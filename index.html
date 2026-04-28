@@ -225,8 +225,8 @@
   .hero-meta{margin-top:44px;font-family:'Inter',sans-serif;font-size:clamp(13px,1.4vw,18px);letter-spacing:0.04em;color:var(--text);text-transform:none;font-weight:600;white-space:nowrap;overflow:visible}
   .hero-meta span{color:var(--gold);margin:0 14px;font-weight:700}
   .hero-social{
-    display:inline-flex;align-items:center;gap:10px;
-    margin:0 auto 26px;padding:9px 18px;
+    display:inline-flex;align-items:center;gap:14px;
+    margin:0 auto 26px;padding:11px 22px;
     background:rgba(212,182,106,0.06);
     border:1px solid rgba(212,182,106,0.28);
     border-radius:999px;
@@ -235,7 +235,7 @@
   }
   .hero-social::before{
     content:"";width:8px;height:8px;border-radius:50%;
-    background:#3DD68C;
+    background:#3DD68C;flex-shrink:0;
     animation:pulseDot 2s ease-out infinite;
   }
   @keyframes pulseDot{
@@ -243,7 +243,13 @@
     70%{box-shadow:0 0 0 9px rgba(61,214,140,0)}
     100%{box-shadow:0 0 0 0 rgba(61,214,140,0)}
   }
-  .hero-social strong{color:var(--gold);font-weight:800;margin-right:2px}
+  .hero-social .hs-divider{
+    display:inline-block;width:1px;height:28px;
+    background:linear-gradient(180deg,transparent 0%,rgba(212,182,106,0.45) 25%,rgba(212,182,106,0.45) 75%,transparent 100%);
+    flex-shrink:0;
+  }
+  .hero-social .hs-text{text-align:center;line-height:1.45}
+  .hero-social strong{color:var(--gold);font-weight:800;display:inline-block}
   .hero-price-warn{
     margin-top:16px;font-family:'Inter',sans-serif;
     font-size:12.5px;font-style:italic;font-weight:500;
@@ -259,7 +265,9 @@
     .hero .lead{font-size:15.5px;line-height:1.5;margin-bottom:32px}
     .hero-meta{font-size:13px;letter-spacing:0;line-height:1.7;font-weight:600}
     .hero-meta span{margin:0 8px}
-    .hero-social{font-size:12.5px;padding:8px 14px;margin-bottom:22px}
+    .hero-social{font-size:12.5px;padding:11px 18px;margin-bottom:22px;gap:12px}
+    .hero-social .hs-divider{height:26px}
+    .hero-social .hs-text{line-height:1.4}
     .hero-price-warn{font-size:11.5px;margin-top:12px;padding:0 14px}
   }
   @media(max-width:380px){
@@ -292,15 +300,19 @@
   .strip{padding:40px 0;border-top:1px solid var(--line-soft);border-bottom:1px solid var(--line-soft);background:rgba(10,22,40,0.4)}
   .strip-inner{display:flex;align-items:center;justify-content:center;flex-wrap:nowrap;gap:0;overflow-x:auto;scrollbar-width:none;-ms-overflow-style:none}
   .strip-inner::-webkit-scrollbar{display:none;width:0;height:0}
-  .strip-item{text-align:center;padding:0 28px;position:relative;flex:0 0 auto;display:flex;flex-direction:column;align-items:center}
-  .strip-item .num{font-family:'Inter',sans-serif;font-size:32px;color:var(--gold);line-height:1;letter-spacing:-0.02em;font-weight:800}
-  .strip-item .lab{font-family:'Inter',sans-serif;font-size:11px;color:var(--text-mute);letter-spacing:0.04em;text-transform:none;margin-top:6px;font-weight:500;white-space:nowrap}
+  .strip-item{text-align:center;padding:0 44px;position:relative;flex:0 0 auto;display:flex;flex-direction:column;align-items:center}
+  .strip-item + .strip-item::before{content:"";position:absolute;left:0;top:50%;transform:translateY(-50%);width:1px;height:42px;background:linear-gradient(180deg,transparent 0%,rgba(212,182,106,0.4) 50%,transparent 100%)}
+  .strip-item .num{font-family:'Inter',sans-serif;font-size:32px;color:var(--gold);line-height:1;letter-spacing:-0.02em;font-weight:800;white-space:nowrap}
+  .strip-item .num-sub{font-size:20px;font-weight:600;color:var(--gold);letter-spacing:-0.01em;margin-left:2px}
+  .strip-item .lab{font-family:'Inter',sans-serif;font-size:12px;color:var(--text-mute);letter-spacing:0.04em;text-transform:none;margin-top:8px;font-weight:500;white-space:nowrap}
   @media(max-width:700px){
     .strip{padding:24px 0}
-    .strip-inner{justify-content:flex-start;padding:0 16px;gap:0}
-    .strip-item{padding:0 14px}
+    .strip-inner{justify-content:center;padding:0 16px;gap:0}
+    .strip-item{padding:0 22px}
     .strip-item .num{font-size:22px}
-    .strip-item .lab{font-size:9.5px;letter-spacing:0}
+    .strip-item .num-sub{font-size:14px}
+    .strip-item + .strip-item::before{height:34px}
+    .strip-item .lab{font-size:10.5px;letter-spacing:0}
   }
   @media(max-width:380px){
     .strip-item{padding:0 10px}
@@ -936,7 +948,7 @@
     <p class="lead reveal">
       GENESYS est la communauté privée d'e-commerçants francophones où la méthode, les formations et les gens se trouvent dans un seul endroit. Sans mentoring à 3 000 €. Sans formation gratuite qui te laisse au milieu du gué.
     </p>
-    <div class="hero-social reveal"><strong>+ de 100 membres</strong> ont déjà rejoint la communauté</div>
+    <div class="hero-social reveal"><span class="hs-divider" aria-hidden="true"></span><span class="hs-text"><strong>+ de 100 membres</strong><br>ont déjà rejoint la communauté</span></div>
     <div class="hero-ctas reveal">
       <a href="#rejoindre" class="btn btn-gold">Rejoindre GENESYS</a>
       <a href="#methode" class="btn btn-primary">Voir la méthode</a>
@@ -953,20 +965,12 @@
   <div class="container">
     <div class="strip-inner">
       <div class="strip-item">
-        <div class="num">100<span style="font-size:24px">h+</span></div>
-        <div class="lab">de formations</div>
+        <div class="num">+13 ans</div>
+        <div class="lab">d'expérience e-com cumulée</div>
       </div>
       <div class="strip-item">
-        <div class="num">23</div>
-        <div class="lab">modules structurés</div>
-      </div>
-      <div class="strip-item">
-        <div class="num">+13</div>
-        <div class="lab">ans d'e-commerce cumulés</div>
-      </div>
-      <div class="strip-item">
-        <div class="num">49<span style="font-size:24px"> $</span></div>
-        <div class="lab">par mois · sans engagement</div>
+        <div class="num">49 $<span class="num-sub">/mois</span></div>
+        <div class="lab">sans engagement</div>
       </div>
     </div>
   </div>
@@ -1018,7 +1022,7 @@
         <span class="label">Le deal</span>
         <div class="line"></div>
       </div>
-      <h2 style="margin-top:30px"><span class="ph-line ph-split-mob"><span class="ph-pre">Tu apportes</span> <em>l'envie de bosser.</em></span><span class="ph-line ph-split-mob"><span class="ph-pre">On apporte</span> <em>tout le reste.</em></span></h2>
+      <h2 style="margin-top:30px"><span class="ph-line ph-split-mob"><span class="ph-pre">Tu apportes</span> <em>la détermination.</em></span><span class="ph-line ph-split-mob"><span class="ph-pre">On apporte</span> <em>tout le reste.</em></span></h2>
       <p>Tu as une boutique, ou l'envie d'en lancer une. Bien. Nous, on a plus de treize ans d'erreurs cumulées payées en argent réel, le plan complet, les formations et les gens. Tu te concentres sur ton produit. Le reste, on le construit ensemble.</p>
     </div>
   </div>
@@ -1394,7 +1398,7 @@
         <!-- SLIDE 1 — Alpha Wolf Vega -->
         <div class="team-slide active">
           <div class="founder">
-            <div class="founder-photo"><img src="assets/alpha-wolf-vega.jpg" alt="Alpha Wolf Vega — Fondateur GENESYS"></div>
+            <div class="founder-photo"><img src="assets/alpha-wolf-vega.webp" alt="Alpha Wolf Vega — Fondateur GENESYS"></div>
             <div>
               <div class="role">— CEO & CMO · GENESYS —</div>
               <h3>Alpha Wolf Vega</h3>
@@ -1412,7 +1416,7 @@
         <!-- SLIDE 2 — Souly -->
         <div class="team-slide">
           <div class="founder">
-            <div class="founder-photo" data-initial="S"></div>
+            <div class="founder-photo"><img src="assets/souly.webp" alt="Souly — CTO & cofondateur GENESYS"></div>
             <div>
               <div class="role">— CTO · COFONDATEUR GENESYS —</div>
               <h3>Souly</h3>
