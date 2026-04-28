@@ -1930,7 +1930,12 @@
       const gap = parseFloat(getComputedStyle(grid).gap) || 12;
       const step = cardWidth + gap;
       const idx = Math.round(scrollLeft / step);
-      const clamped = Math.max(0, Math.min(idx, cards.length - 1));
+      let clamped = Math.max(0, Math.min(idx, cards.length - 1));
+      // If user has scrolled to the very end, force the last dot active
+      const maxScroll = grid.scrollWidth - grid.clientWidth;
+      if(scrollLeft >= maxScroll - 5){
+        clamped = cards.length - 1;
+      }
       dots.forEach((d,n) => d.classList.toggle('active', n === clamped));
     }
 
