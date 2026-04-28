@@ -1107,13 +1107,14 @@
         </div>
         <div class="testimonial-name">Maïssa</div>
       </div>
+      <div class="testimonial-card">
+        <div class="testimonial-video">
+          <iframe src="https://www.youtube-nocookie.com/embed/yKtLULWr3T4?modestbranding=1&rel=0&playsinline=1" title="Témoignage Peter — GENESYS" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div>
+        <div class="testimonial-name">Peter</div>
+      </div>
     </div>
-    <div class="testimonials-dots" id="testimonialsDots" aria-hidden="true">
-      <button class="t-dot active" data-idx="0" aria-label="Témoignage 1"></button>
-      <button class="t-dot" data-idx="1" aria-label="Témoignage 2"></button>
-      <button class="t-dot" data-idx="2" aria-label="Témoignage 3"></button>
-      <button class="t-dot" data-idx="3" aria-label="Témoignage 4"></button>
-    </div>
+    <div class="testimonials-dots" id="testimonialsDots" aria-hidden="true"></div>
     <p class="testimonials-disclaimer">Résultats individuels. Aucune garantie de revenu.</p>
   </div>
 </section>
@@ -1888,14 +1889,25 @@
     }
   })();
 
-  // ===== TESTIMONIALS — DOTS + HINT ANIMATION (mobile only) =====
+  // ===== TESTIMONIALS — DYNAMIC DOTS + HINT ANIMATION (mobile only) =====
   (function(){
     const grid = document.getElementById('testimonialsGrid');
-    const dots = document.querySelectorAll('#testimonialsDots .t-dot');
-    if(!grid || !dots.length) return;
+    const dotsWrap = document.getElementById('testimonialsDots');
+    if(!grid || !dotsWrap) return;
 
     const cards = grid.querySelectorAll('.testimonial-card');
     if(!cards.length) return;
+
+    // Generate one dot per card
+    dotsWrap.innerHTML = '';
+    cards.forEach((_, i) => {
+      const b = document.createElement('button');
+      b.className = 't-dot' + (i === 0 ? ' active' : '');
+      b.setAttribute('data-idx', i);
+      b.setAttribute('aria-label', 'Témoignage ' + (i + 1));
+      dotsWrap.appendChild(b);
+    });
+    const dots = dotsWrap.querySelectorAll('.t-dot');
 
     function isMobile(){ return window.matchMedia('(max-width:760px)').matches; }
 
