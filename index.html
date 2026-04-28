@@ -318,7 +318,7 @@
     .testimonials-grid{
       display:flex;flex-wrap:nowrap;
       grid-template-columns:none;
-      gap:14px;
+      gap:12px;
       overflow-x:auto;overflow-y:hidden;
       -webkit-overflow-scrolling:touch;
       scroll-snap-type:x mandatory;
@@ -330,10 +330,36 @@
     }
     .testimonials-grid::-webkit-scrollbar{display:none;width:0;height:0}
     .testimonials-grid .testimonial-card{
-      flex:0 0 calc(50% - 7px);
+      flex:0 0 46%;
       scroll-snap-align:start;
       min-width:0;
     }
+    .testimonials-grid.hint-animate{
+      animation:carouselHint 1.6s ease-out 0.3s 1 both;
+    }
+  }
+  @keyframes carouselHint{
+    0%   {transform:translateX(0)}
+    25%  {transform:translateX(-22px)}
+    55%  {transform:translateX(-22px)}
+    100% {transform:translateX(0)}
+  }
+  .testimonials-dots{
+    display:none;justify-content:center;align-items:center;gap:9px;
+    margin-top:6px;
+  }
+  @media(max-width:760px){
+    .testimonials-dots{display:flex}
+  }
+  .testimonials-dots .t-dot{
+    width:7px;height:7px;border-radius:50%;
+    background:rgba(255,255,255,0.22);
+    border:none;cursor:pointer;padding:0;
+    transition:all .35s ease;
+  }
+  .testimonials-dots .t-dot.active{
+    background:var(--gold);
+    width:24px;border-radius:4px;
   }
   .testimonial-card{display:flex;flex-direction:column;align-items:center}
   .testimonial-video{
@@ -1056,7 +1082,7 @@
     </div>
     <h2 class="reveal">Ils sont déjà <em>passés à l'action.</em></h2>
     <p class="sub reveal">Membres GENESYS et anciens élèves de mes formations.</p>
-    <div class="testimonials-grid reveal">
+    <div class="testimonials-grid reveal" id="testimonialsGrid">
       <div class="testimonial-card">
         <div class="testimonial-video">
           <iframe src="https://www.youtube-nocookie.com/embed/izzWqt4cD6w?modestbranding=1&rel=0&playsinline=1" title="Témoignage Frank — GENESYS" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
@@ -1077,6 +1103,12 @@
         <div class="testimonial-video placeholder"></div>
         <div class="testimonial-name">&nbsp;</div>
       </div>
+    </div>
+    <div class="testimonials-dots" id="testimonialsDots" aria-hidden="true">
+      <button class="t-dot active" data-idx="0" aria-label="Témoignage 1"></button>
+      <button class="t-dot" data-idx="1" aria-label="Témoignage 2"></button>
+      <button class="t-dot" data-idx="2" aria-label="Témoignage 3"></button>
+      <button class="t-dot" data-idx="3" aria-label="Témoignage 4"></button>
     </div>
     <p class="testimonials-disclaimer">Résultats individuels. Aucune garantie de revenu.</p>
   </div>
@@ -1850,6 +1882,54 @@
         if(Math.abs(dx) > 50) show(dx > 0 ? idx - 1 : idx + 1);
       }, {passive:true});
     }
+  })();
+
+  // ===== TESTIMONIALS — DOTS + HINT ANIMATION (mobile only) =====
+  (function(){
+    const grid = document.getElementById('testimonialsGrid');
+    const dots = document.querySelectorAll('#testimonialsDots .t-dot');
+    if(!grid || !dots.length) return;
+
+    const cards = grid.querySelectorAll('.testimonial-card');
+    if(!cards.length) return;
+
+    function isMobile(){ return window.matchMedia('(max-width:760px)').matches; }
+
+    function updateActiveDot(){
+      if(!isMobile()) return;
+      const scrollLeft = grid.scrollLeft;
+      const cardWidth = cards[0].getBoundingClientRect().width;
+      const gap = parseFloat(getComputedStyle(grid).gap) || 12;
+      const step = cardWidth + gap;
+      const idx = Math.round(scrollLeft / step);
+      const clamped = Math.max(0, Math.min(idx, cards.length - 1));
+      dots.forEach((d,n) => d.classList.toggle('active', n === clamped));
+    }
+
+    grid.addEventListener('scroll', () => {
+      window.requestAnimationFrame(updateActiveDot);
+    }, {passive:true});
+
+    dots.forEach(d => d.addEventListener('click', () => {
+      const i = parseInt(d.dataset.idx, 10);
+      const cardWidth = cards[0].getBoundingClientRect().width;
+      const gap = parseFloat(getComputedStyle(grid).gap) || 12;
+      grid.scrollTo({left: i * (cardWidth + gap), behavior: 'smooth'});
+    }));
+
+    // Hint animation — runs once when section enters viewport on mobile
+    let hinted = false;
+    const hintObs = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if(e.isIntersecting && !hinted && isMobile()){
+          hinted = true;
+          grid.classList.add('hint-animate');
+          setTimeout(() => grid.classList.remove('hint-animate'), 1900);
+          hintObs.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.4 });
+    hintObs.observe(grid);
   })();
 </script>
 
