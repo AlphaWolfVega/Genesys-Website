@@ -689,15 +689,24 @@
     transition:all .3s ease;
   }
   .team-dot.active{background:var(--gold);width:28px;border-radius:4px}
-  .founder .role{font-family:'Inter',sans-serif;font-size:11px;color:var(--gold);letter-spacing:0.32em;text-transform:uppercase;font-weight:500;margin-bottom:18px}
-  .founder h3{font-family:'Inter',sans-serif;font-size:42px;font-weight:800;letter-spacing:-0.02em;text-transform:none;margin-bottom:30px;line-height:1.1}
-  .founder p{color:var(--text-mute);font-size:16px;line-height:1.75;margin-bottom:20px;font-weight:300}
+  .founder > div:last-child{text-align:center}
+  .founder .role{font-family:'Inter',sans-serif;font-size:12.5px;color:var(--gold);letter-spacing:0.34em;text-transform:uppercase;font-weight:500;margin-bottom:18px;white-space:nowrap;overflow:hidden;text-align:center}
+  @media(max-width:600px){
+    .founder .role{font-size:10.5px;letter-spacing:0.22em}
+  }
+  @media(max-width:380px){
+    .founder .role{font-size:9.2px;letter-spacing:0.16em}
+  }
+  .founder h3{font-family:'Inter',sans-serif;font-size:42px;font-weight:800;letter-spacing:-0.02em;text-transform:none;margin-bottom:30px;line-height:1.1;text-align:center}
+  .founder p:first-of-type{text-align:center}
+  .founder p{color:var(--text-mute);font-size:16px;line-height:1.75;margin-bottom:20px;font-weight:300;text-align:left}
   .founder p strong{color:var(--text);font-weight:500;font-family:'Inter',sans-serif;text-transform:uppercase;letter-spacing:0.05em;font-size:14px;letter-spacing:0.05em}
   .founder-quote{
     margin-top:30px;padding-top:24px;
     border-top:1px solid var(--line-soft);
     font-family:'Playfair Display',serif;font-style:italic;
     font-size:15px;color:var(--text-mute);line-height:1.7;
+    text-align:left;
   }
 
   /* ===== VALUE STACK ===== */
