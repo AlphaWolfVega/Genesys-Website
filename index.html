@@ -290,18 +290,89 @@
     line-height:1.55;max-width:520px;margin-left:auto;margin-right:auto;
   }
   .hero-price-warn strong{font-weight:700;font-style:normal;color:var(--gold)}
+  /* Hero lead — desktop shows the paragraph; mobile shows a swipe carousel */
+  .hero-lead-carousel{display:none}
+  .hero-lead-dots{display:none}
   @media(max-width:600px){
     .hero{padding:90px 0 70px}
     .hero h1{font-size:30px;line-height:1.18;letter-spacing:-0.01em;margin:24px auto 28px}
     .hero h1 .nowrap{white-space:nowrap}
     .hero h1 .gold-italic{white-space:nowrap}
-    .hero .lead{font-size:15.5px;line-height:1.5;margin-bottom:32px}
+    .hero .lead.hero-lead-desktop{display:none}
     .hero-meta{font-size:13px;letter-spacing:0;line-height:1.7;font-weight:600}
     .hero-meta span{margin:0 8px}
     .hero-social{font-size:12.5px;padding:11px 18px;margin-bottom:22px;gap:12px}
     .hero-social .hs-divider{height:26px}
     .hero-social .hs-text{line-height:1.4}
     .hero-price-warn{font-size:11.5px;margin-top:12px;padding:0 14px}
+
+    /* Carousel container — horizontal scroll-snap, peek next slide as a hint */
+    .hero-lead-carousel{
+      display:flex;
+      overflow-x:auto;
+      scroll-snap-type:x mandatory;
+      -webkit-overflow-scrolling:touch;
+      scrollbar-width:none;
+      gap:12px;
+      padding:4px 24px 8px;
+      margin:0 -20px 14px;
+      scroll-padding-left:24px;
+    }
+    .hero-lead-carousel::-webkit-scrollbar{display:none}
+    .hero-lead-slide{
+      flex:0 0 calc(100% - 56px);
+      scroll-snap-align:start;
+      background:linear-gradient(135deg,rgba(20,37,64,0.55) 0%,rgba(10,22,40,0.32) 100%);
+      border:1px solid rgba(212,182,106,0.22);
+      border-radius:14px;
+      padding:26px 22px;
+      min-height:170px;
+      display:flex;flex-direction:column;justify-content:center;align-items:center;
+      text-align:center;
+      box-shadow:0 6px 22px rgba(0,0,0,0.18);
+    }
+    .hero-lead-slide p{
+      font-family:'Inter',sans-serif;
+      font-size:15.5px;line-height:1.55;
+      color:var(--text);
+      font-weight:400;
+      margin:0;
+    }
+    .hero-lead-slide strong{color:var(--gold);font-weight:700}
+    .hero-lead-slide-cta p{font-size:16px}
+    /* Continue arrow on last slide — gentle bounce + halo pulse */
+    .hero-lead-down{
+      margin-top:18px;
+      display:flex;align-items:center;justify-content:center;
+      width:38px;height:38px;border-radius:50%;
+      background:rgba(212,182,106,0.1);
+      border:1px solid rgba(212,182,106,0.5);
+      color:var(--gold);
+      animation:heroLeadDown 1.7s ease-in-out infinite;
+    }
+    .hero-lead-down svg{width:18px;height:18px;display:block}
+    @keyframes heroLeadDown{
+      0%,100%{transform:translateY(0);box-shadow:0 0 0 0 rgba(212,182,106,0.5)}
+      50%{transform:translateY(5px);box-shadow:0 0 0 9px rgba(212,182,106,0)}
+    }
+    /* Dots indicator */
+    .hero-lead-dots{
+      display:flex;justify-content:center;gap:8px;
+      margin:0 0 26px;padding:0;
+    }
+    .hl-dot{
+      width:6px;height:6px;border-radius:50%;
+      background:rgba(212,182,106,0.3);
+      border:0;padding:0;cursor:pointer;
+      transition:width 0.28s ease,background 0.28s ease,border-radius 0.28s ease;
+    }
+    .hl-dot.active{
+      width:22px;border-radius:3px;
+      background:var(--gold);
+    }
+    @media (prefers-reduced-motion:reduce){
+      .hero-lead-down{animation:none}
+    }
   }
   @media(max-width:380px){
     .hero h1{font-size:26px}
@@ -1451,9 +1522,24 @@
       <span class="nowrap"><span class="gold-italic">à une boutique rentable</span></span><br>
       <span class="nowrap">en e-commerce</span>
     </h1>
-    <p class="lead reveal">
+    <p class="lead reveal hero-lead-desktop">
       Soyons honnêtes 5 secondes : si tu es sur cette page, c'est probablement que tu as du mal à décoller en e-commerce. Tu as suivi des formations gratuites sur YouTube. Peut-être même des formations payantes (prix plein ou marché noir, voire mentoring). Et malgré tout ça, <strong>tu tournes en rond et tu n'arrives pas à décoller.</strong> Si tu te reconnais dans ce que je viens de citer, <strong>GENESYS est fait pour toi.</strong> Je t'invite à découvrir.
     </p>
+    <div class="hero-lead-carousel reveal" id="heroLeadCarousel" role="region" aria-label="Présentation">
+      <div class="hero-lead-slide"><p>Soyons honnêtes 5 secondes : si tu es sur cette page, c'est probablement que <strong>tu as du mal à décoller en e-commerce</strong>.</p></div>
+      <div class="hero-lead-slide"><p>Tu as suivi des formations gratuites sur YouTube. Peut-être même des formations payantes (prix plein ou marché noir, voire mentoring).</p></div>
+      <div class="hero-lead-slide"><p>Et malgré tout ça, <strong>tu tournes en rond et tu n'arrives pas à décoller</strong>.</p></div>
+      <div class="hero-lead-slide hero-lead-slide-cta">
+        <p>Si tu te reconnais dans ce que je viens de citer, <strong>GENESYS est fait pour toi</strong>. Je t'invite à découvrir.</p>
+        <span class="hero-lead-down" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14"/><path d="m19 12-7 7-7-7"/></svg></span>
+      </div>
+    </div>
+    <div class="hero-lead-dots" id="heroLeadDots">
+      <button type="button" class="hl-dot active" data-idx="0" aria-label="Vignette 1"></button>
+      <button type="button" class="hl-dot" data-idx="1" aria-label="Vignette 2"></button>
+      <button type="button" class="hl-dot" data-idx="2" aria-label="Vignette 3"></button>
+      <button type="button" class="hl-dot" data-idx="3" aria-label="Vignette 4"></button>
+    </div>
     <div class="hero-social reveal"><span class="hs-divider" aria-hidden="true"></span><span class="hs-text"><strong>+ de 100 membres</strong><br>ont déjà rejoint la communauté</span></div>
     <div class="hero-ctas reveal">
       <a href="#rejoindre" class="btn btn-gold">Rejoindre GENESYS</a>
@@ -2833,6 +2919,42 @@
     window.addEventListener('resize', () => {
       window.requestAnimationFrame(updateActiveDot);
     });
+  })();
+
+  // ===== HERO LEAD CAROUSEL (mobile) — dots sync + click-to-jump =====
+  (function initHeroLeadCarousel(){
+    const carousel = document.getElementById('heroLeadCarousel');
+    const dotsWrap = document.getElementById('heroLeadDots');
+    if(!carousel || !dotsWrap) return;
+    const slides = Array.from(carousel.querySelectorAll('.hero-lead-slide'));
+    const dots = Array.from(dotsWrap.querySelectorAll('.hl-dot'));
+    if(!slides.length || !dots.length) return;
+
+    let ticking = false;
+    function update(){
+      const center = carousel.scrollLeft + carousel.clientWidth / 2;
+      let activeIdx = 0;
+      let bestDist = Infinity;
+      slides.forEach((slide, i) => {
+        const slideCenter = slide.offsetLeft + slide.clientWidth / 2;
+        const d = Math.abs(slideCenter - center);
+        if(d < bestDist){ bestDist = d; activeIdx = i; }
+      });
+      dots.forEach((d, i) => d.classList.toggle('active', i === activeIdx));
+      ticking = false;
+    }
+    carousel.addEventListener('scroll', () => {
+      if(!ticking){
+        requestAnimationFrame(update);
+        ticking = true;
+      }
+    }, {passive:true});
+    dots.forEach((dot, i) => {
+      dot.addEventListener('click', () => {
+        slides[i].scrollIntoView({behavior:'smooth', inline:'start', block:'nearest'});
+      });
+    });
+    update();
   })();
 
   // ===== YOUTUBE FACADE — load real iframe only on click =====
