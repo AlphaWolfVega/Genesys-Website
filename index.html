@@ -1501,147 +1501,160 @@
   .reveal{opacity:0;transform:translateY(20px);transition:opacity 1s ease,transform 1s ease}
   .reveal.in{opacity:1;transform:translateY(0)}
 
-  /* ===== COST CALCULATOR (rollback-safe — single commit) ===== */
-  #cost-calc{
+  /* ===== ROULETTE DES LEVIERS (rollback-safe — single commit) ===== */
+  #wheel-game{
     padding:80px 0;
     background:linear-gradient(180deg, var(--bg) 0%, var(--bg-2) 50%, var(--bg) 100%);
     position:relative;overflow:hidden;
   }
-  #cost-calc::before{
+  #wheel-game::before{
     content:"";position:absolute;inset:0;
-    background:radial-gradient(ellipse 60% 40% at 50% 50%, rgba(212,182,106,0.05) 0%, transparent 70%);
+    background:radial-gradient(ellipse 50% 35% at 50% 50%, rgba(212,182,106,0.07) 0%, transparent 70%);
     pointer-events:none;
   }
-  .cost-grid{
-    display:grid;grid-template-columns:1fr 1fr;gap:50px;
-    align-items:start;max-width:1100px;margin:0 auto;
-    position:relative;z-index:1;
+  .wheel-stage{
+    position:relative;
+    width:480px;max-width:100%;
+    aspect-ratio:1/1;
+    margin:0 auto 44px;
   }
-  .cost-inputs{display:flex;flex-direction:column;gap:24px}
-  .cost-q{display:flex;flex-direction:column;gap:10px}
-  .cost-q-label{
+  .wheel-pointer{
+    position:absolute;
+    top:-6px;left:50%;
+    transform:translateX(-50%);
+    width:0;height:0;
+    border:18px solid transparent;
+    border-top-width:34px;
+    border-top-color:var(--gold);
+    z-index:3;
+    filter:drop-shadow(0 4px 14px rgba(212,182,106,0.55));
+  }
+  .wheel-pointer::after{
+    content:"";
+    position:absolute;
+    top:-38px;left:-13px;
+    width:26px;height:26px;border-radius:50%;
+    background:radial-gradient(circle at 35% 35%, #F0DDA8 0%, var(--gold) 60%, #8c6d1f 100%);
+    box-shadow:0 4px 14px rgba(212,182,106,0.55), 0 0 0 2px #06101F;
+  }
+  .wheel-wrapper{
+    position:relative;width:100%;height:100%;
+  }
+  .wheel{
+    width:100%;height:100%;
+    border-radius:50%;
+    background:#0A1628;
+    box-shadow:
+      0 0 0 6px rgba(212,182,106,0.55),
+      0 0 0 10px rgba(6,16,31,0.9),
+      0 0 0 12px rgba(212,182,106,0.18),
+      0 30px 80px rgba(0,0,0,0.55),
+      inset 0 0 60px rgba(212,182,106,0.1);
+    transition:transform 4.6s cubic-bezier(0.17, 0.67, 0.21, 1);
+    will-change:transform;
+    position:relative;
+    overflow:hidden;
+  }
+  .wheel svg{width:100%;height:100%;display:block}
+  .wheel-spin-btn{
+    position:absolute;
+    top:50%;left:50%;
+    transform:translate(-50%,-50%);
+    width:128px;height:128px;border-radius:50%;
+    background:radial-gradient(circle at 35% 30%, #F0DDA8 0%, var(--gold) 50%, #a48742 100%);
+    border:5px solid #06101F;
+    box-shadow:
+      0 0 0 2px rgba(212,182,106,0.7),
+      0 14px 40px rgba(0,0,0,0.55),
+      inset 0 -5px 14px rgba(0,0,0,0.22),
+      inset 0 5px 14px rgba(255,255,255,0.32);
+    cursor:pointer;
+    z-index:2;
     font-family:'Inter',sans-serif;
-    font-size:13px;font-weight:600;letter-spacing:0.05em;
-    color:var(--text-mute);text-transform:uppercase;
-  }
-  .cost-options{display:flex;flex-wrap:wrap;gap:8px}
-  .cost-options button{
-    font-family:'Inter',sans-serif;font-size:13.5px;font-weight:600;
-    padding:10px 16px;border-radius:999px;
-    background:rgba(20,37,64,0.5);
-    border:1px solid rgba(212,182,106,0.18);
-    color:var(--text-mute);cursor:pointer;
-    transition:all 0.2s ease;
+    font-size:14px;font-weight:800;letter-spacing:0.16em;
+    text-transform:uppercase;
+    color:#06101F;
+    transition:transform 0.2s ease, box-shadow 0.25s ease;
   }
   @media (hover:hover){
-    .cost-options button:hover{
-      border-color:rgba(212,182,106,0.4);color:var(--text);
+    .wheel-spin-btn:hover{
+      transform:translate(-50%,-50%) scale(1.06);
+      box-shadow:
+        0 0 0 2px rgba(212,182,106,0.95),
+        0 18px 50px rgba(212,182,106,0.4),
+        inset 0 -5px 14px rgba(0,0,0,0.22),
+        inset 0 5px 14px rgba(255,255,255,0.4);
     }
   }
-  .cost-options button.active{
-    background:linear-gradient(135deg,rgba(212,182,106,0.22) 0%,rgba(212,182,106,0.08) 100%);
-    border-color:var(--gold);color:var(--gold);
-  }
-  .cost-options button:active{transform:scale(0.97);transition:transform 0.08s ease}
-  .cost-display{
-    position:relative;
+  .wheel-spin-btn:active{transform:translate(-50%,-50%) scale(0.95);transition:transform 0.08s ease}
+  .wheel-spin-btn:disabled{opacity:0.7;cursor:not-allowed}
+  .wheel-spin-btn:focus-visible{outline:2px solid #fff;outline-offset:6px}
+  /* Result card */
+  .wheel-result{
+    max-width:580px;
+    margin:0 auto 32px;
     background:linear-gradient(135deg,rgba(20,37,64,0.6) 0%,rgba(10,22,40,0.4) 100%);
     border:1px solid rgba(212,182,106,0.32);
-    border-radius:16px;padding:40px 36px;
-    overflow:hidden;
-    box-shadow:0 20px 50px rgba(0,0,0,0.3),0 0 80px rgba(212,182,106,0.06) inset;
+    border-radius:14px;
+    padding:30px 28px;
+    text-align:center;
+    opacity:0;transform:translateY(15px);
+    transition:opacity 0.55s ease, transform 0.55s ease;
+    pointer-events:none;
+    box-shadow:0 12px 40px rgba(0,0,0,0.25);
   }
-  .cost-coins{position:absolute;inset:0;pointer-events:none;overflow:hidden;z-index:0}
-  .cost-coin{
-    position:absolute;top:-20px;
-    width:11px;height:11px;border-radius:50%;
-    background:radial-gradient(circle at 30% 30%, #F0DDA8 0%, var(--gold) 55%, #8c6d1f 100%);
-    box-shadow:0 0 6px rgba(212,182,106,0.5);
-    opacity:0;
-    animation:coinFall 4.5s linear forwards;
-  }
-  @keyframes coinFall{
-    0%{transform:translateY(0) rotate(0);opacity:0}
-    8%{opacity:0.7}
-    85%{opacity:0.55}
-    100%{transform:translateY(420px) rotate(540deg);opacity:0}
-  }
-  .cost-row{
-    display:flex;flex-direction:column;align-items:center;gap:6px;
-    text-align:center;position:relative;z-index:1;
-  }
-  .cost-row-label{
-    font-family:'Inter',sans-serif;
-    font-size:12.5px;font-weight:600;letter-spacing:0.1em;
-    color:var(--text-mute);text-transform:uppercase;
-  }
-  .cost-row-value{
+  .wheel-result.is-revealed{opacity:1;transform:translateY(0);pointer-events:auto}
+  .wheel-result-name{
     font-family:'Playfair Display',serif;
-    font-style:italic;font-weight:800;
-    font-size:54px;
-    color:var(--gold);
-    line-height:1;
-    text-shadow:0 0 30px rgba(212,182,106,0.35);
-    letter-spacing:-0.01em;
+    font-style:italic;font-weight:700;
+    font-size:32px;color:var(--gold);
+    text-shadow:0 0 24px rgba(212,182,106,0.35);
+    margin-bottom:14px;line-height:1.1;
+    letter-spacing:-0.005em;
   }
-  .cost-row.big .cost-row-value{font-size:78px}
-  .cost-row-unit{
+  .wheel-result-desc{
     font-family:'Inter',sans-serif;
-    font-size:13.5px;font-weight:500;
+    font-size:15.5px;font-weight:400;
+    color:var(--text);line-height:1.55;
+    margin-bottom:16px;
+  }
+  .wheel-result-example{
+    font-family:'Inter',sans-serif;
+    font-size:14px;font-weight:400;
+    color:var(--text-mute);line-height:1.55;
+    padding:14px 16px;
+    background:rgba(212,182,106,0.06);
+    border-left:2px solid rgba(212,182,106,0.55);
+    border-radius:4px;
+    text-align:left;margin-bottom:18px;
+  }
+  .wheel-result-example strong{color:var(--gold);font-weight:600}
+  .wheel-result-meta{
+    font-family:'Inter',sans-serif;
+    font-size:12.5px;font-weight:500;
     color:var(--text-mute);
-    margin-top:2px;
+    letter-spacing:0.05em;
   }
-  .cost-divider{
-    height:1px;
-    background:linear-gradient(90deg,transparent 0%, rgba(212,182,106,0.4) 50%, transparent 100%);
-    margin:26px 0;
-  }
-  .cost-compare{
-    margin-top:30px;
-    display:flex;align-items:baseline;justify-content:center;gap:10px;
-    padding-top:22px;
-    border-top:1px dashed rgba(212,182,106,0.22);
-    position:relative;z-index:1;
-  }
-  .cost-compare-x{
-    font-family:'Playfair Display',serif;font-style:italic;font-weight:700;
-    font-size:34px;color:var(--gold);
-    text-shadow:0 0 20px rgba(212,182,106,0.3);
-  }
-  .cost-compare-text{
+  .wheel-result-meta strong{color:var(--gold);font-weight:700}
+  .wheel-cta{text-align:center;margin-top:18px}
+  .wheel-cta p{
     font-family:'Inter',sans-serif;
-    font-size:13.5px;font-weight:500;
-    color:var(--text-mute);letter-spacing:0.04em;
-  }
-  .cost-cta{
-    margin-top:54px;text-align:center;
-    max-width:640px;margin-left:auto;margin-right:auto;
-  }
-  .cost-cta p{
-    font-family:'Inter',sans-serif;font-size:17px;font-weight:500;
-    color:var(--text);margin-bottom:24px;line-height:1.55;
-  }
-  .cost-cta strong{color:var(--gold);font-weight:700}
-  @media(max-width:760px){
-    .cost-grid{grid-template-columns:1fr;gap:30px}
+    font-size:14.5px;color:var(--text-mute);
+    margin-bottom:22px;
   }
   @media(max-width:600px){
-    #cost-calc{padding:60px 0}
-    .cost-display{padding:32px 22px;border-radius:14px}
-    .cost-row-value{font-size:42px}
-    .cost-row.big .cost-row-value{font-size:56px}
-    .cost-row-label{font-size:11.5px;letter-spacing:0.08em}
-    .cost-row-unit{font-size:12.5px}
-    .cost-options button{font-size:12.5px;padding:9px 13px}
-    .cost-q-label{font-size:11.5px}
-    .cost-cta{margin-top:40px}
-    .cost-cta p{font-size:15px}
-    .cost-compare-x{font-size:28px}
-    .cost-compare-text{font-size:12.5px}
-    .cost-divider{margin:22px 0}
+    #wheel-game{padding:60px 0}
+    .wheel-stage{width:340px;margin:0 auto 36px}
+    .wheel-spin-btn{width:96px;height:96px;font-size:12px;letter-spacing:0.14em;border-width:4px}
+    .wheel-pointer{border-width:14px;border-top-width:26px}
+    .wheel-pointer::after{top:-30px;left:-11px;width:22px;height:22px}
+    .wheel-result{padding:24px 20px;border-radius:12px}
+    .wheel-result-name{font-size:25px}
+    .wheel-result-desc{font-size:14.5px}
+    .wheel-result-example{font-size:13px;padding:12px 14px}
   }
   @media (prefers-reduced-motion:reduce){
-    .cost-coin{animation:none;display:none}
+    .wheel{transition:none}
   }
 </style>
 </head>
@@ -1806,71 +1819,41 @@
   </div>
 </section>
 
-<!-- ===== COST CALCULATOR (rollback-safe — single isolated section) ===== -->
-<section id="cost-calc">
+<!-- ===== ROULETTE DES LEVIERS (rollback-safe — single isolated section) ===== -->
+<section id="wheel-game">
   <div class="container">
     <div class="section-header reveal">
       <div class="ornament">
         <div class="line"></div>
-        <span class="label">Le coût de l'inaction</span>
+        <span class="label">Le terrain de jeu</span>
         <div class="line"></div>
       </div>
-      <h2>Pendant que tu hésites,<br><em>tu continues à payer</em></h2>
-      <p>Sois honnête sur ces 3 questions. Le compteur ne ment pas.</p>
+      <h2>Tourne la roue,<br><em>découvre un levier</em></h2>
+      <p>23 leviers psychologiques pilotent toutes les ventes en e-commerce. En voici un, au hasard. Re-tourne pour en découvrir un autre.</p>
     </div>
 
-    <div class="cost-grid reveal">
-      <div class="cost-inputs">
-        <div class="cost-q">
-          <span class="cost-q-label">Ton CA mensuel actuel</span>
-          <div class="cost-options" data-q="rev">
-            <button type="button" data-v="1">0 – 1 k€</button>
-            <button type="button" data-v="2" class="active">1 – 5 k€</button>
-            <button type="button" data-v="3">5 – 20 k€</button>
-            <button type="button" data-v="4">20 k€ +</button>
-          </div>
+    <div class="wheel-stage reveal">
+      <div class="wheel-pointer" aria-hidden="true"></div>
+      <div class="wheel-wrapper">
+        <div class="wheel" id="leverWheel">
+          <svg viewBox="0 0 400 400" aria-hidden="true"></svg>
         </div>
-        <div class="cost-q">
-          <span class="cost-q-label">Tu testes des produits ?</span>
-          <div class="cost-options" data-q="test">
-            <button type="button" data-v="1" class="active">Rarement</button>
-            <button type="button" data-v="2">Un peu</button>
-            <button type="button" data-v="3">Souvent</button>
-          </div>
-        </div>
-        <div class="cost-q">
-          <span class="cost-q-label">Tu connais les biais cognitifs d'achat ?</span>
-          <div class="cost-options" data-q="neuro">
-            <button type="button" data-v="1" class="active">Non</button>
-            <button type="button" data-v="2">Vaguement</button>
-            <button type="button" data-v="3">Oui</button>
-          </div>
-        </div>
-      </div>
-
-      <div class="cost-display">
-        <div class="cost-coins" aria-hidden="true"></div>
-        <div class="cost-row">
-          <span class="cost-row-label">Tu laisses sur la table</span>
-          <span class="cost-row-value" id="costMonth">0 €</span>
-          <span class="cost-row-unit">par mois</span>
-        </div>
-        <div class="cost-divider"></div>
-        <div class="cost-row big">
-          <span class="cost-row-label">Soit</span>
-          <span class="cost-row-value" id="costYear">0 €</span>
-          <span class="cost-row-unit">par an</span>
-        </div>
-        <div class="cost-compare">
-          <span class="cost-compare-x" id="costRatio">0×</span>
-          <span class="cost-compare-text">le prix annuel de GENESYS</span>
-        </div>
+        <button type="button" class="wheel-spin-btn" id="wheelSpin" aria-label="Tourner la roue">
+          <span>Tourner</span>
+        </button>
       </div>
     </div>
 
-    <div class="cost-cta reveal">
-      <p>Pour <strong>49 $/mois</strong>, tu accèdes à la méthode, à la communauté et aux réponses qui te font arrêter de saigner.</p>
-      <a href="#rejoindre" class="btn btn-gold">Entrer dans GENESYS</a>
+    <div class="wheel-result" id="wheelResult" role="status" aria-live="polite">
+      <div class="wheel-result-name"></div>
+      <div class="wheel-result-desc"></div>
+      <div class="wheel-result-example"></div>
+      <div class="wheel-result-meta"></div>
+    </div>
+
+    <div class="wheel-cta reveal">
+      <p>Les 22 autres sont expliqués pas à pas dans Ecom Neuro et appliqués sur des cas concrets dans la communauté.</p>
+      <a href="#rejoindre" class="btn btn-gold">Découvrir les 22 autres</a>
     </div>
   </div>
 </section>
@@ -3231,111 +3214,134 @@
     });
   })();
 
-  // ===== COST CALCULATOR — rollback-safe, scoped to #cost-calc =====
-  (function initCostCalc(){
-    const section = document.getElementById('cost-calc');
+  // ===== ROULETTE DES LEVIERS — rollback-safe, scoped to #wheel-game =====
+  (function initWheel(){
+    const section = document.getElementById('wheel-game');
     if(!section) return;
 
-    // Loss matrix — calibrated against typical e-com benchmarks (CR delta ~30–60% with neuro+testing)
-    const BASE  = {1: 600,  2: 1800, 3: 5000, 4: 12000};
-    const TEST  = {1: 1.0,  2: 0.45, 3: 0.1};
-    const NEURO = {1: 1.0,  2: 0.45, 3: 0.1};
-    const GENESYS_YEARLY_EUR = 49 * 12 * 1.05; // 49 $/mois ≈ 45 €, * 12 mois
+    const LEVIERS = [
+      {n:"Effet d'ancrage", d:"Le premier chiffre vu devient la référence inconsciente du cerveau.", e:"Affiche le prix barré (199 €) à côté du prix réel (99 €). Le cerveau ne voit plus 99 €, il voit -100 €."},
+      {n:"Preuve sociale",   d:"Plus les autres l'achètent, plus le cerveau valide la décision.",   e:"« 1 247 personnes ont commandé ce produit ce mois-ci. » Sous le bouton, ça multiplie les ventes."},
+      {n:"Rareté",           d:"Ce qui est limité prend de la valeur. Le cerveau craint de perdre l'opportunité.", e:"Affiche le stock réel : « Plus que 3 en stock » déclenche la décision immédiate."},
+      {n:"Urgence",          d:"Le temps qui défile crée une pression à décider maintenant.",         e:"Compte à rebours visible jusqu'à minuit pour la livraison du lendemain."},
+      {n:"Réciprocité",      d:"Quand tu donnes en premier, le cerveau veut rendre la pareille.",   e:"Offre un guide PDF gratuit avant de demander l'email. Conversion 3 à 4× supérieure."},
+      {n:"Engagement & cohérence", d:"Une fois qu'on a fait un petit oui, on dit oui à un plus grand après.", e:"Demande l'email avant le paiement. L'engagement initial double la finalisation."},
+      {n:"Autorité",         d:"Une figure d'autorité raccourcit le processus de décision du prospect.", e:"« Recommandé par [expert] » ou « Vu sur [media] » placé au-dessus du fold."},
+      {n:"Sympathie",        d:"On achète plus volontiers à quelqu'un qu'on aime ou qui nous ressemble.", e:"Photos d'équipe humaines + ton « comme un pote » bat le corporate de +30%."},
+      {n:"Aversion à la perte", d:"La douleur de perdre est 2× plus forte que le plaisir de gagner.", e:"Au lieu de « gagne 30 € », écris « ne perds pas 30 € que tu laisses déjà filer »."},
+      {n:"Effet de cadrage", d:"Le même fait change de poids selon comment tu le présentes.",       e:"« Crème efficace à 95% » convertit mieux que « Crème qui échoue chez 5% »."},
+      {n:"Effet de contraste", d:"Une option médiocre placée à côté d'une bonne fait passer la bonne pour excellente.", e:"3 plans : décoratif (mauvais), star (à pousser), premium (rare). Le « star » explose."},
+      {n:"Tarification charme", d:"Un prix en .9 ou .7 est perçu comme nettement moins cher qu'un rond.", e:"29 € est lu « 20 quelque chose » par le cerveau, pas « 30 ». +20% de conversion vs 30 €."},
+      {n:"Effet de halo",    d:"Un trait positif visible projette de la qualité sur tout le reste du produit.", e:"Photos pro + emballage premium → le client suppose que le produit l'est aussi."},
+      {n:"Paradoxe du choix", d:"Trop d'options paralyse. Moins de choix = plus de décisions.",     e:"Une page collection à 5 produits convertit mieux qu'une à 50."},
+      {n:"FOMO",             d:"La peur de rater pousse à l'action immédiate, court-circuite la réflexion.", e:"« 12 personnes regardent ce produit en ce moment » affiché en temps réel."},
+      {n:"Risque inversé",   d:"Quand tu enlèves le risque côté client, l'objection principale s'effondre.", e:"« Satisfait ou remboursé 60 jours, on paie le retour. » Triple les premières ventes."},
+      {n:"Effet IKEA",       d:"Plus le client investit d'effort, plus il valorise le résultat final.", e:"Un quiz personnalisé avant d'afficher le produit recommandé crée l'engagement émotionnel."},
+      {n:"Heuristique d'affect", d:"L'émotion ressentie pèse plus que les arguments rationnels au moment de décider.", e:"Vidéo de 30 s qui fait sourire avant la fiche technique. +40% de conversion mesurés."},
+      {n:"Storytelling",     d:"Un récit fait vivre le bénéfice là où les caractéristiques techniques restent abstraites.", e:"« Marie a perdu 6 kg en 3 mois grâce à... » bat « Contient 5 actifs naturels »."},
+      {n:"Effet Zeigarnik",  d:"Le cerveau retient les histoires inachevées jusqu'à leur résolution.", e:"Email de panier abandonné qui rappelle ce qu'il manque pour finir l'achat."},
+      {n:"Simple exposition", d:"Plus on voit quelque chose, plus on l'apprécie inconsciemment.",   e:"Retargeting Meta qui rediffuse ton produit 7 à 10 fois → boost final de conversion."},
+      {n:"Foot in the door", d:"Un petit oui ouvre la porte à un plus grand oui.",                  e:"Tripwire à 7 € puis upsell à 47 €. Le 1er oui désinhibe le 2e."},
+      {n:"Effet de gratitude", d:"Une attention gratuite et inattendue génère une fidélité disproportionnée.", e:"Petit cadeau dans le colis + carte manuscrite → 3× plus de clients qui repassent commande."}
+    ];
 
-    const answers = {rev:'2', test:'1', neuro:'1'};
-    const monthEl = section.querySelector('#costMonth');
-    const yearEl  = section.querySelector('#costYear');
-    const ratioEl = section.querySelector('#costRatio');
-    const coinsEl = section.querySelector('.cost-coins');
+    const NUM = LEVIERS.length; // 23
+    const segAngle = 360 / NUM;
 
-    const fmt = new Intl.NumberFormat('fr-FR', {maximumFractionDigits:0});
-    const formatEur = (n) => fmt.format(Math.round(n)) + ' €';
+    const wheel = section.querySelector('#leverWheel');
+    const svg   = wheel.querySelector('svg');
+    const spinBtn = section.querySelector('#wheelSpin');
+    const result  = section.querySelector('#wheelResult');
+    const rName    = result.querySelector('.wheel-result-name');
+    const rDesc    = result.querySelector('.wheel-result-desc');
+    const rExample = result.querySelector('.wheel-result-example');
+    const rMeta    = result.querySelector('.wheel-result-meta');
 
-    let displayMonth = 0, displayYear = 0;
-    let targetMonth  = 0, targetYear  = 0;
-    let raf = null;
-
-    function calculate(){
-      const m = BASE[answers.rev] * TEST[answers.test] * NEURO[answers.neuro];
-      return {month: m, year: m * 12};
+    // Build SVG segments procedurally
+    const NS = 'http://www.w3.org/2000/svg';
+    const cx = 200, cy = 200, R = 198;
+    for(let i = 0; i < NUM; i++){
+      // Segment i is centered at angle (i*segAngle - 90) so segment 0 is at top
+      const startA = (i * segAngle - 90 - segAngle/2) * Math.PI / 180;
+      const endA   = (i * segAngle - 90 + segAngle/2) * Math.PI / 180;
+      const x1 = cx + R * Math.cos(startA);
+      const y1 = cy + R * Math.sin(startA);
+      const x2 = cx + R * Math.cos(endA);
+      const y2 = cy + R * Math.sin(endA);
+      const path = document.createElementNS(NS, 'path');
+      path.setAttribute('d', `M ${cx} ${cy} L ${x1.toFixed(2)} ${y1.toFixed(2)} A ${R} ${R} 0 0 1 ${x2.toFixed(2)} ${y2.toFixed(2)} Z`);
+      path.setAttribute('fill', i % 2 === 0 ? 'rgba(212,182,106,0.14)' : 'rgba(212,182,106,0.04)');
+      path.setAttribute('stroke', 'rgba(212,182,106,0.45)');
+      path.setAttribute('stroke-width', '1');
+      svg.appendChild(path);
     }
+    // Decorative gold dots near the rim, one per segment
+    for(let i = 0; i < NUM; i++){
+      const a = (i * segAngle - 90) * Math.PI / 180;
+      const dot = document.createElementNS(NS, 'circle');
+      dot.setAttribute('cx', (cx + (R * 0.78) * Math.cos(a)).toFixed(2));
+      dot.setAttribute('cy', (cy + (R * 0.78) * Math.sin(a)).toFixed(2));
+      dot.setAttribute('r', '3');
+      dot.setAttribute('fill', i % 2 === 0 ? 'rgba(212,182,106,0.85)' : 'rgba(212,182,106,0.45)');
+      svg.appendChild(dot);
+    }
+    // Inner thin gold ring
+    const innerRing = document.createElementNS(NS, 'circle');
+    innerRing.setAttribute('cx', cx);
+    innerRing.setAttribute('cy', cy);
+    innerRing.setAttribute('r', R * 0.42);
+    innerRing.setAttribute('fill', 'none');
+    innerRing.setAttribute('stroke', 'rgba(212,182,106,0.3)');
+    innerRing.setAttribute('stroke-width', '1');
+    innerRing.setAttribute('stroke-dasharray', '3 4');
+    svg.appendChild(innerRing);
 
-    function rollTo(){
-      if(raf) cancelAnimationFrame(raf);
-      const startMonth = displayMonth, startYear = displayYear;
-      const t0 = performance.now();
-      const duration = 850;
-      function tick(now){
-        const t = Math.min(1, (now - t0) / duration);
-        const eased = 1 - Math.pow(1 - t, 3); // easeOutCubic
-        displayMonth = startMonth + (targetMonth - startMonth) * eased;
-        displayYear  = startYear  + (targetYear  - startYear)  * eased;
-        monthEl.textContent = formatEur(displayMonth);
-        yearEl.textContent  = formatEur(displayYear);
-        const ratio = targetYear > 0 ? Math.round(targetYear / GENESYS_YEARLY_EUR) : 0;
-        ratioEl.textContent = ratio + '×';
-        if(t < 1) raf = requestAnimationFrame(tick);
-        else { displayMonth = targetMonth; displayYear = targetYear; raf = null; }
+    // Spin logic
+    let currentRotation = 0;
+    let spinning = false;
+    let lastIdx = -1;
+
+    function spin(){
+      if(spinning) return;
+      spinning = true;
+      spinBtn.disabled = true;
+      result.classList.remove('is-revealed');
+
+      // Pick a random levier (avoid immediate repeat)
+      let idx = Math.floor(Math.random() * NUM);
+      if(idx === lastIdx && NUM > 1){
+        idx = (lastIdx + 1 + Math.floor(Math.random() * (NUM - 1))) % NUM;
       }
-      raf = requestAnimationFrame(tick);
+      lastIdx = idx;
+
+      // Compute target rotation:
+      // We want segment idx (centered at i*segAngle from top) to land at top.
+      // That means wheel rotation must equal -idx*segAngle (mod 360) visually.
+      const targetMod  = ((360 - idx * segAngle) % 360 + 360) % 360;
+      const currentMod = ((currentRotation % 360) + 360) % 360;
+      let delta = targetMod - currentMod;
+      if(delta < 0) delta += 360;
+      const fullTurns = 5 + Math.floor(Math.random() * 2); // 5 or 6 turns
+      const jitter = (Math.random() - 0.5) * (segAngle * 0.55);
+      const target = currentRotation + fullTurns * 360 + delta + jitter;
+
+      wheel.style.transform = 'rotate(' + target.toFixed(2) + 'deg)';
+      currentRotation = target;
+
+      setTimeout(() => {
+        const lever = LEVIERS[idx];
+        rName.textContent = lever.n;
+        rDesc.textContent = lever.d;
+        rExample.innerHTML = '<strong>Exemple :</strong> ' + lever.e;
+        const remaining = NUM - 1;
+        rMeta.innerHTML = '1 levier découvert. <strong>' + remaining + ' autres</strong> dans GENESYS.';
+        result.classList.add('is-revealed');
+        spinning = false;
+        spinBtn.disabled = false;
+      }, 4700);
     }
 
-    function update(){
-      const r = calculate();
-      targetMonth = r.month;
-      targetYear  = r.year;
-      rollTo();
-    }
-
-    // Coin spawner — one coin at a random horizontal position, falls and fades
-    function spawnCoin(){
-      if(!coinsEl) return;
-      const coin = document.createElement('div');
-      coin.className = 'cost-coin';
-      coin.style.left = (4 + Math.random() * 92) + '%';
-      coin.style.animationDuration = (3.5 + Math.random() * 2) + 's';
-      coin.style.animationDelay = (Math.random() * 0.4) + 's';
-      coinsEl.appendChild(coin);
-      setTimeout(() => coin.remove(), 6500);
-    }
-    function spawnBurst(n){
-      for(let i = 0; i < n; i++) setTimeout(spawnCoin, i * 70);
-    }
-
-    // Buttons → toggle .active inside its group, recalc, mini-burst of coins
-    section.querySelectorAll('.cost-options').forEach(group => {
-      const q = group.dataset.q;
-      group.querySelectorAll('button').forEach(btn => {
-        btn.addEventListener('click', () => {
-          group.querySelectorAll('button').forEach(b => b.classList.remove('active'));
-          btn.classList.add('active');
-          answers[q] = btn.dataset.v;
-          update();
-          spawnBurst(7);
-        });
-      });
-    });
-
-    // Slow continuous coin drip — only while section is visible (saves CPU)
-    let drip = null;
-    let initialCalcDone = false;
-    const obs = new IntersectionObserver(entries => {
-      entries.forEach(e => {
-        if(e.isIntersecting){
-          if(!initialCalcDone){
-            update();
-            spawnBurst(5);
-            initialCalcDone = true;
-          }
-          if(!drip){
-            drip = setInterval(spawnCoin, 700);
-          }
-        } else if(drip){
-          clearInterval(drip); drip = null;
-        }
-      });
-    }, {threshold: 0.15});
-    obs.observe(section);
+    spinBtn.addEventListener('click', spin);
   })();
 </script>
 
