@@ -617,7 +617,7 @@
     box-shadow:0 0 14px rgba(212,182,106,0.6),0 0 28px rgba(212,182,106,0.32);
     transform:translateX(-50%);
     z-index:1;border-radius:1px;
-    transition:height 0.18s cubic-bezier(0.22,0.61,0.36,1);
+    transition:height 0.05s linear;
     pointer-events:none;
     will-change:height;
   }
@@ -745,35 +745,37 @@
   .story-step.reveal.in{opacity:1;transform:translateX(0)}
 
   @media(max-width:760px){
-    .story-timeline{padding:20px 0}
+    .story-timeline{padding:20px 0;max-width:100%}
     .story-timeline::before{left:24px}
     .timeline-fill{left:24px}
     .story-step{
-      gap:18px;margin-bottom:50px;
-      flex-direction:row !important;
-      padding-left:0;
+      flex-direction:column !important;
+      align-items:stretch;
+      gap:14px;margin-bottom:60px;
+      padding-left:50px; /* leave room for the gold rail on the left */
     }
     .story-step::after{
       left:24px;top:6px;
       width:12px;height:12px;
     }
     .story-step .story-photo{
-      flex:0 0 80px;max-width:80px;
-      aspect-ratio:1/1;
-      margin-left:50px;
+      flex:1 1 auto;max-width:100%;
+      width:100%;
+      aspect-ratio:4/3; /* big immersive photo */
+      margin:0;
     }
     .story-step .story-photo::before,
-    .story-step .story-photo::after{width:10px;height:10px;border-width:1px}
-    .story-step .story-photo::before{top:4px;left:4px}
-    .story-step .story-photo::after{bottom:4px;right:4px}
-    .story-placeholder{font-size:18px}
-    .story-photo-caption{font-size:8px;letter-spacing:0.15em;margin-top:5px}
+    .story-step .story-photo::after{width:14px;height:14px;border-width:1.2px}
+    .story-step .story-photo::before{top:6px;left:6px}
+    .story-step .story-photo::after{bottom:6px;right:6px}
+    .story-placeholder{font-size:32px}
+    .story-photo-caption{font-size:9px;letter-spacing:0.18em;margin-top:8px}
     .story-step .story-content{
       flex:1 1 auto;max-width:none;
-      padding:0;
+      padding:0;width:100%;
     }
-    .story-step h3{font-size:18px;margin-bottom:8px}
-    .story-step .story-content p{font-size:14px;line-height:1.55}
+    .story-step h3{font-size:20px;margin-bottom:8px}
+    .story-step .story-content p{font-size:14.5px;line-height:1.6}
     .story-date{font-size:10px;margin-bottom:6px}
     .story-step[data-side="left"].reveal,
     .story-step[data-side="right"].reveal{transform:translateY(20px)}
@@ -2468,10 +2470,16 @@
       return window.matchMedia('(max-width:760px)').matches ? 14 : 90;
     }
 
-    // Magnetic lock-zones around each dot:
-    // 0–35% of segment locked at start dot, 35–65% in transit, 65–100% locked at end dot.
-    const LOCK_START = 0.35;
-    const LOCK_END = 0.65;
+    // Magnetic radius — within this distance of a dot, the line eases smoothly
+    // toward that dot (no overshoot, no acceleration). Outside, line follows
+    // the scroll trigger 1:1 — fully fluid with the scroll.
+    const MAGNET_RADIUS = 40;
+
+    // Smoothstep easing — t in [0,1] returns 3t² - 2t³ (smooth in/out)
+    function smoothstep(t){
+      t = Math.max(0, Math.min(1, t));
+      return t * t * (3 - 2 * t);
+    }
 
     function update(){
       const triggerY = window.innerHeight * 0.55;
@@ -2494,33 +2502,33 @@
         activeIdx = dotPositions.length - 1;
         passedThrough = dotPositions.length - 1;
       } else {
-        // Find segment we're in
-        let segIdx = 0;
-        for(let i = 0; i < dotPositions.length - 1; i++){
-          if(triggerY >= dotPositions[i] && triggerY < dotPositions[i+1]){
-            segIdx = i;
-            break;
-          }
-        }
-        const segStart = dotPositions[segIdx];
-        const segEnd = dotPositions[segIdx + 1];
-        const segLen = Math.max(1, segEnd - segStart);
-        const progress = (triggerY - segStart) / segLen; // 0..1
-        passedThrough = segIdx;
+        // Default: line head follows trigger line 1:1 (linear with scroll)
+        let linearFill = triggerY - tlTop;
 
-        if(progress < LOCK_START){
-          // Locked at start dot — line stops here, dot pulses
-          fillHeight = segStart - tlTop;
-          activeIdx = segIdx;
-        } else if(progress > LOCK_END){
-          // Locked at end dot — line snapped to end, end dot pulses
-          fillHeight = segEnd - tlTop;
-          activeIdx = segIdx + 1;
-          passedThrough = segIdx + 1;
+        // Find nearest dot to apply magnetic attraction
+        let nearestIdx = 0;
+        let nearestDist = Infinity;
+        for(let i = 0; i < dotPositions.length; i++){
+          const d = Math.abs(triggerY - dotPositions[i]);
+          if(d < nearestDist){ nearestDist = d; nearestIdx = i; }
+        }
+
+        // Update passedThrough = the highest dot whose Y <= triggerY
+        for(let i = 0; i < dotPositions.length; i++){
+          if(dotPositions[i] <= triggerY) passedThrough = i;
+        }
+
+        if(nearestDist < MAGNET_RADIUS){
+          // Magnetic zone — ease line head toward the nearest dot
+          const t = 1 - (nearestDist / MAGNET_RADIUS); // 0 at edge, 1 at dot
+          const eased = smoothstep(t);
+          const dotFill = dotPositions[nearestIdx] - tlTop;
+          fillHeight = linearFill + (dotFill - linearFill) * eased;
+          // Dot starts pulsing when we're firmly inside its magnetic field
+          if(eased > 0.45) activeIdx = nearestIdx;
         } else {
-          // In transit — line grows linearly between dots, no pulse
-          const t = (progress - LOCK_START) / (LOCK_END - LOCK_START);
-          fillHeight = (segStart - tlTop) + t * segLen;
+          // Free flow — line head exactly at trigger, no acceleration
+          fillHeight = linearFill;
           activeIdx = -1;
         }
       }
