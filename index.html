@@ -1608,37 +1608,45 @@
     box-shadow:0 14px 40px rgba(0,0,0,0.28);
     opacity:0;transform:translateY(12px);
     transition:opacity 0.4s ease, transform 0.4s ease;
-    min-height:340px;
-    display:flex;flex-direction:column;
+    display:flex;flex-direction:column;align-items:center;
+    text-align:center;
   }
   .dx-q-card.is-visible{opacity:1;transform:translateY(0)}
   .dx-q-domain{
-    display:inline-block;align-self:flex-start;
+    display:inline-block;
     font-family:'Inter',sans-serif;
     font-size:10.5px;font-weight:700;
     letter-spacing:0.18em;text-transform:uppercase;
     color:var(--gold);
-    padding:5px 12px;border-radius:999px;
+    padding:5px 14px;border-radius:999px;
     background:rgba(212,182,106,0.1);
     border:1px solid rgba(212,182,106,0.32);
-    margin-bottom:18px;
+    margin-bottom:20px;
   }
   .dx-q-text{
     font-family:'Playfair Display',serif;
     font-style:italic;font-weight:700;
     font-size:22px;line-height:1.32;
     color:var(--text);
-    margin-bottom:8px;
+    margin-bottom:14px;
     letter-spacing:-0.005em;
+    text-align:center;
+    max-width:520px;
   }
+  .dx-q-text s{opacity:0.55}
   .dx-q-jargon{
     font-family:'Inter',sans-serif;
     font-size:12.5px;font-style:italic;
     color:var(--text-faint);
-    line-height:1.5;margin-bottom:22px;
-    padding-left:12px;border-left:2px solid rgba(212,182,106,0.3);
+    line-height:1.5;margin-bottom:18px;
+    text-align:center;
+    max-width:480px;
+    padding:10px 16px;
+    border-left:0;
+    border-top:1px dashed rgba(212,182,106,0.22);
+    border-bottom:1px dashed rgba(212,182,106,0.22);
   }
-  .dx-options{display:flex;flex-direction:column;gap:10px;margin-top:auto}
+  .dx-options{display:flex;flex-direction:column;gap:10px;margin-top:14px;width:100%;max-width:520px}
   .dx-option{
     display:flex;align-items:center;gap:14px;
     padding:16px 20px;
@@ -1678,10 +1686,33 @@
   .dx-option.is-picked .dx-option-letter{
     background:var(--gold);color:#06101F;
   }
-  /* True/False compact layout */
-  .dx-options.is-tf{flex-direction:row;gap:12px}
-  .dx-options.is-tf .dx-option{justify-content:center;padding:22px 16px;font-size:18px;font-weight:700}
+  /* True/False/Ça dépend compact horizontal layout (3 buttons in a row) */
+  .dx-options.is-tf{flex-direction:row;gap:10px;flex-wrap:wrap;justify-content:center}
+  .dx-options.is-tf .dx-option{flex:1 1 90px;min-width:90px;justify-content:center;padding:18px 12px;font-size:14.5px;font-weight:700;letter-spacing:0.04em}
   .dx-options.is-tf .dx-option-letter{display:none}
+  /* Mood face progress strip — sits under the card, evolves with progress */
+  .dx-mood{
+    display:flex;align-items:center;gap:10px;justify-content:center;
+    margin:18px auto 0;
+    padding:9px 18px;
+    background:rgba(212,182,106,0.05);
+    border:1px solid rgba(212,182,106,0.18);
+    border-radius:999px;
+    width:fit-content;
+    transition:transform 0.3s ease;
+  }
+  .dx-mood-face{
+    width:24px;height:24px;color:var(--gold);
+    transition:color 0.4s ease, transform 0.4s ease;
+  }
+  .dx-mood-face.lvl-3{color:#E8D4A0}
+  .dx-mood-face.lvl-4{color:#F0DDA8;transform:scale(1.08)}
+  .dx-mood-text{
+    font-family:'Inter',sans-serif;
+    font-size:12.5px;font-weight:600;
+    color:var(--text-mute);
+    letter-spacing:0.04em;
+  }
   /* Result */
   .dx-result{display:none}
   .dx-result.is-active{display:block}
@@ -1736,9 +1767,10 @@
   }
   .dx-profile-level{
     font-family:'Inter',sans-serif;
-    font-size:11.5px;font-weight:700;
-    letter-spacing:0.1em;text-transform:uppercase;
-    min-width:90px;text-align:right;
+    font-size:11px;font-weight:700;
+    letter-spacing:0.08em;text-transform:uppercase;
+    min-width:108px;text-align:right;
+    line-height:1.2;
   }
   .dx-profile-level.lvl-low{color:#E8946B}
   .dx-profile-level.lvl-mid{color:#E8D4A0}
@@ -2016,6 +2048,15 @@
           <p class="dx-q-text" id="dxQText"></p>
           <p class="dx-q-jargon" id="dxQJargon" hidden></p>
           <div class="dx-options" id="dxOptions"></div>
+        </div>
+        <div class="dx-mood" id="dxMood" aria-hidden="true">
+          <svg class="dx-mood-face" id="dxMoodFace" viewBox="0 0 28 28">
+            <circle cx="14" cy="14" r="12" fill="none" stroke="currentColor" stroke-width="1.5"/>
+            <circle cx="10" cy="11" r="1.3" fill="currentColor"/>
+            <circle cx="18" cy="11" r="1.3" fill="currentColor"/>
+            <path id="dxMoodMouth" d="M 9 19 L 19 19" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+          </svg>
+          <span class="dx-mood-text" id="dxMoodText">On commence en douceur</span>
         </div>
       </div>
 
@@ -3413,59 +3454,61 @@
     };
 
     // Question pool — 4 per domain × 5 domains = 20. Each session picks 2 per domain.
-    // Each Q has: domain, type (choice|tf|estim|scenario), question, options[{label, correct?}], optional jargon
+    // Most T/F now include a "Ça dépend" 3rd option — for nuanced topics it is the
+    // correct answer; on others it's a smart-looking distractor that catches lucky guesses.
+    // 3 options per domain question = 33% random luck per Q, 11% to fluke 2/2 (vs 25%).
     const POOL = [
       // ---------- NEURO ----------
-      {domain:"neuro", type:"choice", q:"Tu vends une bougie à 39 €. Quel affichage convertit le mieux ?",
-        opts:[{l:"39,00 €"}, {l:"~~89 €~~ → 39 €", c:true}]},
+      {domain:"neuro", type:"choice", q:"Tu vends une bougie à 39&nbsp;€. Quel affichage convertit le mieux ?",
+        opts:[{l:"39,00&nbsp;€"}, {l:"<s>89&nbsp;€</s> &rarr; 39&nbsp;€", c:true}, {l:"39&nbsp;€ <em>seulement aujourd'hui</em>"}]},
       {domain:"neuro", type:"tf", q:"Augmenter ton prix peut faire vendre plus.",
-        opts:[{l:"VRAI", c:true}, {l:"FAUX"}]},
+        opts:[{l:"VRAI", c:true}, {l:"FAUX"}, {l:"Ça dépend"}]},
       {domain:"neuro", type:"choice", q:"Pour pousser à l'achat impulsif, qu'est-ce qui marche le mieux dans la majorité des cas ?",
-        opts:[{l:"Une garantie « satisfait ou remboursé 60 jours »"}, {l:"Un compte à rebours sur le prix actuel", c:true}]},
+        opts:[{l:"Une garantie « satisfait ou remboursé&nbsp;60&nbsp;jours »"}, {l:"Un compte à rebours sur le prix actuel", c:true}, {l:"Un avis client 5 étoiles bien visible"}]},
       {domain:"neuro", type:"tf", q:"Un visiteur doit voir un produit 7 à 10 fois en moyenne avant d'acheter.",
-        opts:[{l:"VRAI", c:true}, {l:"FAUX"}]},
+        opts:[{l:"VRAI"}, {l:"FAUX"}, {l:"Ça dépend du produit et du prix", c:true}]},
 
       // ---------- COPY ----------
       {domain:"copy", type:"choice", q:"Quel hook convertit le mieux pour une crème anti-âge ?",
-        opts:[{l:"Découvrez notre nouvelle crème naturelle"}, {l:"La crème que les dermatologues n'aiment pas (mais qui marche)", c:true}]},
+        opts:[{l:"Découvrez notre nouvelle crème naturelle"}, {l:"La crème que les dermatologues n'aiment pas (mais qui marche)", c:true}, {l:"Crème anti-âge premium, livraison gratuite"}]},
       {domain:"copy", type:"choice", q:"Lequel performe mieux ?",
-        opts:[{l:"Maigris en 30 jours"}, {l:"Marie a perdu 8 kg en 30 jours. Voici comment.", c:true}]},
+        opts:[{l:"Maigris en 30 jours"}, {l:"Marie a perdu 8&nbsp;kg en 30&nbsp;jours. Voici comment.", c:true}, {l:"Programme minceur scientifiquement validé"}]},
       {domain:"copy", type:"estim", q:"Une bonne accroche de pub Meta (titre principal) fait combien de mots ?",
         opts:[{l:"3 à 5 mots"}, {l:"6 à 9 mots", c:true}, {l:"10 à 15 mots"}, {l:"20 mots et plus"}]},
       {domain:"copy", type:"tf", q:"Une page produit longue convertit moins qu'une courte.",
-        opts:[{l:"VRAI"}, {l:"FAUX", c:true}]},
+        opts:[{l:"VRAI"}, {l:"FAUX"}, {l:"Ça dépend du produit et du prix", c:true}]},
 
       // ---------- CRO ----------
-      {domain:"cro", type:"estim", q:"Un taux de conversion de 1,5 % sur Shopify, c'est…",
+      {domain:"cro", type:"estim", q:"Un taux de conversion de 1,5&nbsp;% sur Shopify, c'est…",
         opts:[{l:"Mauvais"}, {l:"Moyen", c:true}, {l:"Excellent"}],
         jargon:"CRO = Conversion Rate Optimization, autrement dit l'art d'augmenter le pourcentage de visiteurs qui achètent."},
       {domain:"cro", type:"choice", q:"Tu veux augmenter ton taux de conversion. Quelle action priorises-tu en premier ?",
         opts:[{l:"Refaire le design de toute la page"}, {l:"Améliorer la hero (la zone visible sans scroller)", c:true}, {l:"Ajouter plus de produits dans la collection"}]},
       {domain:"cro", type:"tf", q:"Une popup d'exit-intent (qui s'affiche quand le visiteur va partir) augmente toujours la conversion.",
-        opts:[{l:"VRAI"}, {l:"FAUX", c:true}]},
+        opts:[{l:"VRAI"}, {l:"FAUX", c:true}, {l:"Ça dépend"}]},
       {domain:"cro", type:"choice", q:"Avis clients sur ta page produit : où les places-tu pour le meilleur impact ?",
         opts:[{l:"Tout en bas, après la description complète"}, {l:"En haut, juste sous le titre du produit", c:true}, {l:"Dans une popup à l'arrivée"}]},
 
       // ---------- ADS ----------
       {domain:"ads", type:"estim", q:"Le CPM moyen sur Meta en France pour l'e-commerce, c'est environ…",
-        opts:[{l:"2 à 5 €"}, {l:"8 à 15 €", c:true}, {l:"20 à 30 €"}, {l:"40 € et plus"}],
+        opts:[{l:"2 à 5&nbsp;€"}, {l:"8 à 15&nbsp;€", c:true}, {l:"20 à 30&nbsp;€"}, {l:"40&nbsp;€ et plus"}],
         jargon:"CPM = coût pour 1 000 impressions. C'est ce que tu paies à Meta pour montrer ta pub à 1 000 personnes."},
-      {domain:"ads", type:"scenario", q:"Ton CPA Meta monte de 30 % en 3 jours sans rien changer. Tu fais quoi ?",
-        opts:[{l:"Je coupe la campagne immédiatement, ça ne marche plus"}, {l:"J'analyse les données 24-48 h avant de bouger", c:true}, {l:"J'augmente le budget pour compenser la baisse de perf"}],
+      {domain:"ads", type:"scenario", q:"Ton CPA Meta monte de 30&nbsp;% en 3&nbsp;jours sans rien changer. Tu fais quoi ?",
+        opts:[{l:"Je coupe la campagne immédiatement, ça ne marche plus"}, {l:"J'analyse les données 24-48&nbsp;h avant de bouger", c:true}, {l:"J'augmente le budget pour compenser la baisse"}],
         jargon:"CPA = coût par acquisition, ce que tu paies pour avoir 1 client."},
       {domain:"ads", type:"tf", q:"Plus tu mets de budget sur Meta, plus l'algorithme apprend vite (à conditions équivalentes).",
-        opts:[{l:"VRAI", c:true}, {l:"FAUX"}]},
-      {domain:"ads", type:"choice", q:"Quelle créa convertit en moyenne mieux sur Meta en 2026 ?",
-        opts:[{l:"Vidéo studio professionnelle 30 s avec voix-off"}, {l:"Vidéo selfie face caméra de la fondatrice qui parle naturellement", c:true}]},
+        opts:[{l:"VRAI", c:true}, {l:"FAUX"}, {l:"Ça dépend"}]},
+      {domain:"ads", type:"choice", q:"Sur 100 tests A/B en 2025-2026, quelle créa Meta gagne le plus souvent ?",
+        opts:[{l:"Vidéo studio professionnelle 30&nbsp;s avec voix-off"}, {l:"Vidéo selfie face caméra qui parle naturellement", c:true}, {l:"Carrousel 5 photos produit haute qualité"}]},
 
       // ---------- MINDSET ----------
-      {domain:"mindset", type:"scenario", q:"Premier mois sur ta boutique : -2 000 € en pubs, 0 vente. Tu réagis comment ?",
+      {domain:"mindset", type:"scenario", q:"Premier mois sur ta boutique : -2 000&nbsp;€ en pubs, 0 vente. Tu réagis comment ?",
         opts:[{l:"Je change de produit, celui-là ne marche pas"}, {l:"J'analyse les données et je teste 1 angle différent", c:true}, {l:"J'arrête, c'est pas pour moi"}]},
       {domain:"mindset", type:"choice", q:"Tu testes 5 produits, 4 ne marchent pas. Tu vois ces 4 échecs comme…",
-        opts:[{l:"4 erreurs qui prouvent que je m'y prends mal"}, {l:"4 signaux qui m'ont rapproché du bon produit", c:true}]},
-      {domain:"mindset", type:"tf", q:"Travailler 12 h par jour est nécessaire pour réussir en e-commerce.",
-        opts:[{l:"VRAI"}, {l:"FAUX", c:true}]},
-      {domain:"mindset", type:"estim", q:"Combien de produits tu testes par mois en moyenne, idéalement, en phase d'apprentissage ?",
+        opts:[{l:"4 erreurs qui prouvent que je m'y prends mal"}, {l:"4 signaux qui m'ont rapproché du bon produit", c:true}, {l:"4 produits à relancer plus tard avec un meilleur angle"}]},
+      {domain:"mindset", type:"tf", q:"Travailler 12&nbsp;h par jour est nécessaire pour réussir en e-commerce.",
+        opts:[{l:"VRAI"}, {l:"FAUX", c:true}, {l:"Ça dépend"}]},
+      {domain:"mindset", type:"estim", q:"Combien de produits tu devrais tester par mois en phase d'apprentissage&nbsp;?",
         opts:[{l:"0 à 1"}, {l:"2 à 4"}, {l:"5 et plus", c:true}]}
     ];
 
@@ -3482,17 +3525,36 @@
       return session;
     }
 
-    // Diagnostic templates per weakest domain
+    // Diagnostic templates per weakest domain — wording stays prudent: 10 questions
+    // ne disent pas tout, on parle de "vigilance" et de "ce qui t'aiderait", pas de
+    // jugement absolu sur le niveau réel de la personne.
     const DIAG = {
-      neuro:   "Ton point faible : tu ignores une partie des leviers psychologiques d'achat. Tu peux mettre un bon produit sur ta page, mais sans déclencheurs (ancrage, urgence, preuve sociale, contraste...), le cerveau du visiteur file. <strong>Ecom Neuro</strong> te donne les leviers à activer, un par un.",
-      copy:    "Ton point faible : ton copywriting laisse de l'argent sur la table. Tu décris ce que TU vois dans ton produit, pas ce qui touche le viewer. <strong>Ecom Copy Impact</strong> t'apprend à écrire pour vendre, pas pour informer — pages, pubs, emails.",
-      cro:     "Ton point faible : ta boutique ne convertit pas comme elle devrait. Tu fais venir du monde, mais une grosse part repart sans acheter. <strong>Boutique qui convertit</strong> restructure ta page produit, et <strong>Conversion & panier</strong> optimise les derniers mètres avant l'achat.",
-      ads:     "Ton point faible : tes pubs payantes te coûtent plus cher qu'elles ne devraient pour ce qu'elles rapportent. Tu jettes du budget sans piloter clairement. <strong>Scaler Meta proprement</strong>, <strong>Créatives qui vendent</strong> et <strong>Google Ads sans gaspillage</strong> couvrent ça étape par étape.",
-      mindset: "Ton point faible : techniquement tu sais déjà pas mal de choses, mais l'opérateur derrière craque trop tôt — premier échec, première tentation d'arrêt, focus dispersé. <strong>Mental & constance</strong> et <strong>Focus d'opérateur</strong> travaillent l'opérateur derrière le e-commerçant."
+      neuro:   "<strong>Sur les questions posées, tu sembles ignorer une partie des leviers psychologiques d'achat.</strong> Tu peux mettre un bon produit sur ta page, mais sans déclencheurs (ancrage, urgence, preuve sociale, contraste...), le cerveau du visiteur file. Le module <strong>Ecom Neuro</strong> te donnerait ces leviers à activer un par un, sur des cas e-com concrets.",
+      copy:    "<strong>Sur les questions posées, tes réflexes copywriting méritent d'être consolidés.</strong> Tu décris probablement ce que TOI tu vois dans ton produit, pas ce qui touche le viewer. <strong>Ecom Copy Impact</strong> est conçu pour ça : écrire pour vendre, pas pour informer — pages, pubs, emails.",
+      cro:     "<strong>Sur les questions posées, tu sembles avoir des angles morts en optimisation de conversion.</strong> Tu fais venir du monde, mais une grosse part repart sans acheter. <strong>Boutique qui convertit</strong> restructure la page produit, et <strong>Conversion & panier</strong> optimise les derniers mètres avant l'achat.",
+      ads:     "<strong>Sur les questions posées, tes réflexes publicitaires sont à étoffer.</strong> Probablement tu jettes du budget sans piloter clairement. <strong>Scaler Meta proprement</strong>, <strong>Créatives qui vendent</strong> et <strong>Google Ads sans gaspillage</strong> couvrent ça étape par étape — du test à la scale.",
+      mindset: "<strong>Sur les questions posées, ton mental d'opérateur a des prises ouvertes.</strong> Techniquement tu peux savoir pas mal de choses, mais l'opérateur derrière craque trop tôt — premier échec, première tentation d'arrêt, focus dispersé. <strong>Mental & constance</strong> et <strong>Focus d'opérateur</strong> travaillent l'opérateur derrière le e-commerçant."
     };
 
-    const ALL_HIGH_DIAG = "Tu maîtrises bien les fondamentaux. GENESYS te servirait surtout pour rester à jour avec les évolutions du marché (algos Meta qui changent, nouveaux comportements consommateurs, neuro), accéder à des cas concrets d'autres opérateurs, et progresser plus vite par le réseau plutôt que dans ton coin.";
-    const ALL_LOW_DIAG = "Tu démarres, et c'est plutôt un avantage : pas de mauvaises habitudes à désapprendre. <strong>Supernova</strong> te donne le parcours complet de zéro à boutique rentable, et la communauté GENESYS te pose un cadre quotidien pour ne pas dériver.";
+    const ALL_HIGH_DIAG = "<strong>Sur les 10 questions posées, tu sembles à l'aise dans tous les domaines.</strong> Précision honnête : 10 questions ne suffisent pas à dire que tu maîtrises tout — mais tes réflexes ont l'air bons. GENESYS te servirait surtout pour rester à jour avec les évolutions du marché (algos Meta qui changent, nouveaux comportements consommateurs), accéder à des cas concrets d'autres opérateurs, et progresser plus vite par le réseau plutôt que dans ton coin.";
+    const ALL_LOW_DIAG = "<strong>Sur les 10 questions posées, beaucoup de leviers sont à explorer.</strong> Bonne nouvelle : tu démarres avec zéro mauvaise habitude à désapprendre. <strong>Supernova</strong> te donne le parcours complet de zéro à boutique rentable, et la communauté GENESYS te pose un cadre quotidien pour ne pas dériver.";
+
+    // Mood face progress (face SVG mouth path keys + encouragement text)
+    const MOUTH_PATHS = {
+      neutral: "M 9 19 L 19 19",
+      ok:      "M 9 18 Q 14 21 19 18",
+      smile:   "M 8 17 Q 14 22 20 17",
+      grin:    "M 7 16 Q 14 24 21 16"
+    };
+    function moodFor(idx, total){
+      const remaining = total - idx;
+      if(idx === 0)            return {mouth:'neutral', lvl:1, txt:"On commence en douceur"};
+      if(remaining > total * 0.6) return {mouth:'neutral', lvl:1, txt:"Plus que " + remaining + " questions"};
+      if(remaining > total * 0.3) return {mouth:'ok', lvl:2, txt:"Plus que " + remaining + " questions"};
+      if(remaining > 1)         return {mouth:'smile', lvl:3, txt:"Plus que " + remaining + " questions"};
+      if(remaining === 1)       return {mouth:'smile', lvl:3, txt:"Plus qu'une !"};
+      return {mouth:'grin', lvl:4, txt:"Dernière question !"};
+    }
 
     // ---------- State + DOM refs ----------
     let session = [];
@@ -3511,6 +3573,9 @@
     const qText   = sec.querySelector('#dxQText');
     const qJargon = sec.querySelector('#dxQJargon');
     const qOpts   = sec.querySelector('#dxOptions');
+    const moodFace= sec.querySelector('#dxMoodFace');
+    const moodMouth= sec.querySelector('#dxMoodMouth');
+    const moodText= sec.querySelector('#dxMoodText');
     const profile = sec.querySelector('#dxProfile');
     const resultH = sec.querySelector('#dxResultH');
     const diagText= sec.querySelector('#dxDiagText');
@@ -3527,13 +3592,21 @@
       const total = session.length;
       progFill.style.width = ((cur / total) * 100) + '%';
       progText.textContent = (cur + 1) + ' / ' + total;
-      qCard.classList.remove('is-visible');
+      // Mood face progress
+      const mood = moodFor(cur, total);
+      if(moodMouth) moodMouth.setAttribute('d', MOUTH_PATHS[mood.mouth]);
+      if(moodFace){
+        moodFace.classList.remove('lvl-1','lvl-2','lvl-3','lvl-4');
+        moodFace.classList.add('lvl-' + mood.lvl);
+      }
+      if(moodText) moodText.textContent = mood.txt;
 
+      qCard.classList.remove('is-visible');
       setTimeout(() => {
         qDomain.textContent = DOMAIN[q.domain].label;
-        qText.textContent = q.q;
-        if(q.jargon){ qJargon.hidden = false; qJargon.textContent = q.jargon; }
-        else { qJargon.hidden = true; qJargon.textContent = ''; }
+        qText.innerHTML = q.q;          // questions may contain &nbsp;, <s>, &rarr; etc.
+        if(q.jargon){ qJargon.hidden = false; qJargon.innerHTML = q.jargon; }
+        else { qJargon.hidden = true; qJargon.innerHTML = ''; }
         qOpts.classList.toggle('is-tf', q.type === 'tf');
         qOpts.innerHTML = '';
         const letters = ['A','B','C','D','E'];
@@ -3579,7 +3652,7 @@
         if(a.correct) scores[a.domain].right++;
       });
 
-      // Build profile rows
+      // Build profile rows. Honest wording — 2 questions ne disent pas tout.
       profile.innerHTML = '';
       let weakest = null, weakestRatio = 99;
       let allHigh = true, allLow = true;
@@ -3587,9 +3660,9 @@
         const s = scores[d];
         const ratio = s.total ? (s.right / s.total) : 0;
         let dots, level, lvlClass;
-        if(ratio >= 0.9){ dots = 5; level = 'Avancé'; lvlClass = 'lvl-high'; allLow = false; }
-        else if(ratio >= 0.5){ dots = 3; level = 'Intermédiaire'; lvlClass = 'lvl-mid'; allLow = false; allHigh = false; }
-        else { dots = 1; level = 'Débutant'; lvlClass = 'lvl-low'; allHigh = false; }
+        if(ratio >= 0.9){ dots = 4; level = "À l'aise"; lvlClass = 'lvl-high'; allLow = false; }
+        else if(ratio >= 0.5){ dots = 2; level = "À consolider"; lvlClass = 'lvl-mid'; allLow = false; allHigh = false; }
+        else { dots = 1; level = "À explorer"; lvlClass = 'lvl-low'; allHigh = false; }
 
         const row = document.createElement('div');
         row.className = 'dx-profile-row';
@@ -3604,20 +3677,20 @@
         if(ratio < weakestRatio){ weakestRatio = ratio; weakest = d; }
       });
 
-      // Diagnostic + module recommendations
+      // Diagnostic + module recommendations — wording prudent partout
       let diagHtml, modules;
       if(allHigh){
         diagHtml = ALL_HIGH_DIAG;
-        modules = ["Ecom Neuro", "Communauté privée", "Diagnostics de boutiques"];
-        resultH.innerHTML = "Tu es <em>solide</em>.";
+        modules = ["Ecom Neuro", "Diagnostics de boutiques", "Communauté privée"];
+        resultH.innerHTML = "Tu sembles <em>à l'aise partout</em>";
       } else if(allLow){
         diagHtml = ALL_LOW_DIAG;
-        modules = ["Supernova", "Communauté privée", "Ecom Copy Impact"];
-        resultH.innerHTML = "Tu démarres. <em>C'est un bon point.</em>";
+        modules = ["Supernova", "Ecom Copy Impact", "Communauté privée"];
+        resultH.innerHTML = "Beaucoup à <em>explorer</em> — c'est un bon point";
       } else {
         diagHtml = DIAG[weakest];
         modules = DOMAIN[weakest].modules.slice();
-        resultH.innerHTML = "Ton blocage : <em>" + DOMAIN[weakest].label + "</em>";
+        resultH.innerHTML = "Ton point de vigilance :<br><em>" + DOMAIN[weakest].label + "</em>";
       }
       diagText.innerHTML = diagHtml;
       modulesEl.innerHTML = '';
