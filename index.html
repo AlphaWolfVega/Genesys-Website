@@ -55,22 +55,27 @@
   #stars{position:fixed;inset:0;pointer-events:none;z-index:1}
   main, nav, footer{position:relative;z-index:2}
 
-  /* ===== H2 CURTAIN REVEAL (Option 5) — non-clipping, visible by default ===== */
+  /* ===== H2 ITALIC GOLD SETTLE (Option D) — gold em words land last, mini overshoot ===== */
   .h2-reveal{position:relative}
-  .h2-reveal::before{
-    content:"";position:absolute;top:0;bottom:0;width:3px;left:0;
-    background:var(--gold);
-    box-shadow:0 0 14px var(--gold), 0 0 28px rgba(212,182,106,0.55), 0 0 60px rgba(212,182,106,0.25);
+  /* Italic em words start hidden, settle in after parent fades up */
+  .h2-reveal em{
+    display:inline-block;
     opacity:0;
-    z-index:2;pointer-events:none;
-    border-radius:2px;
+    transform:translateY(16px);
+    will-change:opacity, transform;
   }
-  .h2-reveal.revealing::before{animation:h2edge 0.95s cubic-bezier(0.7,0,0.25,1) forwards}
-  @keyframes h2edge{
-    0%   { left:0;     opacity:0;   transform:scaleY(0.7); }
-    8%   {              opacity:1;   transform:scaleY(1.05); }
-    92%  { left:100%;   opacity:1;   transform:scaleY(1.05); }
-    100% { left:100%;   opacity:0;   transform:scaleY(0.7); }
+  .h2-reveal.revealing em{
+    animation:h2emSettle 0.62s cubic-bezier(0.2, 0.7, 0.3, 1) 0.22s forwards;
+  }
+  /* Stagger when multiple em in the same H2 (e.g. 'la détermination.' + 'tout le reste.') */
+  .h2-reveal.revealing em:nth-of-type(2){animation-delay:0.40s}
+  .h2-reveal.revealing em:nth-of-type(3){animation-delay:0.58s}
+  .h2-reveal.revealing em:nth-of-type(4){animation-delay:0.76s}
+  @keyframes h2emSettle{
+    0%   { opacity:0; transform:translateY(16px) }
+    55%  { opacity:1; }
+    72%  { transform:translateY(-3px) }   /* slight overshoot — the 'settle' bounce */
+    100% { opacity:1; transform:translateY(0) }
   }
 
   /* ===== MAGNETIC CTA WRAPPER (Option 4) ===== */
