@@ -334,6 +334,24 @@
     #methode .section-header h2{font-size:clamp(30px,3.4vw,44px);line-height:1.15;letter-spacing:-0.015em}
   }
   .section-header p{font-size:17px;color:var(--text-mute);line-height:1.7;max-width:620px;margin:0 auto;font-weight:300}
+  .trust-callout{
+    display:block;margin:32px auto 0;padding:18px 30px;max-width:560px;
+    text-align:center;
+    font-family:'Playfair Display',serif;font-style:italic;
+    font-size:19px;font-weight:600;line-height:1.4;
+    color:var(--gold);
+    background:linear-gradient(135deg,rgba(212,182,106,0.12) 0%,rgba(212,182,106,0.04) 100%);
+    border:1px solid rgba(212,182,106,0.4);border-radius:6px;
+    box-shadow:0 0 30px rgba(212,182,106,0.18);
+    animation:trustGlow 3.2s ease-in-out infinite;
+  }
+  @keyframes trustGlow{
+    0%,100%{box-shadow:0 0 24px rgba(212,182,106,0.18), inset 0 0 0 1px rgba(212,182,106,0)}
+    50%{box-shadow:0 0 55px rgba(212,182,106,0.42), inset 0 0 0 1px rgba(212,182,106,0.25)}
+  }
+  @media(max-width:600px){
+    .trust-callout{font-size:16px;padding:16px 22px;margin-top:24px}
+  }
 
   /* ===== TRUST STRIP ===== */
   /* ===== TESTIMONIALS VIDEO ===== */
@@ -1280,7 +1298,8 @@
         <div class="line"></div>
       </div>
       <h2>2021 → 2026<br><em>+5 ans sur YouTube</em></h2>
-      <p>La plupart des "experts e-commerce" qui étaient là en 2022 ont déjà disparu, changé de niche, ou pivoté vers un autre business à la mode. <strong>Nous, on est toujours là, à publier sur la même chose.</strong> +7 ans dans l'e-commerce. +13 ans en cumulé avec l'équipe. +5 ans sur YouTube à partager énormément de valeurs — méthodes, raisonnements, retours concrets sur les boutiques qu'on a lancées. <strong>La durée trie les sérieux des opportunistes.</strong></p>
+      <p>La plupart des "experts e-commerce" qui étaient là en 2022 ont déjà disparu, changé de niche, ou pivoté vers un autre business à la mode. <strong>Nous, on a toujours des boutiques qui tournent, on connaît la réalité du marché, on vit l'e-commerce toute l'année.</strong> +7 ans dans l'e-commerce. +13 ans d'expérience cumulés avec l'équipe. +5 ans sur YouTube à partager énormément de valeurs — méthodes, raisonnements, retours concrets sur les boutiques qu'on a lancées.</p>
+      <p class="trust-callout reveal">La durée trie les sérieux des opportunistes.</p>
     </div>
     <div class="yt-trust-grid reveal">
       <div class="yt-frame">
