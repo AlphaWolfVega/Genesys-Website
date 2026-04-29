@@ -12,6 +12,7 @@
 <link rel="preconnect" href="https://i.ytimg.com">
 <link rel="dns-prefetch" href="https://googleads.g.doubleclick.net">
 <link rel="dns-prefetch" href="https://static.doubleclick.net">
+<script>document.documentElement.classList.add('js');</script>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,400;0,700;0,800;0,900;1,400;1,700&display=swap" rel="stylesheet">
 <style>
   :root{
@@ -55,14 +56,16 @@
   #stars{position:fixed;inset:0;pointer-events:none;z-index:1}
   main, nav, footer{position:relative;z-index:2}
 
-  /* ===== H2 LEFT-TO-RIGHT REVEAL (no decoration) — original effect restored ===== */
+  /* ===== TITLE LEFT-TO-RIGHT REVEAL (smooth, applied to all H1 + H2) ===== */
   .h2-reveal{position:relative}
-  .h2-reveal.h2-pre{
+  /* Pre-clip is applied via CSS gated by .js so it takes effect before paint
+     (no flash on load). If JS is disabled, no clipping = title visible. */
+  .js .h2-reveal:not(.revealing){
     -webkit-clip-path:inset(0 100% 0 0);
     clip-path:inset(0 100% 0 0);
   }
   .h2-reveal.revealing{
-    animation:h2revealLR 0.85s cubic-bezier(0.65, 0, 0.25, 1) forwards;
+    animation:h2revealLR 0.95s cubic-bezier(0.16, 1, 0.3, 1) forwards;
   }
   @keyframes h2revealLR{
     0%   { -webkit-clip-path:inset(0 100% 0 0); clip-path:inset(0 100% 0 0); }
@@ -2049,59 +2052,62 @@
     loop();
   })();
 
-  // ===== H2 MASK RISING (Option 4) — text reveals from bottom up =====
+  // ===== TITLE LEFT-TO-RIGHT REVEAL — smooth, applied to all H1 + H2 =====
   (function(){
     const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if(reduceMotion) return;
-    const headings = document.querySelectorAll('section h2, .testimonials h2, .partner h2, .strategy h2, .stack-wrap h2, .pillars h2');
+    if(reduceMotion){
+      // Without animation, immediately mark all titles as revealed so the
+      // CSS pre-clip is bypassed.
+      document.querySelectorAll('main h1, main h2, header h1, header h2').forEach(h => {
+        h.classList.add('h2-reveal','revealing');
+      });
+      return;
+    }
+
+    // Broad selector: every H1 and H2 in main content area.
+    const headings = document.querySelectorAll('main h1, main h2, header h1, header h2');
     if(!headings.length) return;
 
     const seen = new WeakSet();
     const vh = window.innerHeight || document.documentElement.clientHeight;
 
-    // Mark all matching H2s as h2-reveal. Only those CURRENTLY BELOW the fold
-    // get the pre-clip applied — H2s already visible at load animate immediately
-    // without the brief flash of being clipped.
+    // 1) Add the marker class — CSS .js .h2-reveal:not(.revealing) clips them
+    //    before any paint happens (no flash).
     const toAnimate = [];
     headings.forEach(h => {
       if(seen.has(h)) return;
       seen.add(h);
       h.classList.add('h2-reveal');
       const rect = h.getBoundingClientRect();
-      if(rect.top > vh * 0.85){
-        // Below the fold — clip first, animate on intersection
-        h.classList.add('h2-pre');
-        toAnimate.push(h);
+      if(rect.top < vh * 0.92 && rect.bottom > 0){
+        // Already visible at load — reveal on next frame so the clip paints first
+        requestAnimationFrame(() => {
+          requestAnimationFrame(() => h.classList.add('revealing'));
+        });
       } else {
-        // Already in viewport at load — animate immediately (no pre-clip flash)
-        h.classList.add('revealing');
+        // Below the fold — observer triggers when entering viewport
+        toAnimate.push(h);
       }
     });
 
-    if(!toAnimate.length) return;
-
-    // Observer with low threshold so reveal triggers as soon as H2 is barely visible.
-    const obs = new IntersectionObserver((entries) => {
-      entries.forEach(e => {
-        if(e.isIntersecting){
-          const el = e.target;
-          const delay = Math.random() * 60;
-          setTimeout(() => {
-            el.classList.remove('h2-pre');
-            el.classList.add('revealing');
-          }, delay);
-          obs.unobserve(el);
-        }
-      });
-    }, { threshold: 0.05, rootMargin: '0px 0px -3% 0px' });
-    toAnimate.forEach(h => obs.observe(h));
+    if(toAnimate.length){
+      // Threshold 0.05 = even a sliver of visibility triggers the reveal.
+      const obs = new IntersectionObserver((entries) => {
+        entries.forEach(e => {
+          if(e.isIntersecting){
+            const el = e.target;
+            const delay = Math.random() * 50;
+            setTimeout(() => el.classList.add('revealing'), delay);
+            obs.unobserve(el);
+          }
+        });
+      }, { threshold: 0.05, rootMargin: '0px 0px -2% 0px' });
+      toAnimate.forEach(h => obs.observe(h));
+    }
 
     // GUARDRAIL — hard fallback at 4.5s: anything still pre-clipped force-reveals.
-    // Protects against any IntersectionObserver edge case (CSS containment,
-    // unusual viewport, browser quirks) that could leave an H2 invisible.
     setTimeout(() => {
-      document.querySelectorAll('.h2-reveal.h2-pre').forEach(h => {
-        h.classList.remove('h2-pre');
+      document.querySelectorAll('.h2-reveal:not(.revealing)').forEach(h => {
         h.classList.add('revealing');
       });
     }, 4500);
