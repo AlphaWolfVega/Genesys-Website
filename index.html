@@ -1445,56 +1445,28 @@
     box-shadow:0 0 50px rgba(212,182,106,0.22),0 0 0 1px rgba(212,182,106,0.4) inset;
   }
   .yt-frame iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
-  /* YouTube facade — instant thumbnail; real iframe loads on click */
-  .yt-facade{
+  /* YouTube poster overlay — instant thumbnail above iframe while it loads,
+     fades out once the iframe is ready. Single-tap to play (native YT button). */
+  .yt-poster{
     position:absolute;inset:0;
     width:100%;height:100%;
-    border:0;padding:0;margin:0;
-    background:#000;
-    cursor:pointer;
-    overflow:hidden;
-    display:block;
-    font:inherit;color:inherit;
-    transition:transform 0.3s ease;
-  }
-  .yt-facade img{
-    width:100%;height:100%;
     object-fit:cover;
-    display:block;
-    pointer-events:none;
+    z-index:1;
+    pointer-events:none; /* taps pass through to the iframe below */
+    opacity:1;
+    transition:opacity 0.45s ease 0.25s;
+    background:#000;
   }
-  .yt-facade::before{
-    content:"";position:absolute;top:50%;left:50%;
-    transform:translate(-50%,-50%);
-    width:68px;height:48px;
-    background:rgba(20,20,20,0.78);
-    border-radius:14%;
-    pointer-events:none;
-    transition:background 0.2s ease;
-  }
-  .yt-facade::after{
-    content:"";position:absolute;top:50%;left:50%;
-    transform:translate(-32%,-50%);
-    width:0;height:0;
-    border:11px solid transparent;
-    border-left-width:19px;
-    border-left-color:#fff;
-    pointer-events:none;
-  }
-  @media (hover:hover){
-    .yt-facade:hover::before{background:#cc0000}
-  }
-  .yt-facade:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
-  /* Testimonial portrait 9:16 — apply the same crop to the facade thumbnail */
-  .testimonial-video .yt-facade img{
+  .yt-frame.is-loaded .yt-poster,
+  .testimonial-video.is-loaded .yt-poster{opacity:0}
+  /* Testimonial portrait 9:16 — same crop as the iframe */
+  .testimonial-video .yt-poster{
     position:absolute;top:50%;left:50%;
     width:177.78%;height:100%;
     max-width:none;
     transform:translate(-50%,-50%);
     object-fit:cover;
   }
-  .testimonial-video .yt-facade::before{width:54px;height:38px}
-  .testimonial-video .yt-facade::after{border-width:9px 0 9px 15px}
   .yt-cta{
     text-align:center;margin-top:40px;
     font-family:'Inter',sans-serif;font-size:14px;
@@ -1615,49 +1587,57 @@
     <div class="testimonials-grid reveal" id="testimonialsGrid">
       <div class="testimonial-card">
         <div class="testimonial-video">
-          <button type="button" class="yt-facade" data-yt="yKtLULWr3T4" data-yt-title="Témoignage Peter — GENESYS" aria-label="Lancer le témoignage de Peter"><img src="https://i.ytimg.com/vi/yKtLULWr3T4/maxresdefault.jpg" onerror="this.onerror=null;this.src='https://i.ytimg.com/vi/yKtLULWr3T4/hqdefault.jpg'" alt="" loading="lazy" decoding="async" width="1280" height="720"></button>
+          <img class="yt-poster" src="https://i.ytimg.com/vi/yKtLULWr3T4/maxresdefault.jpg" onerror="this.onerror=null;this.src='https://i.ytimg.com/vi/yKtLULWr3T4/hqdefault.jpg'" alt="" loading="lazy" decoding="async" aria-hidden="true">
+          <iframe src="https://www.youtube-nocookie.com/embed/yKtLULWr3T4?modestbranding=1&rel=0&playsinline=1" title="Témoignage Peter — GENESYS" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy"></iframe>
         </div>
         <div class="testimonial-name">Peter</div>
       </div>
       <div class="testimonial-card">
         <div class="testimonial-video">
-          <button type="button" class="yt-facade" data-yt="bVd1zHUWAPU" data-yt-title="Témoignage Louis — GENESYS" aria-label="Lancer le témoignage de Louis"><img src="https://i.ytimg.com/vi/bVd1zHUWAPU/maxresdefault.jpg" onerror="this.onerror=null;this.src='https://i.ytimg.com/vi/bVd1zHUWAPU/hqdefault.jpg'" alt="" loading="lazy" decoding="async" width="1280" height="720"></button>
+          <img class="yt-poster" src="https://i.ytimg.com/vi/bVd1zHUWAPU/maxresdefault.jpg" onerror="this.onerror=null;this.src='https://i.ytimg.com/vi/bVd1zHUWAPU/hqdefault.jpg'" alt="" loading="lazy" decoding="async" aria-hidden="true">
+          <iframe src="https://www.youtube-nocookie.com/embed/bVd1zHUWAPU?modestbranding=1&rel=0&playsinline=1" title="Témoignage Louis — GENESYS" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy"></iframe>
         </div>
         <div class="testimonial-name">Louis</div>
       </div>
       <div class="testimonial-card">
         <div class="testimonial-video">
-          <button type="button" class="yt-facade" data-yt="57ypnT-_9hs" data-yt-title="Témoignage Meïssa — GENESYS" aria-label="Lancer le témoignage de Meïssa"><img src="https://i.ytimg.com/vi/57ypnT-_9hs/maxresdefault.jpg" onerror="this.onerror=null;this.src='https://i.ytimg.com/vi/57ypnT-_9hs/hqdefault.jpg'" alt="" loading="lazy" decoding="async" width="1280" height="720"></button>
+          <img class="yt-poster" src="https://i.ytimg.com/vi/57ypnT-_9hs/maxresdefault.jpg" onerror="this.onerror=null;this.src='https://i.ytimg.com/vi/57ypnT-_9hs/hqdefault.jpg'" alt="" loading="lazy" decoding="async" aria-hidden="true">
+          <iframe src="https://www.youtube-nocookie.com/embed/57ypnT-_9hs?modestbranding=1&rel=0&playsinline=1" title="Témoignage Meïssa — GENESYS" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy"></iframe>
         </div>
         <div class="testimonial-name">Meïssa</div>
       </div>
       <div class="testimonial-card">
         <div class="testimonial-video">
-          <button type="button" class="yt-facade" data-yt="N5v7HyDVbZ4" data-yt-title="Témoignage Yann — GENESYS" aria-label="Lancer le témoignage de Yann"><img src="https://i.ytimg.com/vi/N5v7HyDVbZ4/maxresdefault.jpg" onerror="this.onerror=null;this.src='https://i.ytimg.com/vi/N5v7HyDVbZ4/hqdefault.jpg'" alt="" loading="lazy" decoding="async" width="1280" height="720"></button>
+          <img class="yt-poster" src="https://i.ytimg.com/vi/N5v7HyDVbZ4/maxresdefault.jpg" onerror="this.onerror=null;this.src='https://i.ytimg.com/vi/N5v7HyDVbZ4/hqdefault.jpg'" alt="" loading="lazy" decoding="async" aria-hidden="true">
+          <iframe src="https://www.youtube-nocookie.com/embed/N5v7HyDVbZ4?modestbranding=1&rel=0&playsinline=1" title="Témoignage Yann — GENESYS" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy"></iframe>
         </div>
         <div class="testimonial-name">Yann</div>
       </div>
       <div class="testimonial-card">
         <div class="testimonial-video">
-          <button type="button" class="yt-facade" data-yt="izzWqt4cD6w" data-yt-title="Témoignage Frank — GENESYS" aria-label="Lancer le témoignage de Frank"><img src="https://i.ytimg.com/vi/izzWqt4cD6w/maxresdefault.jpg" onerror="this.onerror=null;this.src='https://i.ytimg.com/vi/izzWqt4cD6w/hqdefault.jpg'" alt="" loading="lazy" decoding="async" width="1280" height="720"></button>
+          <img class="yt-poster" src="https://i.ytimg.com/vi/izzWqt4cD6w/maxresdefault.jpg" onerror="this.onerror=null;this.src='https://i.ytimg.com/vi/izzWqt4cD6w/hqdefault.jpg'" alt="" loading="lazy" decoding="async" aria-hidden="true">
+          <iframe src="https://www.youtube-nocookie.com/embed/izzWqt4cD6w?modestbranding=1&rel=0&playsinline=1" title="Témoignage Frank — GENESYS" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy"></iframe>
         </div>
         <div class="testimonial-name">Frank</div>
       </div>
       <div class="testimonial-card">
         <div class="testimonial-video">
-          <button type="button" class="yt-facade" data-yt="jFKrWKaZ9sg" data-yt-title="Témoignage Karim — GENESYS" aria-label="Lancer le témoignage de Karim"><img src="https://i.ytimg.com/vi/jFKrWKaZ9sg/maxresdefault.jpg" onerror="this.onerror=null;this.src='https://i.ytimg.com/vi/jFKrWKaZ9sg/hqdefault.jpg'" alt="" loading="lazy" decoding="async" width="1280" height="720"></button>
+          <img class="yt-poster" src="https://i.ytimg.com/vi/jFKrWKaZ9sg/maxresdefault.jpg" onerror="this.onerror=null;this.src='https://i.ytimg.com/vi/jFKrWKaZ9sg/hqdefault.jpg'" alt="" loading="lazy" decoding="async" aria-hidden="true">
+          <iframe src="https://www.youtube-nocookie.com/embed/jFKrWKaZ9sg?modestbranding=1&rel=0&playsinline=1" title="Témoignage Karim — GENESYS" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy"></iframe>
         </div>
         <div class="testimonial-name">Karim</div>
       </div>
       <div class="testimonial-card">
         <div class="testimonial-video">
-          <button type="button" class="yt-facade" data-yt="nLOa5GbRJQ0" data-yt-title="Témoignage Erwan — GENESYS" aria-label="Lancer le témoignage d'Erwan"><img src="https://i.ytimg.com/vi/nLOa5GbRJQ0/maxresdefault.jpg" onerror="this.onerror=null;this.src='https://i.ytimg.com/vi/nLOa5GbRJQ0/hqdefault.jpg'" alt="" loading="lazy" decoding="async" width="1280" height="720"></button>
+          <img class="yt-poster" src="https://i.ytimg.com/vi/nLOa5GbRJQ0/maxresdefault.jpg" onerror="this.onerror=null;this.src='https://i.ytimg.com/vi/nLOa5GbRJQ0/hqdefault.jpg'" alt="" loading="lazy" decoding="async" aria-hidden="true">
+          <iframe src="https://www.youtube-nocookie.com/embed/nLOa5GbRJQ0?modestbranding=1&rel=0&playsinline=1" title="Témoignage Erwan — GENESYS" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy"></iframe>
         </div>
         <div class="testimonial-name">Erwan</div>
       </div>
       <div class="testimonial-card">
         <div class="testimonial-video">
-          <button type="button" class="yt-facade" data-yt="LKSLAI8xC5E" data-yt-title="Témoignage Ugo — GENESYS" aria-label="Lancer le témoignage d'Ugo"><img src="https://i.ytimg.com/vi/LKSLAI8xC5E/maxresdefault.jpg" onerror="this.onerror=null;this.src='https://i.ytimg.com/vi/LKSLAI8xC5E/hqdefault.jpg'" alt="" loading="lazy" decoding="async" width="1280" height="720"></button>
+          <img class="yt-poster" src="https://i.ytimg.com/vi/LKSLAI8xC5E/maxresdefault.jpg" onerror="this.onerror=null;this.src='https://i.ytimg.com/vi/LKSLAI8xC5E/hqdefault.jpg'" alt="" loading="lazy" decoding="async" aria-hidden="true">
+          <iframe src="https://www.youtube-nocookie.com/embed/LKSLAI8xC5E?modestbranding=1&rel=0&playsinline=1" title="Témoignage Ugo — GENESYS" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy"></iframe>
         </div>
         <div class="testimonial-name">Ugo</div>
       </div>
@@ -1751,13 +1731,16 @@
     <div class="trust-statement reveal"><span class="trust-statement-text">Profite de +13 ans d'expérience cumulée<br>et de chaque erreur qu'on a payée<br>à ta place pour seulement 49$ / mois<br>l'équivalent de 2-3 Uber Eats<br>que tu oublies la semaine d'après.</span></div>
     <div class="yt-trust-grid reveal">
       <div class="yt-frame">
-        <button type="button" class="yt-facade" data-yt="A9P95XvP8TA" data-yt-title="GENESYS — vidéo 1" aria-label="Lancer la vidéo GENESYS 1"><img src="https://i.ytimg.com/vi/A9P95XvP8TA/maxresdefault.jpg" onerror="this.onerror=null;this.src='https://i.ytimg.com/vi/A9P95XvP8TA/hqdefault.jpg'" alt="" loading="lazy" decoding="async" width="1280" height="720"></button>
+        <img class="yt-poster" src="https://i.ytimg.com/vi/A9P95XvP8TA/maxresdefault.jpg" onerror="this.onerror=null;this.src='https://i.ytimg.com/vi/A9P95XvP8TA/hqdefault.jpg'" alt="" loading="lazy" decoding="async" aria-hidden="true">
+        <iframe src="https://www.youtube-nocookie.com/embed/A9P95XvP8TA?rel=0&modestbranding=1&playsinline=1" title="GENESYS — vidéo 1" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
       </div>
       <div class="yt-frame">
-        <button type="button" class="yt-facade" data-yt="50y5ze-5ThQ" data-yt-title="GENESYS — vidéo 2" aria-label="Lancer la vidéo GENESYS 2"><img src="https://i.ytimg.com/vi/50y5ze-5ThQ/maxresdefault.jpg" onerror="this.onerror=null;this.src='https://i.ytimg.com/vi/50y5ze-5ThQ/hqdefault.jpg'" alt="" loading="lazy" decoding="async" width="1280" height="720"></button>
+        <img class="yt-poster" src="https://i.ytimg.com/vi/50y5ze-5ThQ/maxresdefault.jpg" onerror="this.onerror=null;this.src='https://i.ytimg.com/vi/50y5ze-5ThQ/hqdefault.jpg'" alt="" loading="lazy" decoding="async" aria-hidden="true">
+        <iframe src="https://www.youtube-nocookie.com/embed/50y5ze-5ThQ?rel=0&modestbranding=1" title="GENESYS — vidéo 2" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
       </div>
       <div class="yt-frame">
-        <button type="button" class="yt-facade" data-yt="3NoXoyQLdw8" data-yt-title="GENESYS — vidéo 3" aria-label="Lancer la vidéo GENESYS 3"><img src="https://i.ytimg.com/vi/3NoXoyQLdw8/maxresdefault.jpg" onerror="this.onerror=null;this.src='https://i.ytimg.com/vi/3NoXoyQLdw8/hqdefault.jpg'" alt="" loading="lazy" decoding="async" width="1280" height="720"></button>
+        <img class="yt-poster" src="https://i.ytimg.com/vi/3NoXoyQLdw8/maxresdefault.jpg" onerror="this.onerror=null;this.src='https://i.ytimg.com/vi/3NoXoyQLdw8/hqdefault.jpg'" alt="" loading="lazy" decoding="async" aria-hidden="true">
+        <iframe src="https://www.youtube-nocookie.com/embed/3NoXoyQLdw8?rel=0&modestbranding=1&playsinline=1&v=20260429" title="GENESYS — vidéo 3" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
       </div>
     </div>
     <div class="yt-cta-btn reveal" style="text-align:center;margin-top:36px"><a href="#rejoindre" class="btn btn-gold">Rejoindre GENESYS</a></div>
@@ -3005,47 +2988,20 @@
     update();
   })();
 
-  // ===== YOUTUBE FACADE — load real iframe only on click =====
-  (function initYouTubeFacade(){
-    function activate(facade){
-      const id = facade.dataset.yt;
-      if(!id) return;
-      const title = facade.dataset.ytTitle || 'YouTube video';
-      const params = facade.dataset.ytParams || 'rel=0&modestbranding=1&playsinline=1';
-      const iframe = document.createElement('iframe');
-      iframe.src = 'https://www.youtube-nocookie.com/embed/' + id + '?' + params + '&autoplay=1';
-      iframe.title = title;
-      iframe.setAttribute('allow', 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share');
-      iframe.setAttribute('referrerpolicy', 'strict-origin-when-cross-origin');
-      iframe.setAttribute('allowfullscreen', '');
-      iframe.frameBorder = 0;
-      facade.parentNode.replaceChild(iframe, facade);
-    }
-    document.addEventListener('click', function(e){
-      const facade = e.target.closest('.yt-facade');
-      if(!facade) return;
-      e.preventDefault();
-      activate(facade);
+  // ===== YOUTUBE POSTER OVERLAY — hides black box while iframe loads =====
+  (function initYouTubePoster(){
+    document.querySelectorAll('.yt-frame iframe, .testimonial-video iframe').forEach(iframe => {
+      const wrap = iframe.closest('.yt-frame, .testimonial-video');
+      if(!wrap) return;
+      // If the iframe is already loaded by the time JS runs, fade out immediately
+      if(iframe.complete || (iframe.contentWindow && iframe.contentDocument)){
+        wrap.classList.add('is-loaded');
+      }
+      iframe.addEventListener('load', () => {
+        // Slight delay so YouTube has time to paint its UI before the poster fades
+        setTimeout(() => wrap.classList.add('is-loaded'), 250);
+      }, {once:true});
     });
-    // Warm up YouTube origin on first hover/touch (helps the click→play feel snappier)
-    let warmed = false;
-    function warmUp(){
-      if(warmed) return;
-      warmed = true;
-      ['https://www.youtube-nocookie.com','https://www.youtube.com','https://i.ytimg.com'].forEach(href => {
-        const link = document.createElement('link');
-        link.rel = 'preconnect';
-        link.href = href;
-        link.crossOrigin = 'anonymous';
-        document.head.appendChild(link);
-      });
-    }
-    document.addEventListener('mouseover', function(e){
-      if(e.target.closest('.yt-facade')) warmUp();
-    }, {passive:true, once:false});
-    document.addEventListener('touchstart', function(e){
-      if(e.target.closest('.yt-facade')) warmUp();
-    }, {passive:true, once:false});
   })();
 </script>
 
