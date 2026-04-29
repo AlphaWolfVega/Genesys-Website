@@ -1125,15 +1125,34 @@
   .stack-total .lbl strong{display:block;color:var(--text);font-size:22px;letter-spacing:-0.01em;text-transform:none;font-weight:800;margin-top:6px}
   .stack-total .crossed{
     font-family:'Inter',sans-serif;
-    font-size:38px;font-weight:800;letter-spacing:-0.02em;
-    color:var(--text);
-    text-decoration:none;
+    letter-spacing:-0.01em;
     line-height:1;
+    display:inline-flex;align-items:center;gap:20px;
+    flex-wrap:nowrap;white-space:nowrap;
+  }
+  .stack-total .crossed-num{
+    color:var(--gold);
+    font-size:30px;font-weight:800;
+    white-space:nowrap;
+  }
+  .stack-total .crossed-text{
+    color:var(--text);
+    font-size:20px;font-weight:700;
+    white-space:nowrap;
+    line-height:1.2;
+  }
+  .stack-total .crossed-divider{
+    display:inline-block;width:1px;height:34px;
+    background:linear-gradient(180deg,transparent 0%,rgba(212,182,106,0.55) 22%,rgba(212,182,106,0.55) 78%,transparent 100%);
+    flex-shrink:0;
   }
   @media(max-width:600px){
-    .stack-total{flex-direction:column;align-items:center;text-align:center;gap:10px}
+    .stack-total{flex-direction:column;align-items:center;text-align:center;gap:14px}
     .stack-total .lbl{text-align:center}
-    .stack-total .crossed{font-size:30px}
+    .stack-total .crossed{gap:12px;font-size:18px}
+    .stack-total .crossed-num{font-size:20px}
+    .stack-total .crossed-text{font-size:14px}
+    .stack-total .crossed-divider{height:26px}
   }
 
   .stack-deal{
@@ -1786,7 +1805,7 @@
       </ul>
       <div class="stack-total">
         <div class="lbl">Ton accès aujourd'hui<strong>Ce qui est déjà dedans</strong></div>
-        <div class="crossed">23 modules + 100 h+</div>
+        <div class="crossed"><span class="crossed-num">23 modules</span><span class="crossed-divider" aria-hidden="true"></span><span class="crossed-text">+ de 100 heures de contenu</span></div>
       </div>
       <div class="stack-deal">
         <div class="ribbon">Ton accès GENESYS</div>
