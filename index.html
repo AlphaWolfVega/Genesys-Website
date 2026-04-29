@@ -8,7 +8,10 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preconnect" href="https://www.youtube-nocookie.com">
+<link rel="preconnect" href="https://www.youtube.com">
 <link rel="preconnect" href="https://i.ytimg.com">
+<link rel="dns-prefetch" href="https://googleads.g.doubleclick.net">
+<link rel="dns-prefetch" href="https://static.doubleclick.net">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,400;0,700;0,800;0,900;1,400;1,700&display=swap" rel="stylesheet">
 <style>
   :root{
@@ -419,6 +422,32 @@
     .testimonial-video.facade:hover .yt-play{transform:translate(-50%,-50%) scale(1.08);background:#D4B66A;box-shadow:0 8px 32px rgba(0,0,0,0.55),0 0 0 10px rgba(212,182,106,0.22)}
   }
   .testimonial-video.facade:active .yt-play{transform:translate(-50%,-50%) scale(0.95)}
+  /* Persistent thumbnail overlay during iframe load + spinner */
+  .testimonial-video.loading .yt-thumb-overlay{
+    position:absolute;inset:0;
+    background-position:center;background-size:cover;
+    z-index:2;pointer-events:none;
+    transition:opacity .55s ease;
+    opacity:1;
+  }
+  .testimonial-video.loading .yt-thumb-overlay::after{
+    content:"";position:absolute;inset:0;
+    background:rgba(10,22,40,0.32);
+  }
+  .testimonial-video.loading .yt-spinner{
+    position:absolute;top:50%;left:50%;
+    transform:translate(-50%,-50%);
+    width:42px;height:42px;border-radius:50%;
+    border:2.5px solid rgba(212,182,106,0.18);
+    border-top-color:var(--gold);
+    animation:ytspin 0.85s linear infinite;
+    z-index:3;pointer-events:none;
+  }
+  .testimonial-video.loading.fade-out .yt-thumb-overlay,
+  .testimonial-video.loading.fade-out .yt-spinner{
+    opacity:0;
+  }
+  @keyframes ytspin{to{transform:translate(-50%,-50%) rotate(360deg)}}
   .testimonial-video.placeholder{
     display:flex;align-items:center;justify-content:center;
     background:radial-gradient(circle at center,rgba(20,37,64,0.85),rgba(10,22,40,0.7));
@@ -1126,21 +1155,21 @@
     <div class="testimonials-grid reveal" id="testimonialsGrid">
       <div class="testimonial-card">
         <div class="testimonial-video facade" data-video-id="yKtLULWr3T4" data-name="Peter" role="button" tabindex="0" aria-label="Lire le témoignage de Peter">
-          <img class="yt-thumb" src="https://i.ytimg.com/vi/yKtLULWr3T4/hqdefault.jpg" alt="Témoignage Peter" loading="lazy" decoding="async">
+          <img class="yt-thumb" src="https://i.ytimg.com/vi/yKtLULWr3T4/hqdefault.jpg" alt="Témoignage Peter" decoding="async" fetchpriority="high">
           <button class="yt-play" aria-label="Lire la vidéo"></button>
         </div>
         <div class="testimonial-name">Peter</div>
       </div>
       <div class="testimonial-card">
         <div class="testimonial-video facade" data-video-id="bVd1zHUWAPU" data-name="Louis" role="button" tabindex="0" aria-label="Lire le témoignage de Louis">
-          <img class="yt-thumb" src="https://i.ytimg.com/vi/bVd1zHUWAPU/hqdefault.jpg" alt="Témoignage Louis" loading="lazy" decoding="async">
+          <img class="yt-thumb" src="https://i.ytimg.com/vi/bVd1zHUWAPU/hqdefault.jpg" alt="Témoignage Louis" decoding="async" fetchpriority="high">
           <button class="yt-play" aria-label="Lire la vidéo"></button>
         </div>
         <div class="testimonial-name">Louis</div>
       </div>
       <div class="testimonial-card">
         <div class="testimonial-video facade" data-video-id="57ypnT-_9hs" data-name="Meïssa" role="button" tabindex="0" aria-label="Lire le témoignage de Meïssa">
-          <img class="yt-thumb" src="https://i.ytimg.com/vi/57ypnT-_9hs/hqdefault.jpg" alt="Témoignage Meïssa" loading="lazy" decoding="async">
+          <img class="yt-thumb" src="https://i.ytimg.com/vi/57ypnT-_9hs/hqdefault.jpg" alt="Témoignage Meïssa" decoding="async" fetchpriority="high">
           <button class="yt-play" aria-label="Lire la vidéo"></button>
         </div>
         <div class="testimonial-name">Meïssa</div>
@@ -1956,23 +1985,120 @@
     }
   })();
 
-  // ===== TESTIMONIALS — FACADE TO IFRAME ON CLICK =====
+  // ===== TESTIMONIALS — FACADE TO IFRAME WITH WARM-UP + PREFETCH + OVERLAY =====
   (function(){
     const facades = document.querySelectorAll('.testimonial-video.facade');
+    if(!facades.length) return;
+
+    // ---- Step 1: warm up YouTube infra on first user activity ----
+    let warmed = false;
+    function warmUpYouTube(){
+      if(warmed) return;
+      warmed = true;
+      const hints = [
+        {rel:'preconnect', href:'https://s.ytimg.com', crossorigin:'anonymous'},
+        {rel:'preconnect', href:'https://www.youtube-nocookie.com', crossorigin:'anonymous'},
+        {rel:'preconnect', href:'https://www.youtube.com', crossorigin:'anonymous'},
+        {rel:'preconnect', href:'https://i.ytimg.com', crossorigin:'anonymous'},
+        {rel:'preconnect', href:'https://yt3.ggpht.com', crossorigin:'anonymous'},
+      ];
+      hints.forEach(h => {
+        if(document.querySelector(`link[href="${h.href}"][rel="${h.rel}"]`)) return;
+        const link = document.createElement('link');
+        Object.entries(h).forEach(([k,v]) => link.setAttribute(k,v));
+        document.head.appendChild(link);
+      });
+    }
+    ['scroll','mousemove','touchstart','keydown'].forEach(ev => {
+      window.addEventListener(ev, warmUpYouTube, {once:true, passive:true});
+    });
+
+    // ---- Step 2: hover/touchstart prefetch — start downloading the iframe HTML ----
+    const prefetched = new Set();
+    function prefetchVideo(id){
+      if(!id || prefetched.has(id)) return;
+      prefetched.add(id);
+      const link = document.createElement('link');
+      link.rel = 'prefetch';
+      link.href = `https://www.youtube-nocookie.com/embed/${id}?autoplay=1&modestbranding=1&rel=0&playsinline=1`;
+      link.as = 'document';
+      document.head.appendChild(link);
+    }
+
+    // ---- Step 3: click handler — swap to iframe + keep thumb overlay until iframe loads ----
     facades.forEach(facade => {
+      const id = facade.dataset.videoId;
+      const name = facade.dataset.name || 'GENESYS';
+
+      // Hover/touch warm-up (desktop + mobile)
+      let hoverPrefetched = false;
+      function hoverPrefetch(){
+        if(hoverPrefetched) return;
+        hoverPrefetched = true;
+        warmUpYouTube();
+        prefetchVideo(id);
+      }
+      facade.addEventListener('mouseenter', hoverPrefetch, {passive:true});
+      facade.addEventListener('touchstart', hoverPrefetch, {passive:true});
+      facade.addEventListener('focusin', hoverPrefetch, {passive:true});
+
       function activate(){
-        const id = facade.dataset.videoId;
-        const name = facade.dataset.name || 'GENESYS';
-        if(!id) return;
+        if(!id || facade.dataset.activated === '1') return;
+        facade.dataset.activated = '1';
+        warmUpYouTube();
+
+        // Capture current thumbnail src for overlay during load
+        const thumb = facade.querySelector('.yt-thumb');
+        const thumbSrc = thumb ? thumb.src : '';
+
+        // Swap facade content to iframe
         const iframe = document.createElement('iframe');
         iframe.src = `https://www.youtube-nocookie.com/embed/${id}?autoplay=1&modestbranding=1&rel=0&playsinline=1`;
         iframe.title = `Témoignage ${name} — GENESYS`;
         iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture';
         iframe.setAttribute('allowfullscreen', '');
+
         facade.innerHTML = '';
         facade.classList.remove('facade');
+        facade.classList.add('loading');
+
+        // Persistent thumbnail overlay + spinner during iframe load
+        if(thumbSrc){
+          const overlay = document.createElement('div');
+          overlay.className = 'yt-thumb-overlay';
+          overlay.style.backgroundImage = `url("${thumbSrc}")`;
+          facade.appendChild(overlay);
+        }
+        const spinner = document.createElement('div');
+        spinner.className = 'yt-spinner';
+        spinner.setAttribute('aria-hidden', 'true');
+        facade.appendChild(spinner);
+
+        // Insert iframe under the overlay
         facade.appendChild(iframe);
+
+        // Fade overlay out: when iframe loads + small buffer for first frame
+        let faded = false;
+        function fadeOut(){
+          if(faded) return;
+          faded = true;
+          facade.classList.add('fade-out');
+          setTimeout(() => {
+            const o = facade.querySelector('.yt-thumb-overlay');
+            const s = facade.querySelector('.yt-spinner');
+            if(o) o.remove();
+            if(s) s.remove();
+            facade.classList.remove('loading','fade-out');
+          }, 600);
+        }
+        iframe.addEventListener('load', () => {
+          // Iframe HTML loaded — give YouTube ~500ms to show first frame, then fade
+          setTimeout(fadeOut, 500);
+        }, {once:true});
+        // Hard fallback in case load event never fires (network issue)
+        setTimeout(fadeOut, 3500);
       }
+
       facade.addEventListener('click', activate);
       facade.addEventListener('keydown', e => {
         if(e.key === 'Enter' || e.key === ' '){ e.preventDefault(); activate(); }
