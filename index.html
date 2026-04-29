@@ -1271,33 +1271,48 @@
   .stack-total .crossed{
     font-family:'Inter',sans-serif;
     letter-spacing:-0.01em;
-    line-height:1;
-    display:inline-flex;align-items:center;gap:20px;
-    flex-wrap:nowrap;white-space:nowrap;
+    display:inline-flex;align-items:center;justify-content:center;
+    gap:22px;
+    flex-wrap:nowrap;
+  }
+  .stack-total .crossed-col{
+    display:flex;flex-direction:column;align-items:center;
+    gap:5px;
+    text-align:center;
+    flex:0 1 auto;
   }
   .stack-total .crossed-num{
     color:var(--gold);
-    font-size:30px;font-weight:800;
+    font-size:26px;font-weight:800;
+    line-height:1.05;
     white-space:nowrap;
   }
-  .stack-total .crossed-text{
-    color:var(--text);
-    font-size:20px;font-weight:700;
-    white-space:nowrap;
+  .stack-total .crossed-sub{
+    color:var(--text-mute);
+    font-size:11.5px;font-weight:600;
+    letter-spacing:0.08em;
+    text-transform:uppercase;
     line-height:1.2;
+    white-space:nowrap;
   }
   .stack-total .crossed-divider{
-    display:inline-block;width:1px;height:34px;
-    background:linear-gradient(180deg,transparent 0%,rgba(212,182,106,0.55) 22%,rgba(212,182,106,0.55) 78%,transparent 100%);
+    display:inline-block;width:1px;height:50px;
+    background:linear-gradient(180deg,transparent 0%,rgba(212,182,106,0.55) 18%,rgba(212,182,106,0.55) 82%,transparent 100%);
     flex-shrink:0;
   }
   @media(max-width:600px){
     .stack-total{flex-direction:column;align-items:center;text-align:center;gap:14px}
     .stack-total .lbl{text-align:center}
-    .stack-total .crossed{gap:12px;font-size:18px}
-    .stack-total .crossed-num{font-size:20px}
-    .stack-total .crossed-text{font-size:14px}
-    .stack-total .crossed-divider{height:26px}
+    .stack-total .crossed{gap:14px}
+    .stack-total .crossed-col{gap:4px}
+    .stack-total .crossed-num{font-size:17px}
+    .stack-total .crossed-sub{font-size:9.5px;letter-spacing:0.06em}
+    .stack-total .crossed-divider{height:42px}
+  }
+  @media(max-width:340px){
+    .stack-total .crossed{gap:10px}
+    .stack-total .crossed-num{font-size:15px}
+    .stack-total .crossed-sub{font-size:9px}
   }
 
   .stack-deal{
@@ -2015,7 +2030,7 @@
       </ul>
       <div class="stack-total">
         <div class="lbl">Ton accès aujourd'hui<strong>Ce qui est déjà dedans</strong></div>
-        <div class="crossed"><span class="crossed-num">23 modules</span><span class="crossed-divider" aria-hidden="true"></span><span class="crossed-text">+ de 100 heures de contenu</span></div>
+        <div class="crossed"><div class="crossed-col"><span class="crossed-num">23 modules</span><span class="crossed-sub">+ d'autres à venir</span></div><span class="crossed-divider" aria-hidden="true"></span><div class="crossed-col"><span class="crossed-num">+ de 100 heures</span><span class="crossed-sub">de contenu</span></div></div>
       </div>
       <div class="stack-deal">
         <div class="ribbon">Ton accès GENESYS</div>
