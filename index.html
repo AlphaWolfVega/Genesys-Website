@@ -54,6 +54,34 @@
   }
   #stars{position:fixed;inset:0;pointer-events:none;z-index:1}
   main, nav, footer{position:relative;z-index:2}
+
+  /* ===== H2 CURTAIN REVEAL (Option 5) ===== */
+  .h2-reveal{position:relative;clip-path:inset(0 100% 0 0);will-change:clip-path}
+  .h2-reveal::before{
+    content:"";position:absolute;top:0;bottom:0;width:3px;left:0;
+    background:var(--gold);
+    box-shadow:0 0 14px var(--gold), 0 0 28px rgba(212,182,106,0.55), 0 0 60px rgba(212,182,106,0.25);
+    opacity:0;
+    z-index:2;pointer-events:none;
+    border-radius:2px;
+  }
+  .h2-reveal.revealing{animation:h2curtain 0.95s cubic-bezier(0.7,0,0.25,1) forwards}
+  .h2-reveal.revealing::before{animation:h2edge 0.95s cubic-bezier(0.7,0,0.25,1) forwards}
+  @keyframes h2curtain{
+    0%   { clip-path: inset(0 100% 0 0); }
+    100% { clip-path: inset(0 0 0 0); }
+  }
+  @keyframes h2edge{
+    0%   { left:0;     opacity:0;   transform:scaleY(0.7); }
+    8%   {              opacity:1;   transform:scaleY(1.05); }
+    92%  { left:100%;   opacity:1;   transform:scaleY(1.05); }
+    100% { left:100%;   opacity:0;   transform:scaleY(0.7); }
+  }
+
+  /* ===== MAGNETIC CTA WRAPPER (Option 4) ===== */
+  .mag-wrap{display:inline-block;transition:transform 0.35s cubic-bezier(0.2,1.2,0.4,1);will-change:transform}
+  .mag-wrap.btn-stretch{display:block}
+  @media(hover:none){.mag-wrap{transform:none !important}}
   img{max-width:100%;display:block}
   a{color:inherit;text-decoration:none}
 
@@ -1855,62 +1883,255 @@
 </footer>
 
 <script>
-  // ===== STARFIELD CANVAS =====
-  const canvas = document.getElementById('stars');
-  const ctx = canvas.getContext('2d');
-  let stars = [];
-  let dpr = window.devicePixelRatio || 1;
-
-  function resize(){
-    canvas.width = window.innerWidth * dpr;
-    canvas.height = window.innerHeight * dpr;
-    canvas.style.width = window.innerWidth + 'px';
-    canvas.style.height = window.innerHeight + 'px';
-    initStars();
-  }
-
-  function initStars(){
-    stars = [];
-    const count = Math.floor((window.innerWidth * window.innerHeight) / 4500);
-    for(let i=0;i<count;i++){
-      stars.push({
-        x: Math.random() * canvas.width,
-        y: Math.random() * canvas.height,
-        r: Math.random() * 1.4 * dpr,
-        a: Math.random(),
-        s: 0.005 + Math.random() * 0.02,
-        d: Math.random() > 0.5 ? 1 : -1,
-        hue: Math.random() > 0.85 ? 'gold' : 'white'
-      });
+  // ===== CONSTELLATION CANVAS (gold particles + connections + cursor repulsion) =====
+  (function(){
+    const canvas = document.getElementById('stars');
+    if(!canvas) return;
+    const ctx = canvas.getContext('2d');
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if(reduceMotion){
+      // Static fallback — render a subtle field once and stop
+      canvas.style.display = 'none';
+      return;
     }
-  }
 
-  function draw(){
-    ctx.clearRect(0,0,canvas.width,canvas.height);
-    for(const s of stars){
-      s.a += s.s * s.d;
-      if(s.a >= 1){s.a = 1; s.d = -1}
-      if(s.a <= 0.1){s.a = 0.1; s.d = 1}
-      ctx.beginPath();
-      ctx.arc(s.x, s.y, s.r, 0, Math.PI*2);
-      if(s.hue === 'gold'){
-        ctx.fillStyle = `rgba(212,182,106,${s.a * 0.9})`;
-        ctx.shadowColor = 'rgba(212,182,106,0.6)';
-        ctx.shadowBlur = 8;
-      } else {
-        ctx.fillStyle = `rgba(232,228,216,${s.a * 0.85})`;
-        ctx.shadowColor = 'rgba(232,228,216,0.4)';
-        ctx.shadowBlur = 6;
+    let dpr = Math.min(window.devicePixelRatio || 1, 2);
+    let particles = [];
+    let W = 0, H = 0;
+    let mouse = { x: -9999, y: -9999, active: false };
+    let isMobile = window.matchMedia('(max-width:760px)').matches;
+    let connectDist = isMobile ? 90 : 130;
+    let repulseDist = isMobile ? 70 : 150;
+
+    function resize(){
+      dpr = Math.min(window.devicePixelRatio || 1, 2);
+      W = window.innerWidth;
+      H = window.innerHeight;
+      canvas.width = W * dpr;
+      canvas.height = H * dpr;
+      canvas.style.width = W + 'px';
+      canvas.style.height = H + 'px';
+      ctx.scale(dpr, dpr);
+      isMobile = W <= 760;
+      connectDist = isMobile ? 90 : 130;
+      repulseDist = isMobile ? 70 : 150;
+      initParticles();
+    }
+
+    function initParticles(){
+      particles = [];
+      // Density-based count, capped
+      const target = isMobile
+        ? Math.min(110, Math.floor(W * H / 9000))
+        : Math.min(280, Math.floor(W * H / 5500));
+      for(let i=0;i<target;i++){
+        const z = Math.random();           // depth 0 (far) to 1 (near)
+        particles.push({
+          x: Math.random() * W,
+          y: Math.random() * H,
+          vx: (Math.random() - 0.5) * (0.10 + z * 0.18),
+          vy: (Math.random() - 0.5) * (0.10 + z * 0.18),
+          r: 0.5 + z * 1.6,                // size based on depth
+          z: z,
+          baseAlpha: 0.30 + z * 0.55,      // far = dim, near = bright
+          tw: Math.random() * Math.PI * 2, // twinkle phase
+          tws: 0.008 + Math.random() * 0.015,
+          // home position for soft return after repulsion
+          hx: 0, hy: 0
+        });
       }
-      ctx.fill();
+      particles.forEach(p => { p.hx = p.x; p.hy = p.y; });
     }
-    ctx.shadowBlur = 0;
-    requestAnimationFrame(draw);
-  }
 
-  resize();
-  draw();
-  window.addEventListener('resize', resize);
+    function step(){
+      // Trail effect — semi-transparent fill instead of full clear (subtle motion blur)
+      ctx.clearRect(0, 0, W, H);
+
+      // Draw connections first (behind particles)
+      ctx.lineWidth = 0.5;
+      for(let i=0;i<particles.length;i++){
+        const a = particles[i];
+        for(let j=i+1;j<particles.length;j++){
+          const b = particles[j];
+          const dx = a.x - b.x;
+          const dy = a.y - b.y;
+          const d2 = dx*dx + dy*dy;
+          if(d2 < connectDist * connectDist){
+            const d = Math.sqrt(d2);
+            const t = 1 - d / connectDist;
+            // Connection visibility weighted by both particles' depth
+            const alpha = t * t * 0.18 * Math.min(a.baseAlpha, b.baseAlpha) * 1.3;
+            ctx.strokeStyle = `rgba(212,182,106,${alpha})`;
+            ctx.beginPath();
+            ctx.moveTo(a.x, a.y);
+            ctx.lineTo(b.x, b.y);
+            ctx.stroke();
+          }
+        }
+      }
+
+      // Update + draw particles
+      for(const p of particles){
+        // Cursor repulsion
+        if(mouse.active){
+          const dx = p.x - mouse.x;
+          const dy = p.y - mouse.y;
+          const d2 = dx*dx + dy*dy;
+          if(d2 < repulseDist * repulseDist && d2 > 0.01){
+            const d = Math.sqrt(d2);
+            const force = (1 - d / repulseDist) * 0.55 * (0.4 + p.z * 0.6);
+            p.x += (dx / d) * force;
+            p.y += (dy / d) * force;
+          }
+        }
+
+        // Drift
+        p.x += p.vx;
+        p.y += p.vy;
+
+        // Wrap edges
+        if(p.x < -10) p.x = W + 10;
+        else if(p.x > W + 10) p.x = -10;
+        if(p.y < -10) p.y = H + 10;
+        else if(p.y > H + 10) p.y = -10;
+
+        // Twinkle
+        p.tw += p.tws;
+        const twinkle = 0.75 + Math.sin(p.tw) * 0.25;
+        const alpha = p.baseAlpha * twinkle;
+
+        // Glow halo for near particles
+        if(p.z > 0.55){
+          const grad = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, p.r * 4);
+          grad.addColorStop(0, `rgba(212,182,106,${alpha * 0.6})`);
+          grad.addColorStop(1, 'rgba(212,182,106,0)');
+          ctx.fillStyle = grad;
+          ctx.beginPath();
+          ctx.arc(p.x, p.y, p.r * 4, 0, Math.PI * 2);
+          ctx.fill();
+        }
+
+        // Core dot
+        ctx.fillStyle = p.z > 0.7
+          ? `rgba(232,212,150,${alpha})`           // bright gold for near particles
+          : `rgba(212,182,106,${alpha})`;
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+        ctx.fill();
+      }
+    }
+
+    let raf = null;
+    let visible = true;
+    function loop(){
+      if(visible) step();
+      raf = requestAnimationFrame(loop);
+    }
+
+    // Mouse tracking (desktop only — touch keeps native scroll smooth)
+    if(!isMobile){
+      window.addEventListener('mousemove', e => {
+        mouse.x = e.clientX;
+        mouse.y = e.clientY;
+        mouse.active = true;
+      }, {passive:true});
+      window.addEventListener('mouseleave', () => { mouse.active = false; mouse.x = -9999; mouse.y = -9999; });
+    }
+
+    // Pause when tab hidden — battery saver
+    document.addEventListener('visibilitychange', () => {
+      visible = !document.hidden;
+    });
+
+    window.addEventListener('resize', () => {
+      ctx.setTransform(1,0,0,1,0,0);
+      resize();
+    });
+
+    resize();
+    loop();
+  })();
+
+  // ===== H2 CURTAIN REVEAL (Option 5) =====
+  (function(){
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if(reduceMotion) return;
+    const headings = document.querySelectorAll('section h2, .testimonials h2, .partner h2, .strategy h2, .stack-wrap h2, .pillars h2');
+    if(!headings.length) return;
+    const seen = new WeakSet();
+    headings.forEach(h => {
+      if(seen.has(h)) return;
+      seen.add(h);
+      h.classList.add('h2-reveal');
+    });
+    const obs = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if(e.isIntersecting){
+          // Slight stagger if multiple headings enter at once
+          const delay = Math.random() * 80;
+          setTimeout(() => e.target.classList.add('revealing'), delay);
+          obs.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.35, rootMargin: '0px 0px -10% 0px' });
+    headings.forEach(h => obs.observe(h));
+  })();
+
+  // ===== MAGNETIC CTA (Option 4) =====
+  (function(){
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const noHover = !window.matchMedia('(hover:hover)').matches;
+    if(reduceMotion || noHover) return;
+    const buttons = document.querySelectorAll('.btn-gold');
+    buttons.forEach(btn => {
+      // Wrap if not already wrapped
+      let wrap = btn.closest('.mag-wrap');
+      if(!wrap){
+        wrap = document.createElement('span');
+        wrap.className = 'mag-wrap';
+        // Preserve full-width behavior on mobile
+        if(getComputedStyle(btn).width === '100%' || btn.style.width === '100%'){
+          wrap.classList.add('btn-stretch');
+        }
+        btn.parentNode.insertBefore(wrap, btn);
+        wrap.appendChild(btn);
+      }
+      const radius = 130;       // detection radius around button (px)
+      const strength = 0.32;    // 0..1, how much it follows the cursor
+      const max = 14;           // max translation (px)
+      let active = false;
+
+      function onMove(e){
+        const rect = btn.getBoundingClientRect();
+        const cx = rect.left + rect.width / 2;
+        const cy = rect.top + rect.height / 2;
+        const dx = e.clientX - cx;
+        const dy = e.clientY - cy;
+        const dist = Math.sqrt(dx*dx + dy*dy);
+        const reach = Math.max(rect.width, rect.height) / 2 + radius;
+        if(dist < reach){
+          if(!active){
+            active = true;
+            document.addEventListener('mousemove', onMove);
+          }
+          const factor = Math.min(1, 1 - dist / reach);
+          const tx = Math.max(-max, Math.min(max, dx * strength * factor));
+          const ty = Math.max(-max, Math.min(max, dy * strength * factor));
+          wrap.style.transform = `translate(${tx}px, ${ty}px)`;
+        } else if(active){
+          active = false;
+          document.removeEventListener('mousemove', onMove);
+          wrap.style.transform = '';
+        }
+      }
+      // Use a windowed mousemove that activates on proximity
+      window.addEventListener('mousemove', onMove, {passive:true});
+      btn.addEventListener('mouseleave', () => {
+        active = false;
+        wrap.style.transform = '';
+      });
+    });
+  })();
 
   // ===== BURGER MENU =====
   const burger = document.getElementById('burger');
