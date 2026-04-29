@@ -56,20 +56,21 @@
   #stars{position:fixed;inset:0;pointer-events:none;z-index:1}
   main, nav, footer{position:relative;z-index:2}
 
-  /* ===== TITLE LEFT-TO-RIGHT REVEAL (smooth, applied to all H1 + H2) ===== */
-  .h2-reveal{position:relative}
-  /* Pre-clip is applied via CSS gated by .js so it takes effect before paint
-     (no flash on load). If JS is disabled, no clipping = title visible. */
+  /* ===== TITLE SLIDE-MASK COMBO (Apple/Linear-style) — applied to all H1 + H2 ===== */
+  .h2-reveal{position:relative;will-change:clip-path, transform}
+  /* Pre-state via CSS gated by .js — applied before paint (no flash on load).
+     If JS is disabled, no clipping/translation = title visible normally. */
   .js .h2-reveal:not(.revealing){
     -webkit-clip-path:inset(0 100% 0 0);
     clip-path:inset(0 100% 0 0);
+    transform:translateX(-10px);
   }
   .h2-reveal.revealing{
-    animation:h2revealLR 0.95s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    animation:h2revealSlideMask 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
   }
-  @keyframes h2revealLR{
-    0%   { -webkit-clip-path:inset(0 100% 0 0); clip-path:inset(0 100% 0 0); }
-    100% { -webkit-clip-path:inset(0 0 0 0);    clip-path:inset(0 0 0 0); }
+  @keyframes h2revealSlideMask{
+    0%   { -webkit-clip-path:inset(0 100% 0 0); clip-path:inset(0 100% 0 0); transform:translateX(-10px); }
+    100% { -webkit-clip-path:inset(0 0 0 0);    clip-path:inset(0 0 0 0);    transform:translateX(0); }
   }
 
   /* ===== MAGNETIC CTA WRAPPER (Option 4) ===== */
