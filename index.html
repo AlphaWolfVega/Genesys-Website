@@ -1933,19 +1933,57 @@
     let connectDist = isMobile ? 75 : 100;
     let repulseDist = isMobile ? 70 : 150;
 
-    function resize(){
+    // Use visualViewport on mobile when available — ignores URL bar collapse
+    function getViewportSize(){
+      if(window.visualViewport){
+        return { w: window.visualViewport.width, h: window.visualViewport.height };
+      }
+      return { w: window.innerWidth, h: window.innerHeight };
+    }
+
+    let lastInitW = 0, lastInitH = 0;
+
+    function resize(forceReinit){
       dpr = Math.min(window.devicePixelRatio || 1, 2);
-      W = window.innerWidth;
-      H = window.innerHeight;
-      canvas.width = W * dpr;
-      canvas.height = H * dpr;
-      canvas.style.width = W + 'px';
-      canvas.style.height = H + 'px';
+      const sz = getViewportSize();
+      const newW = sz.w;
+      const newH = sz.h;
+
+      // Always update canvas dimensions so render buffer matches DOM
+      ctx.setTransform(1, 0, 0, 1, 0, 0);
+      canvas.width = newW * dpr;
+      canvas.height = newH * dpr;
+      canvas.style.width = newW + 'px';
+      canvas.style.height = newH + 'px';
       ctx.scale(dpr, dpr);
-      isMobile = W <= 760;
+
+      isMobile = newW <= 760;
       connectDist = isMobile ? 75 : 100;
       repulseDist = isMobile ? 70 : 150;
-      initParticles();
+
+      // Decide whether to regenerate particles or just rescale
+      const widthChanged = Math.abs(newW - lastInitW) > 80;       // real width change
+      const heightChanged = Math.abs(newH - lastInitH) > 200;     // real height change (URL bar = ~80-100px max)
+      const hugeChange = widthChanged || heightChanged;
+
+      if(forceReinit || lastInitW === 0 || hugeChange){
+        // Real resize — regenerate
+        W = newW; H = newH;
+        initParticles();
+        lastInitW = newW;
+        lastInitH = newH;
+      } else {
+        // Minor change (URL bar collapse) — keep particles, just rescale positions
+        const scaleX = newW / W;
+        const scaleY = newH / H;
+        for(const p of particles){
+          p.x *= scaleX;
+          p.y *= scaleY;
+          p.hx *= scaleX;
+          p.hy *= scaleY;
+        }
+        W = newW; H = newH;
+      }
     }
 
     function initParticles(){
@@ -2070,12 +2108,25 @@
       visible = !document.hidden;
     });
 
-    window.addEventListener('resize', () => {
-      ctx.setTransform(1,0,0,1,0,0);
-      resize();
+    // Debounced resize — protects against URL-bar resize storms on mobile
+    let resizeTimer = null;
+    function onResize(){
+      if(resizeTimer) clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(() => { resize(false); resizeTimer = null; }, 180);
+    }
+    window.addEventListener('resize', onResize);
+    if(window.visualViewport){
+      // visualViewport fires on URL-bar collapse but doesn't change w/h significantly,
+      // so our threshold-based resize() will treat it as minor and skip regeneration.
+      window.visualViewport.addEventListener('resize', onResize);
+    }
+    // Orientation change is a real resize — force reinit
+    window.addEventListener('orientationchange', () => {
+      if(resizeTimer) clearTimeout(resizeTimer);
+      setTimeout(() => resize(true), 250);
     });
 
-    resize();
+    resize(true);
     loop();
   })();
 
