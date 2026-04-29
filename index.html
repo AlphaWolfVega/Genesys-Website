@@ -2344,24 +2344,27 @@
       function activate(){
         if(!id || facade.dataset.activated === '1') return;
         facade.dataset.activated = '1';
-        warmUpYouTube();
 
-        // Capture current thumbnail src for overlay during load
+        // CRITICAL for iOS autoplay-with-sound: keep gesture context tight.
+        // 1) Build the iframe synchronously, set src BEFORE any other DOM work.
+        const iframe = document.createElement('iframe');
+        iframe.src = `https://www.youtube-nocookie.com/embed/${id}?autoplay=1&modestbranding=1&rel=0&playsinline=1&enablejsapi=1`;
+        iframe.title = `Témoignage ${name} — GENESYS`;
+        iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share';
+        iframe.setAttribute('allowfullscreen', '');
+        iframe.setAttribute('playsinline', '');
+
+        // Capture thumbnail src for the loading overlay
         const thumb = facade.querySelector('.yt-thumb');
         const thumbSrc = thumb ? thumb.src : '';
 
-        // Swap facade content to iframe
-        const iframe = document.createElement('iframe');
-        iframe.src = `https://www.youtube-nocookie.com/embed/${id}?autoplay=1&modestbranding=1&rel=0&playsinline=1`;
-        iframe.title = `Témoignage ${name} — GENESYS`;
-        iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture';
-        iframe.setAttribute('allowfullscreen', '');
-
+        // Replace facade content — iframe FIRST so it's at the bottom of stacking
         facade.innerHTML = '';
         facade.classList.remove('facade');
         facade.classList.add('loading');
+        facade.appendChild(iframe);
 
-        // Persistent thumbnail overlay + spinner during iframe load
+        // Then add the overlay + spinner ON TOP (z-index handled in CSS)
         if(thumbSrc){
           const overlay = document.createElement('div');
           overlay.className = 'yt-thumb-overlay';
@@ -2373,10 +2376,18 @@
         spinner.setAttribute('aria-hidden', 'true');
         facade.appendChild(spinner);
 
-        // Insert iframe under the overlay
-        facade.appendChild(iframe);
+        // 2) Backup: send playVideo via postMessage as soon as iframe is ready.
+        //    iOS sometimes blocks the URL-based autoplay; an explicit JS API
+        //    play command issued right after a recent user gesture is honored.
+        function sendPlay(){
+          try {
+            iframe.contentWindow.postMessage(
+              JSON.stringify({event:'command', func:'playVideo', args:[]}),
+              '*'
+            );
+          } catch(e){}
+        }
 
-        // Fade overlay out: when iframe loads + small buffer for first frame
         let faded = false;
         function fadeOut(){
           if(faded) return;
@@ -2390,11 +2401,16 @@
             facade.classList.remove('loading','fade-out');
           }, 600);
         }
+
         iframe.addEventListener('load', () => {
-          // Iframe HTML loaded — give YouTube ~500ms to show first frame, then fade
+          // Try playVideo immediately and again 250ms later (some iOS builds need a retry)
+          sendPlay();
+          setTimeout(sendPlay, 250);
+          setTimeout(sendPlay, 700);
+          // Then drop the overlay
           setTimeout(fadeOut, 500);
         }, {once:true});
-        // Hard fallback in case load event never fires (network issue)
+        // Hard fallback in case load event never fires
         setTimeout(fadeOut, 3500);
       }
 
