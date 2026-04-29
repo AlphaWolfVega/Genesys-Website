@@ -55,21 +55,18 @@
   #stars{position:fixed;inset:0;pointer-events:none;z-index:1}
   main, nav, footer{position:relative;z-index:2}
 
-  /* ===== H2 MASK RISING FROM BELOW (Option 4) — text reveals bottom-up ===== */
+  /* ===== H2 LEFT-TO-RIGHT REVEAL (no decoration) — original effect restored ===== */
   .h2-reveal{position:relative}
   .h2-reveal.h2-pre{
-    -webkit-clip-path:inset(100% 0 0 0);
-    clip-path:inset(100% 0 0 0);
-    opacity:0;
-    transform:translateY(8px);
+    -webkit-clip-path:inset(0 100% 0 0);
+    clip-path:inset(0 100% 0 0);
   }
   .h2-reveal.revealing{
-    animation:h2maskRise 0.78s cubic-bezier(0.65, 0, 0.25, 1) forwards;
+    animation:h2revealLR 0.85s cubic-bezier(0.65, 0, 0.25, 1) forwards;
   }
-  @keyframes h2maskRise{
-    0%   { -webkit-clip-path:inset(100% 0 0 0); clip-path:inset(100% 0 0 0); opacity:0; transform:translateY(8px); }
-    18%  { opacity:1; }
-    100% { -webkit-clip-path:inset(0 0 0 0); clip-path:inset(0 0 0 0); opacity:1; transform:translateY(0); }
+  @keyframes h2revealLR{
+    0%   { -webkit-clip-path:inset(0 100% 0 0); clip-path:inset(0 100% 0 0); }
+    100% { -webkit-clip-path:inset(0 0 0 0);    clip-path:inset(0 0 0 0); }
   }
 
   /* ===== MAGNETIC CTA WRAPPER (Option 4) ===== */
