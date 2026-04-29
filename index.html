@@ -609,7 +609,7 @@
     width:1px;background:linear-gradient(180deg,transparent 0%,rgba(212,182,106,0.18) 12%,rgba(212,182,106,0.18) 88%,transparent 100%);
     transform:translateX(-50%);z-index:0;
   }
-  /* Liquid gold fill — follows scroll, height set by JS */
+  /* Liquid gold fill — height driven by a JS rAF lerp loop (no CSS transition) */
   .timeline-fill{
     position:absolute;top:0;left:50%;
     width:2px;height:0;
@@ -617,7 +617,6 @@
     box-shadow:0 0 14px rgba(212,182,106,0.6),0 0 28px rgba(212,182,106,0.32);
     transform:translateX(-50%);
     z-index:1;border-radius:1px;
-    transition:height 0.05s linear;
     pointer-events:none;
     will-change:height;
   }
@@ -636,14 +635,15 @@
     margin-bottom:90px;
   }
   .story-step:last-child{margin-bottom:0}
-  /* Anchor dot — aligned with the date label at the top */
+  /* Anchor dot — Y position computed by JS from photo center (--dot-top) */
   .story-step::after{
-    content:"";position:absolute;left:50%;top:8px;
+    content:"";position:absolute;left:50%;
+    top:var(--dot-top, 50%);
     width:14px;height:14px;border-radius:50%;
     background:rgba(212,182,106,0.2);
     border:3px solid #06101F;
     box-shadow:0 0 0 1px rgba(212,182,106,0.28);
-    transform:translateX(-50%);z-index:2;
+    transform:translate(-50%, -50%);z-index:2;
     transition:background 0.4s ease,box-shadow 0.4s ease;
   }
   /* Passed dot — solid gold, fixed glow */
@@ -755,7 +755,8 @@
       padding-left:50px; /* leave room for the gold rail on the left */
     }
     .story-step::after{
-      left:24px;top:6px;
+      left:24px;
+      top:var(--dot-top, 50%);
       width:12px;height:12px;
     }
     .story-step .story-photo{
@@ -2456,7 +2457,7 @@
   }, { threshold: 0.1 });
   document.querySelectorAll('.reveal').forEach(el => io.observe(el));
 
-  // ===== FOUNDER TIMELINE — liquid scroll fill + active dot pulse =====
+  // ===== FOUNDER TIMELINE — magnetic liquid fill (piano-fluid lerp loop) =====
   (function initStoryTimeline(){
     const timeline = document.querySelector('.story-timeline');
     const fill = document.querySelector('.timeline-fill');
@@ -2464,30 +2465,53 @@
     const steps = Array.from(timeline.querySelectorAll('.story-step'));
     if(!steps.length) return;
 
-    let ticking = false;
+    // Magnetic radius — within this distance of a dot, the line eases toward it
+    const MAGNET_RADIUS = 60;
+    // Lerp factor — how fast the visible fill catches up to the target each frame
+    // (lower = slower/smoother; higher = snappier). 0.18 ≈ piano-fluid feel.
+    const LERP_FACTOR = 0.18;
 
-    function getDotOffset(){
-      return window.matchMedia('(max-width:760px)').matches ? 14 : 90;
-    }
-
-    // Magnetic radius — within this distance of a dot, the line eases smoothly
-    // toward that dot (no overshoot, no acceleration). Outside, line follows
-    // the scroll trigger 1:1 — fully fluid with the scroll.
-    const MAGNET_RADIUS = 40;
-
-    // Smoothstep easing — t in [0,1] returns 3t² - 2t³ (smooth in/out)
     function smoothstep(t){
       t = Math.max(0, Math.min(1, t));
       return t * t * (3 - 2 * t);
     }
 
-    function update(){
+    // Compute dot Y in viewport from each photo's vertical center, AND
+    // store the dot's offset within the step (in CSS var --dot-top) so the
+    // visual ::after dot is rendered exactly at photo center too.
+    function dotYForStep(step){
+      const photo = step.querySelector('.story-photo');
+      if(!photo){
+        const r = step.getBoundingClientRect();
+        return r.top + r.height / 2;
+      }
+      const r = photo.getBoundingClientRect();
+      return r.top + r.height / 2;
+    }
+
+    function refreshDotCssOffsets(){
+      steps.forEach(step => {
+        const photo = step.querySelector('.story-photo');
+        if(!photo) return;
+        const stepRect = step.getBoundingClientRect();
+        const photoRect = photo.getBoundingClientRect();
+        const dotTop = (photoRect.top - stepRect.top) + photoRect.height / 2;
+        step.style.setProperty('--dot-top', dotTop + 'px');
+      });
+    }
+
+    let targetFill = 0;
+    let currentFill = 0;
+    let lastActiveIdx = -2;
+    let lastPassedThrough = -2;
+    let rafActive = false;
+
+    function computeTarget(){
       const triggerY = window.innerHeight * 0.55;
       const tlRect = timeline.getBoundingClientRect();
       const tlTop = tlRect.top;
-      const dotOffset = getDotOffset();
 
-      const dotPositions = steps.map(step => step.getBoundingClientRect().top + dotOffset);
+      const dotPositions = steps.map(dotYForStep);
       const firstDotY = dotPositions[0];
       const lastDotY = dotPositions[dotPositions.length - 1];
 
@@ -2502,60 +2526,78 @@
         activeIdx = dotPositions.length - 1;
         passedThrough = dotPositions.length - 1;
       } else {
-        // Default: line head follows trigger line 1:1 (linear with scroll)
-        let linearFill = triggerY - tlTop;
+        const linearFill = triggerY - tlTop;
 
-        // Find nearest dot to apply magnetic attraction
         let nearestIdx = 0;
         let nearestDist = Infinity;
         for(let i = 0; i < dotPositions.length; i++){
           const d = Math.abs(triggerY - dotPositions[i]);
           if(d < nearestDist){ nearestDist = d; nearestIdx = i; }
         }
-
-        // Update passedThrough = the highest dot whose Y <= triggerY
         for(let i = 0; i < dotPositions.length; i++){
           if(dotPositions[i] <= triggerY) passedThrough = i;
         }
 
         if(nearestDist < MAGNET_RADIUS){
-          // Magnetic zone — ease line head toward the nearest dot
-          const t = 1 - (nearestDist / MAGNET_RADIUS); // 0 at edge, 1 at dot
+          const t = 1 - (nearestDist / MAGNET_RADIUS);
           const eased = smoothstep(t);
           const dotFill = dotPositions[nearestIdx] - tlTop;
           fillHeight = linearFill + (dotFill - linearFill) * eased;
-          // Dot starts pulsing when we're firmly inside its magnetic field
           if(eased > 0.45) activeIdx = nearestIdx;
         } else {
-          // Free flow — line head exactly at trigger, no acceleration
           fillHeight = linearFill;
           activeIdx = -1;
         }
       }
 
-      fill.style.height = Math.max(0, fillHeight) + 'px';
-      fill.dataset.empty = fillHeight <= 1 ? 'true' : 'false';
+      targetFill = Math.max(0, fillHeight);
 
-      steps.forEach((step, i) => {
-        step.classList.remove('passed', 'active');
-        if(passedThrough >= 0 && i <= passedThrough) step.classList.add('passed');
-        if(i === activeIdx) step.classList.add('active');
-      });
-
-      ticking = false;
-    }
-
-    function onScroll(){
-      if(!ticking){
-        requestAnimationFrame(update);
-        ticking = true;
+      // Update step classes only when they change (avoid touching DOM each frame)
+      if(activeIdx !== lastActiveIdx || passedThrough !== lastPassedThrough){
+        steps.forEach((step, i) => {
+          step.classList.toggle('passed', passedThrough >= 0 && i <= passedThrough);
+          step.classList.toggle('active', i === activeIdx);
+        });
+        lastActiveIdx = activeIdx;
+        lastPassedThrough = passedThrough;
       }
     }
 
-    window.addEventListener('scroll', onScroll, {passive:true});
-    window.addEventListener('resize', onScroll, {passive:true});
-    // Run once on load to set initial state
-    update();
+    function tick(){
+      computeTarget(); // recompute target each frame so it stays in sync with scroll
+      const delta = targetFill - currentFill;
+      if(Math.abs(delta) < 0.25){
+        currentFill = targetFill;
+        fill.style.height = currentFill + 'px';
+        fill.dataset.empty = currentFill <= 1 ? 'true' : 'false';
+        rafActive = false;
+        return;
+      }
+      currentFill += delta * LERP_FACTOR;
+      fill.style.height = currentFill + 'px';
+      fill.dataset.empty = currentFill <= 1 ? 'true' : 'false';
+      requestAnimationFrame(tick);
+    }
+
+    function wake(){
+      if(!rafActive){
+        rafActive = true;
+        requestAnimationFrame(tick);
+      }
+    }
+
+    window.addEventListener('scroll', wake, {passive:true});
+    window.addEventListener('resize', () => {
+      refreshDotCssOffsets();
+      wake();
+    }, {passive:true});
+
+    // Initial setup
+    refreshDotCssOffsets();
+    // Re-run once images/fonts settle
+    window.addEventListener('load', () => { refreshDotCssOffsets(); wake(); });
+    setTimeout(() => { refreshDotCssOffsets(); wake(); }, 300);
+    wake();
   })();
 
   // ===== TEAM CAROUSEL =====
