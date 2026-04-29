@@ -343,31 +343,33 @@
     .testimonials h2{font-size:30px}
     .testimonials .sub{font-size:13.5px;margin-bottom:36px;padding:0 14px}
   }
+  /* Carousel for ALL viewports — desktop shows 4 + peek, mobile 2 + peek */
+  .testimonials-wrap{position:relative;max-width:1280px;margin:0 auto;padding:0 56px}
+  @media(max-width:760px){.testimonials-wrap{padding:0}}
   .testimonials-grid{
-    display:grid;grid-template-columns:repeat(4,1fr);gap:22px;
-    max-width:1200px;margin:0 auto;
+    display:flex;flex-wrap:nowrap;
+    gap:22px;
+    overflow-x:auto;overflow-y:hidden;
+    -webkit-overflow-scrolling:touch;
+    scroll-snap-type:x mandatory;
+    scroll-padding-left:0;
+    padding:4px 0 18px;
+    scrollbar-width:none;-ms-overflow-style:none;
+    scroll-behavior:smooth;
   }
-  @media(max-width:1100px){.testimonials-grid{grid-template-columns:repeat(3,1fr)}}
+  .testimonials-grid::-webkit-scrollbar{display:none;width:0;height:0}
+  .testimonials-grid .testimonial-card{
+    flex:0 0 calc((100% - 22px*3)/4 - 2%);  /* ~22% — 4 visible + peek of 5th */
+    scroll-snap-align:start;
+    min-width:0;
+  }
+  @media(max-width:1100px){
+    .testimonials-grid{gap:18px}
+    .testimonials-grid .testimonial-card{flex:0 0 calc((100% - 18px*2)/3 - 3%)}  /* 3 visible + peek */
+  }
   @media(max-width:760px){
-    .testimonials-grid{
-      display:flex;flex-wrap:nowrap;
-      grid-template-columns:none;
-      gap:12px;
-      overflow-x:auto;overflow-y:hidden;
-      -webkit-overflow-scrolling:touch;
-      scroll-snap-type:x mandatory;
-      scroll-padding:0 16px;
-      padding:4px 16px 18px;
-      margin:0 -16px;
-      max-width:none;
-      scrollbar-width:none;-ms-overflow-style:none;
-    }
-    .testimonials-grid::-webkit-scrollbar{display:none;width:0;height:0}
-    .testimonials-grid .testimonial-card{
-      flex:0 0 46%;
-      scroll-snap-align:start;
-      min-width:0;
-    }
+    .testimonials-grid{gap:12px;scroll-padding:0 16px;padding:4px 16px 18px;margin:0 -16px}
+    .testimonials-grid .testimonial-card{flex:0 0 46%}  /* 2 visible + peek */
     .testimonials-grid.hint-animate{
       animation:carouselHint 1.6s ease-out 0.3s 1 both;
     }
@@ -378,12 +380,36 @@
     55%  {transform:translateX(-22px)}
     100% {transform:translateX(0)}
   }
-  .testimonials-dots{
-    display:none;justify-content:center;align-items:center;gap:9px;
-    margin-top:6px;
+  /* Arrows — desktop only */
+  .testimonials-arrow{
+    position:absolute;top:calc(50% - 25px);
+    width:50px;height:50px;border-radius:50%;
+    background:rgba(20,37,64,0.85);
+    border:1px solid rgba(212,182,106,0.35);
+    color:var(--gold);font-family:'Inter',sans-serif;
+    font-size:22px;cursor:pointer;
+    display:flex;align-items:center;justify-content:center;
+    transition:all 0.3s ease;
+    z-index:5;
+    backdrop-filter:blur(6px);
+    -webkit-backdrop-filter:blur(6px);
   }
-  @media(max-width:760px){
-    .testimonials-dots{display:flex}
+  .testimonials-arrow:hover{
+    background:rgba(212,182,106,0.15);
+    border-color:var(--gold);
+    transform:scale(1.08);
+    box-shadow:0 0 22px rgba(212,182,106,0.35);
+  }
+  .testimonials-arrow.prev{left:0}
+  .testimonials-arrow.next{right:0}
+  .testimonials-arrow[aria-disabled="true"]{
+    opacity:0.25;pointer-events:none;cursor:default;
+  }
+  @media(max-width:760px){.testimonials-arrow{display:none}}
+  /* Dots — visible on all viewports */
+  .testimonials-dots{
+    display:flex;justify-content:center;align-items:center;gap:9px;
+    margin-top:18px;flex-wrap:wrap;padding:0 12px;
   }
   .testimonials-dots .t-dot{
     width:7px;height:7px;border-radius:50%;
@@ -1180,6 +1206,9 @@
     </div>
     <h2 class="reveal">Ils sont déjà <em>passés à l'action.</em></h2>
     <p class="sub reveal">Membres GENESYS et anciens élèves de mes formations.</p>
+    <div class="testimonials-wrap">
+      <button class="testimonials-arrow prev" id="testimonialsPrev" aria-label="Témoignages précédents" type="button">‹</button>
+      <button class="testimonials-arrow next" id="testimonialsNext" aria-label="Témoignages suivants" type="button">›</button>
     <div class="testimonials-grid reveal" id="testimonialsGrid">
       <div class="testimonial-card">
         <div class="testimonial-video facade" data-video-id="yKtLULWr3T4" data-name="Peter" role="button" tabindex="0" aria-label="Lire le témoignage de Peter">
@@ -1239,6 +1268,7 @@
       </div>
     </div>
     <div class="testimonials-dots" id="testimonialsDots" aria-hidden="true"></div>
+    </div><!-- /.testimonials-wrap -->
     <p class="testimonials-disclaimer">Résultats individuels. Aucune garantie de revenu.</p>
   </div>
 </section>
@@ -2324,10 +2354,12 @@
     });
   })();
 
-  // ===== TESTIMONIALS — DYNAMIC DOTS + HINT ANIMATION (mobile only) =====
+  // ===== TESTIMONIALS — CAROUSEL: dots + arrows + hint (all viewports) =====
   (function(){
     const grid = document.getElementById('testimonialsGrid');
     const dotsWrap = document.getElementById('testimonialsDots');
+    const prevBtn = document.getElementById('testimonialsPrev');
+    const nextBtn = document.getElementById('testimonialsNext');
     if(!grid || !dotsWrap) return;
 
     const cards = grid.querySelectorAll('.testimonial-card');
@@ -2346,20 +2378,31 @@
 
     function isMobile(){ return window.matchMedia('(max-width:760px)').matches; }
 
-    function updateActiveDot(){
-      if(!isMobile()) return;
-      const scrollLeft = grid.scrollLeft;
+    function step(){
       const cardWidth = cards[0].getBoundingClientRect().width;
       const gap = parseFloat(getComputedStyle(grid).gap) || 12;
-      const step = cardWidth + gap;
-      const idx = Math.round(scrollLeft / step);
+      return cardWidth + gap;
+    }
+
+    function visibleCount(){
+      // How many cards roughly fit in the visible width (used for arrow paging)
+      const w = grid.clientWidth;
+      const s = step();
+      return Math.max(1, Math.round(w / s));
+    }
+
+    function updateActiveDot(){
+      const scrollLeft = grid.scrollLeft;
+      const idx = Math.round(scrollLeft / step());
       let clamped = Math.max(0, Math.min(idx, cards.length - 1));
-      // If user has scrolled to the very end, force the last dot active
       const maxScroll = grid.scrollWidth - grid.clientWidth;
       if(scrollLeft >= maxScroll - 5){
         clamped = cards.length - 1;
       }
       dots.forEach((d,n) => d.classList.toggle('active', n === clamped));
+      // Update arrow disabled state
+      if(prevBtn) prevBtn.setAttribute('aria-disabled', scrollLeft <= 2 ? 'true' : 'false');
+      if(nextBtn) nextBtn.setAttribute('aria-disabled', scrollLeft >= maxScroll - 2 ? 'true' : 'false');
     }
 
     grid.addEventListener('scroll', () => {
@@ -2368,12 +2411,17 @@
 
     dots.forEach(d => d.addEventListener('click', () => {
       const i = parseInt(d.dataset.idx, 10);
-      const cardWidth = cards[0].getBoundingClientRect().width;
-      const gap = parseFloat(getComputedStyle(grid).gap) || 12;
-      grid.scrollTo({left: i * (cardWidth + gap), behavior: 'smooth'});
+      grid.scrollTo({left: i * step(), behavior: 'smooth'});
     }));
 
-    // Hint animation — runs once when section enters viewport on mobile
+    function pageBy(direction){
+      const move = step() * Math.max(1, visibleCount() - 1); // page minus 1 for context overlap
+      grid.scrollBy({left: direction * move, behavior: 'smooth'});
+    }
+    if(prevBtn) prevBtn.addEventListener('click', () => pageBy(-1));
+    if(nextBtn) nextBtn.addEventListener('click', () => pageBy(1));
+
+    // Hint animation — runs once when section enters viewport (mobile only)
     let hinted = false;
     const hintObs = new IntersectionObserver((entries) => {
       entries.forEach(e => {
@@ -2386,6 +2434,12 @@
       });
     }, { threshold: 0.4 });
     hintObs.observe(grid);
+
+    // Initial state of arrows
+    updateActiveDot();
+    window.addEventListener('resize', () => {
+      window.requestAnimationFrame(updateActiveDot);
+    });
   })();
 </script>
 
