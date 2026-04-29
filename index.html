@@ -2051,6 +2051,7 @@
       // Without animation, immediately mark all titles as revealed so the
       // CSS pre-clip is bypassed.
       document.querySelectorAll('main h1, main h2, header h1, header h2').forEach(h => {
+        h.classList.remove('reveal');
         h.classList.add('h2-reveal','revealing');
       });
       return;
@@ -2065,10 +2066,13 @@
 
     // 1) Add the marker class — CSS .js .h2-reveal:not(.revealing) clips them
     //    before any paint happens (no flash).
+    //    Also remove .reveal so the legacy fade-up + translateY doesn't
+    //    overlap the L->R reveal (was creating a perceived 2-step animation).
     const toAnimate = [];
     headings.forEach(h => {
       if(seen.has(h)) return;
       seen.add(h);
+      h.classList.remove('reveal');
       h.classList.add('h2-reveal');
       const rect = h.getBoundingClientRect();
       if(rect.top < vh * 0.92 && rect.bottom > 0){
