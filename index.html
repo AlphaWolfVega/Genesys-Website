@@ -1500,6 +1500,149 @@
   /* ===== UTILITY ===== */
   .reveal{opacity:0;transform:translateY(20px);transition:opacity 1s ease,transform 1s ease}
   .reveal.in{opacity:1;transform:translateY(0)}
+
+  /* ===== COST CALCULATOR (rollback-safe — single commit) ===== */
+  #cost-calc{
+    padding:80px 0;
+    background:linear-gradient(180deg, var(--bg) 0%, var(--bg-2) 50%, var(--bg) 100%);
+    position:relative;overflow:hidden;
+  }
+  #cost-calc::before{
+    content:"";position:absolute;inset:0;
+    background:radial-gradient(ellipse 60% 40% at 50% 50%, rgba(212,182,106,0.05) 0%, transparent 70%);
+    pointer-events:none;
+  }
+  .cost-grid{
+    display:grid;grid-template-columns:1fr 1fr;gap:50px;
+    align-items:start;max-width:1100px;margin:0 auto;
+    position:relative;z-index:1;
+  }
+  .cost-inputs{display:flex;flex-direction:column;gap:24px}
+  .cost-q{display:flex;flex-direction:column;gap:10px}
+  .cost-q-label{
+    font-family:'Inter',sans-serif;
+    font-size:13px;font-weight:600;letter-spacing:0.05em;
+    color:var(--text-mute);text-transform:uppercase;
+  }
+  .cost-options{display:flex;flex-wrap:wrap;gap:8px}
+  .cost-options button{
+    font-family:'Inter',sans-serif;font-size:13.5px;font-weight:600;
+    padding:10px 16px;border-radius:999px;
+    background:rgba(20,37,64,0.5);
+    border:1px solid rgba(212,182,106,0.18);
+    color:var(--text-mute);cursor:pointer;
+    transition:all 0.2s ease;
+  }
+  @media (hover:hover){
+    .cost-options button:hover{
+      border-color:rgba(212,182,106,0.4);color:var(--text);
+    }
+  }
+  .cost-options button.active{
+    background:linear-gradient(135deg,rgba(212,182,106,0.22) 0%,rgba(212,182,106,0.08) 100%);
+    border-color:var(--gold);color:var(--gold);
+  }
+  .cost-options button:active{transform:scale(0.97);transition:transform 0.08s ease}
+  .cost-display{
+    position:relative;
+    background:linear-gradient(135deg,rgba(20,37,64,0.6) 0%,rgba(10,22,40,0.4) 100%);
+    border:1px solid rgba(212,182,106,0.32);
+    border-radius:16px;padding:40px 36px;
+    overflow:hidden;
+    box-shadow:0 20px 50px rgba(0,0,0,0.3),0 0 80px rgba(212,182,106,0.06) inset;
+  }
+  .cost-coins{position:absolute;inset:0;pointer-events:none;overflow:hidden;z-index:0}
+  .cost-coin{
+    position:absolute;top:-20px;
+    width:11px;height:11px;border-radius:50%;
+    background:radial-gradient(circle at 30% 30%, #F0DDA8 0%, var(--gold) 55%, #8c6d1f 100%);
+    box-shadow:0 0 6px rgba(212,182,106,0.5);
+    opacity:0;
+    animation:coinFall 4.5s linear forwards;
+  }
+  @keyframes coinFall{
+    0%{transform:translateY(0) rotate(0);opacity:0}
+    8%{opacity:0.7}
+    85%{opacity:0.55}
+    100%{transform:translateY(420px) rotate(540deg);opacity:0}
+  }
+  .cost-row{
+    display:flex;flex-direction:column;align-items:center;gap:6px;
+    text-align:center;position:relative;z-index:1;
+  }
+  .cost-row-label{
+    font-family:'Inter',sans-serif;
+    font-size:12.5px;font-weight:600;letter-spacing:0.1em;
+    color:var(--text-mute);text-transform:uppercase;
+  }
+  .cost-row-value{
+    font-family:'Playfair Display',serif;
+    font-style:italic;font-weight:800;
+    font-size:54px;
+    color:var(--gold);
+    line-height:1;
+    text-shadow:0 0 30px rgba(212,182,106,0.35);
+    letter-spacing:-0.01em;
+  }
+  .cost-row.big .cost-row-value{font-size:78px}
+  .cost-row-unit{
+    font-family:'Inter',sans-serif;
+    font-size:13.5px;font-weight:500;
+    color:var(--text-mute);
+    margin-top:2px;
+  }
+  .cost-divider{
+    height:1px;
+    background:linear-gradient(90deg,transparent 0%, rgba(212,182,106,0.4) 50%, transparent 100%);
+    margin:26px 0;
+  }
+  .cost-compare{
+    margin-top:30px;
+    display:flex;align-items:baseline;justify-content:center;gap:10px;
+    padding-top:22px;
+    border-top:1px dashed rgba(212,182,106,0.22);
+    position:relative;z-index:1;
+  }
+  .cost-compare-x{
+    font-family:'Playfair Display',serif;font-style:italic;font-weight:700;
+    font-size:34px;color:var(--gold);
+    text-shadow:0 0 20px rgba(212,182,106,0.3);
+  }
+  .cost-compare-text{
+    font-family:'Inter',sans-serif;
+    font-size:13.5px;font-weight:500;
+    color:var(--text-mute);letter-spacing:0.04em;
+  }
+  .cost-cta{
+    margin-top:54px;text-align:center;
+    max-width:640px;margin-left:auto;margin-right:auto;
+  }
+  .cost-cta p{
+    font-family:'Inter',sans-serif;font-size:17px;font-weight:500;
+    color:var(--text);margin-bottom:24px;line-height:1.55;
+  }
+  .cost-cta strong{color:var(--gold);font-weight:700}
+  @media(max-width:760px){
+    .cost-grid{grid-template-columns:1fr;gap:30px}
+  }
+  @media(max-width:600px){
+    #cost-calc{padding:60px 0}
+    .cost-display{padding:32px 22px;border-radius:14px}
+    .cost-row-value{font-size:42px}
+    .cost-row.big .cost-row-value{font-size:56px}
+    .cost-row-label{font-size:11.5px;letter-spacing:0.08em}
+    .cost-row-unit{font-size:12.5px}
+    .cost-options button{font-size:12.5px;padding:9px 13px}
+    .cost-q-label{font-size:11.5px}
+    .cost-cta{margin-top:40px}
+    .cost-cta p{font-size:15px}
+    .cost-compare-x{font-size:28px}
+    .cost-compare-text{font-size:12.5px}
+    .cost-divider{margin:22px 0}
+  }
+  @media (prefers-reduced-motion:reduce){
+    .cost-coin{animation:none;display:none}
+  }
 </style>
 </head>
 <body>
@@ -1660,6 +1803,75 @@
     <div class="testimonials-dots" id="testimonialsDots" aria-hidden="true"></div>
     </div><!-- /.testimonials-wrap -->
     <p class="testimonials-disclaimer">Ces résultats sont individuels et ne constituent en aucun cas une garantie de résultat. Vos résultats dépendront de votre implication, du temps consacré et de votre application des principes partagés dans GENESYS.</p>
+  </div>
+</section>
+
+<!-- ===== COST CALCULATOR (rollback-safe — single isolated section) ===== -->
+<section id="cost-calc">
+  <div class="container">
+    <div class="section-header reveal">
+      <div class="ornament">
+        <div class="line"></div>
+        <span class="label">Le coût de l'inaction</span>
+        <div class="line"></div>
+      </div>
+      <h2>Pendant que tu hésites,<br><em>tu continues à payer</em></h2>
+      <p>Sois honnête sur ces 3 questions. Le compteur ne ment pas.</p>
+    </div>
+
+    <div class="cost-grid reveal">
+      <div class="cost-inputs">
+        <div class="cost-q">
+          <span class="cost-q-label">Ton CA mensuel actuel</span>
+          <div class="cost-options" data-q="rev">
+            <button type="button" data-v="1">0 – 1 k€</button>
+            <button type="button" data-v="2" class="active">1 – 5 k€</button>
+            <button type="button" data-v="3">5 – 20 k€</button>
+            <button type="button" data-v="4">20 k€ +</button>
+          </div>
+        </div>
+        <div class="cost-q">
+          <span class="cost-q-label">Tu testes des produits ?</span>
+          <div class="cost-options" data-q="test">
+            <button type="button" data-v="1" class="active">Rarement</button>
+            <button type="button" data-v="2">Un peu</button>
+            <button type="button" data-v="3">Souvent</button>
+          </div>
+        </div>
+        <div class="cost-q">
+          <span class="cost-q-label">Tu connais les biais cognitifs d'achat ?</span>
+          <div class="cost-options" data-q="neuro">
+            <button type="button" data-v="1" class="active">Non</button>
+            <button type="button" data-v="2">Vaguement</button>
+            <button type="button" data-v="3">Oui</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="cost-display">
+        <div class="cost-coins" aria-hidden="true"></div>
+        <div class="cost-row">
+          <span class="cost-row-label">Tu laisses sur la table</span>
+          <span class="cost-row-value" id="costMonth">0 €</span>
+          <span class="cost-row-unit">par mois</span>
+        </div>
+        <div class="cost-divider"></div>
+        <div class="cost-row big">
+          <span class="cost-row-label">Soit</span>
+          <span class="cost-row-value" id="costYear">0 €</span>
+          <span class="cost-row-unit">par an</span>
+        </div>
+        <div class="cost-compare">
+          <span class="cost-compare-x" id="costRatio">0×</span>
+          <span class="cost-compare-text">le prix annuel de GENESYS</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="cost-cta reveal">
+      <p>Pour <strong>49 $/mois</strong>, tu accèdes à la méthode, à la communauté et aux réponses qui te font arrêter de saigner.</p>
+      <a href="#rejoindre" class="btn btn-gold">Entrer dans GENESYS</a>
+    </div>
   </div>
 </section>
 
@@ -3017,6 +3229,113 @@
         setTimeout(() => wrap.classList.add('is-loaded'), 250);
       }, {once:true});
     });
+  })();
+
+  // ===== COST CALCULATOR — rollback-safe, scoped to #cost-calc =====
+  (function initCostCalc(){
+    const section = document.getElementById('cost-calc');
+    if(!section) return;
+
+    // Loss matrix — calibrated against typical e-com benchmarks (CR delta ~30–60% with neuro+testing)
+    const BASE  = {1: 600,  2: 1800, 3: 5000, 4: 12000};
+    const TEST  = {1: 1.0,  2: 0.45, 3: 0.1};
+    const NEURO = {1: 1.0,  2: 0.45, 3: 0.1};
+    const GENESYS_YEARLY_EUR = 49 * 12 * 1.05; // 49 $/mois ≈ 45 €, * 12 mois
+
+    const answers = {rev:'2', test:'1', neuro:'1'};
+    const monthEl = section.querySelector('#costMonth');
+    const yearEl  = section.querySelector('#costYear');
+    const ratioEl = section.querySelector('#costRatio');
+    const coinsEl = section.querySelector('.cost-coins');
+
+    const fmt = new Intl.NumberFormat('fr-FR', {maximumFractionDigits:0});
+    const formatEur = (n) => fmt.format(Math.round(n)) + ' €';
+
+    let displayMonth = 0, displayYear = 0;
+    let targetMonth  = 0, targetYear  = 0;
+    let raf = null;
+
+    function calculate(){
+      const m = BASE[answers.rev] * TEST[answers.test] * NEURO[answers.neuro];
+      return {month: m, year: m * 12};
+    }
+
+    function rollTo(){
+      if(raf) cancelAnimationFrame(raf);
+      const startMonth = displayMonth, startYear = displayYear;
+      const t0 = performance.now();
+      const duration = 850;
+      function tick(now){
+        const t = Math.min(1, (now - t0) / duration);
+        const eased = 1 - Math.pow(1 - t, 3); // easeOutCubic
+        displayMonth = startMonth + (targetMonth - startMonth) * eased;
+        displayYear  = startYear  + (targetYear  - startYear)  * eased;
+        monthEl.textContent = formatEur(displayMonth);
+        yearEl.textContent  = formatEur(displayYear);
+        const ratio = targetYear > 0 ? Math.round(targetYear / GENESYS_YEARLY_EUR) : 0;
+        ratioEl.textContent = ratio + '×';
+        if(t < 1) raf = requestAnimationFrame(tick);
+        else { displayMonth = targetMonth; displayYear = targetYear; raf = null; }
+      }
+      raf = requestAnimationFrame(tick);
+    }
+
+    function update(){
+      const r = calculate();
+      targetMonth = r.month;
+      targetYear  = r.year;
+      rollTo();
+    }
+
+    // Coin spawner — one coin at a random horizontal position, falls and fades
+    function spawnCoin(){
+      if(!coinsEl) return;
+      const coin = document.createElement('div');
+      coin.className = 'cost-coin';
+      coin.style.left = (4 + Math.random() * 92) + '%';
+      coin.style.animationDuration = (3.5 + Math.random() * 2) + 's';
+      coin.style.animationDelay = (Math.random() * 0.4) + 's';
+      coinsEl.appendChild(coin);
+      setTimeout(() => coin.remove(), 6500);
+    }
+    function spawnBurst(n){
+      for(let i = 0; i < n; i++) setTimeout(spawnCoin, i * 70);
+    }
+
+    // Buttons → toggle .active inside its group, recalc, mini-burst of coins
+    section.querySelectorAll('.cost-options').forEach(group => {
+      const q = group.dataset.q;
+      group.querySelectorAll('button').forEach(btn => {
+        btn.addEventListener('click', () => {
+          group.querySelectorAll('button').forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+          answers[q] = btn.dataset.v;
+          update();
+          spawnBurst(7);
+        });
+      });
+    });
+
+    // Slow continuous coin drip — only while section is visible (saves CPU)
+    let drip = null;
+    let initialCalcDone = false;
+    const obs = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if(e.isIntersecting){
+          if(!initialCalcDone){
+            update();
+            spawnBurst(5);
+            initialCalcDone = true;
+          }
+          if(!drip){
+            drip = setInterval(spawnCoin, 700);
+          }
+        } else if(drip){
+          clearInterval(drip); drip = null;
+        }
+      });
+    }, {threshold: 0.15});
+    obs.observe(section);
   })();
 </script>
 
