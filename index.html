@@ -365,15 +365,6 @@
   @media(max-width:760px){
     .testimonials-grid{gap:12px;scroll-padding:0 16px;padding:4px 16px 18px;margin:0 -16px}
     .testimonials-grid .testimonial-card{flex:0 0 46%}  /* 2 visible + peek */
-    .testimonials-grid.hint-animate{
-      animation:carouselHint 1.6s ease-out 0.3s 1 both;
-    }
-  }
-  @keyframes carouselHint{
-    0%   {transform:translateX(0)}
-    25%  {transform:translateX(-22px)}
-    55%  {transform:translateX(-22px)}
-    100% {transform:translateX(0)}
   }
   /* Arrows — desktop only */
   .testimonials-arrow{
@@ -2313,20 +2304,6 @@
     }
     if(prevBtn) prevBtn.addEventListener('click', () => pageBy(-1));
     if(nextBtn) nextBtn.addEventListener('click', () => pageBy(1));
-
-    // Hint animation — runs once when section enters viewport (mobile only)
-    let hinted = false;
-    const hintObs = new IntersectionObserver((entries) => {
-      entries.forEach(e => {
-        if(e.isIntersecting && !hinted && isMobile()){
-          hinted = true;
-          grid.classList.add('hint-animate');
-          setTimeout(() => grid.classList.remove('hint-animate'), 1900);
-          hintObs.unobserve(e.target);
-        }
-      });
-    }, { threshold: 0.4 });
-    hintObs.observe(grid);
 
     // Initial state of arrows
     updateActiveDot();
