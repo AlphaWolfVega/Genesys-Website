@@ -55,8 +55,8 @@
   #stars{position:fixed;inset:0;pointer-events:none;z-index:1}
   main, nav, footer{position:relative;z-index:2}
 
-  /* ===== H2 CURTAIN REVEAL (Option 5) ===== */
-  .h2-reveal{position:relative;clip-path:inset(0 100% 0 0);will-change:clip-path}
+  /* ===== H2 CURTAIN REVEAL (Option 5) — non-clipping, visible by default ===== */
+  .h2-reveal{position:relative}
   .h2-reveal::before{
     content:"";position:absolute;top:0;bottom:0;width:3px;left:0;
     background:var(--gold);
@@ -65,12 +65,7 @@
     z-index:2;pointer-events:none;
     border-radius:2px;
   }
-  .h2-reveal.revealing{animation:h2curtain 0.95s cubic-bezier(0.7,0,0.25,1) forwards}
   .h2-reveal.revealing::before{animation:h2edge 0.95s cubic-bezier(0.7,0,0.25,1) forwards}
-  @keyframes h2curtain{
-    0%   { clip-path: inset(0 100% 0 0); }
-    100% { clip-path: inset(0 0 0 0); }
-  }
   @keyframes h2edge{
     0%   { left:0;     opacity:0;   transform:scaleY(0.7); }
     8%   {              opacity:1;   transform:scaleY(1.05); }
