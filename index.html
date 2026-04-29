@@ -126,9 +126,11 @@
     border:1.5px solid rgba(232,228,216,0.4);
     font-weight:600;
   }
-  .btn-ghost:hover{color:var(--gold);border-color:var(--gold)}
   .btn-ghost::after{content:"→";font-family:'Inter',sans-serif;font-size:18px;font-weight:700;letter-spacing:0;transition:transform .25s ease}
-  .btn-ghost:hover::after{transform:translateX(5px)}
+  @media (hover:hover){
+    .btn-ghost:hover{color:var(--gold);border-color:var(--gold)}
+    .btn-ghost:hover::after{transform:translateX(5px)}
+  }
   .btn-gold{
     background:linear-gradient(180deg,var(--gold-soft) 0%,var(--gold) 100%);
     color:#0A1628;
@@ -147,15 +149,18 @@
     transition:transform .9s ease;
     z-index:-1;
   }
-  .btn-gold:hover{
-    background:linear-gradient(180deg,#F0DDA8 0%,var(--gold-soft) 100%);
-    box-shadow:0 0 70px rgba(212,182,106,0.7), 0 0 0 1px rgba(255,255,255,0.25) inset;
-    transform:translateY(-2px);
-    animation:none;
-  }
-  .btn-gold:hover::before{transform:translateX(100%)}
   .btn-gold::after{content:"→";font-family:'Inter',sans-serif;font-size:18px;font-weight:700;letter-spacing:0;transition:transform .25s ease}
-  .btn-gold:hover::after{transform:translateX(5px)}
+  @media (hover:hover){
+    .btn-gold:hover{
+      background:linear-gradient(180deg,#F0DDA8 0%,var(--gold-soft) 100%);
+      box-shadow:0 0 70px rgba(212,182,106,0.7), 0 0 0 1px rgba(255,255,255,0.25) inset;
+      transform:translateY(-2px);
+      animation:none;
+    }
+    .btn-gold:hover::before{transform:translateX(100%)}
+    .btn-gold:hover::after{transform:translateX(5px)}
+  }
+  .btn-gold:active{transform:translateY(1px) scale(0.98);transition:transform .08s ease}
   @keyframes btnPulse{
     0%,100%{box-shadow:0 0 0 0 rgba(212,182,106,0.65), 0 0 30px rgba(212,182,106,0.35)}
     50%{box-shadow:0 0 0 14px rgba(212,182,106,0), 0 0 50px rgba(212,182,106,0.55)}
