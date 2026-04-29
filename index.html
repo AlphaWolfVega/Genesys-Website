@@ -651,37 +651,51 @@
     background:var(--gold);
     box-shadow:0 0 0 1px rgba(212,182,106,0.6),0 0 18px rgba(212,182,106,0.45);
   }
-  /* Active dot — flash on arrival + sustained pulse halo */
+  /* Active dot — subtle cling on arrival + gentle heartbeat pulse */
   .story-step.active::after{
     background:var(--gold);
-    animation:dotClip 0.45s cubic-bezier(0.16,1,0.3,1), dotPulse 1.6s ease-in-out 0.45s infinite;
+    animation:dotCling 0.55s cubic-bezier(0.16,1,0.3,1), dotHeartbeat 2.6s ease-in-out 0.55s infinite;
   }
-  @keyframes dotClip{
+  /* Cling — small, refined arrival flash */
+  @keyframes dotCling{
     0%{
-      transform:translate(-50%,-50%) scale(0.9);
-      box-shadow:0 0 0 1px rgba(212,182,106,0.3),0 0 8px rgba(212,182,106,0.3);
+      transform:translate(-50%,-50%) scale(0.95);
+      box-shadow:0 0 0 1px rgba(212,182,106,0.4),0 0 6px rgba(212,182,106,0.35);
     }
-    55%{
-      transform:translate(-50%,-50%) scale(1.55);
-      box-shadow:0 0 0 1px rgba(212,182,106,1),
-                 0 0 40px rgba(212,182,106,1),
-                 0 0 0 18px rgba(212,182,106,0.18);
+    50%{
+      transform:translate(-50%,-50%) scale(1.18);
+      box-shadow:0 0 0 1px rgba(212,182,106,0.85),
+                 0 0 16px rgba(212,182,106,0.6),
+                 0 0 0 7px rgba(212,182,106,0.1);
     }
     100%{
       transform:translate(-50%,-50%) scale(1);
-      box-shadow:0 0 0 1px rgba(212,182,106,0.7),0 0 22px rgba(212,182,106,0.55);
+      box-shadow:0 0 0 1px rgba(212,182,106,0.6),0 0 12px rgba(212,182,106,0.5);
     }
   }
-  @keyframes dotPulse{
-    0%,100%{
-      box-shadow:0 0 0 1px rgba(212,182,106,0.7),
-                 0 0 22px rgba(212,182,106,0.55),
-                 0 0 0 0 rgba(212,182,106,0.5);
+  /* Heartbeat — lub-dub rhythm, quiet and organic (not aggressive) */
+  @keyframes dotHeartbeat{
+    0%, 100%{
+      transform:translate(-50%,-50%) scale(1);
+      box-shadow:0 0 0 1px rgba(212,182,106,0.55),0 0 10px rgba(212,182,106,0.42);
     }
-    50%{
-      box-shadow:0 0 0 1px rgba(212,182,106,0.95),
-                 0 0 32px rgba(212,182,106,0.8),
-                 0 0 0 14px rgba(212,182,106,0);
+    18%{
+      transform:translate(-50%,-50%) scale(1.13);
+      box-shadow:0 0 0 1px rgba(212,182,106,0.8),
+                 0 0 16px rgba(212,182,106,0.55),
+                 0 0 0 4px rgba(212,182,106,0.08);
+    }
+    30%{
+      transform:translate(-50%,-50%) scale(1);
+      box-shadow:0 0 0 1px rgba(212,182,106,0.55),0 0 10px rgba(212,182,106,0.42);
+    }
+    42%{
+      transform:translate(-50%,-50%) scale(1.06);
+      box-shadow:0 0 0 1px rgba(212,182,106,0.65),0 0 12px rgba(212,182,106,0.45);
+    }
+    55%{
+      transform:translate(-50%,-50%) scale(1);
+      box-shadow:0 0 0 1px rgba(212,182,106,0.55),0 0 10px rgba(212,182,106,0.42);
     }
   }
   @media (prefers-reduced-motion:reduce){
@@ -2514,20 +2528,15 @@
     const steps = Array.from(timeline.querySelectorAll('.story-step'));
     if(!steps.length) return;
 
-    // Magnetic field — wide approach zone with a tight lock zone at the dot
-    // 18px around the dot = LOCKED (line exactly on dot, clips visibly)
-    // 18-100px = APPROACH (line rushes toward dot with sharp ease-out)
-    // beyond 100px = FREE (line follows scroll trigger 1:1)
-    const MAGNET_RADIUS = 100;
-    const LOCK_RADIUS = 18;
+    // Sticky-clip with hysteresis:
+    //   SNAP_DIST  = trigger gets this close to a dot → line clips onto dot
+    //   LOCK_HOLD  = once clipped, line stays locked until trigger is this far
+    //                away from the locked dot (in either direction)
+    //   FREE       = line follows scroll 1:1 between dots
+    const SNAP_DIST  = 32;
+    const LOCK_HOLD  = 55;
     // Lerp factor — how fast visible fill catches up to target each frame
     const LERP_FACTOR = 0.22;
-
-    // easeOutQuart — sharp deceleration toward target, gives the "clip" feel
-    function easeOutQuart(t){
-      t = Math.max(0, Math.min(1, t));
-      return 1 - Math.pow(1 - t, 4);
-    }
 
     // Compute dot Y in viewport from each photo's vertical center, AND
     // store the dot's offset within the step (in CSS var --dot-top) so the
@@ -2555,6 +2564,7 @@
 
     let targetFill = 0;
     let currentFill = 0;
+    let lockedIdx = -1;          // currently clipped dot (-1 = free)
     let lastActiveIdx = -2;
     let lastPassedThrough = -2;
     let rafActive = false;
@@ -2572,39 +2582,51 @@
       let activeIdx = -1;
       let passedThrough = -1;
 
+      // Compute passedThrough independently
+      for(let i = 0; i < dotPositions.length; i++){
+        if(dotPositions[i] <= triggerY) passedThrough = i;
+      }
+
       if(triggerY < firstDotY){
         fillHeight = 0;
+        lockedIdx = -1;
       } else if(triggerY >= lastDotY){
         fillHeight = lastDotY - tlTop;
         activeIdx = dotPositions.length - 1;
-        passedThrough = dotPositions.length - 1;
+        lockedIdx = dotPositions.length - 1;
       } else {
-        const linearFill = triggerY - tlTop;
-
-        let nearestIdx = 0;
-        let nearestDist = Infinity;
-        for(let i = 0; i < dotPositions.length; i++){
-          const d = Math.abs(triggerY - dotPositions[i]);
-          if(d < nearestDist){ nearestDist = d; nearestIdx = i; }
+        // Currently locked? Stay locked until trigger drifts beyond LOCK_HOLD
+        if(lockedIdx >= 0){
+          const lockedY = dotPositions[lockedIdx];
+          const distFromLocked = Math.abs(triggerY - lockedY);
+          if(distFromLocked <= LOCK_HOLD){
+            // Still inside the hold window — line stays clipped
+            fillHeight = lockedY - tlTop;
+            activeIdx = lockedIdx;
+          } else {
+            // Drifted out — release the lock
+            lockedIdx = -1;
+          }
         }
-        for(let i = 0; i < dotPositions.length; i++){
-          if(dotPositions[i] <= triggerY) passedThrough = i;
-        }
 
-        const dotFill = dotPositions[nearestIdx] - tlTop;
-        if(nearestDist < LOCK_RADIUS){
-          // LOCKED — line snapped exactly on dot, no easing
-          fillHeight = dotFill;
-          activeIdx = nearestIdx;
-        } else if(nearestDist < MAGNET_RADIUS){
-          // APPROACH — sharp ease-out toward dot ("clip" feel)
-          const t = 1 - ((nearestDist - LOCK_RADIUS) / (MAGNET_RADIUS - LOCK_RADIUS));
-          const eased = easeOutQuart(t);
-          fillHeight = linearFill + (dotFill - linearFill) * eased;
-          if(eased > 0.55) activeIdx = nearestIdx;
-        } else {
-          fillHeight = linearFill;
-          activeIdx = -1;
+        // Not locked → check if we should snap onto a dot, else free flow
+        if(lockedIdx === -1){
+          let snapTo = -1;
+          let snapDist = SNAP_DIST + 1;
+          for(let i = 0; i < dotPositions.length; i++){
+            const d = Math.abs(triggerY - dotPositions[i]);
+            if(d < snapDist){ snapDist = d; snapTo = i; }
+          }
+          if(snapTo >= 0){
+            // Clip onto the dot
+            lockedIdx = snapTo;
+            fillHeight = dotPositions[snapTo] - tlTop;
+            activeIdx = snapTo;
+          } else {
+            // Free flow — line follows scroll 1:1 between dots
+            fillHeight = triggerY - tlTop;
+            activeIdx = -1;
+          }
         }
       }
 
