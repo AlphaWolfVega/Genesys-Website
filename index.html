@@ -597,6 +597,105 @@
   }
   .partner p{font-size:17px;color:var(--text-mute);max-width:600px;margin:0 auto;line-height:1.7;font-weight:300}
 
+  /* ===== FOUNDER STORY TIMELINE ===== */
+  #founder-story{padding-top:32px;padding-bottom:64px}
+  .story-timeline{
+    position:relative;max-width:1080px;margin:0 auto;
+    padding:40px 0;
+  }
+  /* Vertical central line */
+  .story-timeline::before{
+    content:"";position:absolute;top:0;bottom:0;left:50%;
+    width:1px;background:linear-gradient(180deg,transparent 0%,rgba(212,182,106,0.4) 12%,rgba(212,182,106,0.4) 88%,transparent 100%);
+    transform:translateX(-50%);
+  }
+  .story-step{
+    position:relative;display:flex;align-items:center;gap:50px;
+    margin-bottom:90px;
+  }
+  .story-step:last-child{margin-bottom:0}
+  /* Anchor dot on the central line */
+  .story-step::after{
+    content:"";position:absolute;left:50%;top:90px;
+    width:14px;height:14px;border-radius:50%;
+    background:var(--gold);
+    border:3px solid #06101F;
+    box-shadow:0 0 0 1px rgba(212,182,106,0.5),0 0 18px rgba(212,182,106,0.4);
+    transform:translateX(-50%);z-index:2;
+  }
+  .story-step[data-side="left"]{flex-direction:row}
+  .story-step[data-side="right"]{flex-direction:row-reverse}
+  .story-step .story-photo{
+    flex:1 1 50%;max-width:48%;
+    aspect-ratio:4/3;
+    background:linear-gradient(135deg,rgba(20,37,64,0.7) 0%,rgba(10,22,40,0.5) 100%);
+    border:1px solid rgba(212,182,106,0.25);border-radius:6px;
+    display:flex;align-items:center;justify-content:center;
+    overflow:hidden;
+  }
+  .story-step .story-photo img{width:100%;height:100%;object-fit:cover;display:block}
+  .story-placeholder{
+    font-family:'Playfair Display',serif;font-style:italic;
+    font-size:42px;font-weight:600;
+    color:rgba(212,182,106,0.55);
+    letter-spacing:0.05em;
+  }
+  .story-step .story-content{
+    flex:1 1 50%;max-width:48%;
+    padding:6px 8px;
+  }
+  .story-date{
+    display:inline-block;
+    font-family:'Inter',sans-serif;font-size:11px;
+    color:var(--gold);letter-spacing:0.18em;
+    text-transform:uppercase;font-weight:600;
+    margin-bottom:12px;
+  }
+  .story-step h3{
+    font-family:'Inter',sans-serif;font-size:24px;font-weight:700;
+    line-height:1.2;letter-spacing:-0.01em;
+    color:var(--text);margin-bottom:14px;
+  }
+  .story-step .story-content p{
+    font-size:15px;line-height:1.65;color:var(--text-mute);
+    font-weight:300;margin:0;
+  }
+  /* Reveal directional animation per side */
+  .story-step.reveal{opacity:0;transition:opacity 0.9s ease,transform 0.9s ease}
+  .story-step[data-side="left"].reveal{transform:translateX(-30px)}
+  .story-step[data-side="right"].reveal{transform:translateX(30px)}
+  .story-step.reveal.in{opacity:1;transform:translateX(0)}
+
+  @media(max-width:760px){
+    .story-timeline{padding:20px 0}
+    .story-timeline::before{left:24px}
+    .story-step{
+      gap:18px;margin-bottom:50px;
+      flex-direction:row !important;
+      padding-left:0;
+    }
+    .story-step::after{
+      left:24px;top:14px;
+      width:12px;height:12px;
+    }
+    .story-step .story-photo{
+      flex:0 0 80px;max-width:80px;
+      aspect-ratio:1/1;
+      margin-left:50px;
+    }
+    .story-placeholder{font-size:18px}
+    .story-step .story-content{
+      flex:1 1 auto;max-width:none;
+      padding:0;
+    }
+    .story-step h3{font-size:18px;margin-bottom:8px}
+    .story-step .story-content p{font-size:14px;line-height:1.55}
+    .story-date{font-size:10px;margin-bottom:6px}
+    .story-step[data-side="left"].reveal,
+    .story-step[data-side="right"].reveal{transform:translateY(20px)}
+    .story-step.reveal.in{transform:translateY(0)}
+  }
+
   /* ===== TWO PILLARS ===== */
   .pillars{display:grid;grid-template-columns:1fr 1fr;gap:32px}
   @media(max-width:900px){.pillars{grid-template-columns:1fr}}
@@ -1329,6 +1428,68 @@
       </div>
     </div>
     <div class="yt-cta-btn reveal" style="text-align:center;margin-top:36px"><a href="#rejoindre" class="btn btn-gold">Rejoindre GENESYS</a></div>
+  </div>
+</section>
+
+<!-- ===== FOUNDER STORY TIMELINE ===== -->
+<section id="founder-story">
+  <div class="container">
+    <div class="section-header reveal">
+      <div class="ornament">
+        <div class="line"></div>
+        <span class="label">Mon parcours</span>
+        <div class="line"></div>
+      </div>
+      <h2>Comment j'en suis arrivé là<br><em>où j'en suis aujourd'hui</em></h2>
+      <p>Pas une trajectoire propre. Pas une success story instagram. Juste 7 ans à apprendre, perdre, ajuster, recommencer.</p>
+    </div>
+
+    <div class="story-timeline">
+      <div class="story-step reveal" data-side="left">
+        <div class="story-photo"><span class="story-placeholder">2019</span></div>
+        <div class="story-content">
+          <span class="story-date">2019</span>
+          <h3>Le premier saut dans le vide</h3>
+          <p>[Placeholder. Ici tu raconteras le démarrage : pourquoi tu t'es lancé, dans quel état d'esprit, ce que tu pensais que ça allait être. 2-3 phrases courtes.]</p>
+        </div>
+      </div>
+
+      <div class="story-step reveal" data-side="right">
+        <div class="story-photo"><span class="story-placeholder">2020</span></div>
+        <div class="story-content">
+          <span class="story-date">2020</span>
+          <h3>La première claque</h3>
+          <p>[Placeholder. La galère initiale, l'argent perdu, les nuits blanches, le moment où tu as failli arrêter. C'est ici que la résonance émotionnelle commence.]</p>
+        </div>
+      </div>
+
+      <div class="story-step reveal" data-side="left">
+        <div class="story-photo"><span class="story-placeholder">2021</span></div>
+        <div class="story-content">
+          <span class="story-date">2021</span>
+          <h3>Le déclic</h3>
+          <p>[Placeholder. Le moment précis où tu as compris quelque chose de fondamental. Une nuit, un produit, un mentor, un constat. Ce qui a tout changé.]</p>
+        </div>
+      </div>
+
+      <div class="story-step reveal" data-side="right">
+        <div class="story-photo"><span class="story-placeholder">2023</span></div>
+        <div class="story-content">
+          <span class="story-date">2023</span>
+          <h3>La méthode prend forme</h3>
+          <p>[Placeholder. La consolidation : 3 boutiques actives, plusieurs millions de CA, l'équipe qui se forme avec Souly et Anaïs. Le passage de "je galère" à "je transmets".]</p>
+        </div>
+      </div>
+
+      <div class="story-step reveal" data-side="left">
+        <div class="story-photo"><span class="story-placeholder">2026</span></div>
+        <div class="story-content">
+          <span class="story-date">Aujourd'hui</span>
+          <h3>GENESYS, l'aboutissement</h3>
+          <p>[Placeholder. Pourquoi tu lances GENESYS aujourd'hui : pour ne plus laisser personne galérer 5 ans seul comme toi. La promesse du présent.]</p>
+        </div>
+      </div>
+    </div>
   </div>
 </section>
 
