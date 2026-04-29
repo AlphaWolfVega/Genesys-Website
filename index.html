@@ -324,7 +324,9 @@
     color:var(--text);
   }
   .section-header h2 em{font-style:italic;color:var(--gold);font-family:'Playfair Display',serif;text-transform:none;font-weight:700;letter-spacing:0}
-  #methode .section-header h2{font-size:clamp(30px,3.4vw,44px);line-height:1.15;letter-spacing:-0.015em}
+  @media(min-width:701px){
+    #methode .section-header h2{font-size:clamp(30px,3.4vw,44px);line-height:1.15;letter-spacing:-0.015em}
+  }
   .section-header p{font-size:17px;color:var(--text-mute);line-height:1.7;max-width:620px;margin:0 auto;font-weight:300}
 
   /* ===== TRUST STRIP ===== */
