@@ -603,25 +603,74 @@
     position:relative;max-width:1080px;margin:0 auto;
     padding:40px 0;
   }
-  /* Vertical central line */
+  /* Vertical central line — base track (dimmed) */
   .story-timeline::before{
     content:"";position:absolute;top:0;bottom:0;left:50%;
-    width:1px;background:linear-gradient(180deg,transparent 0%,rgba(212,182,106,0.4) 12%,rgba(212,182,106,0.4) 88%,transparent 100%);
-    transform:translateX(-50%);
+    width:1px;background:linear-gradient(180deg,transparent 0%,rgba(212,182,106,0.18) 12%,rgba(212,182,106,0.18) 88%,transparent 100%);
+    transform:translateX(-50%);z-index:0;
   }
+  /* Liquid gold fill — follows scroll, height set by JS */
+  .timeline-fill{
+    position:absolute;top:0;left:50%;
+    width:2px;height:0;
+    background:linear-gradient(180deg,rgba(212,182,106,0) 0%,rgba(212,182,106,0.85) 6%,var(--gold) 100%);
+    box-shadow:0 0 14px rgba(212,182,106,0.6),0 0 28px rgba(212,182,106,0.32);
+    transform:translateX(-50%);
+    z-index:1;border-radius:1px;
+    transition:height 0.12s linear;
+    pointer-events:none;
+    will-change:height;
+  }
+  /* Liquid head — glowing tip that follows the descent */
+  .timeline-fill::after{
+    content:"";position:absolute;bottom:-5px;left:50%;
+    width:10px;height:10px;border-radius:50%;
+    background:var(--gold);
+    box-shadow:0 0 16px rgba(212,182,106,0.95),0 0 32px rgba(212,182,106,0.55),0 0 56px rgba(212,182,106,0.25);
+    transform:translateX(-50%);
+    opacity:1;
+  }
+  .timeline-fill[data-empty="true"]::after{opacity:0}
   .story-step{
     position:relative;display:flex;align-items:center;gap:50px;
     margin-bottom:90px;
   }
   .story-step:last-child{margin-bottom:0}
-  /* Anchor dot on the central line */
+  /* Anchor dot — dimmed by default (future) */
   .story-step::after{
     content:"";position:absolute;left:50%;top:90px;
     width:14px;height:14px;border-radius:50%;
-    background:var(--gold);
+    background:rgba(212,182,106,0.2);
     border:3px solid #06101F;
-    box-shadow:0 0 0 1px rgba(212,182,106,0.5),0 0 18px rgba(212,182,106,0.4);
+    box-shadow:0 0 0 1px rgba(212,182,106,0.28);
     transform:translateX(-50%);z-index:2;
+    transition:background 0.4s ease,box-shadow 0.4s ease;
+  }
+  /* Passed dot — solid gold, fixed glow */
+  .story-step.passed::after{
+    background:var(--gold);
+    box-shadow:0 0 0 1px rgba(212,182,106,0.6),0 0 18px rgba(212,182,106,0.45);
+  }
+  /* Active dot — pulsing halo (the one we're currently at) */
+  .story-step.active::after{
+    background:var(--gold);
+    animation:dotPulse 1.6s ease-in-out infinite;
+  }
+  @keyframes dotPulse{
+    0%,100%{
+      box-shadow:0 0 0 1px rgba(212,182,106,0.7),
+                 0 0 22px rgba(212,182,106,0.55),
+                 0 0 0 0 rgba(212,182,106,0.5);
+    }
+    50%{
+      box-shadow:0 0 0 1px rgba(212,182,106,0.95),
+                 0 0 32px rgba(212,182,106,0.8),
+                 0 0 0 14px rgba(212,182,106,0);
+    }
+  }
+  @media (prefers-reduced-motion:reduce){
+    .story-step.active::after{animation:none}
+    .timeline-fill{transition:none}
   }
   .story-step[data-side="left"]{flex-direction:row}
   .story-step[data-side="right"]{flex-direction:row-reverse}
@@ -669,6 +718,7 @@
   @media(max-width:760px){
     .story-timeline{padding:20px 0}
     .story-timeline::before{left:24px}
+    .timeline-fill{left:24px}
     .story-step{
       gap:18px;margin-bottom:50px;
       flex-direction:row !important;
@@ -1445,6 +1495,7 @@
     </div>
 
     <div class="story-timeline">
+      <div class="timeline-fill" data-empty="true" aria-hidden="true"></div>
       <div class="story-step reveal" data-side="left">
         <div class="story-photo"><span class="story-placeholder">2019</span></div>
         <div class="story-content">
@@ -2368,6 +2419,71 @@
     });
   }, { threshold: 0.1 });
   document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+  // ===== FOUNDER TIMELINE — liquid scroll fill + active dot pulse =====
+  (function initStoryTimeline(){
+    const timeline = document.querySelector('.story-timeline');
+    const fill = document.querySelector('.timeline-fill');
+    if(!timeline || !fill) return;
+    const steps = Array.from(timeline.querySelectorAll('.story-step'));
+    if(!steps.length) return;
+
+    let ticking = false;
+
+    function getDotOffset(){
+      return window.matchMedia('(max-width:760px)').matches ? 14 : 90;
+    }
+
+    function update(){
+      const triggerY = window.innerHeight * 0.55;
+      const tlRect = timeline.getBoundingClientRect();
+      const tlTop = tlRect.top;
+      const dotOffset = getDotOffset();
+
+      const dotPositions = steps.map(step => step.getBoundingClientRect().top + dotOffset);
+      const firstDotY = dotPositions[0];
+      const lastDotY = dotPositions[dotPositions.length - 1];
+
+      // Fill height — liquid follows trigger line continuously between first and last dot
+      let fillHeight;
+      if(triggerY < firstDotY){
+        fillHeight = 0;
+      } else if(triggerY > lastDotY){
+        fillHeight = lastDotY - tlTop;
+      } else {
+        fillHeight = triggerY - tlTop;
+      }
+      fill.style.height = Math.max(0, fillHeight) + 'px';
+      fill.dataset.empty = fillHeight <= 1 ? 'true' : 'false';
+
+      // Active = last dot whose Y <= triggerY (the one we just reached)
+      let activeIdx = -1;
+      for(let i = 0; i < dotPositions.length; i++){
+        if(dotPositions[i] <= triggerY) activeIdx = i;
+      }
+
+      steps.forEach((step, i) => {
+        step.classList.remove('passed', 'active');
+        if(activeIdx === -1) return;
+        if(i < activeIdx) step.classList.add('passed');
+        if(i === activeIdx) step.classList.add('active', 'passed');
+      });
+
+      ticking = false;
+    }
+
+    function onScroll(){
+      if(!ticking){
+        requestAnimationFrame(update);
+        ticking = true;
+      }
+    }
+
+    window.addEventListener('scroll', onScroll, {passive:true});
+    window.addEventListener('resize', onScroll, {passive:true});
+    // Run once on load to set initial state
+    update();
+  })();
 
   // ===== TEAM CAROUSEL =====
   (function(){
