@@ -7,6 +7,8 @@
 <meta name="description" content="GENESYS · la communauté privée d'e-commerçants francophones. 23 modules, méthode complète, accès direct au fondateur. À partir de 49 $/mois, sans engagement.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://www.youtube-nocookie.com">
+<link rel="preconnect" href="https://i.ytimg.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,400;0,700;0,800;0,900;1,400;1,700&display=swap" rel="stylesheet">
 <style>
   :root{
@@ -379,6 +381,44 @@
     transform:translate(-50%,-50%);
     border:0;display:block;
   }
+  /* Facade — thumbnail + play overlay before iframe loads */
+  .testimonial-video.facade{cursor:pointer}
+  .testimonial-video.facade .yt-thumb{
+    position:absolute;top:50%;left:50%;
+    width:177.78%;height:100%;
+    transform:translate(-50%,-50%);
+    object-fit:cover;display:block;
+    transition:filter .35s ease, transform .55s ease;
+  }
+  .testimonial-video.facade::after{
+    content:"";position:absolute;inset:0;
+    background:linear-gradient(180deg,rgba(0,0,0,0.0) 55%,rgba(0,0,0,0.55) 100%);
+    pointer-events:none;
+  }
+  .testimonial-video.facade .yt-play{
+    position:absolute;top:50%;left:50%;
+    transform:translate(-50%,-50%);
+    width:62px;height:62px;border-radius:50%;
+    background:rgba(212,182,106,0.92);
+    border:none;cursor:pointer;
+    display:flex;align-items:center;justify-content:center;
+    box-shadow:0 6px 24px rgba(0,0,0,0.45),0 0 0 6px rgba(212,182,106,0.18);
+    transition:transform .35s ease, background .3s ease, box-shadow .3s ease;
+    z-index:2;
+  }
+  .testimonial-video.facade .yt-play::before{
+    content:"";display:block;
+    width:0;height:0;
+    border-left:18px solid #0A1628;
+    border-top:11px solid transparent;
+    border-bottom:11px solid transparent;
+    margin-left:5px;
+  }
+  @media(hover:hover){
+    .testimonial-video.facade:hover .yt-thumb{filter:brightness(1.05);transform:translate(-50%,-50%) scale(1.04)}
+    .testimonial-video.facade:hover .yt-play{transform:translate(-50%,-50%) scale(1.08);background:#D4B66A;box-shadow:0 8px 32px rgba(0,0,0,0.55),0 0 0 10px rgba(212,182,106,0.22)}
+  }
+  .testimonial-video.facade:active .yt-play{transform:translate(-50%,-50%) scale(0.95)}
   .testimonial-video.placeholder{
     display:flex;align-items:center;justify-content:center;
     background:radial-gradient(circle at center,rgba(20,37,64,0.85),rgba(10,22,40,0.7));
@@ -1085,50 +1125,58 @@
     <p class="sub reveal">Membres GENESYS et anciens élèves de mes formations.</p>
     <div class="testimonials-grid reveal" id="testimonialsGrid">
       <div class="testimonial-card">
-        <div class="testimonial-video">
-          <iframe src="https://www.youtube-nocookie.com/embed/yKtLULWr3T4?modestbranding=1&rel=0&playsinline=1" title="Témoignage Peter — GENESYS" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        <div class="testimonial-video facade" data-video-id="yKtLULWr3T4" data-name="Peter" role="button" tabindex="0" aria-label="Lire le témoignage de Peter">
+          <img class="yt-thumb" src="https://i.ytimg.com/vi/yKtLULWr3T4/hqdefault.jpg" alt="Témoignage Peter" loading="lazy" decoding="async">
+          <button class="yt-play" aria-label="Lire la vidéo"></button>
         </div>
         <div class="testimonial-name">Peter</div>
       </div>
       <div class="testimonial-card">
-        <div class="testimonial-video">
-          <iframe src="https://www.youtube-nocookie.com/embed/bVd1zHUWAPU?modestbranding=1&rel=0&playsinline=1" title="Témoignage Louis — GENESYS" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        <div class="testimonial-video facade" data-video-id="bVd1zHUWAPU" data-name="Louis" role="button" tabindex="0" aria-label="Lire le témoignage de Louis">
+          <img class="yt-thumb" src="https://i.ytimg.com/vi/bVd1zHUWAPU/hqdefault.jpg" alt="Témoignage Louis" loading="lazy" decoding="async">
+          <button class="yt-play" aria-label="Lire la vidéo"></button>
         </div>
         <div class="testimonial-name">Louis</div>
       </div>
       <div class="testimonial-card">
-        <div class="testimonial-video">
-          <iframe src="https://www.youtube-nocookie.com/embed/57ypnT-_9hs?modestbranding=1&rel=0&playsinline=1" title="Témoignage Meïssa — GENESYS" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        <div class="testimonial-video facade" data-video-id="57ypnT-_9hs" data-name="Meïssa" role="button" tabindex="0" aria-label="Lire le témoignage de Meïssa">
+          <img class="yt-thumb" src="https://i.ytimg.com/vi/57ypnT-_9hs/hqdefault.jpg" alt="Témoignage Meïssa" loading="lazy" decoding="async">
+          <button class="yt-play" aria-label="Lire la vidéo"></button>
         </div>
         <div class="testimonial-name">Meïssa</div>
       </div>
       <div class="testimonial-card">
-        <div class="testimonial-video">
-          <iframe src="https://www.youtube-nocookie.com/embed/N5v7HyDVbZ4?modestbranding=1&rel=0&playsinline=1" title="Témoignage Yann — GENESYS" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        <div class="testimonial-video facade" data-video-id="N5v7HyDVbZ4" data-name="Yann" role="button" tabindex="0" aria-label="Lire le témoignage de Yann">
+          <img class="yt-thumb" src="https://i.ytimg.com/vi/N5v7HyDVbZ4/hqdefault.jpg" alt="Témoignage Yann" loading="lazy" decoding="async">
+          <button class="yt-play" aria-label="Lire la vidéo"></button>
         </div>
         <div class="testimonial-name">Yann</div>
       </div>
       <div class="testimonial-card">
-        <div class="testimonial-video">
-          <iframe src="https://www.youtube-nocookie.com/embed/izzWqt4cD6w?modestbranding=1&rel=0&playsinline=1" title="Témoignage Frank — GENESYS" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        <div class="testimonial-video facade" data-video-id="izzWqt4cD6w" data-name="Frank" role="button" tabindex="0" aria-label="Lire le témoignage de Frank">
+          <img class="yt-thumb" src="https://i.ytimg.com/vi/izzWqt4cD6w/hqdefault.jpg" alt="Témoignage Frank" loading="lazy" decoding="async">
+          <button class="yt-play" aria-label="Lire la vidéo"></button>
         </div>
         <div class="testimonial-name">Frank</div>
       </div>
       <div class="testimonial-card">
-        <div class="testimonial-video">
-          <iframe src="https://www.youtube-nocookie.com/embed/jFKrWKaZ9sg?modestbranding=1&rel=0&playsinline=1" title="Témoignage Karim — GENESYS" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        <div class="testimonial-video facade" data-video-id="jFKrWKaZ9sg" data-name="Karim" role="button" tabindex="0" aria-label="Lire le témoignage de Karim">
+          <img class="yt-thumb" src="https://i.ytimg.com/vi/jFKrWKaZ9sg/hqdefault.jpg" alt="Témoignage Karim" loading="lazy" decoding="async">
+          <button class="yt-play" aria-label="Lire la vidéo"></button>
         </div>
         <div class="testimonial-name">Karim</div>
       </div>
       <div class="testimonial-card">
-        <div class="testimonial-video">
-          <iframe src="https://www.youtube-nocookie.com/embed/nLOa5GbRJQ0?modestbranding=1&rel=0&playsinline=1" title="Témoignage Erwan — GENESYS" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        <div class="testimonial-video facade" data-video-id="nLOa5GbRJQ0" data-name="Erwan" role="button" tabindex="0" aria-label="Lire le témoignage de Erwan">
+          <img class="yt-thumb" src="https://i.ytimg.com/vi/nLOa5GbRJQ0/hqdefault.jpg" alt="Témoignage Erwan" loading="lazy" decoding="async">
+          <button class="yt-play" aria-label="Lire la vidéo"></button>
         </div>
         <div class="testimonial-name">Erwan</div>
       </div>
       <div class="testimonial-card">
-        <div class="testimonial-video">
-          <iframe src="https://www.youtube-nocookie.com/embed/LKSLAI8xC5E?modestbranding=1&rel=0&playsinline=1" title="Témoignage Ugo — GENESYS" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        <div class="testimonial-video facade" data-video-id="LKSLAI8xC5E" data-name="Ugo" role="button" tabindex="0" aria-label="Lire le témoignage de Ugo">
+          <img class="yt-thumb" src="https://i.ytimg.com/vi/LKSLAI8xC5E/hqdefault.jpg" alt="Témoignage Ugo" loading="lazy" decoding="async">
+          <button class="yt-play" aria-label="Lire la vidéo"></button>
         </div>
         <div class="testimonial-name">Ugo</div>
       </div>
@@ -1906,6 +1954,30 @@
         if(Math.abs(dx) > 50) show(dx > 0 ? idx - 1 : idx + 1);
       }, {passive:true});
     }
+  })();
+
+  // ===== TESTIMONIALS — FACADE TO IFRAME ON CLICK =====
+  (function(){
+    const facades = document.querySelectorAll('.testimonial-video.facade');
+    facades.forEach(facade => {
+      function activate(){
+        const id = facade.dataset.videoId;
+        const name = facade.dataset.name || 'GENESYS';
+        if(!id) return;
+        const iframe = document.createElement('iframe');
+        iframe.src = `https://www.youtube-nocookie.com/embed/${id}?autoplay=1&modestbranding=1&rel=0&playsinline=1`;
+        iframe.title = `Témoignage ${name} — GENESYS`;
+        iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture';
+        iframe.setAttribute('allowfullscreen', '');
+        facade.innerHTML = '';
+        facade.classList.remove('facade');
+        facade.appendChild(iframe);
+      }
+      facade.addEventListener('click', activate);
+      facade.addEventListener('keydown', e => {
+        if(e.key === 'Enter' || e.key === ' '){ e.preventDefault(); activate(); }
+      });
+    });
   })();
 
   // ===== TESTIMONIALS — DYNAMIC DOTS + HINT ANIMATION (mobile only) =====
