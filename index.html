@@ -1501,160 +1501,321 @@
   .reveal{opacity:0;transform:translateY(20px);transition:opacity 1s ease,transform 1s ease}
   .reveal.in{opacity:1;transform:translateY(0)}
 
-  /* ===== ROULETTE DES LEVIERS (rollback-safe — single commit) ===== */
-  #wheel-game{
+  /* ===== DIAGNOSTIC EXPRESS GENESYS (rollback-safe — single commit) ===== */
+  #diagnostic-game{
     padding:80px 0;
     background:linear-gradient(180deg, var(--bg) 0%, var(--bg-2) 50%, var(--bg) 100%);
     position:relative;overflow:hidden;
   }
-  #wheel-game::before{
+  #diagnostic-game::before{
     content:"";position:absolute;inset:0;
-    background:radial-gradient(ellipse 50% 35% at 50% 50%, rgba(212,182,106,0.07) 0%, transparent 70%);
+    background:radial-gradient(ellipse 50% 35% at 50% 50%, rgba(212,182,106,0.06) 0%, transparent 70%);
     pointer-events:none;
   }
-  .wheel-stage{
-    position:relative;
-    width:480px;max-width:100%;
-    aspect-ratio:1/1;
-    margin:0 auto 44px;
+  .dx-stage{
+    max-width:680px;margin:0 auto;
+    position:relative;z-index:1;
+    min-height:480px;
   }
-  .wheel-pointer{
-    position:absolute;
-    top:-6px;left:50%;
-    transform:translateX(-50%);
-    width:0;height:0;
-    border:18px solid transparent;
-    border-top-width:34px;
-    border-top-color:var(--gold);
-    z-index:3;
-    filter:drop-shadow(0 4px 14px rgba(212,182,106,0.55));
+  /* Intro */
+  .dx-intro-card{
+    background:linear-gradient(135deg,rgba(20,37,64,0.6) 0%,rgba(10,22,40,0.4) 100%);
+    border:1px solid rgba(212,182,106,0.3);
+    border-radius:18px;
+    padding:44px 36px;
+    text-align:center;
+    box-shadow:0 16px 45px rgba(0,0,0,0.3);
   }
-  .wheel-pointer::after{
-    content:"";
-    position:absolute;
-    top:-38px;left:-13px;
-    width:26px;height:26px;border-radius:50%;
-    background:radial-gradient(circle at 35% 35%, #F0DDA8 0%, var(--gold) 60%, #8c6d1f 100%);
-    box-shadow:0 4px 14px rgba(212,182,106,0.55), 0 0 0 2px #06101F;
-  }
-  .wheel-wrapper{
-    position:relative;width:100%;height:100%;
-  }
-  .wheel{
-    width:100%;height:100%;
-    border-radius:50%;
-    background:#0A1628;
-    box-shadow:
-      0 0 0 6px rgba(212,182,106,0.55),
-      0 0 0 10px rgba(6,16,31,0.9),
-      0 0 0 12px rgba(212,182,106,0.18),
-      0 30px 80px rgba(0,0,0,0.55),
-      inset 0 0 60px rgba(212,182,106,0.1);
-    transition:transform 4.6s cubic-bezier(0.17, 0.67, 0.21, 1);
-    will-change:transform;
-    position:relative;
-    overflow:hidden;
-  }
-  .wheel svg{width:100%;height:100%;display:block}
-  .wheel-spin-btn{
-    position:absolute;
-    top:50%;left:50%;
-    transform:translate(-50%,-50%);
-    width:128px;height:128px;border-radius:50%;
-    background:radial-gradient(circle at 35% 30%, #F0DDA8 0%, var(--gold) 50%, #a48742 100%);
-    border:5px solid #06101F;
-    box-shadow:
-      0 0 0 2px rgba(212,182,106,0.7),
-      0 14px 40px rgba(0,0,0,0.55),
-      inset 0 -5px 14px rgba(0,0,0,0.22),
-      inset 0 5px 14px rgba(255,255,255,0.32);
-    cursor:pointer;
-    z-index:2;
+  .dx-intro-pill{
+    display:inline-flex;align-items:center;gap:8px;
+    padding:7px 16px;border-radius:999px;
+    background:rgba(212,182,106,0.1);
+    border:1px solid rgba(212,182,106,0.4);
+    color:var(--gold);
     font-family:'Inter',sans-serif;
-    font-size:14px;font-weight:800;letter-spacing:0.16em;
-    text-transform:uppercase;
+    font-size:11.5px;font-weight:700;
+    letter-spacing:0.18em;text-transform:uppercase;
+    margin-bottom:18px;
+  }
+  .dx-intro-card h3{
+    font-family:'Playfair Display',serif;
+    font-style:italic;font-weight:800;
+    font-size:30px;color:var(--text);
+    line-height:1.18;margin-bottom:14px;
+    letter-spacing:-0.005em;
+  }
+  .dx-intro-card h3 em{color:var(--gold);font-style:italic}
+  .dx-intro-card p{
+    font-family:'Inter',sans-serif;
+    font-size:15.5px;color:var(--text-mute);
+    line-height:1.55;margin-bottom:28px;
+  }
+  .dx-start-btn{
+    font-family:'Inter',sans-serif;
+    font-size:14px;font-weight:800;
+    letter-spacing:0.14em;text-transform:uppercase;
+    padding:18px 36px;border-radius:999px;
+    background:linear-gradient(180deg, #F0DDA8 0%, var(--gold) 100%);
     color:#06101F;
+    border:0;cursor:pointer;
+    box-shadow:0 0 0 1px rgba(255,255,255,0.25) inset, 0 12px 30px rgba(212,182,106,0.35);
     transition:transform 0.2s ease, box-shadow 0.25s ease;
   }
   @media (hover:hover){
-    .wheel-spin-btn:hover{
-      transform:translate(-50%,-50%) scale(1.06);
-      box-shadow:
-        0 0 0 2px rgba(212,182,106,0.95),
-        0 18px 50px rgba(212,182,106,0.4),
-        inset 0 -5px 14px rgba(0,0,0,0.22),
-        inset 0 5px 14px rgba(255,255,255,0.4);
+    .dx-start-btn:hover{
+      transform:translateY(-1px);
+      box-shadow:0 0 0 1px rgba(255,255,255,0.35) inset, 0 16px 38px rgba(212,182,106,0.5);
     }
   }
-  .wheel-spin-btn:active{transform:translate(-50%,-50%) scale(0.95);transition:transform 0.08s ease}
-  .wheel-spin-btn:disabled{opacity:0.7;cursor:not-allowed}
-  .wheel-spin-btn:focus-visible{outline:2px solid #fff;outline-offset:6px}
-  /* Result card */
-  .wheel-result{
-    max-width:580px;
-    margin:0 auto 32px;
-    background:linear-gradient(135deg,rgba(20,37,64,0.6) 0%,rgba(10,22,40,0.4) 100%);
-    border:1px solid rgba(212,182,106,0.32);
-    border-radius:14px;
-    padding:30px 28px;
-    text-align:center;
-    opacity:0;transform:translateY(15px);
-    transition:opacity 0.55s ease, transform 0.55s ease;
-    pointer-events:none;
-    box-shadow:0 12px 40px rgba(0,0,0,0.25);
+  .dx-start-btn:active{transform:translateY(1px) scale(0.98);transition:transform 0.08s ease}
+  .dx-meta{
+    font-family:'Inter',sans-serif;
+    font-size:12px;font-weight:500;
+    color:var(--text-faint);
+    letter-spacing:0.04em;margin-top:18px;
   }
-  .wheel-result.is-revealed{opacity:1;transform:translateY(0);pointer-events:auto}
-  .wheel-result-name{
+  /* Game */
+  .dx-game{display:none}
+  .dx-game.is-active{display:block}
+  .dx-progress{
+    display:flex;align-items:center;gap:12px;margin-bottom:24px;
+  }
+  .dx-progress-track{
+    flex:1;height:5px;border-radius:3px;
+    background:rgba(212,182,106,0.12);
+    overflow:hidden;
+  }
+  .dx-progress-fill{
+    height:100%;
+    background:linear-gradient(90deg, var(--gold) 0%, #F0DDA8 100%);
+    border-radius:3px;
+    width:0%;
+    transition:width 0.5s cubic-bezier(0.4,0,0.2,1);
+    box-shadow:0 0 12px rgba(212,182,106,0.5);
+  }
+  .dx-progress-text{
+    font-family:'Inter',sans-serif;
+    font-size:12.5px;font-weight:700;
+    color:var(--gold);
+    letter-spacing:0.06em;
+    min-width:46px;text-align:right;
+  }
+  .dx-q-card{
+    background:linear-gradient(135deg,rgba(20,37,64,0.55) 0%,rgba(10,22,40,0.4) 100%);
+    border:1px solid rgba(212,182,106,0.28);
+    border-radius:16px;
+    padding:32px 30px;
+    box-shadow:0 14px 40px rgba(0,0,0,0.28);
+    opacity:0;transform:translateY(12px);
+    transition:opacity 0.4s ease, transform 0.4s ease;
+    min-height:340px;
+    display:flex;flex-direction:column;
+  }
+  .dx-q-card.is-visible{opacity:1;transform:translateY(0)}
+  .dx-q-domain{
+    display:inline-block;align-self:flex-start;
+    font-family:'Inter',sans-serif;
+    font-size:10.5px;font-weight:700;
+    letter-spacing:0.18em;text-transform:uppercase;
+    color:var(--gold);
+    padding:5px 12px;border-radius:999px;
+    background:rgba(212,182,106,0.1);
+    border:1px solid rgba(212,182,106,0.32);
+    margin-bottom:18px;
+  }
+  .dx-q-text{
     font-family:'Playfair Display',serif;
     font-style:italic;font-weight:700;
-    font-size:32px;color:var(--gold);
-    text-shadow:0 0 24px rgba(212,182,106,0.35);
-    margin-bottom:14px;line-height:1.1;
+    font-size:22px;line-height:1.32;
+    color:var(--text);
+    margin-bottom:8px;
     letter-spacing:-0.005em;
   }
-  .wheel-result-desc{
+  .dx-q-jargon{
     font-family:'Inter',sans-serif;
-    font-size:15.5px;font-weight:400;
-    color:var(--text);line-height:1.55;
-    margin-bottom:16px;
+    font-size:12.5px;font-style:italic;
+    color:var(--text-faint);
+    line-height:1.5;margin-bottom:22px;
+    padding-left:12px;border-left:2px solid rgba(212,182,106,0.3);
   }
-  .wheel-result-example{
+  .dx-options{display:flex;flex-direction:column;gap:10px;margin-top:auto}
+  .dx-option{
+    display:flex;align-items:center;gap:14px;
+    padding:16px 20px;
+    background:rgba(20,37,64,0.4);
+    border:1px solid rgba(212,182,106,0.18);
+    border-radius:10px;
+    cursor:pointer;
+    transition:all 0.18s ease;
     font-family:'Inter',sans-serif;
-    font-size:14px;font-weight:400;
-    color:var(--text-mute);line-height:1.55;
+    font-size:14.5px;font-weight:500;
+    color:var(--text);
+    text-align:left;
+    line-height:1.45;
+    width:100%;
+  }
+  @media (hover:hover){
+    .dx-option:hover{
+      border-color:rgba(212,182,106,0.45);
+      background:rgba(20,37,64,0.6);
+    }
+  }
+  .dx-option.is-picked{
+    border-color:var(--gold);
+    background:linear-gradient(135deg,rgba(212,182,106,0.18) 0%,rgba(212,182,106,0.06) 100%);
+    transform:translateY(-1px);
+    box-shadow:0 6px 18px rgba(212,182,106,0.2);
+  }
+  .dx-option-letter{
+    flex-shrink:0;
+    width:30px;height:30px;border-radius:50%;
+    background:rgba(212,182,106,0.12);
+    border:1px solid rgba(212,182,106,0.4);
+    display:flex;align-items:center;justify-content:center;
+    font-family:'Playfair Display',serif;font-style:italic;
+    font-size:14px;font-weight:700;color:var(--gold);
+  }
+  .dx-option.is-picked .dx-option-letter{
+    background:var(--gold);color:#06101F;
+  }
+  /* True/False compact layout */
+  .dx-options.is-tf{flex-direction:row;gap:12px}
+  .dx-options.is-tf .dx-option{justify-content:center;padding:22px 16px;font-size:18px;font-weight:700}
+  .dx-options.is-tf .dx-option-letter{display:none}
+  /* Result */
+  .dx-result{display:none}
+  .dx-result.is-active{display:block}
+  .dx-result-card{
+    background:linear-gradient(135deg,rgba(20,37,64,0.6) 0%,rgba(10,22,40,0.4) 100%);
+    border:1px solid rgba(212,182,106,0.32);
+    border-radius:18px;
+    padding:36px 32px;
+    box-shadow:0 18px 50px rgba(0,0,0,0.32);
+  }
+  .dx-result-title{
+    font-family:'Inter',sans-serif;
+    font-size:11.5px;font-weight:700;
+    letter-spacing:0.2em;text-transform:uppercase;
+    color:var(--gold);text-align:center;
+    margin-bottom:8px;
+  }
+  .dx-result-h{
+    font-family:'Playfair Display',serif;
+    font-style:italic;font-weight:800;
+    font-size:32px;line-height:1.15;
+    color:var(--text);text-align:center;
+    margin-bottom:30px;
+    letter-spacing:-0.01em;
+  }
+  .dx-result-h em{color:var(--gold)}
+  .dx-profile{
+    display:flex;flex-direction:column;gap:14px;
+    margin-bottom:30px;
+  }
+  .dx-profile-row{
+    display:flex;align-items:center;gap:14px;
     padding:14px 16px;
+    background:rgba(20,37,64,0.35);
+    border:1px solid rgba(212,182,106,0.15);
+    border-radius:10px;
+  }
+  .dx-profile-name{
+    flex:1;
+    font-family:'Inter',sans-serif;
+    font-size:14px;font-weight:600;
+    color:var(--text);
+  }
+  .dx-profile-dots{display:flex;gap:5px}
+  .dx-profile-dot{
+    width:10px;height:10px;border-radius:50%;
+    background:rgba(212,182,106,0.18);
+  }
+  .dx-profile-dot.on{
+    background:var(--gold);
+    box-shadow:0 0 8px rgba(212,182,106,0.5);
+  }
+  .dx-profile-level{
+    font-family:'Inter',sans-serif;
+    font-size:11.5px;font-weight:700;
+    letter-spacing:0.1em;text-transform:uppercase;
+    min-width:90px;text-align:right;
+  }
+  .dx-profile-level.lvl-low{color:#E8946B}
+  .dx-profile-level.lvl-mid{color:#E8D4A0}
+  .dx-profile-level.lvl-high{color:#9CD68C}
+  .dx-diag{
+    padding:22px 22px;
     background:rgba(212,182,106,0.06);
-    border-left:2px solid rgba(212,182,106,0.55);
-    border-radius:4px;
-    text-align:left;margin-bottom:18px;
+    border-left:3px solid var(--gold);
+    border-radius:6px;
+    margin-bottom:24px;
   }
-  .wheel-result-example strong{color:var(--gold);font-weight:600}
-  .wheel-result-meta{
+  .dx-diag-h{
     font-family:'Inter',sans-serif;
-    font-size:12.5px;font-weight:500;
-    color:var(--text-mute);
-    letter-spacing:0.05em;
+    font-size:12px;font-weight:700;
+    letter-spacing:0.16em;text-transform:uppercase;
+    color:var(--gold);margin-bottom:10px;
   }
-  .wheel-result-meta strong{color:var(--gold);font-weight:700}
-  .wheel-cta{text-align:center;margin-top:18px}
-  .wheel-cta p{
+  .dx-diag-text{
     font-family:'Inter',sans-serif;
-    font-size:14.5px;color:var(--text-mute);
-    margin-bottom:22px;
+    font-size:15px;font-weight:400;
+    color:var(--text);line-height:1.6;
+  }
+  .dx-diag-text strong{color:var(--gold);font-weight:700}
+  .dx-modules-h{
+    font-family:'Inter',sans-serif;
+    font-size:12px;font-weight:700;
+    letter-spacing:0.16em;text-transform:uppercase;
+    color:var(--text-mute);margin-bottom:14px;
+  }
+  .dx-modules{
+    display:flex;flex-direction:column;gap:8px;
+    margin-bottom:30px;
+  }
+  .dx-module{
+    display:flex;align-items:center;gap:12px;
+    padding:12px 16px;
+    background:rgba(20,37,64,0.4);
+    border:1px solid rgba(212,182,106,0.18);
+    border-radius:8px;
+    font-family:'Inter',sans-serif;
+    font-size:14px;font-weight:500;
+    color:var(--text);
+  }
+  .dx-module-arrow{color:var(--gold);font-weight:700}
+  .dx-result-cta{text-align:center;margin-top:14px}
+  .dx-result-cta p{
+    font-family:'Inter',sans-serif;
+    font-size:13.5px;color:var(--text-mute);
+    margin-bottom:18px;line-height:1.5;
+  }
+  .dx-replay{
+    display:inline-block;margin-top:14px;
+    font-family:'Inter',sans-serif;
+    font-size:12px;font-weight:600;
+    letter-spacing:0.06em;
+    color:var(--text-faint);
+    text-decoration:underline;
+    background:none;border:0;cursor:pointer;
   }
   @media(max-width:600px){
-    #wheel-game{padding:60px 0}
-    .wheel-stage{width:340px;margin:0 auto 36px}
-    .wheel-spin-btn{width:96px;height:96px;font-size:12px;letter-spacing:0.14em;border-width:4px}
-    .wheel-pointer{border-width:14px;border-top-width:26px}
-    .wheel-pointer::after{top:-30px;left:-11px;width:22px;height:22px}
-    .wheel-result{padding:24px 20px;border-radius:12px}
-    .wheel-result-name{font-size:25px}
-    .wheel-result-desc{font-size:14.5px}
-    .wheel-result-example{font-size:13px;padding:12px 14px}
-  }
-  @media (prefers-reduced-motion:reduce){
-    .wheel{transition:none}
+    #diagnostic-game{padding:60px 0}
+    .dx-intro-card{padding:32px 22px;border-radius:14px}
+    .dx-intro-card h3{font-size:24px}
+    .dx-intro-card p{font-size:14px}
+    .dx-start-btn{padding:16px 28px;font-size:13px}
+    .dx-q-card{padding:24px 20px;border-radius:14px;min-height:360px}
+    .dx-q-text{font-size:18px}
+    .dx-option{padding:14px 16px;font-size:13.5px}
+    .dx-options.is-tf .dx-option{padding:20px 14px;font-size:16px}
+    .dx-result-card{padding:28px 20px;border-radius:14px}
+    .dx-result-h{font-size:24px}
+    .dx-profile-row{padding:12px 14px;gap:10px}
+    .dx-profile-name{font-size:13px}
+    .dx-profile-level{font-size:10.5px;min-width:70px}
+    .dx-diag{padding:18px 16px}
+    .dx-diag-text{font-size:14px}
+    .dx-module{font-size:13px;padding:11px 13px}
   }
 </style>
 </head>
@@ -1819,41 +1980,64 @@
   </div>
 </section>
 
-<!-- ===== ROULETTE DES LEVIERS (rollback-safe — single isolated section) ===== -->
-<section id="wheel-game">
+<!-- ===== DIAGNOSTIC EXPRESS GENESYS (rollback-safe — single isolated section) ===== -->
+<section id="diagnostic-game">
   <div class="container">
     <div class="section-header reveal">
       <div class="ornament">
         <div class="line"></div>
-        <span class="label">Le terrain de jeu</span>
+        <span class="label">Diagnostic express</span>
         <div class="line"></div>
       </div>
-      <h2>Tourne la roue,<br><em>découvre un levier</em></h2>
-      <p>23 leviers psychologiques pilotent toutes les ventes en e-commerce. En voici un, au hasard. Re-tourne pour en découvrir un autre.</p>
+      <h2>Teste ton niveau e-commerce,<br><em>en 90 secondes</em></h2>
+      <p>10 questions, 5 domaines, un diagnostic personnalisé. Pas de note, pas de jugement — juste où tu en es vraiment, et ce qui te débloquerait.</p>
     </div>
 
-    <div class="wheel-stage reveal">
-      <div class="wheel-pointer" aria-hidden="true"></div>
-      <div class="wheel-wrapper">
-        <div class="wheel" id="leverWheel">
-          <svg viewBox="0 0 400 400" aria-hidden="true"></svg>
+    <div class="dx-stage reveal">
+      <!-- Intro screen -->
+      <div class="dx-intro" id="dxIntro">
+        <div class="dx-intro-card">
+          <span class="dx-intro-pill">10 questions · 90 secondes</span>
+          <h3>Découvre ton <em>profil e-commerce</em></h3>
+          <p>Le quiz teste tes réflexes sur 5 domaines : psychologie d'achat, copywriting, conversion, publicités, mental d'opérateur. Chaque session pioche au hasard dans une banque de questions — donc tu ne refais jamais le même test.</p>
+          <button type="button" class="dx-start-btn" id="dxStart">Commencer</button>
+          <p class="dx-meta">Anonyme · pas d'email demandé</p>
         </div>
-        <button type="button" class="wheel-spin-btn" id="wheelSpin" aria-label="Tourner la roue">
-          <span>Tourner</span>
-        </button>
       </div>
-    </div>
 
-    <div class="wheel-result" id="wheelResult" role="status" aria-live="polite">
-      <div class="wheel-result-name"></div>
-      <div class="wheel-result-desc"></div>
-      <div class="wheel-result-example"></div>
-      <div class="wheel-result-meta"></div>
-    </div>
+      <!-- Game screen (hidden until start) -->
+      <div class="dx-game" id="dxGame">
+        <div class="dx-progress">
+          <div class="dx-progress-track"><div class="dx-progress-fill" id="dxProgressFill"></div></div>
+          <div class="dx-progress-text" id="dxProgressText">1 / 10</div>
+        </div>
+        <div class="dx-q-card" id="dxQCard">
+          <span class="dx-q-domain" id="dxQDomain"></span>
+          <p class="dx-q-text" id="dxQText"></p>
+          <p class="dx-q-jargon" id="dxQJargon" hidden></p>
+          <div class="dx-options" id="dxOptions"></div>
+        </div>
+      </div>
 
-    <div class="wheel-cta reveal">
-      <p>Les 22 autres sont expliqués pas à pas dans Ecom Neuro et appliqués sur des cas concrets dans la communauté.</p>
-      <a href="#rejoindre" class="btn btn-gold">Découvrir les 22 autres</a>
+      <!-- Result screen (hidden until done) -->
+      <div class="dx-result" id="dxResult">
+        <div class="dx-result-card">
+          <div class="dx-result-title">Ton profil</div>
+          <h3 class="dx-result-h" id="dxResultH"></h3>
+          <div class="dx-profile" id="dxProfile"></div>
+          <div class="dx-diag">
+            <div class="dx-diag-h">Ton diagnostic</div>
+            <p class="dx-diag-text" id="dxDiagText"></p>
+          </div>
+          <div class="dx-modules-h">Ce qui t'aiderait dans GENESYS</div>
+          <div class="dx-modules" id="dxModules"></div>
+          <div class="dx-result-cta">
+            <p>Pas un argument de vente. Juste ce que les modules adressent, vu tes réponses.</p>
+            <a href="#rejoindre" class="btn btn-gold">Découvrir GENESYS</a>
+            <br><button type="button" class="dx-replay" id="dxReplay">Refaire le diagnostic</button>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </section>
@@ -3214,134 +3398,249 @@
     });
   })();
 
-  // ===== ROULETTE DES LEVIERS — rollback-safe, scoped to #wheel-game =====
-  (function initWheel(){
-    const section = document.getElementById('wheel-game');
-    if(!section) return;
+  // ===== DIAGNOSTIC EXPRESS GENESYS — rollback-safe, scoped to #diagnostic-game =====
+  (function initDiagnostic(){
+    const sec = document.getElementById('diagnostic-game');
+    if(!sec) return;
 
-    const LEVIERS = [
-      {n:"Effet d'ancrage", d:"Le premier chiffre vu devient la référence inconsciente du cerveau.", e:"Affiche le prix barré (199 €) à côté du prix réel (99 €). Le cerveau ne voit plus 99 €, il voit -100 €."},
-      {n:"Preuve sociale",   d:"Plus les autres l'achètent, plus le cerveau valide la décision.",   e:"« 1 247 personnes ont commandé ce produit ce mois-ci. » Sous le bouton, ça multiplie les ventes."},
-      {n:"Rareté",           d:"Ce qui est limité prend de la valeur. Le cerveau craint de perdre l'opportunité.", e:"Affiche le stock réel : « Plus que 3 en stock » déclenche la décision immédiate."},
-      {n:"Urgence",          d:"Le temps qui défile crée une pression à décider maintenant.",         e:"Compte à rebours visible jusqu'à minuit pour la livraison du lendemain."},
-      {n:"Réciprocité",      d:"Quand tu donnes en premier, le cerveau veut rendre la pareille.",   e:"Offre un guide PDF gratuit avant de demander l'email. Conversion 3 à 4× supérieure."},
-      {n:"Engagement & cohérence", d:"Une fois qu'on a fait un petit oui, on dit oui à un plus grand après.", e:"Demande l'email avant le paiement. L'engagement initial double la finalisation."},
-      {n:"Autorité",         d:"Une figure d'autorité raccourcit le processus de décision du prospect.", e:"« Recommandé par [expert] » ou « Vu sur [media] » placé au-dessus du fold."},
-      {n:"Sympathie",        d:"On achète plus volontiers à quelqu'un qu'on aime ou qui nous ressemble.", e:"Photos d'équipe humaines + ton « comme un pote » bat le corporate de +30%."},
-      {n:"Aversion à la perte", d:"La douleur de perdre est 2× plus forte que le plaisir de gagner.", e:"Au lieu de « gagne 30 € », écris « ne perds pas 30 € que tu laisses déjà filer »."},
-      {n:"Effet de cadrage", d:"Le même fait change de poids selon comment tu le présentes.",       e:"« Crème efficace à 95% » convertit mieux que « Crème qui échoue chez 5% »."},
-      {n:"Effet de contraste", d:"Une option médiocre placée à côté d'une bonne fait passer la bonne pour excellente.", e:"3 plans : décoratif (mauvais), star (à pousser), premium (rare). Le « star » explose."},
-      {n:"Tarification charme", d:"Un prix en .9 ou .7 est perçu comme nettement moins cher qu'un rond.", e:"29 € est lu « 20 quelque chose » par le cerveau, pas « 30 ». +20% de conversion vs 30 €."},
-      {n:"Effet de halo",    d:"Un trait positif visible projette de la qualité sur tout le reste du produit.", e:"Photos pro + emballage premium → le client suppose que le produit l'est aussi."},
-      {n:"Paradoxe du choix", d:"Trop d'options paralyse. Moins de choix = plus de décisions.",     e:"Une page collection à 5 produits convertit mieux qu'une à 50."},
-      {n:"FOMO",             d:"La peur de rater pousse à l'action immédiate, court-circuite la réflexion.", e:"« 12 personnes regardent ce produit en ce moment » affiché en temps réel."},
-      {n:"Risque inversé",   d:"Quand tu enlèves le risque côté client, l'objection principale s'effondre.", e:"« Satisfait ou remboursé 60 jours, on paie le retour. » Triple les premières ventes."},
-      {n:"Effet IKEA",       d:"Plus le client investit d'effort, plus il valorise le résultat final.", e:"Un quiz personnalisé avant d'afficher le produit recommandé crée l'engagement émotionnel."},
-      {n:"Heuristique d'affect", d:"L'émotion ressentie pèse plus que les arguments rationnels au moment de décider.", e:"Vidéo de 30 s qui fait sourire avant la fiche technique. +40% de conversion mesurés."},
-      {n:"Storytelling",     d:"Un récit fait vivre le bénéfice là où les caractéristiques techniques restent abstraites.", e:"« Marie a perdu 6 kg en 3 mois grâce à... » bat « Contient 5 actifs naturels »."},
-      {n:"Effet Zeigarnik",  d:"Le cerveau retient les histoires inachevées jusqu'à leur résolution.", e:"Email de panier abandonné qui rappelle ce qu'il manque pour finir l'achat."},
-      {n:"Simple exposition", d:"Plus on voit quelque chose, plus on l'apprécie inconsciemment.",   e:"Retargeting Meta qui rediffuse ton produit 7 à 10 fois → boost final de conversion."},
-      {n:"Foot in the door", d:"Un petit oui ouvre la porte à un plus grand oui.",                  e:"Tripwire à 7 € puis upsell à 47 €. Le 1er oui désinhibe le 2e."},
-      {n:"Effet de gratitude", d:"Une attention gratuite et inattendue génère une fidélité disproportionnée.", e:"Petit cadeau dans le colis + carte manuscrite → 3× plus de clients qui repassent commande."}
+    // Domain → human label + GENESYS modules to recommend when the domain is weak
+    const DOMAIN = {
+      neuro:   {label:"Psychologie d'achat",   modules:["Ecom Neuro"]},
+      copy:    {label:"Copywriting",            modules:["Ecom Copy Impact"]},
+      cro:     {label:"Conversion (CRO)",       modules:["Boutique qui convertit","Conversion & panier"]},
+      ads:     {label:"Publicités payantes",    modules:["Scaler Meta proprement","Google Ads sans gaspillage","Créatives qui vendent"]},
+      mindset: {label:"Mental d'opérateur",     modules:["Mental & constance","Focus d'opérateur"]}
+    };
+
+    // Question pool — 4 per domain × 5 domains = 20. Each session picks 2 per domain.
+    // Each Q has: domain, type (choice|tf|estim|scenario), question, options[{label, correct?}], optional jargon
+    const POOL = [
+      // ---------- NEURO ----------
+      {domain:"neuro", type:"choice", q:"Tu vends une bougie à 39 €. Quel affichage convertit le mieux ?",
+        opts:[{l:"39,00 €"}, {l:"~~89 €~~ → 39 €", c:true}]},
+      {domain:"neuro", type:"tf", q:"Augmenter ton prix peut faire vendre plus.",
+        opts:[{l:"VRAI", c:true}, {l:"FAUX"}]},
+      {domain:"neuro", type:"choice", q:"Pour pousser à l'achat impulsif, qu'est-ce qui marche le mieux dans la majorité des cas ?",
+        opts:[{l:"Une garantie « satisfait ou remboursé 60 jours »"}, {l:"Un compte à rebours sur le prix actuel", c:true}]},
+      {domain:"neuro", type:"tf", q:"Un visiteur doit voir un produit 7 à 10 fois en moyenne avant d'acheter.",
+        opts:[{l:"VRAI", c:true}, {l:"FAUX"}]},
+
+      // ---------- COPY ----------
+      {domain:"copy", type:"choice", q:"Quel hook convertit le mieux pour une crème anti-âge ?",
+        opts:[{l:"Découvrez notre nouvelle crème naturelle"}, {l:"La crème que les dermatologues n'aiment pas (mais qui marche)", c:true}]},
+      {domain:"copy", type:"choice", q:"Lequel performe mieux ?",
+        opts:[{l:"Maigris en 30 jours"}, {l:"Marie a perdu 8 kg en 30 jours. Voici comment.", c:true}]},
+      {domain:"copy", type:"estim", q:"Une bonne accroche de pub Meta (titre principal) fait combien de mots ?",
+        opts:[{l:"3 à 5 mots"}, {l:"6 à 9 mots", c:true}, {l:"10 à 15 mots"}, {l:"20 mots et plus"}]},
+      {domain:"copy", type:"tf", q:"Une page produit longue convertit moins qu'une courte.",
+        opts:[{l:"VRAI"}, {l:"FAUX", c:true}]},
+
+      // ---------- CRO ----------
+      {domain:"cro", type:"estim", q:"Un taux de conversion de 1,5 % sur Shopify, c'est…",
+        opts:[{l:"Mauvais"}, {l:"Moyen", c:true}, {l:"Excellent"}],
+        jargon:"CRO = Conversion Rate Optimization, autrement dit l'art d'augmenter le pourcentage de visiteurs qui achètent."},
+      {domain:"cro", type:"choice", q:"Tu veux augmenter ton taux de conversion. Quelle action priorises-tu en premier ?",
+        opts:[{l:"Refaire le design de toute la page"}, {l:"Améliorer la hero (la zone visible sans scroller)", c:true}, {l:"Ajouter plus de produits dans la collection"}]},
+      {domain:"cro", type:"tf", q:"Une popup d'exit-intent (qui s'affiche quand le visiteur va partir) augmente toujours la conversion.",
+        opts:[{l:"VRAI"}, {l:"FAUX", c:true}]},
+      {domain:"cro", type:"choice", q:"Avis clients sur ta page produit : où les places-tu pour le meilleur impact ?",
+        opts:[{l:"Tout en bas, après la description complète"}, {l:"En haut, juste sous le titre du produit", c:true}, {l:"Dans une popup à l'arrivée"}]},
+
+      // ---------- ADS ----------
+      {domain:"ads", type:"estim", q:"Le CPM moyen sur Meta en France pour l'e-commerce, c'est environ…",
+        opts:[{l:"2 à 5 €"}, {l:"8 à 15 €", c:true}, {l:"20 à 30 €"}, {l:"40 € et plus"}],
+        jargon:"CPM = coût pour 1 000 impressions. C'est ce que tu paies à Meta pour montrer ta pub à 1 000 personnes."},
+      {domain:"ads", type:"scenario", q:"Ton CPA Meta monte de 30 % en 3 jours sans rien changer. Tu fais quoi ?",
+        opts:[{l:"Je coupe la campagne immédiatement, ça ne marche plus"}, {l:"J'analyse les données 24-48 h avant de bouger", c:true}, {l:"J'augmente le budget pour compenser la baisse de perf"}],
+        jargon:"CPA = coût par acquisition, ce que tu paies pour avoir 1 client."},
+      {domain:"ads", type:"tf", q:"Plus tu mets de budget sur Meta, plus l'algorithme apprend vite (à conditions équivalentes).",
+        opts:[{l:"VRAI", c:true}, {l:"FAUX"}]},
+      {domain:"ads", type:"choice", q:"Quelle créa convertit en moyenne mieux sur Meta en 2026 ?",
+        opts:[{l:"Vidéo studio professionnelle 30 s avec voix-off"}, {l:"Vidéo selfie face caméra de la fondatrice qui parle naturellement", c:true}]},
+
+      // ---------- MINDSET ----------
+      {domain:"mindset", type:"scenario", q:"Premier mois sur ta boutique : -2 000 € en pubs, 0 vente. Tu réagis comment ?",
+        opts:[{l:"Je change de produit, celui-là ne marche pas"}, {l:"J'analyse les données et je teste 1 angle différent", c:true}, {l:"J'arrête, c'est pas pour moi"}]},
+      {domain:"mindset", type:"choice", q:"Tu testes 5 produits, 4 ne marchent pas. Tu vois ces 4 échecs comme…",
+        opts:[{l:"4 erreurs qui prouvent que je m'y prends mal"}, {l:"4 signaux qui m'ont rapproché du bon produit", c:true}]},
+      {domain:"mindset", type:"tf", q:"Travailler 12 h par jour est nécessaire pour réussir en e-commerce.",
+        opts:[{l:"VRAI"}, {l:"FAUX", c:true}]},
+      {domain:"mindset", type:"estim", q:"Combien de produits tu testes par mois en moyenne, idéalement, en phase d'apprentissage ?",
+        opts:[{l:"0 à 1"}, {l:"2 à 4"}, {l:"5 et plus", c:true}]}
     ];
 
-    const NUM = LEVIERS.length; // 23
-    const segAngle = 360 / NUM;
-
-    const wheel = section.querySelector('#leverWheel');
-    const svg   = wheel.querySelector('svg');
-    const spinBtn = section.querySelector('#wheelSpin');
-    const result  = section.querySelector('#wheelResult');
-    const rName    = result.querySelector('.wheel-result-name');
-    const rDesc    = result.querySelector('.wheel-result-desc');
-    const rExample = result.querySelector('.wheel-result-example');
-    const rMeta    = result.querySelector('.wheel-result-meta');
-
-    // Build SVG segments procedurally
-    const NS = 'http://www.w3.org/2000/svg';
-    const cx = 200, cy = 200, R = 198;
-    for(let i = 0; i < NUM; i++){
-      // Segment i is centered at angle (i*segAngle - 90) so segment 0 is at top
-      const startA = (i * segAngle - 90 - segAngle/2) * Math.PI / 180;
-      const endA   = (i * segAngle - 90 + segAngle/2) * Math.PI / 180;
-      const x1 = cx + R * Math.cos(startA);
-      const y1 = cy + R * Math.sin(startA);
-      const x2 = cx + R * Math.cos(endA);
-      const y2 = cy + R * Math.sin(endA);
-      const path = document.createElementNS(NS, 'path');
-      path.setAttribute('d', `M ${cx} ${cy} L ${x1.toFixed(2)} ${y1.toFixed(2)} A ${R} ${R} 0 0 1 ${x2.toFixed(2)} ${y2.toFixed(2)} Z`);
-      path.setAttribute('fill', i % 2 === 0 ? 'rgba(212,182,106,0.14)' : 'rgba(212,182,106,0.04)');
-      path.setAttribute('stroke', 'rgba(212,182,106,0.45)');
-      path.setAttribute('stroke-width', '1');
-      svg.appendChild(path);
+    // Pick 2 random questions per domain, then shuffle the 10
+    function pickSession(){
+      const session = [];
+      Object.keys(DOMAIN).forEach(d => {
+        const pool = POOL.filter(q => q.domain === d).slice();
+        for(let i = pool.length - 1; i > 0; i--){ const j = Math.floor(Math.random() * (i+1)); [pool[i], pool[j]] = [pool[j], pool[i]]; }
+        session.push(pool[0], pool[1]);
+      });
+      // shuffle final 10
+      for(let i = session.length - 1; i > 0; i--){ const j = Math.floor(Math.random() * (i+1)); [session[i], session[j]] = [session[j], session[i]]; }
+      return session;
     }
-    // Decorative gold dots near the rim, one per segment
-    for(let i = 0; i < NUM; i++){
-      const a = (i * segAngle - 90) * Math.PI / 180;
-      const dot = document.createElementNS(NS, 'circle');
-      dot.setAttribute('cx', (cx + (R * 0.78) * Math.cos(a)).toFixed(2));
-      dot.setAttribute('cy', (cy + (R * 0.78) * Math.sin(a)).toFixed(2));
-      dot.setAttribute('r', '3');
-      dot.setAttribute('fill', i % 2 === 0 ? 'rgba(212,182,106,0.85)' : 'rgba(212,182,106,0.45)');
-      svg.appendChild(dot);
+
+    // Diagnostic templates per weakest domain
+    const DIAG = {
+      neuro:   "Ton point faible : tu ignores une partie des leviers psychologiques d'achat. Tu peux mettre un bon produit sur ta page, mais sans déclencheurs (ancrage, urgence, preuve sociale, contraste...), le cerveau du visiteur file. <strong>Ecom Neuro</strong> te donne les leviers à activer, un par un.",
+      copy:    "Ton point faible : ton copywriting laisse de l'argent sur la table. Tu décris ce que TU vois dans ton produit, pas ce qui touche le viewer. <strong>Ecom Copy Impact</strong> t'apprend à écrire pour vendre, pas pour informer — pages, pubs, emails.",
+      cro:     "Ton point faible : ta boutique ne convertit pas comme elle devrait. Tu fais venir du monde, mais une grosse part repart sans acheter. <strong>Boutique qui convertit</strong> restructure ta page produit, et <strong>Conversion & panier</strong> optimise les derniers mètres avant l'achat.",
+      ads:     "Ton point faible : tes pubs payantes te coûtent plus cher qu'elles ne devraient pour ce qu'elles rapportent. Tu jettes du budget sans piloter clairement. <strong>Scaler Meta proprement</strong>, <strong>Créatives qui vendent</strong> et <strong>Google Ads sans gaspillage</strong> couvrent ça étape par étape.",
+      mindset: "Ton point faible : techniquement tu sais déjà pas mal de choses, mais l'opérateur derrière craque trop tôt — premier échec, première tentation d'arrêt, focus dispersé. <strong>Mental & constance</strong> et <strong>Focus d'opérateur</strong> travaillent l'opérateur derrière le e-commerçant."
+    };
+
+    const ALL_HIGH_DIAG = "Tu maîtrises bien les fondamentaux. GENESYS te servirait surtout pour rester à jour avec les évolutions du marché (algos Meta qui changent, nouveaux comportements consommateurs, neuro), accéder à des cas concrets d'autres opérateurs, et progresser plus vite par le réseau plutôt que dans ton coin.";
+    const ALL_LOW_DIAG = "Tu démarres, et c'est plutôt un avantage : pas de mauvaises habitudes à désapprendre. <strong>Supernova</strong> te donne le parcours complet de zéro à boutique rentable, et la communauté GENESYS te pose un cadre quotidien pour ne pas dériver.";
+
+    // ---------- State + DOM refs ----------
+    let session = [];
+    let answers = []; // {domain, correct (bool|null), idx}
+    let cur = 0;
+
+    const elIntro = sec.querySelector('#dxIntro');
+    const elGame  = sec.querySelector('#dxGame');
+    const elResult= sec.querySelector('#dxResult');
+    const startBtn= sec.querySelector('#dxStart');
+    const replayBtn= sec.querySelector('#dxReplay');
+    const progFill= sec.querySelector('#dxProgressFill');
+    const progText= sec.querySelector('#dxProgressText');
+    const qCard   = sec.querySelector('#dxQCard');
+    const qDomain = sec.querySelector('#dxQDomain');
+    const qText   = sec.querySelector('#dxQText');
+    const qJargon = sec.querySelector('#dxQJargon');
+    const qOpts   = sec.querySelector('#dxOptions');
+    const profile = sec.querySelector('#dxProfile');
+    const resultH = sec.querySelector('#dxResultH');
+    const diagText= sec.querySelector('#dxDiagText');
+    const modulesEl= sec.querySelector('#dxModules');
+
+    function showScreen(name){
+      elIntro.style.display  = name === 'intro'  ? 'block' : 'none';
+      elGame.classList.toggle('is-active',  name === 'game');
+      elResult.classList.toggle('is-active', name === 'result');
     }
-    // Inner thin gold ring
-    const innerRing = document.createElementNS(NS, 'circle');
-    innerRing.setAttribute('cx', cx);
-    innerRing.setAttribute('cy', cy);
-    innerRing.setAttribute('r', R * 0.42);
-    innerRing.setAttribute('fill', 'none');
-    innerRing.setAttribute('stroke', 'rgba(212,182,106,0.3)');
-    innerRing.setAttribute('stroke-width', '1');
-    innerRing.setAttribute('stroke-dasharray', '3 4');
-    svg.appendChild(innerRing);
 
-    // Spin logic
-    let currentRotation = 0;
-    let spinning = false;
-    let lastIdx = -1;
-
-    function spin(){
-      if(spinning) return;
-      spinning = true;
-      spinBtn.disabled = true;
-      result.classList.remove('is-revealed');
-
-      // Pick a random levier (avoid immediate repeat)
-      let idx = Math.floor(Math.random() * NUM);
-      if(idx === lastIdx && NUM > 1){
-        idx = (lastIdx + 1 + Math.floor(Math.random() * (NUM - 1))) % NUM;
-      }
-      lastIdx = idx;
-
-      // Compute target rotation:
-      // We want segment idx (centered at i*segAngle from top) to land at top.
-      // That means wheel rotation must equal -idx*segAngle (mod 360) visually.
-      const targetMod  = ((360 - idx * segAngle) % 360 + 360) % 360;
-      const currentMod = ((currentRotation % 360) + 360) % 360;
-      let delta = targetMod - currentMod;
-      if(delta < 0) delta += 360;
-      const fullTurns = 5 + Math.floor(Math.random() * 2); // 5 or 6 turns
-      const jitter = (Math.random() - 0.5) * (segAngle * 0.55);
-      const target = currentRotation + fullTurns * 360 + delta + jitter;
-
-      wheel.style.transform = 'rotate(' + target.toFixed(2) + 'deg)';
-      currentRotation = target;
+    function renderQuestion(){
+      const q = session[cur];
+      const total = session.length;
+      progFill.style.width = ((cur / total) * 100) + '%';
+      progText.textContent = (cur + 1) + ' / ' + total;
+      qCard.classList.remove('is-visible');
 
       setTimeout(() => {
-        const lever = LEVIERS[idx];
-        rName.textContent = lever.n;
-        rDesc.textContent = lever.d;
-        rExample.innerHTML = '<strong>Exemple :</strong> ' + lever.e;
-        const remaining = NUM - 1;
-        rMeta.innerHTML = '1 levier découvert. <strong>' + remaining + ' autres</strong> dans GENESYS.';
-        result.classList.add('is-revealed');
-        spinning = false;
-        spinBtn.disabled = false;
-      }, 4700);
+        qDomain.textContent = DOMAIN[q.domain].label;
+        qText.textContent = q.q;
+        if(q.jargon){ qJargon.hidden = false; qJargon.textContent = q.jargon; }
+        else { qJargon.hidden = true; qJargon.textContent = ''; }
+        qOpts.classList.toggle('is-tf', q.type === 'tf');
+        qOpts.innerHTML = '';
+        const letters = ['A','B','C','D','E'];
+        q.opts.forEach((opt, i) => {
+          const btn = document.createElement('button');
+          btn.type = 'button';
+          btn.className = 'dx-option';
+          if(q.type === 'tf'){
+            btn.innerHTML = '<span>' + opt.l + '</span>';
+          } else {
+            btn.innerHTML = '<span class="dx-option-letter">' + letters[i] + '</span><span>' + opt.l + '</span>';
+          }
+          btn.addEventListener('click', () => onPick(i));
+          qOpts.appendChild(btn);
+        });
+        qCard.classList.add('is-visible');
+      }, 280);
     }
 
-    spinBtn.addEventListener('click', spin);
+    function onPick(optIdx){
+      const q = session[cur];
+      const buttons = qOpts.querySelectorAll('.dx-option');
+      buttons.forEach(b => b.classList.remove('is-picked'));
+      if(buttons[optIdx]) buttons[optIdx].classList.add('is-picked');
+      // disable further clicks while transitioning
+      buttons.forEach(b => b.disabled = true);
+      const correct = !!q.opts[optIdx].c;
+      answers.push({domain: q.domain, correct: correct, idx: optIdx});
+      // animate progress to next mark, then move on
+      setTimeout(() => {
+        cur++;
+        if(cur >= session.length){ progFill.style.width = '100%'; setTimeout(showResult, 350); }
+        else renderQuestion();
+      }, 540);
+    }
+
+    function showResult(){
+      // Score per domain (0, 1, 2 over 2 questions per domain)
+      const scores = {};
+      Object.keys(DOMAIN).forEach(d => { scores[d] = {right: 0, total: 0}; });
+      answers.forEach(a => {
+        scores[a.domain].total++;
+        if(a.correct) scores[a.domain].right++;
+      });
+
+      // Build profile rows
+      profile.innerHTML = '';
+      let weakest = null, weakestRatio = 99;
+      let allHigh = true, allLow = true;
+      Object.keys(DOMAIN).forEach(d => {
+        const s = scores[d];
+        const ratio = s.total ? (s.right / s.total) : 0;
+        let dots, level, lvlClass;
+        if(ratio >= 0.9){ dots = 5; level = 'Avancé'; lvlClass = 'lvl-high'; allLow = false; }
+        else if(ratio >= 0.5){ dots = 3; level = 'Intermédiaire'; lvlClass = 'lvl-mid'; allLow = false; allHigh = false; }
+        else { dots = 1; level = 'Débutant'; lvlClass = 'lvl-low'; allHigh = false; }
+
+        const row = document.createElement('div');
+        row.className = 'dx-profile-row';
+        let dotsHtml = '';
+        for(let i = 0; i < 5; i++) dotsHtml += '<span class="dx-profile-dot' + (i < dots ? ' on' : '') + '"></span>';
+        row.innerHTML =
+          '<span class="dx-profile-name">' + DOMAIN[d].label + '</span>' +
+          '<span class="dx-profile-dots">' + dotsHtml + '</span>' +
+          '<span class="dx-profile-level ' + lvlClass + '">' + level + '</span>';
+        profile.appendChild(row);
+
+        if(ratio < weakestRatio){ weakestRatio = ratio; weakest = d; }
+      });
+
+      // Diagnostic + module recommendations
+      let diagHtml, modules;
+      if(allHigh){
+        diagHtml = ALL_HIGH_DIAG;
+        modules = ["Ecom Neuro", "Communauté privée", "Diagnostics de boutiques"];
+        resultH.innerHTML = "Tu es <em>solide</em>.";
+      } else if(allLow){
+        diagHtml = ALL_LOW_DIAG;
+        modules = ["Supernova", "Communauté privée", "Ecom Copy Impact"];
+        resultH.innerHTML = "Tu démarres. <em>C'est un bon point.</em>";
+      } else {
+        diagHtml = DIAG[weakest];
+        modules = DOMAIN[weakest].modules.slice();
+        resultH.innerHTML = "Ton blocage : <em>" + DOMAIN[weakest].label + "</em>";
+      }
+      diagText.innerHTML = diagHtml;
+      modulesEl.innerHTML = '';
+      modules.forEach(m => {
+        const div = document.createElement('div');
+        div.className = 'dx-module';
+        div.innerHTML = '<span class="dx-module-arrow">→</span><span>' + m + '</span>';
+        modulesEl.appendChild(div);
+      });
+
+      showScreen('result');
+    }
+
+    function start(){
+      session = pickSession();
+      answers = [];
+      cur = 0;
+      showScreen('game');
+      renderQuestion();
+    }
+
+    startBtn.addEventListener('click', start);
+    replayBtn.addEventListener('click', start);
   })();
 </script>
 
