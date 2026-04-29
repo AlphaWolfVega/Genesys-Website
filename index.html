@@ -306,41 +306,71 @@
     .hero-social .hs-text{line-height:1.4}
     .hero-price-warn{font-size:11.5px;margin-top:12px;padding:0 14px}
 
-    /* Carousel container — horizontal scroll-snap, peek next slide as a hint */
+    /* Carousel container — full-viewport slides, snap-center, no peek */
     .hero-lead-carousel{
       display:flex;
       overflow-x:auto;
       scroll-snap-type:x mandatory;
       -webkit-overflow-scrolling:touch;
       scrollbar-width:none;
-      gap:12px;
-      padding:4px 24px 8px;
-      margin:0 -20px 14px;
-      scroll-padding-left:24px;
+      gap:0;
+      padding:0;
+      margin:0 0 14px;
+      scroll-padding:0;
     }
     .hero-lead-carousel::-webkit-scrollbar{display:none}
     .hero-lead-slide{
-      flex:0 0 calc(100% - 56px);
-      scroll-snap-align:start;
+      flex:0 0 100%;
+      scroll-snap-align:center;
+      padding:4px 20px 8px;
+      box-sizing:border-box;
+      display:flex;
+    }
+    .hero-lead-card{
+      width:100%;
       background:linear-gradient(135deg,rgba(20,37,64,0.55) 0%,rgba(10,22,40,0.32) 100%);
       border:1px solid rgba(212,182,106,0.22);
       border-radius:14px;
-      padding:26px 22px;
-      min-height:170px;
+      padding:28px 24px;
+      min-height:180px;
       display:flex;flex-direction:column;justify-content:center;align-items:center;
       text-align:center;
-      box-shadow:0 6px 22px rgba(0,0,0,0.18);
+      box-shadow:0 6px 22px rgba(0,0,0,0.2);
+      opacity:1;
+      filter:blur(0);
+      transform:scale(1);
+      transition:opacity 0.45s ease, filter 0.45s ease, transform 0.45s ease;
     }
-    .hero-lead-slide p{
+    /* Inactive slides — fade + blur + slight scale-down so the eye locks on the active card */
+    .hero-lead-slide.is-inactive .hero-lead-card{
+      opacity:0.22;
+      filter:blur(3px);
+      transform:scale(0.96);
+    }
+    .hero-lead-card p{
       font-family:'Inter',sans-serif;
       font-size:15.5px;line-height:1.55;
       color:var(--text);
       font-weight:400;
       margin:0;
     }
-    .hero-lead-slide strong{color:var(--gold);font-weight:700}
-    .hero-lead-slide-cta p{font-size:16px}
-    /* Continue arrow on last slide — gentle bounce + halo pulse */
+    .hero-lead-card strong{color:var(--gold);font-weight:700}
+    .hero-lead-slide-cta .hero-lead-card p{font-size:16px}
+    /* Subtle swipe-right hint on slides 1–3 — never disturbs reading */
+    .hero-lead-swipe{
+      margin-top:16px;
+      display:inline-flex;align-items:center;justify-content:center;
+      width:26px;height:26px;
+      color:rgba(212,182,106,0.55);
+      animation:heroLeadSwipe 1.6s ease-in-out infinite;
+      pointer-events:none;
+    }
+    .hero-lead-swipe svg{width:14px;height:14px;display:block}
+    @keyframes heroLeadSwipe{
+      0%, 100%{transform:translateX(0);opacity:0.45}
+      50%{transform:translateX(7px);opacity:0.85}
+    }
+    /* Continue arrow on last slide — gentle bounce + halo pulse (page scroll-down) */
     .hero-lead-down{
       margin-top:18px;
       display:flex;align-items:center;justify-content:center;
@@ -1526,12 +1556,29 @@
       Soyons honnêtes 5 secondes : si tu es sur cette page, c'est probablement que tu as du mal à décoller en e-commerce. Tu as suivi des formations gratuites sur YouTube. Peut-être même des formations payantes (prix plein ou marché noir, voire mentoring). Et malgré tout ça, <strong>tu tournes en rond et tu n'arrives pas à décoller.</strong> Si tu te reconnais dans ce que je viens de citer, <strong>GENESYS est fait pour toi.</strong> Je t'invite à découvrir.
     </p>
     <div class="hero-lead-carousel reveal" id="heroLeadCarousel" role="region" aria-label="Présentation">
-      <div class="hero-lead-slide"><p>Soyons honnêtes 5 secondes : si tu es sur cette page, c'est probablement que <strong>tu as du mal à décoller en e-commerce</strong>.</p></div>
-      <div class="hero-lead-slide"><p>Tu as suivi des formations gratuites sur YouTube. Peut-être même des formations payantes (prix plein ou marché noir, voire mentoring).</p></div>
-      <div class="hero-lead-slide"><p>Et malgré tout ça, <strong>tu tournes en rond et tu n'arrives pas à décoller</strong>.</p></div>
+      <div class="hero-lead-slide">
+        <div class="hero-lead-card">
+          <p>Soyons honnêtes 5 secondes : si tu es sur cette page, c'est probablement que <strong>tu as du mal à décoller en e-commerce</strong>.</p>
+          <span class="hero-lead-swipe" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg></span>
+        </div>
+      </div>
+      <div class="hero-lead-slide">
+        <div class="hero-lead-card">
+          <p>Tu as suivi des formations gratuites sur YouTube. Peut-être même des formations payantes (prix plein ou marché noir, voire mentoring).</p>
+          <span class="hero-lead-swipe" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg></span>
+        </div>
+      </div>
+      <div class="hero-lead-slide">
+        <div class="hero-lead-card">
+          <p>Et malgré tout ça, <strong>tu tournes en rond et tu n'arrives pas à décoller</strong>.</p>
+          <span class="hero-lead-swipe" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg></span>
+        </div>
+      </div>
       <div class="hero-lead-slide hero-lead-slide-cta">
-        <p>Si tu te reconnais dans ce que je viens de citer, <strong>GENESYS est fait pour toi</strong>. Je t'invite à découvrir.</p>
-        <span class="hero-lead-down" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14"/><path d="m19 12-7 7-7-7"/></svg></span>
+        <div class="hero-lead-card">
+          <p>Si tu te reconnais dans ce que je viens de citer, <strong>GENESYS est fait pour toi</strong>. Je t'invite à découvrir.</p>
+          <span class="hero-lead-down" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14"/><path d="m19 12-7 7-7-7"/></svg></span>
+        </div>
       </div>
     </div>
     <div class="hero-lead-dots" id="heroLeadDots">
@@ -2940,6 +2987,7 @@
         const d = Math.abs(slideCenter - center);
         if(d < bestDist){ bestDist = d; activeIdx = i; }
       });
+      slides.forEach((slide, i) => slide.classList.toggle('is-inactive', i !== activeIdx));
       dots.forEach((d, i) => d.classList.toggle('active', i === activeIdx));
       ticking = false;
     }
@@ -2951,7 +2999,7 @@
     }, {passive:true});
     dots.forEach((dot, i) => {
       dot.addEventListener('click', () => {
-        slides[i].scrollIntoView({behavior:'smooth', inline:'start', block:'nearest'});
+        slides[i].scrollIntoView({behavior:'smooth', inline:'center', block:'nearest'});
       });
     });
     update();
