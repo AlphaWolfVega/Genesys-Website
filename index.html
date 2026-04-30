@@ -2790,13 +2790,14 @@
       <div class="dt-stage" id="dtStage3">
         <div class="dt-stage-tag">Ton pourquoi</div>
         <h3 class="dt-q">Qu'est-ce qui te <em>motive vraiment</em> à réussir ?</h3>
-        <p class="dt-hint">La vraie raison. Celle que tu te dis quand tu es seul.</p>
+        <p class="dt-hint">La vraie raison, celle que tu te dis quand tu es seul.</p>
         <div class="dt-choices" id="dtStage3Choices">
           <button type="button" class="dt-choice" data-val="parents"><span class="dt-choice-letter">A</span><span>Mettre mes parents / ma famille <em>à l'abri</em></span></button>
-          <button type="button" class="dt-choice" data-val="freedom"><span class="dt-choice-letter">B</span><span>Gagner ma <em>liberté</em> (mon temps, mon lieu, mes choix)</span></button>
-          <button type="button" class="dt-choice" data-val="prove"><span class="dt-choice-letter">C</span><span><em>Prouver</em> à ceux qui ont douté de moi qu'ils avaient tort</span></button>
-          <button type="button" class="dt-choice" data-val="children"><span class="dt-choice-letter">D</span><span>Donner à mes (futurs) enfants <em>ce que je n'ai pas eu</em></span></button>
-          <button type="button" class="dt-choice" data-val="legacy"><span class="dt-choice-letter">E</span><span>Construire <em>quelque chose</em> qui me ressemble vraiment</span></button>
+          <button type="button" class="dt-choice" data-val="money"><span class="dt-choice-letter">B</span><span>Ne plus jamais devoir <em>calculer</em> au niveau de l'argent</span></button>
+          <button type="button" class="dt-choice" data-val="freedom"><span class="dt-choice-letter">C</span><span>Gagner ma <em>liberté</em> (mon temps, mon lieu, mes choix)</span></button>
+          <button type="button" class="dt-choice" data-val="prove"><span class="dt-choice-letter">D</span><span><em>Prouver</em> à ceux qui ont douté de moi qu'ils avaient tort</span></button>
+          <button type="button" class="dt-choice" data-val="children"><span class="dt-choice-letter">E</span><span>Donner à mes (futurs) enfants <em>ce que je n'ai pas eu</em></span></button>
+          <button type="button" class="dt-choice" data-val="legacy"><span class="dt-choice-letter">F</span><span>Construire <em>quelque chose</em> qui me ressemble vraiment</span></button>
         </div>
       </div>
 
@@ -4441,21 +4442,25 @@
     // Archétypes de profils déclenchés par la combo (origin + motivation)
     const PROFILES = {
       poor_parents:    { name:"Le pilier",          line:"Celui qui veut sortir sa famille du manque." },
+      poor_money:      { name:"Le rescapé",         line:"Celui qui en a assez d'avoir peur du compteur — chaque mois, chaque achat." },
       poor_freedom:    { name:"L'évadé",            line:"Celui qui n'a jamais eu de filet et ne veut plus jamais en dépendre." },
       poor_prove:      { name:"Le revanchard",      line:"Celui qui s'est entendu dire trop souvent 'tu n'y arriveras pas'." },
       poor_children:   { name:"Le bâtisseur",       line:"Celui qui veut casser le cycle, donner ce qu'il n'a pas eu." },
       poor_legacy:     { name:"Le créateur",        line:"Celui qui veut que sa vie ait pesé." },
       modest_parents:  { name:"Le reconnaissant",   line:"Celui qui a vu ses parents bosser dur et veut leur rendre." },
+      modest_money:    { name:"L'épargnant fatigué",line:"Celui qui en a marre de calculer chaque dépense, chaque restau, chaque vacances." },
       modest_freedom:  { name:"L'indépendant",      line:"Celui qui n'a pas eu de luxe mais a appris la valeur de l'autonomie." },
       modest_prove:    { name:"Le déterminé",       line:"Celui qui n'a pas grand-chose à prouver à part à lui-même." },
       modest_children: { name:"Le transmetteur",    line:"Celui qui veut élever le niveau pour la prochaine génération." },
       modest_legacy:   { name:"L'artisan",          line:"Celui qui croit qu'on construit avec le temps, pas avec la chance." },
       middle_parents:  { name:"Le fidèle",          line:"Celui qui veut prendre soin des siens, pas juste de lui." },
+      middle_money:    { name:"L'aspirant aisé",    line:"Celui qui veut du confort réel, sans plus jamais avoir à se priver pour boucler le mois." },
       middle_freedom:  { name:"Le libéré",          line:"Celui qui sait qu'avoir 'juste assez' n'est pas la même chose qu'être libre." },
       middle_prove:    { name:"L'ambitieux",        line:"Celui qui refuse le confort moyen comme destination finale." },
       middle_children: { name:"L'élévateur",        line:"Celui qui veut donner plus à ses enfants que ce qu'il a reçu." },
       middle_legacy:   { name:"L'auteur",           line:"Celui qui veut écrire sa propre version, pas hériter de celle des autres." },
       wealthy_parents: { name:"Le digne héritier",  line:"Celui qui veut honorer son point de départ, pas juste en profiter." },
+      wealthy_money:   { name:"L'autonome financier",line:"Celui qui veut sa propre indépendance financière, sans dépendre du filet familial." },
       wealthy_freedom: { name:"Le souverain",       line:"Celui qui sait que l'argent ne suffit pas — il veut son temps et sa liberté." },
       wealthy_prove:   { name:"L'autonome",         line:"Celui qui veut prouver qu'il peut bâtir sans le filet familial." },
       wealthy_children:{ name:"Le perpétuateur",    line:"Celui qui veut que ses enfants apprennent à construire, pas juste à recevoir." },
@@ -4477,6 +4482,7 @@
     // 5 leviers Blair Warren — adaptés selon les réponses
     const MOTIVATION_DREAMS = {
       parents:  "Mettre tes parents à l'abri — c'est un des moteurs les plus puissants qu'un humain puisse avoir. Tous les jours, tu auras un visage en tête.",
+      money:    "Ne plus jamais avoir à calculer au moment de payer — c'est un objectif simple, lisible, et atteignable. Tu sauras quand tu y es. Et ce jour-là, tout change.",
       freedom:  "Gagner ta liberté de temps, de lieu, de choix — c'est exactement la promesse de l'e-commerce bien fait. C'est atteignable, et beaucoup l'ont fait.",
       prove:    "Prouver à ceux qui ont douté que tu en étais capable — c'est un moteur qui peut te porter loin si tu apprends à le canaliser.",
       children: "Donner à tes enfants ce que tu n'as pas eu — c'est le projet d'une vie, pas d'une saison. Tu ne lâcheras pas.",
