@@ -2424,8 +2424,6 @@
     color:var(--text);
     margin-bottom:10px;
   }
-  .dt-success-quote::before{content:"« ";color:var(--gold);font-weight:800}
-  .dt-success-quote::after{content:" »";color:var(--gold);font-weight:800}
   .dt-success-author{
     font-family:'Inter',sans-serif;
     font-size:12px;font-weight:600;
@@ -2433,6 +2431,17 @@
     letter-spacing:0.04em;
   }
   .dt-success-author strong{color:var(--gold);font-weight:700}
+  /* Texte d'invitation à parcourir la page */
+  .dt-verdict-explore{
+    font-family:'Inter',sans-serif;
+    font-size:13.5px !important;
+    font-weight:600 !important;
+    color:var(--text-mute) !important;
+    letter-spacing:0.04em;
+    text-align:center !important;
+    margin:0 auto 14px !important;
+    max-width:520px;
+  }
   /* Sub-question dans dt-q */
   .dt-q-sub{
     display:block;
@@ -2867,8 +2876,9 @@
         <div class="dt-verdict-portrait" id="dtVerdictPortrait"></div>
         <div class="dt-verdict-levers" id="dtVerdictLevers"></div>
         <div class="dt-verdict-success" id="dtVerdictSuccess"></div>
+        <p class="dt-verdict-explore">Découvre l'écosystème en parcourant la page.</p>
         <div class="dt-verdict-cta">
-          <a href="#methode" class="btn btn-gold">Découvre l'écosystème en parcourant la page</a>
+          <a href="#rejoindre" class="btn btn-gold">Rejoindre GENESYS</a>
           <button type="button" class="dt-replay" id="dtReplay">Refaire le test</button>
         </div>
       </div>
@@ -4543,12 +4553,29 @@
     };
     const ALWAYS_DREAM = "<strong>Cette motivation est légitime et puissante.</strong> Elle est la raison pour laquelle tu es là, encore en train de chercher. Garde-la précieusement — c'est ton vrai capital.";
 
-    // Success stories par origine
+    // Success stories par origine — célébrités entrepreneurs aux histoires documentées
+    // (matching pattern bio plutôt que témoignage local — impact émotionnel maximal)
     const SUCCESS = {
-      poor:    { quote:"Je viens d'une famille où on comptait chaque euro. J'ai rejoint GENESYS quand j'avais perdu 4 000 € en pubs et que j'étais prêt à arrêter. Aujourd'hui je sors 6-8 K € de bénéfices par mois, et surtout : ma mère ne fait plus la queue à Pôle Emploi.", author:"Karim", note:"Membre GENESYS · ex-employé Carrefour" },
-      modest:  { quote:"On avait juste ce qu'il fallait, jamais plus. Quand j'ai commencé l'e-com, je voulais juste 'compléter mes fins de mois'. La séquence GENESYS m'a appris que mon plafond n'était pas où je le croyais. 18 mois après, je suis à temps plein dessus et je gagne 3 fois mon ancien salaire.", author:"Meïssa", note:"Membre GENESYS · ex-comptable" },
-      middle:  { quote:"Je sortais d'un CDI cadre où je m'ennuyais à mourir. J'avais peur de tout perdre — la mutuelle, le confort, le 13ᵉ mois. La méthode GENESYS m'a donné le cadre que je n'avais pas, et la communauté m'a tenu quand j'ai voulu craquer. Je n'ai jamais regretté d'avoir démissionné.", author:"Louis", note:"Membre GENESYS · ex-cadre" },
-      wealthy: { quote:"Je viens d'une famille aisée et j'avais une chose à prouver : que je pouvais construire seul, sans le filet. GENESYS m'a fait gagner 18 mois d'erreurs en me donnant la séquence qui marche. Aujourd'hui mon e-commerce existe, paie ses charges, et il est à moi.", author:"Erwan", note:"Membre GENESYS" }
+      poor:    {
+        quote:"Howard Schultz a grandi dans les projets sociaux de Brooklyn (Bayview Houses). Son père, chauffeur livreur, s'est blessé au travail et la famille a basculé sans indemnités. Premier de sa famille à aller à l'université (bourse de football), il a racheté Starbucks en 1987. L'entreprise qu'il a bâtie pèse aujourd'hui plus de 100 milliards de dollars.",
+        author:"Howard Schultz",
+        note:"Fondateur Starbucks · né dans les projets de Brooklyn"
+      },
+      modest:  {
+        quote:"Sara Blakely vient d'une famille modeste de Floride. Elle a vendu des fax door-to-door pendant 7 ans avant d'investir 5 000 $ d'économies personnelles dans Spanx. Sans aucun background business ni mode, elle est devenue à 41 ans la plus jeune femme self-made milliardaire de l'histoire.",
+        author:"Sara Blakely",
+        note:"Fondatrice Spanx · classe modeste de Floride"
+      },
+      middle:  {
+        quote:"Jeff Bezos vient d'une famille de classe moyenne américaine. À 30 ans, il a quitté un poste stable à Wall Street pour démarrer Amazon dans le garage de sa maison de Bellevue. Sa logique : si j'échoue, je ne regretterai pas — mais si je n'essaie pas, je regretterai. Amazon vaut aujourd'hui plus de 1 800 milliards.",
+        author:"Jeff Bezos",
+        note:"Fondateur Amazon · classe moyenne, démarré dans un garage"
+      },
+      wealthy: {
+        quote:"Richard Branson vient d'une famille britannique aisée. Dyslexique, il a quitté l'école à 16 ans contre l'avis de tout son entourage. Avec l'avantage matériel mais pas l'approbation, il a fondé Virgin (musique, aviation, télécoms, espace). Le groupe Virgin compte aujourd'hui plus de 400 entreprises dans 35 pays.",
+        author:"Richard Branson",
+        note:"Fondateur Virgin Group · famille aisée britannique, école quittée à 16 ans"
+      }
     };
 
     function showResult(){
@@ -4582,7 +4609,7 @@
       // Success story
       const story = SUCCESS[answers.origin] || SUCCESS.middle;
       verdictSuccess.innerHTML =
-        '<span class="dt-success-tag">Quelqu\'un comme toi qui a réussi</span>' +
+        '<span class="dt-success-tag">Quelqu\'un parti du même point que toi</span>' +
         '<p class="dt-success-quote">' + story.quote + '</p>' +
         '<p class="dt-success-author"><strong>' + story.author + '</strong> — ' + story.note + '</p>';
     }
