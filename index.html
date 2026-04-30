@@ -449,26 +449,29 @@
     }
 
     /* === Schema slide (the failure loop — compact horizontal) === */
-    .hero-lead-slide-schema .hero-lead-card{padding:22px 18px}
+    .hero-lead-slide-schema .hero-lead-card{padding:22px 14px}
     .hero-lead-slide-schema .hl-schema-intro{
       font-family:'Inter',sans-serif !important;
-      font-size:13px !important;
-      font-weight:500 !important;
-      color:var(--text);
-      margin-bottom:10px !important;
-      line-height:1.4 !important;
+      font-size:11.5px !important;
+      font-weight:800 !important;
+      color:var(--gold) !important;
+      margin:0 0 4px !important;
+      line-height:1.25 !important;
       text-align:center;
+      white-space:nowrap;
+      letter-spacing:-0.005em;
+      text-shadow:0 0 22px rgba(212,182,106,0.22);
     }
-    .hero-lead-slide-schema .hl-schema-intro strong{color:var(--gold);font-weight:700}
     .hero-lead-slide-schema .hl-schema-target{
       font-family:'Inter',sans-serif !important;
-      font-size:10.5px !important;
+      font-size:9.5px !important;
       font-style:italic !important;
       font-weight:500 !important;
-      color:rgba(212,182,106,0.55) !important;
-      margin:-4px 0 14px !important;
+      color:rgba(212,182,106,0.5) !important;
+      margin:0 0 12px !important;
       text-align:center !important;
-      line-height:1.4 !important;
+      line-height:1.35 !important;
+      letter-spacing:0.01em;
     }
     .hl-schema{
       display:flex;flex-direction:column;
@@ -545,16 +548,16 @@
     }
     .hl-step-arrow.is-dimmed{opacity:0.25}
     .hl-loop{
-      display:flex;align-items:center;gap:9px;
+      display:flex;align-items:center;justify-content:center;gap:11px;
       width:100%;
-      padding:9px 12px;
-      margin-top:6px;
+      padding:10px 14px;
+      margin-top:0;
       background:rgba(212,182,106,0.1);
       border:1px solid rgba(212,182,106,0.5);
       border-radius:10px;
       box-shadow:0 0 18px rgba(212,182,106,0.12);
       cursor:pointer;
-      font:inherit;color:inherit;text-align:left;
+      font:inherit;color:inherit;text-align:center;
       transition:background 0.32s ease, opacity 0.32s ease;
     }
     .hl-loop:active{transform:scale(0.985);transition:transform 0.08s ease}
@@ -579,7 +582,7 @@
       line-height:1.35;
       font-style:italic;
       text-align:center;
-      flex:1;
+      flex:0 1 auto;
     }
     @media (prefers-reduced-motion:reduce){
       .hl-loop-icon{animation:none}
@@ -611,16 +614,35 @@
       50%{opacity:1}
     }
     .hl-tap-prompt.is-hidden{display:none;animation:none}
-    /* "Ou si aucune ne te correspond" — single-line gold separator */
+    /* "Aucune ne te correspond ? Clique ici ↓" — passerelle vers le bouton loop */
     .hl-loop-or{
       font-family:'Inter',sans-serif;
-      font-size:8.5px;font-weight:700;
-      letter-spacing:0.14em;text-transform:uppercase;
-      color:rgba(212,182,106,0.5);
+      font-size:9px;font-weight:700;
+      letter-spacing:0.08em;text-transform:uppercase;
+      color:rgba(212,182,106,0.7);
       text-align:center;
-      margin:6px 0 6px;
+      margin:10px 0 4px;
       white-space:nowrap;
       overflow:hidden;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      gap:8px;
+    }
+    .hl-loop-or-arrow{
+      display:inline-flex;
+      align-items:center;justify-content:center;
+      font-size:13px;
+      color:var(--gold);
+      animation:hlLoopOrArrow 1.7s ease-in-out infinite;
+      line-height:1;
+    }
+    @keyframes hlLoopOrArrow{
+      0%,100%{transform:translateY(0);opacity:0.7}
+      50%{transform:translateY(3px);opacity:1}
+    }
+    @media (prefers-reduced-motion:reduce){
+      .hl-loop-or-arrow{animation:none}
     }
     /* Verdict reveal */
     .hl-verdict{
@@ -2263,7 +2285,7 @@
       </div>
       <div class="hero-lead-slide hero-lead-slide-schema">
         <div class="hero-lead-card">
-          <p class="hl-schema-intro">Voici le cycle classique des e-commerçants bloqués. <strong>Tape l'étape où tu en es actuellement :</strong></p>
+          <p class="hl-schema-intro">Le cycle classique des e-commerçants bloqués</p>
           <p class="hl-schema-target">Pour débutants et intermédiaires qui veulent passer au niveau avancé.</p>
           <div class="hl-schema" id="hlSchema">
             <div class="hl-schema-row">
@@ -2309,8 +2331,8 @@
               </button>
             </div>
           </div>
-          <p class="hl-tap-prompt" id="hlTapPrompt"><svg class="hl-tap-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 14a8 8 0 0 1-8 8"/><path d="M18 11v-1a2 2 0 0 0-4 0"/><path d="M14 10V9a2 2 0 0 0-4 0v1"/><path d="M10 9.5V4a2 2 0 0 0-4 0v10"/><path d="M18 11a2 2 0 1 1 4 0v3a8 8 0 0 1-8 8h-2c-2.8 0-4.5-.86-5.99-2.34l-3.6-3.6a2 2 0 0 1 2.83-2.82L7 15"/></svg><span>Tape pour te diagnostiquer</span></p>
-          <div class="hl-loop-or" aria-hidden="true">— ou si aucune ne te correspond —</div>
+          <p class="hl-tap-prompt" id="hlTapPrompt"><svg class="hl-tap-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 14a8 8 0 0 1-8 8"/><path d="M18 11v-1a2 2 0 0 0-4 0"/><path d="M14 10V9a2 2 0 0 0-4 0v1"/><path d="M10 9.5V4a2 2 0 0 0-4 0v10"/><path d="M18 11a2 2 0 1 1 4 0v3a8 8 0 0 1-8 8h-2c-2.8 0-4.5-.86-5.99-2.34l-3.6-3.6a2 2 0 0 1 2.83-2.82L7 15"/></svg><span>Clique sur l'étape où tu en es</span></p>
+          <div class="hl-loop-or" aria-hidden="true"><span>Aucune ne te correspond ? Clique ici</span><span class="hl-loop-or-arrow" aria-hidden="true">↓</span></div>
           <button type="button" class="hl-loop" id="hlLoop" aria-label="J'ai compris le piège, je suis sorti de ce cycle">
             <span class="hl-loop-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 0 0-9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/><path d="M3 12a9 9 0 0 0 9 9 9.75 9.75 0 0 0 6.74-2.74L21 16"/><path d="M16 16h5v5"/></svg></span>
             <span class="hl-loop-text">J'ai compris le piège.<br>Je suis sorti de ce cycle.</span>
