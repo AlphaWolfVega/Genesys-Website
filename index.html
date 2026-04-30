@@ -437,6 +437,7 @@
     /* === SLIDE CTA finale — meme logique compacte que mobile === */
     .hero-lead-slide-cta .hero-lead-card{padding:24px 22px;overflow:hidden;width:100%;max-width:420px;margin:0 auto;box-sizing:border-box}
     .hero-lead-slide-cta .hero-lead-card .nowrap{white-space:normal !important}
+    .hero-lead-slide-cta .hero-lead-card .hero-lead-down{width:38px !important;height:38px !important;flex:0 0 auto !important;margin:14px auto 0 !important;display:flex !important;animation:heroLeadDown 1.7s ease-in-out infinite !important}
 
     /* CTA slide BASE styles (re-declared for desktop since base is in mobile @media) */
     .hero-lead-slide-cta .hero-lead-card p{margin:0;max-width:100%;overflow-wrap:break-word;word-wrap:break-word;hyphens:auto}
@@ -740,17 +741,28 @@
     }
     .hero-lead-card strong{color:var(--gold);font-weight:700}
     .hero-lead-slide-cta .hero-lead-card{
-      padding:22px 20px;
+      padding:22px 18px;
       text-align:center;
       box-sizing:border-box;
       overflow:hidden;
       width:100%;
       max-width:100%;
       min-width:0;
+      margin:0 auto;
     }
     .hero-lead-slide-cta .hero-lead-card .nowrap{white-space:normal !important}
-    .hero-lead-slide-cta .hero-lead-card > *{max-width:100%;width:100%;min-width:0;box-sizing:border-box}
-    .hero-lead-slide-cta .hero-lead-card > .hero-lead-down{width:auto;align-self:center}
+    .hero-lead-slide-cta .hero-lead-card > *{max-width:100%;min-width:0;box-sizing:border-box}
+    .hero-lead-slide-cta .hero-lead-card > p,
+    .hero-lead-slide-cta .hero-lead-card > div{width:100%}
+    .hero-lead-slide-cta .hero-lead-card > .hero-lead-down{
+      width:38px !important;
+      height:38px !important;
+      flex:0 0 auto;
+      align-self:center;
+      margin:14px auto 0 !important;
+      display:flex !important;
+      animation:heroLeadDown 1.7s ease-in-out infinite !important;
+    }
     .hero-lead-slide-cta .hero-lead-card p{
       margin:0;
       max-width:100%;
