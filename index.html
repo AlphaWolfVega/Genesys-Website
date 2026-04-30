@@ -1905,353 +1905,429 @@
   .reveal{opacity:0;transform:translateY(20px);transition:opacity 1s ease,transform 1s ease}
   .reveal.in{opacity:1;transform:translateY(0)}
 
-  /* ===== DIAGNOSTIC EXPRESS GENESYS (rollback-safe — single commit) ===== */
-  #diagnostic-game{
+  /* ===== TEST PSYCHOLOGIQUE DE DÉTERMINATION ===== */
+  #determination-test{
     padding:80px 0;
     background:linear-gradient(180deg, var(--bg) 0%, var(--bg-2) 50%, var(--bg) 100%);
     position:relative;overflow:hidden;
   }
-  #diagnostic-game::before{
+  #determination-test::before{
     content:"";position:absolute;inset:0;
     background:radial-gradient(ellipse 50% 35% at 50% 50%, rgba(212,182,106,0.06) 0%, transparent 70%);
     pointer-events:none;
   }
-  .dx-stage{
+  /* Arena / shared */
+  .dt-arena{
     max-width:680px;margin:0 auto;
     position:relative;z-index:1;
-    min-height:480px;
+    min-height:520px;
   }
-  /* Intro */
-  .dx-intro-card{
-    background:linear-gradient(135deg,rgba(20,37,64,0.6) 0%,rgba(10,22,40,0.4) 100%);
-    border:1px solid rgba(212,182,106,0.3);
+  .dt-progress{
+    display:flex;align-items:center;gap:12px;margin-bottom:24px;
+    opacity:0;transform:translateY(-8px);
+    transition:opacity 0.4s ease, transform 0.4s ease;
+  }
+  .dt-progress.is-shown{opacity:1;transform:translateY(0)}
+  .dt-progress-track{
+    flex:1;height:5px;border-radius:3px;
+    background:rgba(212,182,106,0.12);overflow:hidden;
+  }
+  .dt-progress-fill{
+    height:100%;
+    background:linear-gradient(90deg, var(--gold) 0%, #F0DDA8 100%);
+    border-radius:3px;width:0%;
+    transition:width 0.6s cubic-bezier(0.4,0,0.2,1);
+    box-shadow:0 0 12px rgba(212,182,106,0.5);
+  }
+  .dt-progress-text{
+    font-family:'Inter',sans-serif;
+    font-size:11.5px;font-weight:700;
+    color:var(--gold);
+    letter-spacing:0.12em;text-transform:uppercase;
+    min-width:78px;text-align:right;
+  }
+  /* Stages — hidden by default, fade-in when active */
+  .dt-stage{
+    display:none;
+    opacity:0;
+    transform:translateY(14px) scale(0.99);
+    transition:opacity 0.5s ease, transform 0.5s ease;
+    background:linear-gradient(135deg,rgba(20,37,64,0.55) 0%,rgba(10,22,40,0.4) 100%);
+    border:1px solid rgba(212,182,106,0.28);
     border-radius:18px;
-    padding:44px 36px;
+    padding:42px 36px;
     text-align:center;
-    box-shadow:0 16px 45px rgba(0,0,0,0.3);
+    box-shadow:0 16px 48px rgba(0,0,0,0.32);
   }
-  .dx-intro-pill{
+  .dt-stage.is-active{
+    display:block;
+    opacity:1;transform:translateY(0) scale(1);
+  }
+  .dt-stage-tag{
     display:inline-flex;align-items:center;gap:8px;
-    padding:7px 16px;border-radius:999px;
+    padding:6px 14px;border-radius:999px;
     background:rgba(212,182,106,0.1);
     border:1px solid rgba(212,182,106,0.4);
     color:var(--gold);
-    font-family:'Inter',sans-serif;
-    font-size:11.5px;font-weight:700;
-    letter-spacing:0.18em;text-transform:uppercase;
-    margin-bottom:18px;
-  }
-  .dx-intro-card h3{
-    font-family:'Playfair Display',serif;
-    font-style:italic;font-weight:800;
-    font-size:30px;color:var(--text);
-    line-height:1.18;margin-bottom:14px;
-    letter-spacing:-0.005em;
-  }
-  .dx-intro-card h3 em{color:var(--gold);font-style:italic}
-  .dx-intro-card p{
-    font-family:'Inter',sans-serif;
-    font-size:15.5px;color:var(--text-mute);
-    line-height:1.55;margin-bottom:28px;
-  }
-  .dx-start-btn{
-    font-family:'Inter',sans-serif;
-    font-size:14px;font-weight:800;
-    letter-spacing:0.14em;text-transform:uppercase;
-    padding:18px 36px;border-radius:999px;
-    background:linear-gradient(180deg, #F0DDA8 0%, var(--gold) 100%);
-    color:#06101F;
-    border:0;cursor:pointer;
-    box-shadow:0 0 0 1px rgba(255,255,255,0.25) inset, 0 12px 30px rgba(212,182,106,0.35);
-    transition:transform 0.2s ease, box-shadow 0.25s ease;
-  }
-  @media (hover:hover){
-    .dx-start-btn:hover{
-      transform:translateY(-1px);
-      box-shadow:0 0 0 1px rgba(255,255,255,0.35) inset, 0 16px 38px rgba(212,182,106,0.5);
-    }
-  }
-  .dx-start-btn:active{transform:translateY(1px) scale(0.98);transition:transform 0.08s ease}
-  .dx-meta{
-    font-family:'Inter',sans-serif;
-    font-size:12px;font-weight:500;
-    color:var(--text-faint);
-    letter-spacing:0.04em;margin-top:18px;
-  }
-  /* Game */
-  .dx-game{display:none}
-  .dx-game.is-active{display:block}
-  .dx-progress{
-    display:flex;align-items:center;gap:12px;margin-bottom:24px;
-  }
-  .dx-progress-track{
-    flex:1;height:5px;border-radius:3px;
-    background:rgba(212,182,106,0.12);
-    overflow:hidden;
-  }
-  .dx-progress-fill{
-    height:100%;
-    background:linear-gradient(90deg, var(--gold) 0%, #F0DDA8 100%);
-    border-radius:3px;
-    width:0%;
-    transition:width 0.5s cubic-bezier(0.4,0,0.2,1);
-    box-shadow:0 0 12px rgba(212,182,106,0.5);
-  }
-  .dx-progress-text{
-    font-family:'Inter',sans-serif;
-    font-size:12.5px;font-weight:700;
-    color:var(--gold);
-    letter-spacing:0.06em;
-    min-width:46px;text-align:right;
-  }
-  .dx-q-card{
-    background:linear-gradient(135deg,rgba(20,37,64,0.55) 0%,rgba(10,22,40,0.4) 100%);
-    border:1px solid rgba(212,182,106,0.28);
-    border-radius:16px;
-    padding:32px 30px;
-    box-shadow:0 14px 40px rgba(0,0,0,0.28);
-    opacity:0;transform:translateY(12px);
-    transition:opacity 0.4s ease, transform 0.4s ease;
-    display:flex;flex-direction:column;align-items:center;
-    text-align:center;
-  }
-  .dx-q-card.is-visible{opacity:1;transform:translateY(0)}
-  .dx-q-domain{
-    display:inline-block;
     font-family:'Inter',sans-serif;
     font-size:10.5px;font-weight:700;
     letter-spacing:0.18em;text-transform:uppercase;
-    color:var(--gold);
-    padding:5px 14px;border-radius:999px;
-    background:rgba(212,182,106,0.1);
-    border:1px solid rgba(212,182,106,0.32);
-    margin-bottom:20px;
+    margin-bottom:22px;
   }
-  .dx-q-text{
-    font-family:'Playfair Display',serif;
-    font-style:italic;font-weight:700;
-    font-size:22px;line-height:1.32;
-    color:var(--text);
-    margin-bottom:14px;
-    letter-spacing:-0.005em;
-    text-align:center;
-    max-width:520px;
-  }
-  .dx-q-text s{opacity:0.55}
-  .dx-q-jargon{
+  /* Intro */
+  .dt-warning{
+    display:inline-flex;align-items:center;gap:8px;
+    padding:8px 18px;border-radius:999px;
+    background:rgba(232,148,107,0.1);
+    border:1px solid rgba(232,148,107,0.4);
+    color:#E8946B;
     font-family:'Inter',sans-serif;
-    font-size:12.5px;font-style:italic;
-    color:var(--text-faint);
-    line-height:1.5;margin-bottom:18px;
-    text-align:center;
-    max-width:480px;
-    padding:10px 16px;
-    border-left:0;
-    border-top:1px dashed rgba(212,182,106,0.22);
-    border-bottom:1px dashed rgba(212,182,106,0.22);
+    font-size:11px;font-weight:700;
+    letter-spacing:0.16em;text-transform:uppercase;
+    margin-bottom:22px;
   }
-  .dx-options{display:flex;flex-direction:column;gap:10px;margin-top:14px;width:100%;max-width:520px}
-  .dx-option{
+  .dt-stage h3{
+    font-family:'Playfair Display',serif;
+    font-style:italic;font-weight:800;
+    font-size:30px;color:var(--text);
+    line-height:1.18;margin-bottom:16px;
+    letter-spacing:-0.005em;
+  }
+  .dt-stage h3 em{color:var(--gold);font-style:italic}
+  .dt-stage p{
+    font-family:'Inter',sans-serif;
+    font-size:15px;color:var(--text-mute);
+    line-height:1.55;margin-bottom:24px;
+    max-width:520px;margin-left:auto;margin-right:auto;
+  }
+  .dt-hint{
+    font-size:13px !important;
+    font-style:italic;
+    color:var(--text-faint) !important;
+    margin-bottom:26px !important;
+  }
+  .dt-start, .dt-validate{
+    font-family:'Inter',sans-serif;
+    font-size:14px;font-weight:800;
+    letter-spacing:0.16em;text-transform:uppercase;
+    padding:18px 40px;border-radius:999px;
+    background:linear-gradient(180deg, #F0DDA8 0%, var(--gold) 100%);
+    color:#06101F;
+    border:0;cursor:pointer;
+    box-shadow:0 0 0 1px rgba(255,255,255,0.25) inset, 0 12px 30px rgba(212,182,106,0.4);
+    transition:transform 0.2s ease, box-shadow 0.25s ease;
+    animation:dtStartPulse 2.4s ease-in-out infinite;
+  }
+  @keyframes dtStartPulse{
+    0%,100%{box-shadow:0 0 0 1px rgba(255,255,255,0.25) inset, 0 12px 30px rgba(212,182,106,0.4)}
+    50%{box-shadow:0 0 0 1px rgba(255,255,255,0.4) inset, 0 16px 40px rgba(212,182,106,0.65), 0 0 0 8px rgba(212,182,106,0.08)}
+  }
+  @media (hover:hover){
+    .dt-start:hover, .dt-validate:hover{transform:translateY(-1px)}
+  }
+  .dt-start:active, .dt-validate:active{transform:translateY(1px) scale(0.98);transition:transform 0.08s ease}
+  .dt-meta{
+    font-family:'Inter',sans-serif;
+    font-size:12px !important;font-weight:500;
+    color:var(--text-faint) !important;
+    letter-spacing:0.04em;margin-top:18px !important;
+  }
+  /* Question text in stages */
+  .dt-q{
+    font-family:'Playfair Display',serif !important;
+    font-style:italic;font-weight:800;
+    font-size:26px !important;line-height:1.28 !important;
+    color:var(--text);
+    margin-bottom:18px !important;
+    letter-spacing:-0.005em;
+    max-width:560px;margin-left:auto;margin-right:auto;
+  }
+  .dt-q em{color:var(--gold);font-style:italic}
+  /* Choices */
+  .dt-choices{
+    display:flex;flex-direction:column;gap:11px;
+    max-width:560px;margin:18px auto 0;
+  }
+  .dt-choice{
     display:flex;align-items:center;gap:14px;
-    padding:16px 20px;
-    background:rgba(20,37,64,0.4);
-    border:1px solid rgba(212,182,106,0.18);
-    border-radius:10px;
+    padding:17px 22px;
+    background:rgba(20,37,64,0.42);
+    border:1px solid rgba(212,182,106,0.2);
+    border-radius:11px;
     cursor:pointer;
-    transition:all 0.18s ease;
+    transition:transform 0.18s ease, background 0.18s ease, border-color 0.18s ease, box-shadow 0.18s ease;
     font-family:'Inter',sans-serif;
     font-size:14.5px;font-weight:500;
     color:var(--text);
-    text-align:left;
-    line-height:1.45;
+    text-align:left;line-height:1.45;
     width:100%;
   }
   @media (hover:hover){
-    .dx-option:hover{
-      border-color:rgba(212,182,106,0.45);
+    .dt-choice:hover{
+      border-color:rgba(212,182,106,0.55);
       background:rgba(20,37,64,0.6);
+      transform:translateX(2px);
     }
   }
-  .dx-option.is-picked{
+  .dt-choice:active{transform:scale(0.98);transition:transform 0.08s ease}
+  .dt-choice.is-picked{
     border-color:var(--gold);
-    background:linear-gradient(135deg,rgba(212,182,106,0.18) 0%,rgba(212,182,106,0.06) 100%);
-    transform:translateY(-1px);
-    box-shadow:0 6px 18px rgba(212,182,106,0.2);
+    background:linear-gradient(135deg,rgba(212,182,106,0.22) 0%,rgba(212,182,106,0.08) 100%);
+    box-shadow:0 6px 22px rgba(212,182,106,0.28);
   }
-  .dx-option-letter{
+  .dt-choice-letter{
     flex-shrink:0;
     width:30px;height:30px;border-radius:50%;
     background:rgba(212,182,106,0.12);
-    border:1px solid rgba(212,182,106,0.4);
+    border:1px solid rgba(212,182,106,0.45);
     display:flex;align-items:center;justify-content:center;
     font-family:'Playfair Display',serif;font-style:italic;
     font-size:14px;font-weight:700;color:var(--gold);
   }
-  .dx-option.is-picked .dx-option-letter{
-    background:var(--gold);color:#06101F;
+  .dt-choice.is-picked .dt-choice-letter{background:var(--gold);color:#06101F}
+  /* Reaction test */
+  .dt-reaction{
+    display:flex;flex-direction:column;align-items:center;
+    gap:18px;margin-top:14px;
   }
-  /* True/False/Ça dépend compact horizontal layout (3 buttons in a row) */
-  .dx-options.is-tf{flex-direction:row;gap:10px;flex-wrap:wrap;justify-content:center}
-  .dx-options.is-tf .dx-option{flex:1 1 90px;min-width:90px;justify-content:center;padding:18px 12px;font-size:14.5px;font-weight:700;letter-spacing:0.04em}
-  .dx-options.is-tf .dx-option-letter{display:none}
-  /* Mood face progress strip — sits under the card, evolves with progress */
-  .dx-mood{
-    display:flex;align-items:center;gap:10px;justify-content:center;
-    margin:18px auto 0;
-    padding:9px 18px;
-    background:rgba(212,182,106,0.05);
-    border:1px solid rgba(212,182,106,0.18);
-    border-radius:999px;
-    width:fit-content;
-    transition:transform 0.3s ease;
-  }
-  .dx-mood-face{
-    width:24px;height:24px;color:var(--gold);
-    transition:color 0.4s ease, transform 0.4s ease;
-  }
-  .dx-mood-face.lvl-3{color:#E8D4A0}
-  .dx-mood-face.lvl-4{color:#F0DDA8;transform:scale(1.08)}
-  .dx-mood-text{
+  .dt-reaction-btn{
+    width:200px;height:200px;border-radius:50%;
+    background:linear-gradient(135deg,rgba(20,37,64,0.6),rgba(10,22,40,0.5));
+    border:2px solid rgba(212,182,106,0.4);
+    color:var(--text);
+    cursor:pointer;
     font-family:'Inter',sans-serif;
-    font-size:12.5px;font-weight:600;
-    color:var(--text-mute);
-    letter-spacing:0.04em;
+    font-size:18px;font-weight:800;
+    letter-spacing:0.16em;text-transform:uppercase;
+    transition:background 0.3s ease, border-color 0.3s ease, transform 0.15s ease, box-shadow 0.3s ease;
+    box-shadow:0 12px 38px rgba(0,0,0,0.32);
   }
-  /* Result */
-  .dx-result{display:none}
-  .dx-result.is-active{display:block}
-  .dx-result-card{
-    background:linear-gradient(135deg,rgba(20,37,64,0.6) 0%,rgba(10,22,40,0.4) 100%);
-    border:1px solid rgba(212,182,106,0.32);
-    border-radius:18px;
-    padding:36px 32px;
-    box-shadow:0 18px 50px rgba(0,0,0,0.32);
+  .dt-reaction-btn.is-armed{
+    background:linear-gradient(135deg,rgba(212,182,106,0.18),rgba(212,182,106,0.05));
+    border-color:rgba(212,182,106,0.65);
+    animation:dtReactionPulse 1.4s ease-in-out infinite;
   }
-  .dx-result-title{
+  @keyframes dtReactionPulse{
+    0%,100%{box-shadow:0 12px 38px rgba(0,0,0,0.32), 0 0 0 0 rgba(212,182,106,0.45)}
+    50%{box-shadow:0 12px 38px rgba(0,0,0,0.32), 0 0 0 12px rgba(212,182,106,0)}
+  }
+  .dt-reaction-btn.is-fire{
+    background:linear-gradient(135deg,#F0DDA8,var(--gold));
+    border-color:#F0DDA8;
+    color:#06101F;
+    animation:dtReactionFire 0.4s ease-out;
+    box-shadow:0 0 0 12px rgba(212,182,106,0.4), 0 0 60px rgba(212,182,106,0.6);
+  }
+  @keyframes dtReactionFire{
+    0%{transform:scale(0.85)}
+    50%{transform:scale(1.08)}
+    100%{transform:scale(1)}
+  }
+  .dt-reaction-btn:active{transform:scale(0.94)}
+  .dt-reaction-state{display:block;line-height:1.2}
+  .dt-reaction-bolt{font-size:74px;line-height:1}
+  .dt-reaction-result{
     font-family:'Inter',sans-serif;
-    font-size:11.5px;font-weight:700;
-    letter-spacing:0.2em;text-transform:uppercase;
-    color:var(--gold);text-align:center;
-    margin-bottom:8px;
+    font-size:14.5px;font-weight:600;
+    color:var(--text);
+    min-height:24px;
+    transition:opacity 0.3s ease;
   }
-  .dx-result-h{
+  .dt-reaction-result strong{color:var(--gold);font-weight:800;font-size:18px}
+  /* Pressure timer */
+  .dt-timer{
+    position:relative;
+    width:64px;height:64px;
+    margin:0 auto 16px;
+  }
+  .dt-timer-ring{
+    width:100%;height:100%;display:block;
+    transform:rotate(0deg);
+  }
+  .dt-timer-ring circle:nth-child(2){
+    transition:stroke-dashoffset 0.3s linear, stroke 0.3s ease;
+    stroke-dasharray:100.5;
+    stroke-dashoffset:0;
+  }
+  .dt-timer-ring.is-warn circle:nth-child(2){stroke:#E8946B}
+  .dt-timer-ring.is-danger circle:nth-child(2){stroke:#E8703F;animation:dtTimerShake 0.4s ease-in-out infinite}
+  @keyframes dtTimerShake{
+    0%,100%{transform:rotate(0)}
+    25%{transform:rotate(-2deg)}
+    75%{transform:rotate(2deg)}
+  }
+  .dt-timer-num{
+    position:absolute;inset:0;
+    display:flex;align-items:center;justify-content:center;
     font-family:'Playfair Display',serif;
     font-style:italic;font-weight:800;
-    font-size:32px;line-height:1.15;
-    color:var(--text);text-align:center;
-    margin-bottom:30px;
-    letter-spacing:-0.01em;
+    font-size:24px;color:var(--gold);
   }
-  .dx-result-h em{color:var(--gold)}
-  .dx-profile{
-    display:flex;flex-direction:column;gap:14px;
-    margin-bottom:30px;
+  /* Slider stage */
+  .dt-slider-wrap{
+    max-width:480px;margin:14px auto 24px;
+    padding:24px 22px;
+    background:rgba(20,37,64,0.32);
+    border:1px solid rgba(212,182,106,0.22);
+    border-radius:14px;
   }
-  .dx-profile-row{
-    display:flex;align-items:center;gap:14px;
-    padding:14px 16px;
-    background:rgba(20,37,64,0.35);
-    border:1px solid rgba(212,182,106,0.15);
-    border-radius:10px;
+  .dt-slider-value{
+    display:flex;flex-direction:column;align-items:center;gap:4px;
+    margin-bottom:18px;
   }
-  .dx-profile-name{
-    flex:1;
+  .dt-slider-num{
+    font-family:'Playfair Display',serif;
+    font-style:italic;font-weight:800;
+    font-size:64px;color:var(--gold);
+    line-height:1;letter-spacing:-0.02em;
+    text-shadow:0 0 30px rgba(212,182,106,0.4);
+    transition:transform 0.18s ease;
+  }
+  .dt-slider-num.is-bumped{transform:scale(1.08)}
+  .dt-slider-label{
     font-family:'Inter',sans-serif;
-    font-size:14px;font-weight:600;
+    font-size:12.5px;font-weight:600;
+    letter-spacing:0.1em;text-transform:uppercase;
+    color:var(--text-mute);
+  }
+  .dt-slider{
+    -webkit-appearance:none;appearance:none;
+    width:100%;height:5px;border-radius:3px;
+    background:linear-gradient(90deg, rgba(212,182,106,0.2) 0%, rgba(212,182,106,0.6) 100%);
+    outline:none;cursor:pointer;
+  }
+  .dt-slider::-webkit-slider-thumb{
+    -webkit-appearance:none;appearance:none;
+    width:24px;height:24px;border-radius:50%;
+    background:linear-gradient(180deg, #F0DDA8, var(--gold));
+    border:2px solid #06101F;
+    cursor:grab;
+    box-shadow:0 4px 14px rgba(212,182,106,0.45), 0 0 0 4px rgba(212,182,106,0.12);
+  }
+  .dt-slider::-moz-range-thumb{
+    width:24px;height:24px;border-radius:50%;
+    background:linear-gradient(180deg, #F0DDA8, var(--gold));
+    border:2px solid #06101F;cursor:grab;
+    box-shadow:0 4px 14px rgba(212,182,106,0.45);
+  }
+  .dt-slider-marks{
+    display:flex;justify-content:space-between;
+    margin-top:10px;
+    font-family:'Inter',sans-serif;
+    font-size:10.5px;font-weight:600;
+    color:var(--text-faint);
+    letter-spacing:0.06em;
+  }
+  /* Result / verdict */
+  .dt-result-title{
+    font-family:'Inter',sans-serif;
+    font-size:11.5px;font-weight:700;
+    letter-spacing:0.22em;text-transform:uppercase;
+    color:var(--gold);
+    margin-bottom:10px;
+  }
+  .dt-gauge{
+    position:relative;
+    width:280px;max-width:100%;
+    margin:14px auto 18px;
+  }
+  .dt-gauge-svg{
+    width:100%;display:block;overflow:visible;
+  }
+  .dt-gauge-svg path:nth-child(2){
+    transition:stroke-dashoffset 2.4s cubic-bezier(0.22,1,0.36,1);
+    filter:drop-shadow(0 0 14px rgba(212,182,106,0.5));
+  }
+  .dt-gauge-center{
+    position:absolute;
+    left:50%;bottom:6px;
+    transform:translateX(-50%);
+    display:flex;flex-direction:column;align-items:center;
+    text-align:center;
+  }
+  .dt-gauge-num{
+    font-family:'Playfair Display',serif;
+    font-style:italic;font-weight:800;
+    font-size:62px;color:var(--gold);
+    line-height:1;letter-spacing:-0.02em;
+    text-shadow:0 0 26px rgba(212,182,106,0.5);
+  }
+  .dt-gauge-pct{
+    position:absolute;
+    top:8px;right:-22px;
+    font-family:'Playfair Display',serif;
+    font-style:italic;font-weight:800;
+    font-size:24px;color:var(--gold);
+  }
+  .dt-gauge-cap{
+    margin-top:4px;
+    font-family:'Inter',sans-serif;
+    font-size:10.5px;font-weight:700;
+    letter-spacing:0.16em;text-transform:uppercase;
+    color:var(--text-mute);
+  }
+  .dt-verdict-h{
+    font-family:'Playfair Display',serif;
+    font-style:italic;font-weight:800;
+    font-size:30px !important;line-height:1.2 !important;
     color:var(--text);
+    margin:14px auto 14px !important;
+    max-width:540px;
+    letter-spacing:-0.005em;
   }
-  .dx-profile-dots{display:flex;gap:5px}
-  .dx-profile-dot{
-    width:10px;height:10px;border-radius:50%;
-    background:rgba(212,182,106,0.18);
-  }
-  .dx-profile-dot.on{
-    background:var(--gold);
-    box-shadow:0 0 8px rgba(212,182,106,0.5);
-  }
-  .dx-profile-level{
+  .dt-verdict-h em{color:var(--gold)}
+  .dt-verdict-text{
     font-family:'Inter',sans-serif;
-    font-size:11px;font-weight:700;
-    letter-spacing:0.08em;text-transform:uppercase;
-    min-width:108px;text-align:right;
-    line-height:1.2;
-  }
-  .dx-profile-level.lvl-low{color:#E8946B}
-  .dx-profile-level.lvl-mid{color:#E8D4A0}
-  .dx-profile-level.lvl-high{color:#9CD68C}
-  .dx-diag{
-    padding:22px 22px;
+    font-size:15px !important;font-weight:400;
+    color:var(--text);
+    line-height:1.6 !important;
+    margin:0 auto 26px !important;
+    max-width:520px;
+    text-align:left !important;
+    padding:18px 22px;
     background:rgba(212,182,106,0.06);
     border-left:3px solid var(--gold);
-    border-radius:6px;
-    margin-bottom:24px;
-  }
-  .dx-diag-h{
-    font-family:'Inter',sans-serif;
-    font-size:12px;font-weight:700;
-    letter-spacing:0.16em;text-transform:uppercase;
-    color:var(--gold);margin-bottom:10px;
-  }
-  .dx-diag-text{
-    font-family:'Inter',sans-serif;
-    font-size:15px;font-weight:400;
-    color:var(--text);line-height:1.6;
-  }
-  .dx-diag-text strong{color:var(--gold);font-weight:700}
-  .dx-modules-h{
-    font-family:'Inter',sans-serif;
-    font-size:12px;font-weight:700;
-    letter-spacing:0.16em;text-transform:uppercase;
-    color:var(--text-mute);margin-bottom:14px;
-  }
-  .dx-modules{
-    display:flex;flex-direction:column;gap:8px;
-    margin-bottom:30px;
-  }
-  .dx-module{
-    display:flex;align-items:center;gap:12px;
-    padding:12px 16px;
-    background:rgba(20,37,64,0.4);
-    border:1px solid rgba(212,182,106,0.18);
     border-radius:8px;
-    font-family:'Inter',sans-serif;
-    font-size:14px;font-weight:500;
-    color:var(--text);
   }
-  .dx-module-arrow{color:var(--gold);font-weight:700}
-  .dx-result-cta{text-align:center;margin-top:14px}
-  .dx-result-cta p{
+  .dt-verdict-text strong{color:var(--gold);font-weight:700}
+  .dt-verdict-cta{display:flex;flex-direction:column;align-items:center;gap:14px}
+  .dt-replay{
     font-family:'Inter',sans-serif;
-    font-size:13.5px;color:var(--text-mute);
-    margin-bottom:18px;line-height:1.5;
-  }
-  .dx-replay{
-    display:inline-block;margin-top:14px;
-    font-family:'Inter',sans-serif;
-    font-size:12px;font-weight:600;
+    font-size:12.5px;font-weight:600;
     letter-spacing:0.06em;
     color:var(--text-faint);
     text-decoration:underline;
     background:none;border:0;cursor:pointer;
+    padding:6px 14px;
+  }
+  /* Stage transition flash */
+  .dt-arena.is-flashing::after{
+    content:"";position:absolute;inset:0;
+    background:radial-gradient(circle, rgba(212,182,106,0.25) 0%, transparent 60%);
+    pointer-events:none;
+    animation:dtFlash 0.45s ease-out;
+  }
+  @keyframes dtFlash{
+    0%{opacity:0}
+    40%{opacity:1}
+    100%{opacity:0}
   }
   @media(max-width:600px){
-    #diagnostic-game{padding:60px 0}
-    .dx-intro-card{padding:32px 22px;border-radius:14px}
-    .dx-intro-card h3{font-size:24px}
-    .dx-intro-card p{font-size:14px}
-    .dx-start-btn{padding:16px 28px;font-size:13px}
-    .dx-q-card{padding:24px 20px;border-radius:14px;min-height:360px}
-    .dx-q-text{font-size:18px}
-    .dx-option{padding:14px 16px;font-size:13.5px}
-    .dx-options.is-tf .dx-option{padding:20px 14px;font-size:16px}
-    .dx-result-card{padding:28px 20px;border-radius:14px}
-    .dx-result-h{font-size:24px}
-    .dx-profile-row{padding:12px 14px;gap:10px}
-    .dx-profile-name{font-size:13px}
-    .dx-profile-level{font-size:10.5px;min-width:70px}
-    .dx-diag{padding:18px 16px}
-    .dx-diag-text{font-size:14px}
-    .dx-module{font-size:13px;padding:11px 13px}
+    #determination-test{padding:60px 0}
+    .dt-stage{padding:32px 22px;border-radius:14px}
+    .dt-stage h3{font-size:24px}
+    .dt-stage p{font-size:14px}
+    .dt-q{font-size:21px !important}
+    .dt-choice{padding:15px 18px;font-size:13.5px}
+    .dt-start, .dt-validate{padding:16px 30px;font-size:13px}
+    .dt-reaction-btn{width:170px;height:170px;font-size:15px}
+    .dt-reaction-bolt{font-size:60px}
+    .dt-gauge{width:240px}
+    .dt-gauge-num{font-size:54px}
+    .dt-gauge-pct{font-size:21px;right:-18px}
+    .dt-verdict-h{font-size:24px !important}
+    .dt-verdict-text{font-size:14px !important;padding:16px 18px}
+    .dt-slider-num{font-size:54px}
   }
 </style>
 </head>
@@ -2502,73 +2578,142 @@
   </div>
 </section>
 
-<!-- ===== DIAGNOSTIC EXPRESS GENESYS (rollback-safe — single isolated section) ===== -->
-<section id="diagnostic-game">
+<!-- ===== TEST PSYCHOLOGIQUE DE DÉTERMINATION ===== -->
+<section id="determination-test">
   <div class="container">
     <div class="section-header reveal">
       <div class="ornament">
         <div class="line"></div>
-        <span class="label">Diagnostic express</span>
+        <span class="label">Test psychologique</span>
         <div class="line"></div>
       </div>
-      <h2>Teste ton niveau e-commerce,<br><em>en 90 secondes</em></h2>
-      <p>10 questions, 5 domaines, un diagnostic personnalisé. Pas de note, pas de jugement — juste où tu en es vraiment, et ce qui te débloquerait.</p>
+      <h2>Test ton niveau de <em>détermination</em></h2>
+      <p>5 stages. Des questions qui dérangent, un test de réflexe, une décision sous pression. À la fin, tu vois un pourcentage qui évalue tes chances de tenir long terme dans ce business — et un verdict qui ne ment pas.</p>
     </div>
 
-    <div class="dx-stage reveal">
-      <!-- Intro screen -->
-      <div class="dx-intro" id="dxIntro">
-        <div class="dx-intro-card">
-          <span class="dx-intro-pill">10 questions · 90 secondes</span>
-          <h3>Découvre ton <em>profil e-commerce</em></h3>
-          <p>Le quiz teste tes réflexes sur 5 domaines : psychologie d'achat, copywriting, conversion, publicités, mental d'opérateur. Chaque session pioche au hasard dans une banque de questions — donc tu ne refais jamais le même test.</p>
-          <button type="button" class="dx-start-btn" id="dxStart">Commencer</button>
-          <p class="dx-meta">Anonyme · pas d'email demandé</p>
+    <div class="dt-arena reveal" id="dtArena">
+
+      <!-- Progress bar (shown during stages 1-5) -->
+      <div class="dt-progress" id="dtProgress">
+        <div class="dt-progress-track"><div class="dt-progress-fill" id="dtProgressFill"></div></div>
+        <div class="dt-progress-text" id="dtProgressText">Stage 1 / 5</div>
+      </div>
+
+      <!-- Intro -->
+      <div class="dt-stage is-active" id="dtIntro">
+        <div class="dt-warning">⚠ Réponds honnêtement</div>
+        <h3>5 stages.<br><em>5 minutes max.</em><br>Le verdict te dira tout.</h3>
+        <p>Ce n'est pas un test technique. C'est un scan de ton mental d'e-commerçant(e). Personne ne saura tes réponses. Mais à la fin, tu verras un pourcentage qui t'évaluera honnêtement.</p>
+        <button type="button" class="dt-start" id="dtStart">Je commence</button>
+        <p class="dt-meta">Anonyme · pas d'email · 100 % honnête</p>
+      </div>
+
+      <!-- Stage 1: Question viscérale -->
+      <div class="dt-stage" id="dtStage1">
+        <div class="dt-stage-tag">Question viscérale</div>
+        <h3 class="dt-q">Tu lances ta boutique. Pendant <em>60 jours</em>, ZÉRO vente.<br>Tu fais quoi ?</h3>
+        <div class="dt-choices" id="dtStage1Choices">
+          <button type="button" class="dt-choice" data-pts="18"><span class="dt-choice-letter">A</span><span>Je cherche d'abord ce qui cloche dans ma <em>séquence</em> (page, copy, pubs, offre)</span></button>
+          <button type="button" class="dt-choice" data-pts="15"><span class="dt-choice-letter">B</span><span>Je continue sans rien changer, je sais que ça va finir par marcher</span></button>
+          <button type="button" class="dt-choice" data-pts="8"><span class="dt-choice-letter">C</span><span>Je change de produit, peut-être que celui-là n'est pas le bon</span></button>
+          <button type="button" class="dt-choice" data-pts="0"><span class="dt-choice-letter">D</span><span>J'arrête tout, j'ai été stupide d'essayer</span></button>
         </div>
       </div>
 
-      <!-- Game screen (hidden until start) -->
-      <div class="dx-game" id="dxGame">
-        <div class="dx-progress">
-          <div class="dx-progress-track"><div class="dx-progress-fill" id="dxProgressFill"></div></div>
-          <div class="dx-progress-text" id="dxProgressText">1 / 10</div>
+      <!-- Stage 2: Test de réflexe -->
+      <div class="dt-stage" id="dtStage2">
+        <div class="dt-stage-tag">Test de réflexe</div>
+        <h3 class="dt-q">Quand <em>l'éclair</em> apparaît, tape le bouton <em>aussi vite que possible</em>.</h3>
+        <p class="dt-hint">Ne triche pas en tapant avant. Si tu tries ici, tu tricheras ailleurs — et ça, ton chiffre d'affaires le sait.</p>
+        <div class="dt-reaction">
+          <button type="button" class="dt-reaction-btn" id="dtReactionBtn">
+            <span class="dt-reaction-state" id="dtReactionState">Tape pour démarrer</span>
+          </button>
+          <div class="dt-reaction-result" id="dtReactionResult"></div>
         </div>
-        <div class="dx-q-card" id="dxQCard">
-          <span class="dx-q-domain" id="dxQDomain"></span>
-          <p class="dx-q-text" id="dxQText"></p>
-          <p class="dx-q-jargon" id="dxQJargon" hidden></p>
-          <div class="dx-options" id="dxOptions"></div>
-        </div>
-        <div class="dx-mood" id="dxMood" aria-hidden="true">
-          <svg class="dx-mood-face" id="dxMoodFace" viewBox="0 0 28 28">
-            <circle cx="14" cy="14" r="12" fill="none" stroke="currentColor" stroke-width="1.5"/>
-            <circle cx="10" cy="11" r="1.3" fill="currentColor"/>
-            <circle cx="18" cy="11" r="1.3" fill="currentColor"/>
-            <path id="dxMoodMouth" d="M 9 19 L 19 19" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+      </div>
+
+      <!-- Stage 3: Choix sous pression timer -->
+      <div class="dt-stage" id="dtStage3">
+        <div class="dt-stage-tag">Choix sous pression</div>
+        <div class="dt-timer" id="dtTimer">
+          <svg class="dt-timer-ring" id="dtTimerRing" viewBox="0 0 36 36">
+            <circle cx="18" cy="18" r="16" stroke="rgba(212,182,106,0.18)" stroke-width="2.5" fill="none"/>
+            <circle cx="18" cy="18" r="16" stroke="var(--gold)" stroke-width="2.5" fill="none" stroke-linecap="round" transform="rotate(-90 18 18)"/>
           </svg>
-          <span class="dx-mood-text" id="dxMoodText">On commence en douceur</span>
+          <span class="dt-timer-num" id="dtTimerNum">8</span>
+        </div>
+        <h3 class="dt-q">Il te reste <em>47 €</em> en pub.<br>3 ventes en 30 jours.<br>Tu fais quoi ?</h3>
+        <p class="dt-hint">8 secondes pour décider. C'est exactement comme dans la vraie vie : tu n'as jamais le luxe d'y réfléchir une semaine.</p>
+        <div class="dt-choices" id="dtStage3Choices">
+          <button type="button" class="dt-choice" data-pts="14"><span class="dt-choice-letter">A</span><span>Je coupe tout et je relis mes données 1 h avant de bouger</span></button>
+          <button type="button" class="dt-choice" data-pts="12"><span class="dt-choice-letter">B</span><span>Je demande conseil à quelqu'un de plus expérimenté</span></button>
+          <button type="button" class="dt-choice" data-pts="8"><span class="dt-choice-letter">C</span><span>J'attends de gagner plus avant de retoucher</span></button>
+          <button type="button" class="dt-choice" data-pts="6"><span class="dt-choice-letter">D</span><span>Je dépense les 47 € pour booster ma meilleure pub</span></button>
         </div>
       </div>
 
-      <!-- Result screen (hidden until done) -->
-      <div class="dx-result" id="dxResult">
-        <div class="dx-result-card">
-          <div class="dx-result-title">Ton profil</div>
-          <h3 class="dx-result-h" id="dxResultH"></h3>
-          <div class="dx-profile" id="dxProfile"></div>
-          <div class="dx-diag">
-            <div class="dx-diag-h">Ton diagnostic</div>
-            <p class="dx-diag-text" id="dxDiagText"></p>
+      <!-- Stage 4: Slider abandon -->
+      <div class="dt-stage" id="dtStage4">
+        <div class="dt-stage-tag">Test d'honnêteté</div>
+        <h3 class="dt-q">Combien de <em>projets</em> tu as commencés ces 5 dernières années — <em>et abandonnés</em> avant le résultat ?</h3>
+        <p class="dt-hint">Personne ne saura ta réponse. Sois 100 % honnête, c'est dans ton intérêt.</p>
+        <div class="dt-slider-wrap">
+          <div class="dt-slider-value">
+            <span class="dt-slider-num" id="dtSliderNum">5</span>
+            <span class="dt-slider-label" id="dtSliderLabel">projets abandonnés</span>
           </div>
-          <div class="dx-modules-h">Ce qui t'aiderait dans GENESYS</div>
-          <div class="dx-modules" id="dxModules"></div>
-          <div class="dx-result-cta">
-            <p>Pas un argument de vente. Juste ce que les modules adressent, vu tes réponses.</p>
-            <a href="#rejoindre" class="btn btn-gold">Découvrir GENESYS</a>
-            <br><button type="button" class="dx-replay" id="dxReplay">Refaire le diagnostic</button>
+          <input type="range" min="0" max="20" value="5" class="dt-slider" id="dtSlider" aria-label="Nombre de projets abandonnés">
+          <div class="dt-slider-marks">
+            <span>0</span><span>5</span><span>10</span><span>15</span><span>20+</span>
           </div>
         </div>
+        <button type="button" class="dt-validate" id="dtValidate4">Valider</button>
       </div>
+
+      <!-- Stage 5: Question d'identité -->
+      <div class="dt-stage" id="dtStage5">
+        <div class="dt-stage-tag">Question d'identité</div>
+        <h3 class="dt-q">Tu réussis dans <em>3 ans</em>.<br>À qui tu le dois <em>principalement</em> ?</h3>
+        <div class="dt-choices" id="dtStage5Choices">
+          <button type="button" class="dt-choice" data-pts="18"><span class="dt-choice-letter">A</span><span>À moi-même, ma persévérance, mes décisions quotidiennes</span></button>
+          <button type="button" class="dt-choice" data-pts="15"><span class="dt-choice-letter">B</span><span>À mes mentors, formations, communautés qui m'ont structuré</span></button>
+          <button type="button" class="dt-choice" data-pts="10"><span class="dt-choice-letter">C</span><span>À ma famille / mon entourage qui m'a soutenu</span></button>
+          <button type="button" class="dt-choice" data-pts="3"><span class="dt-choice-letter">D</span><span>À la chance, le bon timing, l'opportunité qui s'est présentée</span></button>
+        </div>
+      </div>
+
+      <!-- Result / Verdict -->
+      <div class="dt-stage" id="dtResult">
+        <div class="dt-result-title">Ton verdict</div>
+        <div class="dt-gauge">
+          <svg viewBox="0 0 200 110" class="dt-gauge-svg">
+            <path d="M 20 100 A 80 80 0 0 1 180 100" stroke="rgba(212,182,106,0.18)" stroke-width="14" fill="none" stroke-linecap="round"/>
+            <path d="M 20 100 A 80 80 0 0 1 180 100" stroke="url(#dtGaugeGrad)" stroke-width="14" fill="none" stroke-linecap="round" stroke-dasharray="251" stroke-dashoffset="251" id="dtGaugeArc"/>
+            <defs>
+              <linearGradient id="dtGaugeGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" stop-color="#E8703F"/>
+                <stop offset="40%" stop-color="#E8946B"/>
+                <stop offset="65%" stop-color="#E8D4A0"/>
+                <stop offset="100%" stop-color="#9CD68C"/>
+              </linearGradient>
+            </defs>
+          </svg>
+          <div class="dt-gauge-center">
+            <span style="position:relative;display:inline-block">
+              <span class="dt-gauge-num" id="dtGaugeNum">0</span><span class="dt-gauge-pct">%</span>
+            </span>
+            <span class="dt-gauge-cap">de chance de tenir</span>
+          </div>
+        </div>
+        <h3 class="dt-verdict-h" id="dtVerdictH"></h3>
+        <p class="dt-verdict-text" id="dtVerdictText"></p>
+        <div class="dt-verdict-cta">
+          <a href="#rejoindre" class="btn btn-gold">Rejoindre GENESYS</a>
+          <button type="button" class="dt-replay" id="dtReplay">Refaire le test</button>
+        </div>
+      </div>
+
     </div>
   </div>
 </section>
@@ -4002,344 +4147,294 @@
     });
   })();
 
-  // ===== DIAGNOSTIC EXPRESS GENESYS — rollback-safe, scoped to #diagnostic-game =====
-  (function initDiagnostic(){
-    const sec = document.getElementById('diagnostic-game');
+  // ===== TEST PSYCHOLOGIQUE DE DÉTERMINATION =====
+  (function initDeterminationTest(){
+    const sec = document.getElementById('determination-test');
     if(!sec) return;
 
-    // Domain → human label + GENESYS modules to recommend when the domain is weak
-    const DOMAIN = {
-      neuro:   {label:"Psychologie d'achat",   modules:["Ecom Neuro"]},
-      copy:    {label:"Copywriting",            modules:["Ecom Copy Impact"]},
-      cro:     {label:"Conversion (CRO)",       modules:["Boutique qui convertit","Conversion & panier"]},
-      ads:     {label:"Publicités payantes",    modules:["Scaler Meta proprement","Google Ads sans gaspillage","Créatives qui vendent"]},
-      mindset: {label:"Mental d'e-commerçant(e)", modules:["Mental & constance","Focus d'opérateur"]}
+    const arena = sec.querySelector('#dtArena');
+    const progress = sec.querySelector('#dtProgress');
+    const progFill = sec.querySelector('#dtProgressFill');
+    const progText = sec.querySelector('#dtProgressText');
+    const stages = {
+      intro: sec.querySelector('#dtIntro'),
+      s1: sec.querySelector('#dtStage1'),
+      s2: sec.querySelector('#dtStage2'),
+      s3: sec.querySelector('#dtStage3'),
+      s4: sec.querySelector('#dtStage4'),
+      s5: sec.querySelector('#dtStage5'),
+      result: sec.querySelector('#dtResult')
     };
+    const order = ['intro','s1','s2','s3','s4','s5','result'];
+    const startBtn = sec.querySelector('#dtStart');
+    const replayBtn = sec.querySelector('#dtReplay');
 
-    // Question pool — 10 per domain × 5 domains = 50. Each session picks 2 per domain.
-    // C(10,2) = 45 paires uniques par domaine, ordre × 90 → 90^5 ≈ 5,9 milliards de
-    // combinaisons de session possibles. Probabilité de retomber sur la même session : ~0.
-    const POOL = [
-      // ==================== NEURO (10) ====================
-      {domain:"neuro", type:"choice", q:"Tu vends une bougie à 39&nbsp;€. Quel affichage convertit le mieux ?",
-        opts:[{l:"39,00&nbsp;€"}, {l:"<s>89&nbsp;€</s> &rarr; 39&nbsp;€", c:true}, {l:"39&nbsp;€ <em>seulement aujourd'hui</em>"}]},
-      {domain:"neuro", type:"tf", q:"Augmenter ton prix peut faire vendre plus.",
-        opts:[{l:"VRAI", c:true}, {l:"FAUX"}, {l:"Ça dépend"}]},
-      {domain:"neuro", type:"choice", q:"Pour pousser à l'achat impulsif, qu'est-ce qui marche le mieux dans la majorité des cas ?",
-        opts:[{l:"Une garantie « satisfait ou remboursé&nbsp;60&nbsp;jours »"}, {l:"Un compte à rebours sur le prix actuel", c:true}, {l:"Un avis client 5 étoiles bien visible"}]},
-      {domain:"neuro", type:"tf", q:"Un visiteur doit voir un produit 7 à 10 fois en moyenne avant d'acheter.",
-        opts:[{l:"VRAI"}, {l:"FAUX"}, {l:"Ça dépend du produit et du prix", c:true}]},
-      {domain:"neuro", type:"choice", q:"Quel affichage de stock convertit le mieux sur une page produit ?",
-        opts:[{l:"Aucune mention de stock"}, {l:"« En stock »"}, {l:"« Plus que 3 en stock »", c:true}, {l:"« Stock disponible : 247 unités »"}]},
-      {domain:"neuro", type:"choice", q:"Tu offres un guide PDF gratuit avant ton pitch produit. L'effet le plus probable ?",
-        opts:[{l:"Diminue (le visiteur a déjà ce qu'il voulait)"}, {l:"Reste identique"}, {l:"Augmente significativement (réciprocité)", c:true}]},
-      {domain:"neuro", type:"tf", q:"Afficher « 1&nbsp;247 personnes ont acheté ce produit ce mois-ci » augmente la conversion.",
-        opts:[{l:"VRAI", c:true}, {l:"FAUX"}, {l:"Ça dépend de l'audience"}]},
-      {domain:"neuro", type:"choice", q:"Pour vendre une crème, quel cadrage performe le mieux ?",
-        opts:[{l:"« Crème efficace à 95&nbsp;% »", c:true}, {l:"« Crème qui échoue chez 5&nbsp;% des utilisateurs »"}, {l:"Les deux performent pareil"}]},
-      {domain:"neuro", type:"tf", q:"Vendre à 29&nbsp;€ ou à 30&nbsp;€ donne le même taux de conversion.",
-        opts:[{l:"VRAI"}, {l:"FAUX", c:true}, {l:"Ça dépend"}]},
-      {domain:"neuro", type:"choice", q:"Photos amateures vs photos pro sur ta page produit. Conséquence sur la qualité perçue du produit ?",
-        opts:[{l:"Le visiteur juge uniquement le produit lui-même"}, {l:"Photos pro &rarr; produit perçu comme plus qualitatif", c:true}, {l:"Photos pro &rarr; soupçon de manipulation, méfiance"}]},
+    let scores = {};
+    let currentStage = 'intro';
 
-      // ==================== COPY (10) ====================
-      {domain:"copy", type:"choice", q:"Quel hook convertit le mieux pour une crème anti-âge ?",
-        opts:[{l:"Découvrez notre nouvelle crème naturelle"}, {l:"La crème que les dermatologues n'aiment pas (mais qui marche)", c:true}, {l:"Crème anti-âge premium, livraison gratuite"}]},
-      {domain:"copy", type:"choice", q:"Lequel performe mieux ?",
-        opts:[{l:"Maigris en 30 jours"}, {l:"Marie a perdu 8&nbsp;kg en 30&nbsp;jours. Voici comment.", c:true}, {l:"Programme minceur scientifiquement validé"}]},
-      {domain:"copy", type:"estim", q:"Une bonne accroche de pub Meta (titre principal) fait combien de mots ?",
-        opts:[{l:"3 à 5 mots"}, {l:"6 à 9 mots", c:true}, {l:"10 à 15 mots"}, {l:"20 mots et plus"}]},
-      {domain:"copy", type:"tf", q:"Une page produit longue convertit moins qu'une courte.",
-        opts:[{l:"VRAI"}, {l:"FAUX"}, {l:"Ça dépend du produit et du prix", c:true}]},
-      {domain:"copy", type:"choice", q:"Quel objet d'email convertit le plus en taux d'ouverture ?",
-        opts:[{l:"« Promotion Black Friday : -50&nbsp;% »"}, {l:"« Marie, voici la réponse à ta question »", c:true}, {l:"« Notre offre exceptionnelle de la semaine »"}]},
-      {domain:"copy", type:"choice", q:"Sur le bouton d'achat principal de ta page produit, quel texte convertit le plus ?",
-        opts:[{l:"« Acheter maintenant »"}, {l:"« Commander »"}, {l:"« Je veux ma crème »", c:true}, {l:"« Valider »"}]},
-      {domain:"copy", type:"tf", q:"Sur une page produit, lister les caractéristiques techniques convertit mieux que les bénéfices concrets.",
-        opts:[{l:"VRAI"}, {l:"FAUX", c:true}, {l:"Ça dépend"}]},
-      {domain:"copy", type:"choice", q:"Pour une cible 18-30 ans en B2C, quel registre marche le mieux ?",
-        opts:[{l:"Vouvoiement, ton corporate"}, {l:"Tutoiement, ton « comme un pote »", c:true}, {l:"Ton neutre, ni l'un ni l'autre"}]},
-      {domain:"copy", type:"choice", q:"Lequel de ces appels à l'action est le plus performant ?",
-        opts:[{l:"« Apprends à vendre en ligne »"}, {l:"« Apprends à passer de 0 à 5&nbsp;000&nbsp;€/mois en 90 jours »", c:true}, {l:"« Apprends les bases du commerce »"}]},
-      {domain:"copy", type:"tf", q:"Plus tu empiles les mots de pouvoir (« exclusif », « secret », « ultime »), plus ta page convertit.",
-        opts:[{l:"VRAI"}, {l:"FAUX", c:true}, {l:"Ça dépend"}]},
+    function showStage(name){
+      Object.entries(stages).forEach(([k, el]) => {
+        el.classList.toggle('is-active', k === name);
+      });
+      currentStage = name;
+      // Progress bar visible only during stages 1-5
+      const stageNum = ['s1','s2','s3','s4','s5'].indexOf(name);
+      if(stageNum >= 0){
+        progress.classList.add('is-shown');
+        progFill.style.width = (((stageNum + 1) / 5) * 100) + '%';
+        progText.textContent = 'Stage ' + (stageNum + 1) + ' / 5';
+      } else {
+        progress.classList.remove('is-shown');
+      }
+      // Flash effect on transition
+      if(name !== 'intro' && arena){
+        arena.classList.remove('is-flashing');
+        void arena.offsetWidth;
+        arena.classList.add('is-flashing');
+        setTimeout(() => arena.classList.remove('is-flashing'), 500);
+      }
+      // Scroll back to top of arena
+      if(name !== 'intro' && arena){
+        arena.scrollIntoView({behavior:'smooth', block:'start'});
+      }
+    }
 
-      // ==================== CRO (10) ====================
-      {domain:"cro", type:"estim", q:"Un taux de conversion de 1,5&nbsp;% sur Shopify, c'est…",
-        opts:[{l:"Mauvais"}, {l:"Moyen"}, {l:"Excellent"}, {l:"Ça dépend du panier moyen et de la rentabilité", c:true}],
-        jargon:"CRO = Conversion Rate Optimization, autrement dit l'art d'augmenter le pourcentage de visiteurs qui achètent."},
-      {domain:"cro", type:"choice", q:"Tu veux augmenter ton taux de conversion. Quelle action priorises-tu en premier ?",
-        opts:[{l:"Refaire le design de toute la page"}, {l:"Améliorer la hero (la zone visible sans scroller)", c:true}, {l:"Ajouter plus de produits dans la collection"}]},
-      {domain:"cro", type:"tf", q:"Une popup d'exit-intent (qui s'affiche quand le visiteur va partir) augmente toujours la conversion.",
-        opts:[{l:"VRAI"}, {l:"FAUX", c:true}, {l:"Ça dépend"}]},
-      {domain:"cro", type:"choice", q:"Avis clients sur ta page produit : où les places-tu pour le meilleur impact ?",
-        opts:[{l:"Tout en bas, après la description complète"}, {l:"En haut, juste sous le titre du produit", c:true}, {l:"Dans une popup à l'arrivée"}]},
-      {domain:"cro", type:"choice", q:"Quelle couleur de bouton « Ajouter au panier » convertit le mieux dans la majorité des tests ?",
-        opts:[{l:"Vert (associé au feu vert)"}, {l:"Rouge (urgence, attention)"}, {l:"Une couleur en fort contraste avec la palette de la page", c:true}, {l:"Noir (sobre, premium)"}]},
-      {domain:"cro", type:"choice", q:"Pour ton checkout, idéalement combien d'étapes ?",
-        opts:[{l:"1 page unique avec tout"}, {l:"2-3 étapes courtes", c:true}, {l:"5+ étapes pour rassurer"}]},
-      {domain:"cro", type:"choice", q:"Les badges de paiement sécurisé (Visa, Mastercard, lock SSL) ont le plus d'impact placés où ?",
-        opts:[{l:"Dans le footer du site"}, {l:"Sur la page produit, sous le bouton d'achat", c:true}, {l:"Uniquement sur la page de checkout"}]},
-      {domain:"cro", type:"tf", q:"Un site mobile-first convertit toujours mieux qu'un site desktop-first.",
-        opts:[{l:"VRAI"}, {l:"FAUX"}, {l:"Ça dépend de l'audience et du produit", c:true}]},
-      {domain:"cro", type:"choice", q:"Si un visiteur reste moins de 5 secondes sur ta page avant de partir, c'est…",
-        opts:[{l:"Normal, le marché est concurrentiel"}, {l:"Un signal que ta hero ne capte pas", c:true}, {l:"Sans importance si la conversion globale est bonne"}]},
-      {domain:"cro", type:"tf", q:"Ajouter un live chat sur ta page produit augmente toujours la conversion.",
-        opts:[{l:"VRAI"}, {l:"FAUX"}, {l:"Ça dépend du prix et de la complexité du produit", c:true}]},
+    function nextStage(){
+      const idx = order.indexOf(currentStage);
+      if(idx < order.length - 1) showStage(order[idx + 1]);
+    }
 
-      // ==================== ADS (10) ====================
-      {domain:"ads", type:"estim", q:"Le CPM moyen sur Meta en France pour l'e-commerce, c'est environ…",
-        opts:[{l:"2 à 5&nbsp;€"}, {l:"8 à 15&nbsp;€", c:true}, {l:"20 à 30&nbsp;€"}, {l:"40&nbsp;€ et plus"}],
-        jargon:"CPM = coût pour 1 000 impressions. C'est ce que tu paies à Meta pour montrer ta pub à 1 000 personnes."},
-      {domain:"ads", type:"scenario", q:"Ton CPA Meta monte de 30&nbsp;% en 3&nbsp;jours sans rien changer. Tu fais quoi ?",
-        opts:[{l:"Je coupe la campagne immédiatement, ça ne marche plus"}, {l:"J'analyse les données 24-48&nbsp;h avant de bouger", c:true}, {l:"J'augmente le budget pour compenser la baisse"}],
-        jargon:"CPA = coût par acquisition, ce que tu paies pour avoir 1 client."},
-      {domain:"ads", type:"tf", q:"Plus tu mets de budget sur Meta, plus l'algorithme apprend vite (à conditions équivalentes).",
-        opts:[{l:"VRAI", c:true}, {l:"FAUX"}, {l:"Ça dépend"}]},
-      {domain:"ads", type:"choice", q:"Sur 100 tests A/B en 2025-2026, quelle créa Meta gagne le plus souvent ?",
-        opts:[{l:"Vidéo studio pro avec voix-off"}, {l:"Vidéo selfie face caméra naturelle", c:true}, {l:"Carrousel photos produit"}, {l:"Ça dépend de la niche et du produit"}]},
-      {domain:"ads", type:"choice", q:"Les 3 premières secondes d'une vidéo Meta doivent…",
-        opts:[{l:"Présenter calmement le produit"}, {l:"Créer un pattern interrupt fort (question, choc visuel, surprise)", c:true}, {l:"Afficher le logo de la marque"}]},
-      {domain:"ads", type:"tf", q:"Avec l'algorithme Meta de 2025+, une audience large (1&nbsp;M+) bat souvent une audience ciblée précise.",
-        opts:[{l:"VRAI", c:true}, {l:"FAUX"}, {l:"Ça dépend"}]},
-      {domain:"ads", type:"choice", q:"Combien de variantes de créas tu lances idéalement par campagne au démarrage ?",
-        opts:[{l:"1 seule (focus sur la meilleure)"}, {l:"3 à 5 (assez pour comparer)", c:true}, {l:"10+ pour tester massivement"}]},
-      {domain:"ads", type:"choice", q:"Pour une boutique e-com récente, lequel apporte le plus rapidement les premiers clients ?",
-        opts:[{l:"Google Search Ads (intention d'achat haute)"}, {l:"Meta (Facebook + Instagram) feed et reels", c:true}, {l:"Google Display Ads (visibilité large)"}]},
-      {domain:"ads", type:"estim", q:"Le ROAS minimum pour scaler une campagne Meta e-com avec profit, c'est…",
-        opts:[{l:"1,5"}, {l:"2 à 2,5"}, {l:"4 et plus"}, {l:"Ça dépend de ton ROAS break-even", c:true}],
-        jargon:"ROAS = Return On Ad Spend (1&nbsp;€ dépensé en pubs &rarr; combien tu fais de CA). ROAS break-even = le ROAS minimum pour ne ni gagner ni perdre — il dépend de ta marge brute (taux différent selon ton modèle)."},
-      {domain:"ads", type:"choice", q:"Tu testes un produit pendant combien de jours avant de le déclarer mort ?",
-        opts:[{l:"3 jours, c'est suffisant"}, {l:"7 à 14 jours minimum avec budget cohérent", c:true}, {l:"30+ jours, faut être patient"}]},
+    // ----- Stage 1: Question viscérale -----
+    sec.querySelectorAll('#dtStage1Choices .dt-choice').forEach(btn => {
+      btn.addEventListener('click', () => {
+        scores.s1 = parseInt(btn.dataset.pts, 10);
+        btn.classList.add('is-picked');
+        sec.querySelectorAll('#dtStage1Choices .dt-choice').forEach(b => b.disabled = true);
+        setTimeout(nextStage, 520);
+      });
+    });
 
-      // ==================== MINDSET (10) ====================
-      {domain:"mindset", type:"scenario", q:"Premier mois sur ta boutique : -2 000&nbsp;€ en pubs, 0 vente. Tu réagis comment ?",
-        opts:[{l:"Je change de produit, celui-là ne marche pas"}, {l:"J'analyse les données et je teste 1 angle différent", c:true}, {l:"J'arrête, c'est pas pour moi"}]},
-      {domain:"mindset", type:"choice", q:"Tu testes 5 produits, 4 ne marchent pas. Tu vois ces 4 échecs comme…",
-        opts:[{l:"4 erreurs qui prouvent que je m'y prends mal"}, {l:"4 signaux qui m'ont rapproché du bon produit", c:true}, {l:"4 produits à relancer plus tard avec un meilleur angle"}]},
-      {domain:"mindset", type:"tf", q:"Travailler 12&nbsp;h par jour est nécessaire pour réussir en e-commerce.",
-        opts:[{l:"VRAI"}, {l:"FAUX", c:true}, {l:"Ça dépend"}]},
-      {domain:"mindset", type:"estim", q:"Combien de produits tu devrais tester par mois sur Meta en phase d'apprentissage&nbsp;?",
-        opts:[{l:"0 à 1"}, {l:"2 à 4"}, {l:"5 et plus", c:true}],
-        jargon:"Phase d'apprentissage = la période où tu cherches encore ton produit gagnant — que tu démarres ta 1ʳᵉ boutique, que tu en relances une, ou que tu testes une nouvelle niche."},
-      {domain:"mindset", type:"choice", q:"Tu vois sur LinkedIn un autre entrepreneur qui annonce 50&nbsp;K€/mois. Réaction la plus saine ?",
-        opts:[{l:"Je doute (90&nbsp;% mentent sur les chiffres)"}, {l:"Je m'inspire des étapes possibles, je ne compare pas la photo de fin", c:true}, {l:"Je me dis que je ne suis pas à la hauteur"}]},
-      {domain:"mindset", type:"choice", q:"Ton premier 10&nbsp;K€ de chiffre d'affaires mensuel, tu le vois comme…",
-        opts:[{l:"Une destination atteinte"}, {l:"Une étape qui débloque le suivant", c:true}, {l:"Une preuve que tu as réussi"}]},
-      {domain:"mindset", type:"choice", q:"Pour apprendre l'e-commerce le plus vite, qu'est-ce qui marche le mieux ?",
-        opts:[{l:"Apprendre seul, à son rythme, en testant"}, {l:"Apprendre avec un cadre + une communauté qui pose des retours", c:true}, {l:"Apprendre uniquement avec un mentor 1-1 cher"}]},
-      {domain:"mindset", type:"choice", q:"Tu es bloqué sur ton site depuis 3 jours. Premier réflexe le plus efficace ?",
-        opts:[{l:"Je continue seul jusqu'à trouver"}, {l:"Je publie ma question dans une communauté avec contexte précis", c:true}, {l:"Je laisse tomber, je reprends dans 1 mois"}]},
-      {domain:"mindset", type:"estim", q:"Combien de temps tu donnes à un test produit (créas + page + budget) avant de juger ?",
-        opts:[{l:"24-48&nbsp;h"}, {l:"7 à 14 jours", c:true}, {l:"1 mois minimum"}]},
-      {domain:"mindset", type:"tf", q:"L'erreur la plus chère en e-commerce, c'est de tester trop peu de choses.",
-        opts:[{l:"VRAI", c:true}, {l:"FAUX"}, {l:"Ça dépend"}]}
+    // ----- Stage 2: Test de réflexe -----
+    const reactionBtn = sec.querySelector('#dtReactionBtn');
+    const reactionState = sec.querySelector('#dtReactionState');
+    const reactionResult = sec.querySelector('#dtReactionResult');
+    let reactionPhase = 'idle'; // idle | armed | fire | done
+    let reactionStart = 0;
+    let reactionTimeout = null;
+
+    function reactionReset(){
+      reactionPhase = 'idle';
+      reactionBtn.classList.remove('is-armed','is-fire');
+      reactionState.innerHTML = 'Tape pour démarrer';
+      reactionResult.textContent = '';
+      reactionResult.style.opacity = '0';
+    }
+
+    reactionBtn.addEventListener('click', () => {
+      if(reactionPhase === 'done') return;
+      if(reactionPhase === 'idle'){
+        reactionPhase = 'armed';
+        reactionBtn.classList.add('is-armed');
+        reactionState.innerHTML = 'Attends l\'éclair…';
+        const delay = 1500 + Math.random() * 2200;
+        reactionTimeout = setTimeout(() => {
+          reactionPhase = 'fire';
+          reactionBtn.classList.remove('is-armed');
+          reactionBtn.classList.add('is-fire');
+          reactionState.innerHTML = '<span class="dt-reaction-bolt">⚡</span>';
+          reactionStart = performance.now();
+        }, delay);
+        return;
+      }
+      if(reactionPhase === 'armed'){
+        // Tricheur — anticipated
+        clearTimeout(reactionTimeout);
+        reactionPhase = 'done';
+        reactionBtn.classList.remove('is-armed');
+        scores.s2 = 3;
+        reactionResult.style.opacity = '1';
+        reactionResult.innerHTML = 'Trop tôt — tu as anticipé. Score : <strong>3 pts</strong>';
+        setTimeout(nextStage, 1600);
+        return;
+      }
+      if(reactionPhase === 'fire'){
+        const ms = Math.round(performance.now() - reactionStart);
+        reactionPhase = 'done';
+        let pts;
+        if(ms < 300) pts = 15;
+        else if(ms < 500) pts = 12;
+        else if(ms < 800) pts = 8;
+        else pts = 5;
+        scores.s2 = pts;
+        reactionResult.style.opacity = '1';
+        reactionResult.innerHTML = 'Temps de réaction : <strong>' + ms + ' ms</strong> · Score : <strong>' + pts + ' pts</strong>';
+        setTimeout(nextStage, 1700);
+      }
+    });
+
+    // ----- Stage 3: Choix sous pression timer -----
+    const timerNum = sec.querySelector('#dtTimerNum');
+    const timerRing = sec.querySelector('#dtTimerRing');
+    const timerArc = timerRing.querySelector('circle:nth-child(2)');
+    const stage3Choices = sec.querySelectorAll('#dtStage3Choices .dt-choice');
+    let timerInterval = null;
+    let timerSecs = 8;
+
+    function startStage3Timer(){
+      timerSecs = 8;
+      timerNum.textContent = timerSecs;
+      timerRing.classList.remove('is-warn','is-danger');
+      timerArc.style.strokeDasharray = '100.5';
+      timerArc.style.strokeDashoffset = '0';
+      stage3Choices.forEach(b => { b.disabled = false; b.classList.remove('is-picked'); });
+      const total = 8;
+      const tickStart = performance.now();
+      timerInterval = setInterval(() => {
+        const elapsed = (performance.now() - tickStart) / 1000;
+        const remaining = Math.max(0, total - elapsed);
+        timerSecs = Math.ceil(remaining);
+        timerNum.textContent = timerSecs;
+        const offset = 100.5 * (elapsed / total);
+        timerArc.style.strokeDashoffset = offset;
+        if(remaining <= 3 && remaining > 1.5) timerRing.classList.add('is-warn');
+        if(remaining <= 1.5) timerRing.classList.add('is-danger');
+        if(remaining <= 0){
+          clearInterval(timerInterval);
+          // Timeout penalty
+          scores.s3 = 0;
+          stage3Choices.forEach(b => b.disabled = true);
+          setTimeout(nextStage, 600);
+        }
+      }, 60);
+    }
+
+    stage3Choices.forEach(btn => {
+      btn.addEventListener('click', () => {
+        if(timerInterval) clearInterval(timerInterval);
+        scores.s3 = parseInt(btn.dataset.pts, 10);
+        btn.classList.add('is-picked');
+        stage3Choices.forEach(b => b.disabled = true);
+        // Bonus speed: if more than 5s remaining, +2 pts
+        if(timerSecs >= 5) scores.s3 += 2;
+        setTimeout(nextStage, 520);
+      });
+    });
+
+    // ----- Stage 4: Slider abandon -----
+    const slider = sec.querySelector('#dtSlider');
+    const sliderNum = sec.querySelector('#dtSliderNum');
+    const sliderLabel = sec.querySelector('#dtSliderLabel');
+    const validate4 = sec.querySelector('#dtValidate4');
+
+    slider.addEventListener('input', () => {
+      const v = parseInt(slider.value, 10);
+      sliderNum.textContent = v >= 20 ? '20+' : v;
+      sliderNum.classList.add('is-bumped');
+      setTimeout(() => sliderNum.classList.remove('is-bumped'), 180);
+      sliderLabel.textContent = v <= 1 ? 'projet abandonné' : 'projets abandonnés';
+    });
+
+    validate4.addEventListener('click', () => {
+      const v = parseInt(slider.value, 10);
+      let pts;
+      if(v <= 2) pts = 18;
+      else if(v <= 5) pts = 12;
+      else if(v <= 9) pts = 6;
+      else pts = 2;
+      scores.s4 = pts;
+      validate4.disabled = true;
+      setTimeout(nextStage, 320);
+    });
+
+    // ----- Stage 5: Question d'identité -----
+    sec.querySelectorAll('#dtStage5Choices .dt-choice').forEach(btn => {
+      btn.addEventListener('click', () => {
+        scores.s5 = parseInt(btn.dataset.pts, 10);
+        btn.classList.add('is-picked');
+        sec.querySelectorAll('#dtStage5Choices .dt-choice').forEach(b => b.disabled = true);
+        setTimeout(showResult, 600);
+      });
+    });
+
+    // ----- Result -----
+    const gaugeArc = sec.querySelector('#dtGaugeArc');
+    const gaugeNum = sec.querySelector('#dtGaugeNum');
+    const verdictH = sec.querySelector('#dtVerdictH');
+    const verdictText = sec.querySelector('#dtVerdictText');
+
+    const VERDICTS = [
+      { min:80, h:"Tu es taillé(e) pour ça.", t:"<strong>Sur les 5 stages, ton mental est solide :</strong> tu décides vite, tu ne paniques pas, tu cherches la cause au lieu de fuir, et tu te vois comme acteur de ta réussite. C'est le profil qui réussit. Ce qui te manque, ce n'est pas le mental — c'est <strong>la séquence technique</strong> (offre, page, copy, pubs, lecture chiffres). GENESYS te la donne entière. Tu vas dévorer les modules." },
+      { min:60, h:"Tu as le potentiel — il manque le cadre.", t:"<strong>Ton mental est bon mais a des angles morts</strong> : sous pression tu peux paniquer, ou tu attribues une part trop grande aux circonstances extérieures. Avec un cadre clair (méthode + communauté + correction quotidienne), tu vas exploser. <strong>C'est exactement ce que GENESYS donne :</strong> un parcours structuré, des retours sur ton travail, et un environnement qui te tient quand toi-même tu vacilles." },
+      { min:40, h:"Tu es à un point de bascule.", t:"<strong>Sur les 5 stages, ton mental est en zone fragile.</strong> Tu doutes, tu réagis vite à la pression, ou tu changes de direction trop souvent. <strong>Sans un cadre solide, tu vas abandonner ce business comme les précédents.</strong> Avec un cadre, tu peux complètement basculer. GENESYS aborde aussi le mindset (<strong>Mental & constance</strong>, <strong>Focus d'opérateur</strong>) — pas juste la technique." },
+      { min:0,  h:"Mental fragile aujourd'hui — pas une fatalité.", t:"<strong>Sur les 5 stages, tes réponses montrent un mental d'e-commerçant(e) à reconstruire.</strong> Ce n'est pas un jugement — c'est juste le résultat honnête de tes réponses. La bonne nouvelle : <strong>la détermination, ça se travaille comme un muscle.</strong> Dans GENESYS, le module <strong>Mental & constance</strong> est conçu exactement pour ça. La technique, on s'en occupe après. Le vrai problème en e-commerce, ce n'est presque jamais la technique — c'est le mental qui craque trop tôt." }
     ];
 
-    // Pick 2 random questions per domain, then shuffle the 10
-    function pickSession(){
-      const session = [];
-      Object.keys(DOMAIN).forEach(d => {
-        const pool = POOL.filter(q => q.domain === d).slice();
-        for(let i = pool.length - 1; i > 0; i--){ const j = Math.floor(Math.random() * (i+1)); [pool[i], pool[j]] = [pool[j], pool[i]]; }
-        session.push(pool[0], pool[1]);
-      });
-      // shuffle final 10
-      for(let i = session.length - 1; i > 0; i--){ const j = Math.floor(Math.random() * (i+1)); [session[i], session[j]] = [session[j], session[i]]; }
-      return session;
-    }
-
-    // Diagnostic templates per weakest domain — wording stays prudent: 10 questions
-    // ne disent pas tout, on parle de "vigilance" et de "ce qui t'aiderait", pas de
-    // jugement absolu sur le niveau réel de la personne.
-    const DIAG = {
-      neuro:   "<strong>Sur les questions posées, tu sembles ignorer une partie des leviers psychologiques d'achat.</strong> Tu peux mettre un bon produit sur ta page, mais sans déclencheurs (ancrage, urgence, preuve sociale, contraste...), le cerveau du visiteur file. Le module <strong>Ecom Neuro</strong> te donnerait ces leviers à activer un par un, sur des cas e-com concrets.",
-      copy:    "<strong>Sur les questions posées, tes réflexes copywriting méritent d'être consolidés.</strong> Tu décris probablement ce que TOI tu vois dans ton produit, pas ce qui touche le viewer. <strong>Ecom Copy Impact</strong> est conçu pour ça : écrire pour vendre, pas pour informer — pages, pubs, emails.",
-      cro:     "<strong>Sur les questions posées, tu sembles avoir des angles morts en optimisation de conversion.</strong> Tu fais venir du monde, mais une grosse part repart sans acheter. <strong>Boutique qui convertit</strong> restructure la page produit, et <strong>Conversion & panier</strong> optimise les derniers mètres avant l'achat.",
-      ads:     "<strong>Sur les questions posées, tes réflexes publicitaires sont à étoffer.</strong> Probablement tu jettes du budget sans piloter clairement. <strong>Scaler Meta proprement</strong>, <strong>Créatives qui vendent</strong> et <strong>Google Ads sans gaspillage</strong> couvrent ça étape par étape — du test à la scale.",
-      mindset: "<strong>Sur les questions posées, ton mental d'e-commerçant(e) a des prises ouvertes.</strong> Techniquement tu peux savoir pas mal de choses, mais la personne derrière craque trop tôt — premier échec, première tentation d'arrêt, focus dispersé. <strong>Mental & constance</strong> et <strong>Focus d'opérateur</strong> travaillent l'e-commerçant(e) derrière la boutique."
-    };
-
-    const ALL_HIGH_DIAG = "<strong>Sur les 10 questions posées, tu sembles à l'aise dans tous les domaines.</strong> Précision honnête : 10 questions ne suffisent pas à dire que tu maîtrises tout — mais tes réflexes ont l'air bons. GENESYS te servirait surtout pour rester à jour avec les évolutions du marché (algos Meta qui changent, nouveaux comportements consommateurs), accéder à des cas concrets d'autres opérateurs, et progresser plus vite par le réseau plutôt que dans ton coin.";
-    const ALL_LOW_DIAG = "<strong>Sur les 10 questions posées, beaucoup de leviers sont à explorer.</strong> Bonne nouvelle : tu démarres avec zéro mauvaise habitude à désapprendre. <strong>Supernova</strong> te donne le parcours complet de zéro à boutique rentable, et la communauté GENESYS te pose un cadre quotidien pour ne pas dériver.";
-
-    // Mood face progress — toutes les expressions sont SOURIANTES, escalade joyeuse
-    // (no neutral/sad face — start happy, end with a wide grin)
-    const MOUTH_PATHS = {
-      smile1: "M 10 18 Q 14 20 18 18",         // sourire doux
-      smile2: "M 9 17.5 Q 14 21 19 17.5",      // sourire moyen
-      smile3: "M 8 16.5 Q 14 22.5 20 16.5",    // grand sourire
-      smile4: "M 7 15.5 Q 14 24 21 15.5"       // sourire dents/grin
-    };
-    function moodFor(idx, total){
-      const remaining = total - idx;
-      if(idx === 0)               return {mouth:'smile1', lvl:1, txt:"On commence en douceur"};
-      if(remaining > total * 0.65) return {mouth:'smile1', lvl:1, txt:"Plus que " + remaining + " questions"};
-      if(remaining > total * 0.4)  return {mouth:'smile2', lvl:2, txt:"Plus que " + remaining + " questions"};
-      if(remaining > total * 0.15) return {mouth:'smile3', lvl:3, txt:"Plus que " + remaining + " questions"};
-      if(remaining === 1)          return {mouth:'smile4', lvl:4, txt:"Plus qu'une !"};
-      return {mouth:'smile4', lvl:4, txt:"Dernière question !"};
-    }
-
-    // ---------- State + DOM refs ----------
-    let session = [];
-    let answers = []; // {domain, correct (bool|null), idx}
-    let cur = 0;
-
-    const elIntro = sec.querySelector('#dxIntro');
-    const elGame  = sec.querySelector('#dxGame');
-    const elResult= sec.querySelector('#dxResult');
-    const startBtn= sec.querySelector('#dxStart');
-    const replayBtn= sec.querySelector('#dxReplay');
-    const progFill= sec.querySelector('#dxProgressFill');
-    const progText= sec.querySelector('#dxProgressText');
-    const qCard   = sec.querySelector('#dxQCard');
-    const qDomain = sec.querySelector('#dxQDomain');
-    const qText   = sec.querySelector('#dxQText');
-    const qJargon = sec.querySelector('#dxQJargon');
-    const qOpts   = sec.querySelector('#dxOptions');
-    const moodFace= sec.querySelector('#dxMoodFace');
-    const moodMouth= sec.querySelector('#dxMoodMouth');
-    const moodText= sec.querySelector('#dxMoodText');
-    const profile = sec.querySelector('#dxProfile');
-    const resultH = sec.querySelector('#dxResultH');
-    const diagText= sec.querySelector('#dxDiagText');
-    const modulesEl= sec.querySelector('#dxModules');
-
-    function showScreen(name){
-      elIntro.style.display  = name === 'intro'  ? 'block' : 'none';
-      elGame.classList.toggle('is-active',  name === 'game');
-      elResult.classList.toggle('is-active', name === 'result');
-    }
-
-    function renderQuestion(){
-      const q = session[cur];
-      const total = session.length;
-      progFill.style.width = ((cur / total) * 100) + '%';
-      progText.textContent = (cur + 1) + ' / ' + total;
-      // Mood face progress
-      const mood = moodFor(cur, total);
-      if(moodMouth) moodMouth.setAttribute('d', MOUTH_PATHS[mood.mouth]);
-      if(moodFace){
-        moodFace.classList.remove('lvl-1','lvl-2','lvl-3','lvl-4');
-        moodFace.classList.add('lvl-' + mood.lvl);
-      }
-      if(moodText) moodText.textContent = mood.txt;
-
-      qCard.classList.remove('is-visible');
-      setTimeout(() => {
-        qDomain.textContent = DOMAIN[q.domain].label;
-        qText.innerHTML = q.q;          // questions may contain &nbsp;, <s>, &rarr; etc.
-        if(q.jargon){ qJargon.hidden = false; qJargon.innerHTML = q.jargon; }
-        else { qJargon.hidden = true; qJargon.innerHTML = ''; }
-        qOpts.classList.toggle('is-tf', q.type === 'tf');
-        qOpts.innerHTML = '';
-        const letters = ['A','B','C','D','E'];
-        q.opts.forEach((opt, i) => {
-          const btn = document.createElement('button');
-          btn.type = 'button';
-          btn.className = 'dx-option';
-          if(q.type === 'tf'){
-            btn.innerHTML = '<span>' + opt.l + '</span>';
-          } else {
-            btn.innerHTML = '<span class="dx-option-letter">' + letters[i] + '</span><span>' + opt.l + '</span>';
-          }
-          btn.addEventListener('click', () => onPick(i));
-          qOpts.appendChild(btn);
-        });
-        qCard.classList.add('is-visible');
-      }, 280);
-    }
-
-    function onPick(optIdx){
-      const q = session[cur];
-      const buttons = qOpts.querySelectorAll('.dx-option');
-      buttons.forEach(b => b.classList.remove('is-picked'));
-      if(buttons[optIdx]) buttons[optIdx].classList.add('is-picked');
-      // disable further clicks while transitioning
-      buttons.forEach(b => b.disabled = true);
-      const correct = !!q.opts[optIdx].c;
-      answers.push({domain: q.domain, correct: correct, idx: optIdx});
-      // animate progress to next mark, then move on
-      setTimeout(() => {
-        cur++;
-        if(cur >= session.length){ progFill.style.width = '100%'; setTimeout(showResult, 350); }
-        else renderQuestion();
-      }, 540);
-    }
-
     function showResult(){
-      // Score per domain (0, 1, 2 over 2 questions per domain)
-      const scores = {};
-      Object.keys(DOMAIN).forEach(d => { scores[d] = {right: 0, total: 0}; });
-      answers.forEach(a => {
-        scores[a.domain].total++;
-        if(a.correct) scores[a.domain].right++;
+      showStage('result');
+      // Compute total score (max ~85 → normalize to 100)
+      const total = (scores.s1 || 0) + (scores.s2 || 0) + (scores.s3 || 0) + (scores.s4 || 0) + (scores.s5 || 0);
+      const MAX = 18 + 15 + 16 + 18 + 18; // = 85
+      let pct = Math.round((total / MAX) * 100);
+      if(pct > 99) pct = 99;
+      if(pct < 5) pct = 5;
+      // Find verdict
+      const v = VERDICTS.find(x => pct >= x.min);
+      verdictH.innerHTML = v.h.replace(/<em>/g,'<em>').replace(/(taillé|potentiel|bascule|fragile)/i, '<em>$1</em>');
+      verdictH.textContent = v.h;
+      verdictText.innerHTML = v.t;
+      // Animate gauge
+      const arcLen = 251;
+      const offset = arcLen - (arcLen * pct / 100);
+      // Reset
+      gaugeArc.style.transition = 'none';
+      gaugeArc.style.strokeDashoffset = arcLen;
+      gaugeNum.textContent = '0';
+      // Trigger animation
+      requestAnimationFrame(() => {
+        gaugeArc.style.transition = 'stroke-dashoffset 2.4s cubic-bezier(0.22,1,0.36,1)';
+        gaugeArc.style.strokeDashoffset = offset;
+        // Animate number count-up
+        const startTs = performance.now();
+        const duration = 2400;
+        function tick(){
+          const elapsed = performance.now() - startTs;
+          const t = Math.min(1, elapsed / duration);
+          const eased = 1 - Math.pow(1 - t, 3);
+          gaugeNum.textContent = Math.round(eased * pct);
+          if(t < 1) requestAnimationFrame(tick);
+        }
+        requestAnimationFrame(tick);
       });
-
-      // Build profile rows. Honest wording — 2 questions ne disent pas tout.
-      profile.innerHTML = '';
-      let weakest = null, weakestRatio = 99;
-      let allHigh = true, allLow = true;
-      Object.keys(DOMAIN).forEach(d => {
-        const s = scores[d];
-        const ratio = s.total ? (s.right / s.total) : 0;
-        let dots, level, lvlClass;
-        if(ratio >= 0.9){ dots = 4; level = "À l'aise"; lvlClass = 'lvl-high'; allLow = false; }
-        else if(ratio >= 0.5){ dots = 2; level = "À consolider"; lvlClass = 'lvl-mid'; allLow = false; allHigh = false; }
-        else { dots = 1; level = "À explorer"; lvlClass = 'lvl-low'; allHigh = false; }
-
-        const row = document.createElement('div');
-        row.className = 'dx-profile-row';
-        let dotsHtml = '';
-        for(let i = 0; i < 5; i++) dotsHtml += '<span class="dx-profile-dot' + (i < dots ? ' on' : '') + '"></span>';
-        row.innerHTML =
-          '<span class="dx-profile-name">' + DOMAIN[d].label + '</span>' +
-          '<span class="dx-profile-dots">' + dotsHtml + '</span>' +
-          '<span class="dx-profile-level ' + lvlClass + '">' + level + '</span>';
-        profile.appendChild(row);
-
-        if(ratio < weakestRatio){ weakestRatio = ratio; weakest = d; }
-      });
-
-      // Diagnostic + module recommendations — wording prudent partout
-      let diagHtml, modules;
-      if(allHigh){
-        diagHtml = ALL_HIGH_DIAG;
-        modules = ["Ecom Neuro", "Diagnostics de boutiques", "Communauté privée"];
-        resultH.innerHTML = "Tu sembles <em>à l'aise partout</em>";
-      } else if(allLow){
-        diagHtml = ALL_LOW_DIAG;
-        modules = ["Supernova", "Ecom Copy Impact", "Communauté privée"];
-        resultH.innerHTML = "Beaucoup à <em>explorer</em> — c'est un bon point";
-      } else {
-        diagHtml = DIAG[weakest];
-        modules = DOMAIN[weakest].modules.slice();
-        resultH.innerHTML = "Ton point de vigilance :<br><em>" + DOMAIN[weakest].label + "</em>";
-      }
-      diagText.innerHTML = diagHtml;
-      modulesEl.innerHTML = '';
-      modules.forEach(m => {
-        const div = document.createElement('div');
-        div.className = 'dx-module';
-        div.innerHTML = '<span class="dx-module-arrow">→</span><span>' + m + '</span>';
-        modulesEl.appendChild(div);
-      });
-
-      showScreen('result');
     }
 
-    function start(){
-      session = pickSession();
-      answers = [];
-      cur = 0;
-      showScreen('game');
-      renderQuestion();
+    function startTest(){
+      scores = {};
+      // Reset all interactive elements
+      sec.querySelectorAll('.dt-choice').forEach(b => { b.disabled = false; b.classList.remove('is-picked'); });
+      slider.value = 5;
+      sliderNum.textContent = '5';
+      sliderLabel.textContent = 'projets abandonnés';
+      validate4.disabled = false;
+      reactionReset();
+      showStage('s1');
     }
 
-    startBtn.addEventListener('click', start);
-    replayBtn.addEventListener('click', start);
+    startBtn.addEventListener('click', startTest);
+    replayBtn.addEventListener('click', startTest);
+
+    // Hooks pour démarrer auto les sub-stages quand ils deviennent actifs
+    const obs = new MutationObserver(muts => {
+      muts.forEach(m => {
+        const t = m.target;
+        if(!(t instanceof HTMLElement)) return;
+        if(!t.classList.contains('is-active')) return;
+        if(t.id === 'dtStage2'){ reactionReset(); }
+        if(t.id === 'dtStage3'){ startStage3Timer(); }
+      });
+    });
+    Object.values(stages).forEach(el => obs.observe(el, {attributes:true, attributeFilter:['class']}));
   })();
+
 </script>
 
 </body>
