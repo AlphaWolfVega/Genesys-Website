@@ -437,20 +437,31 @@
     /* === SLIDE CTA finale — meme logique compacte que mobile === */
     .hero-lead-slide-cta .hero-lead-card{padding:24px 22px;overflow:hidden;width:100%;max-width:100%;box-sizing:border-box}
     .hero-lead-slide-cta .hero-lead-card .nowrap{white-space:normal !important}
-    .hl-cta-kicker{font-size:9px !important;margin-bottom:9px !important}
-    .hl-cta-body{font-size:9.5px !important;line-height:1.6 !important;margin-bottom:11px !important}
-    .hl-cta-claim{font-size:11px !important;margin-bottom:9px !important}
-    .hl-cta-claim-inline{font-size:1.05em !important;color:var(--gold);font-weight:800;text-shadow:0 0 14px rgba(212,182,106,0.25)}
-    .hl-cta-mini{margin:0 0 10px !important}
-    .hl-cta-mini-card{padding:13px 14px 14px !important;border-radius:9px !important;text-align:center !important}
-    .hl-cta-mini-head{gap:9px !important;margin:0 0 9px !important}
-    .hl-cta-mini-icon{width:22px !important;height:22px !important;margin:0 !important;flex-shrink:0 !important}
-    .hl-cta-mini-h{font-size:10.5px !important;letter-spacing:0.08em !important;margin:0 !important;text-align:left !important}
-    .hl-cta-mini-b{font-size:11.5px !important;line-height:1.55 !important;text-align:left !important}
-    .hl-cta-mini-dot{width:5.5px !important;height:5.5px !important}
-    .hl-cta-mini-swipe{font-size:7.5px !important;margin-top:6px !important}
-    .hl-cta-exit{font-size:9.5px !important;white-space:normal !important;padding-top:10px !important;line-height:1.55 !important}
-    .hl-cta-explore{font-family:'Inter',sans-serif !important;font-size:9.5px !important;font-weight:700 !important;color:var(--gold) !important;letter-spacing:0.04em;margin:10px 0 5px !important;text-align:center;hyphens:none !important;word-break:keep-all}
+
+    /* CTA slide BASE styles (re-declared for desktop since base is in mobile @media) */
+    .hero-lead-slide-cta .hero-lead-card p{margin:0;max-width:100%;overflow-wrap:break-word;word-wrap:break-word;hyphens:auto}
+    .hl-cta-kicker{font-family:'Inter',sans-serif;font-weight:700;letter-spacing:0.16em;text-transform:uppercase;color:var(--gold);opacity:0.9;font-size:9px;margin-bottom:9px}
+    .hl-cta-body{font-family:'Inter',sans-serif;font-weight:500;color:var(--text);font-size:9.5px;line-height:1.6;margin-bottom:11px;overflow-wrap:break-word;word-wrap:break-word;hyphens:auto}
+    .hl-cta-claim-inline{color:var(--gold);font-weight:800;font-size:1.05em;text-shadow:0 0 14px rgba(212,182,106,0.25)}
+    .hl-cta-exit{font-family:'Inter',sans-serif;font-weight:500;color:rgba(245,238,222,0.62);font-size:9.5px;line-height:1.55;margin:0;padding-top:10px;border-top:1px solid rgba(212,182,106,0.18);white-space:normal;letter-spacing:0;max-width:100%;overflow-wrap:break-word;word-wrap:break-word;hyphens:auto}
+    .hl-cta-exit em{color:rgba(212,182,106,0.7);font-style:italic;font-weight:600}
+    .hl-cta-explore{font-family:'Inter',sans-serif;font-weight:700;color:var(--gold);font-size:9.5px;letter-spacing:0.04em;text-align:center;margin:10px 0 5px;text-shadow:0 0 18px rgba(212,182,106,0.25);hyphens:none;word-break:keep-all}
+
+    /* Mini-carousel BASE styles (duplicated for desktop) */
+    .hl-cta-mini{width:100%;max-width:100%;margin:0 0 10px;position:relative;overflow:hidden;box-sizing:border-box}
+    .hl-cta-mini-track{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;scrollbar-width:none;gap:8px;padding:2px 0 4px;box-sizing:border-box;width:100%;max-width:100%}
+    .hl-cta-mini-track::-webkit-scrollbar{display:none}
+    .hl-cta-mini-card{flex:0 0 100%;width:100%;max-width:100%;min-width:0;scroll-snap-align:center;box-sizing:border-box;background:linear-gradient(135deg,rgba(212,182,106,0.10) 0%,rgba(212,182,106,0.04) 100%);border:1px solid rgba(212,182,106,0.32);border-top:3px solid var(--gold);border-radius:9px;padding:13px 14px 14px;text-align:center;box-shadow:0 4px 16px rgba(0,0,0,0.18);overflow:hidden}
+    .hl-cta-mini-head{display:flex;align-items:center;justify-content:center;gap:9px;margin:0 0 9px;flex-wrap:nowrap;max-width:100%}
+    .hl-cta-mini-icon{display:inline-flex;align-items:center;justify-content:center;width:22px;height:22px;color:var(--gold);flex-shrink:0;margin:0}
+    .hl-cta-mini-icon svg{width:100%;height:100%;display:block}
+    .hl-cta-mini-h{font-family:'Inter',sans-serif;font-weight:800;color:var(--gold);letter-spacing:0.08em;text-transform:uppercase;font-size:10.5px;line-height:1.25;text-align:left;margin:0;text-shadow:0 0 14px rgba(212,182,106,0.28);overflow-wrap:break-word}
+    .hl-cta-mini-b{font-family:'Inter',sans-serif;font-weight:500;color:rgba(245,238,222,0.95);font-size:11.5px;line-height:1.55;text-align:left;margin:0;overflow-wrap:break-word;word-wrap:break-word;hyphens:auto}
+    .hl-cta-mini-b strong{color:var(--gold);font-weight:700}
+    .hl-cta-mini-dots{display:flex;justify-content:center;gap:5px;margin-top:7px}
+    .hl-cta-mini-dot{width:5.5px;height:5.5px;border-radius:50%;background:rgba(212,182,106,0.25);border:0;padding:0;cursor:pointer;transition:background 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease}
+    .hl-cta-mini-dot.active{background:var(--gold);transform:scale(1.4);box-shadow:0 0 8px rgba(212,182,106,0.6)}
+    .hl-cta-mini-swipe{display:block;text-align:center;font-family:'Inter',sans-serif;font-weight:700;font-size:7.5px;color:rgba(212,182,106,0.55);letter-spacing:0.14em;text-transform:uppercase;margin-top:6px;animation:hlMiniSwipe 1.8s ease-in-out infinite}
 
     /* === SCHEMA slide (cycle e-com) — toutes les rules dupliquées pour desktop === */
     .hero-lead-slide-schema .hero-lead-card{padding:28px 18px}
