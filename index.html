@@ -485,7 +485,7 @@
     .hl-source-line{margin-top:13px !important;font-size:13.5px !important;line-height:1.6 !important}
     .hl-source-line + .hl-source-line{margin-top:13px !important}
     /* Slide 3 — bonhomme qui tourne en rond (desktop) */
-    /* === RUNNER VIDEO === silhouette or athlete tapis roulant (Pixabay + FFmpeg gold) */
+    /* === RUNNER VIDEO === silhouette or athlete + mix-blend-mode lighten = noir devient invisible */
     .hl-runner-video{
       width:300px;max-width:100%;margin:0 auto 22px;
       filter:drop-shadow(0 0 22px rgba(212,182,106,0.32));
@@ -493,6 +493,7 @@
     }
     .hl-runner-video video{
       width:100%;height:auto;display:block;background:transparent;
+      mix-blend-mode:lighten;
     }
     /* === CINEMAGRAPH (ancien fallback SVG, hidden) === */
     .hl-spin-anim.hl-cinema{width:200px;height:160px;aspect-ratio:200/160}
@@ -1206,6 +1207,7 @@
     }
     .hl-runner-video video{
       width:100%;height:auto;display:block;background:transparent;
+      mix-blend-mode:lighten;
     }
     /* === CINEMAGRAPH MOBILE (legacy fallback) === */
     .hl-spin-anim.hl-cinema{width:230px;height:184px;aspect-ratio:200/160}
@@ -3492,11 +3494,11 @@
       </div>
       <div class="hero-lead-slide">
         <div class="hero-lead-card">
-          <!-- Video silhouette athlete sur tapis roulant — recoloree en or via FFmpeg + WebM VP9 alpha + MP4 fallback -->
+          <!-- Video silhouette athlete tapis roulant — fond NOIR baked-in + mix-blend-mode lighten = effet alpha universel (iOS compatible) -->
           <div class="hl-runner-video" aria-hidden="true">
-            <video autoplay muted loop playsinline preload="auto" disablepictureinpicture poster="" width="480" height="270">
-              <source src="assets/video/runner-gold-final.webm" type="video/webm">
+            <video id="hlRunnerVideo" autoplay muted loop playsinline webkit-playsinline preload="auto" disablepictureinpicture width="480" height="270">
               <source src="assets/video/runner-gold-final.mp4" type="video/mp4">
+              <source src="assets/video/runner-gold-final.webm" type="video/webm">
             </video>
           </div>
           <div class="hl-spin-anim hl-cinema" style="display:none" aria-hidden="true">
@@ -5342,6 +5344,26 @@
         applySelection(8);
       });
     }
+  })();
+
+  // ===== RUNNER VIDEO — force play sur iOS (autoplay parfois bloque) =====
+  (function initRunnerVideo(){
+    const video = document.getElementById('hlRunnerVideo');
+    if(!video) return;
+    const tryPlay = () => {
+      const p = video.play();
+      if(p && typeof p.catch === 'function'){ p.catch(() => {}); }
+    };
+    tryPlay();
+    // Si autoplay bloque (iOS Low Power Mode, etc.), play au 1er touch/scroll/click
+    const events = ['touchstart','click','scroll','mousemove'];
+    const onceUnlock = () => {
+      tryPlay();
+      events.forEach(e => window.removeEventListener(e, onceUnlock, {passive:true}));
+    };
+    events.forEach(e => window.addEventListener(e, onceUnlock, {passive:true, once:true}));
+    // Re-tente quand la page redevient visible
+    document.addEventListener('visibilitychange', () => { if(!document.hidden) tryPlay(); });
   })();
 
   // ===== HERO CTA MINI-CAROUSEL — slidable cards (dopamine effect) =====
