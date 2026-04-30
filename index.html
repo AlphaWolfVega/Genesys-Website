@@ -485,7 +485,16 @@
     .hl-source-line{margin-top:13px !important;font-size:13.5px !important;line-height:1.6 !important}
     .hl-source-line + .hl-source-line{margin-top:13px !important}
     /* Slide 3 — bonhomme qui tourne en rond (desktop) */
-    /* === CINEMAGRAPH === silhouette FIGEE + environnement vivant */
+    /* === RUNNER VIDEO === silhouette or athlete tapis roulant (Pixabay + FFmpeg gold) */
+    .hl-runner-video{
+      width:300px;max-width:100%;margin:0 auto 22px;
+      filter:drop-shadow(0 0 22px rgba(212,182,106,0.32));
+      display:flex;justify-content:center;
+    }
+    .hl-runner-video video{
+      width:100%;height:auto;display:block;background:transparent;
+    }
+    /* === CINEMAGRAPH (ancien fallback SVG, hidden) === */
     .hl-spin-anim.hl-cinema{width:200px;height:160px;aspect-ratio:200/160}
     .hl-spin-anim{width:160px;height:128px;margin:0 auto 24px;position:relative;filter:drop-shadow(0 0 22px rgba(212,182,106,0.2))}
     .hl-spin-anim svg{width:100%;height:100%;display:block}
@@ -1189,7 +1198,16 @@
     .hl-source-line{margin-top:14px !important;font-size:14px !important;line-height:1.6 !important}
     .hl-source-line + .hl-source-line{margin-top:14px !important}
     /* Slide 3 — bonhomme qui tourne en rond (mobile) */
-    /* === CINEMAGRAPH MOBILE === */
+    /* === RUNNER VIDEO MOBILE === */
+    .hl-runner-video{
+      width:340px;max-width:100%;margin:0 auto 24px;
+      filter:drop-shadow(0 0 24px rgba(212,182,106,0.34));
+      display:flex;justify-content:center;
+    }
+    .hl-runner-video video{
+      width:100%;height:auto;display:block;background:transparent;
+    }
+    /* === CINEMAGRAPH MOBILE (legacy fallback) === */
     .hl-spin-anim.hl-cinema{width:230px;height:184px;aspect-ratio:200/160}
     .hl-spin-anim{width:170px;height:136px;margin:0 auto 26px;position:relative;filter:drop-shadow(0 0 24px rgba(212,182,106,0.22))}
     .hl-spin-anim svg{width:100%;height:100%;display:block}
@@ -3474,7 +3492,14 @@
       </div>
       <div class="hero-lead-slide">
         <div class="hero-lead-card">
-          <div class="hl-spin-anim hl-cinema" aria-hidden="true">
+          <!-- Video silhouette athlete sur tapis roulant — recoloree en or via FFmpeg + WebM VP9 alpha + MP4 fallback -->
+          <div class="hl-runner-video" aria-hidden="true">
+            <video autoplay muted loop playsinline preload="auto" disablepictureinpicture poster="" width="480" height="270">
+              <source src="assets/video/runner-gold-final.webm" type="video/webm">
+              <source src="assets/video/runner-gold-final.mp4" type="video/mp4">
+            </video>
+          </div>
+          <div class="hl-spin-anim hl-cinema" style="display:none" aria-hidden="true">
             <svg viewBox="0 0 200 160" xmlns="http://www.w3.org/2000/svg">
               <defs>
                 <radialGradient id="hlCinemaGlow" cx="50%" cy="50%" r="50%">
