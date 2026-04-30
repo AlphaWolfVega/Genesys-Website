@@ -434,22 +434,23 @@
     /* Hide swipe hint on desktop (les flèches font le job) */
     .hero-lead-swipe{display:none}
 
-    /* === SLIDE CTA finale — sizes adaptées desktop === */
-    .hero-lead-slide-cta .hero-lead-card{padding:32px 28px;overflow:hidden}
-    .hl-cta-kicker{font-size:10px !important;margin-bottom:11px !important}
-    .hl-cta-body{font-size:11px !important;line-height:1.6 !important;margin-bottom:14px !important}
-    .hl-cta-claim{font-size:12px !important;margin-bottom:10px !important}
+    /* === SLIDE CTA finale — meme logique compacte que mobile === */
+    .hero-lead-slide-cta .hero-lead-card{padding:24px 22px;overflow:hidden;width:100%;max-width:100%;box-sizing:border-box}
+    .hero-lead-slide-cta .hero-lead-card .nowrap{white-space:normal !important}
+    .hl-cta-kicker{font-size:9px !important;margin-bottom:9px !important}
+    .hl-cta-body{font-size:9.5px !important;line-height:1.6 !important;margin-bottom:11px !important}
+    .hl-cta-claim{font-size:11px !important;margin-bottom:9px !important}
     .hl-cta-claim-inline{font-size:1.05em !important;color:var(--gold);font-weight:800;text-shadow:0 0 14px rgba(212,182,106,0.25)}
-    .hl-cta-mini{margin:0 0 13px !important}
-    .hl-cta-mini-card{padding:16px 17px 17px !important;border-radius:9px !important;text-align:center !important}
-    .hl-cta-mini-head{gap:11px !important;margin:0 0 11px !important}
-    .hl-cta-mini-icon{width:26px !important;height:26px !important;margin:0 !important}
-    .hl-cta-mini-h{font-size:12.5px !important;letter-spacing:0.08em !important;margin:0 !important;text-align:left !important}
-    .hl-cta-mini-b{font-size:14px !important;line-height:1.6 !important;text-align:left !important}
-    .hl-cta-mini-dot{width:6px !important;height:6px !important}
-    .hl-cta-mini-swipe{font-size:8.5px !important;margin-top:8px !important}
-    .hl-cta-exit{font-size:11px !important;white-space:normal !important;padding-top:13px !important;line-height:1.6 !important}
-    .hl-cta-explore{font-family:'Inter',sans-serif !important;font-size:10.5px !important;font-weight:700 !important;color:var(--gold) !important;letter-spacing:0.04em;margin:13px 0 6px !important;text-align:center;hyphens:none !important;word-break:keep-all}
+    .hl-cta-mini{margin:0 0 10px !important}
+    .hl-cta-mini-card{padding:13px 14px 14px !important;border-radius:9px !important;text-align:center !important}
+    .hl-cta-mini-head{gap:9px !important;margin:0 0 9px !important}
+    .hl-cta-mini-icon{width:22px !important;height:22px !important;margin:0 !important;flex-shrink:0 !important}
+    .hl-cta-mini-h{font-size:10.5px !important;letter-spacing:0.08em !important;margin:0 !important;text-align:left !important}
+    .hl-cta-mini-b{font-size:11.5px !important;line-height:1.55 !important;text-align:left !important}
+    .hl-cta-mini-dot{width:5.5px !important;height:5.5px !important}
+    .hl-cta-mini-swipe{font-size:7.5px !important;margin-top:6px !important}
+    .hl-cta-exit{font-size:9.5px !important;white-space:normal !important;padding-top:10px !important;line-height:1.55 !important}
+    .hl-cta-explore{font-family:'Inter',sans-serif !important;font-size:9.5px !important;font-weight:700 !important;color:var(--gold) !important;letter-spacing:0.04em;margin:10px 0 5px !important;text-align:center;hyphens:none !important;word-break:keep-all}
 
     /* === SCHEMA slide (cycle e-com) — toutes les rules dupliquées pour desktop === */
     .hero-lead-slide-schema .hero-lead-card{padding:28px 18px}
@@ -728,13 +729,15 @@
     }
     .hero-lead-card strong{color:var(--gold);font-weight:700}
     .hero-lead-slide-cta .hero-lead-card{
-      padding:28px 24px;
+      padding:22px 20px;
       text-align:center;
       box-sizing:border-box;
       overflow:hidden;
       width:100%;
       max-width:100%;
+      min-width:0;
     }
+    .hero-lead-slide-cta .hero-lead-card .nowrap{white-space:normal !important}
     .hero-lead-slide-cta .hero-lead-card > *{max-width:100%;width:100%;min-width:0;box-sizing:border-box}
     .hero-lead-slide-cta .hero-lead-card > .hero-lead-down{width:auto;align-self:center}
     .hero-lead-slide-cta .hero-lead-card p{
@@ -3158,7 +3161,7 @@
       <div class="hero-lead-slide hero-lead-slide-cta">
         <div class="hero-lead-card">
           <p class="hl-cta-kicker">Soyons clair.</p>
-          <p class="hl-cta-body">Si tu t'es reconnu dans une ou plusieurs de ces situations, et que tu es prêt à investir <strong class="nowrap">49 $/mois</strong> sur ton évolution pour accéder aux <strong class="nowrap">mêmes méthodes</strong> que <strong>certains te facturent des milliers d'euros</strong>, <strong class="hl-cta-claim-inline">alors GENESYS est fait pour toi.</strong></p>
+          <p class="hl-cta-body">Si tu t'es reconnu dans une ou plusieurs de ces situations, et que tu es prêt à investir <strong>49 $/mois</strong> sur ton évolution pour accéder aux <strong>mêmes méthodes</strong> que <strong>certains te facturent des milliers d'euros</strong>, <strong class="hl-cta-claim-inline">alors GENESYS est fait pour toi.</strong></p>
           <div class="hl-cta-mini" id="hlCtaMini">
             <div class="hl-cta-mini-track" id="hlCtaMiniTrack">
               <div class="hl-cta-mini-card">
@@ -3202,7 +3205,7 @@
             <span class="hl-cta-mini-swipe">← Slide pour découvrir →</span>
           </div>
           <p class="hl-cta-exit"><em>Si tu ne t'es pas reconnu, sincèrement, ce qu'il y a sur cette page ne va pas t'intéresser. Ne perds pas ton temps, retourne à tes occupations.</em></p>
-          <p class="hl-cta-explore">Sinon, découvre <span class="nowrap">l'écosystème GENESYS</span> juste en dessous</p>
+          <p class="hl-cta-explore">Sinon, découvre l'écosystème GENESYS juste en dessous</p>
           <span class="hero-lead-down" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14"/><path d="m19 12-7 7-7-7"/></svg></span>
         </div>
       </div>
