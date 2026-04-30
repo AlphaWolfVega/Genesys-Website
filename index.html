@@ -354,6 +354,8 @@
     }
     .hero-lead-card{
       width:100%;
+      max-width:100%;
+      box-sizing:border-box;
       background:linear-gradient(135deg,rgba(20,37,64,0.55) 0%,rgba(10,22,40,0.32) 100%);
       border:1px solid rgba(212,182,106,0.22);
       border-radius:16px;
@@ -726,8 +728,19 @@
       margin:0;
     }
     .hero-lead-card strong{color:var(--gold);font-weight:700}
-    .hero-lead-slide-cta .hero-lead-card{padding:18px 12px;text-align:center;overflow:hidden}
-    .hero-lead-slide-cta .hero-lead-card p{margin:0}
+    .hero-lead-slide-cta .hero-lead-card{
+      padding:18px 16px;
+      text-align:center;
+      box-sizing:border-box;
+      overflow:visible;
+    }
+    .hero-lead-slide-cta .hero-lead-card p{
+      margin:0;
+      max-width:100%;
+      overflow-wrap:break-word;
+      word-wrap:break-word;
+      hyphens:auto;
+    }
     .hl-cta-kicker{
       font-family:'Inter',sans-serif;
       font-size:8.5px;font-weight:700;
@@ -738,35 +751,41 @@
     }
     .hl-cta-body{
       font-family:'Inter',sans-serif;
-      font-size:10.5px;font-weight:500;
+      font-size:9.5px;font-weight:500;
       color:var(--text);
-      line-height:1.45;
+      line-height:1.5;
       margin-bottom:8px !important;
+      overflow-wrap:break-word;
+      word-wrap:break-word;
+      hyphens:auto;
     }
     .hl-cta-body .nowrap{white-space:nowrap}
     .hl-cta-claim{
       font-family:'Playfair Display',serif;
       font-style:italic;
-      font-size:12.5px;font-weight:800;
+      font-size:11.5px;font-weight:800;
       color:var(--gold);
-      line-height:1.22;
+      line-height:1.25;
       letter-spacing:-0.005em;
       margin-bottom:9px !important;
       text-shadow:0 0 20px rgba(212,182,106,0.28);
+      overflow-wrap:break-word;
     }
     .hl-cta-claim strong{color:var(--gold);font-weight:800}
     .hl-cta-exit{
       font-family:'Inter',sans-serif;
-      font-size:9.5px;font-weight:500;
+      font-size:8.5px;font-weight:500;
       color:rgba(245,238,222,0.62);
-      line-height:1.45;
+      line-height:1.5;
       margin:0 !important;
       padding-top:8px;
       border-top:1px solid rgba(212,182,106,0.18);
       white-space:normal;
       letter-spacing:0;
       max-width:100%;
+      overflow-wrap:break-word;
       word-wrap:break-word;
+      hyphens:auto;
     }
     .hl-cta-exit em{color:rgba(212,182,106,0.7);font-style:italic;font-weight:600}
     /* Subtle swipe-right hint on slides 1–3 — never disturbs reading */
