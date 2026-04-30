@@ -528,8 +528,10 @@
       0%,100%{transform:translateY(0);opacity:0.75}
       50%{transform:translateY(-7px);opacity:1}
     }
-    /* SILHOUETTE COUREUR : ZERO animation interne — c'est ca, l'effet cinemagraph */
+    /* SILHOUETTE COUREUR : squelette articule — rotation aux pivots via SMIL + rebond vertical via CSS */
     .hl-cinema-silhouette{filter:drop-shadow(0 0 6px rgba(212,182,106,0.45))}
+    .hl-body-bounce{animation:hlBodyBounce 0.25s ease-in-out infinite alternate;transform-box:fill-box;transform-origin:center}
+    @keyframes hlBodyBounce{from{transform:translateY(0)}to{transform:translateY(-2px)}}
     .hl-spin-text{font-size:16px !important;line-height:1.85 !important;text-align:center}
     .hl-spin-dots{display:inline-block;color:var(--gold);font-weight:700;letter-spacing:0.18em;margin-left:2px;animation:hlSpinDots 1.4s ease-in-out infinite}
     @keyframes hlSpinDots{0%,100%{opacity:0.35}50%{opacity:1}}
@@ -1226,6 +1228,8 @@
       50%{transform:translateY(-7px);opacity:1}
     }
     .hl-cinema-silhouette{filter:drop-shadow(0 0 7px rgba(212,182,106,0.5))}
+    .hl-body-bounce{animation:hlBodyBounce 0.25s ease-in-out infinite alternate;transform-box:fill-box;transform-origin:center}
+    @keyframes hlBodyBounce{from{transform:translateY(0)}to{transform:translateY(-2.4px)}}
     .hl-spin-text{font-size:17px !important;line-height:1.85 !important;text-align:center}
     .hl-spin-dots{display:inline-block;color:var(--gold);font-weight:700;letter-spacing:0.18em;margin-left:2px;animation:hlSpinDots 1.4s ease-in-out infinite}
     @keyframes hlSpinDots{0%,100%{opacity:0.35}50%{opacity:1}}
@@ -3506,20 +3510,33 @@
                 <circle class="hl-orb hl-orb-3" cx="25" cy="115" r="1.2" fill="var(--gold)"/>
                 <circle class="hl-orb hl-orb-4" cx="178" cy="100" r="1.3" fill="var(--gold)"/>
               </g>
-              <!-- SILHOUETTE COUREUR — pose mid-stride FIGEE, vue de profil droit (face camera 3/4) -->
+              <!-- SILHOUETTE COUREUR — squelette articule, rotation aux hanches/epaules via SMIL SVG -->
               <g class="hl-cinema-silhouette" transform="translate(100,92)">
-                <!-- Tete -->
-                <circle cx="0" cy="-38" r="8.5" fill="var(--gold)"/>
-                <!-- Torse (legere flexion avant, runner stance) -->
-                <path d="M -2 -29 L 5 -28 L 8 -8 L 4 12 L -6 12 L -8 -10 Z" fill="var(--gold)"/>
-                <!-- Jambe avant (droite, genou plie, pied au sol) -->
-                <path d="M 4 12 L 12 14 L 18 28 L 22 32 L 26 46 L 33 47 L 32 50 L 22 50 L 18 36 L 12 26 L 4 18 Z" fill="var(--gold)"/>
-                <!-- Jambe arriere (gauche, etendue, pied leve en toe-off) -->
-                <path d="M -6 12 L -14 16 L -22 22 L -28 26 L -33 24 L -32 21 L -28 20 L -22 16 L -16 8 L -10 8 Z" fill="var(--gold)"/>
-                <!-- Bras avant (gauche, plie au coude, hauteur poitrine) -->
-                <path d="M 5 -22 L 12 -18 L 19 -22 L 25 -28 L 27 -25 L 23 -19 L 16 -13 L 10 -13 L 4 -18 Z" fill="var(--gold)"/>
-                <!-- Bras arriere (droit, plie au coude, hauteur hanche) -->
-                <path d="M -7 -22 L -13 -16 L -18 -10 L -22 -2 L -25 -1 L -25 -4 L -22 -10 L -17 -17 L -10 -22 Z" fill="var(--gold)"/>
+                <!-- Tete + torse (bouncent ensemble, rebond vertical synchro avec foulee) -->
+                <g class="hl-body-bounce">
+                  <circle cx="0" cy="-38" r="8.5" fill="var(--gold)"/>
+                  <path d="M -2 -29 L 5 -28 L 8 -8 L 4 12 L -6 12 L -8 -10 Z" fill="var(--gold)"/>
+                </g>
+                <!-- Jambe AVANT — pivot hanche droite (4,12) -->
+                <g>
+                  <path d="M 4 12 L 12 14 L 18 28 L 22 32 L 26 46 L 33 47 L 32 50 L 22 50 L 18 36 L 12 26 L 4 18 Z" fill="var(--gold)"/>
+                  <animateTransform attributeName="transform" type="rotate" values="-22 4 12;25 4 12;-22 4 12" keyTimes="0;0.5;1" dur="0.5s" repeatCount="indefinite" calcMode="spline" keySplines="0.42 0 0.58 1;0.42 0 0.58 1"/>
+                </g>
+                <!-- Jambe ARRIERE — pivot hanche gauche (-6,12) -->
+                <g>
+                  <path d="M -6 12 L -14 16 L -22 22 L -28 26 L -33 24 L -32 21 L -28 20 L -22 16 L -16 8 L -10 8 Z" fill="var(--gold)"/>
+                  <animateTransform attributeName="transform" type="rotate" values="25 -6 12;-22 -6 12;25 -6 12" keyTimes="0;0.5;1" dur="0.5s" repeatCount="indefinite" calcMode="spline" keySplines="0.42 0 0.58 1;0.42 0 0.58 1"/>
+                </g>
+                <!-- Bras AVANT — pivot epaule droite (5,-22) -->
+                <g>
+                  <path d="M 5 -22 L 12 -18 L 19 -22 L 25 -28 L 27 -25 L 23 -19 L 16 -13 L 10 -13 L 4 -18 Z" fill="var(--gold)"/>
+                  <animateTransform attributeName="transform" type="rotate" values="-25 5 -22;22 5 -22;-25 5 -22" keyTimes="0;0.5;1" dur="0.5s" repeatCount="indefinite" calcMode="spline" keySplines="0.42 0 0.58 1;0.42 0 0.58 1"/>
+                </g>
+                <!-- Bras ARRIERE — pivot epaule gauche (-7,-22) -->
+                <g>
+                  <path d="M -7 -22 L -13 -16 L -18 -10 L -22 -2 L -25 -1 L -25 -4 L -22 -10 L -17 -17 L -10 -22 Z" fill="var(--gold)"/>
+                  <animateTransform attributeName="transform" type="rotate" values="22 -7 -22;-25 -7 -22;22 -7 -22" keyTimes="0;0.5;1" dur="0.5s" repeatCount="indefinite" calcMode="spline" keySplines="0.42 0 0.58 1;0.42 0 0.58 1"/>
+                </g>
               </g>
             </svg>
           </div>
