@@ -435,7 +435,10 @@
     .hero-lead-swipe{display:none}
 
     /* === SLIDE CTA finale — sizes adaptées desktop === */
-    .hero-lead-slide-cta .hero-lead-card{padding:32px 28px;overflow:hidden}
+    .hero-lead-slide-cta .hero-lead-card{display:block !important;padding:32px 28px;overflow:hidden;width:100%;max-width:100%;min-width:0}
+    .hero-lead-slide-cta .hero-lead-card *{min-width:0;box-sizing:border-box;max-width:100%}
+    .hero-lead-slide-cta .hero-lead-card .nowrap{white-space:normal !important}
+    .hero-lead-slide-cta .hero-lead-card .hero-lead-down{display:flex !important;width:38px !important;height:38px !important;margin:18px auto 0 !important;flex-shrink:0}
     .hl-cta-kicker{font-size:10px !important;margin-bottom:11px !important}
     .hl-cta-body{font-size:11px !important;line-height:1.6 !important;margin-bottom:14px !important}
     .hl-cta-claim{font-size:12px !important;margin-bottom:10px !important}
@@ -728,15 +731,24 @@
     }
     .hero-lead-card strong{color:var(--gold);font-weight:700}
     .hero-lead-slide-cta .hero-lead-card{
+      display:block !important;
       padding:28px 24px;
       text-align:center;
       box-sizing:border-box;
       overflow:hidden;
       width:100%;
       max-width:100%;
+      min-width:0;
     }
-    .hero-lead-slide-cta .hero-lead-card > *{max-width:100%;width:100%;min-width:0;box-sizing:border-box}
-    .hero-lead-slide-cta .hero-lead-card > .hero-lead-down{width:auto;align-self:center}
+    .hero-lead-slide-cta .hero-lead-card *{min-width:0;box-sizing:border-box;max-width:100%}
+    .hero-lead-slide-cta .hero-lead-card .nowrap{white-space:normal !important}
+    .hero-lead-slide-cta .hero-lead-card .hero-lead-down{
+      display:flex !important;
+      width:38px !important;
+      height:38px !important;
+      margin:18px auto 0 !important;
+      flex-shrink:0;
+    }
     .hero-lead-slide-cta .hero-lead-card p{
       margin:0;
       max-width:100%;
@@ -3158,7 +3170,7 @@
       <div class="hero-lead-slide hero-lead-slide-cta">
         <div class="hero-lead-card">
           <p class="hl-cta-kicker">Soyons clair.</p>
-          <p class="hl-cta-body">Si tu t'es reconnu dans une ou plusieurs de ces situations, et que tu es prêt à investir <strong class="nowrap">49 $/mois</strong> sur ton évolution pour accéder aux <strong class="nowrap">mêmes méthodes</strong> que <strong>certains te facturent des milliers d'euros</strong>, <strong class="hl-cta-claim-inline">alors GENESYS est fait pour toi.</strong></p>
+          <p class="hl-cta-body">Si tu t'es reconnu dans une ou plusieurs de ces situations, et que tu es prêt à investir <strong>49 $/mois</strong> sur ton évolution pour accéder aux <strong>mêmes méthodes</strong> que <strong>certains te facturent des milliers d'euros</strong>, <strong class="hl-cta-claim-inline">alors GENESYS est fait pour toi.</strong></p>
           <div class="hl-cta-mini" id="hlCtaMini">
             <div class="hl-cta-mini-track" id="hlCtaMiniTrack">
               <div class="hl-cta-mini-card">
@@ -3202,7 +3214,7 @@
             <span class="hl-cta-mini-swipe">← Slide pour découvrir →</span>
           </div>
           <p class="hl-cta-exit"><em>Si tu ne t'es pas reconnu, sincèrement, ce qu'il y a sur cette page ne va pas t'intéresser. Ne perds pas ton temps, retourne à tes occupations.</em></p>
-          <p class="hl-cta-explore">Sinon, découvre <span class="nowrap">l'écosystème GENESYS</span> juste en dessous</p>
+          <p class="hl-cta-explore">Sinon, découvre l'écosystème GENESYS juste en dessous</p>
           <span class="hero-lead-down" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14"/><path d="m19 12-7 7-7-7"/></svg></span>
         </div>
       </div>
