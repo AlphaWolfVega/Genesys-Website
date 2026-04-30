@@ -2254,6 +2254,49 @@
   .reveal{opacity:0;transform:translateY(20px);transition:opacity 1s ease,transform 1s ease}
   .reveal.in{opacity:1;transform:translateY(0)}
 
+  /* === TEST PSYCHOLOGIQUE — section intro paragraphe (rapetissé) === */
+  #determination-test .section-header .dt-section-intro{
+    font-size:14.5px !important;
+    line-height:1.55 !important;
+    max-width:640px;
+    margin:0 auto !important;
+  }
+  @media(max-width:600px){
+    #determination-test .section-header .dt-section-intro{
+      font-size:13px !important;
+      line-height:1.5 !important;
+    }
+  }
+  /* Scroll hint (stage 4 — quand options F/G/H sortent du viewport) */
+  .dt-scroll-hint{
+    position:fixed;
+    bottom:24px;left:50%;
+    transform:translateX(-50%);
+    display:flex;align-items:center;gap:8px;
+    padding:9px 18px;
+    background:linear-gradient(180deg, rgba(212,182,106,0.92), rgba(212,182,106,0.85));
+    border:1px solid rgba(255,255,255,0.18);
+    border-radius:999px;
+    color:#06101F;
+    font-family:'Inter',sans-serif;
+    font-size:11px;font-weight:800;
+    letter-spacing:0.08em;text-transform:uppercase;
+    pointer-events:none;
+    z-index:50;
+    box-shadow:0 8px 24px rgba(0,0,0,0.45), 0 0 0 4px rgba(212,182,106,0.18);
+    opacity:0;
+    transition:opacity 0.35s ease;
+    animation:dtScrollHintBounce 1.4s ease-in-out infinite;
+  }
+  .dt-scroll-hint.is-shown{opacity:1}
+  .dt-scroll-hint svg{width:14px;height:14px;display:block}
+  @keyframes dtScrollHintBounce{
+    0%,100%{transform:translateX(-50%) translateY(0)}
+    50%{transform:translateX(-50%) translateY(5px)}
+  }
+  @media(prefers-reduced-motion:reduce){
+    .dt-scroll-hint{animation:none}
+  }
   /* ===== TEST PSYCHOLOGIQUE DE DÉTERMINATION ===== */
   #determination-test{
     padding:80px 0;
@@ -2777,16 +2820,21 @@
     letter-spacing:0.04em;
   }
   .dt-success-author strong{color:var(--gold);font-weight:700}
-  /* Texte d'invitation à parcourir la page */
+  /* Texte d'invitation à parcourir la page — 1 ligne nowrap */
   .dt-verdict-explore{
     font-family:'Inter',sans-serif;
-    font-size:13.5px !important;
+    font-size:12px !important;
     font-weight:600 !important;
     color:var(--text-mute) !important;
-    letter-spacing:0.04em;
+    letter-spacing:0;
     text-align:center !important;
     margin:0 auto 14px !important;
-    max-width:520px;
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
+  }
+  @media(max-width:380px){
+    .dt-verdict-explore{font-size:10.5px !important}
   }
   /* Sub-question dans dt-q */
   .dt-q-sub{
@@ -3101,7 +3149,7 @@
         <div class="line"></div>
       </div>
       <h2>Quel <em>entrepreneur</em><br>tu es vraiment ?</h2>
-      <p>Ton business est une extension de toi-même. <strong>Avant de te parler méthode, on va regarder ton histoire.</strong> D'où tu pars, ce que tu as traversé, ce qui te motive vraiment, ce qui te freine. À la fin, tu verras ton portrait — et des gens comme toi qui ont réussi à partir du même point. Prends 2 minutes. <strong>C'est 100 % anonyme</strong> — aucun prénom, aucun email, rien n'est demandé.</p>
+      <p class="dt-section-intro">Ton business est une extension de toi-même. <strong>Avant de te parler méthode, on va regarder ton histoire.</strong> D'où tu pars, ce que tu as traversé, ce qui te motive vraiment, ce qui te freine. À la fin, tu verras ton portrait, et des gens comme toi qui ont réussi à partir du même point. Prends 2 minutes. <strong>C'est 100 % anonyme</strong> : aucun prénom, aucun email, rien n'est demandé.</p>
     </div>
 
     <div class="dt-arena reveal" id="dtArena" style="margin-top:14px">
@@ -3169,11 +3217,18 @@
         <div class="dt-stage-tag">Ce qui te freine</div>
         <h3 class="dt-q">Aujourd'hui, qu'est-ce qui<br><em>te ralentit le plus</em> ?</h3>
         <div class="dt-choices" id="dtStage4Choices">
-          <button type="button" class="dt-choice" data-val="capacity"><span class="dt-choice-letter">A</span><span>Je doute de <em>mes capacités</em> — j'ai pas le profil intellectuel/technique</span></button>
-          <button type="button" class="dt-choice" data-val="timing"><span class="dt-choice-letter">B</span><span>Je doute du <em>timing</em> — c'est trop tard, le marché est saturé</span></button>
-          <button type="button" class="dt-choice" data-val="model"><span class="dt-choice-letter">C</span><span>Je doute du <em>modèle e-commerce</em> lui-même</span></button>
-          <button type="button" class="dt-choice" data-val="discipline"><span class="dt-choice-letter">D</span><span>Je doute de <em>ma discipline</em> — je commence, j'arrête, je recommence</span></button>
-          <button type="button" class="dt-choice" data-val="entourage"><span class="dt-choice-letter">E</span><span>Je doute à cause de <em>mon entourage</em> — personne ne croit en moi</span></button>
+          <button type="button" class="dt-choice" data-val="capacity"><span class="dt-choice-letter">A</span><span>Je doute de <em>mes capacités</em>. J'ai pas le profil intellectuel ou technique.</span></button>
+          <button type="button" class="dt-choice" data-val="timing"><span class="dt-choice-letter">B</span><span>Je doute du <em>timing</em>. C'est trop tard, le marché est saturé.</span></button>
+          <button type="button" class="dt-choice" data-val="model"><span class="dt-choice-letter">C</span><span>Je doute du <em>modèle e-commerce</em> lui-même.</span></button>
+          <button type="button" class="dt-choice" data-val="discipline"><span class="dt-choice-letter">D</span><span>Je doute de <em>ma discipline</em>. Je commence, j'arrête, je recommence.</span></button>
+          <button type="button" class="dt-choice" data-val="entourage"><span class="dt-choice-letter">E</span><span>Je doute à cause de <em>mon entourage</em>. Personne ne croit en moi.</span></button>
+          <button type="button" class="dt-choice" data-val="time"><span class="dt-choice-letter">F</span><span>Je manque de <em>temps</em>.</span></button>
+          <button type="button" class="dt-choice" data-val="info"><span class="dt-choice-letter">G</span><span>Je manque de <em>bonnes informations</em>.</span></button>
+          <button type="button" class="dt-choice" data-val="geo"><span class="dt-choice-letter">H</span><span>Ma <em>localisation géographique</em> m'a empêché d'avoir accès à certains outils (Stripe, etc.).</span></button>
+        </div>
+        <div class="dt-scroll-hint" id="dtScrollHint4" aria-hidden="true">
+          <span>D'autres options en bas</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14"/><path d="m19 12-7 7-7-7"/></svg>
         </div>
       </div>
 
@@ -3197,12 +3252,12 @@
         <!-- Sub 6a: target revenue -->
         <div class="dt-substage is-active" id="dtStage6a">
           <h3 class="dt-q">Quel bénéfice<br>souhaites-tu générer<br><em>dans un an</em> ?</h3>
-          <p class="dt-hint">Vise juste : ni trop bas pour te protéger, ni trop haut pour épater.</p>
+          <p class="dt-hint">Sois honnête : pas trop bas, pas trop haut. La vraie cible que tu vises.</p>
           <div class="dt-choices" id="dtStage6aChoices">
-            <button type="button" class="dt-choice" data-val="5k"><span class="dt-choice-letter">A</span><span><em>5 000 €</em> / mois nets</span></button>
-            <button type="button" class="dt-choice" data-val="10k"><span class="dt-choice-letter">B</span><span><em>10 000 €</em> / mois nets</span></button>
-            <button type="button" class="dt-choice" data-val="20k"><span class="dt-choice-letter">C</span><span><em>20 000 €</em> / mois nets</span></button>
-            <button type="button" class="dt-choice" data-val="50k"><span class="dt-choice-letter">D</span><span><em>50 000 €</em> et plus / mois nets</span></button>
+            <button type="button" class="dt-choice" data-val="5k"><span class="dt-choice-letter">A</span><span><em>5 000 €</em> / mois net</span></button>
+            <button type="button" class="dt-choice" data-val="10k"><span class="dt-choice-letter">B</span><span><em>10 000 €</em> / mois net</span></button>
+            <button type="button" class="dt-choice" data-val="20k"><span class="dt-choice-letter">C</span><span><em>20 000 €</em> / mois net</span></button>
+            <button type="button" class="dt-choice" data-val="50k"><span class="dt-choice-letter">D</span><span><em>50 000 €</em> et plus / mois net</span></button>
           </div>
         </div>
 
@@ -3229,7 +3284,6 @@
         <p class="dt-verdict-explore">Découvre l'écosystème en parcourant la page.</p>
         <div class="dt-verdict-cta">
           <a href="#rejoindre" class="btn btn-gold">Rejoindre GENESYS</a>
-          <button type="button" class="dt-replay" id="dtReplay">Refaire le test</button>
         </div>
       </div>
 
@@ -4716,7 +4770,6 @@
     };
     const order = ['intro','s1','s2','s3','s4','s5','s6','result'];
     const startBtn = sec.querySelector('#dtStart');
-    const replayBtn = sec.querySelector('#dtReplay');
 
     let answers = {}; // {origin, difficulties[], motivation, doubt, enemy, horizonDays}
     let currentStage = 'intro';
@@ -4819,10 +4872,10 @@
     const targetEcho = sec.querySelector('#dtTargetEcho');
 
     const TARGET_LABEL = {
-      '5k':  '5 000 €/mois',
-      '10k': '10 000 €/mois',
-      '20k': '20 000 €/mois',
-      '50k': '50 000 €/mois et plus'
+      '5k':  '5 000 €/mois net',
+      '10k': '10 000 €/mois net',
+      '20k': '20 000 €/mois net',
+      '50k': '50 000 €/mois net et plus'
     };
 
     sec.querySelectorAll('#dtStage6aChoices .dt-choice').forEach(btn => {
@@ -4903,11 +4956,14 @@
       legacy:   "Construire quelque chose qui te ressemble vraiment — c'est rare aujourd'hui de chercher du sens, pas juste du cash. C'est un atout."
     };
     const DOUBT_FEAR = {
-      capacity:    "<strong>Tu n'as pas besoin d'être un génie pour réussir en e-commerce.</strong> Les meilleurs ne sont pas les plus brillants — ce sont ceux qui appliquent une bonne séquence et qui ne lâchent pas trop tôt.",
-      timing:      "<strong>Le marché n'est pas saturé — il est juste mal couvert.</strong> Chaque année, de nouveaux entrants raflent des parts de marché à des acteurs qui ont arrêté d'innover. Le timing est aujourd'hui, comme il l'a toujours été.",
-      model:       "<strong>L'e-commerce n'est pas en train de mourir — il évolue.</strong> Ceux qui appliquent les méthodes de 2020 échouent. Ceux qui s'adaptent (séquence, neuro, copy, pubs propres) réussissent. Ce n'est pas le modèle qui plante.",
-      discipline:  "<strong>La discipline n'est pas un trait de personnalité — c'est un système.</strong> Avec le bon cadre, la bonne communauté qui te tient et un parcours clair, tu peux être beaucoup plus constant que tu ne le crois.",
-      entourage:   "<strong>Tu n'as pas besoin que ton entourage croie en toi.</strong> Tu as besoin d'une autre tribu : des gens qui font la même chose, qui se relèvent comme toi, qui te corrigent. C'est ce qu'on construit ici."
+      capacity:    "<strong>Tu n'as pas besoin d'être un génie pour réussir en e-commerce.</strong> Les meilleurs ne sont pas les plus brillants : ce sont ceux qui appliquent une bonne séquence et qui ne lâchent pas trop tôt.",
+      timing:      "<strong>Le marché n'est pas saturé. Il est juste mal couvert.</strong> Chaque année, de nouveaux entrants raflent des parts de marché à des acteurs qui ont arrêté d'innover. Le timing est aujourd'hui, comme il l'a toujours été.",
+      model:       "<strong>L'e-commerce n'est pas en train de mourir. Il évolue.</strong> Ceux qui appliquent les méthodes de 2020 échouent. Ceux qui s'adaptent (séquence, neuro, copy, pubs propres) réussissent. Ce n'est pas le modèle qui plante.",
+      discipline:  "<strong>La discipline n'est pas un trait de personnalité. C'est un système.</strong> Avec le bon cadre, la bonne communauté qui te tient et un parcours clair, tu peux être beaucoup plus constant que tu ne le crois.",
+      entourage:   "<strong>Tu n'as pas besoin que ton entourage croie en toi.</strong> Tu as besoin d'une autre tribu : des gens qui font la même chose, qui se relèvent comme toi, qui te corrigent. C'est ce qu'on construit ici.",
+      time:        "<strong>Le manque de temps n'est pas une fatalité.</strong> En e-commerce, ce qui compte ce n'est pas combien d'heures tu y mets, c'est dans quel ordre tu les mets. Avec la bonne séquence, 1 h par jour bien placée bat 6 h dispersées.",
+      info:        "<strong>Le manque de bonnes infos est le vrai frein de 80 % des débutants.</strong> Tu trouves trop de tutos contradictoires, trop de gourous qui se contredisent. GENESYS te donne une seule séquence claire et testée, pas 50 méthodes en parallèle.",
+      geo:         "<strong>Ta localisation géographique a longtemps été un frein réel</strong> (Stripe, PayPal, Shopify selon les pays). Mais en 2026, il existe des solutions de contournement éprouvées (Wise, Payoneer, Stripe Atlas, etc.) qu'on couvre dans GENESYS sans cacher les complexités."
     };
     const ENEMY_BLAME = {
       gurus:     "<strong>Les gourous qui mentent ont fait beaucoup de dégâts</strong> — ils ont vendu du rêve à des gens qui méritaient mieux. C'est entre autres pour les contrer qu'on a construit GENESYS : pas de promesse en l'air, pas de captures Shopify trafiquées, pas de Lambo louée.",
@@ -5007,7 +5063,34 @@
     }
 
     startBtn.addEventListener('click', startTest);
-    replayBtn.addEventListener('click', startTest);
+
+    // Scroll hint stage 4 — affiche un indicateur "D'autres options en bas" quand le bas n'est pas dans la zone visible
+    const stage4 = stages.s4;
+    const scrollHint4 = sec.querySelector('#dtScrollHint4');
+    if(stage4 && scrollHint4){
+      const lastChoice = stage4.querySelector('.dt-choices .dt-choice:last-child');
+      if(lastChoice){
+        const obs = new IntersectionObserver(entries => {
+          entries.forEach(e => {
+            const stage4Active = stage4.classList.contains('is-active');
+            if(stage4Active && !e.isIntersecting){
+              scrollHint4.classList.add('is-shown');
+            } else {
+              scrollHint4.classList.remove('is-shown');
+            }
+          });
+        }, {threshold:0.4});
+        obs.observe(lastChoice);
+
+        // Hide hint when user leaves stage 4
+        const stageObs = new MutationObserver(() => {
+          if(!stage4.classList.contains('is-active')){
+            scrollHint4.classList.remove('is-shown');
+          }
+        });
+        stageObs.observe(stage4, {attributes:true, attributeFilter:['class']});
+      }
+    }
   })();
 
 </script>
