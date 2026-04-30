@@ -485,22 +485,28 @@
     .hl-source-line{margin-top:13px !important;font-size:13.5px !important;line-height:1.6 !important}
     .hl-source-line + .hl-source-line{margin-top:13px !important}
     /* Slide 3 — bonhomme qui tourne en rond (desktop) */
-    /* === RUNNER TRANSPARENT === silhouette or qui traverse la card horizontalement (effet "tourne en rond") */
+    /* === MARCHEUR PENSIF === silhouette de profil, traverse + demi-tour + repart (effet tourne en rond, marche reflechie) */
     .hl-runner-video{
-      width:100%;height:140px;margin:0 auto 24px;
+      width:100%;height:170px;margin:0 auto 22px;
       position:relative;overflow:hidden;
     }
     .hl-runner-video picture{
-      position:absolute;top:5px;left:0;
-      animation:hlRunnerCross 7s linear infinite;
-      filter:drop-shadow(0 0 16px rgba(212,182,106,0.4));
+      position:absolute;top:4px;left:0;
+      animation:hlWalkerLoop 16s ease-in-out infinite;
+      transform-origin:center;
+      filter:drop-shadow(0 0 14px rgba(212,182,106,0.45));
     }
     .hl-runner-video .hl-runner-img{
-      width:170px;height:130px;display:block;
+      width:90px;height:162px;display:block;
     }
-    @keyframes hlRunnerCross{
-      0%{transform:translateX(-180px)}
-      100%{transform:translateX(calc(100vw + 20px))}
+    @keyframes hlWalkerLoop{
+      0%   {transform:translateX(-100px) scaleX(1)}
+      45%  {transform:translateX(calc(100vw - 90px)) scaleX(1)}
+      48%  {transform:translateX(calc(100vw - 90px)) scaleX(1)}
+      52%  {transform:translateX(calc(100vw - 90px)) scaleX(-1)}
+      95%  {transform:translateX(0) scaleX(-1)}
+      98%  {transform:translateX(0) scaleX(-1)}
+      100% {transform:translateX(-100px) scaleX(1)}
     }
     /* === CINEMAGRAPH (ancien fallback SVG, hidden) === */
     .hl-spin-anim.hl-cinema{width:200px;height:160px;aspect-ratio:200/160}
@@ -1206,22 +1212,28 @@
     .hl-source-line{margin-top:14px !important;font-size:14px !important;line-height:1.6 !important}
     .hl-source-line + .hl-source-line{margin-top:14px !important}
     /* Slide 3 — bonhomme qui tourne en rond (mobile) */
-    /* === RUNNER TRANSPARENT MOBILE === silhouette or qui traverse */
+    /* === MARCHEUR PENSIF MOBILE === traverse + demi-tour + repart */
     .hl-runner-video{
-      width:100%;height:150px;margin:0 auto 24px;
+      width:100%;height:180px;margin:0 auto 24px;
       position:relative;overflow:hidden;
     }
     .hl-runner-video picture{
-      position:absolute;top:8px;left:0;
-      animation:hlRunnerCross 8s linear infinite;
-      filter:drop-shadow(0 0 18px rgba(212,182,106,0.45));
+      position:absolute;top:5px;left:0;
+      animation:hlWalkerLoop 18s ease-in-out infinite;
+      transform-origin:center;
+      filter:drop-shadow(0 0 16px rgba(212,182,106,0.5));
     }
     .hl-runner-video .hl-runner-img{
-      width:180px;height:138px;display:block;
+      width:100px;height:180px;display:block;
     }
-    @keyframes hlRunnerCross{
-      0%{transform:translateX(-200px)}
-      100%{transform:translateX(calc(100vw + 30px))}
+    @keyframes hlWalkerLoop{
+      0%   {transform:translateX(-110px) scaleX(1)}
+      45%  {transform:translateX(calc(100vw - 100px)) scaleX(1)}
+      48%  {transform:translateX(calc(100vw - 100px)) scaleX(1)}
+      52%  {transform:translateX(calc(100vw - 100px)) scaleX(-1)}
+      95%  {transform:translateX(0) scaleX(-1)}
+      98%  {transform:translateX(0) scaleX(-1)}
+      100% {transform:translateX(-110px) scaleX(1)}
     }
     /* === CINEMAGRAPH MOBILE (legacy fallback) === */
     .hl-spin-anim.hl-cinema{width:230px;height:184px;aspect-ratio:200/160}
@@ -3508,11 +3520,11 @@
       </div>
       <div class="hero-lead-slide">
         <div class="hero-lead-card">
-          <!-- Silhouette athlete or transparente, traverse la card de gauche a droite et inversement (effet "qui tourne en rond") -->
+          <!-- Silhouette de profil — marche pensivement, traverse la card, fait demi-tour, repart (effet "tourne en rond") -->
           <div class="hl-runner-video" aria-hidden="true">
             <picture>
-              <source srcset="assets/video/runner-gold.webp" type="image/webp">
-              <img src="assets/video/runner-gold-transparent.gif" alt="" width="170" height="130" loading="eager" decoding="async" class="hl-runner-img">
+              <source srcset="assets/video/walker-gold.webp" type="image/webp">
+              <img src="assets/video/walker-gold.gif" alt="" width="90" height="162" loading="eager" decoding="async" class="hl-runner-img">
             </picture>
           </div>
           <div class="hl-spin-anim hl-cinema" style="display:none" aria-hidden="true">
