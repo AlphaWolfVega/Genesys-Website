@@ -445,26 +445,16 @@
     .hero-lead-slide-schema .hero-lead-card{padding:28px 18px}
     .hero-lead-slide-schema .hl-schema-intro{
       font-family:'Inter',sans-serif !important;
-      font-size:14px !important;
-      font-weight:800 !important;
+      font-size:13px !important;
+      font-weight:700 !important;
       color:var(--gold) !important;
-      margin:0 0 5px !important;
-      line-height:1.25 !important;
+      margin:0 0 12px !important;
+      line-height:1.35 !important;
       text-align:center;
-      white-space:nowrap;
       letter-spacing:-0.005em;
       text-shadow:0 0 22px rgba(212,182,106,0.22);
     }
-    .hero-lead-slide-schema .hl-schema-target{
-      font-family:'Inter',sans-serif !important;
-      font-size:11.5px !important;
-      font-style:italic !important;
-      font-weight:500 !important;
-      color:rgba(212,182,106,0.55) !important;
-      margin:0 0 14px !important;
-      text-align:center !important;
-      line-height:1.4 !important;
-    }
+    .hero-lead-slide-schema .hl-schema-target{display:none !important;}
     .hl-schema{
       display:flex;flex-direction:column;
       align-items:center;justify-content:center;
@@ -566,6 +556,8 @@
       flex-shrink:0;color:var(--gold);
       display:inline-block;
     }
+    .hl-tap-icon-down{transform:rotate(180deg);}
+    .hl-tap-prompt-top{margin:4px 0 10px !important;}
     .hl-tap-prompt.is-hidden{display:none;animation:none}
     .hl-loop-or{
       font-family:'Inter',sans-serif;
@@ -859,27 +851,16 @@
     .hero-lead-slide-schema .hero-lead-card{padding:24px 10px}
     .hero-lead-slide-schema .hl-schema-intro{
       font-family:'Inter',sans-serif !important;
-      font-size:13px !important;
-      font-weight:800 !important;
+      font-size:12.5px !important;
+      font-weight:700 !important;
       color:var(--gold) !important;
-      margin:0 0 5px !important;
-      line-height:1.25 !important;
+      margin:0 0 12px !important;
+      line-height:1.4 !important;
       text-align:center;
-      white-space:nowrap;
       letter-spacing:-0.005em;
       text-shadow:0 0 22px rgba(212,182,106,0.22);
     }
-    .hero-lead-slide-schema .hl-schema-target{
-      font-family:'Inter',sans-serif !important;
-      font-size:10.5px !important;
-      font-style:italic !important;
-      font-weight:500 !important;
-      color:rgba(212,182,106,0.55) !important;
-      margin:0 0 14px !important;
-      text-align:center !important;
-      line-height:1.4 !important;
-      letter-spacing:0.01em;
-    }
+    .hero-lead-slide-schema .hl-schema-target{display:none !important;}
     .hl-schema{
       display:flex;flex-direction:column;
       align-items:center;justify-content:center;
@@ -2978,8 +2959,8 @@
       </div>
       <div class="hero-lead-slide hero-lead-slide-schema">
         <div class="hero-lead-card">
-          <p class="hl-schema-intro">Le cycle classique des e-commerçants bloqués</p>
-          <p class="hl-schema-target">Pour débutants et intermédiaires qui veulent passer au niveau avancé.</p>
+          <p class="hl-schema-intro">Le cycle classique des e-commerçants bloqués, pour débutants et intermédiaires qui veulent passer au niveau avancé.</p>
+          <p class="hl-tap-prompt hl-tap-prompt-top" id="hlTapPromptTop"><svg class="hl-tap-icon hl-tap-icon-down" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 14a8 8 0 0 1-8 8"/><path d="M18 11v-1a2 2 0 0 0-4 0"/><path d="M14 10V9a2 2 0 0 0-4 0v1"/><path d="M10 9.5V4a2 2 0 0 0-4 0v10"/><path d="M18 11a2 2 0 1 1 4 0v3a8 8 0 0 1-8 8h-2c-2.8 0-4.5-.86-5.99-2.34l-3.6-3.6a2 2 0 0 1 2.83-2.82L7 15"/></svg><span>Clique sur l'étape où tu en es</span><svg class="hl-tap-icon hl-tap-icon-down" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 14a8 8 0 0 1-8 8"/><path d="M18 11v-1a2 2 0 0 0-4 0"/><path d="M14 10V9a2 2 0 0 0-4 0v1"/><path d="M10 9.5V4a2 2 0 0 0-4 0v10"/><path d="M18 11a2 2 0 1 1 4 0v3a8 8 0 0 1-8 8h-2c-2.8 0-4.5-.86-5.99-2.34l-3.6-3.6a2 2 0 0 1 2.83-2.82L7 15"/></svg></p>
           <div class="hl-schema" id="hlSchema">
             <div class="hl-schema-row">
               <button type="button" class="hl-step" data-step="0" aria-label="Je me forme sur YouTube">
@@ -3024,7 +3005,6 @@
               </button>
             </div>
           </div>
-          <p class="hl-tap-prompt" id="hlTapPrompt"><svg class="hl-tap-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 14a8 8 0 0 1-8 8"/><path d="M18 11v-1a2 2 0 0 0-4 0"/><path d="M14 10V9a2 2 0 0 0-4 0v1"/><path d="M10 9.5V4a2 2 0 0 0-4 0v10"/><path d="M18 11a2 2 0 1 1 4 0v3a8 8 0 0 1-8 8h-2c-2.8 0-4.5-.86-5.99-2.34l-3.6-3.6a2 2 0 0 1 2.83-2.82L7 15"/></svg><span>Clique sur l'étape où tu en es</span><svg class="hl-tap-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 14a8 8 0 0 1-8 8"/><path d="M18 11v-1a2 2 0 0 0-4 0"/><path d="M14 10V9a2 2 0 0 0-4 0v1"/><path d="M10 9.5V4a2 2 0 0 0-4 0v10"/><path d="M18 11a2 2 0 1 1 4 0v3a8 8 0 0 1-8 8h-2c-2.8 0-4.5-.86-5.99-2.34l-3.6-3.6a2 2 0 0 1 2.83-2.82L7 15"/></svg></p>
           <div class="hl-loop-or" aria-hidden="true"><span class="hl-loop-or-arrow" aria-hidden="true">↓</span><span>Aucune ne te correspond ? Clique ici</span><span class="hl-loop-or-arrow" aria-hidden="true">↓</span></div>
           <button type="button" class="hl-loop" id="hlLoop" aria-label="J'ai compris le piège, je suis sorti de ce cycle">
             <span class="hl-loop-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 0 0-9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/><path d="M3 12a9 9 0 0 0 9 9 9.75 9.75 0 0 0 6.74-2.74L21 16"/><path d="M16 16h5v5"/></svg></span>
@@ -4613,7 +4593,7 @@
     const schema = document.getElementById('hlSchema');
     const loop   = document.getElementById('hlLoop');
     const verdict= document.getElementById('hlVerdict');
-    const tapPrompt = document.getElementById('hlTapPrompt');
+    const tapPrompt = document.getElementById('hlTapPromptTop');
     if(!schema || !verdict) return;
     const vLevel = verdict.querySelector('.hl-verdict-level');
     const vText  = verdict.querySelector('.hl-verdict-text');
