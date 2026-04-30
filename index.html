@@ -290,6 +290,31 @@
     line-height:1.55;max-width:520px;margin-left:auto;margin-right:auto;
   }
   .hero-price-warn strong{font-weight:700;font-style:normal;color:var(--gold)}
+  /* Pretitle "AVANT D'ALLER PLUS LOIN" + gold divider — used on desktop + mobile */
+  .hl-pretitle{
+    font-family:'Inter',sans-serif;
+    font-size:10.5px;font-weight:700;
+    letter-spacing:0.24em;text-transform:uppercase;
+    color:var(--gold);
+    display:block;
+    text-align:center;
+    margin-bottom:10px;
+  }
+  .hl-pretitle-divider{
+    display:block;
+    width:64px;height:1px;
+    background:linear-gradient(90deg, transparent 0%, rgba(212,182,106,0.75) 50%, transparent 100%);
+    margin:0 auto 18px;
+  }
+  .hero-intro-block{
+    display:block;text-align:center;
+    max-width:520px;margin:0 auto 18px;
+  }
+  @media(max-width:600px){
+    .hero-intro-block{display:none}
+    .hero-lead-card .hl-pretitle{font-size:10px;letter-spacing:0.22em;margin-bottom:8px}
+    .hero-lead-card .hl-pretitle-divider{width:54px;margin:0 auto 14px}
+  }
   /* Hero lead — desktop shows the paragraph; mobile shows a swipe carousel */
   .hero-lead-carousel{display:none}
   .hero-lead-dots{display:none}
@@ -2168,13 +2193,19 @@
       <span class="nowrap"><span class="gold-italic">à une boutique rentable</span></span><br>
       <span class="nowrap">en e-commerce</span>
     </h1>
+    <div class="hero-intro-block reveal">
+      <span class="hl-pretitle">Avant d'aller plus loin</span>
+      <span class="hl-pretitle-divider" aria-hidden="true"></span>
+    </div>
     <p class="lead reveal hero-lead-desktop">
-      Soyons honnêtes 5 secondes : si tu es sur cette page, c'est probablement que tu as du mal à décoller en e-commerce. Tu as suivi des formations gratuites sur YouTube. Peut-être même des formations payantes (prix plein ou marché noir, voire mentoring). Et malgré tout ça, <strong>tu tournes en rond et tu n'arrives pas à décoller.</strong> Si tu te reconnais dans ce que je viens de citer, <strong>GENESYS est fait pour toi.</strong> Je t'invite à découvrir.
+      Soyons honnêtes 5 secondes :<br>Si tu es sur cette page,<br>c'est probablement que <strong>tu as du mal<br>à décoller en e-commerce</strong>.<br><br>Tu as suivi des formations gratuites sur YouTube. Peut-être même des formations payantes (prix plein ou marché noir, voire mentoring). Et malgré tout ça, <strong>tu tournes en rond et tu n'arrives pas à décoller.</strong> Si tu te reconnais dans ce que je viens de citer, <strong>GENESYS est fait pour toi.</strong> Je t'invite à découvrir.
     </p>
     <div class="hero-lead-carousel reveal" id="heroLeadCarousel" role="region" aria-label="Présentation">
       <div class="hero-lead-slide">
         <div class="hero-lead-card">
-          <p>Soyons honnêtes 5 secondes : si tu es sur cette page, c'est probablement que <strong>tu as du mal à décoller en e-commerce</strong>.</p>
+          <span class="hl-pretitle">Avant d'aller plus loin</span>
+          <span class="hl-pretitle-divider" aria-hidden="true"></span>
+          <p>Soyons honnêtes 5 secondes :<br>Si tu es sur cette page,<br>c'est probablement que <strong>tu as du mal<br>à décoller en e-commerce</strong>.</p>
           <span class="hero-lead-swipe" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg></span>
         </div>
       </div>
