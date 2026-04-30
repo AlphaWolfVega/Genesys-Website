@@ -3453,12 +3453,11 @@
       mindset: {label:"Mental d'opérateur",     modules:["Mental & constance","Focus d'opérateur"]}
     };
 
-    // Question pool — 4 per domain × 5 domains = 20. Each session picks 2 per domain.
-    // Most T/F now include a "Ça dépend" 3rd option — for nuanced topics it is the
-    // correct answer; on others it's a smart-looking distractor that catches lucky guesses.
-    // 3 options per domain question = 33% random luck per Q, 11% to fluke 2/2 (vs 25%).
+    // Question pool — 10 per domain × 5 domains = 50. Each session picks 2 per domain.
+    // C(10,2) = 45 paires uniques par domaine, ordre × 90 → 90^5 ≈ 5,9 milliards de
+    // combinaisons de session possibles. Probabilité de retomber sur la même session : ~0.
     const POOL = [
-      // ---------- NEURO ----------
+      // ==================== NEURO (10) ====================
       {domain:"neuro", type:"choice", q:"Tu vends une bougie à 39&nbsp;€. Quel affichage convertit le mieux ?",
         opts:[{l:"39,00&nbsp;€"}, {l:"<s>89&nbsp;€</s> &rarr; 39&nbsp;€", c:true}, {l:"39&nbsp;€ <em>seulement aujourd'hui</em>"}]},
       {domain:"neuro", type:"tf", q:"Augmenter ton prix peut faire vendre plus.",
@@ -3467,8 +3466,20 @@
         opts:[{l:"Une garantie « satisfait ou remboursé&nbsp;60&nbsp;jours »"}, {l:"Un compte à rebours sur le prix actuel", c:true}, {l:"Un avis client 5 étoiles bien visible"}]},
       {domain:"neuro", type:"tf", q:"Un visiteur doit voir un produit 7 à 10 fois en moyenne avant d'acheter.",
         opts:[{l:"VRAI"}, {l:"FAUX"}, {l:"Ça dépend du produit et du prix", c:true}]},
+      {domain:"neuro", type:"choice", q:"Quel affichage de stock convertit le mieux sur une page produit ?",
+        opts:[{l:"Aucune mention de stock"}, {l:"« En stock »"}, {l:"« Plus que 3 en stock »", c:true}, {l:"« Stock disponible : 247 unités »"}]},
+      {domain:"neuro", type:"choice", q:"Tu offres un guide PDF gratuit avant ton pitch produit. L'effet le plus probable ?",
+        opts:[{l:"Diminue (le visiteur a déjà ce qu'il voulait)"}, {l:"Reste identique"}, {l:"Augmente significativement (réciprocité)", c:true}]},
+      {domain:"neuro", type:"tf", q:"Afficher « 1&nbsp;247 personnes ont acheté ce produit ce mois-ci » augmente la conversion.",
+        opts:[{l:"VRAI", c:true}, {l:"FAUX"}, {l:"Ça dépend de l'audience"}]},
+      {domain:"neuro", type:"choice", q:"Pour vendre une crème, quel cadrage performe le mieux ?",
+        opts:[{l:"« Crème efficace à 95&nbsp;% »", c:true}, {l:"« Crème qui échoue chez 5&nbsp;% des utilisateurs »"}, {l:"Les deux performent pareil"}]},
+      {domain:"neuro", type:"tf", q:"Vendre à 29&nbsp;€ ou à 30&nbsp;€ donne le même taux de conversion.",
+        opts:[{l:"VRAI"}, {l:"FAUX", c:true}, {l:"Ça dépend"}]},
+      {domain:"neuro", type:"choice", q:"Photos amateures vs photos pro sur ta page produit. Conséquence sur la qualité perçue du produit ?",
+        opts:[{l:"Le visiteur juge uniquement le produit lui-même"}, {l:"Photos pro &rarr; produit perçu comme plus qualitatif", c:true}, {l:"Photos pro &rarr; soupçon de manipulation, méfiance"}]},
 
-      // ---------- COPY ----------
+      // ==================== COPY (10) ====================
       {domain:"copy", type:"choice", q:"Quel hook convertit le mieux pour une crème anti-âge ?",
         opts:[{l:"Découvrez notre nouvelle crème naturelle"}, {l:"La crème que les dermatologues n'aiment pas (mais qui marche)", c:true}, {l:"Crème anti-âge premium, livraison gratuite"}]},
       {domain:"copy", type:"choice", q:"Lequel performe mieux ?",
@@ -3477,8 +3488,20 @@
         opts:[{l:"3 à 5 mots"}, {l:"6 à 9 mots", c:true}, {l:"10 à 15 mots"}, {l:"20 mots et plus"}]},
       {domain:"copy", type:"tf", q:"Une page produit longue convertit moins qu'une courte.",
         opts:[{l:"VRAI"}, {l:"FAUX"}, {l:"Ça dépend du produit et du prix", c:true}]},
+      {domain:"copy", type:"choice", q:"Quel objet d'email convertit le plus en taux d'ouverture ?",
+        opts:[{l:"« Promotion Black Friday : -50&nbsp;% »"}, {l:"« Marie, voici la réponse à ta question »", c:true}, {l:"« Notre offre exceptionnelle de la semaine »"}]},
+      {domain:"copy", type:"choice", q:"Sur ton bouton d'achat principal, quel texte convertit le plus ?",
+        opts:[{l:"« Acheter maintenant »"}, {l:"« Commander »"}, {l:"« Je veux ma crème »", c:true}, {l:"« Valider »"}]},
+      {domain:"copy", type:"tf", q:"Sur une page produit, lister les caractéristiques techniques convertit mieux que les bénéfices concrets.",
+        opts:[{l:"VRAI"}, {l:"FAUX", c:true}, {l:"Ça dépend"}]},
+      {domain:"copy", type:"choice", q:"Pour une cible 18-30 ans en B2C, quel registre marche le mieux ?",
+        opts:[{l:"Vouvoiement, ton corporate"}, {l:"Tutoiement, ton « comme un pote »", c:true}, {l:"Ton neutre, ni l'un ni l'autre"}]},
+      {domain:"copy", type:"choice", q:"Lequel de ces appels à l'action est le plus performant ?",
+        opts:[{l:"« Apprends à vendre en ligne »"}, {l:"« Apprends à passer de 0 à 5&nbsp;000&nbsp;€/mois en 90 jours »", c:true}, {l:"« Apprends les bases du commerce »"}]},
+      {domain:"copy", type:"tf", q:"Plus tu empiles les mots de pouvoir (« exclusif », « secret », « ultime »), plus ta page convertit.",
+        opts:[{l:"VRAI"}, {l:"FAUX", c:true}, {l:"Ça dépend"}]},
 
-      // ---------- CRO ----------
+      // ==================== CRO (10) ====================
       {domain:"cro", type:"estim", q:"Un taux de conversion de 1,5&nbsp;% sur Shopify, c'est…",
         opts:[{l:"Mauvais"}, {l:"Moyen", c:true}, {l:"Excellent"}],
         jargon:"CRO = Conversion Rate Optimization, autrement dit l'art d'augmenter le pourcentage de visiteurs qui achètent."},
@@ -3488,8 +3511,20 @@
         opts:[{l:"VRAI"}, {l:"FAUX", c:true}, {l:"Ça dépend"}]},
       {domain:"cro", type:"choice", q:"Avis clients sur ta page produit : où les places-tu pour le meilleur impact ?",
         opts:[{l:"Tout en bas, après la description complète"}, {l:"En haut, juste sous le titre du produit", c:true}, {l:"Dans une popup à l'arrivée"}]},
+      {domain:"cro", type:"choice", q:"Quelle couleur de bouton « Ajouter au panier » convertit le mieux dans la majorité des tests ?",
+        opts:[{l:"Vert (associé au feu vert)"}, {l:"Rouge (urgence, attention)"}, {l:"Une couleur en fort contraste avec la palette de la page", c:true}, {l:"Noir (sobre, premium)"}]},
+      {domain:"cro", type:"choice", q:"Pour ton checkout, idéalement combien d'étapes ?",
+        opts:[{l:"1 page unique avec tout"}, {l:"2-3 étapes courtes", c:true}, {l:"5+ étapes pour rassurer"}]},
+      {domain:"cro", type:"choice", q:"Les badges de paiement sécurisé (Visa, Mastercard, lock SSL) ont le plus d'impact placés où ?",
+        opts:[{l:"Dans le footer du site"}, {l:"Sur la page produit, sous le bouton d'achat", c:true}, {l:"Uniquement sur la page de checkout"}]},
+      {domain:"cro", type:"tf", q:"Un site mobile-first convertit toujours mieux qu'un site desktop-first.",
+        opts:[{l:"VRAI"}, {l:"FAUX"}, {l:"Ça dépend de l'audience et du produit", c:true}]},
+      {domain:"cro", type:"choice", q:"Si un visiteur reste moins de 5 secondes sur ta page avant de partir, c'est…",
+        opts:[{l:"Normal, le marché est concurrentiel"}, {l:"Un signal que ta hero ne capte pas", c:true}, {l:"Sans importance si la conversion globale est bonne"}]},
+      {domain:"cro", type:"tf", q:"Ajouter un live chat sur ta page produit augmente toujours la conversion.",
+        opts:[{l:"VRAI"}, {l:"FAUX"}, {l:"Ça dépend du prix et de la complexité du produit", c:true}]},
 
-      // ---------- ADS ----------
+      // ==================== ADS (10) ====================
       {domain:"ads", type:"estim", q:"Le CPM moyen sur Meta en France pour l'e-commerce, c'est environ…",
         opts:[{l:"2 à 5&nbsp;€"}, {l:"8 à 15&nbsp;€", c:true}, {l:"20 à 30&nbsp;€"}, {l:"40&nbsp;€ et plus"}],
         jargon:"CPM = coût pour 1 000 impressions. C'est ce que tu paies à Meta pour montrer ta pub à 1 000 personnes."},
@@ -3500,8 +3535,21 @@
         opts:[{l:"VRAI", c:true}, {l:"FAUX"}, {l:"Ça dépend"}]},
       {domain:"ads", type:"choice", q:"Sur 100 tests A/B en 2025-2026, quelle créa Meta gagne le plus souvent ?",
         opts:[{l:"Vidéo studio professionnelle 30&nbsp;s avec voix-off"}, {l:"Vidéo selfie face caméra qui parle naturellement", c:true}, {l:"Carrousel 5 photos produit haute qualité"}]},
+      {domain:"ads", type:"choice", q:"Les 3 premières secondes d'une vidéo Meta doivent…",
+        opts:[{l:"Présenter calmement le produit"}, {l:"Créer un pattern interrupt fort (question, choc visuel, surprise)", c:true}, {l:"Afficher le logo de la marque"}]},
+      {domain:"ads", type:"tf", q:"Avec l'algorithme Meta de 2025+, une audience large (1&nbsp;M+) bat souvent une audience ciblée précise.",
+        opts:[{l:"VRAI", c:true}, {l:"FAUX"}, {l:"Ça dépend"}]},
+      {domain:"ads", type:"choice", q:"Combien de variantes de créas tu lances idéalement par campagne au démarrage ?",
+        opts:[{l:"1 seule (focus sur la meilleure)"}, {l:"3 à 5 (assez pour comparer)", c:true}, {l:"10+ pour tester massivement"}]},
+      {domain:"ads", type:"choice", q:"Pour une boutique e-com récente, lequel apporte le plus rapidement les premiers clients ?",
+        opts:[{l:"Google Search Ads (intention d'achat haute)"}, {l:"Meta (Facebook + Instagram) feed et reels", c:true}, {l:"Google Display Ads (visibilité large)"}]},
+      {domain:"ads", type:"estim", q:"Un ROAS minimum acceptable pour scaler une campagne Meta e-com (marges classiques 50-60&nbsp;%) c'est…",
+        opts:[{l:"1,5"}, {l:"2 à 2,5", c:true}, {l:"4+"}],
+        jargon:"ROAS = Return On Ad Spend, le retour sur investissement publicitaire. ROAS de 2 = pour 1&nbsp;€ dépensé en pubs, tu fais 2&nbsp;€ de chiffre d'affaires."},
+      {domain:"ads", type:"choice", q:"Tu testes un produit pendant combien de jours avant de le déclarer mort ?",
+        opts:[{l:"3 jours, c'est suffisant"}, {l:"7 à 14 jours minimum avec budget cohérent", c:true}, {l:"30+ jours, faut être patient"}]},
 
-      // ---------- MINDSET ----------
+      // ==================== MINDSET (10) ====================
       {domain:"mindset", type:"scenario", q:"Premier mois sur ta boutique : -2 000&nbsp;€ en pubs, 0 vente. Tu réagis comment ?",
         opts:[{l:"Je change de produit, celui-là ne marche pas"}, {l:"J'analyse les données et je teste 1 angle différent", c:true}, {l:"J'arrête, c'est pas pour moi"}]},
       {domain:"mindset", type:"choice", q:"Tu testes 5 produits, 4 ne marchent pas. Tu vois ces 4 échecs comme…",
@@ -3509,7 +3557,19 @@
       {domain:"mindset", type:"tf", q:"Travailler 12&nbsp;h par jour est nécessaire pour réussir en e-commerce.",
         opts:[{l:"VRAI"}, {l:"FAUX", c:true}, {l:"Ça dépend"}]},
       {domain:"mindset", type:"estim", q:"Combien de produits tu devrais tester par mois en phase d'apprentissage&nbsp;?",
-        opts:[{l:"0 à 1"}, {l:"2 à 4"}, {l:"5 et plus", c:true}]}
+        opts:[{l:"0 à 1"}, {l:"2 à 4"}, {l:"5 et plus", c:true}]},
+      {domain:"mindset", type:"choice", q:"Tu vois sur LinkedIn un autre entrepreneur qui annonce 50&nbsp;K€/mois. Réaction la plus saine ?",
+        opts:[{l:"Je doute (90&nbsp;% mentent sur les chiffres)"}, {l:"Je m'inspire des étapes possibles, je ne compare pas la photo de fin", c:true}, {l:"Je me dis que je ne suis pas à la hauteur"}]},
+      {domain:"mindset", type:"choice", q:"Ton premier 10&nbsp;K€ de chiffre d'affaires mensuel, tu le vois comme…",
+        opts:[{l:"Une destination atteinte"}, {l:"Une étape qui débloque le suivant", c:true}, {l:"Une preuve que tu as réussi"}]},
+      {domain:"mindset", type:"choice", q:"Pour apprendre l'e-commerce le plus vite, qu'est-ce qui marche le mieux ?",
+        opts:[{l:"Apprendre seul, à son rythme, en testant"}, {l:"Apprendre avec un cadre + une communauté qui pose des retours", c:true}, {l:"Apprendre uniquement avec un mentor 1-1 cher"}]},
+      {domain:"mindset", type:"choice", q:"Tu es bloqué sur ton site depuis 3 jours. Premier réflexe le plus efficace ?",
+        opts:[{l:"Je continue seul jusqu'à trouver"}, {l:"Je publie ma question dans une communauté avec contexte précis", c:true}, {l:"Je laisse tomber, je reprends dans 1 mois"}]},
+      {domain:"mindset", type:"estim", q:"Combien de temps tu donnes à un test produit (créas + page + budget) avant de juger ?",
+        opts:[{l:"24-48&nbsp;h"}, {l:"7 à 14 jours", c:true}, {l:"1 mois minimum"}]},
+      {domain:"mindset", type:"tf", q:"L'erreur la plus chère en e-commerce, c'est de tester trop peu de choses.",
+        opts:[{l:"VRAI", c:true}, {l:"FAUX"}, {l:"Ça dépend"}]}
     ];
 
     // Pick 2 random questions per domain, then shuffle the 10
