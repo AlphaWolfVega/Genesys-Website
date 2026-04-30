@@ -435,15 +435,20 @@
     .hero-lead-swipe{display:none}
 
     /* === SLIDE CTA finale — sizes adaptées desktop === */
-    .hero-lead-slide-cta .hero-lead-card{padding:22px 22px}
-    .hl-cta-kicker{font-size:9px !important;margin-bottom:6px !important}
-    .hl-cta-body{font-size:11px !important;line-height:1.5 !important;margin-bottom:8px !important}
-    .hl-cta-claim{font-size:13.5px !important;margin-bottom:10px !important}
+    .hero-lead-slide-cta .hero-lead-card{padding:24px 22px}
+    .hl-cta-kicker{font-size:10px !important;margin-bottom:9px !important}
+    .hl-cta-body{font-size:13px !important;line-height:1.5 !important;margin-bottom:13px !important}
+    .hl-cta-claim{font-size:14px !important;margin-bottom:11px !important}
     .hl-cta-claim-inline{font-size:1.05em !important;color:var(--gold);font-weight:800;text-shadow:0 0 14px rgba(212,182,106,0.25)}
-    .hl-cta-reassure{font-size:8.5px !important;line-height:1.45 !important;margin:0 0 7px !important;padding:6px 9px !important;background:rgba(212,182,106,0.07) !important;border-left:2px solid rgba(212,182,106,0.5) !important;border-radius:4px !important;text-align:left !important;color:rgba(245,238,222,0.82) !important;letter-spacing:0.005em}
-    .hl-cta-reassure strong{color:var(--gold)}
-    .hl-cta-exit{font-size:9px !important;white-space:normal !important;padding-top:8px !important;line-height:1.45 !important}
-    .hl-cta-explore{font-family:'Inter',sans-serif !important;font-size:10px !important;font-weight:700 !important;color:var(--gold) !important;letter-spacing:0.04em;margin:10px 0 6px !important;text-align:center;hyphens:none !important;word-break:keep-all}
+    .hl-cta-mini{margin:0 0 12px !important}
+    .hl-cta-mini-card{padding:13px 14px 14px !important;border-radius:9px !important}
+    .hl-cta-mini-icon{width:24px !important;height:24px !important;margin-bottom:6px !important}
+    .hl-cta-mini-h{font-size:11px !important;letter-spacing:0.08em !important;margin:0 0 5px !important}
+    .hl-cta-mini-b{font-size:12px !important;line-height:1.5 !important}
+    .hl-cta-mini-dot{width:6px !important;height:6px !important}
+    .hl-cta-mini-swipe{font-size:9px !important;margin-top:8px !important}
+    .hl-cta-exit{font-size:10.5px !important;white-space:normal !important;padding-top:10px !important;line-height:1.5 !important}
+    .hl-cta-explore{font-family:'Inter',sans-serif !important;font-size:11.5px !important;font-weight:700 !important;color:var(--gold) !important;letter-spacing:0.04em;margin:13px 0 7px !important;text-align:center;hyphens:none !important;word-break:keep-all}
 
     /* === SCHEMA slide (cycle e-com) — toutes les rules dupliquées pour desktop === */
     .hero-lead-slide-schema .hero-lead-card{padding:28px 18px}
@@ -721,7 +726,7 @@
     }
     .hero-lead-card strong{color:var(--gold);font-weight:700}
     .hero-lead-slide-cta .hero-lead-card{
-      padding:14px 13px;
+      padding:16px 14px;
       text-align:center;
       box-sizing:border-box;
       overflow:visible;
@@ -735,18 +740,18 @@
     }
     .hl-cta-kicker{
       font-family:'Inter',sans-serif;
-      font-size:7.5px;font-weight:700;
+      font-size:9px;font-weight:700;
       letter-spacing:0.16em;text-transform:uppercase;
       color:var(--gold);
-      margin-bottom:5px !important;
-      opacity:0.85;
+      margin-bottom:7px !important;
+      opacity:0.9;
     }
     .hl-cta-body{
       font-family:'Inter',sans-serif;
-      font-size:8.5px;font-weight:500;
+      font-size:11.5px;font-weight:500;
       color:var(--text);
-      line-height:1.45;
-      margin-bottom:6px !important;
+      line-height:1.5;
+      margin-bottom:10px !important;
       overflow-wrap:break-word;
       word-wrap:break-word;
       hyphens:auto;
@@ -766,11 +771,11 @@
     .hl-cta-claim strong{color:var(--gold);font-weight:800}
     .hl-cta-exit{
       font-family:'Inter',sans-serif;
-      font-size:7.5px;font-weight:500;
+      font-size:9.5px;font-weight:500;
       color:rgba(245,238,222,0.62);
-      line-height:1.45;
+      line-height:1.5;
       margin:0 !important;
-      padding-top:6px;
+      padding-top:9px;
       border-top:1px solid rgba(212,182,106,0.18);
       white-space:normal;
       letter-spacing:0;
@@ -781,27 +786,91 @@
     }
     .hl-cta-exit em{color:rgba(212,182,106,0.7);font-style:italic;font-weight:600}
     .hl-cta-claim-inline{color:var(--gold);font-weight:800;font-size:1.05em;text-shadow:0 0 14px rgba(212,182,106,0.25);}
-    .hl-cta-reassure{
-      font-family:'Inter',sans-serif;
-      font-size:7.4px;
-      line-height:1.4;
-      color:rgba(245,238,222,0.82);
-      background:rgba(212,182,106,0.07);
-      border-left:2px solid rgba(212,182,106,0.5);
-      border-radius:4px;
-      padding:5px 7px;
-      margin:0 0 6px !important;
-      text-align:left;
-      letter-spacing:0.005em;
+    /* === MINI-CAROUSEL inside slide CTA — slidable cards (dopamine effect) === */
+    .hl-cta-mini{width:100%;margin:0 0 10px;position:relative}
+    .hl-cta-mini-track{
+      display:flex;
+      overflow-x:auto;
+      scroll-snap-type:x mandatory;
+      -webkit-overflow-scrolling:touch;
+      scrollbar-width:none;
+      gap:8px;
+      padding:2px 2px 4px;
+      box-sizing:border-box;
     }
-    .hl-cta-reassure strong{color:var(--gold);font-weight:700}
+    .hl-cta-mini-track::-webkit-scrollbar{display:none}
+    .hl-cta-mini-card{
+      flex:0 0 100%;
+      scroll-snap-align:center;
+      box-sizing:border-box;
+      background:linear-gradient(135deg,rgba(212,182,106,0.10) 0%,rgba(212,182,106,0.04) 100%);
+      border:1px solid rgba(212,182,106,0.32);
+      border-left:3px solid var(--gold);
+      border-radius:8px;
+      padding:11px 12px 12px;
+      text-align:left;
+      box-shadow:0 4px 16px rgba(0,0,0,0.18);
+      transition:transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .hl-cta-mini-icon{
+      display:inline-flex;align-items:center;justify-content:center;
+      width:22px;height:22px;
+      color:var(--gold);
+      margin-bottom:5px;
+    }
+    .hl-cta-mini-icon svg{width:100%;height:100%;display:block}
+    .hl-cta-mini-h{
+      font-family:'Inter',sans-serif !important;
+      font-size:10px !important;font-weight:800 !important;
+      color:var(--gold) !important;
+      letter-spacing:0.08em !important;text-transform:uppercase;
+      margin:0 0 4px !important;
+      line-height:1.3 !important;
+      text-shadow:0 0 14px rgba(212,182,106,0.25);
+    }
+    .hl-cta-mini-b{
+      font-family:'Inter',sans-serif !important;
+      font-size:10.5px !important;font-weight:500 !important;
+      color:rgba(245,238,222,0.92) !important;
+      line-height:1.5 !important;
+      margin:0 !important;
+    }
+    .hl-cta-mini-b strong{color:var(--gold);font-weight:700}
+    .hl-cta-mini-dots{
+      display:flex;justify-content:center;gap:5px;
+      margin-top:7px;
+    }
+    .hl-cta-mini-dot{
+      width:5px;height:5px;border-radius:50%;
+      background:rgba(212,182,106,0.25);
+      border:0;padding:0;cursor:pointer;
+      transition:background 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .hl-cta-mini-dot.active{
+      background:var(--gold);
+      transform:scale(1.4);
+      box-shadow:0 0 8px rgba(212,182,106,0.6);
+    }
+    .hl-cta-mini-swipe{
+      display:block;text-align:center;
+      font-family:'Inter',sans-serif;
+      font-size:8px;font-weight:700;
+      color:rgba(212,182,106,0.55);
+      letter-spacing:0.16em;text-transform:uppercase;
+      margin-top:6px;
+      animation:hlMiniSwipe 1.8s ease-in-out infinite;
+    }
+    @keyframes hlMiniSwipe{
+      0%,100%{opacity:0.4;letter-spacing:0.14em}
+      50%{opacity:1;letter-spacing:0.2em}
+    }
     .hl-cta-explore{
       font-family:'Inter',sans-serif;
-      font-size:9px;font-weight:700;
+      font-size:10.5px;font-weight:700;
       color:var(--gold);
       letter-spacing:0.04em;
       text-align:center;
-      margin:8px 0 4px !important;
+      margin:11px 0 5px !important;
       text-shadow:0 0 18px rgba(212,182,106,0.25);
       hyphens:none !important;
       word-break:keep-all;
@@ -3059,7 +3128,43 @@
         <div class="hero-lead-card">
           <p class="hl-cta-kicker">Soyons clair.</p>
           <p class="hl-cta-body">Si tu t'es reconnu dans une ou plusieurs de ces situations, et que tu es prêt à investir <strong class="nowrap">49 $/mois</strong> sur ton évolution pour accéder aux <strong class="nowrap">mêmes méthodes</strong> que <strong>certains te facturent des milliers d'euros</strong>, <strong class="hl-cta-claim-inline">alors GENESYS est fait pour toi.</strong></p>
-          <p class="hl-cta-reassure"><strong>Aucun engagement.</strong> Tu viens, tu testes, tu pars quand tu veux. Et même si tu payais 12 mois pleins à <strong class="nowrap">49 $</strong>, ce serait toujours moins cher qu'une formation à <strong class="nowrap">1 500 €</strong> ou qu'un mentoring à <strong class="nowrap">5 000 €</strong>. Pour la même qualité d'accompagnement, de réponses et d'information que les meilleurs du marché.</p>
+          <div class="hl-cta-mini" id="hlCtaMini">
+            <div class="hl-cta-mini-track" id="hlCtaMiniTrack">
+              <div class="hl-cta-mini-card">
+                <span class="hl-cta-mini-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 9.9-1"/></svg></span>
+                <p class="hl-cta-mini-h">Aucun engagement</p>
+                <p class="hl-cta-mini-b">Tu viens, tu testes, tu pars quand tu veux.</p>
+              </div>
+              <div class="hl-cta-mini-card">
+                <span class="hl-cta-mini-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" x2="12" y1="2" y2="22"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></span>
+                <p class="hl-cta-mini-h">Le pire scénario</p>
+                <p class="hl-cta-mini-b">Même si tu payais <strong>12 mois pleins à 49 $</strong>, ça reste moins cher qu'une formation à <strong>1 500 €</strong> ou qu'un mentoring à <strong>5 000 €</strong>.</p>
+              </div>
+              <div class="hl-cta-mini-card">
+                <span class="hl-cta-mini-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 11h.01"/><path d="M11 15h.01"/><path d="M16 16h.01"/><path d="m2 16 20 6-6-20A20 20 0 0 0 2 16"/><path d="M5.71 17.11a17.04 17.04 0 0 1 11.4-11.4"/></svg></span>
+                <p class="hl-cta-mini-h">2 pizzas par mois</p>
+                <p class="hl-cta-mini-b">49 $, c'est <strong>2 pizzas livrées</strong>. La pizza disparaît en 10 minutes. Ce que tu apprends ici, <strong>ça reste à vie</strong>.</p>
+              </div>
+              <div class="hl-cta-mini-card">
+                <span class="hl-cta-mini-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3h12l4 6-10 13L2 9Z"/><path d="M11 3 8 9l4 13 4-13-3-6"/><path d="M2 9h20"/></svg></span>
+                <p class="hl-cta-mini-h">Qualité haut de gamme</p>
+                <p class="hl-cta-mini-b">Tu reçois la <strong>même qualité d'accompagnement, de réponses et d'information</strong> que les meilleures formations du marché.</p>
+              </div>
+              <div class="hl-cta-mini-card">
+                <span class="hl-cta-mini-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 8h.01"/><rect width="16" height="16" x="4" y="4" rx="3"/><path d="m4 16 5-5c.928-.893 2.072-.893 3 0l5 5"/><path d="m14 14 1-1c.928-.893 2.072-.893 3 0l2 2"/></svg></span>
+                <p class="hl-cta-mini-h">Bonus : lives</p>
+                <p class="hl-cta-mini-b">Des <strong>lives réguliers</strong> où on répond à toutes tes questions, en direct, sans filtre.</p>
+              </div>
+            </div>
+            <div class="hl-cta-mini-dots" id="hlCtaMiniDots">
+              <button type="button" class="hl-cta-mini-dot active" data-idx="0" aria-label="Carte 1"></button>
+              <button type="button" class="hl-cta-mini-dot" data-idx="1" aria-label="Carte 2"></button>
+              <button type="button" class="hl-cta-mini-dot" data-idx="2" aria-label="Carte 3"></button>
+              <button type="button" class="hl-cta-mini-dot" data-idx="3" aria-label="Carte 4"></button>
+              <button type="button" class="hl-cta-mini-dot" data-idx="4" aria-label="Carte 5"></button>
+            </div>
+            <span class="hl-cta-mini-swipe">← Slide pour découvrir →</span>
+          </div>
           <p class="hl-cta-exit"><em>Si tu ne t'es pas reconnu, sincèrement, ce qu'il y a sur cette page ne va pas t'intéresser. Ne perds pas ton temps, retourne à tes occupations.</em></p>
           <p class="hl-cta-explore">Sinon, découvre <span class="nowrap">l'écosystème GENESYS</span> juste en dessous</p>
           <span class="hero-lead-down" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14"/><path d="m19 12-7 7-7-7"/></svg></span>
@@ -4678,6 +4783,45 @@
         applySelection(8);
       });
     }
+  })();
+
+  // ===== HERO CTA MINI-CAROUSEL — slidable cards (dopamine effect) =====
+  (function initCtaMini(){
+    const mini = document.getElementById('hlCtaMini');
+    if(!mini) return;
+    const track = document.getElementById('hlCtaMiniTrack');
+    const dotsWrap = document.getElementById('hlCtaMiniDots');
+    if(!track || !dotsWrap) return;
+    const cards = Array.from(track.children);
+    const dots = Array.from(dotsWrap.querySelectorAll('.hl-cta-mini-dot'));
+    if(!cards.length || !dots.length) return;
+
+    let ticking = false;
+    function update(){
+      const center = track.scrollLeft + track.clientWidth / 2;
+      let activeIdx = 0;
+      let bestDist = Infinity;
+      cards.forEach((card, i) => {
+        const cc = card.offsetLeft + card.clientWidth / 2;
+        const d = Math.abs(cc - center);
+        if(d < bestDist){ bestDist = d; activeIdx = i; }
+      });
+      dots.forEach((dot, i) => dot.classList.toggle('active', i === activeIdx));
+    }
+    track.addEventListener('scroll', () => {
+      if(!ticking){
+        requestAnimationFrame(() => { update(); ticking = false; });
+        ticking = true;
+      }
+    }, {passive:true});
+    dots.forEach((dot, i) => {
+      dot.addEventListener('click', e => {
+        e.stopPropagation();
+        const card = cards[i];
+        if(card) card.scrollIntoView({behavior:'smooth', inline:'center', block:'nearest'});
+      });
+    });
+    update();
   })();
 
   // ===== HERO LEAD CAROUSEL (mobile) — dots sync + click-to-jump =====
