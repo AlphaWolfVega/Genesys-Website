@@ -528,20 +528,13 @@
     @keyframes hlMiniSwipeDown{0%,100%{transform:translateY(0);opacity:0.55}50%{transform:translateY(3px);opacity:0.9}}
     /* Choix 1 / Choix 2 separes par paragraphe — espace plus marque */
     .hl-cta-mini-card .hl-cta-mini-b + .hl-cta-mini-b{margin-top:16px}
-    /* TOUS les heads des mini-cards CTA : icone + titre OBLIGATOIREMENT centres en groupe */
+    /* TOUS les heads des mini-cards CTA : icone a gauche + titre a droite, groupe centre horizontalement */
     .hl-cta-mini-head{
-      display:block !important;text-align:center !important;
-      gap:0 !important;font-size:0;
+      display:flex !important;align-items:center !important;justify-content:center !important;
+      gap:9px !important;flex-wrap:nowrap !important;text-align:center !important;
     }
-    .hl-cta-mini-head > .hl-cta-mini-icon{
-      display:inline-flex !important;vertical-align:middle !important;
-      margin:0 9px 0 0 !important;font-size:initial;
-    }
-    .hl-cta-mini-head > .hl-cta-mini-h{
-      display:inline-block !important;vertical-align:middle !important;
-      flex:none !important;text-align:center !important;font-size:10.5px !important;
-      max-width:calc(100% - 35px);
-    }
+    .hl-cta-mini-head .hl-cta-mini-icon{flex:0 0 auto !important}
+    .hl-cta-mini-head .hl-cta-mini-h{flex:0 1 auto !important;text-align:left !important;margin:0 !important}
     .hl-cta-mini-head-center{justify-content:center !important;text-align:center !important}
 
     /* === SCHEMA slide (cycle e-com) — toutes les rules dupliquées pour desktop === */
@@ -1058,20 +1051,13 @@
     @keyframes hlMiniSwipeDown{0%,100%{transform:translateY(0);opacity:0.55}50%{transform:translateY(3px);opacity:0.95}}
     /* Mobile : Choix 1 / Choix 2 separes par paragraphe — espace plus marque */
     .hl-cta-mini-card .hl-cta-mini-b + .hl-cta-mini-b{margin-top:18px}
-    /* Mobile : TOUS les heads des mini-cards CTA OBLIGATOIREMENT centres */
+    /* Mobile : TOUS les heads des mini-cards : icone a gauche + titre a droite, groupe centre */
     .hl-cta-mini-head{
-      display:block !important;text-align:center !important;
-      gap:0 !important;font-size:0;
+      display:flex !important;align-items:center !important;justify-content:center !important;
+      gap:9px !important;flex-wrap:nowrap !important;text-align:center !important;
     }
-    .hl-cta-mini-head > .hl-cta-mini-icon{
-      display:inline-flex !important;vertical-align:middle !important;
-      margin:0 9px 0 0 !important;font-size:initial;
-    }
-    .hl-cta-mini-head > .hl-cta-mini-h{
-      display:inline-block !important;vertical-align:middle !important;
-      flex:none !important;text-align:center !important;font-size:11px !important;
-      max-width:calc(100% - 35px);
-    }
+    .hl-cta-mini-head .hl-cta-mini-icon{flex:0 0 auto !important}
+    .hl-cta-mini-head .hl-cta-mini-h{flex:0 1 auto !important;text-align:left !important;margin:0 !important}
     .hl-cta-mini-head-center{justify-content:center !important;text-align:center !important}
     @keyframes hlMiniSwipe{
       0%,100%{opacity:0.4;letter-spacing:0.14em}
@@ -3496,7 +3482,7 @@
               </div>
               <div class="hl-cta-mini-card">
                 <div class="hl-cta-mini-head"><span class="hl-cta-mini-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" x2="12" y1="2" y2="22"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></span><p class="hl-cta-mini-h">Le calcul est vite fait</p></div>
-                <p class="hl-cta-mini-b">Une formation classique : entre <strong>600 et 1 500 €</strong>. Un mentoring : entre <strong>3 000 et 5 000 €</strong>. Ici, tu accèdes au <strong>même niveau de qualité, de suivi et d'assistance qu'un mentoring premium</strong>, pour <strong>70 à 90 % moins cher</strong>.</p>
+                <p class="hl-cta-mini-b">Une formation classique : entre <strong>600 et 1&nbsp;500&nbsp;€</strong>. Un mentoring : entre <strong>3&nbsp;000 et 5&nbsp;000&nbsp;€</strong>. Ici, tu accèdes au même niveau de qualité, de suivi et d'assistance qu'un mentoring premium, pour <strong>70 à 90&nbsp;% moins cher</strong>.</p>
               </div>
               <div class="hl-cta-mini-card">
                 <div class="hl-cta-mini-head"><span class="hl-cta-mini-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 11h.01"/><path d="M11 15h.01"/><path d="M16 16h.01"/><path d="m2 16 20 6-6-20A20 20 0 0 0 2 16"/><path d="M5.71 17.11a17.04 17.04 0 0 1 11.4-11.4"/></svg></span><p class="hl-cta-mini-h">3 à 4 pizzas</p></div>
