@@ -315,9 +315,136 @@
     .hero-lead-card .hl-pretitle{font-size:10px;letter-spacing:0.22em;margin-bottom:8px}
     .hero-lead-card .hl-pretitle-divider{width:54px;margin:0 auto 14px}
   }
-  /* Hero lead — desktop shows the paragraph; mobile shows a swipe carousel */
+  /* Hero lead — carousel partout (mobile via swipe, desktop via flèches) */
   .hero-lead-carousel{display:none}
   .hero-lead-dots{display:none}
+  .hero-lead-wrap{display:contents}
+
+  /* === DESKTOP CAROUSEL (min-width:601px) === */
+  @media(min-width:601px){
+    /* Cache l'ancien paragraphe lead desktop, le carousel le remplace */
+    .hero .lead.hero-lead-desktop{display:none !important}
+    .hero-intro-block{display:none}
+
+    .hero-lead-wrap{
+      display:block;
+      position:relative;
+      max-width:680px;
+      margin:0 auto;
+    }
+    .hero-lead-carousel{
+      display:flex;
+      overflow-x:auto;
+      scroll-snap-type:x mandatory;
+      scrollbar-width:none;
+      gap:0;padding:0;margin:0 0 18px;
+      scroll-padding:0;
+    }
+    .hero-lead-carousel::-webkit-scrollbar{display:none}
+    .hero-lead-slide{
+      flex:0 0 100%;
+      scroll-snap-align:center;
+      padding:6px 28px 10px;
+      box-sizing:border-box;
+      display:flex;
+    }
+    .hero-lead-card{
+      width:100%;
+      background:linear-gradient(135deg,rgba(20,37,64,0.55) 0%,rgba(10,22,40,0.32) 100%);
+      border:1px solid rgba(212,182,106,0.22);
+      border-radius:16px;
+      padding:38px 36px;
+      min-height:240px;
+      display:flex;flex-direction:column;justify-content:center;align-items:center;
+      text-align:center;
+      box-shadow:0 8px 28px rgba(0,0,0,0.22);
+      opacity:1;filter:blur(0);transform:scale(1);
+      transition:opacity 0.45s ease, filter 0.45s ease, transform 0.45s ease;
+    }
+    .hero-lead-slide.is-inactive .hero-lead-card{
+      opacity:0.22;filter:blur(3px);transform:scale(0.96);
+    }
+    .hero-lead-card p{
+      font-family:'Inter',sans-serif;
+      font-size:16.5px;line-height:1.6;
+      color:var(--text);font-weight:400;margin:0;
+      max-width:540px;
+    }
+    .hero-lead-card strong{color:var(--gold);font-weight:700}
+    .hero-lead-card .hl-pretitle{
+      font-family:'Inter',sans-serif;
+      font-size:11px;font-weight:700;
+      letter-spacing:0.22em;text-transform:uppercase;
+      color:var(--gold);opacity:0.85;
+      margin-bottom:10px;display:block;
+    }
+    .hero-lead-card .hl-pretitle-divider{
+      display:block;width:64px;height:1.5px;
+      background:linear-gradient(90deg, transparent, var(--gold), transparent);
+      margin:0 auto 16px;
+    }
+
+    /* Dots — desktop visible */
+    .hero-lead-dots{
+      display:flex;justify-content:center;gap:8px;
+      margin:0 0 26px;padding:0;
+    }
+    .hl-dot{
+      width:7px;height:7px;border-radius:50%;
+      background:rgba(212,182,106,0.32);
+      border:0;padding:0;cursor:pointer;
+      transition:width 0.28s ease,background 0.28s ease,border-radius 0.28s ease;
+    }
+    .hl-dot.active{
+      width:24px;border-radius:3px;
+      background:var(--gold);
+    }
+
+    /* Arrows desktop — outside the scroll container */
+    .hl-arrow{
+      position:absolute;top:50%;
+      transform:translateY(-50%);
+      width:48px;height:48px;border-radius:50%;
+      background:linear-gradient(180deg, rgba(212,182,106,0.2), rgba(212,182,106,0.08));
+      border:1px solid rgba(212,182,106,0.45);
+      color:var(--gold);cursor:pointer;
+      display:flex;align-items:center;justify-content:center;
+      transition:transform 0.18s ease, background 0.25s ease, box-shadow 0.25s ease;
+      z-index:5;
+      box-shadow:0 8px 26px rgba(0,0,0,0.4);
+    }
+    @media (hover:hover){
+      .hl-arrow:hover{
+        background:linear-gradient(180deg, rgba(212,182,106,0.36), rgba(212,182,106,0.16));
+        box-shadow:0 0 28px rgba(212,182,106,0.45);
+        transform:translateY(-50%) scale(1.06);
+      }
+    }
+    .hl-arrow:active{transform:translateY(-50%) scale(0.95)}
+    .hl-arrow svg{width:20px;height:20px;display:block}
+    .hl-arrow-prev{left:-28px}
+    .hl-arrow-next{right:-28px}
+    .hl-arrow:disabled{opacity:0.3;cursor:default;pointer-events:none;box-shadow:none}
+
+    /* Slide CTA finale — overrides desktop */
+    .hero-lead-slide-cta .hero-lead-card{padding:38px 36px}
+    .hero-lead-slide-cta .hero-lead-card p{font-size:14px}
+    .hl-cta-kicker{font-size:11px !important;margin-bottom:12px !important}
+    .hl-cta-body{font-size:14.5px !important;margin-bottom:14px !important}
+    .hl-cta-claim{font-size:18px !important;margin-bottom:16px !important}
+    .hl-cta-exit{font-size:13px !important;white-space:normal !important;padding-top:14px !important}
+
+    /* Schema slide — overrides desktop pour avoir un peu plus d'air */
+    .hero-lead-slide-schema .hl-schema-intro{font-size:13.5px !important}
+    .hero-lead-slide-schema .hl-schema-target{font-size:11px !important}
+    .hl-step-text{font-size:9.5px}
+
+    /* Hide swipe hint on desktop (les flèches font le job) */
+    .hero-lead-swipe{display:none}
+  }
+  @media(max-width:600px){
+    .hl-arrow{display:none}
+  }
   @media(max-width:600px){
     .hero{padding:90px 0 70px}
     .hero h1{font-size:30px;line-height:1.18;letter-spacing:-0.01em;margin:24px auto 28px}
@@ -2538,7 +2665,10 @@
     <p class="lead reveal hero-lead-desktop">
       Soyons honnêtes 5 secondes :<br>Si tu es sur cette page<br>c'est probablement que<br><strong>tu as du mal à décoller<br>en e-commerce</strong>.<br><br>Tu as suivi des formations gratuites sur YouTube. Peut-être même des formations payantes (prix plein, marché noir, voire mentoring). Tu as peut-être rejoint un Skool à <strong>100, 200 €/mois ou plus</strong>. Ou suivi des comptes X qui semblent partager la vraie value. <strong>Mais au moment d'implémenter, ça ne se transforme jamais en chiffre d'affaires.</strong> Et malgré tout ça, <strong>tu tournes en rond et tu n'arrives pas à décoller.</strong> Si tu te reconnais dans ce que je viens de citer, <strong>GENESYS est fait pour toi.</strong> Je t'invite à découvrir.
     </p>
-    <div class="hero-lead-carousel reveal" id="heroLeadCarousel" role="region" aria-label="Présentation">
+    <div class="hero-lead-wrap reveal">
+      <button type="button" class="hl-arrow hl-arrow-prev" id="heroLeadPrev" aria-label="Slide précédent"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg></button>
+      <button type="button" class="hl-arrow hl-arrow-next" id="heroLeadNext" aria-label="Slide suivant"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg></button>
+    <div class="hero-lead-carousel" id="heroLeadCarousel" role="region" aria-label="Présentation">
       <div class="hero-lead-slide">
         <div class="hero-lead-card">
           <span class="hl-pretitle">Avant d'aller plus loin</span>
@@ -2644,6 +2774,7 @@
         </div>
       </div>
     </div>
+    </div><!-- /.hero-lead-wrap -->
     <div class="hero-lead-dots" id="heroLeadDots">
       <button type="button" class="hl-dot active" data-idx="0" aria-label="Vignette 1"></button>
       <button type="button" class="hl-dot" data-idx="1" aria-label="Vignette 2"></button>
@@ -4297,7 +4428,36 @@
         slides[i].scrollIntoView({behavior:'smooth', inline:'center', block:'nearest'});
       });
     });
+
+    // Desktop prev/next arrows
+    const prevBtn = document.getElementById('heroLeadPrev');
+    const nextBtn = document.getElementById('heroLeadNext');
+    function activeIndex(){
+      const center = carousel.scrollLeft + carousel.clientWidth / 2;
+      let idx = 0, best = Infinity;
+      slides.forEach((s, i) => {
+        const c = s.offsetLeft + s.clientWidth / 2;
+        const d = Math.abs(c - center);
+        if(d < best){ best = d; idx = i; }
+      });
+      return idx;
+    }
+    function goTo(i){
+      const target = Math.max(0, Math.min(slides.length - 1, i));
+      slides[target].scrollIntoView({behavior:'smooth', inline:'center', block:'nearest'});
+    }
+    function refreshArrows(){
+      if(!prevBtn || !nextBtn) return;
+      const idx = activeIndex();
+      prevBtn.disabled = (idx === 0);
+      nextBtn.disabled = (idx === slides.length - 1);
+    }
+    if(prevBtn) prevBtn.addEventListener('click', () => goTo(activeIndex() - 1));
+    if(nextBtn) nextBtn.addEventListener('click', () => goTo(activeIndex() + 1));
+    carousel.addEventListener('scroll', refreshArrows, {passive:true});
+
     update();
+    refreshArrows();
   })();
 
   // ===== YOUTUBE POSTER OVERLAY — hides black box while iframe loads =====
