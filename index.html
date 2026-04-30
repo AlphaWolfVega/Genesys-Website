@@ -3878,7 +3878,7 @@
       copy:    {label:"Copywriting",            modules:["Ecom Copy Impact"]},
       cro:     {label:"Conversion (CRO)",       modules:["Boutique qui convertit","Conversion & panier"]},
       ads:     {label:"Publicités payantes",    modules:["Scaler Meta proprement","Google Ads sans gaspillage","Créatives qui vendent"]},
-      mindset: {label:"Mental d'opérateur",     modules:["Mental & constance","Focus d'opérateur"]}
+      mindset: {label:"Mental d'e-commerçant(e)", modules:["Mental & constance","Focus d'opérateur"]}
     };
 
     // Question pool — 10 per domain × 5 domains = 50. Each session picks 2 per domain.
@@ -3918,7 +3918,7 @@
         opts:[{l:"VRAI"}, {l:"FAUX"}, {l:"Ça dépend du produit et du prix", c:true}]},
       {domain:"copy", type:"choice", q:"Quel objet d'email convertit le plus en taux d'ouverture ?",
         opts:[{l:"« Promotion Black Friday : -50&nbsp;% »"}, {l:"« Marie, voici la réponse à ta question »", c:true}, {l:"« Notre offre exceptionnelle de la semaine »"}]},
-      {domain:"copy", type:"choice", q:"Sur ton bouton d'achat principal, quel texte convertit le plus ?",
+      {domain:"copy", type:"choice", q:"Sur le bouton d'achat principal de ta page produit, quel texte convertit le plus ?",
         opts:[{l:"« Acheter maintenant »"}, {l:"« Commander »"}, {l:"« Je veux ma crème »", c:true}, {l:"« Valider »"}]},
       {domain:"copy", type:"tf", q:"Sur une page produit, lister les caractéristiques techniques convertit mieux que les bénéfices concrets.",
         opts:[{l:"VRAI"}, {l:"FAUX", c:true}, {l:"Ça dépend"}]},
@@ -3931,7 +3931,7 @@
 
       // ==================== CRO (10) ====================
       {domain:"cro", type:"estim", q:"Un taux de conversion de 1,5&nbsp;% sur Shopify, c'est…",
-        opts:[{l:"Mauvais"}, {l:"Moyen", c:true}, {l:"Excellent"}],
+        opts:[{l:"Mauvais"}, {l:"Moyen"}, {l:"Excellent"}, {l:"Ça dépend du panier moyen et de la rentabilité", c:true}],
         jargon:"CRO = Conversion Rate Optimization, autrement dit l'art d'augmenter le pourcentage de visiteurs qui achètent."},
       {domain:"cro", type:"choice", q:"Tu veux augmenter ton taux de conversion. Quelle action priorises-tu en premier ?",
         opts:[{l:"Refaire le design de toute la page"}, {l:"Améliorer la hero (la zone visible sans scroller)", c:true}, {l:"Ajouter plus de produits dans la collection"}]},
@@ -3962,7 +3962,7 @@
       {domain:"ads", type:"tf", q:"Plus tu mets de budget sur Meta, plus l'algorithme apprend vite (à conditions équivalentes).",
         opts:[{l:"VRAI", c:true}, {l:"FAUX"}, {l:"Ça dépend"}]},
       {domain:"ads", type:"choice", q:"Sur 100 tests A/B en 2025-2026, quelle créa Meta gagne le plus souvent ?",
-        opts:[{l:"Vidéo studio professionnelle 30&nbsp;s avec voix-off"}, {l:"Vidéo selfie face caméra qui parle naturellement", c:true}, {l:"Carrousel 5 photos produit haute qualité"}]},
+        opts:[{l:"Vidéo studio pro avec voix-off"}, {l:"Vidéo selfie face caméra naturelle", c:true}, {l:"Carrousel photos produit"}, {l:"Ça dépend de la niche et du produit"}]},
       {domain:"ads", type:"choice", q:"Les 3 premières secondes d'une vidéo Meta doivent…",
         opts:[{l:"Présenter calmement le produit"}, {l:"Créer un pattern interrupt fort (question, choc visuel, surprise)", c:true}, {l:"Afficher le logo de la marque"}]},
       {domain:"ads", type:"tf", q:"Avec l'algorithme Meta de 2025+, une audience large (1&nbsp;M+) bat souvent une audience ciblée précise.",
@@ -3971,9 +3971,9 @@
         opts:[{l:"1 seule (focus sur la meilleure)"}, {l:"3 à 5 (assez pour comparer)", c:true}, {l:"10+ pour tester massivement"}]},
       {domain:"ads", type:"choice", q:"Pour une boutique e-com récente, lequel apporte le plus rapidement les premiers clients ?",
         opts:[{l:"Google Search Ads (intention d'achat haute)"}, {l:"Meta (Facebook + Instagram) feed et reels", c:true}, {l:"Google Display Ads (visibilité large)"}]},
-      {domain:"ads", type:"estim", q:"Un ROAS minimum acceptable pour scaler une campagne Meta e-com (marges classiques 50-60&nbsp;%) c'est…",
-        opts:[{l:"1,5"}, {l:"2 à 2,5", c:true}, {l:"4+"}],
-        jargon:"ROAS = Return On Ad Spend, le retour sur investissement publicitaire. ROAS de 2 = pour 1&nbsp;€ dépensé en pubs, tu fais 2&nbsp;€ de chiffre d'affaires."},
+      {domain:"ads", type:"estim", q:"Le ROAS minimum pour scaler une campagne Meta e-com avec profit, c'est…",
+        opts:[{l:"1,5"}, {l:"2 à 2,5"}, {l:"4 et plus"}, {l:"Ça dépend de ton ROAS break-even", c:true}],
+        jargon:"ROAS = Return On Ad Spend (1&nbsp;€ dépensé en pubs &rarr; combien tu fais de CA). ROAS break-even = le ROAS minimum pour ne ni gagner ni perdre — il dépend de ta marge brute (taux différent selon ton modèle)."},
       {domain:"ads", type:"choice", q:"Tu testes un produit pendant combien de jours avant de le déclarer mort ?",
         opts:[{l:"3 jours, c'est suffisant"}, {l:"7 à 14 jours minimum avec budget cohérent", c:true}, {l:"30+ jours, faut être patient"}]},
 
@@ -3984,8 +3984,9 @@
         opts:[{l:"4 erreurs qui prouvent que je m'y prends mal"}, {l:"4 signaux qui m'ont rapproché du bon produit", c:true}, {l:"4 produits à relancer plus tard avec un meilleur angle"}]},
       {domain:"mindset", type:"tf", q:"Travailler 12&nbsp;h par jour est nécessaire pour réussir en e-commerce.",
         opts:[{l:"VRAI"}, {l:"FAUX", c:true}, {l:"Ça dépend"}]},
-      {domain:"mindset", type:"estim", q:"Combien de produits tu devrais tester par mois en phase d'apprentissage&nbsp;?",
-        opts:[{l:"0 à 1"}, {l:"2 à 4"}, {l:"5 et plus", c:true}]},
+      {domain:"mindset", type:"estim", q:"Combien de produits tu devrais tester par mois sur Meta en phase d'apprentissage&nbsp;?",
+        opts:[{l:"0 à 1"}, {l:"2 à 4"}, {l:"5 et plus", c:true}],
+        jargon:"Phase d'apprentissage = la période où tu cherches encore ton produit gagnant — que tu démarres ta 1ʳᵉ boutique, que tu en relances une, ou que tu testes une nouvelle niche."},
       {domain:"mindset", type:"choice", q:"Tu vois sur LinkedIn un autre entrepreneur qui annonce 50&nbsp;K€/mois. Réaction la plus saine ?",
         opts:[{l:"Je doute (90&nbsp;% mentent sur les chiffres)"}, {l:"Je m'inspire des étapes possibles, je ne compare pas la photo de fin", c:true}, {l:"Je me dis que je ne suis pas à la hauteur"}]},
       {domain:"mindset", type:"choice", q:"Ton premier 10&nbsp;K€ de chiffre d'affaires mensuel, tu le vois comme…",
@@ -4021,27 +4022,28 @@
       copy:    "<strong>Sur les questions posées, tes réflexes copywriting méritent d'être consolidés.</strong> Tu décris probablement ce que TOI tu vois dans ton produit, pas ce qui touche le viewer. <strong>Ecom Copy Impact</strong> est conçu pour ça : écrire pour vendre, pas pour informer — pages, pubs, emails.",
       cro:     "<strong>Sur les questions posées, tu sembles avoir des angles morts en optimisation de conversion.</strong> Tu fais venir du monde, mais une grosse part repart sans acheter. <strong>Boutique qui convertit</strong> restructure la page produit, et <strong>Conversion & panier</strong> optimise les derniers mètres avant l'achat.",
       ads:     "<strong>Sur les questions posées, tes réflexes publicitaires sont à étoffer.</strong> Probablement tu jettes du budget sans piloter clairement. <strong>Scaler Meta proprement</strong>, <strong>Créatives qui vendent</strong> et <strong>Google Ads sans gaspillage</strong> couvrent ça étape par étape — du test à la scale.",
-      mindset: "<strong>Sur les questions posées, ton mental d'opérateur a des prises ouvertes.</strong> Techniquement tu peux savoir pas mal de choses, mais l'opérateur derrière craque trop tôt — premier échec, première tentation d'arrêt, focus dispersé. <strong>Mental & constance</strong> et <strong>Focus d'opérateur</strong> travaillent l'opérateur derrière le e-commerçant."
+      mindset: "<strong>Sur les questions posées, ton mental d'e-commerçant(e) a des prises ouvertes.</strong> Techniquement tu peux savoir pas mal de choses, mais la personne derrière craque trop tôt — premier échec, première tentation d'arrêt, focus dispersé. <strong>Mental & constance</strong> et <strong>Focus d'opérateur</strong> travaillent l'e-commerçant(e) derrière la boutique."
     };
 
     const ALL_HIGH_DIAG = "<strong>Sur les 10 questions posées, tu sembles à l'aise dans tous les domaines.</strong> Précision honnête : 10 questions ne suffisent pas à dire que tu maîtrises tout — mais tes réflexes ont l'air bons. GENESYS te servirait surtout pour rester à jour avec les évolutions du marché (algos Meta qui changent, nouveaux comportements consommateurs), accéder à des cas concrets d'autres opérateurs, et progresser plus vite par le réseau plutôt que dans ton coin.";
     const ALL_LOW_DIAG = "<strong>Sur les 10 questions posées, beaucoup de leviers sont à explorer.</strong> Bonne nouvelle : tu démarres avec zéro mauvaise habitude à désapprendre. <strong>Supernova</strong> te donne le parcours complet de zéro à boutique rentable, et la communauté GENESYS te pose un cadre quotidien pour ne pas dériver.";
 
-    // Mood face progress (face SVG mouth path keys + encouragement text)
+    // Mood face progress — toutes les expressions sont SOURIANTES, escalade joyeuse
+    // (no neutral/sad face — start happy, end with a wide grin)
     const MOUTH_PATHS = {
-      neutral: "M 9 19 L 19 19",
-      ok:      "M 9 18 Q 14 21 19 18",
-      smile:   "M 8 17 Q 14 22 20 17",
-      grin:    "M 7 16 Q 14 24 21 16"
+      smile1: "M 10 18 Q 14 20 18 18",         // sourire doux
+      smile2: "M 9 17.5 Q 14 21 19 17.5",      // sourire moyen
+      smile3: "M 8 16.5 Q 14 22.5 20 16.5",    // grand sourire
+      smile4: "M 7 15.5 Q 14 24 21 15.5"       // sourire dents/grin
     };
     function moodFor(idx, total){
       const remaining = total - idx;
-      if(idx === 0)            return {mouth:'neutral', lvl:1, txt:"On commence en douceur"};
-      if(remaining > total * 0.6) return {mouth:'neutral', lvl:1, txt:"Plus que " + remaining + " questions"};
-      if(remaining > total * 0.3) return {mouth:'ok', lvl:2, txt:"Plus que " + remaining + " questions"};
-      if(remaining > 1)         return {mouth:'smile', lvl:3, txt:"Plus que " + remaining + " questions"};
-      if(remaining === 1)       return {mouth:'smile', lvl:3, txt:"Plus qu'une !"};
-      return {mouth:'grin', lvl:4, txt:"Dernière question !"};
+      if(idx === 0)               return {mouth:'smile1', lvl:1, txt:"On commence en douceur"};
+      if(remaining > total * 0.65) return {mouth:'smile1', lvl:1, txt:"Plus que " + remaining + " questions"};
+      if(remaining > total * 0.4)  return {mouth:'smile2', lvl:2, txt:"Plus que " + remaining + " questions"};
+      if(remaining > total * 0.15) return {mouth:'smile3', lvl:3, txt:"Plus que " + remaining + " questions"};
+      if(remaining === 1)          return {mouth:'smile4', lvl:4, txt:"Plus qu'une !"};
+      return {mouth:'smile4', lvl:4, txt:"Dernière question !"};
     }
 
     // ---------- State + DOM refs ----------
