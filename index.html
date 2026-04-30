@@ -491,8 +491,8 @@
       position:relative;overflow:hidden;
     }
     .hl-runner-video picture{
-      position:absolute;top:4px;left:0;
-      animation:hlWalkerLoop 16s ease-in-out infinite;
+      position:absolute;top:4px;left:50%;margin-left:-45px;
+      animation:hlWalkerLoop 14s ease-in-out infinite;
       transform-origin:center;
       filter:drop-shadow(0 0 14px rgba(212,182,106,0.45));
     }
@@ -500,13 +500,12 @@
       width:90px;height:162px;display:block;
     }
     @keyframes hlWalkerLoop{
-      0%   {transform:translateX(-100px) scaleX(1)}
-      45%  {transform:translateX(calc(100vw - 90px)) scaleX(1)}
-      48%  {transform:translateX(calc(100vw - 90px)) scaleX(1)}
-      52%  {transform:translateX(calc(100vw - 90px)) scaleX(-1)}
-      95%  {transform:translateX(0) scaleX(-1)}
-      98%  {transform:translateX(0) scaleX(-1)}
-      100% {transform:translateX(-100px) scaleX(1)}
+      0%   {transform:translateX(0) scaleX(1)}
+      38%  {transform:translateX(45px) scaleX(1)}
+      45%  {transform:translateX(45px) scaleX(-1)}
+      83%  {transform:translateX(-45px) scaleX(-1)}
+      92%  {transform:translateX(-45px) scaleX(1)}
+      100% {transform:translateX(0) scaleX(1)}
     }
     /* === CINEMAGRAPH (ancien fallback SVG, hidden) === */
     .hl-spin-anim.hl-cinema{width:200px;height:160px;aspect-ratio:200/160}
@@ -1218,8 +1217,8 @@
       position:relative;overflow:hidden;
     }
     .hl-runner-video picture{
-      position:absolute;top:5px;left:0;
-      animation:hlWalkerLoop 18s ease-in-out infinite;
+      position:absolute;top:5px;left:50%;margin-left:-50px;
+      animation:hlWalkerLoop 15s ease-in-out infinite;
       transform-origin:center;
       filter:drop-shadow(0 0 16px rgba(212,182,106,0.5));
     }
@@ -1227,13 +1226,12 @@
       width:100px;height:180px;display:block;
     }
     @keyframes hlWalkerLoop{
-      0%   {transform:translateX(-110px) scaleX(1)}
-      45%  {transform:translateX(calc(100vw - 100px)) scaleX(1)}
-      48%  {transform:translateX(calc(100vw - 100px)) scaleX(1)}
-      52%  {transform:translateX(calc(100vw - 100px)) scaleX(-1)}
-      95%  {transform:translateX(0) scaleX(-1)}
-      98%  {transform:translateX(0) scaleX(-1)}
-      100% {transform:translateX(-110px) scaleX(1)}
+      0%   {transform:translateX(0) scaleX(1)}
+      38%  {transform:translateX(50px) scaleX(1)}
+      45%  {transform:translateX(50px) scaleX(-1)}
+      83%  {transform:translateX(-50px) scaleX(-1)}
+      92%  {transform:translateX(-50px) scaleX(1)}
+      100% {transform:translateX(0) scaleX(1)}
     }
     /* === CINEMAGRAPH MOBILE (legacy fallback) === */
     .hl-spin-anim.hl-cinema{width:230px;height:184px;aspect-ratio:200/160}
