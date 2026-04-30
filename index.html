@@ -435,20 +435,21 @@
     .hero-lead-swipe{display:none}
 
     /* === SLIDE CTA finale — sizes adaptées desktop === */
-    .hero-lead-slide-cta .hero-lead-card{padding:26px 26px;overflow:hidden}
-    .hl-cta-kicker{font-size:8.5px !important;margin-bottom:8px !important}
-    .hl-cta-body{font-size:9px !important;line-height:1.55 !important;margin-bottom:11px !important}
-    .hl-cta-claim{font-size:11px !important;margin-bottom:9px !important}
+    .hero-lead-slide-cta .hero-lead-card{padding:32px 28px;overflow:hidden}
+    .hl-cta-kicker{font-size:10px !important;margin-bottom:11px !important}
+    .hl-cta-body{font-size:11px !important;line-height:1.6 !important;margin-bottom:14px !important}
+    .hl-cta-claim{font-size:12px !important;margin-bottom:10px !important}
     .hl-cta-claim-inline{font-size:1.05em !important;color:var(--gold);font-weight:800;text-shadow:0 0 14px rgba(212,182,106,0.25)}
-    .hl-cta-mini{margin:0 0 11px !important}
-    .hl-cta-mini-card{padding:15px 16px 16px !important;border-radius:9px !important;text-align:center !important}
-    .hl-cta-mini-icon{width:28px !important;height:28px !important;margin:0 auto 7px !important}
-    .hl-cta-mini-h{font-size:11.5px !important;letter-spacing:0.08em !important;margin:0 auto 7px !important;text-align:center !important}
-    .hl-cta-mini-b{font-size:12.5px !important;line-height:1.6 !important;text-align:left !important}
-    .hl-cta-mini-dot{width:5.5px !important;height:5.5px !important}
-    .hl-cta-mini-swipe{font-size:7.5px !important;margin-top:7px !important}
-    .hl-cta-exit{font-size:7.5px !important;white-space:normal !important;padding-top:9px !important;line-height:1.55 !important}
-    .hl-cta-explore{font-family:'Inter',sans-serif !important;font-size:8px !important;font-weight:700 !important;color:var(--gold) !important;letter-spacing:0.04em;margin:10px 0 5px !important;text-align:center;hyphens:none !important;word-break:keep-all}
+    .hl-cta-mini{margin:0 0 13px !important}
+    .hl-cta-mini-card{padding:16px 17px 17px !important;border-radius:9px !important;text-align:center !important}
+    .hl-cta-mini-head{gap:11px !important;margin:0 0 11px !important}
+    .hl-cta-mini-icon{width:26px !important;height:26px !important;margin:0 !important}
+    .hl-cta-mini-h{font-size:12.5px !important;letter-spacing:0.08em !important;margin:0 !important;text-align:left !important}
+    .hl-cta-mini-b{font-size:14px !important;line-height:1.6 !important;text-align:left !important}
+    .hl-cta-mini-dot{width:6px !important;height:6px !important}
+    .hl-cta-mini-swipe{font-size:8.5px !important;margin-top:8px !important}
+    .hl-cta-exit{font-size:11px !important;white-space:normal !important;padding-top:13px !important;line-height:1.6 !important}
+    .hl-cta-explore{font-family:'Inter',sans-serif !important;font-size:10.5px !important;font-weight:700 !important;color:var(--gold) !important;letter-spacing:0.04em;margin:13px 0 6px !important;text-align:center;hyphens:none !important;word-break:keep-all}
 
     /* === SCHEMA slide (cycle e-com) — toutes les rules dupliquées pour desktop === */
     .hero-lead-slide-schema .hero-lead-card{padding:28px 18px}
@@ -650,13 +651,14 @@
 
     /* Down arrow (slide CTA finale) */
     .hero-lead-down{
-      margin-top:18px;
+      margin:18px auto 0;
       display:flex;align-items:center;justify-content:center;
       width:38px;height:38px;border-radius:50%;
       background:rgba(212,182,106,0.1);
       border:1px solid rgba(212,182,106,0.5);
       color:var(--gold);
       animation:heroLeadDown 1.7s ease-in-out infinite;
+      align-self:center;
     }
     .hero-lead-down svg{width:18px;height:18px;display:block}
   }
@@ -726,15 +728,15 @@
     }
     .hero-lead-card strong{color:var(--gold);font-weight:700}
     .hero-lead-slide-cta .hero-lead-card{
-      padding:22px 22px;
+      padding:28px 24px;
       text-align:center;
       box-sizing:border-box;
       overflow:hidden;
       width:100%;
       max-width:100%;
-      align-items:stretch;
     }
-    .hero-lead-slide-cta .hero-lead-card > *{align-self:stretch;max-width:100%;min-width:0}
+    .hero-lead-slide-cta .hero-lead-card > *{max-width:100%;width:100%;min-width:0;box-sizing:border-box}
+    .hero-lead-slide-cta .hero-lead-card > .hero-lead-down{width:auto;align-self:center}
     .hero-lead-slide-cta .hero-lead-card p{
       margin:0;
       max-width:100%;
@@ -746,18 +748,18 @@
     }
     .hl-cta-kicker{
       font-family:'Inter',sans-serif;
-      font-size:7.5px;font-weight:700;
+      font-size:9px;font-weight:700;
       letter-spacing:0.16em;text-transform:uppercase;
       color:var(--gold);
-      margin-bottom:6px !important;
+      margin-bottom:9px !important;
       opacity:0.9;
     }
     .hl-cta-body{
       font-family:'Inter',sans-serif;
-      font-size:7.5px;font-weight:500;
+      font-size:9.5px;font-weight:500;
       color:var(--text);
-      line-height:1.55;
-      margin-bottom:9px !important;
+      line-height:1.6;
+      margin-bottom:12px !important;
       overflow-wrap:break-word;
       word-wrap:break-word;
       hyphens:auto;
@@ -777,11 +779,11 @@
     .hl-cta-claim strong{color:var(--gold);font-weight:800}
     .hl-cta-exit{
       font-family:'Inter',sans-serif;
-      font-size:6.5px;font-weight:500;
+      font-size:9.5px;font-weight:500;
       color:rgba(245,238,222,0.62);
-      line-height:1.55;
+      line-height:1.6;
       margin:0 !important;
-      padding-top:7px;
+      padding-top:11px;
       border-top:1px solid rgba(212,182,106,0.18);
       white-space:normal;
       letter-spacing:0;
@@ -818,35 +820,45 @@
       border:1px solid rgba(212,182,106,0.32);
       border-top:3px solid var(--gold);
       border-radius:8px;
-      padding:13px 14px 14px;
+      padding:14px 14px 16px;
       text-align:center;
       box-shadow:0 4px 16px rgba(0,0,0,0.18);
       transition:transform 0.3s ease, box-shadow 0.3s ease;
       overflow:hidden;
     }
+    .hl-cta-mini-head{
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      gap:9px;
+      margin:0 0 10px !important;
+      flex-wrap:nowrap;
+      max-width:100%;
+    }
     .hl-cta-mini-icon{
-      display:flex;align-items:center;justify-content:center;
-      width:24px;height:24px;
+      display:inline-flex;align-items:center;justify-content:center;
+      width:22px;height:22px;
       color:var(--gold);
-      margin:0 auto 6px !important;
+      flex-shrink:0;
+      margin:0 !important;
     }
     .hl-cta-mini-icon svg{width:100%;height:100%;display:block}
     .hl-cta-mini-h{
       font-family:'Inter',sans-serif !important;
-      font-size:10.5px !important;font-weight:800 !important;
+      font-size:11px !important;font-weight:800 !important;
       color:var(--gold) !important;
       letter-spacing:0.08em !important;text-transform:uppercase;
-      margin:0 auto 7px !important;
-      line-height:1.3 !important;
-      text-align:center !important;
+      margin:0 !important;
+      line-height:1.25 !important;
+      text-align:left !important;
       text-shadow:0 0 14px rgba(212,182,106,0.28);
       overflow-wrap:break-word;
     }
     .hl-cta-mini-b{
       font-family:'Inter',sans-serif !important;
-      font-size:11px !important;font-weight:500 !important;
+      font-size:12.5px !important;font-weight:500 !important;
       color:rgba(245,238,222,0.95) !important;
-      line-height:1.55 !important;
+      line-height:1.6 !important;
       margin:0 !important;
       text-align:left !important;
       overflow-wrap:break-word;
@@ -884,11 +896,11 @@
     }
     .hl-cta-explore{
       font-family:'Inter',sans-serif;
-      font-size:7px;font-weight:700;
+      font-size:9px;font-weight:700;
       color:var(--gold);
       letter-spacing:0.04em;
       text-align:center;
-      margin:8px 0 4px !important;
+      margin:11px 0 6px !important;
       text-shadow:0 0 18px rgba(212,182,106,0.25);
       hyphens:none !important;
       word-break:keep-all;
@@ -1238,13 +1250,14 @@
 
     /* Continue arrow on last slide — gentle bounce + halo pulse (page scroll-down) */
     .hero-lead-down{
-      margin-top:18px;
+      margin:18px auto 0;
       display:flex;align-items:center;justify-content:center;
       width:38px;height:38px;border-radius:50%;
       background:rgba(212,182,106,0.1);
       border:1px solid rgba(212,182,106,0.5);
       color:var(--gold);
       animation:heroLeadDown 1.7s ease-in-out infinite;
+      align-self:center;
     }
     .hero-lead-down svg{width:18px;height:18px;display:block}
     @keyframes heroLeadDown{
@@ -3149,38 +3162,31 @@
           <div class="hl-cta-mini" id="hlCtaMini">
             <div class="hl-cta-mini-track" id="hlCtaMiniTrack">
               <div class="hl-cta-mini-card">
-                <span class="hl-cta-mini-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 9.9-1"/></svg></span>
-                <p class="hl-cta-mini-h">Liberté totale</p>
+                <div class="hl-cta-mini-head"><span class="hl-cta-mini-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 9.9-1"/></svg></span><p class="hl-cta-mini-h">Liberté totale</p></div>
                 <p class="hl-cta-mini-b">Aucun engagement. Tu testes 1 mois, tu pars en 2 clics quand tu veux. <strong>Pas de relance, pas de piège, pas de carte cachée.</strong> Tu décides à 100 %, et tu ne dois rien à personne.</p>
               </div>
               <div class="hl-cta-mini-card">
-                <span class="hl-cta-mini-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" x2="12" y1="2" y2="22"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></span>
-                <p class="hl-cta-mini-h">Le pire scénario</p>
+                <div class="hl-cta-mini-head"><span class="hl-cta-mini-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" x2="12" y1="2" y2="22"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></span><p class="hl-cta-mini-h">Le pire scénario</p></div>
                 <p class="hl-cta-mini-b">Même si tu restais <strong>12 mois pleins</strong>, ça te coûterait <strong>588 $</strong>. Une formation classique : <strong>1 500 €</strong>. Un mentoring : <strong>5 000 €</strong>. Soit <strong>70 à 90 % de moins</strong>, pour la même profondeur.</p>
               </div>
               <div class="hl-cta-mini-card">
-                <span class="hl-cta-mini-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 11h.01"/><path d="M11 15h.01"/><path d="M16 16h.01"/><path d="m2 16 20 6-6-20A20 20 0 0 0 2 16"/><path d="M5.71 17.11a17.04 17.04 0 0 1 11.4-11.4"/></svg></span>
-                <p class="hl-cta-mini-h">3 à 4 pizzas</p>
+                <div class="hl-cta-mini-head"><span class="hl-cta-mini-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 11h.01"/><path d="M11 15h.01"/><path d="M16 16h.01"/><path d="m2 16 20 6-6-20A20 20 0 0 0 2 16"/><path d="M5.71 17.11a17.04 17.04 0 0 1 11.4-11.4"/></svg></span><p class="hl-cta-mini-h">3 à 4 pizzas</p></div>
                 <p class="hl-cta-mini-b">49 $, c'est 3 à 4 pizzas livrées. Bouffées en une journée, oubliées en deux. <strong>Ce que tu apprends ici, ça te paie pendant 10, 20 ans, toute ta vie.</strong></p>
               </div>
               <div class="hl-cta-mini-card">
-                <span class="hl-cta-mini-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3h12l4 6-10 13L2 9Z"/><path d="M11 3 8 9l4 13 4-13-3-6"/><path d="M2 9h20"/></svg></span>
-                <p class="hl-cta-mini-h">Plusieurs milliers en valeur</p>
+                <div class="hl-cta-mini-head"><span class="hl-cta-mini-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3h12l4 6-10 13L2 9Z"/><path d="M11 3 8 9l4 13 4-13-3-6"/><path d="M2 9h20"/></svg></span><p class="hl-cta-mini-h">Plusieurs milliers en valeur</p></div>
                 <p class="hl-cta-mini-b">Vendues séparément, les formations à l'intérieur coûteraient <strong>plusieurs milliers d'euros</strong>. Produit, copy, ads, scaling, opérations, mindset. <strong>Tu accèdes à tout</strong>, sans paywall, pour 49 $/mois.</p>
               </div>
               <div class="hl-cta-mini-card">
-                <span class="hl-cta-mini-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" x2="12" y1="19" y2="22"/></svg></span>
-                <p class="hl-cta-mini-h">Lives en direct</p>
+                <div class="hl-cta-mini-head"><span class="hl-cta-mini-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" x2="12" y1="19" y2="22"/></svg></span><p class="hl-cta-mini-h">Lives en direct</p></div>
                 <p class="hl-cta-mini-b">Tu poses ta question, on <strong>répond en direct</strong>. Pas de support fantôme. Pas de Q&amp;A préenregistrée. <strong>Toi, moi, en vrai</strong>, dans la même pièce virtuelle.</p>
               </div>
               <div class="hl-cta-mini-card">
-                <span class="hl-cta-mini-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></span>
-                <p class="hl-cta-mini-h">Tu n'es plus seul</p>
+                <div class="hl-cta-mini-head"><span class="hl-cta-mini-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></span><p class="hl-cta-mini-h">Tu n'es plus seul</p></div>
                 <p class="hl-cta-mini-b">Une communauté de gens qui <strong>font, testent, partagent leurs vrais chiffres</strong>. Pas des coachs en voiture. Des opérateurs comme toi. <strong>Voir d'autres réussir avec la même méthode, c'est ce qui change tout.</strong></p>
               </div>
               <div class="hl-cta-mini-card">
-                <span class="hl-cta-mini-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg></span>
-                <p class="hl-cta-mini-h">Dans quelques mois</p>
+                <div class="hl-cta-mini-head"><span class="hl-cta-mini-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg></span><p class="hl-cta-mini-h">Dans quelques mois</p></div>
                 <p class="hl-cta-mini-b">Tu auras <strong>structure, méthode, entourage</strong>. Tu prends des décisions calmes là où tu paniquais avant. <strong>Le doute fond.</strong> Pas par magie. Par travail.</p>
               </div>
             </div>
