@@ -485,14 +485,22 @@
     .hl-source-line{margin-top:13px !important;font-size:13.5px !important;line-height:1.6 !important}
     .hl-source-line + .hl-source-line{margin-top:13px !important}
     /* Slide 3 — bonhomme qui tourne en rond (desktop) */
-    /* === RUNNER GIF === silhouette or athlete (navy bake-in matche la card, pas de blend mode) */
+    /* === RUNNER TRANSPARENT === silhouette or qui traverse la card horizontalement (effet "tourne en rond") */
     .hl-runner-video{
-      width:300px;max-width:100%;margin:0 auto 22px;
-      filter:drop-shadow(0 0 22px rgba(212,182,106,0.32));
-      display:flex;justify-content:center;
+      width:100%;height:140px;margin:0 auto 24px;
+      position:relative;overflow:hidden;
     }
-    .hl-runner-video img{
-      width:100%;height:auto;display:block;border-radius:8px;
+    .hl-runner-video picture{
+      position:absolute;top:5px;left:0;
+      animation:hlRunnerCross 7s linear infinite;
+      filter:drop-shadow(0 0 16px rgba(212,182,106,0.4));
+    }
+    .hl-runner-video .hl-runner-img{
+      width:170px;height:130px;display:block;
+    }
+    @keyframes hlRunnerCross{
+      0%{transform:translateX(-180px)}
+      100%{transform:translateX(calc(100vw + 20px))}
     }
     /* === CINEMAGRAPH (ancien fallback SVG, hidden) === */
     .hl-spin-anim.hl-cinema{width:200px;height:160px;aspect-ratio:200/160}
@@ -1198,14 +1206,22 @@
     .hl-source-line{margin-top:14px !important;font-size:14px !important;line-height:1.6 !important}
     .hl-source-line + .hl-source-line{margin-top:14px !important}
     /* Slide 3 — bonhomme qui tourne en rond (mobile) */
-    /* === RUNNER GIF MOBILE === */
+    /* === RUNNER TRANSPARENT MOBILE === silhouette or qui traverse */
     .hl-runner-video{
-      width:340px;max-width:100%;margin:0 auto 24px;
-      filter:drop-shadow(0 0 24px rgba(212,182,106,0.34));
-      display:flex;justify-content:center;
+      width:100%;height:150px;margin:0 auto 24px;
+      position:relative;overflow:hidden;
     }
-    .hl-runner-video img{
-      width:100%;height:auto;display:block;border-radius:8px;
+    .hl-runner-video picture{
+      position:absolute;top:8px;left:0;
+      animation:hlRunnerCross 8s linear infinite;
+      filter:drop-shadow(0 0 18px rgba(212,182,106,0.45));
+    }
+    .hl-runner-video .hl-runner-img{
+      width:180px;height:138px;display:block;
+    }
+    @keyframes hlRunnerCross{
+      0%{transform:translateX(-200px)}
+      100%{transform:translateX(calc(100vw + 30px))}
     }
     /* === CINEMAGRAPH MOBILE (legacy fallback) === */
     .hl-spin-anim.hl-cinema{width:230px;height:184px;aspect-ratio:200/160}
@@ -3492,9 +3508,12 @@
       </div>
       <div class="hero-lead-slide">
         <div class="hero-lead-card">
-          <!-- GIF silhouette athlete or sur tapis roulant — autoplay loop natif, marche partout (iOS Chrome / Safari / desktop), zero codec issue -->
+          <!-- Silhouette athlete or transparente, traverse la card de gauche a droite et inversement (effet "qui tourne en rond") -->
           <div class="hl-runner-video" aria-hidden="true">
-            <img src="assets/video/runner-gold.gif" alt="" width="320" height="180" loading="eager" decoding="async">
+            <picture>
+              <source srcset="assets/video/runner-gold.webp" type="image/webp">
+              <img src="assets/video/runner-gold-transparent.gif" alt="" width="170" height="130" loading="eager" decoding="async" class="hl-runner-img">
+            </picture>
           </div>
           <div class="hl-spin-anim hl-cinema" style="display:none" aria-hidden="true">
             <svg viewBox="0 0 200 160" xmlns="http://www.w3.org/2000/svg">
