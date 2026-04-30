@@ -380,7 +380,44 @@
       margin:0;
     }
     .hero-lead-card strong{color:var(--gold);font-weight:700}
-    .hero-lead-slide-cta .hero-lead-card p{font-size:16px}
+    .hero-lead-slide-cta .hero-lead-card{padding:26px 22px;text-align:center}
+    .hero-lead-slide-cta .hero-lead-card p{margin:0}
+    .hl-cta-kicker{
+      font-family:'Inter',sans-serif;
+      font-size:11px;font-weight:700;
+      letter-spacing:0.18em;text-transform:uppercase;
+      color:var(--gold);
+      margin-bottom:14px !important;
+      opacity:0.85;
+    }
+    .hl-cta-body{
+      font-family:'Inter',sans-serif;
+      font-size:15px;font-weight:500;
+      color:var(--text);
+      line-height:1.5;
+      margin-bottom:14px !important;
+    }
+    .hl-cta-claim{
+      font-family:'Playfair Display',serif;
+      font-style:italic;
+      font-size:18px;font-weight:800;
+      color:var(--gold);
+      line-height:1.25;
+      letter-spacing:-0.005em;
+      margin-bottom:18px !important;
+      text-shadow:0 0 24px rgba(212,182,106,0.28);
+    }
+    .hl-cta-claim strong{color:var(--gold);font-weight:800}
+    .hl-cta-exit{
+      font-family:'Inter',sans-serif;
+      font-size:12.5px;font-weight:500;
+      color:rgba(245,238,222,0.6);
+      line-height:1.5;
+      margin:0 !important;
+      padding-top:14px;
+      border-top:1px solid rgba(212,182,106,0.18);
+    }
+    .hl-cta-exit em{color:rgba(212,182,106,0.7);font-style:italic;font-weight:600}
     /* Subtle swipe-right hint on slides 1–3 — never disturbs reading */
     .hero-lead-swipe{
       margin-top:16px;
@@ -2360,7 +2397,10 @@
       </div>
       <div class="hero-lead-slide hero-lead-slide-cta">
         <div class="hero-lead-card">
-          <p>Je vais aller droit au but.<br><br>Si tu t'es reconnu dans une ou plusieurs de ces situations, et que tu es prêt à investir dans toi-même pour accéder aux mêmes méthodes que <strong>certains font payer des milliers d'euros</strong> — descends. <strong>GENESYS est fait pour toi.</strong><br><br>Sinon, quitte cette page. <em>On y gagne tous les deux.</em></p>
+          <p class="hl-cta-kicker">Soyons clair.</p>
+          <p class="hl-cta-body">Si tu t'es reconnu dans une ou plusieurs de ces situations, et que tu es prêt à investir <strong>49 $/mois</strong> dans toi-même pour accéder aux mêmes méthodes que <strong>certains facturent des milliers d'euros</strong> — alors descends.</p>
+          <p class="hl-cta-claim"><strong>L'écosystème GENESYS est fait pour toi.</strong></p>
+          <p class="hl-cta-exit">Sinon, ferme cette page maintenant.<br><em>Tu gagnes ton temps, je gagne le mien.</em></p>
           <span class="hero-lead-down" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14"/><path d="m19 12-7 7-7-7"/></svg></span>
         </div>
       </div>
