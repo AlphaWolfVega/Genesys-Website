@@ -370,6 +370,143 @@
       0%, 100%{transform:translateX(0);opacity:0.45}
       50%{transform:translateX(7px);opacity:0.85}
     }
+    /* === Schema slide (the failure loop) === */
+    .hero-lead-slide-schema .hero-lead-card{padding:24px 22px}
+    .hero-lead-slide-schema .hl-schema-intro{
+      font-family:'Inter',sans-serif !important;
+      font-size:14px !important;
+      font-weight:500 !important;
+      color:var(--text);
+      margin-bottom:14px !important;
+      line-height:1.45 !important;
+      text-align:center;
+    }
+    .hero-lead-slide-schema .hl-schema-intro strong{color:var(--gold);font-weight:700}
+    .hl-schema{
+      display:flex;flex-direction:column;
+      align-items:flex-start;
+      width:100%;
+      margin:4px 0 6px;
+    }
+    .hl-step{
+      display:flex;align-items:center;gap:11px;
+      width:100%;
+      padding:4px 0;
+      text-align:left;
+    }
+    .hl-step-icon{
+      flex-shrink:0;
+      width:28px;height:28px;
+      display:inline-flex;align-items:center;justify-content:center;
+      background:rgba(212,182,106,0.08);
+      border:1px solid rgba(212,182,106,0.32);
+      border-radius:50%;
+      color:var(--gold);
+    }
+    .hl-step-icon svg{width:14px;height:14px;display:block}
+    .hl-step-text{
+      font-family:'Inter',sans-serif;
+      font-size:13px;
+      color:var(--text);
+      line-height:1.35;
+      font-weight:500;
+      flex:1;
+    }
+    .hl-step-text strong{color:var(--gold);font-weight:700}
+    .hl-step-line{
+      width:1px;height:10px;
+      background:linear-gradient(180deg,transparent,rgba(212,182,106,0.45),transparent);
+      margin-left:14px;
+      flex-shrink:0;
+    }
+    .hl-loop{
+      display:flex;align-items:center;gap:10px;
+      width:100%;
+      padding:10px 14px;
+      margin-top:10px;
+      background:rgba(212,182,106,0.1);
+      border:1px solid rgba(212,182,106,0.5);
+      border-radius:10px;
+      box-shadow:0 0 18px rgba(212,182,106,0.12);
+    }
+    .hl-loop-icon{
+      flex-shrink:0;
+      width:24px;height:24px;
+      display:inline-flex;align-items:center;justify-content:center;
+      color:var(--gold);
+      animation:hlLoopSpin 3.5s linear infinite;
+    }
+    .hl-loop-icon svg{width:18px;height:18px;display:block}
+    @keyframes hlLoopSpin{from{transform:rotate(0)}to{transform:rotate(-360deg)}}
+    .hl-loop-text{
+      font-family:'Inter',sans-serif;
+      font-size:12px;font-weight:600;
+      color:var(--gold);
+      line-height:1.35;
+      font-style:italic;
+      text-align:left;
+      flex:1;
+    }
+    @media (prefers-reduced-motion:reduce){
+      .hl-loop-icon{animation:none}
+    }
+
+    /* === Diag slide (the broken sequence) === */
+    .hero-lead-slide-diag .hero-lead-card{padding:26px 22px}
+    .hero-lead-slide-diag .hl-diag-h{
+      font-family:'Inter',sans-serif !important;
+      font-size:14.5px !important;
+      font-weight:500 !important;
+      color:var(--text);
+      margin-bottom:6px !important;
+      line-height:1.4 !important;
+      text-align:center;
+    }
+    .hero-lead-slide-diag .hl-diag-sub{
+      font-family:'Inter',sans-serif !important;
+      font-size:13.5px !important;
+      font-weight:500 !important;
+      color:var(--text-mute);
+      margin-bottom:16px !important;
+      line-height:1.4 !important;
+      text-align:center;
+    }
+    .hero-lead-slide-diag .hl-diag-sub strong{color:var(--gold);font-weight:700}
+    .hl-diag-list{
+      list-style:none;padding:0;margin:0 0 14px 0 !important;
+      display:flex;flex-direction:column;gap:7px;
+      width:100%;
+      text-align:left;
+    }
+    .hl-diag-list li{
+      position:relative;
+      padding-left:24px;
+      font-family:'Inter',sans-serif;
+      font-size:13px;
+      color:var(--text);
+      line-height:1.45;
+    }
+    .hl-diag-list li::before{
+      content:"×";
+      position:absolute;left:0;top:-2px;
+      width:18px;height:18px;
+      display:flex;align-items:center;justify-content:center;
+      color:#E8946B;
+      font-weight:800;font-size:20px;
+      font-family:'Inter',sans-serif;
+    }
+    .hero-lead-slide-diag .hl-diag-conclusion{
+      font-family:'Playfair Display',serif !important;
+      font-style:italic !important;
+      font-size:14.5px !important;
+      font-weight:600 !important;
+      color:var(--gold) !important;
+      text-align:center;
+      margin-top:8px !important;
+      line-height:1.4 !important;
+      letter-spacing:-0.005em;
+    }
+
     /* Continue arrow on last slide — gentle bounce + halo pulse (page scroll-down) */
     .hero-lead-down{
       margin-top:18px;
@@ -1910,6 +2047,56 @@
           <span class="hero-lead-swipe" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg></span>
         </div>
       </div>
+      <div class="hero-lead-slide hero-lead-slide-schema">
+        <div class="hero-lead-card">
+          <p class="hl-schema-intro">Voici le chemin classique de ceux qui <strong>ne décolleront jamais</strong> :</p>
+          <div class="hl-schema">
+            <div class="hl-step">
+              <span class="hl-step-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polygon points="10 8 16 12 10 16 10 8" fill="currentColor"/></svg></span>
+              <span class="hl-step-text">Vidéo YouTube « +10 K€/mois facile »</span>
+            </div>
+            <div class="hl-step-line"></div>
+            <div class="hl-step">
+              <span class="hl-step-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="14" x="8" y="8" rx="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg></span>
+              <span class="hl-step-text">Produit « gagnant » copié sur TikTok</span>
+            </div>
+            <div class="hl-step-line"></div>
+            <div class="hl-step">
+              <span class="hl-step-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="m3 11 18-5v12L3 14v-3z"/><path d="M11.6 16.8a3 3 0 1 1-5.8-1.6"/></svg></span>
+              <span class="hl-step-text">Pubs Meta lancées sans stratégie</span>
+            </div>
+            <div class="hl-step-line"></div>
+            <div class="hl-step">
+              <span class="hl-step-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 17 13.5 8.5 8.5 13.5 2 7"/><polyline points="16 17 22 17 22 11"/></svg></span>
+              <span class="hl-step-text"><strong>0 vente</strong>. 200 € brûlés en 5 jours.</span>
+            </div>
+            <div class="hl-step-line"></div>
+            <div class="hl-step">
+              <span class="hl-step-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="m15 9-6 6"/><path d="m9 9 6 6"/></svg></span>
+              <span class="hl-step-text">« Le produit n'était pas le bon »</span>
+            </div>
+          </div>
+          <div class="hl-loop">
+            <span class="hl-loop-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 0 0-9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/><path d="M3 12a9 9 0 0 0 9 9 9.75 9.75 0 0 0 6.74-2.74L21 16"/><path d="M16 16h5v5"/></svg></span>
+            <span class="hl-loop-text">On recommence avec un nouveau produit. Et encore. Et encore.</span>
+          </div>
+          <span class="hero-lead-swipe" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg></span>
+        </div>
+      </div>
+      <div class="hero-lead-slide hero-lead-slide-diag">
+        <div class="hero-lead-card">
+          <p class="hl-diag-h">Le problème, ce n'est <strong>jamais</strong> le produit.</p>
+          <p class="hl-diag-sub">C'est <strong>la séquence</strong> qui est cassée. Toujours la même :</p>
+          <ul class="hl-diag-list">
+            <li>tu apprends en regardant, pas en faisant</li>
+            <li>tu copies, tu n'analyses pas</li>
+            <li>tu lances, tu ne testes pas</li>
+            <li>tu paniques, tu ne comprends pas</li>
+          </ul>
+          <p class="hl-diag-conclusion">C'est exactement ce qu'on remet en place dans GENESYS.</p>
+          <span class="hero-lead-swipe" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg></span>
+        </div>
+      </div>
       <div class="hero-lead-slide hero-lead-slide-cta">
         <div class="hero-lead-card">
           <p>Si tu te reconnais dans ce que je viens de citer, <strong>GENESYS est fait pour toi</strong>. Je t'invite à découvrir.</p>
@@ -1922,6 +2109,8 @@
       <button type="button" class="hl-dot" data-idx="1" aria-label="Vignette 2"></button>
       <button type="button" class="hl-dot" data-idx="2" aria-label="Vignette 3"></button>
       <button type="button" class="hl-dot" data-idx="3" aria-label="Vignette 4"></button>
+      <button type="button" class="hl-dot" data-idx="4" aria-label="Vignette 5"></button>
+      <button type="button" class="hl-dot" data-idx="5" aria-label="Vignette 6"></button>
     </div>
     <div class="hero-social reveal"><span class="hs-divider" aria-hidden="true"></span><span class="hs-text"><strong>+ de 100 membres</strong><br>ont déjà rejoint la communauté</span></div>
     <div class="hero-ctas reveal">
