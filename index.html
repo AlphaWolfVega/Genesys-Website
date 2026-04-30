@@ -370,6 +370,59 @@
       0%, 100%{transform:translateX(0);opacity:0.45}
       50%{transform:translateX(7px);opacity:0.85}
     }
+    /* === Recognition slide (deeper diagnostic — empathy escalation) === */
+    .hero-lead-slide-recog .hero-lead-card{padding:24px 22px}
+    .hero-lead-slide-recog .hl-recog-h{
+      font-family:'Inter',sans-serif !important;
+      font-size:14px !important;
+      font-weight:500 !important;
+      color:var(--text);
+      margin-bottom:14px !important;
+      line-height:1.4 !important;
+      text-align:center;
+    }
+    .hl-recog{
+      display:flex;flex-direction:column;
+      gap:10px;
+      width:100%;
+      margin:0 0 14px 0;
+      text-align:left;
+    }
+    .hl-recog-item{
+      display:flex;
+      align-items:flex-start;
+      gap:10px;
+      font-family:'Inter',sans-serif;
+      font-size:12.5px;
+      line-height:1.4;
+      color:var(--text);
+      font-weight:500;
+    }
+    .hl-recog-check{
+      flex-shrink:0;
+      width:20px;height:20px;
+      display:inline-flex;align-items:center;justify-content:center;
+      color:var(--gold);
+      margin-top:0;
+      background:rgba(212,182,106,0.1);
+      border-radius:50%;
+      border:1px solid rgba(212,182,106,0.35);
+    }
+    .hl-recog-check svg{width:11px;height:11px;display:block}
+    .hl-recog-item strong{color:var(--gold);font-weight:700}
+    .hero-lead-slide-recog .hl-recog-bridge{
+      font-family:'Playfair Display',serif !important;
+      font-style:italic !important;
+      font-size:13px !important;
+      font-weight:600 !important;
+      color:var(--gold) !important;
+      text-align:center !important;
+      margin:6px 0 0 !important;
+      line-height:1.4 !important;
+      letter-spacing:-0.005em;
+      text-shadow:0 0 18px rgba(212,182,106,0.25);
+    }
+
     /* === Schema slide (the failure loop — compact horizontal) === */
     .hero-lead-slide-schema .hero-lead-card{padding:22px 18px}
     .hero-lead-slide-schema .hl-schema-intro{
@@ -2137,6 +2190,31 @@
           <span class="hero-lead-swipe" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg></span>
         </div>
       </div>
+      <div class="hero-lead-slide hero-lead-slide-recog">
+        <div class="hero-lead-card">
+          <p class="hl-recog-h">Et peut-être même que :</p>
+          <div class="hl-recog">
+            <div class="hl-recog-item">
+              <span class="hl-recog-check" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
+              <span>tu as fait confiance à plusieurs formations, plusieurs personnes — <strong>et rien n'a vraiment décollé</strong></span>
+            </div>
+            <div class="hl-recog-item">
+              <span class="hl-recog-check" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
+              <span>tu as eu quelques ventes — <strong>mais jamais à profit</strong></span>
+            </div>
+            <div class="hl-recog-item">
+              <span class="hl-recog-check" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
+              <span>tu as déjà <strong>sérieusement pensé à tout arrêter</strong></span>
+            </div>
+            <div class="hl-recog-item">
+              <span class="hl-recog-check" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
+              <span>tu es même parti tester un autre business — <strong>et tu es revenu vers l'e-commerce</strong></span>
+            </div>
+          </div>
+          <p class="hl-recog-bridge">Tu n'es pas seul. Voici exactement le cycle.</p>
+          <span class="hero-lead-swipe" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg></span>
+        </div>
+      </div>
       <div class="hero-lead-slide hero-lead-slide-schema">
         <div class="hero-lead-card">
           <p class="hl-schema-intro">Voici le cycle classique. <strong>Tape l'étape où tu en es :</strong></p>
@@ -2206,6 +2284,7 @@
       <button type="button" class="hl-dot" data-idx="3" aria-label="Vignette 4"></button>
       <button type="button" class="hl-dot" data-idx="4" aria-label="Vignette 5"></button>
       <button type="button" class="hl-dot" data-idx="5" aria-label="Vignette 6"></button>
+      <button type="button" class="hl-dot" data-idx="6" aria-label="Vignette 7"></button>
     </div>
     <div class="hero-social reveal"><span class="hs-divider" aria-hidden="true"></span><span class="hs-text"><strong>+ de 100 membres</strong><br>ont déjà rejoint la communauté</span></div>
     <div class="hero-ctas reveal">
