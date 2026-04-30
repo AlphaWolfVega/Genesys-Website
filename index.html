@@ -475,12 +475,11 @@
       transition:opacity 0.32s ease, filter 0.32s ease;
     }
     .hl-step:active{transform:scale(0.95);transition:transform 0.08s ease}
-    .hl-step.is-dimmed{opacity:0.32;filter:saturate(0.4)}
-    .hl-step.is-selected{opacity:1;filter:none}
     .hl-step.is-selected .hl-step-icon{
-      background:var(--gold)!important;
+      background:rgba(212,182,106,0.95)!important;
       color:#06101F;
-      box-shadow:0 0 0 2px rgba(212,182,106,0.4),0 0 18px rgba(212,182,106,0.55);
+      border-color:var(--gold);
+      box-shadow:0 0 0 2px rgba(212,182,106,0.45),0 0 22px rgba(212,182,106,0.6);
     }
     .hl-step.is-selected .hl-step-text{
       color:var(--gold);font-weight:800;
@@ -492,7 +491,7 @@
       background:rgba(212,182,106,0.08);
       border:1px solid rgba(212,182,106,0.32);
       border-radius:50%;color:var(--gold);
-      transition:background 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
+      transition:background 0.3s ease, color 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
     }
     .hl-step-icon svg{width:17px;height:17px;display:block}
     .hl-step-text{
@@ -507,9 +506,7 @@
       height:38px;padding-top:12px;
       color:rgba(212,182,106,0.5);
       font-size:13px;flex:0 0 7px;font-weight:700;
-      transition:opacity 0.32s ease;
     }
-    .hl-step-arrow.is-dimmed{opacity:0.25}
     .hl-loop{
       display:flex;align-items:center;justify-content:center;gap:11px;
       width:100%;padding:10px 14px;margin-top:0;
@@ -520,7 +517,6 @@
       cursor:pointer;font:inherit;color:inherit;text-align:center;
       transition:background 0.32s ease, opacity 0.32s ease;
     }
-    .hl-loop.is-dimmed{opacity:0.32}
     .hl-loop.is-selected{
       background:linear-gradient(135deg,rgba(212,182,106,0.28) 0%, rgba(212,182,106,0.1) 100%);
       box-shadow:0 0 0 1px var(--gold) inset, 0 0 26px rgba(212,182,106,0.3);
@@ -891,12 +887,11 @@
       transition:opacity 0.32s ease, filter 0.32s ease;
     }
     .hl-step:active{transform:scale(0.95);transition:transform 0.08s ease}
-    .hl-step.is-dimmed{opacity:0.32;filter:saturate(0.4)}
-    .hl-step.is-selected{opacity:1;filter:none}
     .hl-step.is-selected .hl-step-icon{
-      background:var(--gold)!important;
+      background:rgba(212,182,106,0.95)!important;
       color:#06101F;
-      box-shadow:0 0 0 2px rgba(212,182,106,0.4),0 0 18px rgba(212,182,106,0.55);
+      border-color:var(--gold);
+      box-shadow:0 0 0 2px rgba(212,182,106,0.45),0 0 22px rgba(212,182,106,0.6);
     }
     .hl-step.is-selected .hl-step-text{
       color:var(--gold);font-weight:800;
@@ -909,7 +904,7 @@
       border:1px solid rgba(212,182,106,0.32);
       border-radius:50%;
       color:var(--gold);
-      transition:background 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
+      transition:background 0.3s ease, color 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
     }
     .hl-step-icon svg{width:16px;height:16px;display:block}
     .hl-step-text{
@@ -932,9 +927,7 @@
       font-size:12px;
       flex:0 0 7px;
       font-weight:700;
-      transition:opacity 0.32s ease;
     }
-    .hl-step-arrow.is-dimmed{opacity:0.25}
     .hl-loop{
       display:flex;align-items:center;justify-content:center;gap:11px;
       width:100%;
@@ -949,7 +942,6 @@
       transition:background 0.32s ease, opacity 0.32s ease;
     }
     .hl-loop:active{transform:scale(0.985);transition:transform 0.08s ease}
-    .hl-loop.is-dimmed{opacity:0.32}
     .hl-loop.is-selected{
       background:linear-gradient(135deg,rgba(212,182,106,0.28) 0%, rgba(212,182,106,0.1) 100%);
       box-shadow:0 0 0 1px var(--gold) inset, 0 0 26px rgba(212,182,106,0.3);
@@ -4619,22 +4611,16 @@
     ];
 
     function clearAll(){
-      steps.forEach(s => s.classList.remove('is-selected','is-dimmed'));
-      arrows.forEach(a => a.classList.remove('is-dimmed'));
-      if(loop) loop.classList.remove('is-selected','is-dimmed');
+      steps.forEach(s => s.classList.remove('is-selected'));
+      if(loop) loop.classList.remove('is-selected');
     }
     function applySelection(idx){
       clearAll();
       if(idx >= 0 && idx <= 7){
         steps.forEach((s, i) => {
           s.classList.toggle('is-selected', i === idx);
-          s.classList.toggle('is-dimmed',   i !== idx);
         });
-        arrows.forEach(a => a.classList.add('is-dimmed'));
-        if(loop) loop.classList.add('is-dimmed');
       } else if(idx === 8){
-        steps.forEach(s => s.classList.add('is-dimmed'));
-        arrows.forEach(a => a.classList.add('is-dimmed'));
         if(loop) loop.classList.add('is-selected');
       }
       const v = (idx === 8) ? LOOP_VERDICT : VERDICTS[idx];
