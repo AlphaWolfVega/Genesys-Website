@@ -528,7 +528,9 @@
     @keyframes hlMiniSwipeDown{0%,100%{transform:translateY(0);opacity:0.55}50%{transform:translateY(3px);opacity:0.9}}
     /* Choix 1 / Choix 2 separes par paragraphe */
     .hl-cta-mini-card .hl-cta-mini-b + .hl-cta-mini-b{margin-top:9px}
-    /* Variante "head" centree (icone + titre) — deja centre par defaut, on garde explicite pour clarte */
+    /* TOUS les heads des mini-cards CTA : icone + titre obligatoirement centres */
+    .hl-cta-mini-head{justify-content:center !important;text-align:center !important}
+    .hl-cta-mini-head .hl-cta-mini-h{flex:0 1 auto !important;text-align:center !important}
     .hl-cta-mini-head-center{justify-content:center !important;text-align:center}
 
     /* === SCHEMA slide (cycle e-com) — toutes les rules dupliquées pour desktop === */
@@ -1045,7 +1047,9 @@
     @keyframes hlMiniSwipeDown{0%,100%{transform:translateY(0);opacity:0.55}50%{transform:translateY(3px);opacity:0.95}}
     /* Mobile : Choix 1 / Choix 2 separes par paragraphe */
     .hl-cta-mini-card .hl-cta-mini-b + .hl-cta-mini-b{margin-top:10px}
-    /* Mobile : variante head centre (icone + titre) */
+    /* Mobile : TOUS les heads des mini-cards CTA centres (icone + titre) */
+    .hl-cta-mini-head{justify-content:center !important;text-align:center !important}
+    .hl-cta-mini-head .hl-cta-mini-h{flex:0 1 auto !important;text-align:center !important}
     .hl-cta-mini-head-center{justify-content:center !important;text-align:center}
     @keyframes hlMiniSwipe{
       0%,100%{opacity:0.4;letter-spacing:0.14em}
