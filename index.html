@@ -706,10 +706,13 @@
     .hero-lead-carousel::-webkit-scrollbar{display:none}
     .hero-lead-slide{
       flex:0 0 100%;
+      max-width:100%;
+      min-width:0;
       scroll-snap-align:center;
       padding:4px 8px 8px;
       box-sizing:border-box;
       display:flex;
+      overflow:hidden;
     }
     .hero-lead-card{
       width:100%;
@@ -750,12 +753,17 @@
       border-radius:14px !important;
       margin:0 !important;
     }
+    .hero-lead-slide-cta .hero-lead-card *{min-width:0;box-sizing:border-box}
     .hero-lead-slide-cta .hl-cta-mini,
     .hero-lead-slide-cta .hl-cta-mini-track{
       width:100% !important;
       max-width:100% !important;
       box-sizing:border-box !important;
       min-width:0 !important;
+      overflow-x:hidden;
+    }
+    .hero-lead-slide-cta .hl-cta-mini-track{
+      overflow-x:auto !important;
     }
     .hero-lead-slide-cta .hl-cta-mini-card{
       max-width:100% !important;
