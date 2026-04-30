@@ -1966,6 +1966,10 @@
     display:block;
     opacity:1;transform:translateY(0) scale(1);
   }
+  /* Sub-stages (used inside Stage 6 — ambition / cohérence) */
+  .dt-substage{display:none;animation:dtSubFadeIn 0.45s ease both}
+  .dt-substage.is-active{display:block}
+  @keyframes dtSubFadeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
   .dt-stage-tag{
     display:inline-flex;align-items:center;gap:8px;
     padding:6px 14px;border-radius:999px;
@@ -2804,7 +2808,7 @@
       <!-- Stage 4: Plus gros doute -->
       <div class="dt-stage" id="dtStage4">
         <div class="dt-stage-tag">Ce qui te freine</div>
-        <h3 class="dt-q">Aujourd'hui, qu'est-ce qui <em>te ralentit le plus</em> ?</h3>
+        <h3 class="dt-q">Aujourd'hui, qu'est-ce qui<br><em>te ralentit le plus</em> ?</h3>
         <div class="dt-choices" id="dtStage4Choices">
           <button type="button" class="dt-choice" data-val="capacity"><span class="dt-choice-letter">A</span><span>Je doute de <em>mes capacités</em> — j'ai pas le profil intellectuel/technique</span></button>
           <button type="button" class="dt-choice" data-val="timing"><span class="dt-choice-letter">B</span><span>Je doute du <em>timing</em> — c'est trop tard, le marché est saturé</span></button>
@@ -2827,21 +2831,33 @@
         </div>
       </div>
 
-      <!-- Stage 6: Engagement temporel -->
+      <!-- Stage 6: Ton ambition (2 sous-questions test cohérence) -->
       <div class="dt-stage" id="dtStage6">
-        <div class="dt-stage-tag">Ton horizon</div>
-        <h3 class="dt-q">Imagine dans 3 ans, ton business e-commerce<br>génère <em>30 000 €/mois</em> en bénéfices.<br><span class="dt-q-sub">Combien de temps tu te donnes pour y arriver ?</span></h3>
-        <div class="dt-slider-wrap">
-          <div class="dt-slider-value">
-            <span class="dt-slider-num" id="dtSliderNum2">1 an</span>
-            <span class="dt-slider-label" id="dtSliderLabel2">d'engagement</span>
-          </div>
-          <input type="range" min="30" max="1095" step="15" value="365" class="dt-slider" id="dtSlider2" aria-label="Combien de temps tu te donnes">
-          <div class="dt-slider-marks">
-            <span>1 mois</span><span>6 mois</span><span>1 an</span><span>2 ans</span><span>3 ans</span>
+        <div class="dt-stage-tag">Ton ambition</div>
+
+        <!-- Sub 6a: target revenue -->
+        <div class="dt-substage is-active" id="dtStage6a">
+          <h3 class="dt-q">Quel bénéfice<br>souhaites-tu générer<br><em>dans un an</em> ?</h3>
+          <p class="dt-hint">Vise juste : ni trop bas pour te protéger, ni trop haut pour épater.</p>
+          <div class="dt-choices" id="dtStage6aChoices">
+            <button type="button" class="dt-choice" data-val="5k"><span class="dt-choice-letter">A</span><span><em>5 000 €</em> / mois nets</span></button>
+            <button type="button" class="dt-choice" data-val="10k"><span class="dt-choice-letter">B</span><span><em>10 000 €</em> / mois nets</span></button>
+            <button type="button" class="dt-choice" data-val="20k"><span class="dt-choice-letter">C</span><span><em>20 000 €</em> / mois nets</span></button>
+            <button type="button" class="dt-choice" data-val="50k"><span class="dt-choice-letter">D</span><span><em>50 000 €</em> et plus / mois nets</span></button>
           </div>
         </div>
-        <button type="button" class="dt-validate" id="dtValidate6">Voir mon profil</button>
+
+        <!-- Sub 6b: investment willingness (revealed after 6a) -->
+        <div class="dt-substage" id="dtStage6b">
+          <h3 class="dt-q">Pour atteindre <em id="dtTargetEcho">10 000 €/mois</em>,<br>qu'est-ce que tu es prêt à <em>donner</em> ?</h3>
+          <p class="dt-hint">Sois honnête. La cohérence entre ambition et engagement, c'est l'un des facteurs les plus déterminants.</p>
+          <div class="dt-choices" id="dtStage6bChoices">
+            <button type="button" class="dt-choice" data-val="all"><span class="dt-choice-letter">A</span><span><em>Tout</em>. Je suis déterminé à fond.</span></button>
+            <button type="button" class="dt-choice" data-val="unsure"><span class="dt-choice-letter">B</span><span>Je ne sais pas trop.</span></button>
+            <button type="button" class="dt-choice" data-val="money_issue"><span class="dt-choice-letter">C</span><span><em>L'argent</em> est un problème pour moi.</span></button>
+          </div>
+        </div>
+
       </div>
 
       <!-- Result / Profil -->
@@ -4408,29 +4424,38 @@
       });
     });
 
-    // ----- Stage 6: Engagement temporel -----
-    const slider2 = sec.querySelector('#dtSlider2');
-    const sliderNum2 = sec.querySelector('#dtSliderNum2');
-    const sliderLabel2 = sec.querySelector('#dtSliderLabel2');
-    const validate6 = sec.querySelector('#dtValidate6');
+    // ----- Stage 6: Ambition (sub-stage 6a) + Engagement (sub-stage 6b) -----
+    const stage6a = sec.querySelector('#dtStage6a');
+    const stage6b = sec.querySelector('#dtStage6b');
+    const targetEcho = sec.querySelector('#dtTargetEcho');
 
-    function formatDays(d){
-      if(d < 60) return d + ' jours';
-      if(d < 365) return Math.round(d/30) + ' mois';
-      const years = +(d/365).toFixed(1);
-      const display = (years % 1 === 0) ? years : years.toFixed(1).replace('.', ',');
-      return display + ' an' + (years > 1 ? 's' : '');
-    }
-    slider2.addEventListener('input', () => {
-      const v = parseInt(slider2.value, 10);
-      sliderNum2.textContent = formatDays(v);
-      sliderNum2.classList.add('is-bumped');
-      setTimeout(() => sliderNum2.classList.remove('is-bumped'), 180);
+    const TARGET_LABEL = {
+      '5k':  '5 000 €/mois',
+      '10k': '10 000 €/mois',
+      '20k': '20 000 €/mois',
+      '50k': '50 000 €/mois et plus'
+    };
+
+    sec.querySelectorAll('#dtStage6aChoices .dt-choice').forEach(btn => {
+      btn.addEventListener('click', () => {
+        answers.target = btn.dataset.val;
+        btn.classList.add('is-picked');
+        sec.querySelectorAll('#dtStage6aChoices .dt-choice').forEach(b => b.disabled = true);
+        targetEcho.textContent = TARGET_LABEL[answers.target] || '10 000 €/mois';
+        setTimeout(() => {
+          stage6a.classList.remove('is-active');
+          stage6b.classList.add('is-active');
+        }, 480);
+      });
     });
-    validate6.addEventListener('click', () => {
-      answers.horizonDays = parseInt(slider2.value, 10);
-      validate6.disabled = true;
-      setTimeout(showResult, 320);
+
+    sec.querySelectorAll('#dtStage6bChoices .dt-choice').forEach(btn => {
+      btn.addEventListener('click', () => {
+        answers.willingness = btn.dataset.val;
+        btn.classList.add('is-picked');
+        sec.querySelectorAll('#dtStage6bChoices .dt-choice').forEach(b => b.disabled = true);
+        setTimeout(showResult, 600);
+      });
     });
 
     // ----- Profil + 5 leviers Blair Warren + success story -----
@@ -4502,10 +4527,19 @@
       bosses:    "<strong>Les boss qui t'ont sous-payé t'ont surtout offert une chose</strong> — la motivation de ne plus jamais dépendre d'eux. Cette colère légitime peut devenir ton meilleur carburant si tu la canalises sur la construction, pas sur la rancœur.",
       fears:     "<strong>Tes peurs ne sont pas tes ennemies</strong> — elles t'ont juste été apprises pour te protéger d'un monde qui n'existe plus. Avec un cadre clair, elles deviennent des balises au lieu d'être des barrières."
     };
-    const HORIZON_EXCUSE = {
-      short:    "<strong>Si tu te donnes peu de temps</strong>, c'est probablement parce que la vie t'a appris à attendre des résultats vite. C'est légitime. Mais en e-commerce, les 12-24 premiers mois sont la phase de construction — donne-toi cette fenêtre, et tu changeras la vie d'après.",
-      medium:   "<strong>Tu te donnes 1 à 2 ans</strong> — c'est exactement la fenêtre réaliste pour passer de zéro à un business e-commerce qui paie ses charges, son opérateur, et qui commence à scaler. C'est pas du fantasme, c'est juste honnête.",
-      long:     "<strong>Tu te donnes 2 à 3 ans</strong> — c'est mature. Tu as compris que les business solides ne se construisent pas en 90 jours. Cette patience est une de tes plus grosses forces."
+    const COHERENCE_TEXT = {
+      '5k_all':         "Tu vises 5 000 €/mois et tu es prêt à donner ce qu'il faut. <strong>C'est mature : un objectif atteignable + un engagement clair.</strong> C'est exactement le profil qui réussit en 12-18 mois.",
+      '5k_unsure':      "Tu vises 5 000 €/mois mais tu hésites sur ce que tu es prêt à donner. C'est normal — personne ne sait vraiment ce qu'il faut investir avant d'avoir un cadre. <strong>GENESYS donne ce cadre :</strong> combien d'argent, combien de temps, dans quel ordre.",
+      '5k_money_issue': "Tu vises 5 000 €/mois et l'argent est un blocage pour toi. C'est lucide. <strong>L'e-commerce moderne permet de démarrer avec des budgets très faibles si on a la bonne séquence</strong> — c'est précisément ce qu'on enseigne dans GENESYS.",
+      '10k_all':        "Tu vises 10 000 €/mois et tu es prêt à tout donner. <strong>C'est l'équilibre parfait entre ambition et réalisme.</strong> Avec la bonne séquence, c'est exactement ce que tu peux atteindre en 12-24 mois.",
+      '10k_unsure':     "Tu vises 10 000 €/mois mais tu hésites sur ce que tu es prêt à donner. C'est commun — la plupart des gens ne savent pas avant de s'engager. <strong>GENESYS te donne la lecture honnête du coût et de la trajectoire.</strong>",
+      '10k_money_issue':"Tu vises 10 000 €/mois mais l'argent est un blocage. <strong>Cette tension est normale au démarrage</strong> — l'enjeu n'est pas combien tu mets, mais où tu le mets. GENESYS donne le modèle d'allocation exact.",
+      '20k_all':        "Tu vises 20 000 €/mois et tu es prêt à tout donner. <strong>C'est cohérent et ambitieux.</strong> Reste à transformer cette ambition en action structurée — exactement ce que GENESYS donne, étape par étape.",
+      '20k_unsure':     "Tu vises 20 000 €/mois mais tu hésites sur ton engagement. <strong>Cette incohérence est un signal :</strong> soit l'objectif est plus haut que ce que tu acceptes vraiment, soit tu n'as pas encore vu ce que cet objectif demande concrètement. GENESYS te le montre, sans filtre.",
+      '20k_money_issue':"Tu vises 20 000 €/mois mais l'argent est un blocage aujourd'hui. <strong>Cette incohérence est très commune</strong> — et ce n'est pas de ta faute : personne ne t'a appris à structurer un budget de lancement. GENESYS donne le modèle exact : combien investir, dans quoi, à quel moment.",
+      '50k_all':        "Tu vises 50 000 €/mois et plus, et tu es prêt à tout donner. <strong>Très peu de gens visent à ce niveau et acceptent vraiment le prix à payer.</strong> Si c'est sincère, GENESYS est le point de départ de ta première étape — 5K, puis 10K, puis 20K, puis ton objectif.",
+      '50k_unsure':     "Tu vises 50 000 €/mois mais tu hésites sur ce que tu es prêt à donner. <strong>Cette incohérence va te faire abandonner avant les 6 premiers mois</strong> si elle n'est pas réglée. Soit tu ajustes l'objectif, soit tu ajustes ton engagement. GENESYS t'aide à clarifier les deux honnêtement.",
+      '50k_money_issue':"Tu vises 50 000 €/mois mais l'argent est un blocage. <strong>Cette incohérence est trop grande pour être ignorée.</strong> Soit tu démarres avec un objectif plus modeste (5-10K) et tu progresses, soit tu trouves d'abord un revenu d'appoint pour avoir le budget de lancement. GENESYS te montre le chemin réaliste."
     };
     const ALWAYS_DREAM = "<strong>Cette motivation est légitime et puissante.</strong> Elle est la raison pour laquelle tu es là, encore en train de chercher. Garde-la précieusement — c'est ton vrai capital.";
 
@@ -4525,11 +4559,11 @@
       // Portrait
       verdictPortrait.innerHTML = buildPortrait();
       // 5 Blair Warren levers
-      const horizonKey = answers.horizonDays < 365 ? 'short' : (answers.horizonDays < 730 ? 'medium' : 'long');
+      const coherenceKey = (answers.target || '10k') + '_' + (answers.willingness || 'all');
       const dreamText = MOTIVATION_DREAMS[answers.motivation] || ALWAYS_DREAM;
       const fearText = DOUBT_FEAR[answers.doubt] || "Tes doutes sont légitimes — et ils sont surmontables avec le bon cadre.";
       const enemyText = ENEMY_BLAME[answers.enemy] || "Les vrais coupables ne sont jamais ceux qu'on accuse en surface.";
-      const excuseText = HORIZON_EXCUSE[horizonKey];
+      const excuseText = COHERENCE_TEXT[coherenceKey] || "Ta cohérence ambition/engagement détermine ta trajectoire. GENESYS t'aide à l'aligner.";
       const confirmText = "<strong>Tes doutes ne sont pas paranoïa — ils sont sains.</strong> Beaucoup de gens lancent leur boutique sans douter, et ils explosent en vol. Le fait que tu te poses ces questions, c'est ce qui te donne une chance réelle de durer.";
 
       const SVG_DREAM   = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v6m0 8v6M4.93 4.93l4.24 4.24m5.66 5.66 4.24 4.24M2 12h6m8 0h6M4.93 19.07l4.24-4.24m5.66-5.66 4.24-4.24"/></svg>';
@@ -4541,7 +4575,7 @@
       verdictLevers.innerHTML =
         '<div class="dt-lever"><span class="dt-lever-icon">' + SVG_DREAM + '</span><div class="dt-lever-body"><span class="dt-lever-tag">Tes rêves</span><span class="dt-lever-text">' + dreamText + '</span></div></div>' +
         '<div class="dt-lever"><span class="dt-lever-icon">' + SVG_CONFIRM + '</span><div class="dt-lever-body"><span class="dt-lever-tag">Tes doutes — légitimes</span><span class="dt-lever-text">' + confirmText + '</span></div></div>' +
-        '<div class="dt-lever"><span class="dt-lever-icon">' + SVG_EXCUSE + '</span><div class="dt-lever-body"><span class="dt-lever-tag">Tes échecs passés</span><span class="dt-lever-text">' + excuseText + '</span></div></div>' +
+        '<div class="dt-lever"><span class="dt-lever-icon">' + SVG_EXCUSE + '</span><div class="dt-lever-body"><span class="dt-lever-tag">Ta cohérence ambition / engagement</span><span class="dt-lever-text">' + excuseText + '</span></div></div>' +
         '<div class="dt-lever"><span class="dt-lever-icon">' + SVG_FEAR + '</span><div class="dt-lever-body"><span class="dt-lever-tag">Tes peurs</span><span class="dt-lever-text">' + fearText + '</span></div></div>' +
         '<div class="dt-lever"><span class="dt-lever-icon">' + SVG_ENEMY + '</span><div class="dt-lever-body"><span class="dt-lever-tag">Tes vrais ennemis</span><span class="dt-lever-text">' + enemyText + '</span></div></div>';
 
@@ -4559,9 +4593,10 @@
       sec.querySelectorAll('.dt-choice').forEach(b => { b.disabled = false; b.classList.remove('is-picked'); });
       multicheck.querySelectorAll('input[type="checkbox"]').forEach(c => c.checked = false);
       validate2.disabled = false;
-      slider2.value = 365;
-      sliderNum2.textContent = formatDays(365);
-      validate6.disabled = false;
+      // Reset stage 6 sub-stages
+      stage6a.classList.add('is-active');
+      stage6b.classList.remove('is-active');
+      targetEcho.textContent = '10 000 €/mois';
       showStage('s1');
     }
 
