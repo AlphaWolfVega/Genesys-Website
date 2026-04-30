@@ -528,10 +528,21 @@
     @keyframes hlMiniSwipeDown{0%,100%{transform:translateY(0);opacity:0.55}50%{transform:translateY(3px);opacity:0.9}}
     /* Choix 1 / Choix 2 separes par paragraphe — espace plus marque */
     .hl-cta-mini-card .hl-cta-mini-b + .hl-cta-mini-b{margin-top:16px}
-    /* TOUS les heads des mini-cards CTA : icone + titre obligatoirement centres */
-    .hl-cta-mini-head{justify-content:center !important;text-align:center !important}
-    .hl-cta-mini-head .hl-cta-mini-h{flex:0 1 auto !important;text-align:center !important}
-    .hl-cta-mini-head-center{justify-content:center !important;text-align:center}
+    /* TOUS les heads des mini-cards CTA : icone + titre OBLIGATOIREMENT centres en groupe */
+    .hl-cta-mini-head{
+      display:block !important;text-align:center !important;
+      gap:0 !important;font-size:0;
+    }
+    .hl-cta-mini-head > .hl-cta-mini-icon{
+      display:inline-flex !important;vertical-align:middle !important;
+      margin:0 9px 0 0 !important;font-size:initial;
+    }
+    .hl-cta-mini-head > .hl-cta-mini-h{
+      display:inline-block !important;vertical-align:middle !important;
+      flex:none !important;text-align:center !important;font-size:10.5px !important;
+      max-width:calc(100% - 35px);
+    }
+    .hl-cta-mini-head-center{justify-content:center !important;text-align:center !important}
 
     /* === SCHEMA slide (cycle e-com) — toutes les rules dupliquées pour desktop === */
     .hero-lead-slide-schema .hero-lead-card{padding:28px 18px}
@@ -1047,10 +1058,21 @@
     @keyframes hlMiniSwipeDown{0%,100%{transform:translateY(0);opacity:0.55}50%{transform:translateY(3px);opacity:0.95}}
     /* Mobile : Choix 1 / Choix 2 separes par paragraphe — espace plus marque */
     .hl-cta-mini-card .hl-cta-mini-b + .hl-cta-mini-b{margin-top:18px}
-    /* Mobile : TOUS les heads des mini-cards CTA centres (icone + titre) */
-    .hl-cta-mini-head{justify-content:center !important;text-align:center !important}
-    .hl-cta-mini-head .hl-cta-mini-h{flex:0 1 auto !important;text-align:center !important}
-    .hl-cta-mini-head-center{justify-content:center !important;text-align:center}
+    /* Mobile : TOUS les heads des mini-cards CTA OBLIGATOIREMENT centres */
+    .hl-cta-mini-head{
+      display:block !important;text-align:center !important;
+      gap:0 !important;font-size:0;
+    }
+    .hl-cta-mini-head > .hl-cta-mini-icon{
+      display:inline-flex !important;vertical-align:middle !important;
+      margin:0 9px 0 0 !important;font-size:initial;
+    }
+    .hl-cta-mini-head > .hl-cta-mini-h{
+      display:inline-block !important;vertical-align:middle !important;
+      flex:none !important;text-align:center !important;font-size:11px !important;
+      max-width:calc(100% - 35px);
+    }
+    .hl-cta-mini-head-center{justify-content:center !important;text-align:center !important}
     @keyframes hlMiniSwipe{
       0%,100%{opacity:0.4;letter-spacing:0.14em}
       50%{opacity:1;letter-spacing:0.2em}
