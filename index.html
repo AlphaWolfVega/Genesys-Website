@@ -2342,6 +2342,104 @@
     border-radius:8px;
   }
   .dt-verdict-text strong{color:var(--gold);font-weight:700}
+  /* Portrait — texte introduction du profil */
+  .dt-verdict-portrait{
+    font-family:'Inter',sans-serif;
+    font-size:15px;font-weight:400;
+    color:var(--text);
+    line-height:1.65;
+    margin:0 auto 22px;
+    max-width:540px;
+    text-align:left;
+    padding:18px 22px;
+    background:linear-gradient(135deg,rgba(212,182,106,0.08) 0%, rgba(212,182,106,0.02) 100%);
+    border:1px solid rgba(212,182,106,0.22);
+    border-radius:10px;
+  }
+  .dt-verdict-portrait strong{color:var(--gold);font-weight:700}
+  .dt-verdict-portrait em{color:var(--gold);font-style:italic}
+  /* 5 leviers Blair Warren — chaque levier dans une carte */
+  .dt-verdict-levers{
+    display:flex;flex-direction:column;gap:9px;
+    margin:0 auto 24px;max-width:540px;
+    text-align:left;
+  }
+  .dt-lever{
+    display:flex;align-items:flex-start;gap:14px;
+    padding:13px 18px;
+    background:rgba(20,37,64,0.4);
+    border:1px solid rgba(212,182,106,0.18);
+    border-radius:10px;
+  }
+  .dt-lever-icon{
+    flex-shrink:0;
+    width:32px;height:32px;border-radius:50%;
+    background:rgba(212,182,106,0.1);
+    border:1px solid rgba(212,182,106,0.4);
+    display:flex;align-items:center;justify-content:center;
+    color:var(--gold);
+  }
+  .dt-lever-icon svg{width:15px;height:15px;display:block}
+  .dt-lever-body{flex:1;min-width:0}
+  .dt-lever-tag{
+    display:block;
+    font-family:'Inter',sans-serif;
+    font-size:9.5px;font-weight:700;
+    letter-spacing:0.16em;text-transform:uppercase;
+    color:var(--gold);opacity:0.85;
+    margin-bottom:4px;
+  }
+  .dt-lever-text{
+    font-family:'Inter',sans-serif;
+    font-size:13.5px;font-weight:500;
+    color:var(--text);line-height:1.5;
+  }
+  .dt-lever-text strong{color:var(--gold);font-weight:700}
+  /* Success story */
+  .dt-verdict-success{
+    margin:0 auto 24px;max-width:540px;
+    padding:20px 22px;
+    background:linear-gradient(135deg,rgba(20,37,64,0.6) 0%,rgba(10,22,40,0.4) 100%);
+    border:1px solid rgba(212,182,106,0.32);
+    border-left:4px solid var(--gold);
+    border-radius:10px;
+    box-shadow:0 8px 24px rgba(0,0,0,0.3);
+    text-align:left;
+  }
+  .dt-success-tag{
+    font-family:'Inter',sans-serif;
+    font-size:9.5px;font-weight:700;
+    letter-spacing:0.18em;text-transform:uppercase;
+    color:var(--gold);
+    margin-bottom:8px;display:block;
+  }
+  .dt-success-quote{
+    font-family:'Playfair Display',serif;
+    font-style:italic;font-weight:600;
+    font-size:15.5px;line-height:1.5;
+    color:var(--text);
+    margin-bottom:10px;
+  }
+  .dt-success-quote::before{content:"« ";color:var(--gold);font-weight:800}
+  .dt-success-quote::after{content:" »";color:var(--gold);font-weight:800}
+  .dt-success-author{
+    font-family:'Inter',sans-serif;
+    font-size:12px;font-weight:600;
+    color:var(--text-mute);
+    letter-spacing:0.04em;
+  }
+  .dt-success-author strong{color:var(--gold);font-weight:700}
+  /* Sub-question dans dt-q */
+  .dt-q-sub{
+    display:block;
+    margin-top:8px;
+    font-family:'Inter',sans-serif !important;
+    font-size:14px !important;
+    font-style:normal !important;
+    font-weight:600 !important;
+    color:var(--text-mute) !important;
+    letter-spacing:0;
+  }
   .dt-verdict-cta{display:flex;flex-direction:column;align-items:center;gap:14px}
   .dt-replay{
     font-family:'Inter',sans-serif;
@@ -2640,7 +2738,7 @@
         <div class="line"></div>
       </div>
       <h2>Test ton niveau de <em>détermination</em></h2>
-      <p>Ton business est une extension de toi-même. Si tu n'es pas prêt mentalement, je peux te partager tout ce que je veux — ça ne changera rien. <strong>C'est pour ça que ce test arrive avant tout le reste : voir honnêtement où tu en es.</strong> Prends 2 minutes. Réponds vraiment honnêtement. Le verdict te dira si GENESYS peut t'aider, ou s'il faut d'abord travailler autre chose.</p>
+      <p>Ton business est une extension de toi-même. <strong>Avant de te parler méthode, on va regarder ton histoire.</strong> D'où tu pars, ce que tu as traversé, ce qui te motive vraiment, ce qui te freine. À la fin, tu verras ton profil — et des gens comme toi qui ont réussi à partir du même point. Prends 2 minutes. Réponds honnêtement, personne ne saura.</p>
     </div>
 
     <div class="dt-arena reveal" id="dtArena" style="margin-top:14px">
@@ -2654,135 +2752,106 @@
       <!-- Intro -->
       <div class="dt-stage is-active" id="dtIntro">
         <div class="dt-warning">⚠ Réponds honnêtement</div>
-        <h3>6 stages.<br><em>3 minutes max.</em><br>Le verdict te dira tout.</h3>
-        <p>Ce n'est pas un test technique. C'est un scan de ton mental d'e-commerçant(e). Personne ne saura tes réponses. Mais à la fin, tu verras un pourcentage qui t'évaluera honnêtement.</p>
+        <h3>6 questions.<br><em>3 minutes max.</em><br>Ton profil te dira tout.</h3>
+        <p>Ce n'est pas un test de connaissances. C'est ton histoire qu'on regarde : ton point de départ, tes épreuves, ce qui te motive, ce qui te freine. À la fin, tu vois ton profil et un parcours possible — basé sur des gens comme toi qui ont réussi.</p>
         <button type="button" class="dt-start" id="dtStart">Je commence</button>
         <p class="dt-meta">Anonyme · pas d'email · 100 % honnête</p>
       </div>
 
-      <!-- Stage 1: Question viscérale -->
+      <!-- Stage 1: Origine sociale -->
       <div class="dt-stage" id="dtStage1">
-        <div class="dt-stage-tag">Question viscérale</div>
-        <h3 class="dt-q">Tu lances ta boutique.<br>Pendant <em>60 jours</em>,<br>ZÉRO vente.<br>Tu fais quoi ?</h3>
+        <div class="dt-stage-tag">Ton point de départ</div>
+        <h3 class="dt-q">D'où tu pars financièrement ?<br>Comment tu as <em>grandi</em> ?</h3>
         <div class="dt-choices" id="dtStage1Choices">
-          <button type="button" class="dt-choice" data-pts="18"><span class="dt-choice-letter">A</span><span>Je cherche d'abord ce qui cloche dans ma <em>séquence</em> (page, copy, pubs, offre)</span></button>
-          <button type="button" class="dt-choice" data-pts="15"><span class="dt-choice-letter">B</span><span>Je continue sans rien changer, je sais que ça va finir par marcher</span></button>
-          <button type="button" class="dt-choice" data-pts="8"><span class="dt-choice-letter">C</span><span>Je change de produit, peut-être que celui-là n'est pas le bon</span></button>
-          <button type="button" class="dt-choice" data-pts="0"><span class="dt-choice-letter">D</span><span>J'arrête tout, j'ai été stupide d'essayer</span></button>
+          <button type="button" class="dt-choice" data-val="poor"><span class="dt-choice-letter">A</span><span>Famille pauvre — j'ai connu le manque, j'ai vu mes parents galérer</span></button>
+          <button type="button" class="dt-choice" data-val="modest"><span class="dt-choice-letter">B</span><span>Famille modeste — on avait juste ce qu'il fallait, sans plus</span></button>
+          <button type="button" class="dt-choice" data-val="middle"><span class="dt-choice-letter">C</span><span>Classe moyenne — confort, vacances, mais pas de luxe</span></button>
+          <button type="button" class="dt-choice" data-val="wealthy"><span class="dt-choice-letter">D</span><span>Famille aisée ou riche — pas de manque matériel</span></button>
         </div>
       </div>
 
-      <!-- Stage 2: Test des excuses -->
+      <!-- Stage 2: Difficultés vécues -->
       <div class="dt-stage" id="dtStage2">
-        <div class="dt-stage-tag">Test des excuses</div>
-        <h3 class="dt-q">Coche les phrases que tu te dis <em>vraiment</em> souvent.</h3>
-        <p class="dt-hint">Sois 100 % honnête. Personne ne verra. Plus tu coches, plus c'est utile <em>pour toi</em>.</p>
+        <div class="dt-stage-tag">Ton parcours</div>
+        <h3 class="dt-q">Coche les domaines où tu as connu <em>des difficultés importantes</em>.</h3>
+        <p class="dt-hint">Sois 100 % honnête. Personne ne verra. Plus c'est précis, plus ton profil le sera.</p>
         <div class="dt-multicheck" id="dtMulticheck">
-          <label class="dt-mcheck"><input type="checkbox"><span class="dt-mcheck-tick" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span><span class="dt-mcheck-text">« C'est la faute de Meta / l'algo qui change tout le temps. »</span></label>
-          <label class="dt-mcheck"><input type="checkbox"><span class="dt-mcheck-tick" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span><span class="dt-mcheck-text">« J'ai pas eu de chance avec mon produit. »</span></label>
-          <label class="dt-mcheck"><input type="checkbox"><span class="dt-mcheck-tick" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span><span class="dt-mcheck-text">« Si j'avais commencé il y a 5 ans, ça aurait été différent. »</span></label>
-          <label class="dt-mcheck"><input type="checkbox"><span class="dt-mcheck-tick" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span><span class="dt-mcheck-text">« Je vais m'y mettre sérieusement la semaine prochaine. »</span></label>
-          <label class="dt-mcheck"><input type="checkbox"><span class="dt-mcheck-tick" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span><span class="dt-mcheck-text">« J'attends d'avoir plus d'argent pour bien faire. »</span></label>
-          <label class="dt-mcheck"><input type="checkbox"><span class="dt-mcheck-tick" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span><span class="dt-mcheck-text">« Les autres trichent, c'est pour ça qu'ils réussissent. »</span></label>
+          <label class="dt-mcheck"><input type="checkbox" data-key="childhood"><span class="dt-mcheck-tick" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span><span class="dt-mcheck-text">Mon enfance (parents absents, instabilité, violence, manque)</span></label>
+          <label class="dt-mcheck"><input type="checkbox" data-key="school"><span class="dt-mcheck-tick" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span><span class="dt-mcheck-text">L'école (échecs, harcèlement, profs qui m'ont rabaissé)</span></label>
+          <label class="dt-mcheck"><input type="checkbox" data-key="work"><span class="dt-mcheck-tick" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span><span class="dt-mcheck-text">Le travail (boss qui m'ont sous-payé, exploité, ou viré)</span></label>
+          <label class="dt-mcheck"><input type="checkbox" data-key="love"><span class="dt-mcheck-tick" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span><span class="dt-mcheck-text">Mon couple / ma vie sentimentale (rupture difficile, trahison)</span></label>
+          <label class="dt-mcheck"><input type="checkbox" data-key="business"><span class="dt-mcheck-tick" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span><span class="dt-mcheck-text">Un précédent business qui a échoué</span></label>
+          <label class="dt-mcheck"><input type="checkbox" data-key="health"><span class="dt-mcheck-tick" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span><span class="dt-mcheck-text">Ma santé (mentale ou physique — burnout, dépression, maladie)</span></label>
         </div>
         <button type="button" class="dt-validate" id="dtValidate2">Valider</button>
       </div>
 
-      <!-- Stage 3: Choix sous pression timer 30s -->
+      <!-- Stage 3: Motivation profonde -->
       <div class="dt-stage" id="dtStage3">
-        <div class="dt-stage-tag">Choix sous pression</div>
-        <div class="dt-timer" id="dtTimer">
-          <svg class="dt-timer-ring" id="dtTimerRing" viewBox="0 0 36 36">
-            <circle cx="18" cy="18" r="16" stroke="rgba(212,182,106,0.18)" stroke-width="2.5" fill="none"/>
-            <circle cx="18" cy="18" r="16" stroke="var(--gold)" stroke-width="2.5" fill="none" stroke-linecap="round" transform="rotate(-90 18 18)"/>
-          </svg>
-          <span class="dt-timer-num" id="dtTimerNum">30</span>
-        </div>
-        <h3 class="dt-q">Il te reste <em>47 €</em> en pub.<br>3 ventes en 30 jours.<br>Tu fais quoi ?</h3>
-        <p class="dt-hint">30 secondes pour décider — assez pour lire, pas assez pour fuir la décision. C'est ça la vraie vie d'un opérateur.</p>
+        <div class="dt-stage-tag">Ton pourquoi</div>
+        <h3 class="dt-q">Qu'est-ce qui te <em>motive vraiment</em> à réussir ?</h3>
+        <p class="dt-hint">La vraie raison. Celle que tu te dis quand tu es seul.</p>
         <div class="dt-choices" id="dtStage3Choices">
-          <button type="button" class="dt-choice" data-pts="14"><span class="dt-choice-letter">A</span><span>Je coupe tout et je relis mes données 1 h avant de bouger</span></button>
-          <button type="button" class="dt-choice" data-pts="12"><span class="dt-choice-letter">B</span><span>Je demande conseil à quelqu'un de plus expérimenté</span></button>
-          <button type="button" class="dt-choice" data-pts="8"><span class="dt-choice-letter">C</span><span>J'attends de gagner plus avant de retoucher</span></button>
-          <button type="button" class="dt-choice" data-pts="6"><span class="dt-choice-letter">D</span><span>Je dépense les 47 € pour booster ma meilleure pub</span></button>
+          <button type="button" class="dt-choice" data-val="parents"><span class="dt-choice-letter">A</span><span>Mettre mes parents / ma famille <em>à l'abri</em></span></button>
+          <button type="button" class="dt-choice" data-val="freedom"><span class="dt-choice-letter">B</span><span>Gagner ma <em>liberté</em> (mon temps, mon lieu, mes choix)</span></button>
+          <button type="button" class="dt-choice" data-val="prove"><span class="dt-choice-letter">C</span><span><em>Prouver</em> à ceux qui ont douté de moi qu'ils avaient tort</span></button>
+          <button type="button" class="dt-choice" data-val="children"><span class="dt-choice-letter">D</span><span>Donner à mes (futurs) enfants <em>ce que je n'ai pas eu</em></span></button>
+          <button type="button" class="dt-choice" data-val="legacy"><span class="dt-choice-letter">E</span><span>Construire <em>quelque chose</em> qui me ressemble vraiment</span></button>
         </div>
       </div>
 
-      <!-- Stage 4: Test de projection (slider) -->
+      <!-- Stage 4: Plus gros doute -->
       <div class="dt-stage" id="dtStage4">
-        <div class="dt-stage-tag">Test de projection</div>
-        <h3 class="dt-q">Imagine.<br>Dans <em>3 ans</em>, ton e-commerce génère <em>30 000 €/mois</em> en bénéfices.<br>Combien de jours tu serais prêt à tenir <em>d'efforts difficiles</em> avant d'y arriver ?</h3>
-        <p class="dt-hint">Pense aux jours où tu galères, où tu doutes, où tu veux abandonner. Combien tu en accepterais avant que ça décolle ?</p>
+        <div class="dt-stage-tag">Ce qui te freine</div>
+        <h3 class="dt-q">Aujourd'hui, qu'est-ce qui <em>te ralentit le plus</em> ?</h3>
+        <div class="dt-choices" id="dtStage4Choices">
+          <button type="button" class="dt-choice" data-val="capacity"><span class="dt-choice-letter">A</span><span>Je doute de <em>mes capacités</em> — j'ai pas le profil intellectuel/technique</span></button>
+          <button type="button" class="dt-choice" data-val="timing"><span class="dt-choice-letter">B</span><span>Je doute du <em>timing</em> — c'est trop tard, le marché est saturé</span></button>
+          <button type="button" class="dt-choice" data-val="model"><span class="dt-choice-letter">C</span><span>Je doute du <em>modèle e-commerce</em> lui-même</span></button>
+          <button type="button" class="dt-choice" data-val="discipline"><span class="dt-choice-letter">D</span><span>Je doute de <em>ma discipline</em> — je commence, j'arrête, je recommence</span></button>
+          <button type="button" class="dt-choice" data-val="entourage"><span class="dt-choice-letter">E</span><span>Je doute à cause de <em>mon entourage</em> — personne ne croit en moi</span></button>
+        </div>
+      </div>
+
+      <!-- Stage 5: Ennemi commun -->
+      <div class="dt-stage" id="dtStage5">
+        <div class="dt-stage-tag">Ce contre quoi tu te bats</div>
+        <h3 class="dt-q">Qu'est-ce qui t'a déjà <em>empêché d'avancer</em> dans le passé ?</h3>
+        <div class="dt-choices" id="dtStage5Choices">
+          <button type="button" class="dt-choice" data-val="gurus"><span class="dt-choice-letter">A</span><span>Les gourous qui mentent sur leurs chiffres et vendent du rêve</span></button>
+          <button type="button" class="dt-choice" data-val="system"><span class="dt-choice-letter">B</span><span>Le système (banques, État, charges) qui étouffe les petits</span></button>
+          <button type="button" class="dt-choice" data-val="entourage"><span class="dt-choice-letter">C</span><span>Mon entourage qui m'a découragé ou s'est moqué</span></button>
+          <button type="button" class="dt-choice" data-val="bosses"><span class="dt-choice-letter">D</span><span>Des employeurs qui m'ont sous-payé et exploité</span></button>
+          <button type="button" class="dt-choice" data-val="fears"><span class="dt-choice-letter">E</span><span>Mes propres peurs et mon propre cerveau</span></button>
+        </div>
+      </div>
+
+      <!-- Stage 6: Engagement temporel -->
+      <div class="dt-stage" id="dtStage6">
+        <div class="dt-stage-tag">Ton horizon</div>
+        <h3 class="dt-q">Imagine dans 3 ans, ton business e-commerce<br>génère <em>30 000 €/mois</em> en bénéfices.<br><span class="dt-q-sub">Combien de temps tu te donnes pour y arriver ?</span></h3>
         <div class="dt-slider-wrap">
           <div class="dt-slider-value">
             <span class="dt-slider-num" id="dtSliderNum2">1 an</span>
-            <span class="dt-slider-label" id="dtSliderLabel2">d'efforts difficiles</span>
+            <span class="dt-slider-label" id="dtSliderLabel2">d'engagement</span>
           </div>
-          <input type="range" min="30" max="1095" step="15" value="365" class="dt-slider" id="dtSlider2" aria-label="Nombre de jours d'efforts difficiles acceptés">
+          <input type="range" min="30" max="1095" step="15" value="365" class="dt-slider" id="dtSlider2" aria-label="Combien de temps tu te donnes">
           <div class="dt-slider-marks">
             <span>1 mois</span><span>6 mois</span><span>1 an</span><span>2 ans</span><span>3 ans</span>
           </div>
         </div>
-        <button type="button" class="dt-validate" id="dtValidate4">Valider</button>
+        <button type="button" class="dt-validate" id="dtValidate6">Voir mon profil</button>
       </div>
 
-      <!-- Stage 5: Slider abandon -->
-      <div class="dt-stage" id="dtStage5">
-        <div class="dt-stage-tag">Test d'honnêteté</div>
-        <h3 class="dt-q">Combien de <em>projets</em> tu as commencés ces 5 dernières années — <em>et abandonnés</em> avant le résultat ?</h3>
-        <p class="dt-hint">Personne ne saura ta réponse. Sois 100 % honnête, c'est dans ton intérêt.</p>
-        <div class="dt-slider-wrap">
-          <div class="dt-slider-value">
-            <span class="dt-slider-num" id="dtSliderNum">5</span>
-            <span class="dt-slider-label" id="dtSliderLabel">projets abandonnés</span>
-          </div>
-          <input type="range" min="0" max="20" value="5" class="dt-slider" id="dtSlider" aria-label="Nombre de projets abandonnés">
-          <div class="dt-slider-marks">
-            <span>0</span><span>5</span><span>10</span><span>15</span><span>20+</span>
-          </div>
-        </div>
-        <button type="button" class="dt-validate" id="dtValidate5">Valider</button>
-      </div>
-
-      <!-- Stage 6: Question d'identité -->
-      <div class="dt-stage" id="dtStage6">
-        <div class="dt-stage-tag">Question d'identité</div>
-        <h3 class="dt-q">Tu réussis dans <em>3 ans</em>.<br>À qui tu le dois <em>principalement</em> ?</h3>
-        <div class="dt-choices" id="dtStage6Choices">
-          <button type="button" class="dt-choice" data-pts="18"><span class="dt-choice-letter">A</span><span>À moi-même, ma persévérance, mes décisions quotidiennes</span></button>
-          <button type="button" class="dt-choice" data-pts="15"><span class="dt-choice-letter">B</span><span>À mes mentors, formations, communautés qui m'ont structuré</span></button>
-          <button type="button" class="dt-choice" data-pts="10"><span class="dt-choice-letter">C</span><span>À ma famille / mon entourage qui m'a soutenu</span></button>
-          <button type="button" class="dt-choice" data-pts="3"><span class="dt-choice-letter">D</span><span>À la chance, le bon timing, l'opportunité qui s'est présentée</span></button>
-        </div>
-      </div>
-
-      <!-- Result / Verdict -->
+      <!-- Result / Profil -->
       <div class="dt-stage" id="dtResult">
-        <div class="dt-result-title">Ton verdict</div>
-        <div class="dt-gauge">
-          <svg viewBox="0 0 200 110" class="dt-gauge-svg">
-            <path d="M 20 100 A 80 80 0 0 1 180 100" stroke="rgba(212,182,106,0.18)" stroke-width="14" fill="none" stroke-linecap="round"/>
-            <path d="M 20 100 A 80 80 0 0 1 180 100" stroke="url(#dtGaugeGrad)" stroke-width="14" fill="none" stroke-linecap="round" stroke-dasharray="251" stroke-dashoffset="251" id="dtGaugeArc"/>
-            <defs>
-              <linearGradient id="dtGaugeGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-                <stop offset="0%" stop-color="#E8703F"/>
-                <stop offset="40%" stop-color="#E8946B"/>
-                <stop offset="65%" stop-color="#E8D4A0"/>
-                <stop offset="100%" stop-color="#9CD68C"/>
-              </linearGradient>
-            </defs>
-          </svg>
-          <div class="dt-gauge-center">
-            <span style="position:relative;display:inline-block">
-              <span class="dt-gauge-num" id="dtGaugeNum">0</span><span class="dt-gauge-pct">%</span>
-            </span>
-            <span class="dt-gauge-cap">de chance de tenir</span>
-          </div>
-        </div>
+        <div class="dt-result-title">Ton profil</div>
         <h3 class="dt-verdict-h" id="dtVerdictH"></h3>
-        <p class="dt-verdict-text" id="dtVerdictText"></p>
+        <div class="dt-verdict-portrait" id="dtVerdictPortrait"></div>
+        <div class="dt-verdict-levers" id="dtVerdictLevers"></div>
+        <div class="dt-verdict-success" id="dtVerdictSuccess"></div>
         <div class="dt-verdict-cta">
-          <a href="#rejoindre" class="btn btn-gold">Rejoindre GENESYS</a>
+          <a href="#methode" class="btn btn-gold">Découvre l'écosystème en parcourant la page</a>
           <button type="button" class="dt-replay" id="dtReplay">Refaire le test</button>
         </div>
       </div>
@@ -4243,7 +4312,7 @@
     const startBtn = sec.querySelector('#dtStart');
     const replayBtn = sec.querySelector('#dtReplay');
 
-    let scores = {};
+    let answers = {}; // {origin, difficulties[], motivation, doubt, enemy, horizonDays}
     let currentStage = 'intro';
 
     function showStage(name){
@@ -4288,213 +4357,210 @@
       });
     });
 
-    // ----- Stage 2: Test des excuses (multi-checkbox) -----
-    const multicheck = sec.querySelector('#dtMulticheck');
-    const validate2 = sec.querySelector('#dtValidate2');
-    validate2.addEventListener('click', () => {
-      const checked = multicheck.querySelectorAll('input[type="checkbox"]:checked').length;
-      // 0 cochée = 18 pts (lucide), chaque cochée enlève 3 pts, min 0
-      let pts = Math.max(0, 18 - (checked * 3));
-      scores.s2 = pts;
-      validate2.disabled = true;
-      setTimeout(nextStage, 320);
-    });
-
-    // ----- Stage 3: Choix sous pression timer 30s -----
-    const timerNum = sec.querySelector('#dtTimerNum');
-    const timerRing = sec.querySelector('#dtTimerRing');
-    const timerArc = timerRing.querySelector('circle:nth-child(2)');
-    const stage3Choices = sec.querySelectorAll('#dtStage3Choices .dt-choice');
-    let timerInterval = null;
-    let timerSecs = 30;
-    const TIMER_TOTAL = 30;
-
-    function startStage3Timer(){
-      timerSecs = TIMER_TOTAL;
-      timerNum.textContent = timerSecs;
-      timerRing.classList.remove('is-warn','is-danger');
-      timerArc.style.strokeDasharray = '100.5';
-      timerArc.style.strokeDashoffset = '0';
-      stage3Choices.forEach(b => { b.disabled = false; b.classList.remove('is-picked'); });
-      const tickStart = performance.now();
-      timerInterval = setInterval(() => {
-        const elapsed = (performance.now() - tickStart) / 1000;
-        const remaining = Math.max(0, TIMER_TOTAL - elapsed);
-        timerSecs = Math.ceil(remaining);
-        timerNum.textContent = timerSecs;
-        const offset = 100.5 * (elapsed / TIMER_TOTAL);
-        timerArc.style.strokeDashoffset = offset;
-        if(remaining <= 10 && remaining > 5) timerRing.classList.add('is-warn');
-        if(remaining <= 5) timerRing.classList.add('is-danger');
-        if(remaining <= 0){
-          clearInterval(timerInterval);
-          scores.s3 = 0;
-          stage3Choices.forEach(b => b.disabled = true);
-          setTimeout(nextStage, 600);
-        }
-      }, 100);
-    }
-
-    stage3Choices.forEach(btn => {
+    // ----- Stage 1: Origine sociale -----
+    sec.querySelectorAll('#dtStage1Choices .dt-choice').forEach(btn => {
       btn.addEventListener('click', () => {
-        if(timerInterval) clearInterval(timerInterval);
-        scores.s3 = parseInt(btn.dataset.pts, 10);
+        answers.origin = btn.dataset.val;
         btn.classList.add('is-picked');
-        stage3Choices.forEach(b => b.disabled = true);
-        // Bonus si décide en moins de 12 sec (>= 18s remaining) → +2 pts
-        if(timerSecs >= 18) scores.s3 += 2;
+        sec.querySelectorAll('#dtStage1Choices .dt-choice').forEach(b => b.disabled = true);
         setTimeout(nextStage, 520);
       });
     });
 
-    // ----- Stage 4: Test de projection (slider grand range) -----
+    // ----- Stage 2: Difficultés (multi-checkbox) -----
+    const multicheck = sec.querySelector('#dtMulticheck');
+    const validate2 = sec.querySelector('#dtValidate2');
+    validate2.addEventListener('click', () => {
+      const checked = Array.from(multicheck.querySelectorAll('input[type="checkbox"]:checked'));
+      answers.difficulties = checked.map(c => c.dataset.key);
+      validate2.disabled = true;
+      setTimeout(nextStage, 320);
+    });
+
+    // ----- Stage 3: Motivation profonde -----
+    sec.querySelectorAll('#dtStage3Choices .dt-choice').forEach(btn => {
+      btn.addEventListener('click', () => {
+        answers.motivation = btn.dataset.val;
+        btn.classList.add('is-picked');
+        sec.querySelectorAll('#dtStage3Choices .dt-choice').forEach(b => b.disabled = true);
+        setTimeout(nextStage, 520);
+      });
+    });
+
+    // ----- Stage 4: Plus gros doute -----
+    sec.querySelectorAll('#dtStage4Choices .dt-choice').forEach(btn => {
+      btn.addEventListener('click', () => {
+        answers.doubt = btn.dataset.val;
+        btn.classList.add('is-picked');
+        sec.querySelectorAll('#dtStage4Choices .dt-choice').forEach(b => b.disabled = true);
+        setTimeout(nextStage, 520);
+      });
+    });
+
+    // ----- Stage 5: Ennemi commun -----
+    sec.querySelectorAll('#dtStage5Choices .dt-choice').forEach(btn => {
+      btn.addEventListener('click', () => {
+        answers.enemy = btn.dataset.val;
+        btn.classList.add('is-picked');
+        sec.querySelectorAll('#dtStage5Choices .dt-choice').forEach(b => b.disabled = true);
+        setTimeout(nextStage, 520);
+      });
+    });
+
+    // ----- Stage 6: Engagement temporel -----
     const slider2 = sec.querySelector('#dtSlider2');
     const sliderNum2 = sec.querySelector('#dtSliderNum2');
     const sliderLabel2 = sec.querySelector('#dtSliderLabel2');
-    const validate4 = sec.querySelector('#dtValidate4');
+    const validate6 = sec.querySelector('#dtValidate6');
 
     function formatDays(d){
       if(d < 60) return d + ' jours';
       if(d < 365) return Math.round(d/30) + ' mois';
-      const years = (d/365).toFixed(1).replace('.0','');
-      return years + ' an' + (years > 1 ? 's' : '');
+      const years = +(d/365).toFixed(1);
+      const display = (years % 1 === 0) ? years : years.toFixed(1).replace('.', ',');
+      return display + ' an' + (years > 1 ? 's' : '');
     }
     slider2.addEventListener('input', () => {
       const v = parseInt(slider2.value, 10);
       sliderNum2.textContent = formatDays(v);
       sliderNum2.classList.add('is-bumped');
       setTimeout(() => sliderNum2.classList.remove('is-bumped'), 180);
-      sliderLabel2.textContent = v < 60 ? "jours d'efforts difficiles" : "d'efforts difficiles";
     });
-    validate4.addEventListener('click', () => {
-      const v = parseInt(slider2.value, 10);
-      let pts;
-      if(v >= 800) pts = 18;
-      else if(v >= 500) pts = 13;
-      else if(v >= 200) pts = 7;
-      else pts = 2;
-      scores.s4 = pts;
-      validate4.disabled = true;
-      setTimeout(nextStage, 320);
+    validate6.addEventListener('click', () => {
+      answers.horizonDays = parseInt(slider2.value, 10);
+      validate6.disabled = true;
+      setTimeout(showResult, 320);
     });
 
-    // ----- Stage 5: Slider abandon -----
-    const slider = sec.querySelector('#dtSlider');
-    const sliderNum = sec.querySelector('#dtSliderNum');
-    const sliderLabel = sec.querySelector('#dtSliderLabel');
-    const validate5 = sec.querySelector('#dtValidate5');
-
-    slider.addEventListener('input', () => {
-      const v = parseInt(slider.value, 10);
-      sliderNum.textContent = v >= 20 ? '20+' : v;
-      sliderNum.classList.add('is-bumped');
-      setTimeout(() => sliderNum.classList.remove('is-bumped'), 180);
-      sliderLabel.textContent = v <= 1 ? 'projet abandonné' : 'projets abandonnés';
-    });
-
-    validate5.addEventListener('click', () => {
-      const v = parseInt(slider.value, 10);
-      let pts;
-      if(v <= 2) pts = 18;
-      else if(v <= 5) pts = 12;
-      else if(v <= 9) pts = 6;
-      else pts = 2;
-      scores.s5 = pts;
-      validate5.disabled = true;
-      setTimeout(nextStage, 320);
-    });
-
-    // ----- Stage 6: Question d'identité -----
-    sec.querySelectorAll('#dtStage6Choices .dt-choice').forEach(btn => {
-      btn.addEventListener('click', () => {
-        scores.s6 = parseInt(btn.dataset.pts, 10);
-        btn.classList.add('is-picked');
-        sec.querySelectorAll('#dtStage6Choices .dt-choice').forEach(b => b.disabled = true);
-        setTimeout(showResult, 600);
-      });
-    });
-
-    // ----- Result -----
-    const gaugeArc = sec.querySelector('#dtGaugeArc');
-    const gaugeNum = sec.querySelector('#dtGaugeNum');
+    // ----- Profil + 5 leviers Blair Warren + success story -----
     const verdictH = sec.querySelector('#dtVerdictH');
-    const verdictText = sec.querySelector('#dtVerdictText');
+    const verdictPortrait = sec.querySelector('#dtVerdictPortrait');
+    const verdictLevers = sec.querySelector('#dtVerdictLevers');
+    const verdictSuccess = sec.querySelector('#dtVerdictSuccess');
 
-    const VERDICTS = [
-      { min:80, h:"Tu es taillé(e) pour ça.", t:"<strong>Sur les 6 stages, ton mental est solide :</strong> tu te projettes loin, tu ne te caches pas derrière des excuses, tu décides sous pression, et tu te vois comme acteur de ta réussite. C'est exactement le profil qui réussit. Ce qui te manque, ce n'est pas le mental — c'est <strong>la séquence technique</strong> (offre, page produit, copy, pubs, lecture chiffres). GENESYS te la donne entière. Tu vas dévorer les modules. <strong>Découvre l'écosystème juste en dessous.</strong>" },
-      { min:60, h:"Tu as le potentiel — il manque le cadre.", t:"<strong>Ton mental est bon mais a des angles morts</strong> : tu te projettes pas assez loin, ou tu te dis encore quelques excuses qui te freinent. Avec un cadre clair (méthode + communauté + correction quotidienne), tu vas exploser. <strong>C'est exactement ce que GENESYS donne :</strong> 23 modules qui couvrent toute la séquence (produit, copy, page, pubs, conversion, scaling), une communauté qui te corrige, et un environnement qui te tient quand toi-même tu vacilles. <strong>Découvre l'écosystème juste en dessous.</strong>" },
-      { min:40, h:"Tu es à un point de bascule.", t:"<strong>Sur les 6 stages, ton mental est en zone fragile.</strong> Tu te projettes pas, tu doutes, tu te trouves des excuses, ou tu attends que les choses arrivent. <strong>Sans un cadre solide, tu vas abandonner ce business comme les précédents.</strong> Avec un cadre, tu peux basculer complètement. <strong>Et GENESYS, ce n'est pas que du mindset</strong> : c'est aussi la séquence technique complète (produit, copy, conversion, pubs, scaling). On travaille les deux en parallèle. <strong>Découvre l'écosystème juste en dessous.</strong>" },
-      { min:0,  h:"Mental fragile aujourd'hui — pas une fatalité.", t:"<strong>Sur les 6 stages, tes réponses montrent un mental d'e-commerçant(e) à reconstruire.</strong> Ce n'est pas un jugement — c'est juste le résultat honnête de tes réponses. La bonne nouvelle : <strong>la détermination, ça se travaille comme un muscle.</strong> <strong>Et au-delà du mindset, GENESYS aborde énormément d'autres choses :</strong> la séquence d'achat, le copywriting, la conversion, les pubs Meta et Google, le scaling, la lecture des chiffres. Tout est couvert, dans le bon ordre. <strong>Je t'invite à découvrir l'écosystème juste en dessous</strong> — tu verras toi-même ce qui peut t'aider, là où tu en es vraiment." }
-    ];
+    // Archétypes de profils déclenchés par la combo (origin + motivation)
+    const PROFILES = {
+      poor_parents:    { name:"Le pilier",          line:"Celui qui veut sortir sa famille du manque." },
+      poor_freedom:    { name:"L'évadé",            line:"Celui qui n'a jamais eu de filet et ne veut plus jamais en dépendre." },
+      poor_prove:      { name:"Le revanchard",      line:"Celui qui s'est entendu dire trop souvent 'tu n'y arriveras pas'." },
+      poor_children:   { name:"Le bâtisseur",       line:"Celui qui veut casser le cycle, donner ce qu'il n'a pas eu." },
+      poor_legacy:     { name:"Le créateur",        line:"Celui qui veut que sa vie ait pesé." },
+      modest_parents:  { name:"Le reconnaissant",   line:"Celui qui a vu ses parents bosser dur et veut leur rendre." },
+      modest_freedom:  { name:"L'indépendant",      line:"Celui qui n'a pas eu de luxe mais a appris la valeur de l'autonomie." },
+      modest_prove:    { name:"Le déterminé",       line:"Celui qui n'a pas grand-chose à prouver à part à lui-même." },
+      modest_children: { name:"Le transmetteur",    line:"Celui qui veut élever le niveau pour la prochaine génération." },
+      modest_legacy:   { name:"L'artisan",          line:"Celui qui croit qu'on construit avec le temps, pas avec la chance." },
+      middle_parents:  { name:"Le fidèle",          line:"Celui qui veut prendre soin des siens, pas juste de lui." },
+      middle_freedom:  { name:"Le libéré",          line:"Celui qui sait qu'avoir 'juste assez' n'est pas la même chose qu'être libre." },
+      middle_prove:    { name:"L'ambitieux",        line:"Celui qui refuse le confort moyen comme destination finale." },
+      middle_children: { name:"L'élévateur",        line:"Celui qui veut donner plus à ses enfants que ce qu'il a reçu." },
+      middle_legacy:   { name:"L'auteur",           line:"Celui qui veut écrire sa propre version, pas hériter de celle des autres." },
+      wealthy_parents: { name:"Le digne héritier",  line:"Celui qui veut honorer son point de départ, pas juste en profiter." },
+      wealthy_freedom: { name:"Le souverain",       line:"Celui qui sait que l'argent ne suffit pas — il veut son temps et sa liberté." },
+      wealthy_prove:   { name:"L'autonome",         line:"Celui qui veut prouver qu'il peut bâtir sans le filet familial." },
+      wealthy_children:{ name:"Le perpétuateur",    line:"Celui qui veut que ses enfants apprennent à construire, pas juste à recevoir." },
+      wealthy_legacy:  { name:"Le visionnaire",     line:"Celui qui veut que son nom signifie quelque chose au-delà de l'héritage reçu." }
+    };
+
+    // Portrait — phrase d'accroche selon profil + difficultés vécues
+    function buildPortrait(){
+      const profile = PROFILES[answers.origin + '_' + answers.motivation] || { name:"L'opérateur", line:"Celui qui avance, malgré tout." };
+      const diffCount = (answers.difficulties || []).length;
+      let diffPhrase = "";
+      if(diffCount === 0) diffPhrase = "Tu n'as pas connu de grosses épreuves dans les domaines listés — c'est rare, et c'est une force que tu peux capitaliser.";
+      else if(diffCount === 1) diffPhrase = "Tu as connu une grosse épreuve dans ta vie, et tu es encore debout. Ça veut dire quelque chose.";
+      else if(diffCount === 2) diffPhrase = "Tu as traversé deux gros chocs dans ta vie, et tu cherches encore à avancer. C'est exactement le profil qui réussit en e-commerce, pas malgré ça — <strong>à cause de ça</strong>.";
+      else diffPhrase = "Tu as traversé <strong>" + diffCount + " domaines difficiles</strong> dans ta vie, et tu es là, en train de chercher comment construire quelque chose. Ce n'est pas anodin — c'est exactement la trajectoire des entrepreneurs qui durent.";
+      return '<strong>Tu es ' + profile.name + '.</strong> ' + profile.line + '<br><br>' + diffPhrase;
+    }
+
+    // 5 leviers Blair Warren — adaptés selon les réponses
+    const MOTIVATION_DREAMS = {
+      parents:  "Mettre tes parents à l'abri — c'est un des moteurs les plus puissants qu'un humain puisse avoir. Tous les jours, tu auras un visage en tête.",
+      freedom:  "Gagner ta liberté de temps, de lieu, de choix — c'est exactement la promesse de l'e-commerce bien fait. C'est atteignable, et beaucoup l'ont fait.",
+      prove:    "Prouver à ceux qui ont douté que tu en étais capable — c'est un moteur qui peut te porter loin si tu apprends à le canaliser.",
+      children: "Donner à tes enfants ce que tu n'as pas eu — c'est le projet d'une vie, pas d'une saison. Tu ne lâcheras pas.",
+      legacy:   "Construire quelque chose qui te ressemble vraiment — c'est rare aujourd'hui de chercher du sens, pas juste du cash. C'est un atout."
+    };
+    const DOUBT_FEAR = {
+      capacity:    "<strong>Tu n'as pas besoin d'être un génie pour réussir en e-commerce.</strong> Les meilleurs ne sont pas les plus brillants — ce sont ceux qui appliquent une bonne séquence et qui ne lâchent pas trop tôt.",
+      timing:      "<strong>Le marché n'est pas saturé — il est juste mal couvert.</strong> Chaque année, de nouveaux entrants raflent des parts de marché à des acteurs qui ont arrêté d'innover. Le timing est aujourd'hui, comme il l'a toujours été.",
+      model:       "<strong>L'e-commerce n'est pas en train de mourir — il évolue.</strong> Ceux qui appliquent les méthodes de 2020 échouent. Ceux qui s'adaptent (séquence, neuro, copy, pubs propres) réussissent. Ce n'est pas le modèle qui plante.",
+      discipline:  "<strong>La discipline n'est pas un trait de personnalité — c'est un système.</strong> Avec le bon cadre, la bonne communauté qui te tient et un parcours clair, tu peux être beaucoup plus constant que tu ne le crois.",
+      entourage:   "<strong>Tu n'as pas besoin que ton entourage croie en toi.</strong> Tu as besoin d'une autre tribu : des gens qui font la même chose, qui se relèvent comme toi, qui te corrigent. C'est ce qu'on construit ici."
+    };
+    const ENEMY_BLAME = {
+      gurus:     "<strong>Les gourous qui mentent ont fait beaucoup de dégâts</strong> — ils ont vendu du rêve à des gens qui méritaient mieux. C'est entre autres pour les contrer qu'on a construit GENESYS : pas de promesse en l'air, pas de captures Shopify trafiquées, pas de Lambo louée.",
+      system:    "<strong>Le système n'est pas fait pour les petits</strong> — banques frileuses, charges qui étouffent, paperasse interminable. Mais l'e-commerce reste un des modèles où ces obstacles pèsent le moins. Tu peux passer à côté de la machine.",
+      entourage: "<strong>Quand l'entourage décourage, c'est rarement par méchanceté</strong> — c'est par projection de leurs propres peurs. Tu n'as pas besoin de leur permission pour réussir. Tu as besoin d'une autre tribu, en parallèle.",
+      bosses:    "<strong>Les boss qui t'ont sous-payé t'ont surtout offert une chose</strong> — la motivation de ne plus jamais dépendre d'eux. Cette colère légitime peut devenir ton meilleur carburant si tu la canalises sur la construction, pas sur la rancœur.",
+      fears:     "<strong>Tes peurs ne sont pas tes ennemies</strong> — elles t'ont juste été apprises pour te protéger d'un monde qui n'existe plus. Avec un cadre clair, elles deviennent des balises au lieu d'être des barrières."
+    };
+    const HORIZON_EXCUSE = {
+      short:    "<strong>Si tu te donnes peu de temps</strong>, c'est probablement parce que la vie t'a appris à attendre des résultats vite. C'est légitime. Mais en e-commerce, les 12-24 premiers mois sont la phase de construction — donne-toi cette fenêtre, et tu changeras la vie d'après.",
+      medium:   "<strong>Tu te donnes 1 à 2 ans</strong> — c'est exactement la fenêtre réaliste pour passer de zéro à un business e-commerce qui paie ses charges, son opérateur, et qui commence à scaler. C'est pas du fantasme, c'est juste honnête.",
+      long:     "<strong>Tu te donnes 2 à 3 ans</strong> — c'est mature. Tu as compris que les business solides ne se construisent pas en 90 jours. Cette patience est une de tes plus grosses forces."
+    };
+    const ALWAYS_DREAM = "<strong>Cette motivation est légitime et puissante.</strong> Elle est la raison pour laquelle tu es là, encore en train de chercher. Garde-la précieusement — c'est ton vrai capital.";
+
+    // Success stories par origine
+    const SUCCESS = {
+      poor:    { quote:"Je viens d'une famille où on comptait chaque euro. J'ai rejoint GENESYS quand j'avais perdu 4 000 € en pubs et que j'étais prêt à arrêter. Aujourd'hui je sors 6-8 K € de bénéfices par mois, et surtout : ma mère ne fait plus la queue à Pôle Emploi.", author:"Karim", note:"Membre GENESYS · ex-employé Carrefour" },
+      modest:  { quote:"On avait juste ce qu'il fallait, jamais plus. Quand j'ai commencé l'e-com, je voulais juste 'compléter mes fins de mois'. La séquence GENESYS m'a appris que mon plafond n'était pas où je le croyais. 18 mois après, je suis à temps plein dessus et je gagne 3 fois mon ancien salaire.", author:"Meïssa", note:"Membre GENESYS · ex-comptable" },
+      middle:  { quote:"Je sortais d'un CDI cadre où je m'ennuyais à mourir. J'avais peur de tout perdre — la mutuelle, le confort, le 13ᵉ mois. La méthode GENESYS m'a donné le cadre que je n'avais pas, et la communauté m'a tenu quand j'ai voulu craquer. Je n'ai jamais regretté d'avoir démissionné.", author:"Louis", note:"Membre GENESYS · ex-cadre" },
+      wealthy: { quote:"Je viens d'une famille aisée et j'avais une chose à prouver : que je pouvais construire seul, sans le filet. GENESYS m'a fait gagner 18 mois d'erreurs en me donnant la séquence qui marche. Aujourd'hui mon e-commerce existe, paie ses charges, et il est à moi.", author:"Erwan", note:"Membre GENESYS" }
+    };
 
     function showResult(){
       showStage('result');
-      // Compute total score (max ~85 → normalize to 100)
-      const total = (scores.s1 || 0) + (scores.s2 || 0) + (scores.s3 || 0) + (scores.s4 || 0) + (scores.s5 || 0) + (scores.s6 || 0);
-      const MAX = 18 + 18 + 16 + 18 + 18 + 18; // = 106
-      let pct = Math.round((total / MAX) * 100);
-      if(pct > 99) pct = 99;
-      if(pct < 5) pct = 5;
-      // Find verdict
-      const v = VERDICTS.find(x => pct >= x.min);
-      verdictH.innerHTML = v.h.replace(/<em>/g,'<em>').replace(/(taillé|potentiel|bascule|fragile)/i, '<em>$1</em>');
-      verdictH.textContent = v.h;
-      verdictText.innerHTML = v.t;
-      // Animate gauge
-      const arcLen = 251;
-      const offset = arcLen - (arcLen * pct / 100);
-      // Reset
-      gaugeArc.style.transition = 'none';
-      gaugeArc.style.strokeDashoffset = arcLen;
-      gaugeNum.textContent = '0';
-      // Trigger animation
-      requestAnimationFrame(() => {
-        gaugeArc.style.transition = 'stroke-dashoffset 2.4s cubic-bezier(0.22,1,0.36,1)';
-        gaugeArc.style.strokeDashoffset = offset;
-        // Animate number count-up
-        const startTs = performance.now();
-        const duration = 2400;
-        function tick(){
-          const elapsed = performance.now() - startTs;
-          const t = Math.min(1, elapsed / duration);
-          const eased = 1 - Math.pow(1 - t, 3);
-          gaugeNum.textContent = Math.round(eased * pct);
-          if(t < 1) requestAnimationFrame(tick);
-        }
-        requestAnimationFrame(tick);
-      });
+      const profile = PROFILES[answers.origin + '_' + answers.motivation] || { name:"L'opérateur" };
+      // Title
+      verdictH.innerHTML = "Tu es <em>" + profile.name + "</em>";
+      // Portrait
+      verdictPortrait.innerHTML = buildPortrait();
+      // 5 Blair Warren levers
+      const horizonKey = answers.horizonDays < 365 ? 'short' : (answers.horizonDays < 730 ? 'medium' : 'long');
+      const dreamText = MOTIVATION_DREAMS[answers.motivation] || ALWAYS_DREAM;
+      const fearText = DOUBT_FEAR[answers.doubt] || "Tes doutes sont légitimes — et ils sont surmontables avec le bon cadre.";
+      const enemyText = ENEMY_BLAME[answers.enemy] || "Les vrais coupables ne sont jamais ceux qu'on accuse en surface.";
+      const excuseText = HORIZON_EXCUSE[horizonKey];
+      const confirmText = "<strong>Tes doutes ne sont pas paranoïa — ils sont sains.</strong> Beaucoup de gens lancent leur boutique sans douter, et ils explosent en vol. Le fait que tu te poses ces questions, c'est ce qui te donne une chance réelle de durer.";
+
+      const SVG_DREAM   = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v6m0 8v6M4.93 4.93l4.24 4.24m5.66 5.66 4.24 4.24M2 12h6m8 0h6M4.93 19.07l4.24-4.24m5.66-5.66 4.24-4.24"/></svg>';
+      const SVG_CONFIRM = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>';
+      const SVG_EXCUSE  = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>';
+      const SVG_FEAR    = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s-8-4.5-8-11.5a8 8 0 0 1 16 0c0 7-8 11.5-8 11.5z"/><circle cx="12" cy="10.5" r="3"/></svg>';
+      const SVG_ENEMY   = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22c5.5-2 9-7 9-13V4l-9-2-9 2v5c0 6 3.5 11 9 13z"/></svg>';
+
+      verdictLevers.innerHTML =
+        '<div class="dt-lever"><span class="dt-lever-icon">' + SVG_DREAM + '</span><div class="dt-lever-body"><span class="dt-lever-tag">Tes rêves</span><span class="dt-lever-text">' + dreamText + '</span></div></div>' +
+        '<div class="dt-lever"><span class="dt-lever-icon">' + SVG_CONFIRM + '</span><div class="dt-lever-body"><span class="dt-lever-tag">Tes doutes — légitimes</span><span class="dt-lever-text">' + confirmText + '</span></div></div>' +
+        '<div class="dt-lever"><span class="dt-lever-icon">' + SVG_EXCUSE + '</span><div class="dt-lever-body"><span class="dt-lever-tag">Tes échecs passés</span><span class="dt-lever-text">' + excuseText + '</span></div></div>' +
+        '<div class="dt-lever"><span class="dt-lever-icon">' + SVG_FEAR + '</span><div class="dt-lever-body"><span class="dt-lever-tag">Tes peurs</span><span class="dt-lever-text">' + fearText + '</span></div></div>' +
+        '<div class="dt-lever"><span class="dt-lever-icon">' + SVG_ENEMY + '</span><div class="dt-lever-body"><span class="dt-lever-tag">Tes vrais ennemis</span><span class="dt-lever-text">' + enemyText + '</span></div></div>';
+
+      // Success story
+      const story = SUCCESS[answers.origin] || SUCCESS.middle;
+      verdictSuccess.innerHTML =
+        '<span class="dt-success-tag">Quelqu\'un comme toi qui a réussi</span>' +
+        '<p class="dt-success-quote">' + story.quote + '</p>' +
+        '<p class="dt-success-author"><strong>' + story.author + '</strong> — ' + story.note + '</p>';
     }
 
     function startTest(){
-      scores = {};
+      answers = {};
       // Reset all interactive elements
       sec.querySelectorAll('.dt-choice').forEach(b => { b.disabled = false; b.classList.remove('is-picked'); });
       multicheck.querySelectorAll('input[type="checkbox"]').forEach(c => c.checked = false);
       validate2.disabled = false;
       slider2.value = 365;
       sliderNum2.textContent = formatDays(365);
-      sliderLabel2.textContent = "d'efforts difficiles";
-      validate4.disabled = false;
-      slider.value = 5;
-      sliderNum.textContent = '5';
-      sliderLabel.textContent = 'projets abandonnés';
-      validate5.disabled = false;
+      validate6.disabled = false;
       showStage('s1');
     }
 
     startBtn.addEventListener('click', startTest);
     replayBtn.addEventListener('click', startTest);
-
-    // Hooks pour démarrer auto les sub-stages quand ils deviennent actifs
-    const obs = new MutationObserver(muts => {
-      muts.forEach(m => {
-        const t = m.target;
-        if(!(t instanceof HTMLElement)) return;
-        if(!t.classList.contains('is-active')) return;
-        if(t.id === 'dtStage3'){ startStage3Timer(); }
-      });
-    });
-    Object.values(stages).forEach(el => obs.observe(el, {attributes:true, attributeFilter:['class']}));
   })();
 
 </script>
