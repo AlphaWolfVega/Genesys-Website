@@ -471,21 +471,27 @@
       line-height:1.4 !important;
     }
     .hl-schema{
+      display:flex;flex-direction:column;
+      align-items:center;justify-content:center;
+      gap:9px;
+      width:100%;
+      margin:6px 0 10px;
+    }
+    .hl-schema-row{
       display:flex;flex-direction:row;
       align-items:flex-start;justify-content:center;
       gap:0;
       width:100%;
-      margin:6px 0 10px;
       flex-wrap:nowrap;
     }
     .hl-step{
       display:flex;flex-direction:column;
       align-items:center;
-      gap:5px;
-      flex:0 0 auto;
+      gap:4px;
+      flex:1 1 0;
+      min-width:0;
       text-align:center;
-      width:58px;
-      max-width:58px;
+      max-width:74px;
       background:transparent;
       border:0;
       padding:2px 0;
@@ -506,7 +512,7 @@
     }
     .hl-step-icon{
       flex-shrink:0;
-      width:32px;height:32px;
+      width:30px;height:30px;
       display:inline-flex;align-items:center;justify-content:center;
       background:rgba(212,182,106,0.08);
       border:1px solid rgba(212,182,106,0.32);
@@ -514,25 +520,26 @@
       color:var(--gold);
       transition:background 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
     }
-    .hl-step-icon svg{width:14px;height:14px;display:block}
+    .hl-step-icon svg{width:13px;height:13px;display:block}
     .hl-step-text{
       font-family:'Inter',sans-serif;
-      font-size:8.5px;
+      font-size:8px;
       letter-spacing:0;
       color:var(--text-mute);
-      line-height:1.25;
+      line-height:1.22;
       font-weight:600;
       text-align:center;
       white-space:normal;
+      word-break:break-word;
     }
     .hl-step-text strong{color:inherit;font-weight:600}
     .hl-step-arrow{
       display:flex;align-items:flex-start;justify-content:center;
-      height:32px;
+      height:30px;
       padding-top:9px;
       color:rgba(212,182,106,0.5);
-      font-size:11px;
-      flex:0 0 5px;
+      font-size:10px;
+      flex:0 0 6px;
       font-weight:700;
       transition:opacity 0.32s ease;
     }
@@ -2284,30 +2291,48 @@
           <p class="hl-schema-intro">Voici le cycle classique des e-commerçants bloqués. <strong>Tape l'étape où tu en es actuellement :</strong></p>
           <p class="hl-schema-target">Pour débutants et intermédiaires qui veulent passer au niveau avancé.</p>
           <div class="hl-schema" id="hlSchema">
-            <button type="button" class="hl-step" data-step="0" aria-label="Je me forme sur YouTube">
-              <span class="hl-step-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polygon points="10 8 16 12 10 16 10 8" fill="currentColor"/></svg></span>
-              <span class="hl-step-text">Je me forme<br>sur YouTube</span>
-            </button>
-            <span class="hl-step-arrow" aria-hidden="true">›</span>
-            <button type="button" class="hl-step" data-step="1" aria-label="Je construis mon site">
-              <span class="hl-step-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="14" x="2" y="3" rx="2"/><line x1="8" x2="16" y1="21" y2="21"/><line x1="12" x2="12" y1="17" y2="21"/></svg></span>
-              <span class="hl-step-text">Je construis<br>mon site</span>
-            </button>
-            <span class="hl-step-arrow" aria-hidden="true">›</span>
-            <button type="button" class="hl-step" data-step="2" aria-label="Je fais mes pubs">
-              <span class="hl-step-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="m3 11 18-5v12L3 14v-3z"/><path d="M11.6 16.8a3 3 0 1 1-5.8-1.6"/></svg></span>
-              <span class="hl-step-text">Je fais<br>mes pubs</span>
-            </button>
-            <span class="hl-step-arrow" aria-hidden="true">›</span>
-            <button type="button" class="hl-step" data-step="3" aria-label="Je suis en perte">
-              <span class="hl-step-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 17 13.5 8.5 8.5 13.5 2 7"/><polyline points="16 17 22 17 22 11"/></svg></span>
-              <span class="hl-step-text">Je suis<br>en perte</span>
-            </button>
-            <span class="hl-step-arrow" aria-hidden="true">›</span>
-            <button type="button" class="hl-step" data-step="4" aria-label="Je doute">
-              <span class="hl-step-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="m15 9-6 6"/><path d="m9 9 6 6"/></svg></span>
-              <span class="hl-step-text">Je<br>doute</span>
-            </button>
+            <div class="hl-schema-row">
+              <button type="button" class="hl-step" data-step="0" aria-label="Je me forme sur YouTube">
+                <span class="hl-step-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polygon points="10 8 16 12 10 16 10 8" fill="currentColor"/></svg></span>
+                <span class="hl-step-text">Je me forme<br>sur YouTube</span>
+              </button>
+              <span class="hl-step-arrow" aria-hidden="true">›</span>
+              <button type="button" class="hl-step" data-step="1" aria-label="Je cherche mon produit">
+                <span class="hl-step-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg></span>
+                <span class="hl-step-text">Je cherche<br>mon produit</span>
+              </button>
+              <span class="hl-step-arrow" aria-hidden="true">›</span>
+              <button type="button" class="hl-step" data-step="2" aria-label="Je construis mon site">
+                <span class="hl-step-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="14" x="2" y="3" rx="2"/><line x1="8" x2="16" y1="21" y2="21"/><line x1="12" x2="12" y1="17" y2="21"/></svg></span>
+                <span class="hl-step-text">Je construis<br>mon site</span>
+              </button>
+              <span class="hl-step-arrow" aria-hidden="true">›</span>
+              <button type="button" class="hl-step" data-step="3" aria-label="Je fais mes pubs">
+                <span class="hl-step-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="m3 11 18-5v12L3 14v-3z"/><path d="M11.6 16.8a3 3 0 1 1-5.8-1.6"/></svg></span>
+                <span class="hl-step-text">Je fais<br>mes pubs</span>
+              </button>
+            </div>
+            <div class="hl-schema-row">
+              <button type="button" class="hl-step" data-step="4" aria-label="Je n'ai aucune vente">
+                <span class="hl-step-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="21" r="1"/><circle cx="19" cy="21" r="1"/><path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"/></svg></span>
+                <span class="hl-step-text">Je n'ai<br>aucune vente</span>
+              </button>
+              <span class="hl-step-arrow" aria-hidden="true">›</span>
+              <button type="button" class="hl-step" data-step="5" aria-label="Je change de produit">
+                <span class="hl-step-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="m17 2 4 4-4 4"/><path d="M3 11v-1a4 4 0 0 1 4-4h14"/><path d="m7 22-4-4 4-4"/><path d="M21 13v1a4 4 0 0 1-4 4H3"/></svg></span>
+                <span class="hl-step-text">Je change<br>de produit</span>
+              </button>
+              <span class="hl-step-arrow" aria-hidden="true">›</span>
+              <button type="button" class="hl-step" data-step="6" aria-label="Je suis en perte">
+                <span class="hl-step-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 17 13.5 8.5 8.5 13.5 2 7"/><polyline points="16 17 22 17 22 11"/></svg></span>
+                <span class="hl-step-text">Je suis<br>en perte</span>
+              </button>
+              <span class="hl-step-arrow" aria-hidden="true">›</span>
+              <button type="button" class="hl-step" data-step="7" aria-label="Je doute">
+                <span class="hl-step-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><path d="M12 17h.01"/></svg></span>
+                <span class="hl-step-text">Je<br>doute</span>
+              </button>
+            </div>
           </div>
           <p class="hl-tap-prompt" id="hlTapPrompt"><svg class="hl-tap-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 14a8 8 0 0 1-8 8"/><path d="M18 11v-1a2 2 0 0 0-4 0"/><path d="M14 10V9a2 2 0 0 0-4 0v1"/><path d="M10 9.5V4a2 2 0 0 0-4 0v10"/><path d="M18 11a2 2 0 1 1 4 0v3a8 8 0 0 1-8 8h-2c-2.8 0-4.5-.86-5.99-2.34l-3.6-3.6a2 2 0 0 1 2.83-2.82L7 15"/></svg><span>Tape pour te diagnostiquer</span></p>
           <div class="hl-loop-or" aria-hidden="true">— ou si aucune ne te correspond —</div>
@@ -2338,7 +2363,7 @@
       </div>
       <div class="hero-lead-slide hero-lead-slide-cta">
         <div class="hero-lead-card">
-          <p>Si tu te reconnais dans ce que je viens de citer, <strong>GENESYS est fait pour toi</strong>. Je t'invite à découvrir.</p>
+          <p>Je vais aller droit au but.<br><br>Si tu t'es reconnu dans une ou plusieurs de ces situations, et que tu es prêt à investir dans toi-même pour accéder aux mêmes méthodes que <strong>certains font payer des milliers d'euros</strong> — descends. <strong>GENESYS est fait pour toi.</strong><br><br>Sinon, quitte cette page. <em>On y gagne tous les deux.</em></p>
           <span class="hero-lead-down" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14"/><path d="m19 12-7 7-7-7"/></svg></span>
         </div>
       </div>
@@ -3829,16 +3854,20 @@
     const VERDICTS = [
       { l:"Débutant absolu",
         t:"Tu apprends encore en regardant des vidéos sans avoir lancé concrètement. C'est OK — mais à un moment, il faut sortir du fauteuil. <strong>Le contenu seul ne t'a jamais fait vendre.</strong>" },
-      { l:"Débutant en setup",
-        t:"Tu es en train de monter ta boutique : choix du produit, design, fiches, structure. <strong>C'est exactement le moment où la majorité fait des choix qui plombent la conversion avant même d'avoir lancé une pub.</strong>" },
+      { l:"Phase recherche produit",
+        t:"Tu es en plein choix de produit. <strong>C'est le moment qui décide tout : un mauvais choix ici, c'est 6 mois de pertes garanties.</strong> Et la plupart se trompent parce qu'ils cherchent un produit, pas une promesse." },
+      { l:"Phase setup",
+        t:"Tu es en train de monter ta boutique : design, fiches, structure. <strong>C'est exactement le moment où la majorité fait des choix qui plombent la conversion avant même d'avoir lancé une pub.</strong>" },
       { l:"Débutant actif",
         t:"Tu as déjà lancé des pubs — c'est plus que la majorité. Mais elles partent <strong>sans la séquence qui convertit derrière</strong> (page produit, copy, leviers neuro). Stade le plus dangereux : à 1 pas d'abandonner." },
+      { l:"Stade silence",
+        t:"Tu as des visites, mais aucune vente. <strong>Le silence du compteur fait paniquer 9 débutants sur 10 — qui changent tout au lieu de comprendre ce qui bloque.</strong> Le vrai souci n'est presque jamais le produit. C'est la séquence." },
+      { l:"Stade panique produit",
+        t:"Tu cherches un nouveau produit en pensant que celui d'avant était le problème. <strong>C'est exactement le piège : ce n'est jamais le produit, c'est la séquence qui plante.</strong> Tant que la séquence n'est pas réparée, aucun produit ne fonctionnera." },
       { l:"Débutant blessé",
         t:"Tu as soit 0 vente, soit quelques ventes mais pas rentables. <strong>À ce stade précis, 9 sur 10 abandonnent</strong> — alors que c'est juste un signal qu'il manque la séquence, pas que le modèle est cassé." },
       { l:"Frontière débutant / intermédiaire",
-        t:"Tu doutes du modèle entier, du produit, de toi-même. <strong>Soit tu casses ce cycle maintenant en changeant ton approche, soit tu rejoins ceux qui abandonnent.</strong> Tu es au point de bascule." },
-      { l:"Intermédiaire conscient",
-        t:"Tu vois le piège. Tu sais que c'est <strong>la séquence et non le produit</strong> qui crée les ventes. Tu n'as plus besoin de quelqu'un qui te dise quoi faire — juste les leviers que tu commences à intuiter." }
+        t:"Tu doutes du modèle entier, du produit, de toi-même. <strong>Soit tu casses ce cycle maintenant en changeant ton approche, soit tu rejoins ceux qui abandonnent.</strong> Tu es au point de bascule." }
     ];
 
     function clearAll(){
@@ -3848,24 +3877,28 @@
     }
     function applySelection(idx){
       clearAll();
-      if(idx >= 0 && idx <= 4){
+      if(idx >= 0 && idx <= 7){
         steps.forEach((s, i) => {
           s.classList.toggle('is-selected', i === idx);
           s.classList.toggle('is-dimmed',   i !== idx);
         });
         arrows.forEach(a => a.classList.add('is-dimmed'));
         if(loop) loop.classList.add('is-dimmed');
-      } else if(idx === 5){
+      } else if(idx === 8){
         steps.forEach(s => s.classList.add('is-dimmed'));
         arrows.forEach(a => a.classList.add('is-dimmed'));
         if(loop) loop.classList.add('is-selected');
       }
-      const v = VERDICTS[idx];
+      const v = (idx === 8) ? LOOP_VERDICT : VERDICTS[idx];
       vLevel.textContent = v.l;
       vText.innerHTML = v.t;
       verdict.classList.add('is-shown');
       if(tapPrompt) tapPrompt.classList.add('is-hidden');
     }
+    const LOOP_VERDICT = {
+      l:"Intermédiaire conscient",
+      t:"Tu vois le piège. Tu sais que c'est <strong>la séquence et non le produit</strong> qui crée les ventes. Tu n'as plus besoin de quelqu'un qui te dise quoi faire — juste les leviers que tu commences à intuiter."
+    };
     steps.forEach(step => {
       step.addEventListener('click', e => {
         e.stopPropagation();
@@ -3875,7 +3908,7 @@
     if(loop){
       loop.addEventListener('click', e => {
         e.stopPropagation();
-        applySelection(5);
+        applySelection(8);
       });
     }
   })();
