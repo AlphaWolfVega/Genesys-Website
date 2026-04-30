@@ -397,6 +397,23 @@
       flex:0 0 auto;
       text-align:center;
       max-width:48px;
+      background:transparent;
+      border:0;
+      padding:2px;
+      cursor:pointer;
+      font:inherit;color:inherit;
+      transition:opacity 0.32s ease, filter 0.32s ease;
+    }
+    .hl-step:active{transform:scale(0.95);transition:transform 0.08s ease}
+    .hl-step.is-dimmed{opacity:0.32;filter:saturate(0.4)}
+    .hl-step.is-selected{opacity:1;filter:none}
+    .hl-step.is-selected .hl-step-icon{
+      background:var(--gold)!important;
+      color:#06101F;
+      box-shadow:0 0 0 2px rgba(212,182,106,0.4),0 0 18px rgba(212,182,106,0.55);
+    }
+    .hl-step.is-selected .hl-step-text{
+      color:var(--gold);font-weight:800;
     }
     .hl-step-icon{
       flex-shrink:0;
@@ -406,6 +423,7 @@
       border:1px solid rgba(212,182,106,0.32);
       border-radius:50%;
       color:var(--gold);
+      transition:background 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
     }
     .hl-step-icon svg{width:14px;height:14px;display:block}
     .hl-step-text{
@@ -426,7 +444,9 @@
       flex:0 0 8px;
       font-weight:700;
       margin-top:0;
+      transition:opacity 0.32s ease;
     }
+    .hl-step-arrow.is-dimmed{opacity:0.25}
     .hl-loop{
       display:flex;align-items:center;gap:9px;
       width:100%;
@@ -436,6 +456,15 @@
       border:1px solid rgba(212,182,106,0.5);
       border-radius:10px;
       box-shadow:0 0 18px rgba(212,182,106,0.12);
+      cursor:pointer;
+      font:inherit;color:inherit;text-align:left;
+      transition:background 0.32s ease, opacity 0.32s ease;
+    }
+    .hl-loop:active{transform:scale(0.985);transition:transform 0.08s ease}
+    .hl-loop.is-dimmed{opacity:0.32}
+    .hl-loop.is-selected{
+      background:linear-gradient(135deg,rgba(212,182,106,0.28) 0%, rgba(212,182,106,0.1) 100%);
+      box-shadow:0 0 0 1px var(--gold) inset, 0 0 26px rgba(212,182,106,0.3);
     }
     .hl-loop-icon{
       flex-shrink:0;
@@ -458,6 +487,59 @@
     @media (prefers-reduced-motion:reduce){
       .hl-loop-icon{animation:none}
     }
+    /* Tap prompt below the schema */
+    .hl-tap-prompt{
+      font-family:'Inter',sans-serif !important;
+      font-size:10.5px !important;
+      font-weight:700 !important;
+      letter-spacing:0.08em !important;
+      text-transform:uppercase;
+      color:var(--gold) !important;
+      margin:6px 0 4px !important;
+      text-align:center;
+      animation:hlTapPulse 2.4s ease-in-out infinite;
+    }
+    @keyframes hlTapPulse{
+      0%,100%{opacity:0.55}
+      50%{opacity:1}
+    }
+    .hl-tap-prompt.is-hidden{display:none;animation:none}
+    /* Verdict reveal */
+    .hl-verdict{
+      width:100%;
+      margin:0;
+      padding:0 14px;
+      max-height:0;
+      overflow:hidden;
+      opacity:0;
+      background:linear-gradient(135deg,rgba(212,182,106,0.15) 0%, rgba(212,182,106,0.04) 100%);
+      border:0;
+      border-radius:10px;
+      text-align:center;
+      transition:opacity 0.45s ease, max-height 0.5s ease, padding 0.4s ease, margin 0.4s ease, border-width 0.3s ease;
+    }
+    .hl-verdict.is-shown{
+      opacity:1;
+      max-height:200px;
+      padding:13px 14px;
+      margin:8px 0 0;
+      border:1px solid var(--gold);
+    }
+    .hl-verdict-level{
+      font-family:'Playfair Display',serif;
+      font-style:italic;font-weight:800;
+      font-size:14.5px;
+      color:var(--gold);
+      margin-bottom:5px;line-height:1.18;
+      letter-spacing:-0.005em;
+      text-shadow:0 0 18px rgba(212,182,106,0.3);
+    }
+    .hl-verdict-text{
+      font-family:'Inter',sans-serif;
+      font-size:12px;line-height:1.4;
+      color:var(--text);font-weight:500;
+    }
+    .hl-verdict-text strong{color:var(--gold);font-weight:700}
 
     /* === Diag slide (the broken sequence — tightened) === */
     .hero-lead-slide-diag .hero-lead-card{padding:24px 22px}
@@ -2057,36 +2139,41 @@
       </div>
       <div class="hero-lead-slide hero-lead-slide-schema">
         <div class="hero-lead-card">
-          <p class="hl-schema-intro">Voici le chemin classique de ceux qui <strong>ne décolleront jamais</strong> :</p>
-          <div class="hl-schema">
-            <div class="hl-step">
+          <p class="hl-schema-intro">Voici le cycle classique. <strong>Tape l'étape où tu en es :</strong></p>
+          <div class="hl-schema" id="hlSchema">
+            <button type="button" class="hl-step" data-step="0" aria-label="J'apprends sur YouTube sans avoir lancé">
               <span class="hl-step-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polygon points="10 8 16 12 10 16 10 8" fill="currentColor"/></svg></span>
               <span class="hl-step-text">YouTube</span>
-            </div>
+            </button>
             <span class="hl-step-arrow" aria-hidden="true">›</span>
-            <div class="hl-step">
+            <button type="button" class="hl-step" data-step="1" aria-label="Je copie des produits gagnants">
               <span class="hl-step-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="14" x="8" y="8" rx="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg></span>
               <span class="hl-step-text">Copie</span>
-            </div>
+            </button>
             <span class="hl-step-arrow" aria-hidden="true">›</span>
-            <div class="hl-step">
+            <button type="button" class="hl-step" data-step="2" aria-label="J'ai déjà lancé des publicités">
               <span class="hl-step-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="m3 11 18-5v12L3 14v-3z"/><path d="M11.6 16.8a3 3 0 1 1-5.8-1.6"/></svg></span>
               <span class="hl-step-text">Pubs</span>
-            </div>
+            </button>
             <span class="hl-step-arrow" aria-hidden="true">›</span>
-            <div class="hl-step">
+            <button type="button" class="hl-step" data-step="3" aria-label="J'ai perdu de l'argent sans vente">
               <span class="hl-step-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 17 13.5 8.5 8.5 13.5 2 7"/><polyline points="16 17 22 17 22 11"/></svg></span>
               <span class="hl-step-text"><strong>0 vente</strong></span>
-            </div>
+            </button>
             <span class="hl-step-arrow" aria-hidden="true">›</span>
-            <div class="hl-step">
+            <button type="button" class="hl-step" data-step="4" aria-label="Je doute du modèle">
               <span class="hl-step-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="m15 9-6 6"/><path d="m9 9 6 6"/></svg></span>
               <span class="hl-step-text">Doute</span>
-            </div>
+            </button>
           </div>
-          <div class="hl-loop">
+          <p class="hl-tap-prompt" id="hlTapPrompt">👆 Tape pour te diagnostiquer</p>
+          <button type="button" class="hl-loop" id="hlLoop" aria-label="Je vois déjà le pattern, je suis sorti du cycle">
             <span class="hl-loop-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 0 0-9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/><path d="M3 12a9 9 0 0 0 9 9 9.75 9.75 0 0 0 6.74-2.74L21 16"/><path d="M16 16h5v5"/></svg></span>
-            <span class="hl-loop-text">On recommence. Et encore. Et encore.</span>
+            <span class="hl-loop-text">Je vois le pattern — je suis sorti du loop.</span>
+          </button>
+          <div class="hl-verdict" id="hlVerdict" role="status" aria-live="polite">
+            <div class="hl-verdict-level"></div>
+            <div class="hl-verdict-text"></div>
           </div>
           <span class="hero-lead-swipe" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg></span>
         </div>
@@ -3581,6 +3668,71 @@
     window.addEventListener('resize', () => {
       window.requestAnimationFrame(updateActiveDot);
     });
+  })();
+
+  // ===== HERO SCHEMA — tap-to-diagnose (6 levels: débutant → intermédiaire) =====
+  (function initHeroSchema(){
+    const schema = document.getElementById('hlSchema');
+    const loop   = document.getElementById('hlLoop');
+    const verdict= document.getElementById('hlVerdict');
+    const tapPrompt = document.getElementById('hlTapPrompt');
+    if(!schema || !verdict) return;
+    const vLevel = verdict.querySelector('.hl-verdict-level');
+    const vText  = verdict.querySelector('.hl-verdict-text');
+    const steps  = Array.from(schema.querySelectorAll('.hl-step'));
+    const arrows = Array.from(schema.querySelectorAll('.hl-step-arrow'));
+    const VERDICTS = [
+      { l:"Débutant absolu",
+        t:"Tu absorbes encore du contenu sans avoir lancé. C'est OK — mais à un moment, il faut sortir du fauteuil. <strong>Le contenu seul ne t'a jamais fait vendre.</strong>" },
+      { l:"Débutant en quête",
+        t:"Tu cherches LE produit gagnant en copiant TikTok. Le produit ne fait que ~30&nbsp;% du résultat. <strong>La méthode et l'angle font les 70 autres.</strong>" },
+      { l:"Débutant actif",
+        t:"Tu as lancé — c'est plus que la majorité. Mais tes pubs partent <strong>sans la séquence qui convertit derrière</strong> (page produit, copy, neuro). Stade le plus dangereux : à 1 pas d'abandonner." },
+      { l:"Débutant blessé",
+        t:"Tu as déjà perdu de l'argent. C'est normal en e-com — mais <strong>9 sur 10 abandonnent à ce stade précis</strong>. Tu n'as pas encore décodé pourquoi ça n'a pas marché." },
+      { l:"Frontière débutant / intermédiaire",
+        t:"Tu doutes du modèle entier, du produit, de toi-même. <strong>Soit tu casses le loop maintenant en changeant ton approche, soit tu rejoins ceux qui abandonnent.</strong> Tu es au point de bascule." },
+      { l:"Intermédiaire conscient",
+        t:"Tu vois le pattern. Tu sais que c'est <strong>la séquence et non le produit</strong> qui crée les ventes. Tu n'as plus besoin de quelqu'un qui te dise quoi faire — juste les leviers que tu commences à intuiter." }
+    ];
+
+    function clearAll(){
+      steps.forEach(s => s.classList.remove('is-selected','is-dimmed'));
+      arrows.forEach(a => a.classList.remove('is-dimmed'));
+      if(loop) loop.classList.remove('is-selected','is-dimmed');
+    }
+    function applySelection(idx){
+      clearAll();
+      if(idx >= 0 && idx <= 4){
+        steps.forEach((s, i) => {
+          s.classList.toggle('is-selected', i === idx);
+          s.classList.toggle('is-dimmed',   i !== idx);
+        });
+        arrows.forEach(a => a.classList.add('is-dimmed'));
+        if(loop) loop.classList.add('is-dimmed');
+      } else if(idx === 5){
+        steps.forEach(s => s.classList.add('is-dimmed'));
+        arrows.forEach(a => a.classList.add('is-dimmed'));
+        if(loop) loop.classList.add('is-selected');
+      }
+      const v = VERDICTS[idx];
+      vLevel.textContent = v.l;
+      vText.innerHTML = v.t;
+      verdict.classList.add('is-shown');
+      if(tapPrompt) tapPrompt.classList.add('is-hidden');
+    }
+    steps.forEach(step => {
+      step.addEventListener('click', e => {
+        e.stopPropagation();
+        applySelection(parseInt(step.dataset.step, 10));
+      });
+    });
+    if(loop){
+      loop.addEventListener('click', e => {
+        e.stopPropagation();
+        applySelection(5);
+      });
+    }
   })();
 
   // ===== HERO LEAD CAROUSEL (mobile) — dots sync + click-to-jump =====
