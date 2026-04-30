@@ -740,15 +740,27 @@
       margin:0;
     }
     .hero-lead-card strong{color:var(--gold);font-weight:700}
+
+    /* === UNIFIED FRAME — toutes les cards mobile partagent le meme cadre externe === */
+    .hero-lead-slide .hero-lead-card{
+      width:100% !important;
+      max-width:100% !important;
+      box-sizing:border-box !important;
+      overflow:hidden !important;
+      border-radius:14px !important;
+      margin:0 !important;
+    }
+    .hero-lead-slide-cta .hl-cta-mini,
+    .hero-lead-slide-cta .hl-cta-mini-track{
+      width:100% !important;
+      max-width:100% !important;
+      box-sizing:border-box !important;
+    }
+
     .hero-lead-slide-cta .hero-lead-card{
       padding:22px 18px;
       text-align:center;
-      box-sizing:border-box;
-      overflow:hidden;
-      width:100%;
-      max-width:100%;
       min-width:0;
-      margin:0 auto;
     }
     .hero-lead-slide-cta .hero-lead-card .nowrap{white-space:normal !important}
     .hero-lead-slide-cta .hero-lead-card > *{max-width:100%;min-width:0;box-sizing:border-box}
