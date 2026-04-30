@@ -522,6 +522,14 @@
     .hl-cta-mini-dot{width:5.5px;height:5.5px;border-radius:50%;background:rgba(212,182,106,0.25);border:0;padding:0;cursor:pointer;transition:background 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease}
     .hl-cta-mini-dot.active{background:var(--gold);transform:scale(1.4);box-shadow:0 0 8px rgba(212,182,106,0.6)}
     .hl-cta-mini-swipe{display:block;text-align:center;font-family:'Inter',sans-serif;font-weight:700;font-size:10px;color:rgba(212,182,106,0.55);letter-spacing:0.14em;text-transform:uppercase;margin-top:16px;animation:hlMiniSwipe 1.8s ease-in-out infinite}
+    /* Variante "Decouvre GENESYS" : fleches verticales descendantes au lieu d'horizontales */
+    .hl-cta-mini-swipe-down{animation:hlMiniSwipeDown 1.8s ease-in-out infinite;display:flex !important;align-items:center;justify-content:center;gap:10px}
+    .hl-cta-mini-swipe-down .hl-cta-mini-arr{display:inline-block;font-size:13px;color:var(--gold);font-weight:900}
+    @keyframes hlMiniSwipeDown{0%,100%{transform:translateY(0);opacity:0.55}50%{transform:translateY(3px);opacity:0.9}}
+    /* Choix 1 / Choix 2 separes par paragraphe */
+    .hl-cta-mini-card .hl-cta-mini-b + .hl-cta-mini-b{margin-top:9px}
+    /* Variante "head" centree (icone + titre) — deja centre par defaut, on garde explicite pour clarte */
+    .hl-cta-mini-head-center{justify-content:center !important;text-align:center}
 
     /* === SCHEMA slide (cycle e-com) — toutes les rules dupliquées pour desktop === */
     .hero-lead-slide-schema .hero-lead-card{padding:28px 18px}
@@ -1031,6 +1039,14 @@
       margin-top:14px;
       animation:hlMiniSwipe 1.8s ease-in-out infinite;
     }
+    /* Mobile : Variante "Decouvre GENESYS" avec fleches descendantes */
+    .hl-cta-mini-swipe-down{animation:hlMiniSwipeDown 1.8s ease-in-out infinite;display:flex !important;align-items:center;justify-content:center;gap:9px;font-size:10px !important}
+    .hl-cta-mini-swipe-down .hl-cta-mini-arr{display:inline-block;font-size:13px;color:var(--gold);font-weight:900}
+    @keyframes hlMiniSwipeDown{0%,100%{transform:translateY(0);opacity:0.55}50%{transform:translateY(3px);opacity:0.95}}
+    /* Mobile : Choix 1 / Choix 2 separes par paragraphe */
+    .hl-cta-mini-card .hl-cta-mini-b + .hl-cta-mini-b{margin-top:10px}
+    /* Mobile : variante head centre (icone + titre) */
+    .hl-cta-mini-head-center{justify-content:center !important;text-align:center}
     @keyframes hlMiniSwipe{
       0%,100%{opacity:0.4;letter-spacing:0.14em}
       50%{opacity:1;letter-spacing:0.2em}
@@ -3473,8 +3489,9 @@
                 <p class="hl-cta-mini-b">Une communauté de gens qui <strong>font, testent, partagent leurs vrais chiffres</strong>. Pas des coachs en voiture de luxe louée. Des e-commerçants comme toi. <strong>Voir d'autres réussir avec la même méthode, c'est ce qui change tout.</strong></p>
               </div>
               <div class="hl-cta-mini-card">
-                <div class="hl-cta-mini-head"><span class="hl-cta-mini-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6 15 12 9 18"/><path d="M3 6h.01"/><path d="M3 12h.01"/><path d="M3 18h.01"/></svg></span><p class="hl-cta-mini-h">Tu as deux choix</p></div>
-                <p class="hl-cta-mini-b"><strong>Choix 1</strong> : tu fermes la page. Dans 6 mois, mêmes doutes, mêmes excuses, même point. <em>« J'aurais dû. »</em> <strong>Choix 2</strong> : pour le prix de 2-3 pizzas, tu testes 1 mois sans engagement. Si ça matche pas, tu pars. Sinon, tu commences enfin à avancer pour de vrai.</p>
+                <div class="hl-cta-mini-head hl-cta-mini-head-center"><span class="hl-cta-mini-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6 15 12 9 18"/><path d="M3 6h.01"/><path d="M3 12h.01"/><path d="M3 18h.01"/></svg></span><p class="hl-cta-mini-h">Tu as deux choix</p></div>
+                <p class="hl-cta-mini-b"><strong>Choix 1</strong> : tu fermes la page. Dans 6 mois, mêmes doutes, mêmes excuses, même point. <em>« J'aurais dû. »</em></p>
+                <p class="hl-cta-mini-b"><strong>Choix 2</strong> : pour le prix de 2-3 pizzas, tu testes 1 mois sans engagement. Si ça matche pas, tu pars. Sinon, tu commences enfin à avancer pour de vrai.</p>
               </div>
             </div>
             <div class="hl-cta-mini-dots" id="hlCtaMiniDots">
@@ -3486,7 +3503,7 @@
               <button type="button" class="hl-cta-mini-dot" data-idx="5" aria-label="Carte 6"></button>
               <button type="button" class="hl-cta-mini-dot" data-idx="6" aria-label="Carte 7"></button>
             </div>
-            <span class="hl-cta-mini-swipe">← Slide pour découvrir →</span>
+            <span class="hl-cta-mini-swipe hl-cta-mini-swipe-down"><span class="hl-cta-mini-arr" aria-hidden="true">↓</span><span>Découvre GENESYS</span><span class="hl-cta-mini-arr" aria-hidden="true">↓</span></span>
           </div>
         </div>
       </div>
