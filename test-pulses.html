@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Test pulsations — Breathing & Shimmer (déclinaisons)</title>
+<title>Test pulsations — Heartbeat (déclinaisons)</title>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
   *{margin:0;padding:0;box-sizing:border-box}
@@ -13,16 +13,10 @@
   }
   h1{font-size:28px;text-align:center;margin-bottom:8px;letter-spacing:-0.01em}
   .sub{text-align:center;color:#9aa3b2;font-size:14px;margin-bottom:50px}
-  h2.section{
-    max-width:1280px;margin:60px auto 30px;
-    font-size:14px;text-transform:uppercase;letter-spacing:0.18em;
-    color:#D4B66A;font-weight:700;text-align:left;
-    border-top:1px solid rgba(212,182,106,0.2);padding-top:24px;
-  }
   .grid{
     max-width:1280px;margin:0 auto;
     display:grid;grid-template-columns:repeat(auto-fit,minmax(330px,1fr));
-    gap:60px 30px;padding:10px 0;
+    gap:60px 30px;padding:30px 0;
   }
   .card{
     background:linear-gradient(180deg,rgba(20,37,64,0.4),rgba(10,22,40,0.2));
@@ -61,228 +55,119 @@
   .btn::after{content:"→";font-size:18px;font-weight:700}
 
   /* ============================================
-     BREATHING VARIANTS (déclinaisons du 6)
+     HEARTBEAT VARIANTS (déclinaisons du 01)
      ============================================ */
 
-  /* 6-A — ORIGINAL */
-  .b6A{animation:breatheA 3.8s ease-in-out infinite}
-  @keyframes breatheA{
-    0%,100%{transform:scale(1);box-shadow:0 0 24px rgba(212,182,106,0.30)}
-    50%{transform:scale(1.025);box-shadow:0 0 50px rgba(212,182,106,0.65)}
+  /* 01-A — ORIGINAL */
+  .h1A{animation:hbA 1.6s ease-in-out infinite;box-shadow:0 0 30px rgba(212,182,106,0.4)}
+  @keyframes hbA{
+    0%,40%,100%{transform:scale(1)}
+    10%{transform:scale(1.04)}
+    20%{transform:scale(1)}
+    25%{transform:scale(1.06)}
+    35%{transform:scale(1)}
   }
 
-  /* 6-B — Lent méditatif */
-  .b6B{animation:breatheB 5s ease-in-out infinite}
-  @keyframes breatheB{
-    0%,100%{transform:scale(1);box-shadow:0 0 22px rgba(212,182,106,0.25)}
-    50%{transform:scale(1.015);box-shadow:0 0 60px rgba(212,182,106,0.50)}
+  /* 01-B — Marqué (lub-dub plus fort) */
+  .h1B{animation:hbB 1.5s ease-in-out infinite;box-shadow:0 0 30px rgba(212,182,106,0.45)}
+  @keyframes hbB{
+    0%,45%,100%{transform:scale(1)}
+    8%{transform:scale(1.06)}
+    18%{transform:scale(1)}
+    25%{transform:scale(1.09)}
+    38%{transform:scale(1)}
   }
 
-  /* 6-C — Marqué vivace */
-  .b6C{animation:breatheC 3s ease-in-out infinite}
-  @keyframes breatheC{
-    0%,100%{transform:scale(1);box-shadow:0 0 26px rgba(212,182,106,0.35)}
-    50%{transform:scale(1.045);box-shadow:0 0 55px rgba(212,182,106,0.75)}
+  /* 01-C — Subtil discret */
+  .h1C{animation:hbC 1.7s ease-in-out infinite;box-shadow:0 0 28px rgba(212,182,106,0.35)}
+  @keyframes hbC{
+    0%,40%,100%{transform:scale(1)}
+    10%{transform:scale(1.02)}
+    20%{transform:scale(1)}
+    25%{transform:scale(1.03)}
+    35%{transform:scale(1)}
   }
 
-  /* 6-D — Asymétrique (inspire rapide, expire lent) */
-  .b6D{animation:breatheD 4s cubic-bezier(.5,0,.2,1) infinite}
-  @keyframes breatheD{
-    0%{transform:scale(1);box-shadow:0 0 22px rgba(212,182,106,0.25)}
-    25%{transform:scale(1.035);box-shadow:0 0 55px rgba(212,182,106,0.70)}
-    100%{transform:scale(1);box-shadow:0 0 22px rgba(212,182,106,0.25)}
+  /* 01-D — Halo synchro (l'or s'allume aux bumps) */
+  .h1D{animation:hbD 1.6s ease-in-out infinite}
+  @keyframes hbD{
+    0%,40%,100%{transform:scale(1);box-shadow:0 0 22px rgba(212,182,106,0.30)}
+    10%{transform:scale(1.04);box-shadow:0 0 50px rgba(212,182,106,0.75)}
+    20%{transform:scale(1);box-shadow:0 0 22px rgba(212,182,106,0.30)}
+    25%{transform:scale(1.06);box-shadow:0 0 60px rgba(212,182,106,0.85)}
+    35%{transform:scale(1);box-shadow:0 0 22px rgba(212,182,106,0.30)}
   }
 
-  /* 6-E — Halo dominant (scale invisible, halo fort) */
-  .b6E{animation:breatheE 3.5s ease-in-out infinite}
-  @keyframes breatheE{
-    0%,100%{transform:scale(1);box-shadow:0 0 18px rgba(212,182,106,0.20),0 0 50px rgba(212,182,106,0.12)}
-    50%{transform:scale(1.008);box-shadow:0 0 42px rgba(212,182,106,0.85),0 0 100px rgba(212,182,106,0.30)}
+  /* 01-E — Triple battement rapproché */
+  .h1E{animation:hbE 2.2s ease-in-out infinite;box-shadow:0 0 30px rgba(212,182,106,0.4)}
+  @keyframes hbE{
+    0%,55%,100%{transform:scale(1)}
+    8%{transform:scale(1.04)}
+    16%{transform:scale(1)}
+    22%{transform:scale(1.06)}
+    30%{transform:scale(1)}
+    36%{transform:scale(1.04)}
+    48%{transform:scale(1)}
   }
 
-  /* 6-F — Micro-tilt (scale + rotation subtile) */
-  .b6F{animation:breatheF 4.5s ease-in-out infinite;transform-origin:center}
-  @keyframes breatheF{
-    0%,100%{transform:scale(1) rotate(-0.4deg);box-shadow:0 0 24px rgba(212,182,106,0.30)}
-    50%{transform:scale(1.025) rotate(0.4deg);box-shadow:0 0 55px rgba(212,182,106,0.65)}
-  }
-
-  /* ============================================
-     SHIMMER VARIANTS (déclinaisons du 7)
-     ============================================ */
-
-  /* 7-A — ORIGINAL */
-  .s7A{box-shadow:0 0 30px rgba(212,182,106,0.35);overflow:hidden;isolation:isolate}
-  .s7A::before{
-    content:"";position:absolute;inset:0;border-radius:inherit;
-    background:linear-gradient(115deg,transparent 35%,rgba(255,255,255,0.55) 50%,transparent 65%);
-    transform:translateX(-150%);
-    animation:shimmerA 2.8s ease-in-out infinite;
-    z-index:1;pointer-events:none;
-  }
-  @keyframes shimmerA{
-    0%{transform:translateX(-150%)}
-    60%,100%{transform:translateX(150%)}
-  }
-
-  /* 7-B — Reflet doré (au lieu de blanc) */
-  .s7B{box-shadow:0 0 30px rgba(212,182,106,0.40);overflow:hidden;isolation:isolate}
-  .s7B::before{
-    content:"";position:absolute;inset:0;border-radius:inherit;
-    background:linear-gradient(115deg,transparent 35%,rgba(255,235,170,0.85) 50%,transparent 65%);
-    transform:translateX(-150%);
-    animation:shimmerA 3s ease-in-out infinite;
-    z-index:1;pointer-events:none;
-  }
-
-  /* 7-C — Plus rapide */
-  .s7C{box-shadow:0 0 30px rgba(212,182,106,0.35);overflow:hidden;isolation:isolate}
-  .s7C::before{
-    content:"";position:absolute;inset:0;border-radius:inherit;
-    background:linear-gradient(115deg,transparent 35%,rgba(255,255,255,0.7) 50%,transparent 65%);
-    transform:translateX(-150%);
-    animation:shimmerA 1.8s ease-in-out infinite;
-    z-index:1;pointer-events:none;
-  }
-
-  /* 7-D — Plus large reflet diffus */
-  .s7D{box-shadow:0 0 30px rgba(212,182,106,0.35);overflow:hidden;isolation:isolate}
-  .s7D::before{
-    content:"";position:absolute;inset:0;border-radius:inherit;
-    background:linear-gradient(115deg,transparent 15%,rgba(255,255,255,0.4) 50%,transparent 85%);
-    transform:translateX(-150%);
-    animation:shimmerA 3.5s ease-in-out infinite;
-    z-index:1;pointer-events:none;
-  }
-
-  /* 7-E — Double pass (2 reflets en cascade) */
-  .s7E{box-shadow:0 0 30px rgba(212,182,106,0.35);overflow:hidden;isolation:isolate}
-  .s7E::before{
-    content:"";position:absolute;inset:0;border-radius:inherit;
-    background:
-      linear-gradient(115deg,transparent 38%,rgba(255,255,255,0.55) 50%,transparent 62%),
-      linear-gradient(115deg,transparent 38%,rgba(255,235,170,0.4) 50%,transparent 62%);
-    background-size:50% 100%, 50% 100%;
-    background-position:-50% 0, -120% 0;
-    background-repeat:no-repeat;
-    animation:shimmerE 3.2s ease-in-out infinite;
-    z-index:1;pointer-events:none;
-  }
-  @keyframes shimmerE{
-    0%{background-position:-60% 0, -150% 0}
-    100%{background-position:160% 0, 250% 0}
-  }
-
-  /* 7-F — Vertical (top → bottom) */
-  .s7F{box-shadow:0 0 30px rgba(212,182,106,0.35);overflow:hidden;isolation:isolate}
-  .s7F::before{
-    content:"";position:absolute;inset:0;border-radius:inherit;
-    background:linear-gradient(180deg,transparent 35%,rgba(255,255,255,0.55) 50%,transparent 65%);
-    transform:translateY(-150%);
-    animation:shimmerF 3s ease-in-out infinite;
-    z-index:1;pointer-events:none;
-  }
-  @keyframes shimmerF{
-    0%{transform:translateY(-150%)}
-    60%,100%{transform:translateY(150%)}
+  /* 01-F — Lent calme (zen) */
+  .h1F{animation:hbF 2.5s ease-in-out infinite;box-shadow:0 0 30px rgba(212,182,106,0.4)}
+  @keyframes hbF{
+    0%,40%,100%{transform:scale(1)}
+    10%{transform:scale(1.03)}
+    20%{transform:scale(1)}
+    25%{transform:scale(1.045)}
+    35%{transform:scale(1)}
   }
 </style>
 </head>
 <body>
 
-<h1>Test pulsations — Breathing & Shimmer</h1>
-<p class="sub">12 variantes (6 par type). A = original. Dis-moi le code, j'applique.</p>
+<h1>Heartbeat — 6 déclinaisons</h1>
+<p class="sub">A = original. Dis-moi le code, j'applique sur tous les boutons or du site.</p>
 
-<h2 class="section">Breathing (déclinaisons du 06)</h2>
 <div class="grid">
 
   <div class="card">
-    <span class="num">06-A · ORIGINAL</span>
-    <button class="btn b6A">Rejoindre GENESYS</button>
-    <div class="label">Breathing soft (référence)</div>
-    <div class="desc">Scale 1.025 + halo synchro. 3.8s ease-in-out.</div>
+    <span class="num">01-A · ORIGINAL</span>
+    <button class="btn h1A">Rejoindre GENESYS</button>
+    <div class="label">Heartbeat (référence)</div>
+    <div class="desc">Lub-dub classique. Scale 1.04 / 1.06, cycle 1.6s.</div>
   </div>
 
   <div class="card">
-    <span class="num">06-B</span>
-    <button class="btn b6B">Rejoindre GENESYS</button>
-    <div class="label">Lent méditatif</div>
-    <div class="desc">Scale 1.015, halo plus diffus, 5s. Très calme, presque imperceptible.</div>
+    <span class="num">01-B</span>
+    <button class="btn h1B">Rejoindre GENESYS</button>
+    <div class="label">Marqué</div>
+    <div class="desc">Scale 1.06 / 1.09. Battement plus visible, plus présent.</div>
   </div>
 
   <div class="card">
-    <span class="num">06-C</span>
-    <button class="btn b6C">Rejoindre GENESYS</button>
-    <div class="label">Marqué vivace</div>
-    <div class="desc">Scale 1.045, halo intense, 3s. Présence forte, urgent.</div>
+    <span class="num">01-C</span>
+    <button class="btn h1C">Rejoindre GENESYS</button>
+    <div class="label">Subtil discret</div>
+    <div class="desc">Scale 1.02 / 1.03. À peine perceptible, pulse de fond.</div>
   </div>
 
   <div class="card">
-    <span class="num">06-D</span>
-    <button class="btn b6D">Rejoindre GENESYS</button>
-    <div class="label">Asymétrique</div>
-    <div class="desc">Inspire vite (25% du cycle), expire lent (75%). Comme une vraie respiration.</div>
+    <span class="num">01-D</span>
+    <button class="btn h1D">Rejoindre GENESYS</button>
+    <div class="label">Halo synchro</div>
+    <div class="desc">L'or s'allume au moment des bumps. Le bouton "vit" en lumière.</div>
   </div>
 
   <div class="card">
-    <span class="num">06-E</span>
-    <button class="btn b6E">Rejoindre GENESYS</button>
-    <div class="label">Halo dominant</div>
-    <div class="desc">Scale quasi-invisible (1.008), halo très puissant qui pulse seul.</div>
+    <span class="num">01-E</span>
+    <button class="btn h1E">Rejoindre GENESYS</button>
+    <div class="label">Triple battement</div>
+    <div class="desc">3 bumps successifs dans le cycle (2.2s). Plus dense, plus vif.</div>
   </div>
 
   <div class="card">
-    <span class="num">06-F</span>
-    <button class="btn b6F">Rejoindre GENESYS</button>
-    <div class="label">Micro-tilt</div>
-    <div class="desc">Scale + rotation très subtile (±0.4°). Le bouton "vit" légèrement.</div>
-  </div>
-
-</div>
-
-<h2 class="section">Shimmer (déclinaisons du 07)</h2>
-<div class="grid">
-
-  <div class="card">
-    <span class="num">07-A · ORIGINAL</span>
-    <button class="btn s7A">Rejoindre GENESYS</button>
-    <div class="label">Shimmer (référence)</div>
-    <div class="desc">Reflet blanc diagonal 115°, 2.8s. Effet métal poli.</div>
-  </div>
-
-  <div class="card">
-    <span class="num">07-B</span>
-    <button class="btn s7B">Rejoindre GENESYS</button>
-    <div class="label">Reflet doré</div>
-    <div class="desc">Reflet or chaud au lieu de blanc. Plus prestige, moins flashy.</div>
-  </div>
-
-  <div class="card">
-    <span class="num">07-C</span>
-    <button class="btn s7C">Rejoindre GENESYS</button>
-    <div class="label">Rapide net</div>
-    <div class="desc">Sweep en 1.8s, contraste blanc 0.7. Plus dynamique.</div>
-  </div>
-
-  <div class="card">
-    <span class="num">07-D</span>
-    <button class="btn s7D">Rejoindre GENESYS</button>
-    <div class="label">Diffus large</div>
-    <div class="desc">Reflet large (15-85%) qui balaie doucement. Lustre subtil.</div>
-  </div>
-
-  <div class="card">
-    <span class="num">07-E</span>
-    <button class="btn s7E">Rejoindre GENESYS</button>
-    <div class="label">Double pass</div>
-    <div class="desc">2 reflets successifs (blanc + or) qui balaient à la suite.</div>
-  </div>
-
-  <div class="card">
-    <span class="num">07-F</span>
-    <button class="btn s7F">Rejoindre GENESYS</button>
-    <div class="label">Vertical top→bottom</div>
-    <div class="desc">Reflet qui descend de haut en bas au lieu de balayer en diagonal.</div>
+    <span class="num">01-F</span>
+    <button class="btn h1F">Rejoindre GENESYS</button>
+    <div class="label">Lent zen</div>
+    <div class="desc">Cycle 2.5s. Battement détendu, plus calme.</div>
   </div>
 
 </div>
