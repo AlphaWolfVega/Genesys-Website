@@ -3101,45 +3101,46 @@
   @media(max-width:900px){
     .founder-letter > div:last-child::before{top:-30px;left:-4px;font-size:70px}
   }
-  /* Tout ce qu'Alpha "dit" est en manuscrit Kalam (corps + salutation + quote) */
+  /* Tout ce qu'Alpha "dit" est en Playfair italique éditorial — référence visuelle */
   .founder-letter p,
   .founder-letter .founder-quote{
-    font-family:'Kalam','Bradley Hand',cursive;
+    font-family:'Playfair Display',serif;
+    font-style:italic;
     font-weight:400;
     font-size:18px;
-    line-height:1.7;
+    line-height:1.75;
     color:rgba(245,238,222,0.92);
   }
   .founder-letter p strong,
   .founder-letter .founder-quote strong{
     color:#F0D690;
-    font-family:'Kalam','Bradley Hand',cursive;
+    font-family:'Playfair Display',serif;
+    font-style:italic;
     font-weight:700;
     font-size:inherit;
     letter-spacing:0;
     text-transform:none;
   }
   .founder-letter .letter-greet{
-    font-family:'Kalam','Bradley Hand',cursive;
-    font-style:normal;
+    font-family:'Playfair Display',serif;
+    font-style:italic;
     font-weight:700;
-    font-size:36px;
+    font-size:30px;
     color:#F0D690;
     text-align:left !important;
-    margin-bottom:26px;
+    margin-bottom:24px;
     margin-top:6px;
-    line-height:1.15;
-    letter-spacing:0;
-    text-shadow:0 0 18px rgba(212,182,106,0.30);
+    line-height:1.2;
+    letter-spacing:-0.005em;
+    text-shadow:0 0 18px rgba(212,182,106,0.25);
   }
   @media(max-width:600px){
-    .founder-letter .letter-greet{font-size:30px}
+    .founder-letter .letter-greet{font-size:26px}
     .founder-letter p,
-    .founder-letter .founder-quote{font-size:17px;line-height:1.65}
+    .founder-letter .founder-quote{font-size:17px;line-height:1.7}
   }
   .founder-letter .founder-quote{
     color:#F0D690;
-    font-style:italic;
     border-top:1px solid rgba(212,182,106,0.25);
     padding-top:22px;
     margin-top:28px;
@@ -3189,6 +3190,16 @@
     letter-spacing:0.2em;
     text-transform:uppercase;
     font-weight:600;
+    line-height:1.7;
+  }
+  .founder-signature .greek-alpha{
+    font-family:'Playfair Display','Times New Roman',serif;
+    font-style:italic;
+    font-weight:700;
+    color:#F0D690;
+    font-size:1.15em;
+    text-transform:none;
+    letter-spacing:0;
   }
   @media(max-width:600px){
     .founder-signature .sig-role{font-size:9.5px;letter-spacing:0.14em}
@@ -6029,8 +6040,8 @@
               <div class="role">— UN ACCÈS DIRECT À MOI —</div>
               <h3>Alpha Wolf Vega</h3>
               <p class="letter-greet">Salut, c'est Alpha.</p>
-              <p>J'ai démarré là où la plupart d'entre vous démarrez : à changer trop vite de produit, à brûler du budget sans savoir lire les signaux, à suivre des méthodes qui ne tiennent pas ensemble. <strong>C'est pour ça que j'ai créé GENESYS.</strong></p>
-              <p>Plusieurs millions d'euros plus tard, sur Shopify à travers plusieurs boutiques (dont <strong>trois actives en ce moment</strong>), j'ai distillé ce que j'ai appris dans <strong>le protocole α-QUANTT</strong> : la méthode que tu vas suivre dedans. Choix du produit, angle de vente, structure de page, priorités de test. Chaque décision a sa place dans la séquence.</p>
+              <p>J'ai connu les mêmes débuts que la plupart d'entre vous : changer trop vite de produit, brûler du budget sans savoir lire les signaux, empiler des méthodes qui se contredisent. <strong>C'est de là qu'est née GENESYS.</strong></p>
+              <p>Plusieurs millions d'euros plus tard, à travers plusieurs boutiques sur Shopify (dont <strong>trois encore actives en ce moment</strong>), j'ai distillé tout ce que j'ai appris dans <strong>le protocole α-QUANTT</strong> : la méthode que tu vas suivre dedans. Choix du produit, angle de vente, structure de page, priorités de test. Chaque décision a sa place dans la séquence.</p>
               <p>Mon rôle ici, c'est simple. Je t'aide à remettre de l'ordre dans ce que tu fais déjà, à couper les faux problèmes, et à voir plus vite ce qui mérite vraiment ton attention.</p>
               <div class="founder-quote">
                 « Tu postes ta question. Je regarde le vrai blocage, pas juste le symptôme. »
@@ -6040,7 +6051,7 @@
                 <svg class="sig-underline" viewBox="0 0 230 22" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                   <path d="M 4 18 Q 30 12, 90 11 T 175 7 Q 200 6, 222 3"/>
                 </svg>
-                <span class="sig-role">Créateur de GENESYS · Architecte du protocole α-QUANTT</span>
+                <span class="sig-role">Créateur de GENESYS<br>Architecte du protocole <span class="greek-alpha">&#945;</span>-QUANTT</span>
               </div>
             </div>
           </div>
