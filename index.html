@@ -3085,6 +3085,68 @@
     font-size:15px;color:var(--text-mute);line-height:1.7;
     text-align:left;
   }
+  /* ===== FOUNDER LETTER (Alpha — direct speech) ===== */
+  .founder-letter > div:last-child{position:relative}
+  .founder-letter > div:last-child::before{
+    content:"\201C";
+    position:absolute;top:-20px;left:-12px;
+    font-family:'Playfair Display',serif;
+    font-size:90px;line-height:1;font-weight:700;
+    color:rgba(212,182,106,0.18);
+    pointer-events:none;
+  }
+  @media(max-width:900px){
+    .founder-letter > div:last-child::before{top:-30px;left:-4px;font-size:70px}
+  }
+  .founder-letter .letter-greet{
+    font-family:'Playfair Display',serif;
+    font-style:italic;
+    font-size:19px;
+    color:var(--gold);
+    text-align:left !important;
+    margin-bottom:22px;
+    margin-top:2px;
+    letter-spacing:0.005em;
+  }
+  .founder-letter p strong{
+    color:#F0D690;
+    font-family:'Inter',sans-serif;
+    font-weight:600;
+    font-size:inherit;
+    letter-spacing:0;
+    text-transform:none;
+  }
+  .founder-letter .founder-quote{
+    color:#F0D690;
+    font-size:16px;
+  }
+  .founder-signature{
+    margin-top:26px;padding-top:22px;
+    border-top:1px solid rgba(212,182,106,0.25);
+    text-align:left;
+  }
+  .founder-signature .sig-name{
+    display:block;
+    font-family:'Playfair Display',serif;
+    font-style:italic;
+    font-size:20px;
+    color:#F0D690;
+    font-weight:700;
+    margin-bottom:7px;
+    text-shadow:0 0 14px rgba(212,182,106,0.25);
+  }
+  .founder-signature .sig-role{
+    display:block;
+    font-family:'Inter',sans-serif;
+    font-size:10.5px;
+    color:rgba(245,238,222,0.6);
+    letter-spacing:0.2em;
+    text-transform:uppercase;
+    font-weight:600;
+  }
+  @media(max-width:600px){
+    .founder-signature .sig-role{font-size:9.5px;letter-spacing:0.14em}
+  }
 
   /* ===== VALUE STACK ===== */
   .stack-wrap{
@@ -5915,17 +5977,21 @@
 
         <!-- SLIDE 1 — Alpha Wolf Vega -->
         <div class="team-slide active">
-          <div class="founder">
+          <div class="founder founder-letter">
             <div class="founder-photo"><img src="assets/alpha-wolf-vega.webp" alt="Alpha Wolf Vega — Fondateur GENESYS"></div>
             <div>
-              <div class="role">— CEO & CMO · GENESYS —</div>
+              <div class="role">— ALPHA TE PARLE, DIRECTEMENT —</div>
               <h3>Alpha Wolf Vega</h3>
-              <p><strong>Ce qu'Alpha t'aide à débloquer</strong></p>
-              <p>Choix du produit, angle de vente, structure de page, priorités de test. Plusieurs millions d'euros générés sur Shopify à travers plusieurs boutiques, avec trois boutiques actives en ce moment.</p>
-              <p>J'ai démarré avec les mêmes erreurs que la plupart des membres : changer trop vite de produit, brûler du budget sans savoir lire les signaux, suivre des méthodes incompatibles. GENESYS vient de là.</p>
-              <p>Mon rôle ici, c'est de t'aider à remettre de l'ordre dans ce que tu fais déjà, à couper les faux problèmes, et à voir plus vite ce qui mérite vraiment ton attention.</p>
+              <p class="letter-greet">Salut, c'est Alpha.</p>
+              <p>J'ai démarré là où la plupart d'entre vous démarrez : à changer trop vite de produit, à brûler du budget sans savoir lire les signaux, à suivre des méthodes qui ne tiennent pas ensemble. <strong>C'est pour ça que j'ai créé GENESYS.</strong></p>
+              <p>Plusieurs millions d'euros plus tard, sur Shopify à travers plusieurs boutiques (dont <strong>trois actives en ce moment</strong>), j'ai distillé ce que j'ai appris dans <strong>le protocole α-QUANTT</strong> : la méthode que tu vas suivre dedans. Choix du produit, angle de vente, structure de page, priorités de test. Chaque décision a sa place dans la séquence.</p>
+              <p>Mon rôle ici, c'est simple. Je t'aide à remettre de l'ordre dans ce que tu fais déjà, à couper les faux problèmes, et à voir plus vite ce qui mérite vraiment ton attention.</p>
               <div class="founder-quote">
                 « Tu postes ta question. Je regarde le vrai blocage, pas juste le symptôme. »
+              </div>
+              <div class="founder-signature">
+                <span class="sig-name">— Alpha Wolf Vega</span>
+                <span class="sig-role">Créateur de GENESYS · Architecte du protocole α-QUANTT</span>
               </div>
             </div>
           </div>
