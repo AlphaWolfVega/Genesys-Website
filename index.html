@@ -2324,7 +2324,19 @@
   }
   .story-step .story-content p{
     font-size:15px;line-height:1.65;color:var(--text-mute);
-    font-weight:300;margin:0;
+    font-weight:300;margin:0 0 12px;
+  }
+  .story-step .story-content p:last-child{margin-bottom:0}
+  .story-step .story-content p.story-lede{
+    font-size:16px;color:var(--text);font-weight:400;
+    line-height:1.55;margin-bottom:14px;
+  }
+  .story-step .story-content p.story-punch{
+    font-size:15.5px;line-height:1.55;
+    color:var(--gold);font-style:italic;font-weight:500;
+    padding:10px 0 0 14px;
+    border-left:2px solid rgba(212,182,106,0.5);
+    margin-top:6px;
   }
   /* Reveal directional animation per side */
   .story-step.reveal{opacity:0;transition:opacity 0.9s ease,transform 0.9s ease}
@@ -4714,47 +4726,52 @@
     <div class="story-timeline">
       <div class="timeline-fill" data-empty="true" aria-hidden="true"></div>
       <div class="story-step reveal" data-side="left">
-        <div class="story-photo"><img src="assets/story/story-2019.webp" alt="Alpha début 2019" loading="lazy" decoding="async"><span class="story-placeholder">2019</span><span class="story-photo-caption">Photo à venir</span></div>
+        <div class="story-photo"><img src="assets/story/story-2019.webp" alt="Alpha en 2018" loading="lazy" decoding="async"><span class="story-placeholder">2018</span><span class="story-photo-caption">Photo à venir</span></div>
         <div class="story-content">
-          <span class="story-date">Début 2019</span>
+          <span class="story-date">2018</span>
           <h3>Le fond du trou</h3>
-          <p>Avant l'e-commerce, j'ai vécu <strong>4 mois sans savoir où j'allais dormir</strong>.</p>
+          <p class="story-lede">Avant l'e-commerce, j'ai vécu <strong>4 mois sans savoir où j'allais dormir</strong>.</p>
           <p>Quand un pote pouvait m'accueillir, c'était son canapé. Sinon, c'était un banc dans le froid de Bruxelles.</p>
-          <p>Une seule phrase tournait dans ma tête : <strong><em>« je vais m'en sortir, mais il faut passer à l'action, et massivement. »</em></strong></p>
+          <p class="story-punch">« Je vais m'en sortir. Mais il faut passer à l'action, et massivement. »</p>
         </div>
       </div>
 
       <div class="story-step reveal" data-side="right">
-        <div class="story-photo"><img src="assets/story/story-2019b.webp" alt="Alpha plongeur en intérim à Bruxelles en 2019" loading="lazy" decoding="async"><span class="story-placeholder">2019</span><span class="story-photo-caption">Photo à venir</span></div>
+        <div class="story-photo"><img src="assets/story/story-2019b.webp" alt="Alpha plongeur en intérim à Bruxelles" loading="lazy" decoding="async"><span class="story-placeholder">2018-2019</span><span class="story-photo-caption">Photo à venir</span></div>
         <div class="story-content">
-          <span class="story-date">2019</span>
+          <span class="story-date">Fin 2018 — 2019</span>
           <h3>L'intérim et la plonge</h3>
-          <p>Un pote a fini par me trouver un boulot en intérim. <strong>J'étais plongeur. 900€ par mois quand on m'appelait.</strong></p>
+          <p class="story-lede">Mon ami <strong>Hervé</strong>, qui était chargé du recrutement dans une boîte d'intérim, a appris ma situation. Il m'a pistonné en urgence.</p>
+          <p><strong>J'étais plongeur. 900€ par mois quand on m'appelait.</strong></p>
           <p>Je me souviens de la sensation des journées où le téléphone ne sonnait pas. Je savais ce que ça voulait dire : la fin du mois allait être tendue.</p>
           <p>Hors de question que je reste comme ça.</p>
         </div>
       </div>
 
       <div class="story-step reveal" data-side="left">
-        <div class="story-photo"><img src="assets/story/story-2019c.webp" alt="Alpha au lancement de son premier dropshipping fin 2019" loading="lazy" decoding="async"><span class="story-placeholder">2019</span><span class="story-photo-caption">Photo à venir</span></div>
+        <div class="story-photo"><img src="assets/story/story-2019c.webp" alt="Alpha au lancement de son premier dropshipping" loading="lazy" decoding="async"><span class="story-placeholder">2019</span><span class="story-photo-caption">Photo à venir</span></div>
         <div class="story-content">
-          <span class="story-date">Fin 2019</span>
+          <span class="story-date">Mars 2019</span>
           <h3>Le grand saut</h3>
-          <p>Mon cousin n'arrêtait pas de me parler de dropshipping. À force de l'entendre, j'ai sauté.</p>
-          <p><strong>J'ai démarré avec 250€.</strong> Premier produit testé : pinceaux de maquillage. Flop total. Je voyais des visiteurs arriver. Aucun n'achetait. Ça me bouffait.</p>
-          <p>Puis ma première vente est tombée. <strong>Un sac fluo pour ranger des pinceaux.</strong> Et là, le déclic : <strong><em>si une personne a acheté, alors des milliers peuvent acheter.</em></strong></p>
+          <p class="story-lede">Je n'en pouvais plus de l'intérim. Les déplacements à l'autre bout de la ville. Les réveils à 4 heures du matin. Le mal de dos qui ne passait plus.</p>
+          <p>Mon cousin n'arrêtait pas de me parler de dropshipping. À force de l'entendre, on a fini par sauter ensemble.</p>
+          <p>On a partagé une formation, <strong>moitié-moitié</strong>. Et j'ai démarré avec <strong>250€ de budget pub</strong>.</p>
+          <p>Premier produit testé : pinceaux de maquillage. <strong>Flop total.</strong> Je voyais des visiteurs arriver. Aucun n'achetait. Ça me bouffait.</p>
+          <p>Puis ma première vente est tombée. <strong>Un sac fluo pour ranger des pinceaux.</strong></p>
+          <p class="story-punch">« Si une personne a acheté, alors des milliers peuvent acheter. »</p>
         </div>
       </div>
 
       <div class="story-step reveal" data-side="right">
-        <div class="story-photo"><img src="assets/story/story-2021.webp" alt="Alpha à Koh Samui en 2021" loading="lazy" decoding="async"><span class="story-placeholder">2021</span><span class="story-photo-caption">Photo à venir</span></div>
+        <div class="story-photo"><img src="assets/story/story-2021.webp" alt="Alpha à Koh Samui en 2021" loading="lazy" decoding="async"><span class="story-placeholder">2020-2021</span><span class="story-photo-caption">Photo à venir</span></div>
         <div class="story-content">
-          <span class="story-date">2021</span>
-          <h3>Koh Samui</h3>
-          <p>Deux ans plus tard, j'avais déjà généré plusieurs centaines de milliers d'euros. J'étais obsédé.</p>
-          <p>2021, le saut quantique : <strong>56 000€ de chiffre d'affaires en une seule journée</strong>. Et entre 36 000€ et 50 000€ par jour, <strong>30 jours non-stop</strong>. Sur le moment, je n'arrivais même pas à y croire.</p>
-          <p><strong>Le plongeur de Bruxelles s'expatriait à Koh Samui.</strong></p>
-          <p>C'est là que j'ai ouvert ma chaîne YouTube. <strong>Pas pour vendre. Juste parce que j'étais hypé</strong> et que j'avais besoin de partager.</p>
+          <span class="story-date">2020 — 2021</span>
+          <h3>Koh Samui <span style="opacity:0.7;font-weight:500">(Thaïlande)</span></h3>
+          <p class="story-lede">Un an plus tard, j'avais déjà généré plusieurs centaines de milliers d'euros. J'étais obsédé.</p>
+          <p>En <strong>2020</strong>, j'ai ouvert ma chaîne YouTube. <strong>Pas pour vendre.</strong> Juste parce que j'étais hypé et que j'avais besoin de partager ce que j'apprenais sur le terrain.</p>
+          <p>Et puis <strong>2021</strong>, le saut quantique : <strong>56 000€ de chiffre d'affaires en une seule journée</strong>. Entre 36 000€ et 50 000€ par jour, <strong>30 jours non-stop</strong>. Et le record absolu : <strong>1,4 million d'euros sur un seul mois</strong>.</p>
+          <p>Sur le moment, je n'arrivais même pas à y croire.</p>
+          <p class="story-punch">Le plongeur de Bruxelles s'expatriait à Koh Samui.</p>
         </div>
       </div>
 
@@ -4763,7 +4780,7 @@
         <div class="story-content">
           <span class="story-date">2021 — 2022</span>
           <h3>Le piège du confort</h3>
-          <p>Ce qu'on ne te dit jamais quand tu réussis : <strong>l'argent peut t'éteindre</strong>.</p>
+          <p class="story-lede">Ce qu'on ne te dit jamais quand tu réussis : <strong>l'argent peut t'éteindre</strong>.</p>
           <p>À Koh Samui, je me suis dit <em>« j'ai plié le game »</em>. Et pendant <strong>8 mois, je n'ai plus rien foutu</strong>. Plus de drive. Plus d'envie. Juste chiller.</p>
           <p>Il fallait que je trouve un nouveau moteur.</p>
         </div>
@@ -4774,9 +4791,10 @@
         <div class="story-content">
           <span class="story-date">2023 — 2024</span>
           <h3>La transmission qui galvanise</h3>
-          <p>Le moteur, je l'ai trouvé en aidant les autres à y arriver. Et là, le drive est revenu, plus fort qu'avant.</p>
-          <p>En <strong>2023</strong>, j'ai sorti ma première formation. Pas en 2021 quand j'ai ouvert YouTube. <strong>2 ans plus tard.</strong> Parce que je n'avais pas besoin de ça pour vivre.</p>
-          <p>En <strong>2024</strong>, premier mastermind à Koh Samui : <strong>10 personnes à 7 000€ la place</strong>. Et cette année-là, <strong>1,4 million d'euros sur un seul mois</strong> avec une équipe de 8.</p>
+          <p class="story-lede">Le moteur, je l'ai trouvé en aidant les autres à y arriver. Et là, le drive est revenu, plus fort qu'avant.</p>
+          <p>En <strong>2023</strong>, j'ai sorti ma première formation. Pas en 2020 quand j'ai ouvert YouTube. <strong>3 ans plus tard.</strong> Parce que je n'avais pas besoin de ça pour vivre.</p>
+          <p>En <strong>2024</strong>, premier mastermind à Koh Samui : <strong>10 personnes à 7 000€ la place</strong>.</p>
+          <p>Et sur 2023 et 2024 cumulés, <strong>plus de 3,7 millions d'euros de chiffre d'affaires</strong> sur les boutiques, avec une équipe de 8.</p>
         </div>
       </div>
 
@@ -4785,10 +4803,10 @@
         <div class="story-content">
           <span class="story-date">Aujourd'hui</span>
           <h3>GENESYS</h3>
-          <p>J'ai créé GENESYS pour permettre à un maximum de personnes de se donner la chance, dans une communauté.</p>
+          <p class="story-lede">J'ai créé GENESYS pour permettre à un maximum de personnes de se donner la chance, dans une communauté.</p>
           <p>Parce que voir quelqu'un changer sa situation grâce à ce que tu lui transmets, c'est plus galvanisant que n'importe quel chiffre d'affaires.</p>
           <p><strong>J'étais plongeur intérimaire à Bruxelles. Je ne connaissais rien. Absolument rien. Si j'y suis arrivé en partant de là, alors toi aussi tu peux y arriver.</strong></p>
-          <p><strong><em>Ce n'est pas un cliché. C'est juste un fait.</em></strong></p>
+          <p class="story-punch">Ce n'est pas un cliché. C'est juste un fait.</p>
         </div>
       </div>
     </div>
