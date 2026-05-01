@@ -838,7 +838,6 @@
     .hl-vraie-bridge-bot{
       font-family:'Playfair Display',serif;
       font-size:14.5px;font-weight:600;
-      color:var(--text);
       text-align:center;margin:0 !important;
       line-height:1.35;letter-spacing:0.005em;
       display:inline-block;
@@ -847,34 +846,34 @@
       border-radius:7px;
       background:linear-gradient(180deg,rgba(212,182,106,0.05) 0%,rgba(212,182,106,0.02) 100%);
       transform-origin:center;
-      position:relative;
-      overflow:hidden;
       animation:hlVerdictBreathe 2s cubic-bezier(0.4,0,0.6,1) infinite;
     }
-    .hl-vraie-bridge-bot em{font-style:italic;color:var(--gold);font-weight:700;position:relative;z-index:2}
-    /* Reflet metallique brillant qui balaie en diagonale */
-    .hl-vraie-bridge-bot::before{
-      content:'';
-      position:absolute;
-      top:0;left:0;bottom:0;
-      width:38%;
-      background:linear-gradient(110deg,
-        rgba(255,255,255,0) 0%,
-        rgba(255,248,220,0.25) 35%,
-        rgba(255,253,235,0.85) 50%,
-        rgba(255,248,220,0.25) 65%,
-        rgba(255,255,255,0) 100%);
-      transform:translateX(-180%) skewX(-18deg);
-      animation:hlMetalShine 3.6s ease-in-out infinite;
-      pointer-events:none;
-      z-index:1;
+    /* Texte metallique : gradient or → blanc → or qui traverse le texte (background-clip:text) */
+    .hl-vraie-bridge-bot em{
+      font-style:italic;font-weight:700;
+      background-image:linear-gradient(110deg,
+        #B8985A 0%,
+        #D4B66A 25%,
+        #F0D690 42%,
+        #FFFFFF 48%,
+        #FFFDF0 50%,
+        #FFFFFF 52%,
+        #F0D690 58%,
+        #D4B66A 75%,
+        #B8985A 100%);
+      background-size:300% 100%;
+      background-position:0% center;
+      background-repeat:no-repeat;
+      -webkit-background-clip:text;
+      background-clip:text;
+      -webkit-text-fill-color:transparent;
+      color:transparent;
+      animation:hlMetalText 3.2s ease-in-out infinite;
     }
-    @keyframes hlMetalShine{
-      0%{transform:translateX(-180%) skewX(-18deg);opacity:0}
-      8%{opacity:1}
-      45%{transform:translateX(380%) skewX(-18deg);opacity:1}
-      55%{opacity:0}
-      100%{transform:translateX(380%) skewX(-18deg);opacity:0}
+    @keyframes hlMetalText{
+      0%{background-position:100% center}
+      55%{background-position:-50% center}
+      100%{background-position:-50% center}
     }
     /* Inspiration (0% → 50%) puis expiration (50% → 100%) — un cycle complet en 2s */
     @keyframes hlVerdictBreathe{
