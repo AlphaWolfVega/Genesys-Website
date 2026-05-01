@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Test pulsations — Double pass + Shimmer/Pulse/Pause</title>
+<title>Test pulsations — Shimmer / Breath / Pulse / Breath</title>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
   *{margin:0;padding:0;box-sizing:border-box}
@@ -12,17 +12,11 @@
     min-height:100vh;padding:60px 20px;
   }
   h1{font-size:28px;text-align:center;margin-bottom:8px;letter-spacing:-0.01em}
-  .sub{text-align:center;color:#9aa3b2;font-size:14px;margin-bottom:50px}
-  h2.section{
-    max-width:1280px;margin:60px auto 30px;
-    font-size:14px;text-transform:uppercase;letter-spacing:0.18em;
-    color:#D4B66A;font-weight:700;text-align:left;
-    border-top:1px solid rgba(212,182,106,0.2);padding-top:24px;
-  }
+  .sub{text-align:center;color:#9aa3b2;font-size:14px;margin-bottom:50px;max-width:740px;margin-left:auto;margin-right:auto;line-height:1.6}
   .grid{
     max-width:1280px;margin:0 auto;
     display:grid;grid-template-columns:repeat(auto-fit,minmax(330px,1fr));
-    gap:60px 30px;padding:10px 0;
+    gap:60px 30px;padding:30px 0;
   }
   .card{
     background:linear-gradient(180deg,rgba(20,37,64,0.4),rgba(10,22,40,0.2));
@@ -30,7 +24,7 @@
     border-radius:14px;
     padding:60px 30px 40px;
     text-align:center;position:relative;
-    min-height:240px;
+    min-height:260px;
     display:flex;flex-direction:column;align-items:center;justify-content:center;
     overflow:visible;
   }
@@ -45,7 +39,11 @@
   }
   .card .desc{
     margin-top:8px;font-size:12px;color:#6b7382;
-    line-height:1.5;max-width:280px;
+    line-height:1.55;max-width:290px;
+  }
+  .card .timing{
+    margin-top:10px;font-family:'JetBrains Mono','Menlo',monospace;
+    font-size:10.5px;color:#D4B66A;letter-spacing:0.04em;
   }
 
   .btn{
@@ -58,319 +56,179 @@
     position:relative;border-radius:999px;
     background:linear-gradient(180deg,#E0C57A 0%,#D4B66A 100%);
     overflow:hidden;isolation:isolate;
+    box-shadow:0 0 24px rgba(212,182,106,0.30);
   }
   .btn::after{content:"→";font-size:18px;font-weight:700}
-  /* base shimmer pseudo (set in each variant via ::before) */
 
   /* ============================================
-     SET 1 — DOUBLE PASS AVEC RESPIRATION
-     (shimmer + pause = breath)
+     SHIMMER → BREATH → PULSE → BREATH → LOOP
+     6 variants with different timings
+     Phase model:
+     [SHIMMER][REST 1][PULSE][REST 2]
      ============================================ */
 
-  /* A1 — Pause courte (cycle 4s, shimmer 0-50%, pause 50-100%) */
-  .a1{box-shadow:0 0 30px rgba(212,182,106,0.35)}
-  .a1::before{
-    content:"";position:absolute;inset:0;border-radius:inherit;z-index:1;pointer-events:none;
-    background:
-      linear-gradient(115deg,transparent 38%,rgba(255,255,255,0.55) 50%,transparent 62%),
-      linear-gradient(115deg,transparent 38%,rgba(255,235,170,0.45) 50%,transparent 62%);
-    background-size:50% 100%, 50% 100%;
-    background-repeat:no-repeat;
-    animation:dpA1 4s ease-in-out infinite;
-  }
-  @keyframes dpA1{
-    0%{background-position:-60% 0, -150% 0}
-    50%{background-position:160% 0, 250% 0}
-    100%{background-position:160% 0, 250% 0}
-  }
-
-  /* A2 — Pause moyenne (cycle 5s, shimmer 0-40%, pause 40-100%) */
-  .a2{box-shadow:0 0 30px rgba(212,182,106,0.35)}
-  .a2::before{
-    content:"";position:absolute;inset:0;border-radius:inherit;z-index:1;pointer-events:none;
-    background:
-      linear-gradient(115deg,transparent 38%,rgba(255,255,255,0.55) 50%,transparent 62%),
-      linear-gradient(115deg,transparent 38%,rgba(255,235,170,0.45) 50%,transparent 62%);
-    background-size:50% 100%, 50% 100%;
-    background-repeat:no-repeat;
-    animation:dpA2 5s ease-in-out infinite;
-  }
-  @keyframes dpA2{
-    0%{background-position:-60% 0, -150% 0}
-    40%{background-position:160% 0, 250% 0}
-    100%{background-position:160% 0, 250% 0}
-  }
-
-  /* A3 — Pause longue (cycle 6s, shimmer 0-30%, pause 30-100%) */
-  .a3{box-shadow:0 0 30px rgba(212,182,106,0.35)}
-  .a3::before{
-    content:"";position:absolute;inset:0;border-radius:inherit;z-index:1;pointer-events:none;
-    background:
-      linear-gradient(115deg,transparent 38%,rgba(255,255,255,0.55) 50%,transparent 62%),
-      linear-gradient(115deg,transparent 38%,rgba(255,235,170,0.45) 50%,transparent 62%);
-    background-size:50% 100%, 50% 100%;
-    background-repeat:no-repeat;
-    animation:dpA3 6s ease-in-out infinite;
-  }
-  @keyframes dpA3{
-    0%{background-position:-60% 0, -150% 0}
-    30%{background-position:160% 0, 250% 0}
-    100%{background-position:160% 0, 250% 0}
-  }
-
-  /* A4 — Pause + halo respire pendant la pause */
-  .a4{animation:haloA4 5s ease-in-out infinite}
-  .a4::before{
-    content:"";position:absolute;inset:0;border-radius:inherit;z-index:1;pointer-events:none;
-    background:
-      linear-gradient(115deg,transparent 38%,rgba(255,255,255,0.55) 50%,transparent 62%),
-      linear-gradient(115deg,transparent 38%,rgba(255,235,170,0.45) 50%,transparent 62%);
-    background-size:50% 100%, 50% 100%;
-    background-repeat:no-repeat;
-    animation:dpA2 5s ease-in-out infinite;
-  }
-  @keyframes haloA4{
-    0%,40%,100%{box-shadow:0 0 22px rgba(212,182,106,0.30)}
-    70%{box-shadow:0 0 55px rgba(212,182,106,0.65)}
-  }
-
-  /* A5 — Pause + micro-scale (le bouton respire après le shimmer) */
-  .a5{animation:scaleA5 5s ease-in-out infinite;box-shadow:0 0 30px rgba(212,182,106,0.35)}
-  .a5::before{
-    content:"";position:absolute;inset:0;border-radius:inherit;z-index:1;pointer-events:none;
-    background:
-      linear-gradient(115deg,transparent 38%,rgba(255,255,255,0.55) 50%,transparent 62%),
-      linear-gradient(115deg,transparent 38%,rgba(255,235,170,0.45) 50%,transparent 62%);
-    background-size:50% 100%, 50% 100%;
-    background-repeat:no-repeat;
-    animation:dpA2 5s ease-in-out infinite;
-  }
-  @keyframes scaleA5{
-    0%,40%,100%{transform:scale(1)}
-    70%{transform:scale(1.025)}
-  }
-
-  /* A6 — Asymétrique (shimmer rapide puis longue pause variable) */
-  .a6{box-shadow:0 0 30px rgba(212,182,106,0.35)}
-  .a6::before{
-    content:"";position:absolute;inset:0;border-radius:inherit;z-index:1;pointer-events:none;
-    background:
-      linear-gradient(115deg,transparent 38%,rgba(255,255,255,0.55) 50%,transparent 62%),
-      linear-gradient(115deg,transparent 38%,rgba(255,235,170,0.45) 50%,transparent 62%);
-    background-size:50% 100%, 50% 100%;
-    background-repeat:no-repeat;
-    animation:dpA6 5.5s cubic-bezier(.4,0,.2,1) infinite;
-  }
-  @keyframes dpA6{
-    0%{background-position:-60% 0, -150% 0}
-    25%{background-position:160% 0, 250% 0}
-    100%{background-position:160% 0, 250% 0}
-  }
-
-  /* ============================================
-     SET 2 — SHIMMER + PULSE + PAUSE 2s + LOOP
-     ============================================ */
-
-  /* B1 — Shimmer + scale pulse + 2s rest */
-  .b1{animation:scaleB1 3.5s ease-in-out infinite;box-shadow:0 0 24px rgba(212,182,106,0.30)}
-  .b1::before{
+  /* C1 — Compact (4.5s) | sh 0-22% | rest 22-44% | pulse 44-55% | rest 55-100% */
+  .c1{animation:scaleC1 4.5s ease-in-out infinite}
+  .c1::before{
     content:"";position:absolute;inset:0;border-radius:inherit;z-index:1;pointer-events:none;
     background:linear-gradient(115deg,transparent 38%,rgba(255,255,255,0.6) 50%,transparent 62%);
     background-size:50% 100%;background-repeat:no-repeat;
-    animation:shB1 3.5s ease-in-out infinite;
+    animation:shC1 4.5s ease-in-out infinite;
   }
-  @keyframes shB1{
-    0%{background-position:-60% 0}
-    25%{background-position:160% 0}
-    100%{background-position:160% 0}
-  }
-  @keyframes scaleB1{
-    0%,25%,42%,100%{transform:scale(1)}
-    33%{transform:scale(1.04)}
-  }
-
-  /* B2 — Shimmer + halo flash + 2s rest */
-  .b2{animation:haloB2 3.5s ease-in-out infinite}
-  .b2::before{
-    content:"";position:absolute;inset:0;border-radius:inherit;z-index:1;pointer-events:none;
-    background:linear-gradient(115deg,transparent 38%,rgba(255,255,255,0.6) 50%,transparent 62%);
-    background-size:50% 100%;background-repeat:no-repeat;
-    animation:shB1 3.5s ease-in-out infinite;
-  }
-  @keyframes haloB2{
-    0%,25%,45%,100%{box-shadow:0 0 22px rgba(212,182,106,0.25)}
-    33%{box-shadow:0 0 60px rgba(212,182,106,0.85)}
-  }
-
-  /* B3 — Shimmer + double pulse (lub-dub) + 2s rest */
-  .b3{animation:dubB3 4s ease-in-out infinite;box-shadow:0 0 24px rgba(212,182,106,0.30)}
-  .b3::before{
-    content:"";position:absolute;inset:0;border-radius:inherit;z-index:1;pointer-events:none;
-    background:linear-gradient(115deg,transparent 38%,rgba(255,255,255,0.6) 50%,transparent 62%);
-    background-size:50% 100%;background-repeat:no-repeat;
-    animation:shB3 4s ease-in-out infinite;
-  }
-  @keyframes shB3{
+  @keyframes shC1{
     0%{background-position:-60% 0}
     22%{background-position:160% 0}
     100%{background-position:160% 0}
   }
-  @keyframes dubB3{
-    0%,22%,42%,100%{transform:scale(1)}
-    28%{transform:scale(1.04)}
-    33%{transform:scale(1)}
-    37%{transform:scale(1.06)}
+  @keyframes scaleC1{
+    0%,44%,55%,100%{transform:scale(1)}
+    49%{transform:scale(1.04)}
   }
 
-  /* B4 — Shimmer + scale+halo combined + 2s rest */
-  .b4{animation:comboB4 3.5s ease-in-out infinite}
-  .b4::before{
+  /* C2 — Balanced (5.5s) | sh 0-18% | rest 18-36% | pulse 36-45% | rest 45-100% */
+  .c2{animation:scaleC2 5.5s ease-in-out infinite}
+  .c2::before{
     content:"";position:absolute;inset:0;border-radius:inherit;z-index:1;pointer-events:none;
     background:linear-gradient(115deg,transparent 38%,rgba(255,255,255,0.6) 50%,transparent 62%);
     background-size:50% 100%;background-repeat:no-repeat;
-    animation:shB1 3.5s ease-in-out infinite;
+    animation:shC2 5.5s ease-in-out infinite;
   }
-  @keyframes comboB4{
-    0%,25%,45%,100%{transform:scale(1);box-shadow:0 0 22px rgba(212,182,106,0.25)}
-    33%{transform:scale(1.035);box-shadow:0 0 55px rgba(212,182,106,0.75)}
-  }
-
-  /* B5 — Shimmer doré + halo + 2s rest */
-  .b5{animation:haloB5 3.8s ease-in-out infinite}
-  .b5::before{
-    content:"";position:absolute;inset:0;border-radius:inherit;z-index:1;pointer-events:none;
-    background:linear-gradient(115deg,transparent 38%,rgba(255,235,170,0.85) 50%,transparent 62%);
-    background-size:50% 100%;background-repeat:no-repeat;
-    animation:shB5 3.8s ease-in-out infinite;
-  }
-  @keyframes shB5{
+  @keyframes shC2{
     0%{background-position:-60% 0}
-    25%{background-position:160% 0}
+    18%{background-position:160% 0}
     100%{background-position:160% 0}
   }
-  @keyframes haloB5{
-    0%,25%,45%,100%{box-shadow:0 0 22px rgba(212,182,106,0.30)}
-    32%{box-shadow:0 0 60px rgba(212,182,106,0.80)}
+  @keyframes scaleC2{
+    0%,36%,45%,100%{transform:scale(1)}
+    40%{transform:scale(1.04)}
   }
 
-  /* B6 — Shimmer + ring expansion + 2s rest */
-  .b6{box-shadow:0 0 24px rgba(212,182,106,0.30)}
-  .b6::before{
+  /* C3 — Spacieux (6.5s) | sh 0-15% | rest 15-32% | pulse 32-42% | rest 42-100% */
+  .c3{animation:scaleC3 6.5s ease-in-out infinite}
+  .c3::before{
     content:"";position:absolute;inset:0;border-radius:inherit;z-index:1;pointer-events:none;
     background:linear-gradient(115deg,transparent 38%,rgba(255,255,255,0.6) 50%,transparent 62%);
     background-size:50% 100%;background-repeat:no-repeat;
-    animation:shB1 3.5s ease-in-out infinite;
+    animation:shC3 6.5s ease-in-out infinite;
   }
-  .b6 .ring{
-    position:absolute;inset:0;border-radius:inherit;
-    border:2px solid rgba(212,182,106,0.85);
-    animation:ringB6 3.5s ease-out infinite;
-    pointer-events:none;
-    opacity:0;
+  @keyframes shC3{
+    0%{background-position:-60% 0}
+    15%{background-position:160% 0}
+    100%{background-position:160% 0}
   }
-  @keyframes ringB6{
-    0%,25%{transform:scale(1);opacity:0}
-    27%{opacity:0.95;transform:scale(1)}
-    50%{transform:scale(1.55);opacity:0}
-    100%{transform:scale(1.55);opacity:0}
+  @keyframes scaleC3{
+    0%,32%,42%,100%{transform:scale(1)}
+    37%{transform:scale(1.04)}
+  }
+
+  /* C4 — Long breath after shimmer (5.5s) | sh 0-15% | LONG rest 15-50% | pulse 50-58% | rest 58-100% */
+  .c4{animation:scaleC4 5.5s ease-in-out infinite}
+  .c4::before{
+    content:"";position:absolute;inset:0;border-radius:inherit;z-index:1;pointer-events:none;
+    background:linear-gradient(115deg,transparent 38%,rgba(255,255,255,0.6) 50%,transparent 62%);
+    background-size:50% 100%;background-repeat:no-repeat;
+    animation:shC4 5.5s ease-in-out infinite;
+  }
+  @keyframes shC4{
+    0%{background-position:-60% 0}
+    15%{background-position:160% 0}
+    100%{background-position:160% 0}
+  }
+  @keyframes scaleC4{
+    0%,50%,58%,100%{transform:scale(1)}
+    54%{transform:scale(1.04)}
+  }
+
+  /* C5 — Très espacé méditatif (7.5s) | sh 0-12% | rest 12-28% | pulse 28-37% | rest 37-100% */
+  .c5{animation:scaleC5 7.5s ease-in-out infinite}
+  .c5::before{
+    content:"";position:absolute;inset:0;border-radius:inherit;z-index:1;pointer-events:none;
+    background:linear-gradient(115deg,transparent 38%,rgba(255,255,255,0.6) 50%,transparent 62%);
+    background-size:50% 100%;background-repeat:no-repeat;
+    animation:shC5 7.5s ease-in-out infinite;
+  }
+  @keyframes shC5{
+    0%{background-position:-60% 0}
+    12%{background-position:160% 0}
+    100%{background-position:160% 0}
+  }
+  @keyframes scaleC5{
+    0%,28%,37%,100%{transform:scale(1)}
+    32%{transform:scale(1.04)}
+  }
+
+  /* C6 — Symmetric breaths égales (5s) | sh 0-15% | rest 15-40% | pulse 40-50% | rest 50-100% (50%=50%) */
+  .c6{animation:scaleC6 5s ease-in-out infinite}
+  .c6::before{
+    content:"";position:absolute;inset:0;border-radius:inherit;z-index:1;pointer-events:none;
+    background:linear-gradient(115deg,transparent 38%,rgba(255,255,255,0.6) 50%,transparent 62%);
+    background-size:50% 100%;background-repeat:no-repeat;
+    animation:shC6 5s ease-in-out infinite;
+  }
+  @keyframes shC6{
+    0%{background-position:-60% 0}
+    15%{background-position:160% 0}
+    100%{background-position:160% 0}
+  }
+  @keyframes scaleC6{
+    0%,40%,50%,100%{transform:scale(1)}
+    45%{transform:scale(1.04)}
   }
 </style>
 </head>
 <body>
 
-<h1>Test pulsations — Respiration & Séquençage</h1>
-<p class="sub">12 variantes (6 par set). Set 1 = double pass + pause. Set 2 = shimmer + pulse + 2s stop + loop.</p>
+<h1>Shimmer → Breath → Pulse → Breath → Loop</h1>
+<p class="sub">L'effet métallique passe, on respire, le pulse vient, on respire, on recommence. 6 variantes avec des timings différents — choisis celui qui a le bon rythme.</p>
 
-<h2 class="section">Set 1 — Double pass avec respiration (pause après shimmer)</h2>
 <div class="grid">
 
   <div class="card">
-    <span class="num">07-E-A1</span>
-    <button class="btn a1">Rejoindre GENESYS</button>
-    <div class="label">Pause courte</div>
-    <div class="desc">Shimmer 0-50% du cycle, pause 50-100%. Cycle total 4s.</div>
+    <span class="num">07-C1</span>
+    <button class="btn c1">Rejoindre GENESYS</button>
+    <div class="label">Compact</div>
+    <div class="desc">Shimmer rapide, respirations courtes mais présentes. Le rythme reste vif.</div>
+    <div class="timing">4,5 s · 22% sh · 22% rest · 11% pulse · 45% rest</div>
   </div>
 
   <div class="card">
-    <span class="num">07-E-A2</span>
-    <button class="btn a2">Rejoindre GENESYS</button>
-    <div class="label">Pause moyenne</div>
-    <div class="desc">Shimmer 0-40%, pause 60%. Cycle 5s. Plus de respiration.</div>
+    <span class="num">07-C2</span>
+    <button class="btn c2">Rejoindre GENESYS</button>
+    <div class="label">Équilibré</div>
+    <div class="desc">Bon ratio. Le shimmer respire, le pulse arrive après une vraie pause.</div>
+    <div class="timing">5,5 s · 18% sh · 18% rest · 9% pulse · 55% rest</div>
   </div>
 
   <div class="card">
-    <span class="num">07-E-A3</span>
-    <button class="btn a3">Rejoindre GENESYS</button>
-    <div class="label">Pause longue</div>
-    <div class="desc">Shimmer 0-30%, pause 70%. Cycle 6s. Très espacé, presque méditatif.</div>
+    <span class="num">07-C3</span>
+    <button class="btn c3">Rejoindre GENESYS</button>
+    <div class="label">Spacieux</div>
+    <div class="desc">Cycle plus long, plus apaisé. Chaque phase a sa place sans précipitation.</div>
+    <div class="timing">6,5 s · 15% sh · 17% rest · 10% pulse · 58% rest</div>
   </div>
 
   <div class="card">
-    <span class="num">07-E-A4</span>
-    <button class="btn a4">Rejoindre GENESYS</button>
-    <div class="label">Pause + halo qui respire</div>
-    <div class="desc">Pendant la pause, le halo or s'amplifie doucement puis revient.</div>
+    <span class="num">07-C4</span>
+    <button class="btn c4">Rejoindre GENESYS</button>
+    <div class="label">Long breath après shimmer</div>
+    <div class="desc">Grosse pause après le shimmer (35% du cycle) avant que le pulse arrive. Le bouton "se pose" longtemps.</div>
+    <div class="timing">5,5 s · 15% sh · 35% rest · 8% pulse · 42% rest</div>
   </div>
 
   <div class="card">
-    <span class="num">07-E-A5</span>
-    <button class="btn a5">Rejoindre GENESYS</button>
-    <div class="label">Pause + micro-scale</div>
-    <div class="desc">Pendant la pause, le bouton fait un soupir (scale 1.025).</div>
+    <span class="num">07-C5</span>
+    <button class="btn c5">Rejoindre GENESYS</button>
+    <div class="label">Méditatif</div>
+    <div class="desc">Cycle très long. Les phases sont très étalées, l'oeil oublie presque entre deux apparitions.</div>
+    <div class="timing">7,5 s · 12% sh · 16% rest · 9% pulse · 63% rest</div>
   </div>
 
   <div class="card">
-    <span class="num">07-E-A6</span>
-    <button class="btn a6">Rejoindre GENESYS</button>
-    <div class="label">Asymétrique express</div>
-    <div class="desc">Shimmer rapide (25% du cycle), longue pause variable (75%). 5.5s.</div>
-  </div>
-
-</div>
-
-<h2 class="section">Set 2 — Shimmer → Pulse → Pause 2s → Loop</h2>
-<div class="grid">
-
-  <div class="card">
-    <span class="num">07-B1</span>
-    <button class="btn b1">Rejoindre GENESYS</button>
-    <div class="label">Shimmer + scale pulse</div>
-    <div class="desc">Reflet métallique → bump scale 1.04 → 2s rest → loop. Cycle 3.5s.</div>
-  </div>
-
-  <div class="card">
-    <span class="num">07-B2</span>
-    <button class="btn b2">Rejoindre GENESYS</button>
-    <div class="label">Shimmer + halo flash</div>
-    <div class="desc">Reflet → flash de halo or → 2s rest. Pas de scale, juste lumière.</div>
-  </div>
-
-  <div class="card">
-    <span class="num">07-B3</span>
-    <button class="btn b3">Rejoindre GENESYS</button>
-    <div class="label">Shimmer + double pulse</div>
-    <div class="desc">Reflet → 2 bumps lub-dub (cœur) → 2s rest. Plus vivant, plus humain.</div>
-  </div>
-
-  <div class="card">
-    <span class="num">07-B4</span>
-    <button class="btn b4">Rejoindre GENESYS</button>
-    <div class="label">Shimmer + scale+halo combo</div>
-    <div class="desc">Reflet → scale 1.035 ET halo s'allument ensemble → 2s rest. Pulse plein.</div>
-  </div>
-
-  <div class="card">
-    <span class="num">07-B5</span>
-    <button class="btn b5">Rejoindre GENESYS</button>
-    <div class="label">Shimmer doré + halo</div>
-    <div class="desc">Reflet or chaud (au lieu de blanc) → halo flash → 2s rest. Plus prestige.</div>
-  </div>
-
-  <div class="card">
-    <span class="num">07-B6</span>
-    <button class="btn b6">Rejoindre GENESYS<span class="ring"></span></button>
-    <div class="label">Shimmer + ring expansion</div>
-    <div class="desc">Reflet → onde de ring qui se diffuse → 2s rest. Combo métal + radar.</div>
+    <span class="num">07-C6</span>
+    <button class="btn c6">Rejoindre GENESYS</button>
+    <div class="label">Respirations symétriques</div>
+    <div class="desc">Les deux pauses ont la même durée. Sensation de cycle "carré", régulier.</div>
+    <div class="timing">5 s · 15% sh · 25% rest · 10% pulse · 50% rest</div>
   </div>
 
 </div>
