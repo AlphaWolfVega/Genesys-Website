@@ -1734,6 +1734,22 @@
   /* Timeline animee — section "Mon parcours" */
   .story-anim-wrap{display:flex;justify-content:center;width:100%;max-width:380px;margin:18px auto 14px}
   .story-anim{width:100%;height:auto;display:block;filter:drop-shadow(0 0 14px rgba(212,182,106,0.18))}
+  /* Overload anim — section "Plus d'outils, plus de tutos..." */
+  .overload-anim{display:flex;justify-content:center;width:100%;max-width:380px;margin:18px auto 14px}
+  .overload-anim svg{width:100%;height:auto;display:block;filter:drop-shadow(0 0 12px rgba(212,182,106,0.15))}
+  .overload-anim .ovl-item circle:first-child{
+    transform-origin:center;
+    transform-box:fill-box;
+    animation:ovlPulse 3.6s ease-in-out infinite;
+  }
+  .overload-anim g.ovl-item:nth-of-type(1) circle:first-child{animation-delay:0s}
+  .overload-anim g.ovl-item:nth-of-type(2) circle:first-child{animation-delay:-1.2s}
+  .overload-anim g.ovl-item:nth-of-type(3) circle:first-child{animation-delay:-2.4s}
+  @keyframes ovlPulse{
+    0%, 100%{transform:scale(1);stroke:rgba(212,182,106,0.4);fill:rgba(212,182,106,0.06)}
+    16%{transform:scale(1.18);stroke:rgba(212,182,106,1);fill:rgba(212,182,106,0.22)}
+    33%{transform:scale(1);stroke:rgba(212,182,106,0.4);fill:rgba(212,182,106,0.06)}
+  }
   /* 4 archetypes — section "Quel entrepreneur tu es vraiment" */
   .archetypes-anim{display:flex;justify-content:center;align-items:flex-start;gap:14px;margin:18px auto 22px;flex-wrap:nowrap;max-width:380px}
   .arch-item{display:flex;flex-direction:column;align-items:center;gap:7px;flex:0 0 auto;animation:archSpotlight 6s ease-in-out infinite;opacity:0.45;transform-origin:center}
@@ -4218,6 +4234,68 @@
         <div class="line"></div>
       </div>
       <h2>Plus d'outils, plus de tutos,<br>plus de gourous. Et pourtant…<br><em>Tu galères toujours autant.</em></h2>
+      <div class="overload-anim" aria-hidden="true">
+        <svg viewBox="0 0 320 90" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <filter id="ovlGlow" x="-100%" y="-100%" width="300%" height="300%">
+              <feGaussianBlur stdDeviation="1.6" result="b"/>
+              <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+            </filter>
+          </defs>
+          <!-- 3 cercles sources d'overload -->
+          <!-- OUTILS (clé/tournevis) -->
+          <g class="ovl-item" transform="translate(70,32)">
+            <circle r="22" fill="rgba(212,182,106,0.06)" stroke="rgba(212,182,106,0.4)" stroke-width="1.4"/>
+            <g transform="translate(-11,-11)" stroke="rgba(212,182,106,0.75)" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round">
+              <path d="m15 12-8.5 8.5c-.83.83-2.17.83-3 0-.83-.83-.83-2.17 0-3L12 9"/>
+              <path d="M17.64 15 22 10.64"/>
+              <path d="m20.91 11.7-1.25-1.25c-.6-.6-.93-1.4-.93-2.25v-.86L16.01 4.6a5.56 5.56 0 0 0-3.94-1.64H9l.92.82A6.18 6.18 0 0 1 12 8.4v1.56l2 2h2.47l2.26 1.91"/>
+            </g>
+            <!-- Sparkles "+" qui montent -->
+            <text x="0" y="-26" text-anchor="middle" font-family="Inter,sans-serif" font-size="11" font-weight="700" fill="#F0D690" opacity="0">
+              +1
+              <animate attributeName="opacity" values="0;1;0" keyTimes="0;0.5;1" dur="3.6s" repeatCount="indefinite" begin="0s"/>
+              <animate attributeName="y" values="-22;-38" dur="3.6s" repeatCount="indefinite" begin="0s"/>
+            </text>
+          </g>
+          <!-- TUTOS (livre ouvert) -->
+          <g class="ovl-item" transform="translate(160,32)">
+            <circle r="22" fill="rgba(212,182,106,0.06)" stroke="rgba(212,182,106,0.4)" stroke-width="1.4"/>
+            <g transform="translate(-11,-11)" stroke="rgba(212,182,106,0.75)" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/>
+              <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>
+            </g>
+            <text x="0" y="-26" text-anchor="middle" font-family="Inter,sans-serif" font-size="11" font-weight="700" fill="#F0D690" opacity="0">
+              +1
+              <animate attributeName="opacity" values="0;1;0" keyTimes="0;0.5;1" dur="3.6s" repeatCount="indefinite" begin="-1.2s"/>
+              <animate attributeName="y" values="-22;-38" dur="3.6s" repeatCount="indefinite" begin="-1.2s"/>
+            </text>
+          </g>
+          <!-- GOUROUS (silhouette personne avec micro) -->
+          <g class="ovl-item" transform="translate(250,32)">
+            <circle r="22" fill="rgba(212,182,106,0.06)" stroke="rgba(212,182,106,0.4)" stroke-width="1.4"/>
+            <g transform="translate(-11,-11)" stroke="rgba(212,182,106,0.75)" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="8" r="4"/>
+              <path d="M6 21v-2a4 4 0 0 1 4-4h4a4 4 0 0 1 4 4v2"/>
+            </g>
+            <text x="0" y="-26" text-anchor="middle" font-family="Inter,sans-serif" font-size="11" font-weight="700" fill="#F0D690" opacity="0">
+              +1
+              <animate attributeName="opacity" values="0;1;0" keyTimes="0;0.5;1" dur="3.6s" repeatCount="indefinite" begin="-2.4s"/>
+              <animate attributeName="y" values="-22;-38" dur="3.6s" repeatCount="indefinite" begin="-2.4s"/>
+            </text>
+          </g>
+          <!-- Ligne de stagnation au sol — barre de progression vide qui ne bouge pas -->
+          <g transform="translate(0,72)">
+            <line x1="40" y1="0" x2="280" y2="0" stroke="rgba(212,182,106,0.15)" stroke-width="2" stroke-linecap="round"/>
+            <line x1="40" y1="0" x2="280" y2="0" stroke="rgba(232,148,107,0.5)" stroke-width="2" stroke-linecap="round" stroke-dasharray="3 4"/>
+            <!-- Petit point "TOI" qui tente d'avancer mais glisse en arriere — sur place -->
+            <circle r="3.2" fill="#E8946B" filter="url(#ovlGlow)">
+              <animate attributeName="cx" values="46;58;48;52;44;50;46" keyTimes="0;0.18;0.36;0.55;0.72;0.88;1" dur="3.6s" repeatCount="indefinite"/>
+            </circle>
+            <text x="160" y="14" text-anchor="middle" font-family="Inter,sans-serif" font-size="9" font-weight="700" fill="rgba(232,148,107,0.7)" letter-spacing="0.18em">SUR PLACE</text>
+          </g>
+        </svg>
+      </div>
       <p>C'est mathématique : plus l'info est facile à trouver, moins elle a de valeur, et plus c'est ce qu'on en fait qui fait la différence. Trois choses se payent cher en 2026 : <strong>savoir par où commencer</strong>, <strong>avoir quelqu'un qui te corrige quand tu te trompes</strong>, et <strong>un environnement où tu n'avances pas seul</strong>. GENESYS, c'est les trois en un seul endroit.</p>
     </div>
     <div class="value-grid">
