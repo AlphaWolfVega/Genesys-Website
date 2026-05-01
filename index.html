@@ -3615,7 +3615,93 @@
   .faq-q .ico{font-size:20px;color:var(--gold);font-weight:300;transition:transform .35s ease;font-family:'Inter',sans-serif;letter-spacing:0}
   .faq.open .faq-q .ico{transform:rotate(45deg)}
   .faq-a{max-height:0;overflow:hidden;transition:max-height .4s ease;color:var(--text-mute);font-size:15.5px;line-height:1.75;font-weight:300}
-  .faq.open .faq-a{max-height:600px;padding-bottom:32px}
+  .faq.open .faq-a{max-height:800px;padding-bottom:32px}
+
+  /* ===== FAQ — animation question → answer ===== */
+  .faq-anim{
+    max-width:560px;
+    margin:-30px auto 50px;
+    padding:0 20px;
+  }
+  .faq-anim-row{
+    display:flex;
+    align-items:flex-start;
+    justify-content:space-between;
+    gap:14px;
+  }
+  .faq-anim-bubble{
+    display:flex;flex-direction:column;align-items:center;
+    gap:10px;flex-shrink:0;width:auto;
+  }
+  .faq-anim-icon{
+    width:50px;height:50px;
+    display:flex;align-items:center;justify-content:center;
+    border-radius:50%;
+    font-family:'Inter',sans-serif;
+    font-weight:700;line-height:1;
+    border:2px solid;
+  }
+  .faq-anim-bubble.q .faq-anim-icon{
+    border-color:rgba(212,182,106,0.5);
+    color:var(--gold);
+    background:rgba(212,182,106,0.08);
+    font-size:24px;
+  }
+  .faq-anim-bubble.a .faq-anim-icon{
+    border-color:#5BD16F;
+    color:#5BD16F;
+    background:rgba(91,209,111,0.08);
+    font-size:22px;
+    animation:faqCheckPulse 4s ease-in-out infinite;
+  }
+  .faq-anim-label{
+    font-family:'Inter',sans-serif;
+    font-size:11px;
+    letter-spacing:0.16em;
+    text-transform:uppercase;
+    color:var(--text-faint);
+    font-weight:600;
+    text-align:center;
+  }
+  .faq-anim-track{
+    flex:1;
+    height:2px;
+    background:repeating-linear-gradient(90deg, rgba(212,182,106,0.35) 0 4px, transparent 4px 8px);
+    position:relative;
+    margin:24px 4px 0;
+    align-self:flex-start;
+  }
+  .faq-anim-dot{
+    position:absolute;
+    top:50%;left:0;
+    width:10px;height:10px;
+    border-radius:50%;
+    background:var(--gold);
+    box-shadow:0 0 14px rgba(212,182,106,0.7);
+    transform:translate(-50%,-50%);
+    animation:faqDotMove 4s linear infinite;
+  }
+  @keyframes faqDotMove{
+    0%{left:0; opacity:0}
+    10%{opacity:1}
+    85%{opacity:1; left:100%}
+    100%{left:100%; opacity:0}
+  }
+  @keyframes faqCheckPulse{
+    0%, 75%{transform:scale(1); filter:none}
+    85%{transform:scale(1.14); filter:drop-shadow(0 0 16px rgba(91,209,111,0.65))}
+    100%{transform:scale(1); filter:none}
+  }
+  @media(max-width:600px){
+    .faq-anim{margin:-20px auto 36px}
+    .faq-anim-icon{width:42px;height:42px;font-size:19px}
+    .faq-anim-bubble.q .faq-anim-icon{font-size:20px}
+    .faq-anim-bubble.a .faq-anim-icon{font-size:18px}
+    .faq-anim-label{font-size:9.5px;letter-spacing:0.12em}
+    .faq-anim-track{margin-top:20px}
+  }
+  .faq-a p{margin:0 0 14px 0}
+  .faq-a p:last-child{margin-bottom:0}
 
   /* ===== FINAL CTA ===== */
   .final{
@@ -6626,12 +6712,29 @@
         <span class="label">Questions fréquentes</span>
         <div class="line"></div>
       </div>
-      <h2>Tout ce que<br>tu te demandes<br><em>avant de cliquer</em></h2>
+      <h2>Les réponses<br><em>à tes questions</em></h2>
+    </div>
+    <div class="faq-anim reveal" aria-hidden="true">
+      <div class="faq-anim-row">
+        <div class="faq-anim-bubble q">
+          <div class="faq-anim-icon">?</div>
+          <div class="faq-anim-label">Une question</div>
+        </div>
+        <div class="faq-anim-track"><div class="faq-anim-dot"></div></div>
+        <div class="faq-anim-bubble a">
+          <div class="faq-anim-icon">&#10003;</div>
+          <div class="faq-anim-label">Une réponse claire</div>
+        </div>
+      </div>
     </div>
     <div class="faq-list">
       <div class="faq">
         <button class="faq-q">C'est quoi exactement, GENESYS ? <span class="ico">+</span></button>
         <div class="faq-a">GENESYS, c'est l'endroit où tu arrêtes d'apprendre dans le vide. Tu y trouves la méthode, les modules, les échanges et les réponses directes au même endroit. Techniquement, la communauté est hébergée sur Skool : tu paies 49 $/mois, tu accèdes à 23 modules, à l'espace privé et aux lives. Rien à installer.</div>
+      </div>
+      <div class="faq">
+        <button class="faq-q">C'est quoi exactement, le protocole α-QUANT ? <span class="ico">+</span></button>
+        <div class="faq-a"><p>C'est la séquence de décisions que je suis sur chacune de mes boutiques actives. Pas une formule magique, juste l'ordre dans lequel chaque décision doit être prise pour qu'une boutique e-commerce tienne debout : choix du produit, angle de vente, structure de page, priorités de test, scaling.</p><p>Le problème, ce n'est jamais l'info qu'on te donne. C'est l'ordre dans lequel elle arrive. La plupart des gens connaissent déjà 70 à 80% des éléments. Ils les appliquent juste dans le mauvais sens, et c'est ce qui les fait revenir en arrière 6 mois plus tard.</p><p>α-QUANT met de l'ordre dans cette connaissance dispersée. À chaque étape, tu sais ce qui mérite ton attention, ce qui doit attendre, et ce que tu peux ignorer pour l'instant. Tu suis la séquence, je regarde par-dessus ton épaule.</p></div>
       </div>
       <div class="faq">
         <button class="faq-q">Je suis débutant total. C'est pour moi ? <span class="ico">+</span></button>
