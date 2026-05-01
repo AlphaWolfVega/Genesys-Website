@@ -3231,6 +3231,89 @@
     font-size:15px;color:var(--text-mute);line-height:1.7;
     text-align:left;
   }
+
+  /* ===== TEAM BIO — structured layout (tagline + context + bullets) ===== */
+  .founder .bio-tagline{
+    font-family:'Inter',sans-serif;
+    font-size:18px;
+    font-weight:700;
+    color:var(--text);
+    margin:0 0 18px 0;
+    line-height:1.4;
+    letter-spacing:-0.005em;
+  }
+  .founder .bio-context{
+    margin:0 0 26px 0;
+    padding-bottom:24px;
+    border-bottom:1px solid rgba(212,182,106,0.18);
+  }
+  .founder .bio-context p{
+    font-family:'Inter',sans-serif;
+    font-size:15px;
+    color:var(--text-mute);
+    line-height:1.7;
+    margin:0;
+    font-weight:400;
+    text-align:left;
+  }
+  .founder .bio-context p strong{
+    color:var(--text);
+    font-weight:600;
+    font-family:'Inter',sans-serif;
+    text-transform:none;
+    letter-spacing:0;
+    font-size:inherit;
+  }
+  .founder .bio-section-title{
+    display:block;
+    font-family:'Inter',sans-serif;
+    font-size:11px;
+    font-weight:700;
+    color:var(--gold);
+    letter-spacing:0.22em;
+    text-transform:uppercase;
+    margin:0 0 18px 0;
+  }
+  .founder .bio-bullets{
+    list-style:none;
+    margin:0 0 28px 0;
+    padding:0;
+    display:flex;flex-direction:column;
+    gap:13px;
+  }
+  .founder .bio-bullets li{
+    position:relative;
+    padding-left:22px;
+    font-size:14.5px;
+    line-height:1.6;
+    color:var(--text-mute);
+    font-family:'Inter',sans-serif;
+    font-weight:400;
+  }
+  .founder .bio-bullets li::before{
+    content:"";
+    position:absolute;
+    left:0;top:8px;
+    width:6px;height:6px;
+    background:var(--gold);
+    border-radius:50%;
+    box-shadow:0 0 10px rgba(212,182,106,0.55);
+  }
+  .founder .bio-bullets li strong{
+    color:var(--text);
+    font-weight:600;
+    font-family:'Inter',sans-serif;
+    text-transform:none;
+    letter-spacing:0;
+    font-size:inherit;
+  }
+  @media(max-width:600px){
+    .founder .bio-tagline{font-size:16px}
+    .founder .bio-context p{font-size:14px;line-height:1.65}
+    .founder .bio-bullets li{font-size:13.5px}
+    .founder .bio-bullets{gap:11px}
+  }
+
   /* ===== FOUNDER LETTER (Alpha — direct speech, manuscrit) ===== */
   .founder-letter > div:last-child{position:relative}
   .founder-letter > div:last-child::before{
@@ -6207,7 +6290,16 @@
               <p class="letter-greet">Salut, c'est Alpha.</p>
               <p>J'ai connu les mêmes débuts que la plupart d'entre vous : changer trop vite de produit, brûler du budget sans savoir lire les signaux, empiler des méthodes qui se contredisent. <strong>C'est de là qu'est née GENESYS.</strong></p>
               <p>Plusieurs millions d'euros plus tard, à travers plusieurs boutiques sur Shopify (dont <strong>trois encore actives en ce moment</strong>), j'ai distillé tout ce que j'ai appris dans <strong class="protocole-tag">le protocole <span class="greek-alpha">&#945;</span>-QUANT</strong> : la méthode que tu vas suivre dedans. Choix du produit, angle de vente, structure de page, priorités de test. Chaque décision a sa place dans la séquence.</p>
-              <p>Mon rôle ici, c'est simple. Je t'aide à remettre de l'ordre dans ce que tu fais déjà, à couper les faux problèmes, et à voir plus vite ce qui mérite vraiment ton attention.</p>
+
+              <div class="bio-section-title">Mon rôle dans GENESYS</div>
+
+              <ul class="bio-bullets">
+                <li><strong>Remettre de l'ordre</strong> dans ce que tu fais déjà</li>
+                <li><strong>Couper les faux problèmes</strong> qui te bouffent du temps</li>
+                <li><strong>Te montrer plus vite</strong> ce qui mérite ton attention</li>
+                <li><strong>Mon œil direct</strong> sur les blocages qui le méritent</li>
+              </ul>
+
               <div class="founder-quote">
                 « Tu postes ta question. Je regarde le vrai blocage, pas juste le symptôme. »
               </div>
@@ -6226,9 +6318,23 @@
             <div>
               <div class="role">— TECH, MEDIA BUY &amp; SÉCURITÉ —</div>
               <h3>Souly</h3>
-              <p><strong>Tracking, pubs, sécurité, dépôt de marque.</strong></p>
-              <p>Près d'un million d'euros générés sur Shopify. Tout ce qui se passe sous le capot d'une boutique, c'est mon terrain : du setup pixel à la campagne Meta qu'on scale sans casser, du Google Shopping automatisé à la protection légale d'une marque.</p>
-              <p>Dans GENESYS, je m'occupe de la couche qui passe inaperçue mais qui plombe une boutique : un tracking faussé, une campagne qui dépense sans convertir, un pixel qui envoie n'importe quoi, une boutique pas protégée. Je review tes setups, je débugge tes pubs Meta et Google, je réponds aux questions techniques dans l'espace privé, et je fais des lives dédiés dès qu'un sujet mérite qu'on creuse.</p>
+
+              <div class="bio-tagline">Tracking, pubs, sécurité, dépôt de marque.</div>
+
+              <div class="bio-context">
+                <p>Près d'un million d'euros générés sur Shopify. Tout ce qui se passe sous le capot d'une boutique, c'est mon terrain : du setup pixel à la campagne Meta qu'on scale sans casser, du Google Shopping automatisé à la protection légale d'une marque.</p>
+              </div>
+
+              <div class="bio-section-title">Dans GENESYS</div>
+
+              <ul class="bio-bullets">
+                <li><strong>Setup tracking propre</strong> : pixel Meta, Google Tag, événements qui remontent les bonnes infos</li>
+                <li><strong>Pubs Meta et Google</strong> qui scalent sans tout casser à chaque palier</li>
+                <li><strong>Audit + débug</strong> des outils qui plombent la conversion sans qu'on le voie</li>
+                <li><strong>Sécurité e-com et dépôt de marque</strong> pour protéger ce que tu construis</li>
+                <li><strong>Lives techniques</strong> dès qu'un sujet mérite qu'on creuse à plusieurs</li>
+              </ul>
+
               <div class="founder-quote">
                 « Si ton tracking est cassé, c'est pas tes pubs qui ont un problème. C'est ce qui te dit qu'elles en ont un. »
               </div>
@@ -6243,9 +6349,23 @@
             <div>
               <div class="role">— STRATÉGIE &amp; BRAND DESIGN —</div>
               <h3>Anaïs</h3>
-              <p><strong>Paris Dauphine, salles de marché, e-commerce.</strong></p>
-              <p>Près d'un million d'euros de chiffre d'affaires générés. La finance et le marketing partagent la même mécanique : analyser, parier, exécuter. La différence, c'est qu'en e-commerce, tu construis ta propre marque au lieu de placer l'argent des autres.</p>
-              <p>Dans GENESYS, je m'occupe de ce qui transforme un produit générique en marque qu'on reconnaît : positionnement, identité visuelle qui convertit, audit de boutique sous l'angle marque. J'enseigne dans les modules brand et positionnement, j'aide à choisir l'univers visuel d'une boutique en lancement, et je review les pages produit pour que ton identité tienne du premier scroll au passage en caisse.</p>
+
+              <div class="bio-tagline">Paris Dauphine, salles de marché, e-commerce.</div>
+
+              <div class="bio-context">
+                <p>Près d'un million d'euros de chiffre d'affaires générés. La finance et le marketing partagent la même mécanique : analyser, parier, exécuter. La différence, c'est qu'en e-commerce, tu construis ta propre marque au lieu de placer l'argent des autres.</p>
+              </div>
+
+              <div class="bio-section-title">Dans GENESYS</div>
+
+              <ul class="bio-bullets">
+                <li><strong>Positionnement de marque</strong> : trouver l'angle qui transforme un produit générique en référence</li>
+                <li><strong>Identité visuelle qui convertit</strong> : direction artistique qui sert tes ventes, pas qui les freine</li>
+                <li><strong>Audit boutique sous angle marque</strong> : tout ce qui dilue ton univers, on le sort</li>
+                <li><strong>Modules brand &amp; positionnement</strong> : enseignement structuré dans GENESYS</li>
+                <li><strong>Review pages produit</strong> : que ton identité tienne du premier scroll au passage en caisse</li>
+              </ul>
+
               <div class="founder-quote">
                 « Une boutique sans identité, c'est un catalogue. Une marque, c'est un univers que les gens veulent rejoindre. »
               </div>
