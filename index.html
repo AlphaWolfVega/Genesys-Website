@@ -828,7 +828,9 @@
     }
 
     /* === VRAIE RAISON DES ECHECS — air & breathing === */
-    .hl-vraie-pretitle{line-height:1.35 !important;margin-bottom:14px !important}
+    .hl-vraie-anim-wrap{display:flex;justify-content:center;width:100%;margin:0 auto 8px}
+    .hl-vraie-anim{width:140px;height:auto;display:block;filter:drop-shadow(0 0 10px rgba(212,182,106,0.22))}
+    .hl-vraie-pretitle{font-size:14.5px !important;letter-spacing:0.22em !important;line-height:1.4 !important;margin-bottom:14px !important}
     .hl-vraie-list{margin:0 0 16px 0 !important;gap:7px !important}
     .hl-vraie-list li{font-size:11.5px !important;line-height:1.4 !important;padding-left:20px !important}
     .hl-vraie-list li::before{font-size:14px !important;width:14px !important}
@@ -1646,7 +1648,8 @@
     }
 
     /* === VRAIE RAISON DES ECHECS (mobile tweaks) === */
-    .hl-vraie-pretitle{line-height:1.35 !important;margin-bottom:14px !important}
+    .hl-vraie-anim{width:150px !important}
+    .hl-vraie-pretitle{font-size:15px !important;letter-spacing:0.22em !important;line-height:1.4 !important;margin-bottom:14px !important}
     .hl-vraie-list{margin-bottom:14px !important;gap:6px !important}
     .hl-vraie-list li{font-size:11px !important;line-height:1.4 !important;padding-left:18px !important}
     .hl-vraie-list li::before{font-size:14px !important;width:13px !important}
@@ -3691,6 +3694,34 @@
       </div>
       <div class="hero-lead-slide hero-lead-slide-diag">
         <div class="hero-lead-card">
+          <div class="hl-vraie-anim-wrap" aria-hidden="true">
+            <svg viewBox="0 0 160 56" class="hl-vraie-anim" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <linearGradient id="hlVraieGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+                  <stop offset="0%" stop-color="#D4B66A"/>
+                  <stop offset="50%" stop-color="#F0D690"/>
+                  <stop offset="72%" stop-color="#E8946B"/>
+                  <stop offset="100%" stop-color="#C84B3A"/>
+                </linearGradient>
+                <filter id="hlVraieGlow" x="-50%" y="-50%" width="200%" height="200%">
+                  <feGaussianBlur stdDeviation="1.6" result="b"/>
+                  <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+                </filter>
+              </defs>
+              <!-- Baseline tirets dim -->
+              <line x1="4" y1="50" x2="156" y2="50" stroke="rgba(212,182,106,0.22)" stroke-width="0.8" stroke-dasharray="2 3"/>
+              <!-- Trajectoire : monte puis crash -->
+              <path id="hlCrashPath" d="M 8 46 L 30 38 L 52 28 L 76 16 L 100 26 L 122 40 L 152 50" fill="none" stroke="url(#hlVraieGrad)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" filter="url(#hlVraieGlow)"/>
+              <!-- Point lumineux qui parcourt la trajectoire -->
+              <circle r="3" fill="#FFE4B0" filter="url(#hlVraieGlow)">
+                <animateMotion dur="2.8s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.55;0.7;1" keySplines="0.4 0 0.6 1 ; 0.5 0 0.5 1 ; 0.7 0 0.4 1">
+                  <mpath href="#hlCrashPath"/>
+                </animateMotion>
+                <animate attributeName="fill" values="#FFE4B0;#F0D690;#E8946B;#C84B3A;#FFE4B0" keyTimes="0;0.4;0.6;0.85;1" dur="2.8s" repeatCount="indefinite"/>
+                <animate attributeName="r" values="2.8;3.2;3.5;4;2.8" keyTimes="0;0.4;0.6;0.85;1" dur="2.8s" repeatCount="indefinite"/>
+              </circle>
+            </svg>
+          </div>
           <span class="hl-pretitle hl-pretitle-lg hl-vraie-pretitle">Les vraies raisons<br>de tes échecs</span>
           <span class="hl-pretitle-divider" aria-hidden="true"></span>
           <ul class="hl-diag-list hl-vraie-list">
@@ -3706,6 +3737,8 @@
             <li>Tu changes de produit toutes les 2 semaines</li>
             <li>Tu suis 10 formations qui se contredisent</li>
             <li>Tu blâmes Meta quand ta créative est mauvaise</li>
+            <li>Tu confonds chiffre d'affaires et bénéfice réel</li>
+            <li>Tu réinjectes ton cash perso pour sauver une pub qui plonge</li>
             <li>Tu testes la couleur du bouton avant de revoir ton hero</li>
           </ul>
           <div class="hl-vraie-verdict-wrap">
