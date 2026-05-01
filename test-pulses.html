@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Test pulsations boutons — GENESYS</title>
+<title>Test pulsations boutons — Slow Ring (déclinaisons)</title>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
   *{margin:0;padding:0;box-sizing:border-box}
@@ -14,8 +14,8 @@
   h1{font-size:28px;text-align:center;margin-bottom:8px;letter-spacing:-0.01em}
   .sub{text-align:center;color:#9aa3b2;font-size:14px;margin-bottom:50px}
   .grid{
-    max-width:1200px;margin:0 auto;
-    display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
+    max-width:1280px;margin:0 auto;
+    display:grid;grid-template-columns:repeat(auto-fit,minmax(330px,1fr));
     gap:60px 30px;
     padding:30px 0;
   }
@@ -28,6 +28,7 @@
     position:relative;
     min-height:240px;
     display:flex;flex-direction:column;align-items:center;justify-content:center;
+    overflow:visible;
   }
   .card .num{
     position:absolute;top:14px;left:18px;
@@ -35,12 +36,12 @@
     font-size:11px;color:#D4B66A;font-weight:700;letter-spacing:0.1em;
   }
   .card .label{
-    margin-top:36px;font-size:13px;color:#9aa3b2;
+    margin-top:42px;font-size:13px;color:#9aa3b2;
     text-transform:uppercase;letter-spacing:0.1em;font-weight:600;
   }
   .card .desc{
     margin-top:8px;font-size:12px;color:#6b7382;
-    line-height:1.5;max-width:260px;
+    line-height:1.5;max-width:280px;
   }
 
   /* ===== BASE BUTTON ===== */
@@ -58,189 +59,221 @@
   .btn::after{
     content:"→";font-size:18px;font-weight:700;
   }
-
-  /* ===== 1. HEARTBEAT ===== */
-  .v1{animation:heartbeat 1.6s ease-in-out infinite;box-shadow:0 0 30px rgba(212,182,106,0.4)}
-  @keyframes heartbeat{
-    0%,40%,100%{transform:scale(1)}
-    10%{transform:scale(1.04)}
-    20%{transform:scale(1)}
-    25%{transform:scale(1.06)}
-    35%{transform:scale(1)}
-  }
-
-  /* ===== 2. HALO RESPIRATION (blur-only) ===== */
-  .v2{animation:halo 3.2s ease-in-out infinite}
-  @keyframes halo{
-    0%,100%{
-      box-shadow:
-        0 0 18px rgba(212,182,106,0.20),
-        0 0 42px rgba(212,182,106,0.14),
-        0 0 78px rgba(212,182,106,0.08);
-    }
-    50%{
-      box-shadow:
-        0 0 30px rgba(212,182,106,0.55),
-        0 0 68px rgba(212,182,106,0.35),
-        0 0 120px rgba(212,182,106,0.20);
-    }
-  }
-
-  /* ===== 3. ECHO RIPPLE (current, more visible) ===== */
-  .v3{box-shadow:0 0 28px rgba(212,182,106,0.35);position:relative}
-  .v3::before, .v3 .echo{
-    content:"";position:absolute;inset:-2px;
-    border-radius:999px;
-    background:radial-gradient(ellipse at center,rgba(212,182,106,0.85) 0%,rgba(212,182,106,0.55) 35%,rgba(212,182,106,0.18) 65%,rgba(212,182,106,0) 85%);
-    pointer-events:none;opacity:0;z-index:-1;
-    animation:echoR 2.4s cubic-bezier(.22,.6,.36,1) infinite;
-  }
-  .v3 .echo.e2{animation-delay:0.8s}
-  .v3 .echo.e3{animation-delay:1.6s}
-  @keyframes echoR{
-    0%{transform:scale(1);opacity:0.85}
-    60%{opacity:0.35}
-    100%{transform:scale(1.75);opacity:0}
-  }
-
-  /* ===== 4. AURA (gros halo unique qui respire, sans scale) ===== */
-  .v4{animation:aura 4s ease-in-out infinite}
-  @keyframes aura{
-    0%,100%{box-shadow:0 0 20px rgba(212,182,106,0.25), 0 0 80px rgba(212,182,106,0.10)}
-    50%{box-shadow:0 0 50px rgba(212,182,106,0.85), 0 0 150px rgba(212,182,106,0.45)}
-  }
-
-  /* ===== 5. CHASE BORDER (lumière qui tourne autour) ===== */
-  .v5{position:relative;box-shadow:0 0 24px rgba(212,182,106,0.3);overflow:visible}
-  .v5::before{
-    content:"";position:absolute;inset:-3px;border-radius:999px;
-    background:conic-gradient(from 0deg, transparent 0deg, transparent 270deg, rgba(255,235,170,0.95) 320deg, rgba(212,182,106,0.6) 340deg, transparent 360deg);
-    z-index:-1;
-    animation:chase 3s linear infinite;
-    -webkit-mask:radial-gradient(circle at center, transparent 60%, #000 62%);
-            mask:radial-gradient(circle at center, transparent 60%, #000 62%);
-  }
-  @keyframes chase{
-    0%{transform:rotate(0deg)}
-    100%{transform:rotate(360deg)}
-  }
-
-  /* ===== 6. SOFT BREATHING (scale subtle + halo) ===== */
-  .v6{animation:breathe 3.8s ease-in-out infinite}
-  @keyframes breathe{
-    0%,100%{transform:scale(1);box-shadow:0 0 24px rgba(212,182,106,0.30)}
-    50%{transform:scale(1.025);box-shadow:0 0 50px rgba(212,182,106,0.65)}
-  }
-
-  /* ===== 7. SHIMMER (light sweep diagonal) ===== */
-  .v7{box-shadow:0 0 30px rgba(212,182,106,0.35);overflow:hidden;isolation:isolate}
-  .v7::before{
-    content:"";position:absolute;inset:0;border-radius:inherit;
-    background:linear-gradient(115deg,transparent 35%,rgba(255,255,255,0.55) 50%,transparent 65%);
-    transform:translateX(-150%);
-    animation:shimmer 2.8s ease-in-out infinite;
-    z-index:1;pointer-events:none;
-  }
-  @keyframes shimmer{
-    0%{transform:translateX(-150%)}
-    60%,100%{transform:translateX(150%)}
-  }
-
-  /* ===== 8. SOFT GLOW + RING ÉCHO LENT (1 seule onde lente) ===== */
-  .v8{box-shadow:0 0 28px rgba(212,182,106,0.4);position:relative}
-  .v8::before{
+  .btn .ring{
     content:"";position:absolute;inset:0;border-radius:999px;
-    border:2px solid rgba(212,182,106,0.7);
-    animation:slowRing 3.2s ease-out infinite;
     pointer-events:none;
   }
-  @keyframes slowRing{
+
+  /* ===== 08-A — ORIGINAL (référence) ===== */
+  .vA{box-shadow:0 0 28px rgba(212,182,106,0.4)}
+  .vA::before{
+    content:"";position:absolute;inset:0;border-radius:999px;
+    border:2px solid rgba(212,182,106,0.7);
+    animation:ringA 3.2s ease-out infinite;
+    pointer-events:none;
+  }
+  @keyframes ringA{
     0%{transform:scale(1);opacity:0.9}
     100%{transform:scale(1.5);opacity:0}
   }
 
-  /* ===== 9. GLINT (éclats brefs aléatoires sur la surface) ===== */
-  .v9{box-shadow:0 0 28px rgba(212,182,106,0.35);overflow:hidden;isolation:isolate}
-  .v9::before{
-    content:"";position:absolute;inset:0;border-radius:inherit;
-    background:radial-gradient(circle at 30% 50%, rgba(255,255,255,0.7), transparent 25%);
-    animation:glint 2.6s ease-in-out infinite;
+  /* ===== 08-B — Fin minimaliste lent ===== */
+  .vB{box-shadow:0 0 24px rgba(212,182,106,0.30)}
+  .vB::before{
+    content:"";position:absolute;inset:0;border-radius:999px;
+    border:1px solid rgba(212,182,106,0.85);
+    animation:ringB 4.5s ease-out infinite;
     pointer-events:none;
   }
-  @keyframes glint{
-    0%,100%{opacity:0;background-position:0% 50%}
-    50%{opacity:1;background-position:100% 50%}
+  @keyframes ringB{
+    0%{transform:scale(1);opacity:1}
+    100%{transform:scale(1.7);opacity:0}
+  }
+
+  /* ===== 08-C — Épais et rapide ===== */
+  .vC{box-shadow:0 0 30px rgba(212,182,106,0.45)}
+  .vC::before{
+    content:"";position:absolute;inset:0;border-radius:999px;
+    border:3px solid rgba(212,182,106,0.85);
+    animation:ringC 2s ease-out infinite;
+    pointer-events:none;
+  }
+  @keyframes ringC{
+    0%{transform:scale(1);opacity:1}
+    100%{transform:scale(1.4);opacity:0}
+  }
+
+  /* ===== 08-D — Double ring cascade ===== */
+  .vD{box-shadow:0 0 28px rgba(212,182,106,0.4)}
+  .vD::before, .vD .ring2{
+    content:"";position:absolute;inset:0;border-radius:999px;
+    border:2px solid rgba(212,182,106,0.75);
+    animation:ringD 3.2s ease-out infinite;
+    pointer-events:none;
+  }
+  .vD .ring2{animation-delay:1.6s}
+  @keyframes ringD{
+    0%{transform:scale(1);opacity:0.95}
+    100%{transform:scale(1.55);opacity:0}
+  }
+
+  /* ===== 08-E — Triple ring cascade dense ===== */
+  .vE{box-shadow:0 0 28px rgba(212,182,106,0.4)}
+  .vE::before, .vE .ring2, .vE .ring3{
+    content:"";position:absolute;inset:0;border-radius:999px;
+    border:1.5px solid rgba(212,182,106,0.8);
+    animation:ringE 3.3s ease-out infinite;
+    pointer-events:none;
+  }
+  .vE .ring2{animation-delay:1.1s}
+  .vE .ring3{animation-delay:2.2s}
+  @keyframes ringE{
+    0%{transform:scale(1);opacity:1}
+    100%{transform:scale(1.55);opacity:0}
+  }
+
+  /* ===== 08-F — Ring + halo synchro ===== */
+  .vF{animation:haloF 3.2s ease-in-out infinite}
+  .vF::before{
+    content:"";position:absolute;inset:0;border-radius:999px;
+    border:2px solid rgba(212,182,106,0.8);
+    animation:ringF 3.2s ease-out infinite;
+    pointer-events:none;
+  }
+  @keyframes haloF{
+    0%,100%{box-shadow:0 0 18px rgba(212,182,106,0.25)}
+    50%{box-shadow:0 0 50px rgba(212,182,106,0.7)}
+  }
+  @keyframes ringF{
+    0%{transform:scale(1);opacity:1}
+    100%{transform:scale(1.55);opacity:0}
+  }
+
+  /* ===== 08-G — Onde longue distance ===== */
+  .vG{box-shadow:0 0 28px rgba(212,182,106,0.4)}
+  .vG::before{
+    content:"";position:absolute;inset:0;border-radius:999px;
+    border:1px solid rgba(212,182,106,0.95);
+    animation:ringG 4s ease-out infinite;
+    pointer-events:none;
+  }
+  @keyframes ringG{
+    0%{transform:scale(1);opacity:1}
+    100%{transform:scale(2.2);opacity:0}
+  }
+
+  /* ===== 08-H — Mille-feuille (2 rings simultanés vitesses différentes) ===== */
+  .vH{box-shadow:0 0 28px rgba(212,182,106,0.4)}
+  .vH::before{
+    content:"";position:absolute;inset:0;border-radius:999px;
+    border:2px solid rgba(212,182,106,0.8);
+    animation:ringH1 2.2s ease-out infinite;
+    pointer-events:none;
+  }
+  .vH .ring2{
+    border:1.5px solid rgba(212,182,106,0.6);
+    animation:ringH2 3.6s ease-out infinite;
+  }
+  @keyframes ringH1{
+    0%{transform:scale(1);opacity:0.9}
+    100%{transform:scale(1.4);opacity:0}
+  }
+  @keyframes ringH2{
+    0%{transform:scale(1);opacity:0.7}
+    100%{transform:scale(1.85);opacity:0}
+  }
+
+  /* ===== 08-I — Sonar bidirectionnel ===== */
+  .vI{box-shadow:0 0 28px rgba(212,182,106,0.4),inset 0 0 0 0 rgba(212,182,106,0.5)}
+  .vI::before{
+    content:"";position:absolute;inset:0;border-radius:999px;
+    border:2px solid rgba(212,182,106,0.85);
+    animation:ringI1 3s ease-out infinite;
+    pointer-events:none;
+  }
+  .vI .ring2{
+    border:1.5px solid rgba(255,235,170,0.9);
+    transform-origin:center;
+    animation:ringI2 3s ease-in infinite;
+  }
+  @keyframes ringI1{
+    0%{transform:scale(1);opacity:0.95}
+    100%{transform:scale(1.55);opacity:0}
+  }
+  @keyframes ringI2{
+    0%{transform:scale(1.4);opacity:0}
+    100%{transform:scale(1);opacity:0.85}
   }
 </style>
 </head>
 <body>
 
-<h1>Tests pulsations boutons or</h1>
-<p class="sub">9 variantes — clique pour copier le numéro, pour valider la version finale dis-moi juste le numéro</p>
+<h1>Slow Ring — 9 déclinaisons</h1>
+<p class="sub">A = original. Dis-moi la lettre qui te plaît, j'applique.</p>
 
 <div class="grid">
 
   <div class="card">
-    <span class="num">01</span>
-    <button class="btn v1">Rejoindre GENESYS</button>
-    <div class="label">Heartbeat</div>
-    <div class="desc">Battement de cœur (lub-dub) — micro pulse de scale, comme un signe vital.</div>
+    <span class="num">08-A · ORIGINAL</span>
+    <button class="btn vA">Rejoindre GENESYS</button>
+    <div class="label">Slow ring (référence)</div>
+    <div class="desc">1 ring 2px, scale 1.5, durée 3.2s. Sobre, type radar.</div>
   </div>
 
   <div class="card">
-    <span class="num">02</span>
-    <button class="btn v2">Rejoindre GENESYS</button>
-    <div class="label">Halo respiration</div>
-    <div class="desc">Box-shadow blur-only multi-couches qui inspire et expire. Très calme.</div>
+    <span class="num">08-B</span>
+    <button class="btn vB">Rejoindre GENESYS</button>
+    <div class="label">Fin lent</div>
+    <div class="desc">Ring 1px très fin, scale 1.7, durée 4.5s. Minimaliste, élégant.</div>
   </div>
 
   <div class="card">
-    <span class="num">03</span>
-    <button class="btn v3">Rejoindre GENESYS<span class="echo e2"></span><span class="echo e3"></span></button>
-    <div class="label">Écho ripple iOS</div>
-    <div class="desc">3 vagues d'ondulations en cascade qui partent du bouton et s'évanouissent.</div>
+    <span class="num">08-C</span>
+    <button class="btn vC">Rejoindre GENESYS</button>
+    <div class="label">Épais rapide</div>
+    <div class="desc">Ring 3px, scale 1.4, durée 2s. Plus marqué, plus pressant.</div>
   </div>
 
   <div class="card">
-    <span class="num">04</span>
-    <button class="btn v4">Rejoindre GENESYS</button>
-    <div class="label">Aura intense</div>
-    <div class="desc">Un seul halo lointain très dense qui brille puis se contracte. Présence forte.</div>
+    <span class="num">08-D</span>
+    <button class="btn vD">Rejoindre GENESYS<span class="ring ring2"></span></button>
+    <div class="label">Double ring cascade</div>
+    <div class="desc">2 ondes décalées de 1.6s. Continuité sans temps mort.</div>
   </div>
 
   <div class="card">
-    <span class="num">05</span>
-    <button class="btn v5">Rejoindre GENESYS</button>
-    <div class="label">Chase border</div>
-    <div class="desc">Lumière dorée qui tourne autour du bouton en continu. Très cinétique.</div>
+    <span class="num">08-E</span>
+    <button class="btn vE">Rejoindre GENESYS<span class="ring ring2"></span><span class="ring ring3"></span></button>
+    <div class="label">Triple ring cascade</div>
+    <div class="desc">3 ondes décalées de 1.1s. Effet radar dense.</div>
   </div>
 
   <div class="card">
-    <span class="num">06</span>
-    <button class="btn v6">Rejoindre GENESYS</button>
-    <div class="label">Breathing soft</div>
-    <div class="desc">Scale subtil (+2.5%) + halo qui pulse avec. Le bouton respire physiquement.</div>
+    <span class="num">08-F</span>
+    <button class="btn vF">Rejoindre GENESYS</button>
+    <div class="label">Ring + halo synchro</div>
+    <div class="desc">Le bouton s'allume au moment où le ring part. Charisme.</div>
   </div>
 
   <div class="card">
-    <span class="num">07</span>
-    <button class="btn v7">Rejoindre GENESYS</button>
-    <div class="label">Shimmer</div>
-    <div class="desc">Reflet de lumière qui balaie en diagonal toutes les 3s. Effet métal poli.</div>
+    <span class="num">08-G</span>
+    <button class="btn vG">Rejoindre GENESYS</button>
+    <div class="label">Onde longue distance</div>
+    <div class="desc">Ring 1px qui scale jusqu'à 2.2 sur 4s. Portée maximale.</div>
   </div>
 
   <div class="card">
-    <span class="num">08</span>
-    <button class="btn v8">Rejoindre GENESYS</button>
-    <div class="label">Slow ring</div>
-    <div class="desc">Une seule onde fine et nette qui se dilate lentement. Sobre, type radar.</div>
+    <span class="num">08-H</span>
+    <button class="btn vH">Rejoindre GENESYS<span class="ring ring2"></span></button>
+    <div class="label">Mille-feuille</div>
+    <div class="desc">2 ondes simultanées vitesses différentes (2.2s + 3.6s).</div>
   </div>
 
   <div class="card">
-    <span class="num">09</span>
-    <button class="btn v9">Rejoindre GENESYS</button>
-    <div class="label">Glint</div>
-    <div class="desc">Reflet ponctuel sur la surface, comme une lumière qui accroche le métal.</div>
+    <span class="num">08-I</span>
+    <button class="btn vI">Rejoindre GENESYS<span class="ring ring2"></span></button>
+    <div class="label">Sonar bidirectionnel</div>
+    <div class="desc">Une onde sort, une autre rentre. Contraction + expansion.</div>
   </div>
 
 </div>
