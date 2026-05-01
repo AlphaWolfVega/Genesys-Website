@@ -1892,6 +1892,19 @@
     fill:none;stroke:rgba(212,182,106,0.13);stroke-width:1;
     stroke-dasharray:2 5;
   }
+  .solar-anim .star{
+    fill:rgba(255,240,200,0.9);
+    filter:drop-shadow(0 0 3px rgba(255,235,180,0.7));
+  }
+  .solar-anim .star.s1{animation:starTwinkle 4.2s ease-in-out infinite}
+  .solar-anim .star.s2{animation:starTwinkle 5.6s ease-in-out infinite;animation-delay:.7s}
+  .solar-anim .star.s3{animation:starTwinkle 3.8s ease-in-out infinite;animation-delay:1.4s}
+  .solar-anim .star.s4{animation:starTwinkle 6.2s ease-in-out infinite;animation-delay:2.1s}
+  .solar-anim .star.s5{animation:starTwinkle 4.8s ease-in-out infinite;animation-delay:2.8s}
+  @keyframes starTwinkle{
+    0%,100%{opacity:.25}
+    50%{opacity:1}
+  }
   .solar-anim .module-dot{
     fill:var(--gold);
     filter:drop-shadow(0 0 5px rgba(212,182,106,0.95)) drop-shadow(0 0 11px rgba(212,182,106,0.55));
@@ -1923,7 +1936,8 @@
   @media (prefers-reduced-motion: reduce){
     .solar-anim .orbit animateTransform,
     .solar-anim .solar-hub-glow,
-    .solar-anim .solar-hub-core{animation:none}
+    .solar-anim .solar-hub-core,
+    .solar-anim .star{animation:none}
     .solar-anim{transition:none}
   }
   @media (max-width:640px){
@@ -5366,6 +5380,34 @@
             </radialGradient>
           </defs>
           <rect width="600" height="420" fill="url(#solarGrid)"/>
+          <g class="stars" aria-hidden="true">
+            <circle class="star s1" cx="42" cy="28" r="0.9"/>
+            <circle class="star s2" cx="88" cy="52" r="1.2"/>
+            <circle class="star s3" cx="20" cy="98" r="0.7"/>
+            <circle class="star s4" cx="115" cy="22" r="1"/>
+            <circle class="star s5" cx="58" cy="172" r="0.8"/>
+            <circle class="star s1" cx="155" cy="48" r="0.7"/>
+            <circle class="star s2" cx="220" cy="18" r="1.1"/>
+            <circle class="star s3" cx="285" cy="32" r="0.8"/>
+            <circle class="star s4" cx="348" cy="14" r="1"/>
+            <circle class="star s5" cx="430" cy="40" r="0.9"/>
+            <circle class="star s1" cx="498" cy="22" r="1.2"/>
+            <circle class="star s2" cx="548" cy="62" r="0.8"/>
+            <circle class="star s3" cx="582" cy="108" r="1"/>
+            <circle class="star s4" cx="525" cy="148" r="0.7"/>
+            <circle class="star s5" cx="572" cy="200" r="1.1"/>
+            <circle class="star s1" cx="540" cy="278" r="0.9"/>
+            <circle class="star s2" cx="585" cy="340" r="1.3"/>
+            <circle class="star s3" cx="498" cy="385" r="0.8"/>
+            <circle class="star s4" cx="445" cy="402" r="1"/>
+            <circle class="star s5" cx="372" cy="392" r="0.7"/>
+            <circle class="star s1" cx="278" cy="408" r="1.1"/>
+            <circle class="star s2" cx="180" cy="395" r="0.8"/>
+            <circle class="star s3" cx="92" cy="378" r="1"/>
+            <circle class="star s4" cx="32" cy="335" r="0.9"/>
+            <circle class="star s5" cx="68" cy="285" r="1.2"/>
+            <circle class="star s1" cx="15" cy="220" r="0.7"/>
+          </g>
           <circle class="orbit-track" cx="300" cy="220" r="55"/>
           <circle class="orbit-track" cx="300" cy="220" r="90"/>
           <circle class="orbit-track" cx="300" cy="220" r="125"/>
