@@ -2809,6 +2809,47 @@
   .modules-foot .plus{color:#fff;font-style:normal;font-weight:600;font-family:'Inter',sans-serif;margin-right:4px;text-shadow:0 0 8px rgba(255,255,255,0.3)}
 
   /* ===== PROCESS ===== */
+  .process-anim{display:flex;justify-content:center;width:100%;max-width:520px;margin:34px auto 6px}
+  .process-anim svg{width:100%;height:auto;display:block;filter:drop-shadow(0 0 14px rgba(212,182,106,0.10))}
+  .process-anim .proc-fill{transform-box:fill-box;transform-origin:center}
+  .process-anim .proc-line-1{animation:procLine1 4.4s ease-in-out infinite}
+  .process-anim .proc-line-2{animation:procLine2 4.4s ease-in-out infinite}
+  .process-anim .proc-fill-1{animation:procFill1 4.4s ease-in-out infinite}
+  .process-anim .proc-fill-2{animation:procFill2 4.4s ease-in-out infinite}
+  .process-anim .proc-fill-3{animation:procFill3 4.4s ease-in-out infinite}
+  @keyframes procFill1{
+    0%{transform:scale(1);opacity:1}
+    5%{transform:scale(1.45);opacity:1}
+    12%{transform:scale(1);opacity:1}
+    92%{transform:scale(1);opacity:1}
+    100%{transform:scale(1);opacity:1}
+  }
+  @keyframes procFill2{
+    0%, 38%{opacity:0;transform:scale(1)}
+    42%{opacity:1;transform:scale(1.45)}
+    49%{opacity:1;transform:scale(1)}
+    92%{opacity:1;transform:scale(1)}
+    100%{opacity:0;transform:scale(1)}
+  }
+  @keyframes procFill3{
+    0%, 70%{opacity:0;transform:scale(1)}
+    74%{opacity:1;transform:scale(1.45)}
+    81%{opacity:1;transform:scale(1)}
+    92%{opacity:1;transform:scale(1)}
+    100%{opacity:0;transform:scale(1)}
+  }
+  @keyframes procLine1{
+    0%, 12%{stroke-dashoffset:160}
+    38%{stroke-dashoffset:0}
+    92%{stroke-dashoffset:0}
+    100%{stroke-dashoffset:160}
+  }
+  @keyframes procLine2{
+    0%, 44%{stroke-dashoffset:160}
+    70%{stroke-dashoffset:0}
+    92%{stroke-dashoffset:0}
+    100%{stroke-dashoffset:160}
+  }
   .process{display:grid;grid-template-columns:repeat(5,1fr);gap:20px;position:relative}
   @media(max-width:1000px){.process{grid-template-columns:1fr 1fr}}
   @media(max-width:560px){.process{grid-template-columns:1fr}}
@@ -5608,7 +5649,18 @@
         <div class="line"></div>
       </div>
       <h2>Le processus<br><em>est très simple</em></h2>
-      <p>Pas d'appel commercial. Pas de formulaire à rallonge. Pas de pitch déguisé. Tu rentres, tu repères ton vrai blocage, et tu sais par quoi commencer dans la foulée. <strong>Honnêtement, vu ce que tu vas trouver dedans, peu de chance que tu repartes.</strong> Mais si tu n'aimes pas ou si ça ne te convient pas, tu es libre de partir en un clic.</p>
+      <div class="process-anim" aria-hidden="true">
+        <svg viewBox="0 0 400 60" xmlns="http://www.w3.org/2000/svg">
+          <line class="proc-line proc-line-1" x1="40" y1="30" x2="200" y2="30" stroke="rgba(212,182,106,0.4)" stroke-width="1.2" stroke-dasharray="160" stroke-dashoffset="160" stroke-linecap="round"/>
+          <line class="proc-line proc-line-2" x1="200" y1="30" x2="360" y2="30" stroke="rgba(212,182,106,0.4)" stroke-width="1.2" stroke-dasharray="160" stroke-dashoffset="160" stroke-linecap="round"/>
+          <circle cx="40" cy="30" r="10" fill="#0A1628" stroke="#D4B66A" stroke-width="1.5"/>
+          <circle cx="200" cy="30" r="10" fill="#0A1628" stroke="#D4B66A" stroke-width="1.5"/>
+          <circle cx="360" cy="30" r="10" fill="#0A1628" stroke="#D4B66A" stroke-width="1.5"/>
+          <circle class="proc-fill proc-fill-1" cx="40" cy="30" r="4.5" fill="#D4B66A"/>
+          <circle class="proc-fill proc-fill-2" cx="200" cy="30" r="4.5" fill="#D4B66A"/>
+          <circle class="proc-fill proc-fill-3" cx="360" cy="30" r="4.5" fill="#D4B66A"/>
+        </svg>
+      </div>
     </div>
     <div class="process">
       <div class="step reveal">
