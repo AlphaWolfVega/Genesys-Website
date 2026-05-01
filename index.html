@@ -2718,16 +2718,35 @@
   @media(max-width:700px){.stack-wrap{padding:32px 22px}}
   .stack-list{list-style:none;margin:0;padding:0}
   .stack-list li{
-    display:flex;justify-content:space-between;align-items:baseline;
-    padding:14px 0;
+    display:flex;align-items:flex-start;
+    padding:16px 0;
     border-bottom:1px dashed rgba(212,182,106,0.15);
-    gap:20px;
+    gap:14px;
   }
   .stack-list li:last-child{border-bottom:none}
-  .stack-list .name{font-size:15.5px;color:var(--text);font-weight:500;flex:1}
+  .stack-list .stack-icon{
+    width:24px;height:24px;flex-shrink:0;
+    color:var(--gold);margin-top:2px;
+    filter:drop-shadow(0 0 8px rgba(212,182,106,0.30));
+  }
+  .stack-list .stack-icon svg{width:100%;height:100%;display:block}
+  .stack-list .name{font-size:15.5px;color:var(--text);font-weight:500;flex:1;min-width:0}
   .stack-list .name small{display:block;font-size:12.5px;color:var(--text-mute);font-weight:400;margin-top:2px;font-style:italic;font-family:'Playfair Display',serif}
-  .stack-list .price{font-family:'Inter',sans-serif;font-size:16px;color:var(--gold);font-weight:700;letter-spacing:-0.01em;white-space:nowrap;flex-shrink:0}
-  @media(max-width:600px){.stack-list .name{font-size:14px} .stack-list .name small{font-size:11.5px} .stack-list .price{font-size:14.5px}}
+  .stack-list .price{
+    font-family:'Inter',sans-serif;font-size:11.5px;color:var(--gold);font-weight:800;
+    letter-spacing:0.10em;text-transform:uppercase;white-space:nowrap;flex-shrink:0;
+    background:rgba(212,182,106,0.10);
+    border:1px solid rgba(212,182,106,0.35);
+    padding:5px 10px;border-radius:3px;
+    align-self:center;
+  }
+  @media(max-width:600px){
+    .stack-list li{gap:10px}
+    .stack-list .stack-icon{width:20px;height:20px}
+    .stack-list .name{font-size:14px}
+    .stack-list .name small{font-size:11.5px}
+    .stack-list .price{font-size:10px;padding:4px 8px}
+  }
 
   .stack-total{
     margin-top:32px;padding-top:32px;
@@ -5008,13 +5027,13 @@
     </div>
     <div class="stack-wrap reveal">
       <ul class="stack-list">
-        <li><span class="name">SUPERNOVA + modules essentiels <small>Produit, boutique, copy, publicités, neuro</small></span><span class="price">Inclus</span></li>
-        <li><span class="name">100 h+ de contenu structuré <small>Pas une playlist jetée en vrac</small></span><span class="price">Inclus</span></li>
-        <li><span class="name">Bibliothèque de modules complémentaires <small>Créatives, métriques, IA, CRO, Google Ads, productivité...</small></span><span class="price">Inclus</span></li>
-        <li><span class="name">Communauté privée d'e-commerçants <small>Tests, blocages, retours, contexte francophone</small></span><span class="price">Inclus</span></li>
-        <li><span class="name">Réponses directes dans la plateforme <small>Tu postes, tu avances, tu corriges</small></span><span class="price">Inclus</span></li>
-        <li><span class="name">Lives + rediffusions <small>Cas concrets, questions, débloquages</small></span><span class="price">Inclus</span></li>
-        <li><span class="name">Mises à jour tant que tu es membre <small>Le contenu suit le marché au lieu de vieillir seul</small></span><span class="price">Inclus</span></li>
+        <li><span class="stack-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="m12.83 2.18a2 2 0 0 0-1.66 0L2.6 6.08a1 1 0 0 0 0 1.83l8.58 3.91a2 2 0 0 0 1.66 0l8.58-3.91a1 1 0 0 0 0-1.83z"/><path d="M2 12a1 1 0 0 0 .58.91l8.6 3.91a2 2 0 0 0 1.65 0l8.58-3.9A1 1 0 0 0 22 12"/><path d="M2 17a1 1 0 0 0 .58.91l8.6 3.91a2 2 0 0 0 1.65 0l8.58-3.9A1 1 0 0 0 22 17"/></svg></span><span class="name">SUPERNOVA + modules essentiels <small>Produit, boutique, copy, publicités, neuro</small></span><span class="price">Accès total</span></li>
+        <li><span class="stack-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polygon points="10 8 16 12 10 16 10 8"/></svg></span><span class="name">100 h+ de contenu structuré <small>Pas une playlist jetée en vrac</small></span><span class="price">+100 h</span></li>
+        <li><span class="stack-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M21 8a2 2 0 0 0-2-2H10l-2-2H5a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2Z"/></svg></span><span class="name">Bibliothèque de modules complémentaires <small>Créatives, métriques, IA, CRO, Google Ads, productivité...</small></span><span class="price">+18 modules</span></li>
+        <li><span class="stack-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></span><span class="name">Communauté privée d'e-commerçants <small>Tests, blocages, retours, contexte francophone</small></span><span class="price">Privée</span></li>
+        <li><span class="stack-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></span><span class="name">Réponses directes dans la plateforme <small>Tu postes, tu avances, tu corriges</small></span><span class="price">Direct</span></li>
+        <li><span class="stack-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4.9 19.1C1 15.2 1 8.8 4.9 4.9"/><path d="M7.8 16.2c-2.3-2.3-2.3-6.1 0-8.5"/><circle cx="12" cy="12" r="2"/><path d="M16.2 7.8c2.3 2.3 2.3 6.1 0 8.5"/><path d="M19.1 4.9C23 8.8 23 15.1 19.1 19"/></svg></span><span class="name">Lives + rediffusions <small>Cas concrets, questions, débloquages</small></span><span class="price">Mensuel</span></li>
+        <li><span class="stack-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-9-9c2.52 0 4.93 1 6.74 2.74L21 8"/><path d="M21 3v5h-5"/></svg></span><span class="name">Mises à jour tant que tu es membre <small>Le contenu suit le marché au lieu de vieillir seul</small></span><span class="price">À vie</span></li>
       </ul>
       <div class="stack-total">
         <div class="lbl">Ton accès aujourd'hui<strong>Ce qui est déjà dedans</strong></div>
