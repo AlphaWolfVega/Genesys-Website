@@ -3500,10 +3500,10 @@
                 </filter>
               </defs>
               <!-- Track tirets fixes (parcours total, dim) -->
-              <use href="#hlInfPath" fill="none" stroke="#D4B66A" stroke-width="1.4" stroke-dasharray="3 5" opacity="0.28"/>
-              <!-- Boucle lumineuse qui chasse en continu sur le pointille -->
-              <use href="#hlInfPath" fill="none" stroke="#E5CB85" stroke-width="2.6" stroke-linecap="round" stroke-dasharray="70 600" opacity="0.85" filter="url(#hlInfFigGlow)">
-                <animate attributeName="stroke-dashoffset" from="0" to="-670" dur="6s" repeatCount="indefinite"/>
+              <use href="#hlInfPath" pathLength="100" fill="none" stroke="#D4B66A" stroke-width="1.4" stroke-dasharray="0.6 1" opacity="0.3"/>
+              <!-- Boucle lumineuse qui chasse en continu : pathLength=100, dash tile exactement (15+85=100) — quand un trail sort, le suivant entre en meme temps, zero pause -->
+              <use href="#hlInfPath" pathLength="100" fill="none" stroke="#E5CB85" stroke-width="2.6" stroke-linecap="round" stroke-dasharray="15 85" opacity="0.9" filter="url(#hlInfFigGlow)">
+                <animate attributeName="stroke-dashoffset" from="0" to="-100" dur="5s" calcMode="linear" repeatCount="indefinite"/>
               </use>
             </svg>
           </div>
