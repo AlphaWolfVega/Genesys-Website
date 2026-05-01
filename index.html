@@ -3646,6 +3646,175 @@
   .final .reassure{margin-top:30px;font-family:'Inter',sans-serif;font-size:11px;color:var(--text-faint);letter-spacing:0.28em;text-transform:uppercase}
   .final .reassure span{color:var(--gold);margin:0 10px}
 
+  /* ===== FINAL CTA — Carrefour (two-choice fork) ===== */
+  .final .final-sub{
+    font-family:'Inter',sans-serif;
+    font-size:17px;color:var(--text-mute);
+    max-width:580px;margin:0 auto 50px;
+    line-height:1.6;font-weight:400;
+  }
+  .fork{
+    display:grid;
+    grid-template-columns:1fr auto 1fr;
+    gap:28px;align-items:stretch;
+    max-width:1080px;margin:0 auto 56px;
+    text-align:left;
+  }
+  .fork-path{
+    padding:42px 32px 32px;
+    border-radius:6px;
+    border:1px solid;
+    position:relative;
+    display:flex;flex-direction:column;
+  }
+  .fork-a{
+    border-color:rgba(255,255,255,0.10);
+    background:rgba(10,22,40,0.5);
+  }
+  .fork-b{
+    border-color:rgba(212,182,106,0.38);
+    background:linear-gradient(180deg,rgba(212,182,106,0.07) 0%,rgba(10,22,40,0.4) 100%);
+    box-shadow:0 0 32px rgba(212,182,106,0.10);
+  }
+  .fork-letter{
+    position:absolute;
+    top:-18px;left:24px;
+    width:36px;height:36px;
+    display:flex;align-items:center;justify-content:center;
+    font-family:'Inter',sans-serif;
+    font-size:14px;font-weight:800;
+    letter-spacing:0.05em;
+    border-radius:50%;
+    background:#0A1628;
+    border:1px solid;
+  }
+  .fork-a .fork-letter{
+    border-color:rgba(255,255,255,0.25);
+    color:rgba(255,255,255,0.55);
+  }
+  .fork-b .fork-letter{
+    border-color:rgba(212,182,106,0.55);
+    color:var(--gold);
+    box-shadow:0 0 14px rgba(212,182,106,0.4);
+  }
+  .fork-title{
+    font-family:'Inter',sans-serif;
+    font-size:22px;font-weight:800;
+    letter-spacing:-0.01em;
+    margin:0 0 18px;line-height:1.25;
+  }
+  .fork-a .fork-title{color:rgba(255,255,255,0.82)}
+  .fork-b .fork-title{color:var(--gold)}
+  .fork-text{
+    font-family:'Inter',sans-serif;
+    font-size:14.5px;color:var(--text-mute);
+    line-height:1.65;margin:0 0 20px;font-weight:400;
+  }
+  .fork-bullets{
+    list-style:none;padding:0;
+    margin:0 0 22px 0;
+    display:flex;flex-direction:column;gap:11px;
+  }
+  .fork-bullets li{
+    position:relative;padding-left:22px;
+    font-size:14px;line-height:1.55;
+    color:var(--text-mute);
+    font-family:'Inter',sans-serif;
+  }
+  .fork-bullets li::before{
+    content:"";position:absolute;
+    left:0;top:8px;width:6px;height:6px;
+    border-radius:50%;
+  }
+  .fork-a .fork-bullets li::before{background:rgba(255,255,255,0.4)}
+  .fork-b .fork-bullets li::before{
+    background:var(--gold);
+    box-shadow:0 0 9px rgba(212,182,106,0.55);
+  }
+  .fork-bullets li strong{color:var(--text);font-weight:600}
+  .fork-coda{
+    font-family:'Inter',sans-serif;
+    font-size:13px;font-style:italic;
+    line-height:1.55;margin:auto 0 0;
+    padding-top:14px;
+    border-top:1px solid rgba(255,255,255,0.06);
+  }
+  .fork-a .fork-coda{color:var(--text-faint)}
+  .fork-b .fork-coda{
+    color:rgba(240,214,144,0.75);
+    border-top-color:rgba(212,182,106,0.20);
+  }
+  .fork-or{
+    display:flex;align-items:center;justify-content:center;
+    font-family:'Inter',sans-serif;
+    font-size:13px;font-weight:800;
+    letter-spacing:0.22em;
+    color:var(--gold);
+    align-self:center;
+    position:relative;
+    width:36px;height:36px;
+    border-radius:50%;
+    border:1px solid rgba(212,182,106,0.4);
+    background:#0A1628;
+  }
+  .fork-or::before, .fork-or::after{
+    content:"";display:block;
+    width:1px;height:60px;
+    background:linear-gradient(180deg,transparent,rgba(212,182,106,0.4),transparent);
+    position:absolute;left:50%;transform:translateX(-50%);
+  }
+  .fork-or::before{top:-70px}
+  .fork-or::after{bottom:-70px}
+
+  @media(max-width:800px){
+    .fork{grid-template-columns:1fr;gap:42px}
+    .fork-or{margin:0 auto;align-self:center}
+    .fork-or::before, .fork-or::after{height:30px}
+    .fork-or::before{top:-36px}
+    .fork-or::after{bottom:-36px}
+    .fork-path{padding:32px 22px 24px}
+    .fork-letter{width:32px;height:32px;font-size:13px;top:-16px;left:18px}
+    .fork-title{font-size:19px}
+    .fork-text{font-size:14px}
+    .fork-bullets li{font-size:13.5px}
+    .fork-coda{font-size:12.5px}
+  }
+
+  /* Reassurance grid (4 + 2) */
+  .reassure-grid{
+    margin-top:34px;
+    display:flex;flex-direction:column;
+    gap:14px;align-items:center;
+  }
+  .reassure-row{
+    display:flex;flex-wrap:wrap;
+    justify-content:center;
+    gap:10px 28px;
+    font-family:'Inter',sans-serif;
+    font-size:11px;color:var(--text-faint);
+    letter-spacing:0.22em;text-transform:uppercase;
+  }
+  .reassure-row span{
+    display:inline-flex;align-items:center;gap:7px;
+  }
+  .reassure-row span::before{
+    content:"\2713";
+    color:var(--gold);
+    font-size:11px;font-weight:700;
+    letter-spacing:0;
+  }
+  .reassure-row strong{
+    color:var(--gold);
+    font-weight:700;
+    letter-spacing:0.02em;
+    font-size:13px;
+    text-transform:none;
+  }
+  @media(max-width:600px){
+    .reassure-row{font-size:10px;gap:8px 16px;letter-spacing:0.14em}
+    .reassure-row strong{font-size:12px}
+  }
+
   /* ===== FOOTER ===== */
   footer{padding:60px 0 40px;border-top:1px solid var(--line-soft);background:rgba(6,16,31,0.6)}
   .foot-inner{display:flex;justify-content:center;align-items:center;flex-wrap:wrap;gap:24px}
@@ -6499,7 +6668,7 @@
   </div>
 </section>
 
-<!-- ===== FINAL CTA ===== -->
+<!-- ===== FINAL CTA — Carrefour (Tugan/Halbert close) ===== -->
 <section id="rejoindre" style="padding:0">
   <div class="container">
     <div class="final reveal">
@@ -6508,10 +6677,51 @@
         <span class="label">Dernier appel</span>
         <div class="line"></div>
       </div>
-      <h2>Tu n'as probablement pas besoin<br><em>d'une autre vidéo</em></h2>
-      <p>Si ton vrai blocage, c'est le désordre, l'isolement et l'absence de retour, GENESYS règle exactement ça. 49 $/mois, sans engagement, accès immédiat.</p>
-      <a href="https://www.skool.com/genesys/about" target="_blank" rel="noopener" class="btn btn-gold" style="font-size:14px;padding:22px 44px">Entrer dans GENESYS pour 49 $</a>
-      <div class="reassure">Accès immédiat <span>·</span> 23 modules <span>·</span> Résiliable à tout moment</div>
+      <h2>Il te reste <em>deux choix</em>.</h2>
+      <p class="final-sub">Tu es arrivé jusqu'ici. Ce n'est pas un hasard. Voilà ce qui t'attend dans chaque cas.</p>
+
+      <div class="fork">
+        <div class="fork-path fork-a">
+          <div class="fork-letter">A</div>
+          <div class="fork-title">Tu fermes cette page.</div>
+          <p class="fork-text">Tu retournes chercher la prochaine vidéo, le prochain mentor, la prochaine méthode qui va peut-être tout débloquer.</p>
+          <ul class="fork-bullets">
+            <li><strong>Dans 3 mois</strong>, tu auras avancé d'un cran sans en avoir la preuve</li>
+            <li><strong>Dans 6 mois</strong>, tu hésiteras encore entre deux produits</li>
+            <li><strong>Dans 12 mois</strong>, tu te demanderas encore si c'est fait pour toi</li>
+          </ul>
+          <p class="fork-coda">C'est pas une faute. C'est juste ce qui arrive quand on apprend sans cadre.</p>
+        </div>
+
+        <div class="fork-or" aria-hidden="true">OU</div>
+
+        <div class="fork-path fork-b">
+          <div class="fork-letter">B</div>
+          <div class="fork-title">Tu rejoins GENESYS.</div>
+          <p class="fork-text">Tu entres dans le protocole α-QUANT, dans la communauté, dans l'espace privé. Tout, tout de suite.</p>
+          <ul class="fork-bullets">
+            <li><strong>Dans 7 jours</strong>, tu sais où mettre tes heures, dans le bon ordre</li>
+            <li><strong>Dans 30 jours</strong>, tu as posé tes premières décisions avec retour direct</li>
+            <li><strong>Dans 90 jours</strong>, tu as la méthode et l'environnement pour avancer</li>
+          </ul>
+          <p class="fork-coda">C'est pas une promesse de résultat. C'est une promesse de cadre, de méthode et d'accès.</p>
+        </div>
+      </div>
+
+      <a href="https://www.skool.com/genesys/about" target="_blank" rel="noopener" class="btn btn-gold" style="font-size:14px;padding:22px 44px">Rejoindre GENESYS</a>
+
+      <div class="reassure-grid">
+        <div class="reassure-row">
+          <span><strong>49 $/mois</strong></span>
+          <span>Accès immédiat</span>
+          <span>23 modules</span>
+          <span>Annulable en 1 clic</span>
+        </div>
+        <div class="reassure-row">
+          <span>Communauté active</span>
+          <span>100 h+ de contenu</span>
+        </div>
+      </div>
     </div>
   </div>
 </section>
