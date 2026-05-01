@@ -143,34 +143,33 @@
     color:#0A1628;
     border:none;
     font-weight:800;
-    box-shadow:0 0 24px rgba(212,182,106,0.28);
     position:relative;
+    animation:btnHalo 3.2s ease-in-out infinite;
+    will-change:box-shadow;
   }
-  .btn-gold::before, .btn-gold .btn-echo{
-    content:"";position:absolute;inset:0;
-    border-radius:inherit;
-    background:radial-gradient(ellipse at center,rgba(212,182,106,0.55) 0%,rgba(212,182,106,0.35) 45%,rgba(212,182,106,0) 75%);
-    pointer-events:none;
-    opacity:0;
-    z-index:-1;
-    animation:btnEcho 3s ease-out infinite;
-    will-change:transform,opacity;
-  }
-  .btn-gold .btn-echo.e2{animation-delay:1s}
-  .btn-gold .btn-echo.e3{animation-delay:2s}
   .btn-gold::after{content:"→";font-family:'Inter',sans-serif;font-size:18px;font-weight:700;letter-spacing:0;transition:transform .25s ease}
   @media (hover:hover){
     .btn-gold:hover{
       background:linear-gradient(180deg,#F0DDA8 0%,var(--gold-soft) 100%);
-      box-shadow:0 0 60px rgba(212,182,106,0.55);
       transform:translateY(-2px);
+      animation-duration:2.4s;
     }
     .btn-gold:hover::after{transform:translateX(5px)}
   }
   .btn-gold:active{transform:translateY(1px) scale(0.98);transition:transform .08s ease}
-  @keyframes btnEcho{
-    0%{transform:scale(1);opacity:0.55}
-    100%{transform:scale(1.55);opacity:0}
+  @keyframes btnHalo{
+    0%,100%{
+      box-shadow:
+        0 0 18px rgba(212,182,106,0.20),
+        0 0 42px rgba(212,182,106,0.14),
+        0 0 78px rgba(212,182,106,0.08);
+    }
+    50%{
+      box-shadow:
+        0 0 30px rgba(212,182,106,0.55),
+        0 0 68px rgba(212,182,106,0.35),
+        0 0 120px rgba(212,182,106,0.20);
+    }
   }
 
   /* ===== COCKPIT (count-up KPIs) ===== */
@@ -7147,21 +7146,6 @@
         stageObs.observe(stage4, {attributes:true, attributeFilter:['class']});
       }
     }
-  })();
-
-  /* ===== BTN GOLD ECHO RIPPLE (3 waves cascading) ===== */
-  (function(){
-    document.querySelectorAll('.btn-gold').forEach(btn => {
-      if(btn.querySelector('.btn-echo')) return;
-      const e2 = document.createElement('span');
-      e2.className = 'btn-echo e2';
-      e2.setAttribute('aria-hidden','true');
-      const e3 = document.createElement('span');
-      e3.className = 'btn-echo e3';
-      e3.setAttribute('aria-hidden','true');
-      btn.prepend(e3);
-      btn.prepend(e2);
-    });
   })();
 
   /* ===== COCKPIT COUNT-UP ===== */
