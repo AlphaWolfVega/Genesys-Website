@@ -1812,11 +1812,22 @@
   @keyframes gearSpinCW{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
   @keyframes gearSpinCCW{from{transform:rotate(0deg)}to{transform:rotate(-360deg)}}
   .gears-anim .gear-label{
-    fill:var(--gold);font-size:11px;font-weight:700;letter-spacing:.24em;
-    filter:drop-shadow(0 0 4px rgba(212,182,106,0.4));
+    fill:var(--gold);font-size:15px;font-weight:800;letter-spacing:.2em;
+    filter:drop-shadow(0 0 4px rgba(212,182,106,0.45));
   }
   .gears-anim .gear-link{
-    stroke:rgba(212,182,106,0.25);stroke-width:1;stroke-dasharray:3 4;
+    stroke:rgba(212,182,106,0.32);stroke-width:1;stroke-dasharray:3 4;
+  }
+  .gears-anim .gear-orbit-light{
+    filter:drop-shadow(0 0 6px rgba(212,182,106,1)) drop-shadow(0 0 14px rgba(212,182,106,0.7));
+  }
+  .gears-anim .gear-orbit-trail{
+    opacity:0.6;
+    filter:drop-shadow(0 0 5px rgba(212,182,106,0.7));
+  }
+  .gears-anim .gear-orbit-trail-far{
+    opacity:0.3;
+    filter:drop-shadow(0 0 4px rgba(212,182,106,0.5));
   }
   .gears-anim .gear-pulse{
     fill:var(--gold);
@@ -1831,12 +1842,15 @@
   @media (prefers-reduced-motion: reduce){
     .gears-anim .gear-cw,
     .gears-anim .gear-ccw,
-    .gears-anim .gear-pulse{animation:none}
+    .gears-anim .gear-pulse,
+    .gears-anim .gear-orbit-light,
+    .gears-anim .gear-orbit-trail,
+    .gears-anim .gear-orbit-trail-far{animation:none}
     .gears-anim{transition:none}
   }
   @media (max-width:640px){
-    .gears-anim{max-width:340px;margin:18px auto 18px}
-    .gears-anim .gear-label{font-size:9.5px;letter-spacing:.18em}
+    .gears-anim{max-width:360px;margin:18px auto 18px}
+    .gears-anim .gear-label{font-size:13px;letter-spacing:.16em}
   }
   /* YT stats grid — section "2020 → 2026 / +6 ans sur YouTube" */
   .yt-stats-grid{
@@ -5125,6 +5139,22 @@
           <line class="gear-link" x1="206" y1="200" x2="394" y2="200"/>
           <line class="gear-link" x1="180" y1="121" x2="180" y2="174"/>
           <line class="gear-link" x1="420" y1="121" x2="420" y2="174"/>
+          <path id="gearOrbitPath" d="M 206 95 L 394 95 A 26 26 0 0 1 420 121 L 420 174 A 26 26 0 0 1 394 200 L 206 200 A 26 26 0 0 1 180 174 L 180 121 A 26 26 0 0 1 206 95 Z" fill="none" stroke="none"/>
+          <circle class="gear-orbit-light" r="4" fill="var(--gold)">
+            <animateMotion dur="6.5s" repeatCount="indefinite" rotate="auto">
+              <mpath href="#gearOrbitPath"/>
+            </animateMotion>
+          </circle>
+          <circle class="gear-orbit-trail" r="2.5" fill="var(--gold)">
+            <animateMotion dur="6.5s" repeatCount="indefinite" rotate="auto" begin="-0.18s">
+              <mpath href="#gearOrbitPath"/>
+            </animateMotion>
+          </circle>
+          <circle class="gear-orbit-trail-far" r="1.5" fill="var(--gold)">
+            <animateMotion dur="6.5s" repeatCount="indefinite" rotate="auto" begin="-0.36s">
+              <mpath href="#gearOrbitPath"/>
+            </animateMotion>
+          </circle>
           <circle class="gear-pulse" cx="300" cy="147.5" r="3"/>
         </svg>
       </div>
