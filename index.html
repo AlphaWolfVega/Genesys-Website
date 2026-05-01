@@ -3912,21 +3912,22 @@
     .fork-coda{font-size:12.5px}
   }
 
-  /* Reassurance grid (3 + 3 mirrored, gold divider) */
+  /* Reassurance grid (3 left | divider | 3 right) */
   .reassure-grid{
     margin:38px auto 0;
     display:grid;
     grid-template-columns:1fr auto 1fr;
-    gap:0 36px;
-    max-width:560px;
-    align-items:center;
+    gap:0 30px;
+    max-width:580px;
+    align-items:stretch;
   }
   .reassure-col{
     display:flex;flex-direction:column;
+    justify-content:center;
     gap:14px;
   }
-  .reassure-col:first-child{align-items:flex-end;text-align:right}
-  .reassure-col:last-child{align-items:flex-start;text-align:left}
+  .reassure-col:first-child{align-items:flex-start;text-align:left}
+  .reassure-col:last-child{align-items:flex-end;text-align:right}
   .reassure-item{
     font-family:'Inter',sans-serif;
     font-size:11px;color:var(--text-faint);
@@ -3934,7 +3935,8 @@
     text-transform:uppercase;
     display:inline-flex;align-items:center;gap:8px;
   }
-  .reassure-col:first-child .reassure-item{flex-direction:row-reverse}
+  .reassure-col:first-child .reassure-item{flex-direction:row}
+  .reassure-col:last-child .reassure-item{flex-direction:row-reverse}
   .reassure-item::before{
     content:"\2713";
     color:var(--gold);
@@ -3949,27 +3951,19 @@
     text-transform:none;
   }
   .reassure-divider{
-    width:1px;height:110px;
-    background:linear-gradient(180deg,transparent 0%,rgba(212,182,106,0.4) 50%,transparent 100%);
+    width:1px;
     align-self:stretch;
-    margin:0 auto;
+    background:linear-gradient(180deg,transparent 0%,rgba(212,182,106,0.4) 50%,transparent 100%);
   }
   @media(max-width:600px){
     .reassure-grid{
-      grid-template-columns:1fr;
-      gap:18px 0;
-      max-width:300px;
+      grid-template-columns:1fr auto 1fr;
+      gap:0 14px;
+      max-width:100%;
+      padding:0 6px;
     }
-    .reassure-col:first-child{align-items:center;text-align:center}
-    .reassure-col:last-child{align-items:center;text-align:center}
-    .reassure-col:first-child .reassure-item{flex-direction:row}
-    .reassure-item{font-size:10px;letter-spacing:0.14em}
-    .reassure-item strong{font-size:12px}
-    .reassure-divider{
-      width:60%;height:1px;
-      background:linear-gradient(90deg,transparent,rgba(212,182,106,0.4),transparent);
-      margin:0 auto;
-    }
+    .reassure-item{font-size:9.5px;letter-spacing:0.10em;gap:6px}
+    .reassure-item strong{font-size:11px}
   }
 
   /* ===== FOOTER ===== */
