@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Test polices manuscrites — Lettre d'Alpha</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Kalam:wght@400;700&family=Caveat:wght@500;700&family=Patrick+Hand&family=Architects+Daughter&family=Homemade+Apple&family=Just+Another+Hand&family=Coming+Soon&family=Gochi+Hand&family=Shadows+Into+Light+Two&family=Permanent+Marker&family=Reenie+Beanie&family=Walter+Turncoat&family=Indie+Flower&family=Kaushan+Script&family=Sacramento&family=Marck+Script&family=Yellowtail&family=Mr+Dafoe&family=Allura&family=Dancing+Script:wght@600;700&family=Pacifico&family=Great+Vibes&family=Pinyon+Script&family=Cookie&display=swap" rel="stylesheet">
+<style>
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{
+    background:#0A1628;color:#E8E4D8;font-family:Inter,sans-serif;
+    min-height:100vh;padding:60px 20px 100px;
+  }
+  h1{font-size:30px;text-align:center;margin-bottom:8px;letter-spacing:-0.01em;font-weight:800}
+  .sub{text-align:center;color:#9aa3b2;font-size:14px;margin-bottom:50px;max-width:740px;margin-left:auto;margin-right:auto;line-height:1.6}
+  .section-title{
+    font-size:13px;color:#D4B66A;letter-spacing:0.3em;text-transform:uppercase;font-weight:700;
+    text-align:center;margin:60px 0 30px;
+    border-top:1px solid rgba(212,182,106,0.2);padding-top:30px;
+  }
+  .grid{
+    max-width:1280px;margin:0 auto;
+    display:grid;grid-template-columns:repeat(auto-fit,minmax(360px,1fr));
+    gap:30px;
+  }
+  .card{
+    background:linear-gradient(180deg,rgba(20,37,64,0.45),rgba(10,22,40,0.25));
+    border:1px solid rgba(212,182,106,0.18);
+    border-radius:10px;
+    padding:50px 30px 40px;
+    position:relative;
+    min-height:520px;
+  }
+  .card .num{
+    position:absolute;top:12px;left:18px;
+    font-family:'JetBrains Mono','Menlo',monospace;
+    font-size:10.5px;color:#D4B66A;font-weight:700;letter-spacing:0.1em;
+    text-transform:uppercase;
+  }
+  .card .font-name{
+    position:absolute;top:12px;right:18px;
+    font-family:'JetBrains Mono','Menlo',monospace;
+    font-size:10.5px;color:#9aa3b2;font-weight:600;letter-spacing:0.05em;
+  }
+  .greet{
+    font-weight:700;font-size:34px;
+    color:#F0D690;text-shadow:0 0 18px rgba(212,182,106,0.30);
+    margin-bottom:20px;line-height:1.15;
+  }
+  .body p{
+    font-size:17px;line-height:1.7;
+    color:rgba(245,238,222,0.92);margin-bottom:14px;
+  }
+  .body p strong{color:#F0D690;font-weight:700}
+  .quote{
+    margin-top:18px;padding-top:16px;
+    border-top:1px solid rgba(212,182,106,0.2);
+    font-style:italic;font-size:16px;color:#F0D690;line-height:1.6;
+  }
+
+  /* ============================================
+     POLICES POUR LE CORPS (la lettre d'Alpha)
+     ============================================ */
+
+  /* A1 — Kalam (current) */
+  .a1 .greet, .a1 .body, .a1 .quote{font-family:'Kalam','Bradley Hand',cursive}
+  .a1 .body p{font-weight:400}
+  .a1 .body p strong{font-weight:700}
+
+  /* A2 — Caveat */
+  .a2 .greet, .a2 .body, .a2 .quote{font-family:'Caveat','Brush Script MT',cursive}
+  .a2 .greet{font-weight:700;font-size:42px}
+  .a2 .body p{font-size:21px;font-weight:500}
+  .a2 .body p strong{font-weight:700}
+  .a2 .quote{font-size:19px}
+
+  /* A3 — Patrick Hand */
+  .a3 .greet, .a3 .body, .a3 .quote{font-family:'Patrick Hand',cursive}
+  .a3 .greet{font-weight:400;font-size:36px}
+  .a3 .body p{font-size:18px;font-weight:400}
+  .a3 .body p strong{font-weight:400;text-decoration:underline;text-decoration-color:rgba(212,182,106,0.4);text-underline-offset:3px}
+
+  /* A4 — Architects Daughter */
+  .a4 .greet, .a4 .body, .a4 .quote{font-family:'Architects Daughter',cursive}
+  .a4 .greet{font-size:30px}
+  .a4 .body p{font-size:16px;font-weight:400}
+
+  /* A5 — Homemade Apple (cursive realistic) */
+  .a5 .greet, .a5 .body, .a5 .quote{font-family:'Homemade Apple',cursive}
+  .a5 .greet{font-size:24px}
+  .a5 .body p{font-size:14px;line-height:2;font-weight:400}
+
+  /* A6 — Just Another Hand */
+  .a6 .greet, .a6 .body, .a6 .quote{font-family:'Just Another Hand',cursive}
+  .a6 .greet{font-size:42px;font-weight:400}
+  .a6 .body p{font-size:22px;line-height:1.5;font-weight:400}
+
+  /* A7 — Coming Soon */
+  .a7 .greet, .a7 .body, .a7 .quote{font-family:'Coming Soon',cursive}
+  .a7 .greet{font-size:32px;font-weight:400}
+  .a7 .body p{font-size:17px;font-weight:400}
+
+  /* A8 — Gochi Hand */
+  .a8 .greet, .a8 .body, .a8 .quote{font-family:'Gochi Hand',cursive}
+  .a8 .greet{font-size:32px;font-weight:400}
+  .a8 .body p{font-size:17px;font-weight:400}
+
+  /* A9 — Shadows Into Light Two */
+  .a9 .greet, .a9 .body, .a9 .quote{font-family:'Shadows Into Light Two',cursive}
+  .a9 .greet{font-size:34px;font-weight:400}
+  .a9 .body p{font-size:18px;font-weight:400}
+
+  /* A10 — Permanent Marker */
+  .a10 .greet, .a10 .body, .a10 .quote{font-family:'Permanent Marker',cursive}
+  .a10 .greet{font-size:28px;font-weight:400}
+  .a10 .body p{font-size:15px;font-weight:400;line-height:1.65}
+
+  /* A11 — Reenie Beanie */
+  .a11 .greet, .a11 .body, .a11 .quote{font-family:'Reenie Beanie',cursive}
+  .a11 .greet{font-size:42px;font-weight:400}
+  .a11 .body p{font-size:22px;line-height:1.5;font-weight:400}
+
+  /* A12 — Walter Turncoat */
+  .a12 .greet, .a12 .body, .a12 .quote{font-family:'Walter Turncoat',cursive}
+  .a12 .greet{font-size:30px;font-weight:400}
+  .a12 .body p{font-size:16px;font-weight:400}
+
+  /* ============================================
+     SIGNATURES SEULES
+     ============================================ */
+  .sig-card{
+    background:linear-gradient(180deg,rgba(20,37,64,0.45),rgba(10,22,40,0.25));
+    border:1px solid rgba(212,182,106,0.18);
+    border-radius:10px;
+    padding:48px 30px 36px;
+    position:relative;
+    min-height:200px;
+    display:flex;flex-direction:column;align-items:flex-start;justify-content:center;
+  }
+  .sig-card .num{
+    position:absolute;top:12px;left:18px;
+    font-family:'JetBrains Mono','Menlo',monospace;
+    font-size:10.5px;color:#D4B66A;font-weight:700;letter-spacing:0.1em;
+  }
+  .sig-card .font-name{
+    position:absolute;top:12px;right:18px;
+    font-family:'JetBrains Mono','Menlo',monospace;
+    font-size:10.5px;color:#9aa3b2;font-weight:600;
+  }
+  .sig-card .signature{
+    color:#F0D690;line-height:1;
+    text-shadow:0 0 18px rgba(212,182,106,0.30);
+    transform:rotate(-2deg);transform-origin:left center;
+    margin-bottom:8px;
+  }
+  .sig-card .sig-swoosh{
+    width:240px;height:24px;display:block;margin-top:2px;margin-bottom:14px;overflow:visible;
+  }
+  .sig-card .sig-swoosh path{
+    stroke:#F0D690;stroke-width:1.4;fill:none;stroke-linecap:round;
+    filter:drop-shadow(0 0 8px rgba(212,182,106,0.3));
+  }
+  .sig-card .sig-role{
+    font-family:Inter,sans-serif;font-size:10.5px;
+    color:rgba(245,238,222,0.6);letter-spacing:0.2em;
+    text-transform:uppercase;font-weight:600;
+  }
+
+  /* B1 — Kaushan Script (current) */
+  .b1 .signature{font-family:'Kaushan Script',cursive;font-size:46px;font-weight:400}
+  /* B2 — Sacramento */
+  .b2 .signature{font-family:'Sacramento',cursive;font-size:54px;font-weight:400}
+  /* B3 — Marck Script */
+  .b3 .signature{font-family:'Marck Script',cursive;font-size:50px;font-weight:400}
+  /* B4 — Yellowtail */
+  .b4 .signature{font-family:'Yellowtail',cursive;font-size:46px;font-weight:400}
+  /* B5 — Mr Dafoe */
+  .b5 .signature{font-family:'Mr Dafoe',cursive;font-size:54px;font-weight:400}
+  /* B6 — Allura */
+  .b6 .signature{font-family:'Allura',cursive;font-size:54px;font-weight:400}
+  /* B7 — Dancing Script Bold */
+  .b7 .signature{font-family:'Dancing Script',cursive;font-size:42px;font-weight:700}
+  /* B8 — Pacifico */
+  .b8 .signature{font-family:'Pacifico',cursive;font-size:38px;font-weight:400}
+  /* B9 — Pinyon Script */
+  .b9 .signature{font-family:'Pinyon Script',cursive;font-size:60px;font-weight:400}
+</style>
+</head>
+<body>
+
+<h1>Test polices manuscrites — Lettre d'Alpha</h1>
+<p class="sub">12 polices pour le corps de la lettre + 9 polices pour la signature. Choisis une variante du corps + une variante de signature, puis dis-moi les numéros (ex : "A3 + B5"). Je pousse direct.</p>
+
+<div class="section-title">— PARTIE 1 — Police pour le corps de la lettre —</div>
+
+<div class="grid">
+
+  <!-- A1 -->
+  <div class="card a1">
+    <span class="num">A1</span><span class="font-name">Kalam (actuel)</span>
+    <div class="greet">Salut, c'est Alpha.</div>
+    <div class="body">
+      <p>J'ai démarré là où la plupart d'entre vous démarrez : à changer trop vite de produit, à brûler du budget sans savoir lire les signaux. <strong>C'est pour ça que j'ai créé GENESYS.</strong></p>
+      <p>Plusieurs millions d'euros plus tard, sur Shopify (dont <strong>trois boutiques actives en ce moment</strong>), j'ai distillé ce que j'ai appris dans <strong>le protocole α-QUANTT</strong>.</p>
+    </div>
+    <div class="quote">« Tu postes ta question. Je regarde le vrai blocage, pas juste le symptôme. »</div>
+  </div>
+
+  <!-- A2 -->
+  <div class="card a2">
+    <span class="num">A2</span><span class="font-name">Caveat</span>
+    <div class="greet">Salut, c'est Alpha.</div>
+    <div class="body">
+      <p>J'ai démarré là où la plupart d'entre vous démarrez : à changer trop vite de produit, à brûler du budget sans savoir lire les signaux. <strong>C'est pour ça que j'ai créé GENESYS.</strong></p>
+      <p>Plusieurs millions d'euros plus tard, sur Shopify (dont <strong>trois boutiques actives en ce moment</strong>), j'ai distillé ce que j'ai appris dans <strong>le protocole α-QUANTT</strong>.</p>
+    </div>
+    <div class="quote">« Tu postes ta question. Je regarde le vrai blocage, pas juste le symptôme. »</div>
+  </div>
+
+  <!-- A3 -->
+  <div class="card a3">
+    <span class="num">A3</span><span class="font-name">Patrick Hand</span>
+    <div class="greet">Salut, c'est Alpha.</div>
+    <div class="body">
+      <p>J'ai démarré là où la plupart d'entre vous démarrez : à changer trop vite de produit, à brûler du budget sans savoir lire les signaux. <strong>C'est pour ça que j'ai créé GENESYS.</strong></p>
+      <p>Plusieurs millions d'euros plus tard, sur Shopify (dont <strong>trois boutiques actives en ce moment</strong>), j'ai distillé ce que j'ai appris dans <strong>le protocole α-QUANTT</strong>.</p>
+    </div>
+    <div class="quote">« Tu postes ta question. Je regarde le vrai blocage, pas juste le symptôme. »</div>
+  </div>
+
+  <!-- A4 -->
+  <div class="card a4">
+    <span class="num">A4</span><span class="font-name">Architects Daughter</span>
+    <div class="greet">Salut, c'est Alpha.</div>
+    <div class="body">
+      <p>J'ai démarré là où la plupart d'entre vous démarrez : à changer trop vite de produit, à brûler du budget sans savoir lire les signaux. <strong>C'est pour ça que j'ai créé GENESYS.</strong></p>
+      <p>Plusieurs millions d'euros plus tard, sur Shopify (dont <strong>trois boutiques actives en ce moment</strong>), j'ai distillé ce que j'ai appris dans <strong>le protocole α-QUANTT</strong>.</p>
+    </div>
+    <div class="quote">« Tu postes ta question. Je regarde le vrai blocage, pas juste le symptôme. »</div>
+  </div>
+
+  <!-- A5 -->
+  <div class="card a5">
+    <span class="num">A5</span><span class="font-name">Homemade Apple (cursif)</span>
+    <div class="greet">Salut, c'est Alpha.</div>
+    <div class="body">
+      <p>J'ai démarré là où la plupart d'entre vous démarrez : à changer trop vite de produit, à brûler du budget sans savoir lire les signaux. <strong>C'est pour ça que j'ai créé GENESYS.</strong></p>
+      <p>Plusieurs millions d'euros plus tard, sur Shopify (dont <strong>trois boutiques actives en ce moment</strong>), j'ai distillé ce que j'ai appris dans <strong>le protocole α-QUANTT</strong>.</p>
+    </div>
+    <div class="quote">« Tu postes ta question. Je regarde le vrai blocage, pas juste le symptôme. »</div>
+  </div>
+
+  <!-- A6 -->
+  <div class="card a6">
+    <span class="num">A6</span><span class="font-name">Just Another Hand</span>
+    <div class="greet">Salut, c'est Alpha.</div>
+    <div class="body">
+      <p>J'ai démarré là où la plupart d'entre vous démarrez : à changer trop vite de produit, à brûler du budget sans savoir lire les signaux. <strong>C'est pour ça que j'ai créé GENESYS.</strong></p>
+      <p>Plusieurs millions d'euros plus tard, sur Shopify (dont <strong>trois boutiques actives en ce moment</strong>), j'ai distillé ce que j'ai appris dans <strong>le protocole α-QUANTT</strong>.</p>
+    </div>
+    <div class="quote">« Tu postes ta question. Je regarde le vrai blocage, pas juste le symptôme. »</div>
+  </div>
+
+  <!-- A7 -->
+  <div class="card a7">
+    <span class="num">A7</span><span class="font-name">Coming Soon</span>
+    <div class="greet">Salut, c'est Alpha.</div>
+    <div class="body">
+      <p>J'ai démarré là où la plupart d'entre vous démarrez : à changer trop vite de produit, à brûler du budget sans savoir lire les signaux. <strong>C'est pour ça que j'ai créé GENESYS.</strong></p>
+      <p>Plusieurs millions d'euros plus tard, sur Shopify (dont <strong>trois boutiques actives en ce moment</strong>), j'ai distillé ce que j'ai appris dans <strong>le protocole α-QUANTT</strong>.</p>
+    </div>
+    <div class="quote">« Tu postes ta question. Je regarde le vrai blocage, pas juste le symptôme. »</div>
+  </div>
+
+  <!-- A8 -->
+  <div class="card a8">
+    <span class="num">A8</span><span class="font-name">Gochi Hand</span>
+    <div class="greet">Salut, c'est Alpha.</div>
+    <div class="body">
+      <p>J'ai démarré là où la plupart d'entre vous démarrez : à changer trop vite de produit, à brûler du budget sans savoir lire les signaux. <strong>C'est pour ça que j'ai créé GENESYS.</strong></p>
+      <p>Plusieurs millions d'euros plus tard, sur Shopify (dont <strong>trois boutiques actives en ce moment</strong>), j'ai distillé ce que j'ai appris dans <strong>le protocole α-QUANTT</strong>.</p>
+    </div>
+    <div class="quote">« Tu postes ta question. Je regarde le vrai blocage, pas juste le symptôme. »</div>
+  </div>
+
+  <!-- A9 -->
+  <div class="card a9">
+    <span class="num">A9</span><span class="font-name">Shadows Into Light Two</span>
+    <div class="greet">Salut, c'est Alpha.</div>
+    <div class="body">
+      <p>J'ai démarré là où la plupart d'entre vous démarrez : à changer trop vite de produit, à brûler du budget sans savoir lire les signaux. <strong>C'est pour ça que j'ai créé GENESYS.</strong></p>
+      <p>Plusieurs millions d'euros plus tard, sur Shopify (dont <strong>trois boutiques actives en ce moment</strong>), j'ai distillé ce que j'ai appris dans <strong>le protocole α-QUANTT</strong>.</p>
+    </div>
+    <div class="quote">« Tu postes ta question. Je regarde le vrai blocage, pas juste le symptôme. »</div>
+  </div>
+
+  <!-- A10 -->
+  <div class="card a10">
+    <span class="num">A10</span><span class="font-name">Permanent Marker</span>
+    <div class="greet">Salut, c'est Alpha.</div>
+    <div class="body">
+      <p>J'ai démarré là où la plupart d'entre vous démarrez : à changer trop vite de produit, à brûler du budget sans savoir lire les signaux. <strong>C'est pour ça que j'ai créé GENESYS.</strong></p>
+      <p>Plusieurs millions d'euros plus tard, sur Shopify (dont <strong>trois boutiques actives en ce moment</strong>), j'ai distillé ce que j'ai appris dans <strong>le protocole α-QUANTT</strong>.</p>
+    </div>
+    <div class="quote">« Tu postes ta question. Je regarde le vrai blocage, pas juste le symptôme. »</div>
+  </div>
+
+  <!-- A11 -->
+  <div class="card a11">
+    <span class="num">A11</span><span class="font-name">Reenie Beanie</span>
+    <div class="greet">Salut, c'est Alpha.</div>
+    <div class="body">
+      <p>J'ai démarré là où la plupart d'entre vous démarrez : à changer trop vite de produit, à brûler du budget sans savoir lire les signaux. <strong>C'est pour ça que j'ai créé GENESYS.</strong></p>
+      <p>Plusieurs millions d'euros plus tard, sur Shopify (dont <strong>trois boutiques actives en ce moment</strong>), j'ai distillé ce que j'ai appris dans <strong>le protocole α-QUANTT</strong>.</p>
+    </div>
+    <div class="quote">« Tu postes ta question. Je regarde le vrai blocage, pas juste le symptôme. »</div>
+  </div>
+
+  <!-- A12 -->
+  <div class="card a12">
+    <span class="num">A12</span><span class="font-name">Walter Turncoat</span>
+    <div class="greet">Salut, c'est Alpha.</div>
+    <div class="body">
+      <p>J'ai démarré là où la plupart d'entre vous démarrez : à changer trop vite de produit, à brûler du budget sans savoir lire les signaux. <strong>C'est pour ça que j'ai créé GENESYS.</strong></p>
+      <p>Plusieurs millions d'euros plus tard, sur Shopify (dont <strong>trois boutiques actives en ce moment</strong>), j'ai distillé ce que j'ai appris dans <strong>le protocole α-QUANTT</strong>.</p>
+    </div>
+    <div class="quote">« Tu postes ta question. Je regarde le vrai blocage, pas juste le symptôme. »</div>
+  </div>
+
+</div>
+
+<div class="section-title">— PARTIE 2 — Police pour la signature seule —</div>
+
+<div class="grid">
+
+  <div class="sig-card b1">
+    <span class="num">B1</span><span class="font-name">Kaushan Script (actuel)</span>
+    <span class="signature">Alpha Wolf Vega</span>
+    <svg class="sig-swoosh" viewBox="0 0 230 22"><path d="M 4 18 Q 30 12, 90 11 T 175 7 Q 200 6, 222 3"/></svg>
+    <span class="sig-role">Créateur de GENESYS · Architecte du protocole α-QUANTT</span>
+  </div>
+
+  <div class="sig-card b2">
+    <span class="num">B2</span><span class="font-name">Sacramento</span>
+    <span class="signature">Alpha Wolf Vega</span>
+    <svg class="sig-swoosh" viewBox="0 0 230 22"><path d="M 4 18 Q 30 12, 90 11 T 175 7 Q 200 6, 222 3"/></svg>
+    <span class="sig-role">Créateur de GENESYS · Architecte du protocole α-QUANTT</span>
+  </div>
+
+  <div class="sig-card b3">
+    <span class="num">B3</span><span class="font-name">Marck Script</span>
+    <span class="signature">Alpha Wolf Vega</span>
+    <svg class="sig-swoosh" viewBox="0 0 230 22"><path d="M 4 18 Q 30 12, 90 11 T 175 7 Q 200 6, 222 3"/></svg>
+    <span class="sig-role">Créateur de GENESYS · Architecte du protocole α-QUANTT</span>
+  </div>
+
+  <div class="sig-card b4">
+    <span class="num">B4</span><span class="font-name">Yellowtail</span>
+    <span class="signature">Alpha Wolf Vega</span>
+    <svg class="sig-swoosh" viewBox="0 0 230 22"><path d="M 4 18 Q 30 12, 90 11 T 175 7 Q 200 6, 222 3"/></svg>
+    <span class="sig-role">Créateur de GENESYS · Architecte du protocole α-QUANTT</span>
+  </div>
+
+  <div class="sig-card b5">
+    <span class="num">B5</span><span class="font-name">Mr Dafoe (sig pro)</span>
+    <span class="signature">Alpha Wolf Vega</span>
+    <svg class="sig-swoosh" viewBox="0 0 230 22"><path d="M 4 18 Q 30 12, 90 11 T 175 7 Q 200 6, 222 3"/></svg>
+    <span class="sig-role">Créateur de GENESYS · Architecte du protocole α-QUANTT</span>
+  </div>
+
+  <div class="sig-card b6">
+    <span class="num">B6</span><span class="font-name">Allura</span>
+    <span class="signature">Alpha Wolf Vega</span>
+    <svg class="sig-swoosh" viewBox="0 0 230 22"><path d="M 4 18 Q 30 12, 90 11 T 175 7 Q 200 6, 222 3"/></svg>
+    <span class="sig-role">Créateur de GENESYS · Architecte du protocole α-QUANTT</span>
+  </div>
+
+  <div class="sig-card b7">
+    <span class="num">B7</span><span class="font-name">Dancing Script 700</span>
+    <span class="signature">Alpha Wolf Vega</span>
+    <svg class="sig-swoosh" viewBox="0 0 230 22"><path d="M 4 18 Q 30 12, 90 11 T 175 7 Q 200 6, 222 3"/></svg>
+    <span class="sig-role">Créateur de GENESYS · Architecte du protocole α-QUANTT</span>
+  </div>
+
+  <div class="sig-card b8">
+    <span class="num">B8</span><span class="font-name">Pacifico</span>
+    <span class="signature">Alpha Wolf Vega</span>
+    <svg class="sig-swoosh" viewBox="0 0 230 22"><path d="M 4 18 Q 30 12, 90 11 T 175 7 Q 200 6, 222 3"/></svg>
+    <span class="sig-role">Créateur de GENESYS · Architecte du protocole α-QUANTT</span>
+  </div>
+
+  <div class="sig-card b9">
+    <span class="num">B9</span><span class="font-name">Pinyon Script (formel)</span>
+    <span class="signature">Alpha Wolf Vega</span>
+    <svg class="sig-swoosh" viewBox="0 0 230 22"><path d="M 4 18 Q 30 12, 90 11 T 175 7 Q 200 6, 222 3"/></svg>
+    <span class="sig-role">Créateur de GENESYS · Architecte du protocole α-QUANTT</span>
+  </div>
+
+</div>
+
+</body>
+</html>
