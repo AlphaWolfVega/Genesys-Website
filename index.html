@@ -1893,13 +1893,14 @@
     stroke-dasharray:2 5;
   }
   .solar-anim .star{
-    fill:rgba(255,240,210,0.95);
-    filter:drop-shadow(0 0 2px rgba(255,235,180,0.6));
+    fill:rgba(255,243,215,1);
+    filter:drop-shadow(0 0 4px rgba(255,235,180,0.85)) drop-shadow(0 0 8px rgba(255,225,160,0.5));
+    transform-box:fill-box;transform-origin:center;
     animation:starTwinkle ease-in-out infinite;
   }
   @keyframes starTwinkle{
-    0%,100%{opacity:.35}
-    50%{opacity:.95}
+    0%,100%{opacity:.75;transform:scale(1)}
+    50%{opacity:1;transform:scale(1.45)}
   }
   .solar-anim .module-dot{
     fill:var(--gold);
