@@ -3722,6 +3722,107 @@
   }
   .faq-a p{margin:0 0 14px 0}
   .faq-a p:last-child{margin-bottom:0}
+  .faq-a strong{color:var(--text);font-weight:600}
+  .faq-a strong.gold{color:var(--gold);font-weight:700}
+
+  /* Drop cap on first letter — for long answer first paragraph */
+  .faq-a-dropcap::first-letter{
+    font-family:'Playfair Display',serif;
+    font-size:54px;
+    font-weight:700;
+    color:var(--gold);
+    float:left;
+    line-height:0.9;
+    margin:6px 12px 0 0;
+    text-shadow:0 0 16px rgba(212,182,106,0.28);
+  }
+  /* Numbered phase list — gold ordinals, gold left border */
+  .faq-a-phases{
+    list-style:none;
+    margin:20px 0;
+    padding:18px 22px;
+    border-left:2px solid rgba(212,182,106,0.45);
+    background:linear-gradient(90deg,rgba(212,182,106,0.06),transparent 80%);
+    border-radius:0 4px 4px 0;
+    display:flex;flex-direction:column;
+    gap:11px;
+    counter-reset:phase;
+  }
+  .faq-a-phases li{
+    position:relative;
+    padding-left:42px;
+    font-size:14.5px;
+    color:var(--text);
+    font-weight:500;
+    letter-spacing:0.005em;
+    line-height:1.4;
+    counter-increment:phase;
+  }
+  .faq-a-phases li::before{
+    content:"0" counter(phase);
+    position:absolute;
+    left:0;top:1px;
+    font-family:'JetBrains Mono','Menlo',monospace;
+    font-size:12px;
+    font-weight:700;
+    color:var(--gold);
+    letter-spacing:0.05em;
+  }
+  /* Big-idea callout — italic gold with left border */
+  .faq-a-callout{
+    margin:22px 0;
+    padding:18px 22px;
+    border-left:3px solid var(--gold);
+    background:rgba(212,182,106,0.07);
+    font-family:'Playfair Display',serif;
+    font-style:italic;
+    font-size:17px;
+    color:var(--gold);
+    line-height:1.55;
+    border-radius:0 4px 4px 0;
+  }
+  /* Punchline closer — italic gold with dashed top border */
+  .faq-a-punchline{
+    margin-top:20px!important;
+    padding-top:18px;
+    border-top:1px dashed rgba(212,182,106,0.3);
+    font-style:italic;
+    color:var(--gold)!important;
+    font-size:15px!important;
+    line-height:1.55!important;
+  }
+  /* Generic gold-dot bullet list inside FAQ */
+  .faq-a-list{
+    list-style:none;
+    margin:14px 0;
+    padding:0;
+    display:flex;flex-direction:column;
+    gap:10px;
+  }
+  .faq-a-list li{
+    position:relative;
+    padding-left:22px;
+    font-size:14.5px;
+    color:var(--text-mute);
+    line-height:1.55;
+  }
+  .faq-a-list li::before{
+    content:"";
+    position:absolute;
+    left:0;top:8px;
+    width:6px;height:6px;
+    background:var(--gold);
+    border-radius:50%;
+    box-shadow:0 0 8px rgba(212,182,106,0.5);
+  }
+  .faq.open .faq-a{max-height:1200px}
+  @media(max-width:600px){
+    .faq-a-dropcap::first-letter{font-size:46px;margin:4px 10px 0 0}
+    .faq-a-phases{padding:16px 18px}
+    .faq-a-phases li{font-size:13.5px;padding-left:36px}
+    .faq-a-callout{font-size:15px;padding:14px 18px}
+    .faq-a-punchline{font-size:14px!important}
+  }
 
   /* ===== FINAL CTA ===== */
   .final{
@@ -6799,7 +6900,20 @@
       </div>
       <div class="faq">
         <button class="faq-q">C'est quoi exactement, le protocole α-QUANTT ? <span class="ico">+</span></button>
-        <div class="faq-a"><p>C'est la séquence de décisions que je suis sur chacune de mes boutiques actives. Pas une formule magique, juste l'ordre dans lequel chaque décision doit être prise pour qu'une boutique e-commerce tienne debout : choix du produit, angle de vente, structure de page, priorités de test, scaling.</p><p>Le problème, ce n'est jamais l'info qu'on te donne. C'est l'ordre dans lequel elle arrive. La plupart des gens connaissent déjà 70 à 80% des éléments. Ils les appliquent juste dans le mauvais sens, et c'est ce qui les fait revenir en arrière 6 mois plus tard.</p><p>α-QUANTT met de l'ordre dans cette connaissance dispersée. À chaque étape, tu sais ce qui mérite ton attention, ce qui doit attendre, et ce que tu peux ignorer pour l'instant. Tu suis la séquence, je regarde par-dessus ton épaule.</p></div>
+        <div class="faq-a">
+          <p class="faq-a-dropcap">C'est la séquence de décisions que je suis sur chacune de mes boutiques actives. Pas une formule magique, juste l'ordre dans lequel chaque décision doit être prise pour qu'une boutique e-commerce tienne debout.</p>
+          <ol class="faq-a-phases">
+            <li>Choix du produit</li>
+            <li>Angle de vente</li>
+            <li>Structure de page</li>
+            <li>Priorités de test</li>
+            <li>Scaling</li>
+          </ol>
+          <div class="faq-a-callout">Le problème, ce n'est jamais l'info qu'on te donne. C'est l'ordre dans lequel elle arrive.</div>
+          <p>La plupart des gens connaissent déjà <strong class="gold">70 à 80%</strong> des éléments. Ils les appliquent juste dans le mauvais sens, et c'est ce qui les fait revenir en arrière 6 mois plus tard.</p>
+          <p>α-QUANTT met de l'ordre dans cette connaissance dispersée. À chaque étape, tu sais ce qui mérite ton attention, ce qui doit attendre, et ce que tu peux ignorer pour l'instant.</p>
+          <p class="faq-a-punchline">Tu suis la séquence, je regarde par-dessus ton épaule.</p>
+        </div>
       </div>
       <div class="faq">
         <button class="faq-q">Je suis débutant total. C'est pour moi ? <span class="ico">+</span></button>
