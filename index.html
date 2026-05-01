@@ -3733,6 +3733,32 @@
   .final .reassure span{color:var(--gold);margin:0 10px}
 
   /* ===== FINAL CTA — Carrefour (two-choice fork) ===== */
+  .h2-dots{
+    display:inline-flex;
+    gap:10px;
+    margin-left:14px;
+    vertical-align:0.18em;
+    align-items:center;
+    line-height:0;
+  }
+  .h2-dots span{
+    display:inline-block;
+    width:14px;height:14px;
+    border-radius:50%;
+    background:var(--gold);
+    box-shadow:0 0 12px rgba(212,182,106,0.55);
+    animation:h2DotPulse 1.6s ease-in-out infinite;
+  }
+  .h2-dots span:nth-child(2){animation-delay:0.20s}
+  .h2-dots span:nth-child(3){animation-delay:0.40s}
+  @keyframes h2DotPulse{
+    0%, 100%{opacity:0.35; transform:scale(0.85)}
+    40%{opacity:1; transform:scale(1.1)}
+  }
+  @media(max-width:600px){
+    .h2-dots{gap:7px;margin-left:10px}
+    .h2-dots span{width:10px;height:10px}
+  }
   .final .final-sub{
     font-family:'Inter',sans-serif;
     font-size:17px;color:var(--text-mute);
@@ -6805,7 +6831,7 @@
         <span class="label">Dernier appel</span>
         <div class="line"></div>
       </div>
-      <h2>Il te reste <em>deux choix</em>.</h2>
+      <h2>Il te reste<br><em>deux choix</em><span class="h2-dots" aria-hidden="true"><span></span><span></span><span></span></span></h2>
       <p class="final-sub">Tu es arrivé jusqu'ici. Ce n'est pas un hasard. Voilà ce qui t'attend dans chaque cas.</p>
 
       <div class="fork">
