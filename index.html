@@ -7171,7 +7171,7 @@
     if(!cockpit) return;
     const counters = cockpit.querySelectorAll('.num');
     let triggered = false;
-    function fmtThousand(n){return n.toLocaleString('fr-FR').replace(/ | /g,' ');}
+    function fmtThousand(n){return n.toLocaleString('fr-FR').replace(/\s/g,"'");}
     function animate(el){
       const target = parseInt(el.dataset.count, 10);
       const suffix = el.dataset.suffix || '';
