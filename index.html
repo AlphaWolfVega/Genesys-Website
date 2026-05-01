@@ -21,6 +21,9 @@
 <link rel="dns-prefetch" href="https://static.doubleclick.net">
 <script>document.documentElement.classList.add('js');</script>
 <link href="assets/fonts/googlefonts.css" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;700&family=Sacramento&display=swap" rel="stylesheet">
 <style>
   :root{
     --bg:#06101F;
@@ -3099,14 +3102,20 @@
     .founder-letter > div:last-child::before{top:-30px;left:-4px;font-size:70px}
   }
   .founder-letter .letter-greet{
-    font-family:'Playfair Display',serif;
-    font-style:italic;
-    font-size:19px;
-    color:var(--gold);
+    font-family:'Caveat','Brush Script MT',cursive;
+    font-style:normal;
+    font-weight:700;
+    font-size:38px;
+    color:#F0D690;
     text-align:left !important;
-    margin-bottom:22px;
-    margin-top:2px;
-    letter-spacing:0.005em;
+    margin-bottom:24px;
+    margin-top:6px;
+    line-height:1.1;
+    letter-spacing:0;
+    text-shadow:0 0 18px rgba(212,182,106,0.35);
+  }
+  @media(max-width:600px){
+    .founder-letter .letter-greet{font-size:32px}
   }
   .founder-letter p strong{
     color:#F0D690;
@@ -3126,14 +3135,34 @@
     text-align:left;
   }
   .founder-signature .sig-name{
-    display:block;
-    font-family:'Playfair Display',serif;
-    font-style:italic;
-    font-size:20px;
+    display:inline-block;
+    font-family:'Sacramento','Brush Script MT',cursive;
+    font-style:normal;
+    font-size:54px;
     color:#F0D690;
-    font-weight:700;
-    margin-bottom:7px;
-    text-shadow:0 0 14px rgba(212,182,106,0.25);
+    font-weight:400;
+    line-height:1;
+    margin-bottom:0;
+    text-shadow:0 0 18px rgba(212,182,106,0.35);
+    letter-spacing:0.01em;
+    position:relative;
+  }
+  .founder-signature .sig-underline{
+    display:block;
+    width:230px;height:22px;
+    margin-top:-4px;margin-bottom:10px;
+    overflow:visible;
+  }
+  .founder-signature .sig-underline path{
+    stroke:#F0D690;
+    stroke-width:1.6;
+    fill:none;
+    stroke-linecap:round;
+    filter:drop-shadow(0 0 8px rgba(212,182,106,0.3));
+  }
+  @media(max-width:600px){
+    .founder-signature .sig-name{font-size:46px}
+    .founder-signature .sig-underline{width:200px}
   }
   .founder-signature .sig-role{
     display:block;
@@ -5990,7 +6019,10 @@
                 « Tu postes ta question. Je regarde le vrai blocage, pas juste le symptôme. »
               </div>
               <div class="founder-signature">
-                <span class="sig-name">— Alpha Wolf Vega</span>
+                <span class="sig-name">Alpha Wolf Vega</span>
+                <svg class="sig-underline" viewBox="0 0 230 22" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                  <path d="M 4 18 Q 30 12, 90 11 T 175 7 Q 200 6, 222 3"/>
+                </svg>
                 <span class="sig-role">Créateur de GENESYS · Architecte du protocole α-QUANTT</span>
               </div>
             </div>
