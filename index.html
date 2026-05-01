@@ -369,7 +369,8 @@
     .hero-lead-carousel{
       display:flex;
       overflow-x:auto;
-      scroll-snap-type:x mandatory;
+      overscroll-behavior:contain;
+      scroll-snap-type:x proximity;
       scrollbar-width:none;
       gap:0;
       padding:0 17%;        /* peek 17% chaque côté */
@@ -597,7 +598,7 @@
     .hl-cta-mini-card-quant .hl-cta-mini-h{color:#F0D690 !important}
     .hl-cta-mini-card-quant .hl-cta-mini-b em{font-style:italic;color:var(--gold);font-weight:600}
     .hl-cta-mini{width:100%;max-width:100%;margin:0 0 10px;position:relative;overflow:hidden;box-sizing:border-box}
-    .hl-cta-mini-track{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;scrollbar-width:none;gap:8px;padding:2px 0 4px;box-sizing:border-box;width:100%;max-width:100%}
+    .hl-cta-mini-track{display:flex;overflow-x:auto;overscroll-behavior:contain;scroll-snap-type:x proximity;-webkit-overflow-scrolling:touch;scrollbar-width:none;gap:8px;padding:2px 0 4px;box-sizing:border-box;width:100%;max-width:100%}
     .hl-cta-mini-track::-webkit-scrollbar{display:none}
     .hl-cta-mini-card{flex:0 0 100%;width:100%;max-width:100%;min-width:0;scroll-snap-align:center;box-sizing:border-box;background:linear-gradient(135deg,rgba(212,182,106,0.10) 0%,rgba(212,182,106,0.04) 100%);border:1px solid rgba(212,182,106,0.32);border-top:3px solid var(--gold);border-radius:9px;padding:13px 14px 14px;text-align:center;box-shadow:0 4px 16px rgba(0,0,0,0.18);overflow:hidden}
     .hl-cta-mini-head{display:flex;align-items:center;justify-content:center;gap:9px;margin:0 0 9px;flex-wrap:nowrap;max-width:100%}
@@ -950,7 +951,8 @@
     .hero-lead-carousel{
       display:flex;
       overflow-x:auto;
-      scroll-snap-type:x mandatory;
+      overscroll-behavior:contain;
+      scroll-snap-type:x proximity;
       -webkit-overflow-scrolling:touch;
       scrollbar-width:none;
       gap:0;
@@ -1114,7 +1116,8 @@
     .hl-cta-mini-track{
       display:flex;
       overflow-x:auto;
-      scroll-snap-type:x mandatory;
+      overscroll-behavior:contain;
+      scroll-snap-type:x proximity;
       -webkit-overflow-scrolling:touch;
       scrollbar-width:none;
       gap:8px;
@@ -2178,8 +2181,9 @@
     display:flex;flex-wrap:nowrap;
     gap:22px;
     overflow-x:auto;overflow-y:hidden;
+    overscroll-behavior:contain;
     -webkit-overflow-scrolling:touch;
-    scroll-snap-type:x mandatory;
+    scroll-snap-type:x proximity;
     scroll-padding-left:0;
     padding:4px 0 18px;
     scrollbar-width:none;-ms-overflow-style:none;
