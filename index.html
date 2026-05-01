@@ -1734,6 +1734,73 @@
   /* Timeline animee — section "Mon parcours" */
   .story-anim-wrap{display:flex;justify-content:center;width:100%;max-width:380px;margin:18px auto 14px}
   .story-anim{width:100%;height:auto;display:block;filter:drop-shadow(0 0 14px rgba(212,182,106,0.18))}
+  /* 4 archetypes — section "Quel entrepreneur tu es vraiment" */
+  .archetypes-anim{display:flex;justify-content:center;align-items:flex-start;gap:14px;margin:18px auto 22px;flex-wrap:nowrap;max-width:380px}
+  .arch-item{display:flex;flex-direction:column;align-items:center;gap:7px;flex:0 0 auto;animation:archSpotlight 6s ease-in-out infinite;opacity:0.45;transform-origin:center}
+  .arch-item:nth-child(1){animation-delay:0s}
+  .arch-item:nth-child(2){animation-delay:1.5s}
+  .arch-item:nth-child(3){animation-delay:3s}
+  .arch-item:nth-child(4){animation-delay:4.5s}
+  .arch-circle{
+    width:48px;height:48px;border-radius:50%;
+    border:1.4px solid rgba(212,182,106,0.4);
+    background:linear-gradient(140deg,rgba(212,182,106,0.08) 0%,rgba(212,182,106,0.02) 100%);
+    display:flex;align-items:center;justify-content:center;
+    color:rgba(212,182,106,0.7);
+    transition:none;
+  }
+  .arch-circle svg{width:24px;height:24px;display:block}
+  .arch-label{
+    font-family:'Inter',sans-serif;
+    font-size:10.5px;font-weight:600;
+    letter-spacing:0.16em;text-transform:uppercase;
+    color:rgba(212,182,106,0.55);
+    text-align:center;
+  }
+  @keyframes archSpotlight{
+    0%, 18%, 100%{
+      opacity:1;
+    }
+    25%, 95%{
+      opacity:0.45;
+    }
+  }
+  .arch-item{animation:archSpotlight 6s ease-in-out infinite}
+  /* Spotlight effect via stacked animations on circle + label */
+  .arch-item:nth-child(1) .arch-circle{animation:archGlow 6s ease-in-out infinite 0s}
+  .arch-item:nth-child(2) .arch-circle{animation:archGlow 6s ease-in-out infinite 1.5s}
+  .arch-item:nth-child(3) .arch-circle{animation:archGlow 6s ease-in-out infinite 3s}
+  .arch-item:nth-child(4) .arch-circle{animation:archGlow 6s ease-in-out infinite 4.5s}
+  .arch-item:nth-child(1) .arch-label{animation:archLabelBright 6s ease-in-out infinite 0s}
+  .arch-item:nth-child(2) .arch-label{animation:archLabelBright 6s ease-in-out infinite 1.5s}
+  .arch-item:nth-child(3) .arch-label{animation:archLabelBright 6s ease-in-out infinite 3s}
+  .arch-item:nth-child(4) .arch-label{animation:archLabelBright 6s ease-in-out infinite 4.5s}
+  @keyframes archGlow{
+    0%, 22%, 100%{
+      transform:scale(1.06);
+      border-color:rgba(212,182,106,1);
+      background:linear-gradient(140deg,rgba(212,182,106,0.22) 0%,rgba(212,182,106,0.08) 100%);
+      color:#FFE4B0;
+      box-shadow:0 0 22px rgba(212,182,106,0.45),inset 0 0 10px rgba(212,182,106,0.18);
+    }
+    30%, 95%{
+      transform:scale(1);
+      border-color:rgba(212,182,106,0.4);
+      background:linear-gradient(140deg,rgba(212,182,106,0.08) 0%,rgba(212,182,106,0.02) 100%);
+      color:rgba(212,182,106,0.7);
+      box-shadow:0 0 0 rgba(212,182,106,0),inset 0 0 0 rgba(212,182,106,0);
+    }
+  }
+  @keyframes archLabelBright{
+    0%, 22%, 100%{color:#F0D690;text-shadow:0 0 8px rgba(212,182,106,0.4)}
+    30%, 95%{color:rgba(212,182,106,0.55);text-shadow:none}
+  }
+  @media(max-width:380px){
+    .archetypes-anim{gap:10px}
+    .arch-circle{width:42px;height:42px}
+    .arch-circle svg{width:20px;height:20px}
+    .arch-label{font-size:9.5px;letter-spacing:0.12em}
+  }
   @media(max-width:700px){
     section{padding:32px 0}
     .section-header{margin:0 auto 32px}
@@ -3952,6 +4019,32 @@
         <div class="line"></div>
       </div>
       <h2>Quel <em>entrepreneur</em><br>tu es vraiment ?</h2>
+      <div class="archetypes-anim" aria-hidden="true">
+        <div class="arch-item">
+          <div class="arch-circle">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6"/><path d="M10 22h4"/><path d="M12 2a7 7 0 0 0-4 12.7c.7.5 1 1.3 1 2.1V18h6v-1.2c0-.8.3-1.6 1-2.1A7 7 0 0 0 12 2Z"/></svg>
+          </div>
+          <span class="arch-label">Visionnaire</span>
+        </div>
+        <div class="arch-item">
+          <div class="arch-circle">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 3 14h8l-1 8 10-12h-8l1-8Z"/></svg>
+          </div>
+          <span class="arch-label">Impulsif</span>
+        </div>
+        <div class="arch-item">
+          <div class="arch-circle">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polygon points="16.24,7.76 14.12,14.12 7.76,16.24 9.88,9.88"/></svg>
+          </div>
+          <span class="arch-label">Stratège</span>
+        </div>
+        <div class="arch-item">
+          <div class="arch-circle">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>
+          </div>
+          <span class="arch-label">Focalisé</span>
+        </div>
+      </div>
       <p class="dt-section-intro">Ton business est une extension de toi-même. <strong>Avant de te parler méthode, on va regarder ton histoire.</strong> D'où tu pars, ce que tu as traversé, ce qui te motive vraiment, ce qui te freine. À la fin, tu verras ton portrait, et des gens comme toi qui ont réussi à partir du même point. Prends 2 minutes. <strong>C'est 100 % anonyme</strong> : aucun prénom, aucun email, rien n'est demandé.</p>
     </div>
 
