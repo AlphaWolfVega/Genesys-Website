@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Test signatures style PDG — Alpha Wolf Vega</title>
+<title>Signatures sophistiquées V2 — Alpha Wolf Vega</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
@@ -17,151 +17,284 @@
   .sub{text-align:center;color:#9aa3b2;font-size:14px;margin-bottom:50px;max-width:780px;margin-left:auto;margin-right:auto;line-height:1.6}
   .grid{
     max-width:1280px;margin:0 auto;
-    display:grid;grid-template-columns:repeat(auto-fit,minmax(380px,1fr));
-    gap:30px;
+    display:grid;grid-template-columns:repeat(auto-fit,minmax(440px,1fr));
+    gap:36px;
   }
   .sig-card{
-    background:linear-gradient(180deg,rgba(20,37,64,0.5),rgba(10,22,40,0.3));
-    border:1px solid rgba(212,182,106,0.18);
-    border-radius:10px;
-    padding:54px 32px 36px;
+    background:linear-gradient(180deg,rgba(20,37,64,0.55),rgba(10,22,40,0.32));
+    border:1px solid rgba(212,182,106,0.22);
+    border-radius:12px;
+    padding:60px 38px 40px;
     position:relative;
-    min-height:230px;
+    min-height:280px;
     display:flex;flex-direction:column;align-items:flex-start;justify-content:center;
   }
   .sig-card .num{
-    position:absolute;top:14px;left:18px;
+    position:absolute;top:14px;left:20px;
     font-family:'JetBrains Mono','Menlo',monospace;
-    font-size:10.5px;color:#D4B66A;font-weight:700;letter-spacing:0.1em;
+    font-size:11px;color:#D4B66A;font-weight:700;letter-spacing:0.1em;
   }
   .sig-card .label{
-    position:absolute;top:14px;right:18px;
+    position:absolute;top:14px;right:20px;
     font-family:'JetBrains Mono','Menlo',monospace;
     font-size:10px;color:#9aa3b2;font-weight:600;letter-spacing:0.05em;text-transform:uppercase;
   }
   .ceo-sig{
-    width:300px;max-width:100%;height:100px;display:block;margin-bottom:10px;overflow:visible;
+    width:100%;max-width:380px;height:130px;display:block;margin-bottom:14px;overflow:visible;color:#F0D690;
   }
-  .ceo-sig path, .ceo-sig circle{
-    fill:none;stroke:#F0D690;stroke-linecap:round;stroke-linejoin:round;
-    filter:drop-shadow(0 0 10px rgba(212,182,106,0.35));
+  .ceo-sig path,
+  .ceo-sig circle,
+  .ceo-sig ellipse{
+    fill:none;
+    stroke:currentColor;stroke-linecap:round;stroke-linejoin:round;
+    filter:drop-shadow(0 0 12px rgba(212,182,106,0.4));
   }
+  .ceo-sig .ink-thick{stroke-width:5.5}
+  .ceo-sig .ink-medium{stroke-width:3.5}
+  .ceo-sig .ink-fine{stroke-width:2}
+  .ceo-sig .ink-hair{stroke-width:1.2}
+  .ceo-sig .filled{fill:currentColor;stroke:none}
   .sig-role{
     font-family:Inter,sans-serif;font-size:10.5px;
     color:rgba(245,238,222,0.6);letter-spacing:0.2em;
-    text-transform:uppercase;font-weight:600;line-height:1.7;margin-top:6px;
+    text-transform:uppercase;font-weight:600;line-height:1.7;margin-top:8px;
   }
   .sig-role .greek-alpha{
     font-family:'Playfair Display',serif;font-style:italic;font-weight:700;
     color:#F0D690;font-size:1.15em;text-transform:none;letter-spacing:0;
   }
   .inspi{
-    margin-top:14px;font-family:'JetBrains Mono','Menlo',monospace;
-    font-size:9.5px;color:rgba(212,182,106,0.55);letter-spacing:0.05em;
+    margin-top:14px;padding-top:14px;border-top:1px solid rgba(212,182,106,0.15);
+    font-family:'JetBrains Mono','Menlo',monospace;
+    font-size:9.5px;color:rgba(212,182,106,0.55);letter-spacing:0.05em;line-height:1.6;
   }
 </style>
 </head>
 <body>
 
-<h1>Signatures style PDG — Alpha Wolf Vega</h1>
-<p class="sub">9 propositions handcraftées en SVG, chacune inspirée du pattern de tracé d'une vraie signature de PDG (Jobs, Musk, Bezos, Cook, Pichai, Zuckerberg, Macron, Branson, Buffett). Couleur or, traits fluides, illisibles volontairement comme les vraies. Donne-moi le numéro <strong>S_</strong> que tu valides.</p>
+<h1>Signatures sophistiquées — Alpha Wolf Vega</h1>
+<p class="sub">9 signatures handcraftées avec multiple paths superposés, stroke variable, fioritures décoratives et serifs calligraphiques. Chaque signature = 4 à 8 strokes superposés pour simuler une vraie pression de plume. Donne-moi le numéro <strong>S_</strong> que tu valides.</p>
 
 <div class="grid">
 
-  <!-- S1 — Style Steve Jobs : précis géométrique, S calligraphique + ligne -->
+  <!-- S1 — MASTER CALLIGRAPHER : A monogramme + entrance swoosh + trail + curled underline + dot ornament -->
   <div class="sig-card">
-    <span class="num">S1</span><span class="label">Style Steve Jobs</span>
-    <svg class="ceo-sig" viewBox="0 0 300 100">
-      <path d="M 35 40 Q 18 35, 22 55 Q 28 72, 50 65 Q 68 60, 60 42 Q 50 30, 38 42 Q 45 55, 70 70 L 110 60 Q 140 50, 175 65 Q 210 75, 250 55 Q 275 45, 285 50" stroke-width="3"/>
-      <path d="M 30 88 Q 130 80, 270 75" stroke-width="1.4"/>
+    <span class="num">S1</span><span class="label">Master Calligrapher</span>
+    <svg class="ceo-sig" viewBox="0 0 380 130">
+      <!-- Entrance flourish curl -->
+      <path class="ink-fine" d="M 8 78 Q 18 60, 32 70 Q 42 78, 48 65 Q 52 56, 58 62"/>
+      <!-- Main A geometric calligraphic -->
+      <path class="ink-thick" d="M 48 105 L 95 22 L 142 105"/>
+      <!-- A crossbar with serif curl -->
+      <path class="ink-medium" d="M 68 70 Q 95 62, 122 70"/>
+      <!-- Connecting cursive sweep through the rest of the name -->
+      <path class="ink-medium" d="M 142 78 Q 175 55, 215 70 Q 252 84, 290 62 Q 320 45, 350 60 Q 365 65, 372 58"/>
+      <!-- Secondary shadow stroke (simulates pressure) -->
+      <path class="ink-hair" d="M 144 84 Q 175 64, 213 76 Q 250 88, 287 70"/>
+      <!-- Underline with terminal curl -->
+      <path class="ink-fine" d="M 55 122 L 320 118 Q 345 117, 345 102 Q 345 90, 332 95 Q 325 100, 332 110"/>
+      <!-- Decorative ornament dot -->
+      <circle cx="22" cy="78" r="1.8" class="filled"/>
+      <circle cx="362" cy="62" r="1.4" class="filled"/>
     </svg>
     <span class="sig-role">Fondateur de GENESYS<br>Architecte du protocole <span class="greek-alpha">α</span>-QUANT</span>
-    <div class="inspi">Précis · géométrique · trait sec et confiant</div>
+    <div class="inspi">8 strokes · serif crossbar · entrance & terminal flourish · dots ornement</div>
   </div>
 
-  <!-- S2 — Style Elon Musk : initiale petite + grand swoop ascendant -->
+  <!-- S2 — GREEK QUANT : alpha grec calligraphique géant + WV cursive entrelacé + paraph -->
   <div class="sig-card">
-    <span class="num">S2</span><span class="label">Style Elon Musk</span>
-    <svg class="ceo-sig" viewBox="0 0 300 100">
-      <path d="M 30 60 Q 20 55, 25 70 Q 35 80, 45 65 Q 40 50, 30 60 M 50 65 Q 80 55, 120 45 Q 165 32, 215 22 Q 260 15, 290 18" stroke-width="2.8"/>
+    <span class="num">S2</span><span class="label">Greek Quant</span>
+    <svg class="ceo-sig" viewBox="0 0 380 130">
+      <!-- Big calligraphic α (Greek alpha) -->
+      <path class="ink-thick" d="M 75 50 Q 35 40, 28 75 Q 24 105, 60 102 Q 90 98, 82 65 Q 75 38, 65 48 Q 80 75, 110 100 Q 122 108, 132 102"/>
+      <!-- Hairline detail inside α -->
+      <path class="ink-hair" d="M 50 65 Q 60 80, 75 75"/>
+      <!-- Cursive WV intertwined -->
+      <path class="ink-medium" d="M 132 75 L 150 110 L 170 60 L 190 110 L 210 65 L 230 105"/>
+      <!-- Continuation swoosh -->
+      <path class="ink-medium" d="M 230 90 Q 270 70, 310 80 Q 340 86, 360 70 Q 372 62, 376 66"/>
+      <!-- Secondary stroke pressure -->
+      <path class="ink-hair" d="M 235 96 Q 275 76, 312 86 Q 338 92, 358 76"/>
+      <!-- Bottom paraph with circular flourish -->
+      <path class="ink-fine" d="M 70 122 L 300 118 Q 325 117, 332 105 Q 338 92, 320 90 Q 305 90, 312 102 Q 318 110, 332 108"/>
     </svg>
     <span class="sig-role">Fondateur de GENESYS<br>Architecte du protocole <span class="greek-alpha">α</span>-QUANT</span>
-    <div class="inspi">Minimal · ascendant · style tech rebelle</div>
+    <div class="inspi">α grec calligraphique · WV intertwined · circular flourish · 6 strokes</div>
   </div>
 
-  <!-- S3 — Style Jeff Bezos : grande boucle J + swoosh continu -->
+  <!-- S3 — PRESIDENTIEL : A monumental + barre transversale ornée + queue circulaire + paraph -->
   <div class="sig-card">
-    <span class="num">S3</span><span class="label">Style Jeff Bezos</span>
-    <svg class="ceo-sig" viewBox="0 0 300 100">
-      <path d="M 35 25 L 35 75 Q 35 90, 55 85 Q 78 78, 72 55 Q 65 38, 90 50 Q 115 65, 140 50 Q 165 33, 200 48 Q 235 65, 270 50 Q 285 42, 290 48" stroke-width="3"/>
-      <path d="M 40 90 L 245 88" stroke-width="1.4"/>
+    <span class="num">S3</span><span class="label">Présidentiel ornemental</span>
+    <svg class="ceo-sig" viewBox="0 0 380 130">
+      <!-- Monumental A -->
+      <path class="ink-thick" d="M 32 110 L 90 18 L 148 110"/>
+      <!-- A apex serif (top) -->
+      <path class="ink-fine" d="M 86 22 Q 90 15, 94 22"/>
+      <!-- Crossbar with decorative finial -->
+      <path class="ink-medium" d="M 56 70 Q 90 64, 124 70 Q 132 71, 138 65"/>
+      <!-- Crossbar shadow -->
+      <path class="ink-hair" d="M 58 75 Q 90 70, 122 75"/>
+      <!-- Tail forming a circular loop -->
+      <path class="ink-medium" d="M 148 95 Q 175 75, 210 88 Q 245 100, 280 80 Q 305 65, 295 50 Q 285 38, 270 50 Q 265 60, 280 60"/>
+      <!-- Secondary trail -->
+      <path class="ink-fine" d="M 150 102 Q 180 84, 215 95 Q 248 105, 283 86"/>
+      <!-- Continuation -->
+      <path class="ink-medium" d="M 295 60 Q 320 75, 350 65 Q 368 60, 374 64"/>
+      <!-- Lateral paraph (right side) -->
+      <path class="ink-fine" d="M 358 38 Q 372 28, 360 22 Q 350 18, 350 32 Q 350 42, 365 42"/>
+      <!-- Underline -->
+      <path class="ink-fine" d="M 38 122 L 305 120"/>
     </svg>
     <span class="sig-role">Fondateur de GENESYS<br>Architecte du protocole <span class="greek-alpha">α</span>-QUANT</span>
-    <div class="inspi">Boucle dominante · trait continu · autorité installée</div>
+    <div class="inspi">Apex serif · crossbar finial · loop circulaire · paraph latéral · 9 strokes</div>
   </div>
 
-  <!-- S4 — Style Tim Cook : ramassée verticale rapide, montagnes -->
+  <!-- S4 — MAESTRO ITALIEN : 3 layers cursifs ondulants + flourish principal énorme -->
   <div class="sig-card">
-    <span class="num">S4</span><span class="label">Style Tim Cook</span>
-    <svg class="ceo-sig" viewBox="0 0 300 100">
-      <path d="M 30 70 L 55 22 L 75 55 L 90 25 L 105 60 L 125 30 L 140 65 L 160 28 L 178 60 L 198 35 L 215 65" stroke-width="2.8"/>
-      <path d="M 30 80 L 220 78 Q 260 76, 290 70" stroke-width="1.5"/>
+    <span class="num">S4</span><span class="label">Maestro Italien</span>
+    <svg class="ceo-sig" viewBox="0 0 380 130">
+      <!-- Layer 1 : grand swoosh d'ouverture -->
+      <path class="ink-thick" d="M 12 95 Q 28 35, 65 50 Q 95 62, 95 82 Q 95 105, 70 100 Q 55 95, 70 80"/>
+      <!-- Layer 2 : cursive principale -->
+      <path class="ink-medium" d="M 95 78 Q 135 50, 175 70 Q 215 90, 255 65 Q 295 40, 335 60 Q 360 72, 372 65"/>
+      <!-- Layer 2 shadow -->
+      <path class="ink-hair" d="M 100 86 Q 140 60, 178 78 Q 215 96, 252 72"/>
+      <!-- Layer 3 : underline ondulé multiple -->
+      <path class="ink-fine" d="M 38 115 Q 100 108, 180 112 Q 260 118, 330 108 Q 350 105, 360 108"/>
+      <!-- Final flourish circulaire -->
+      <path class="ink-fine" d="M 360 108 Q 376 100, 372 88 Q 365 78, 354 88 Q 348 96, 360 102"/>
+      <!-- Mini accents calligraphiques -->
+      <circle cx="40" cy="62" r="1.6" class="filled"/>
+      <path class="ink-hair" d="M 320 50 Q 326 45, 332 50"/>
     </svg>
     <span class="sig-role">Fondateur de GENESYS<br>Architecte du protocole <span class="greek-alpha">α</span>-QUANT</span>
-    <div class="inspi">Compact · rapide · ingénieur exécution</div>
+    <div class="inspi">3 layers ondulants · flourish circulaire terminal · accents fins · 7 strokes</div>
   </div>
 
-  <!-- S5 — Style Sundar Pichai : longue cursive fluide -->
+  <!-- S5 — LE GRAND MAITRE : monogramme AWV calligraphique + sceau circulaire + double paraph -->
   <div class="sig-card">
-    <span class="num">S5</span><span class="label">Style Sundar Pichai</span>
-    <svg class="ceo-sig" viewBox="0 0 300 100">
-      <path d="M 20 65 Q 30 35, 55 50 Q 70 62, 78 42 L 75 70 Q 95 82, 115 62 Q 135 42, 155 60 Q 175 78, 200 58 Q 225 35, 250 50 Q 275 65, 290 55" stroke-width="3"/>
+    <span class="num">S5</span><span class="label">Le Grand Maître</span>
+    <svg class="ceo-sig" viewBox="0 0 380 130">
+      <!-- A monogramme calligraphique avec deux pieds -->
+      <path class="ink-thick" d="M 30 105 Q 50 60, 70 25 Q 75 18, 80 25 Q 100 60, 120 105"/>
+      <!-- A crossbar avec curl gauche -->
+      <path class="ink-medium" d="M 48 72 Q 52 65, 60 70 Q 90 64, 108 70"/>
+      <!-- W intertwined with V -->
+      <path class="ink-medium" d="M 130 50 L 145 105 L 165 60 L 185 105 L 205 55 L 225 105 L 245 50"/>
+      <!-- W shadow -->
+      <path class="ink-hair" d="M 132 56 L 147 100 M 168 65 L 188 100"/>
+      <!-- Continuation flourish vers droite -->
+      <path class="ink-medium" d="M 245 75 Q 280 55, 315 70 Q 340 80, 358 68"/>
+      <!-- Sceau circulaire en bas -->
+      <ellipse cx="335" cy="100" rx="20" ry="14" class="ink-fine"/>
+      <path class="ink-hair" d="M 322 100 L 348 100 M 335 92 L 335 108"/>
+      <!-- Double underline -->
+      <path class="ink-fine" d="M 38 118 L 305 115"/>
+      <path class="ink-hair" d="M 38 124 L 305 121"/>
     </svg>
     <span class="sig-role">Fondateur de GENESYS<br>Architecte du protocole <span class="greek-alpha">α</span>-QUANT</span>
-    <div class="inspi">Cursive longue · fluide · diplomate posé</div>
+    <div class="inspi">Monogramme AWV · sceau circulaire · double underline · 9 strokes</div>
   </div>
 
-  <!-- S6 — Style Zuckerberg : initiale grande + ligne droite simple -->
+  <!-- S6 — ARCHITECTE GEOMETRIQUE : structure rigoureuse + 3 strokes parallèles + flourish précis -->
   <div class="sig-card">
-    <span class="num">S6</span><span class="label">Style Zuckerberg</span>
-    <svg class="ceo-sig" viewBox="0 0 300 100">
-      <path d="M 30 78 L 65 18 L 100 78 M 50 56 L 80 56" stroke-width="3.5"/>
-      <path d="M 105 60 Q 145 65, 200 60 Q 250 55, 290 58" stroke-width="2.5"/>
+    <span class="num">S6</span><span class="label">Architecte géométrique</span>
+    <svg class="ceo-sig" viewBox="0 0 380 130">
+      <!-- A architectural triangle -->
+      <path class="ink-thick" d="M 40 110 L 80 25 L 120 110 Z" stroke-linejoin="miter"/>
+      <!-- Crossbar -->
+      <path class="ink-medium" d="M 58 75 L 102 75"/>
+      <!-- Strokes parallèles décalés (effet "tampon ancien") -->
+      <path class="ink-medium" d="M 130 60 Q 165 50, 205 60 Q 245 70, 285 55"/>
+      <path class="ink-fine" d="M 130 70 Q 165 60, 205 70 Q 245 80, 285 65"/>
+      <path class="ink-hair" d="M 130 80 Q 165 70, 205 80 Q 245 90, 285 75"/>
+      <!-- Trait final coupé net -->
+      <path class="ink-thick" d="M 285 50 L 365 50"/>
+      <path class="ink-fine" d="M 285 60 L 350 60"/>
+      <!-- Underline architectural avec terminal serif -->
+      <path class="ink-medium" d="M 40 122 L 360 122"/>
+      <path class="ink-fine" d="M 40 122 L 40 115 M 360 122 L 360 115"/>
     </svg>
     <span class="sig-role">Fondateur de GENESYS<br>Architecte du protocole <span class="greek-alpha">α</span>-QUANT</span>
-    <div class="inspi">Initiale brute · ligne droite · style geek dominant</div>
+    <div class="inspi">Triangle rigoureux · 3 strokes parallèles · serifs terminaux · 9 strokes</div>
   </div>
 
-  <!-- S7 — Style Macron : A présidentiel + grand swoosh français -->
+  <!-- S7 — CALLIGRAPHIE COPPERPLATE : cursive complète Alpha en lettres ornées -->
   <div class="sig-card">
-    <span class="num">S7</span><span class="label">Style Macron</span>
-    <svg class="ceo-sig" viewBox="0 0 300 100">
-      <path d="M 25 80 L 65 18 L 105 80 M 45 56 L 85 56" stroke-width="4"/>
-      <path d="M 100 70 Q 145 78, 190 65 Q 235 50, 275 60 Q 290 64, 295 60" stroke-width="2.5"/>
+    <span class="num">S7</span><span class="label">Copperplate Master</span>
+    <svg class="ceo-sig" viewBox="0 0 380 130">
+      <!-- A capital calligraphique avec entry stroke -->
+      <path class="ink-fine" d="M 12 75 Q 22 65, 32 75"/>
+      <path class="ink-thick" d="M 32 75 Q 38 25, 65 28 Q 92 32, 88 78 Q 85 110, 60 105 Q 48 100, 55 88 Q 70 85, 85 92"/>
+      <!-- Hairline thru loop -->
+      <path class="ink-hair" d="M 55 65 Q 70 60, 80 68"/>
+      <!-- Connection vers cursive -->
+      <path class="ink-medium" d="M 88 80 Q 105 65, 125 75 Q 140 82, 145 95 Q 150 110, 135 108 Q 125 105, 132 95"/>
+      <!-- Continuation cursive longue -->
+      <path class="ink-medium" d="M 145 90 Q 175 65, 210 75 Q 240 82, 250 100 Q 255 115, 240 112 Q 230 108, 238 100"/>
+      <path class="ink-medium" d="M 250 88 Q 280 60, 318 70 Q 345 78, 358 92 Q 365 105, 350 105 Q 340 102, 348 92"/>
+      <!-- Final flourish -->
+      <path class="ink-fine" d="M 358 90 Q 372 78, 376 65 Q 376 55, 365 60"/>
+      <!-- Hairline shadows -->
+      <path class="ink-hair" d="M 95 86 Q 110 72, 125 82"/>
+      <path class="ink-hair" d="M 152 96 Q 180 72, 210 82"/>
+      <path class="ink-hair" d="M 256 96 Q 282 70, 318 78"/>
     </svg>
     <span class="sig-role">Fondateur de GENESYS<br>Architecte du protocole <span class="greek-alpha">α</span>-QUANT</span>
-    <div class="inspi">Présidentiel · A monumental · swoosh décisif</div>
+    <div class="inspi">Copperplate calligraphique · 3 lettres entrelacées · hairline shadows · 9 strokes</div>
   </div>
 
-  <!-- S8 — Style Branson : loop vertical libre rebelle -->
+  <!-- S8 — BAROQUE OPULENT : flourish d'entrée + initiale lourde + corps en arabesque + paraph triple -->
   <div class="sig-card">
-    <span class="num">S8</span><span class="label">Style Branson</span>
-    <svg class="ceo-sig" viewBox="0 0 300 100">
-      <path d="M 25 65 Q 38 18, 65 35 Q 85 50, 78 70 Q 70 85, 52 75 Q 60 60, 95 55 Q 130 38, 175 55 Q 215 70, 255 48 Q 280 35, 295 48" stroke-width="2.8"/>
+    <span class="num">S8</span><span class="label">Baroque opulent</span>
+    <svg class="ceo-sig" viewBox="0 0 380 130">
+      <!-- Flourish d'entrée triple boucle -->
+      <path class="ink-fine" d="M 8 60 Q 18 40, 35 50 Q 48 58, 38 70 Q 28 80, 25 65"/>
+      <path class="ink-hair" d="M 18 55 Q 28 50, 35 58"/>
+      <!-- Initiale A monumentale arrondie -->
+      <path class="ink-thick" d="M 38 70 Q 60 18, 90 22 Q 118 28, 110 78 Q 105 105, 80 105 Q 60 102, 65 88"/>
+      <!-- Détails ornementaux dans le A -->
+      <path class="ink-hair" d="M 60 60 Q 75 50, 95 58"/>
+      <path class="ink-fine" d="M 70 92 Q 85 88, 100 92"/>
+      <!-- Corps en arabesque -->
+      <path class="ink-medium" d="M 110 78 Q 145 55, 180 70 Q 215 85, 250 65 Q 285 45, 320 60"/>
+      <path class="ink-hair" d="M 115 86 Q 148 64, 182 78 Q 215 92, 250 72"/>
+      <!-- Triple paraph terminal (style baroque) -->
+      <path class="ink-medium" d="M 320 60 Q 340 50, 350 65 Q 358 78, 348 88 Q 338 95, 332 80"/>
+      <path class="ink-fine" d="M 350 65 Q 365 55, 372 68"/>
+      <path class="ink-hair" d="M 358 78 Q 370 72, 376 82"/>
+      <!-- Underline avec swirl -->
+      <path class="ink-fine" d="M 38 118 Q 150 115, 280 118 Q 305 119, 318 113 Q 326 108, 320 102"/>
     </svg>
     <span class="sig-role">Fondateur de GENESYS<br>Architecte du protocole <span class="greek-alpha">α</span>-QUANT</span>
-    <div class="inspi">Libre · loop vertical · entrepreneur audacieux</div>
+    <div class="inspi">Flourish triple · ornements internes · arabesque · paraph baroque · 11 strokes</div>
   </div>
 
-  <!-- S9 — Style Warren Buffett : ramassé classique mature, lent -->
+  <!-- S9 — MODERN LUXURY : minimal raffiné, type Hermès / Chanel — initiale + dot + tracé extrêmement précis -->
   <div class="sig-card">
-    <span class="num">S9</span><span class="label">Style Warren Buffett</span>
-    <svg class="ceo-sig" viewBox="0 0 300 100">
-      <path d="M 30 30 Q 60 20, 80 45 Q 95 65, 75 75 Q 55 80, 50 60 Q 70 55, 100 65 L 130 60 Q 155 50, 175 60 Q 195 70, 215 55 Q 235 40, 260 50 Q 280 60, 290 55" stroke-width="3"/>
-      <path d="M 35 92 L 280 88" stroke-width="1.6"/>
+    <span class="num">S9</span><span class="label">Modern Luxury</span>
+    <svg class="ceo-sig" viewBox="0 0 380 130">
+      <!-- A minimal mais épais -->
+      <path class="ink-thick" d="M 35 100 L 78 22 L 121 100"/>
+      <!-- Crossbar fine -->
+      <path class="ink-fine" d="M 53 70 L 103 70"/>
+      <!-- Long trait horizontal pur (style Hermès) -->
+      <path class="ink-medium" d="M 121 60 L 340 60"/>
+      <!-- Trait fin parallèle -->
+      <path class="ink-fine" d="M 121 70 L 320 70"/>
+      <!-- Trait hair line -->
+      <path class="ink-hair" d="M 121 80 L 290 80"/>
+      <!-- Terminal dot precise -->
+      <circle cx="350" cy="60" r="3" class="filled"/>
+      <!-- Bottom serif -->
+      <path class="ink-fine" d="M 35 105 L 35 95 M 121 105 L 121 95"/>
+      <!-- Clean baseline -->
+      <path class="ink-fine" d="M 35 118 L 350 118"/>
+      <!-- Tiny ornement -->
+      <path class="ink-hair" d="M 200 50 Q 205 45, 210 50"/>
     </svg>
     <span class="sig-role">Fondateur de GENESYS<br>Architecte du protocole <span class="greek-alpha">α</span>-QUANT</span>
-    <div class="inspi">Classique · mature · sagesse posée</div>
+    <div class="inspi">Style Hermès/Chanel · trait pur · 3 lignes parallèles · dot terminal · 9 strokes</div>
   </div>
 
 </div>
