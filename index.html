@@ -3477,6 +3477,85 @@
     letter-spacing:0.04em;
   }
   .dt-success-author strong{color:var(--gold);font-weight:700}
+  /* Bridge α-QUANTT — connecte le profil au protocole avec promesse personnalisée */
+  .dt-verdict-quant{
+    margin:0 auto 18px;max-width:540px;
+    padding:22px 22px 20px;
+    background:linear-gradient(135deg,rgba(212,182,106,0.18) 0%,rgba(212,182,106,0.06) 100%);
+    border:1px solid rgba(212,182,106,0.5);
+    border-top:3px solid #F0D690;
+    border-radius:10px;
+    box-shadow:0 8px 28px rgba(212,182,106,0.18);
+    text-align:left;
+  }
+  .dt-quant-tag{
+    font-family:'Inter',sans-serif;
+    font-size:9.5px;font-weight:700;
+    letter-spacing:0.18em;text-transform:uppercase;
+    color:#F0D690;
+    margin-bottom:10px;display:block;
+  }
+  .dt-quant-h{
+    font-family:'Playfair Display',serif;
+    font-size:18px;font-weight:700;font-style:italic;
+    color:var(--text);
+    margin:0 0 12px;line-height:1.3;letter-spacing:-0.005em;
+  }
+  .dt-quant-h strong{color:#F0D690;font-style:normal;font-weight:800}
+  .dt-quant-body{
+    font-family:'Inter',sans-serif;
+    font-size:13.5px;font-weight:400;
+    color:var(--text);
+    line-height:1.55;margin:0;
+  }
+  .dt-quant-body strong{color:var(--gold);font-weight:700}
+  .dt-quant-body em{font-style:italic;color:#F0D690;font-weight:500}
+  /* Mention des autres formations dans GENESYS */
+  .dt-verdict-formations{
+    margin:0 auto 22px;max-width:540px;
+    padding:18px 22px;
+    background:linear-gradient(135deg,rgba(20,37,64,0.55) 0%,rgba(10,22,40,0.35) 100%);
+    border:1px solid rgba(212,182,106,0.25);
+    border-radius:10px;
+    text-align:left;
+  }
+  .dt-formations-tag{
+    font-family:'Inter',sans-serif;
+    font-size:9.5px;font-weight:700;
+    letter-spacing:0.18em;text-transform:uppercase;
+    color:var(--gold);
+    margin-bottom:10px;display:block;
+  }
+  .dt-formations-intro{
+    font-family:'Inter',sans-serif;
+    font-size:13px;font-weight:500;
+    color:var(--text);
+    margin:0 0 10px;line-height:1.5;
+  }
+  .dt-formations-list{
+    list-style:none;padding:0;margin:0;
+    display:flex;flex-direction:column;gap:5px;
+  }
+  .dt-formations-list li{
+    position:relative;padding-left:18px;
+    font-family:'Inter',sans-serif;
+    font-size:12px;color:var(--text-mute);line-height:1.5;
+  }
+  .dt-formations-list li::before{
+    content:'';position:absolute;left:2px;top:9px;
+    width:6px;height:6px;border-radius:50%;
+    background:var(--gold);
+    box-shadow:0 0 6px rgba(212,182,106,0.5);
+  }
+  .dt-formations-list li strong{color:var(--text);font-weight:600}
+  @media(max-width:600px){
+    .dt-verdict-quant{padding:18px 18px 16px}
+    .dt-quant-h{font-size:16px}
+    .dt-quant-body{font-size:12.5px}
+    .dt-verdict-formations{padding:14px 18px}
+    .dt-formations-intro{font-size:12px}
+    .dt-formations-list li{font-size:11.5px}
+  }
   /* Texte d'invitation à parcourir la page — 1 ligne nowrap */
   .dt-verdict-explore{
     font-family:'Inter',sans-serif;
@@ -4198,6 +4277,8 @@
         <div class="dt-verdict-portrait" id="dtVerdictPortrait"></div>
         <div class="dt-verdict-levers" id="dtVerdictLevers"></div>
         <div class="dt-verdict-success" id="dtVerdictSuccess"></div>
+        <div class="dt-verdict-quant" id="dtVerdictQuant"></div>
+        <div class="dt-verdict-formations" id="dtVerdictFormations"></div>
         <p class="dt-verdict-explore">Découvre l'écosystème en parcourant la page.</p>
         <div class="dt-verdict-cta">
           <a href="https://www.skool.com/genesys/about" target="_blank" rel="noopener" class="btn btn-gold">Rejoindre GENESYS</a>
@@ -6147,6 +6228,38 @@
         '<span class="dt-success-tag">Quelqu\'un parti du même point que toi</span>' +
         '<p class="dt-success-quote">' + story.quote + '</p>' +
         '<p class="dt-success-author"><strong>' + story.author + '</strong> — ' + story.note + '</p>';
+
+      // Bridge alpha-QUANTT — promesse personnalisée selon objectif financier
+      const QUANT_BY_TARGET = {
+        '5k':   "Pour atteindre <strong>5 000 €/mois</strong>, ce qui te manque ce n'est pas plus d'effort — c'est un système qui te dit <em>quoi tester, combien y mettre, quand couper</em>. Le Protocole α-QUANTT te donne ce système : score produit sur 100, espérance de gain calculée avant chaque pari, stop-loss écrits avant le lancement.",
+        '10k':  "Pour passer à <strong>10 000 €/mois</strong>, le facteur limitant n'est plus la motivation — c'est la <em>discipline opérationnelle</em>. Le Protocole α-QUANTT t'apporte exactement ça : 12 modules de décision calibrée, scaling progressif par paliers, kill switch automatique, rituels hebdo qui éliminent les choix émotionnels.",
+        '20k':  "Pour viser <strong>20 000 €/mois et au-delà</strong>, tu rentres dans la zone où chaque erreur coûte cher. Le Protocole α-QUANTT est dimensionné pour ce niveau : modélisation EV avant chaque créative, position sizing Kelly, courbe de saturation par audience, plafond économique calculé. Tu décides comme un quant, pas comme un parieur.",
+        '50k':  "À <strong>50 000 €/mois</strong>, tu pilotes une opération, pas un side-project. Le Protocole α-QUANTT te donne la grille : matelas trésorerie 90 jours, diversification d'infrastructure Meta, profit factor cible, anti-fragility checklist mensuelle. Tu construis pour durer, pas pour exploser sur un coup de chance."
+      };
+      const quantText = QUANT_BY_TARGET[answers.target] || QUANT_BY_TARGET['10k'];
+      const verdictQuant = document.getElementById('dtVerdictQuant');
+      if(verdictQuant){
+        verdictQuant.innerHTML =
+          '<span class="dt-quant-tag">Le Protocole α-QUANTT pour toi</span>' +
+          '<h4 class="dt-quant-h">Voilà comment <strong>α-QUANTT</strong> va t\'aider à atteindre <em>ton objectif</em>.</h4>' +
+          '<p class="dt-quant-body">' + quantText + '</p>';
+      }
+
+      // Autres formations dans GENESYS — contextualisé à l'audience large
+      const verdictFormations = document.getElementById('dtVerdictFormations');
+      if(verdictFormations){
+        verdictFormations.innerHTML =
+          '<span class="dt-formations-tag">Et tu n\'es pas seul avec α-QUANTT</span>' +
+          '<p class="dt-formations-intro">GENESYS contient un écosystème complet de formations qui s\'emboîtent avec le Protocole pour couvrir chaque levier de ton e-commerce :</p>' +
+          '<ul class="dt-formations-list">' +
+            '<li><strong>Psychologie du consommateur</strong> — comprendre comment le cerveau achète</li>' +
+            '<li><strong>Copywriting persuasif</strong> — écrire des pages produit qui convertissent</li>' +
+            '<li><strong>Testing créatif Meta</strong> — produire des batches de pubs profitables</li>' +
+            '<li><strong>Recherche produit avancée</strong> — trouver les vrais signaux de demande</li>' +
+            '<li><strong>SOP de scaling</strong> — passer du test à la rentabilité durable</li>' +
+            '<li><strong>Lives en direct + accès aux personnes</strong> — corrections en temps réel</li>' +
+          '</ul>';
+      }
     }
 
     function startTest(){
