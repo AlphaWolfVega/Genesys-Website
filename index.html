@@ -1737,6 +1737,9 @@
   /* Deal anim — section "Tu apportes l'envie. On apporte tout le reste." */
   .deal-anim{display:flex;justify-content:center;width:100%;max-width:380px;margin:18px auto 14px}
   .deal-anim svg{width:100%;height:auto;display:block;filter:drop-shadow(0 0 14px rgba(212,182,106,0.18))}
+  /* YT timeline anim — section "2021 → 2026 / +5 ans sur YouTube" */
+  .yt-timeline-anim{display:flex;justify-content:center;width:100%;max-width:380px;margin:18px auto 14px}
+  .yt-timeline-anim svg{width:100%;height:auto;display:block;filter:drop-shadow(0 0 14px rgba(212,182,106,0.18))}
   /* Overload anim — section "Plus d'outils, plus de tutos..." */
   .overload-anim{display:flex;justify-content:center;width:100%;max-width:380px;margin:18px auto 14px}
   .overload-anim svg{width:100%;height:auto;display:block;filter:drop-shadow(0 0 12px rgba(212,182,106,0.15))}
@@ -4501,6 +4504,100 @@
         <div class="line"></div>
       </div>
       <h2>2021 → 2026<br><em>+5 ans sur YouTube</em></h2>
+      <div class="yt-timeline-anim" aria-hidden="true">
+        <svg viewBox="0 0 320 100" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <filter id="ytGlow" x="-100%" y="-100%" width="300%" height="300%">
+              <feGaussianBlur stdDeviation="1.6" result="b"/>
+              <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+            </filter>
+            <linearGradient id="ytTimelineGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%" stop-color="rgba(212,182,106,0.25)"/>
+              <stop offset="80%" stop-color="rgba(212,182,106,0.55)"/>
+              <stop offset="100%" stop-color="#F0D690"/>
+            </linearGradient>
+          </defs>
+
+          <!-- 12 concurrents qui s'éteignent au fil des années (cycle 7s) -->
+          <circle cx="40" cy="22" r="2.6" fill="rgba(232,148,107,0.7)" filter="url(#ytGlow)">
+            <animate attributeName="opacity" values="1;1;0.15;0.15" keyTimes="0;0.18;0.22;1" dur="7s" repeatCount="indefinite"/>
+          </circle>
+          <circle cx="58" cy="34" r="2.4" fill="rgba(232,148,107,0.7)" filter="url(#ytGlow)">
+            <animate attributeName="opacity" values="1;1;0.15;0.15" keyTimes="0;0.22;0.26;1" dur="7s" repeatCount="indefinite"/>
+          </circle>
+          <circle cx="78" cy="14" r="2.2" fill="rgba(232,148,107,0.7)" filter="url(#ytGlow)">
+            <animate attributeName="opacity" values="1;1;0.15;0.15" keyTimes="0;0.28;0.32;1" dur="7s" repeatCount="indefinite"/>
+          </circle>
+          <circle cx="98" cy="28" r="2.5" fill="rgba(232,148,107,0.7)" filter="url(#ytGlow)">
+            <animate attributeName="opacity" values="1;1;0.15;0.15" keyTimes="0;0.34;0.38;1" dur="7s" repeatCount="indefinite"/>
+          </circle>
+          <circle cx="118" cy="42" r="2.3" fill="rgba(232,148,107,0.7)" filter="url(#ytGlow)">
+            <animate attributeName="opacity" values="1;1;0.15;0.15" keyTimes="0;0.40;0.44;1" dur="7s" repeatCount="indefinite"/>
+          </circle>
+          <circle cx="138" cy="18" r="2.6" fill="rgba(232,148,107,0.7)" filter="url(#ytGlow)">
+            <animate attributeName="opacity" values="1;1;0.15;0.15" keyTimes="0;0.46;0.50;1" dur="7s" repeatCount="indefinite"/>
+          </circle>
+          <circle cx="158" cy="36" r="2.4" fill="rgba(232,148,107,0.7)" filter="url(#ytGlow)">
+            <animate attributeName="opacity" values="1;1;0.15;0.15" keyTimes="0;0.52;0.56;1" dur="7s" repeatCount="indefinite"/>
+          </circle>
+          <circle cx="180" cy="22" r="2.3" fill="rgba(232,148,107,0.7)" filter="url(#ytGlow)">
+            <animate attributeName="opacity" values="1;1;0.15;0.15" keyTimes="0;0.58;0.62;1" dur="7s" repeatCount="indefinite"/>
+          </circle>
+          <circle cx="200" cy="44" r="2.5" fill="rgba(232,148,107,0.7)" filter="url(#ytGlow)">
+            <animate attributeName="opacity" values="1;1;0.15;0.15" keyTimes="0;0.64;0.68;1" dur="7s" repeatCount="indefinite"/>
+          </circle>
+          <circle cx="222" cy="16" r="2.4" fill="rgba(232,148,107,0.7)" filter="url(#ytGlow)">
+            <animate attributeName="opacity" values="1;1;0.15;0.15" keyTimes="0;0.70;0.74;1" dur="7s" repeatCount="indefinite"/>
+          </circle>
+          <circle cx="240" cy="32" r="2.3" fill="rgba(232,148,107,0.7)" filter="url(#ytGlow)">
+            <animate attributeName="opacity" values="1;1;0.15;0.15" keyTimes="0;0.76;0.80;1" dur="7s" repeatCount="indefinite"/>
+          </circle>
+          <circle cx="258" cy="42" r="2.4" fill="rgba(232,148,107,0.7)" filter="url(#ytGlow)">
+            <animate attributeName="opacity" values="1;1;0.15;0.15" keyTimes="0;0.82;0.86;1" dur="7s" repeatCount="indefinite"/>
+          </circle>
+
+          <!-- Curseur temporel : trait vertical qui balaie de gauche à droite -->
+          <line y1="6" y2="64" stroke="rgba(232,202,126,0.5)" stroke-width="1" stroke-dasharray="2 3">
+            <animate attributeName="x1" values="22;298" dur="7s" calcMode="linear" repeatCount="indefinite"/>
+            <animate attributeName="x2" values="22;298" dur="7s" calcMode="linear" repeatCount="indefinite"/>
+          </line>
+
+          <!-- Timeline horizontale -->
+          <line x1="22" y1="68" x2="298" y2="68" stroke="url(#ytTimelineGrad)" stroke-width="1.4" stroke-linecap="round"/>
+          <!-- Year ticks + labels -->
+          <g font-family="Inter,sans-serif" font-size="8.5" font-weight="700" text-anchor="middle">
+            <line x1="22" y1="64" x2="22" y2="72" stroke="rgba(212,182,106,0.6)" stroke-width="1.2"/>
+            <text x="22" y="84" fill="rgba(212,182,106,0.75)">2021</text>
+            <line x1="77" y1="64" x2="77" y2="72" stroke="rgba(212,182,106,0.6)" stroke-width="1.2"/>
+            <text x="77" y="84" fill="rgba(212,182,106,0.65)">2022</text>
+            <line x1="132" y1="64" x2="132" y2="72" stroke="rgba(212,182,106,0.6)" stroke-width="1.2"/>
+            <text x="132" y="84" fill="rgba(212,182,106,0.65)">2023</text>
+            <line x1="187" y1="64" x2="187" y2="72" stroke="rgba(212,182,106,0.6)" stroke-width="1.2"/>
+            <text x="187" y="84" fill="rgba(212,182,106,0.65)">2024</text>
+            <line x1="242" y1="64" x2="242" y2="72" stroke="rgba(212,182,106,0.7)" stroke-width="1.3"/>
+            <text x="242" y="84" fill="rgba(212,182,106,0.75)">2025</text>
+            <line x1="298" y1="58" x2="298" y2="76" stroke="#F0D690" stroke-width="1.8"/>
+            <text x="298" y="84" fill="#F0D690" font-weight="800">2026</text>
+          </g>
+
+          <!-- Badge YouTube doré qui survit et pulse à droite -->
+          <g transform="translate(298,28)">
+            <!-- Halo qui rayonne -->
+            <rect x="-18" y="-12" width="36" height="24" rx="6" fill="none" stroke="rgba(212,182,106,0.4)" filter="url(#ytGlow)">
+              <animate attributeName="stroke-width" values="0.5;2.5;0.5" dur="2s" repeatCount="indefinite"/>
+              <animate attributeName="opacity" values="0.3;1;0.3" dur="2s" repeatCount="indefinite"/>
+            </rect>
+            <!-- Badge -->
+            <rect x="-14" y="-9" width="28" height="18" rx="4.5" fill="rgba(212,182,106,0.22)" stroke="#F0D690" stroke-width="1.4" filter="url(#ytGlow)"/>
+            <!-- Triangle play -->
+            <polygon points="-3,-5 -3,5 5.5,0" fill="#FFE4B0" filter="url(#ytGlow)">
+              <animate attributeName="fill" values="#FFE4B0;#F0D690;#FFE4B0" dur="2s" repeatCount="indefinite"/>
+            </polygon>
+            <!-- Label "VIVANT" -->
+            <text y="22" text-anchor="middle" fill="#F0D690" font-family="Inter,sans-serif" font-size="8.5" font-weight="800" letter-spacing="0.16em">VIVANT</text>
+          </g>
+        </svg>
+      </div>
       <p>La plupart des "experts e-commerce" qui étaient là en 2022 ont déjà disparu, changé de niche, ou pivoté vers un autre business à la mode. <strong>Nous, on a toujours des boutiques qui tournent, on connaît la réalité du marché, on vit l'e-commerce toute l'année.</strong> +7 ans dans l'e-commerce. +13 ans d'expérience cumulés avec l'équipe. +5 ans sur YouTube à partager énormément de valeurs — méthodes, raisonnements, retours concrets sur les boutiques qu'on a lancées.</p>
     </div>
     <div class="trust-statement reveal"><span class="trust-statement-text">Profite de +13 ans d'expérience cumulée<br>et de chaque erreur qu'on a payée<br>à ta place pour seulement 49$ / mois<br>l'équivalent de 2-3 Uber Eats<br>que tu oublies la semaine d'après.</span></div>
