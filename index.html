@@ -818,78 +818,39 @@
       line-height:1.4 !important;letter-spacing:-0.005em;
     }
 
-    /* === VRAIE RAISON DES ECHECS (slide redesign) === */
+    /* === VRAIE RAISON DES ECHECS — version tight & propre === */
     .hl-vraie-title{
-      font-family:'Playfair Display',serif;
-      font-size:26px;font-weight:800;
-      color:var(--text);
-      text-align:center;line-height:1.1;
-      letter-spacing:-0.015em;
-      margin:0 0 14px 0 !important;
-    }
-    .hl-vraie-negate-block{
-      display:flex;flex-direction:column;align-items:center;
-      gap:3px;margin-bottom:14px;
-    }
-    .hl-vraie-negate{
-      font-family:'Inter',sans-serif;
-      font-size:13.5px;font-weight:500;
-      color:var(--text-mute);
-      text-align:center;margin:0;line-height:1.35;
-    }
-    .hl-vraie-negate strong{color:var(--text);font-weight:700}
-    .hl-vraie-reveal{
-      font-family:'Playfair Display',serif;
-      font-size:16px;font-weight:600;font-style:italic;
-      color:var(--gold);
-      text-align:center;line-height:1.35;
-      margin:0 0 18px 0 !important;
-      letter-spacing:-0.005em;
-    }
-    .hl-vraie-protocole{
-      font-style:normal;font-weight:800;
-      color:var(--gold);
-      letter-spacing:0.01em;
+      font-family:'Playfair Display','Times New Roman',serif !important;
+      font-size:22px !important;font-weight:700 !important;font-style:italic;
+      color:var(--gold) !important;text-align:center;
+      margin:0 0 16px !important;letter-spacing:0.005em;line-height:1.25 !important;
       white-space:nowrap;
     }
-    .hl-vraie-bridge{
+    .hl-vraie-punch{
       font-family:'Inter',sans-serif;
-      font-size:12.5px;font-weight:500;
-      color:var(--text-mute);
-      text-align:left;margin:0 0 8px 0 !important;
-      line-height:1.4;
-    }
-    .hl-vraie-verdict{
-      font-family:'Inter',sans-serif;
-      font-size:13px;font-weight:600;
+      font-size:14px;font-weight:500;
       color:var(--text);
-      text-align:center;margin:14px 0 4px 0 !important;
-      line-height:1.4;
-    }
-    .hl-vraie-verdict-2{
-      font-family:'Playfair Display',serif;
-      font-size:14.5px;font-weight:700;font-style:italic;
-      color:var(--gold);
-      text-align:center;margin:0 0 16px 0 !important;
-      line-height:1.35;letter-spacing:-0.005em;
-    }
-    .hl-vraie-solution{
-      font-family:'Inter',sans-serif;
-      font-size:12.5px;font-weight:400;
-      color:var(--text);
-      line-height:1.55;text-align:left;
+      text-align:center;line-height:1.45;
       margin:0 0 14px 0 !important;
     }
-    .hl-vraie-solution strong{color:var(--gold);font-weight:700}
-    .hl-vraie-solution em{font-style:italic;color:#F0D690;font-weight:500}
-    .hl-vraie-conclusion{
+    .hl-vraie-punch strong{color:var(--gold);font-weight:700;white-space:nowrap}
+    .hl-vraie-list{margin:0 0 14px 0 !important}
+    .hl-vraie-bridge-bot{
       font-family:'Playfair Display',serif;
-      font-size:14.5px;font-weight:600;font-style:italic;
+      font-size:14px;font-weight:500;
       color:var(--text);
-      text-align:center;margin:6px 0 0 0 !important;
-      line-height:1.4;letter-spacing:-0.005em;
+      text-align:center;margin:0 0 16px 0 !important;
+      line-height:1.4;
     }
-    .hl-vraie-conclusion strong{color:var(--gold);font-weight:800;font-style:normal}
+    .hl-vraie-bridge-bot em{font-style:italic;color:var(--gold);font-weight:600}
+    .hl-vraie-cta{
+      font-family:'Inter',sans-serif;
+      font-size:13px;font-weight:500;
+      color:var(--text);
+      text-align:center;margin:0 !important;
+      line-height:1.4;
+    }
+    .hl-vraie-cta strong{color:var(--gold);font-weight:700;white-space:nowrap}
 
     /* Down arrow (slide CTA finale) */
     .hero-lead-down{
@@ -1679,21 +1640,10 @@
     }
 
     /* === VRAIE RAISON DES ECHECS (mobile tweaks) === */
-    .hl-vraie-title{
-      font-size:24px !important;
-      letter-spacing:-0.015em;
-      margin-bottom:12px !important;
-    }
-    .hl-vraie-negate{font-size:13px !important}
-    .hl-vraie-reveal{
-      font-size:15px !important;
-      margin-bottom:16px !important;
-    }
-    .hl-vraie-bridge{font-size:12px !important}
-    .hl-vraie-verdict{font-size:12.5px !important;margin:12px 0 4px 0 !important}
-    .hl-vraie-verdict-2{font-size:14px !important;margin-bottom:14px !important}
-    .hl-vraie-solution{font-size:12px !important;line-height:1.55 !important;margin-bottom:12px !important}
-    .hl-vraie-conclusion{font-size:14px !important}
+    .hl-vraie-title{font-size:21px !important;margin-bottom:14px !important}
+    .hl-vraie-punch{font-size:13.5px !important;margin-bottom:12px !important}
+    .hl-vraie-bridge-bot{font-size:13.5px !important;margin-bottom:14px !important}
+    .hl-vraie-cta{font-size:12.5px !important}
 
     /* Continue arrow on last slide — gentle bounce + halo pulse (page scroll-down) */
     .hero-lead-down{
@@ -3734,27 +3684,17 @@
       </div>
       <div class="hero-lead-slide hero-lead-slide-diag">
         <div class="hero-lead-card">
-          <p class="hl-vraie-title">La vraie raison<br>de tes échecs</p>
-          <div class="hl-vraie-negate-block">
-            <p class="hl-vraie-negate">Ce n'est pas ton <strong>produit</strong>.</p>
-            <p class="hl-vraie-negate">Ce n'est pas <strong>Meta</strong>.</p>
-            <p class="hl-vraie-negate">Ce n'est pas le <strong>marché</strong>.</p>
-          </div>
-          <p class="hl-vraie-reveal">C'est que tu n'as jamais appliqué le <span class="hl-vraie-protocole">Protocole α-QUANT</span>.</p>
-          <p class="hl-vraie-bridge">À la place, voilà ce que tu as fait :</p>
-          <ul class="hl-diag-list">
-            <li>tu choisis tes produits à l'instinct, pas avec un score</li>
-            <li>tu lances tes campagnes sans calculer ton espérance de gain</li>
-            <li>tu ne sais pas quel CPA te rend rentable</li>
+          <p class="hl-vraie-title">La vraie raison de tes échecs</p>
+          <p class="hl-vraie-punch">Tu n'as jamais appliqué le <strong>Protocole α-QUANT</strong>.</p>
+          <ul class="hl-diag-list hl-vraie-list">
+            <li>tu choisis tes produits à l'instinct</li>
+            <li>tu lances sans calculer ton espérance de gain</li>
             <li>tu coupes une pub au bout de 24h en panique</li>
-            <li>tu doubles ton budget dès que ça commence à marcher</li>
+            <li>tu doubles ton budget dès que ça marche</li>
             <li>tu n'écris aucun stop-loss avant de cliquer</li>
-            <li>tu copies tes concurrents au lieu de décoder leur structure</li>
           </ul>
-          <p class="hl-vraie-verdict">Tu paries sans cadre. Sans math. Sans discipline.</p>
-          <p class="hl-vraie-verdict-2">Voilà pourquoi tu tournes en rond.</p>
-          <p class="hl-vraie-solution">Le <strong>Protocole α-QUANT</strong>, c'est l'inverse : un système opérationnel en <strong>12 modules</strong> qui transforme chaque décision e-commerce en <em>pari calibré</em>. Score produit sur 100, EV modeling, position sizing Kelly, stop-loss écrits avant le lancement, scaling progressif par paliers, kill switch, rituels hebdo.</p>
-          <p class="hl-vraie-conclusion">Disponible <strong>uniquement dans GENESYS.</strong></p>
+          <p class="hl-vraie-bridge-bot"><em>Tu paries sans cadre.<br>Voilà pourquoi tu tournes en rond.</em></p>
+          <p class="hl-vraie-cta">Le <strong>Protocole α-QUANT</strong> est dans GENESYS.</p>
           <span class="hero-lead-swipe" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg></span>
         </div>
       </div>
