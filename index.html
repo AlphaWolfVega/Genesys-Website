@@ -1798,6 +1798,46 @@
     .pillars-blueprint .bp-axis-label{font-size:8px}
     .pillars-blueprint .bp-ticker{font-size:11px}
   }
+  /* Gears anim — section "Ce qu'il faut maîtriser" — 4 engrenages synchronisés */
+  .gears-anim{
+    width:100%;max-width:560px;margin:24px auto 22px;
+    filter:drop-shadow(0 0 16px rgba(212,182,106,0.10));
+    opacity:0;transform:translateY(20px);transition:opacity 1s ease,transform 1s ease;
+  }
+  .gears-anim.in{opacity:1;transform:translateY(0)}
+  .gears-anim svg{width:100%;height:auto;display:block;overflow:visible;font-family:'Inter',sans-serif}
+  .gears-anim .gear{transform-origin:center;transform-box:fill-box;will-change:transform}
+  .gears-anim .gear-cw{animation:gearSpinCW 8s linear infinite}
+  .gears-anim .gear-ccw{animation:gearSpinCCW 8s linear infinite}
+  @keyframes gearSpinCW{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
+  @keyframes gearSpinCCW{from{transform:rotate(0deg)}to{transform:rotate(-360deg)}}
+  .gears-anim .gear-label{
+    fill:var(--gold);font-size:11px;font-weight:700;letter-spacing:.24em;
+    filter:drop-shadow(0 0 4px rgba(212,182,106,0.4));
+  }
+  .gears-anim .gear-link{
+    stroke:rgba(212,182,106,0.25);stroke-width:1;stroke-dasharray:3 4;
+  }
+  .gears-anim .gear-pulse{
+    fill:var(--gold);
+    animation:gearPulse 2.4s ease-in-out infinite;
+    transform-origin:center;transform-box:fill-box;
+    filter:drop-shadow(0 0 8px rgba(212,182,106,0.85));
+  }
+  @keyframes gearPulse{
+    0%,100%{opacity:.4;transform:scale(0.85)}
+    50%{opacity:1;transform:scale(1.4)}
+  }
+  @media (prefers-reduced-motion: reduce){
+    .gears-anim .gear-cw,
+    .gears-anim .gear-ccw,
+    .gears-anim .gear-pulse{animation:none}
+    .gears-anim{transition:none}
+  }
+  @media (max-width:640px){
+    .gears-anim{max-width:340px;margin:18px auto 18px}
+    .gears-anim .gear-label{font-size:9.5px;letter-spacing:.18em}
+  }
   /* YT stats grid — section "2020 → 2026 / +6 ans sur YouTube" */
   .yt-stats-grid{
     display:grid;
@@ -4543,6 +4583,9 @@
         <p>Tu poses ta question dans Skool — tu récupères un retour exploitable, souvent dans l'heure. Les lives servent à débloquer <strong>les blocages plus complexes</strong>. <strong>Pas de "support sous 72h ouvrées"</strong>. Du concret, vite, et fini les semaines de détours qui te coûtent du temps.</p>
       </div>
     </div>
+    <div class="reveal" style="text-align:center;margin-top:40px">
+      <a href="https://www.skool.com/genesys/about" target="_blank" rel="noopener" class="btn btn-gold">Rejoindre GENESYS</a>
+    </div>
   </div>
 </section>
 
@@ -4890,6 +4933,9 @@
         </div>
       </div>
     </div>
+    <div class="reveal" style="text-align:center;margin-top:48px">
+      <a href="https://www.skool.com/genesys/about" target="_blank" rel="noopener" class="btn btn-gold">Rejoindre GENESYS</a>
+    </div>
   </div>
 </section>
 
@@ -4981,6 +5027,9 @@
         </ul>
       </div>
     </div>
+    <div class="reveal" style="text-align:center;margin-top:44px">
+      <a href="https://www.skool.com/genesys/about" target="_blank" rel="noopener" class="btn btn-gold">Rejoindre GENESYS</a>
+    </div>
   </div>
 </section>
 
@@ -5025,11 +5074,61 @@
     <div class="section-header reveal">
       <div class="ornament">
         <div class="line"></div>
-        <span class="label">Ce qu'on couvre</span>
+        <span class="label">Les fondamentaux</span>
         <div class="line"></div>
       </div>
       <h2 style="font-size:clamp(22px,4.6vw,64px)">Ce qu'il faut maîtriser<br>pour qu'une boutique <em>tourne vraiment</em></h2>
-      <p>Quatre blocs. Pas dix créateurs qui se contredisent. Chaque bloc sert à prendre de meilleures décisions et à vendre plus proprement.</p>
+      <div class="gears-anim reveal" aria-hidden="true">
+        <svg viewBox="0 0 600 260" preserveAspectRatio="xMidYMid meet">
+          <defs>
+            <pattern id="gearsGrid" width="20" height="20" patternUnits="userSpaceOnUse">
+              <path d="M 20 0 L 0 0 0 20" fill="none" stroke="rgba(212,182,106,0.05)" stroke-width="0.5"/>
+            </pattern>
+            <symbol id="gearShape" overflow="visible">
+              <circle r="26" fill="none" stroke="var(--gold)" stroke-width="1.6" stroke-opacity="0.85"/>
+              <circle r="14" fill="none" stroke="var(--gold)" stroke-width="1" stroke-opacity="0.45"/>
+              <circle r="5" fill="var(--gold)"/>
+              <g stroke="var(--gold)" stroke-width="3.5" stroke-linecap="round">
+                <line y1="-30" y2="-23"/>
+                <line transform="rotate(30)" y1="-30" y2="-23"/>
+                <line transform="rotate(60)" y1="-30" y2="-23"/>
+                <line transform="rotate(90)" y1="-30" y2="-23"/>
+                <line transform="rotate(120)" y1="-30" y2="-23"/>
+                <line transform="rotate(150)" y1="-30" y2="-23"/>
+                <line transform="rotate(180)" y1="-30" y2="-23"/>
+                <line transform="rotate(210)" y1="-30" y2="-23"/>
+                <line transform="rotate(240)" y1="-30" y2="-23"/>
+                <line transform="rotate(270)" y1="-30" y2="-23"/>
+                <line transform="rotate(300)" y1="-30" y2="-23"/>
+                <line transform="rotate(330)" y1="-30" y2="-23"/>
+              </g>
+            </symbol>
+          </defs>
+          <rect x="0" y="0" width="600" height="260" fill="url(#gearsGrid)"/>
+          <g transform="translate(180 95)">
+            <g class="gear gear-cw"><use href="#gearShape"/></g>
+            <text class="gear-label gear-label-top" y="-52" text-anchor="middle">PRODUIT</text>
+          </g>
+          <g transform="translate(420 95)">
+            <g class="gear gear-ccw"><use href="#gearShape"/></g>
+            <text class="gear-label gear-label-top" y="-52" text-anchor="middle">BOUTIQUE</text>
+          </g>
+          <g transform="translate(180 200)">
+            <g class="gear gear-ccw"><use href="#gearShape"/></g>
+            <text class="gear-label gear-label-bottom" y="55" text-anchor="middle">PUBLICITÉ</text>
+          </g>
+          <g transform="translate(420 200)">
+            <g class="gear gear-cw"><use href="#gearShape"/></g>
+            <text class="gear-label gear-label-bottom" y="55" text-anchor="middle">COPYWRITING</text>
+          </g>
+          <line class="gear-link" x1="206" y1="95" x2="394" y2="95"/>
+          <line class="gear-link" x1="206" y1="200" x2="394" y2="200"/>
+          <line class="gear-link" x1="180" y1="121" x2="180" y2="174"/>
+          <line class="gear-link" x1="420" y1="121" x2="420" y2="174"/>
+          <circle class="gear-pulse" cx="300" cy="147.5" r="3"/>
+        </svg>
+      </div>
+      <p>Juste en dessous, les quatre fondamentaux que tu dois maîtriser pour qu'une boutique commence à faire des ventes — et surtout, pour qu'elle devienne stable. Aucun des quatre n'est optionnel.</p>
     </div>
     <div class="four-grid">
       <div class="four-card reveal">
