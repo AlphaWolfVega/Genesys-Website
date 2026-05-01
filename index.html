@@ -3353,7 +3353,7 @@
     letter-spacing:0;
     text-transform:none;
   }
-  /* Override : protocole α-QUANT en lettres normales (lisibilité) */
+  /* Override : protocole α-QUANTT en lettres normales (lisibilité) */
   .founder-letter p strong.protocole-tag{
     font-family:'Inter',sans-serif;
     font-style:normal;
@@ -3866,39 +3866,64 @@
     .fork-coda{font-size:12.5px}
   }
 
-  /* Reassurance grid (4 + 2) */
+  /* Reassurance grid (3 + 3 mirrored, gold divider) */
   .reassure-grid{
-    margin-top:34px;
-    display:flex;flex-direction:column;
-    gap:14px;align-items:center;
+    margin:38px auto 0;
+    display:grid;
+    grid-template-columns:1fr auto 1fr;
+    gap:0 36px;
+    max-width:560px;
+    align-items:center;
   }
-  .reassure-row{
-    display:flex;flex-wrap:wrap;
-    justify-content:center;
-    gap:10px 28px;
+  .reassure-col{
+    display:flex;flex-direction:column;
+    gap:14px;
+  }
+  .reassure-col:first-child{align-items:flex-end;text-align:right}
+  .reassure-col:last-child{align-items:flex-start;text-align:left}
+  .reassure-item{
     font-family:'Inter',sans-serif;
     font-size:11px;color:var(--text-faint);
-    letter-spacing:0.22em;text-transform:uppercase;
+    letter-spacing:0.22em;
+    text-transform:uppercase;
+    display:inline-flex;align-items:center;gap:8px;
   }
-  .reassure-row span{
-    display:inline-flex;align-items:center;gap:7px;
-  }
-  .reassure-row span::before{
+  .reassure-col:first-child .reassure-item{flex-direction:row-reverse}
+  .reassure-item::before{
     content:"\2713";
     color:var(--gold);
     font-size:11px;font-weight:700;
     letter-spacing:0;
   }
-  .reassure-row strong{
+  .reassure-item strong{
     color:var(--gold);
     font-weight:700;
     letter-spacing:0.02em;
     font-size:13px;
     text-transform:none;
   }
+  .reassure-divider{
+    width:1px;height:110px;
+    background:linear-gradient(180deg,transparent 0%,rgba(212,182,106,0.4) 50%,transparent 100%);
+    align-self:stretch;
+    margin:0 auto;
+  }
   @media(max-width:600px){
-    .reassure-row{font-size:10px;gap:8px 16px;letter-spacing:0.14em}
-    .reassure-row strong{font-size:12px}
+    .reassure-grid{
+      grid-template-columns:1fr;
+      gap:18px 0;
+      max-width:300px;
+    }
+    .reassure-col:first-child{align-items:center;text-align:center}
+    .reassure-col:last-child{align-items:center;text-align:center}
+    .reassure-col:first-child .reassure-item{flex-direction:row}
+    .reassure-item{font-size:10px;letter-spacing:0.14em}
+    .reassure-item strong{font-size:12px}
+    .reassure-divider{
+      width:60%;height:1px;
+      background:linear-gradient(90deg,transparent,rgba(212,182,106,0.4),transparent);
+      margin:0 auto;
+    }
   }
 
   /* ===== FOOTER ===== */
@@ -4540,7 +4565,7 @@
     letter-spacing:0.04em;
   }
   .dt-success-author strong{color:var(--gold);font-weight:700}
-  /* Bridge α-QUANT — connecte le profil au protocole avec promesse personnalisée */
+  /* Bridge α-QUANTT — connecte le profil au protocole avec promesse personnalisée */
   .dt-verdict-quant{
     margin:0 auto 18px;max-width:540px;
     padding:22px 22px 20px;
@@ -4719,7 +4744,7 @@
       <div class="line"></div>
     </div>
     <h1 class="reveal">
-      <span class="nowrap">Le protocole α-QUANT</span><br>
+      <span class="nowrap">Le protocole α-QUANTT</span><br>
       <span class="nowrap">pour passer <span class="gold-italic">de zéro</span></span><br>
       <span class="nowrap"><span class="gold-italic">à une boutique rentable</span></span><br>
       <span class="nowrap">en e-commerce</span>
@@ -5017,7 +5042,7 @@
       <div class="hero-lead-slide hero-lead-slide-cta">
         <div class="hero-lead-card">
           <p class="hl-cta-kicker">Soyons clair.</p>
-          <p class="hl-cta-body">Si tu t'es reconnu dans une ou plusieurs des situations précédentes, et que tu es prêt à investir <strong>49&nbsp;$/mois</strong> sur toi-même, alors <strong class="hl-cta-claim-inline">le Protocole α-QUANT disponible dans GENESYS</strong> est exactement ce qu'il te faut pour atteindre tes objectifs.</p>
+          <p class="hl-cta-body">Si tu t'es reconnu dans une ou plusieurs des situations précédentes, et que tu es prêt à investir <strong>49&nbsp;$/mois</strong> sur toi-même, alors <strong class="hl-cta-claim-inline">le Protocole α-QUANTT disponible dans GENESYS</strong> est exactement ce qu'il te faut pour atteindre tes objectifs.</p>
           <div class="hl-cta-teaser" aria-hidden="true">
             <span class="hl-cta-teaser-arrow">←</span>
             <span class="hl-cta-teaser-text">Pourquoi rejoindre GENESYS</span>
@@ -5208,7 +5233,7 @@
           <span class="arch-label">Focalisé</span>
         </div>
       </div>
-      <p class="dt-section-intro">Ton business est une extension de toi-même. <strong>Avant de te parler méthode, on va regarder ton histoire.</strong> D'où tu pars, ce que tu as traversé, ce qui te motive vraiment, ce qui te freine. À la fin, tu verras ton portrait, et des gens comme toi qui ont réussi à partir du même point. <strong>Tu sauras aussi si le Protocole α-QUANT est fait pour toi.</strong> Prends 2 minutes. <strong>C'est 100 % anonyme</strong> : aucun prénom, aucun email, rien n'est demandé.</p>
+      <p class="dt-section-intro">Ton business est une extension de toi-même. <strong>Avant de te parler méthode, on va regarder ton histoire.</strong> D'où tu pars, ce que tu as traversé, ce qui te motive vraiment, ce qui te freine. À la fin, tu verras ton portrait, et des gens comme toi qui ont réussi à partir du même point. <strong>Tu sauras aussi si le Protocole α-QUANTT est fait pour toi.</strong> Prends 2 minutes. <strong>C'est 100 % anonyme</strong> : aucun prénom, aucun email, rien n'est demandé.</p>
     </div>
 
     <div class="dt-arena reveal" id="dtArena" style="margin-top:14px">
@@ -6502,7 +6527,7 @@
         <div>
           <h3>Tu rejoins GENESYS</h3>
 
-          <p class="panel-lede">À l'intérieur, tu suis <strong class="panel-protocol">le protocole α-QUANT</strong> : la séquence exacte des décisions à prendre, dans le bon ordre, pour qu'une boutique tienne debout.</p>
+          <p class="panel-lede">À l'intérieur, tu suis <strong class="panel-protocol">le protocole α-QUANTT</strong> : la séquence exacte des décisions à prendre, dans le bon ordre, pour qu'une boutique tienne debout.</p>
 
           <ul class="panel-bullets">
             <li><strong>La séquence, pas à pas</strong> : choix du produit, angle de vente, structure de page, priorités de test. Chaque décision a sa place.</li>
@@ -6516,7 +6541,7 @@
             <span class="sep">·</span><span>accès immédiat</span>
           </div>
 
-          <p class="panel-verdict">Le protocole α-QUANT te dit quoi faire. GENESYS te tient pour le faire.</p>
+          <p class="panel-verdict">Le protocole α-QUANTT te dit quoi faire. GENESYS te tient pour le faire.</p>
 
           <a href="https://www.skool.com/genesys/about" target="_blank" rel="noopener" class="btn btn-gold" style="margin-top:6px">Entrer dans GENESYS</a>
         </div>
@@ -6553,7 +6578,7 @@
 
               <div class="bio-context">
                 <p>Pas savoir quel produit choisir. Brûler du budget pub sans savoir lire les signaux. Empiler des méthodes qui se contredisent. <strong>C'est de là qu'est née GENESYS.</strong></p>
-                <p>Plusieurs millions d'euros plus tard, à travers plusieurs boutiques sur Shopify (dont <strong>trois encore actives en ce moment</strong>), j'ai distillé tout ce que j'ai appris dans <strong class="protocole-name">le protocole α-QUANT</strong> : la méthode que tu vas suivre dedans.</p>
+                <p>Plusieurs millions d'euros plus tard, à travers plusieurs boutiques sur Shopify (dont <strong>trois encore actives en ce moment</strong>), j'ai distillé tout ce que j'ai appris dans <strong class="protocole-name">le protocole α-QUANTT</strong> : la méthode que tu vas suivre dedans.</p>
               </div>
 
               <div class="bio-section-title">Mon rôle dans GENESYS</div>
@@ -6570,7 +6595,7 @@
               </div>
               <div class="founder-signature">
                 <img class="sig-handwritten" src="assets/signature-alpha-gold.png" alt="Alpha Wolf Vega — signature manuscrite">
-                <span class="sig-role">Fondateur de GENESYS<br>Architecte du protocole α-QUANT</span>
+                <span class="sig-role">Fondateur de GENESYS<br>Architecte du protocole α-QUANTT</span>
               </div>
             </div>
           </div>
@@ -6733,8 +6758,8 @@
         <div class="faq-a">GENESYS, c'est l'endroit où tu arrêtes d'apprendre dans le vide. Tu y trouves la méthode, les modules, les échanges et les réponses directes au même endroit. Techniquement, la communauté est hébergée sur Skool : tu paies 49 $/mois, tu accèdes à 23 modules, à l'espace privé et aux lives. Rien à installer.</div>
       </div>
       <div class="faq">
-        <button class="faq-q">C'est quoi exactement, le protocole α-QUANT ? <span class="ico">+</span></button>
-        <div class="faq-a"><p>C'est la séquence de décisions que je suis sur chacune de mes boutiques actives. Pas une formule magique, juste l'ordre dans lequel chaque décision doit être prise pour qu'une boutique e-commerce tienne debout : choix du produit, angle de vente, structure de page, priorités de test, scaling.</p><p>Le problème, ce n'est jamais l'info qu'on te donne. C'est l'ordre dans lequel elle arrive. La plupart des gens connaissent déjà 70 à 80% des éléments. Ils les appliquent juste dans le mauvais sens, et c'est ce qui les fait revenir en arrière 6 mois plus tard.</p><p>α-QUANT met de l'ordre dans cette connaissance dispersée. À chaque étape, tu sais ce qui mérite ton attention, ce qui doit attendre, et ce que tu peux ignorer pour l'instant. Tu suis la séquence, je regarde par-dessus ton épaule.</p></div>
+        <button class="faq-q">C'est quoi exactement, le protocole α-QUANTT ? <span class="ico">+</span></button>
+        <div class="faq-a"><p>C'est la séquence de décisions que je suis sur chacune de mes boutiques actives. Pas une formule magique, juste l'ordre dans lequel chaque décision doit être prise pour qu'une boutique e-commerce tienne debout : choix du produit, angle de vente, structure de page, priorités de test, scaling.</p><p>Le problème, ce n'est jamais l'info qu'on te donne. C'est l'ordre dans lequel elle arrive. La plupart des gens connaissent déjà 70 à 80% des éléments. Ils les appliquent juste dans le mauvais sens, et c'est ce qui les fait revenir en arrière 6 mois plus tard.</p><p>α-QUANTT met de l'ordre dans cette connaissance dispersée. À chaque étape, tu sais ce qui mérite ton attention, ce qui doit attendre, et ce que tu peux ignorer pour l'instant. Tu suis la séquence, je regarde par-dessus ton épaule.</p></div>
       </div>
       <div class="faq">
         <button class="faq-q">Je suis débutant total. C'est pour moi ? <span class="ico">+</span></button>
@@ -6801,28 +6826,29 @@
         <div class="fork-path fork-b">
           <div class="fork-letter">B</div>
           <div class="fork-title">Tu rejoins GENESYS.</div>
-          <p class="fork-text">Tu entres dans le protocole α-QUANT, dans la communauté, dans l'espace privé. Tout, tout de suite.</p>
+          <p class="fork-text">Tu entres dans le protocole α-QUANTT, dans la communauté, dans l'espace privé. Tout, tout de suite.</p>
           <ul class="fork-bullets">
             <li><strong>Dans 7 jours</strong>, tu sais où mettre tes heures, dans le bon ordre</li>
             <li><strong>Dans 30 jours</strong>, tu as posé tes premières décisions avec retour direct</li>
             <li><strong>Dans 90 jours</strong>, tu as la méthode et l'environnement pour avancer</li>
           </ul>
-          <p class="fork-coda">C'est pas une promesse de résultat. C'est une promesse de cadre, de méthode et d'accès.</p>
+          <p class="fork-coda">Une méthode logique, structurée, qui multiplie ta probabilité d'arriver là où tu vises.</p>
         </div>
       </div>
 
       <a href="https://www.skool.com/genesys/about" target="_blank" rel="noopener" class="btn btn-gold" style="font-size:14px;padding:22px 44px">Rejoindre GENESYS</a>
 
       <div class="reassure-grid">
-        <div class="reassure-row">
-          <span><strong>49 $/mois</strong></span>
-          <span>Accès immédiat</span>
-          <span>23 modules</span>
-          <span>Annulable en 1 clic</span>
+        <div class="reassure-col">
+          <div class="reassure-item"><strong>49 $/mois</strong></div>
+          <div class="reassure-item">23 modules</div>
+          <div class="reassure-item">Communauté active</div>
         </div>
-        <div class="reassure-row">
-          <span>Communauté active</span>
-          <span>100 h+ de contenu</span>
+        <div class="reassure-divider" aria-hidden="true"></div>
+        <div class="reassure-col">
+          <div class="reassure-item">Accès immédiat</div>
+          <div class="reassure-item">Annulable en 1 clic</div>
+          <div class="reassure-item">100 h+ de contenu</div>
         </div>
       </div>
     </div>
@@ -7972,17 +7998,17 @@
 
       // Bridge alpha-QUANT — promesse personnalisée selon objectif financier
       const QUANT_BY_TARGET = {
-        '5k':   "Pour atteindre <strong>5 000 €/mois</strong>, ce qui te manque ce n'est pas plus d'effort — c'est un système qui te dit <em>quoi tester, combien y mettre, quand couper</em>. Le Protocole α-QUANT te donne ce système : score produit sur 100, espérance de gain calculée avant chaque pari, stop-loss écrits avant le lancement.",
-        '10k':  "Pour passer à <strong>10 000 €/mois</strong>, le facteur limitant n'est plus la motivation — c'est la <em>discipline opérationnelle</em>. Le Protocole α-QUANT t'apporte exactement ça : 12 modules de décision calibrée, scaling progressif par paliers, kill switch automatique, rituels hebdo qui éliminent les choix émotionnels.",
-        '20k':  "Pour viser <strong>20 000 €/mois et au-delà</strong>, tu rentres dans la zone où chaque erreur coûte cher. Le Protocole α-QUANT est dimensionné pour ce niveau : modélisation EV avant chaque créative, position sizing Kelly, courbe de saturation par audience, plafond économique calculé. Tu décides comme un quant, pas comme un parieur.",
-        '50k':  "À <strong>50 000 €/mois</strong>, tu pilotes une opération, pas un side-project. Le Protocole α-QUANT te donne la grille : matelas trésorerie 90 jours, diversification d'infrastructure Meta, profit factor cible, anti-fragility checklist mensuelle. Tu construis pour durer, pas pour exploser sur un coup de chance."
+        '5k':   "Pour atteindre <strong>5 000 €/mois</strong>, ce qui te manque ce n'est pas plus d'effort — c'est un système qui te dit <em>quoi tester, combien y mettre, quand couper</em>. Le Protocole α-QUANTT te donne ce système : score produit sur 100, espérance de gain calculée avant chaque pari, stop-loss écrits avant le lancement.",
+        '10k':  "Pour passer à <strong>10 000 €/mois</strong>, le facteur limitant n'est plus la motivation — c'est la <em>discipline opérationnelle</em>. Le Protocole α-QUANTT t'apporte exactement ça : 12 modules de décision calibrée, scaling progressif par paliers, kill switch automatique, rituels hebdo qui éliminent les choix émotionnels.",
+        '20k':  "Pour viser <strong>20 000 €/mois et au-delà</strong>, tu rentres dans la zone où chaque erreur coûte cher. Le Protocole α-QUANTT est dimensionné pour ce niveau : modélisation EV avant chaque créative, position sizing Kelly, courbe de saturation par audience, plafond économique calculé. Tu décides comme un quant, pas comme un parieur.",
+        '50k':  "À <strong>50 000 €/mois</strong>, tu pilotes une opération, pas un side-project. Le Protocole α-QUANTT te donne la grille : matelas trésorerie 90 jours, diversification d'infrastructure Meta, profit factor cible, anti-fragility checklist mensuelle. Tu construis pour durer, pas pour exploser sur un coup de chance."
       };
       const quantText = QUANT_BY_TARGET[answers.target] || QUANT_BY_TARGET['10k'];
       const verdictQuant = document.getElementById('dtVerdictQuant');
       if(verdictQuant){
         verdictQuant.innerHTML =
           '<span class="dt-quant-tag">Le Protocole <span style="text-transform:none;font-family:\'Playfair Display\',\'Times New Roman\',serif;font-style:italic;font-weight:800">α</span>-QUANT pour toi</span>' +
-          '<h4 class="dt-quant-h">Voilà comment <strong>α-QUANT</strong> va t\'aider à atteindre <em>ton objectif</em>.</h4>' +
+          '<h4 class="dt-quant-h">Voilà comment <strong>α-QUANTT</strong> va t\'aider à atteindre <em>ton objectif</em>.</h4>' +
           '<p class="dt-quant-body">' + quantText + '</p>';
       }
 
