@@ -3493,7 +3493,7 @@
           <div class="hl-infinity-loop" aria-hidden="true">
             <svg viewBox="0 0 280 130" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg">
               <defs>
-                <path id="hlInfPath" d="M 140 65 C 165 30, 200 30, 200 65 C 200 100, 165 100, 140 65 C 115 30, 80 30, 80 65 C 80 100, 115 100, 140 65 Z"/>
+                <path id="hlInfPath" d="M 200 65 C 200 35, 165 35, 140 65 C 115 95, 80 95, 80 65 C 80 35, 115 35, 140 65 C 165 95, 200 95, 200 65 Z"/>
                 <filter id="hlInfFigGlow" x="-50%" y="-50%" width="200%" height="200%">
                   <feGaussianBlur stdDeviation="2.6" result="b"/>
                   <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
@@ -3501,9 +3501,9 @@
               </defs>
               <!-- Track tirets fixes (parcours total, dim) -->
               <use href="#hlInfPath" pathLength="100" fill="none" stroke="#D4B66A" stroke-width="1.4" stroke-dasharray="0.6 1" opacity="0.3"/>
-              <!-- Trail lumineux continu : 30% du path lit, tourne autour du lemniscate. Path commence au centre = seam masque par le croisement, donc aucune disparition visible. -->
-              <use href="#hlInfPath" pathLength="100" fill="none" stroke="#E5CB85" stroke-width="2.6" stroke-linecap="round" stroke-dasharray="30 70" opacity="0.92" filter="url(#hlInfFigGlow)">
-                <animate attributeName="stroke-dashoffset" from="0" to="-100" dur="4.5s" calcMode="linear" repeatCount="indefinite"/>
+              <!-- UN SEUL trail lumineux. Lemniscate avec tangentes continues au croisement (Bezier C0+C1 smooth) → la lumiere coule sans coupure ni disparition. Cycle 3s rapide, dash 25/75 (sum=100=pathLength) tile parfait. -->
+              <use href="#hlInfPath" pathLength="100" fill="none" stroke="#E5CB85" stroke-width="2.6" stroke-linecap="round" stroke-dasharray="25 75" opacity="0.95" filter="url(#hlInfFigGlow)">
+                <animate attributeName="stroke-dashoffset" from="0" to="-100" dur="3s" calcMode="linear" repeatCount="indefinite"/>
               </use>
             </svg>
           </div>
