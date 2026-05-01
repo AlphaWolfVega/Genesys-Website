@@ -3627,7 +3627,7 @@
     display:flex;
     align-items:flex-start;
     justify-content:space-between;
-    gap:14px;
+    gap:0;
   }
   .faq-anim-bubble{
     display:flex;flex-direction:column;align-items:center;
@@ -3648,11 +3648,12 @@
     font-size:24px;
   }
   .faq-anim-bubble.a .faq-anim-icon{
-    border-color:#5BD16F;
-    color:#5BD16F;
-    background:rgba(91,209,111,0.08);
+    border-color:rgba(255,255,255,0.18);
+    color:rgba(255,255,255,0.32);
+    background:rgba(255,255,255,0.03);
     font-size:22px;
-    animation:faqCheckPulse 4s ease-in-out infinite;
+    animation:faqCheckArrive 4s ease-in-out infinite;
+    transition:none;
   }
   .faq-anim-label{
     font-family:'Inter',sans-serif;
@@ -3666,31 +3667,50 @@
   .faq-anim-track{
     flex:1;
     height:2px;
-    background:repeating-linear-gradient(90deg, rgba(212,182,106,0.35) 0 4px, transparent 4px 8px);
+    background:repeating-linear-gradient(90deg, rgba(212,182,106,0.4) 0 4px, transparent 4px 8px);
     position:relative;
-    margin:24px 4px 0;
+    margin:24px 0 0;
     align-self:flex-start;
   }
   .faq-anim-dot{
     position:absolute;
     top:50%;left:0;
-    width:10px;height:10px;
+    width:11px;height:11px;
     border-radius:50%;
     background:var(--gold);
-    box-shadow:0 0 14px rgba(212,182,106,0.7);
+    box-shadow:0 0 14px rgba(212,182,106,0.75);
     transform:translate(-50%,-50%);
-    animation:faqDotMove 4s linear infinite;
+    animation:faqDotMove 4s ease-in-out infinite;
   }
   @keyframes faqDotMove{
-    0%{left:0; opacity:0}
-    10%{opacity:1}
-    85%{opacity:1; left:100%}
-    100%{left:100%; opacity:0}
+    0%   {left:0%;   opacity:0; transform:translate(-50%,-50%) scale(0.5)}
+    8%   {           opacity:1; transform:translate(-50%,-50%) scale(1)}
+    78%  {left:100%; opacity:1; transform:translate(-50%,-50%) scale(1)}
+    84%  {left:100%; opacity:0; transform:translate(-50%,-50%) scale(1.7)}
+    100% {left:100%; opacity:0; transform:translate(-50%,-50%) scale(0.5)}
   }
-  @keyframes faqCheckPulse{
-    0%, 75%{transform:scale(1); filter:none}
-    85%{transform:scale(1.14); filter:drop-shadow(0 0 16px rgba(91,209,111,0.65))}
-    100%{transform:scale(1); filter:none}
+  @keyframes faqCheckArrive{
+    0%, 76%{
+      border-color:rgba(255,255,255,0.18);
+      color:rgba(255,255,255,0.32);
+      background:rgba(255,255,255,0.03);
+      transform:scale(1);
+      filter:none;
+    }
+    82%, 92%{
+      border-color:#5BD16F;
+      color:#5BD16F;
+      background:rgba(91,209,111,0.18);
+      transform:scale(1.14);
+      filter:drop-shadow(0 0 18px rgba(91,209,111,0.7));
+    }
+    100%{
+      border-color:rgba(255,255,255,0.18);
+      color:rgba(255,255,255,0.32);
+      background:rgba(255,255,255,0.03);
+      transform:scale(1);
+      filter:none;
+    }
   }
   @media(max-width:600px){
     .faq-anim{margin:-20px auto 36px}
