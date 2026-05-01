@@ -3,10 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Test polices manuscrites — Lettre d'Alpha</title>
+<title>Test polices manuscrites V2 — Réalisme stylo</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Kalam:wght@400;700&family=Caveat:wght@500;700&family=Patrick+Hand&family=Architects+Daughter&family=Homemade+Apple&family=Just+Another+Hand&family=Coming+Soon&family=Gochi+Hand&family=Shadows+Into+Light+Two&family=Permanent+Marker&family=Reenie+Beanie&family=Walter+Turncoat&family=Indie+Flower&family=Kaushan+Script&family=Sacramento&family=Marck+Script&family=Yellowtail&family=Mr+Dafoe&family=Allura&family=Dancing+Script:wght@600;700&family=Pacifico&family=Great+Vibes&family=Pinyon+Script&family=Cookie&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cedarville+Cursive&family=La+Belle+Aurore&family=Damion&family=Mansalva&family=Calligraffitti&family=Felipa&family=Birthstone&family=Vibur&family=Ms+Madi&family=Style+Script&family=Italianno&family=Yesteryear&family=Mrs+Saint+Delafield&family=Ephesis&family=Imperial+Script&family=Niconne&family=Petit+Formal+Script&family=Tangerine:wght@400;700&family=Parisienne&family=Mr+Dafoe&family=Allura&family=Sacramento&family=Marck+Script&family=Mr+De+Haviland&family=Pinyon+Script&family=Mrs+Sheppards&display=swap" rel="stylesheet">
 <style>
   *{margin:0;padding:0;box-sizing:border-box}
   body{
@@ -45,90 +45,86 @@
     font-size:10.5px;color:#9aa3b2;font-weight:600;letter-spacing:0.05em;
   }
   .greet{
-    font-weight:700;font-size:34px;
-    color:#F0D690;text-shadow:0 0 18px rgba(212,182,106,0.30);
+    color:#F0D690;text-shadow:0 0 18px rgba(212,182,106,0.25);
     margin-bottom:20px;line-height:1.15;
   }
   .body p{
-    font-size:17px;line-height:1.7;
-    color:rgba(245,238,222,0.92);margin-bottom:14px;
+    line-height:1.8;color:rgba(245,238,222,0.92);
+    margin-bottom:14px;
   }
-  .body p strong{color:#F0D690;font-weight:700}
+  .body p strong{color:#F0D690}
   .quote{
     margin-top:18px;padding-top:16px;
     border-top:1px solid rgba(212,182,106,0.2);
-    font-style:italic;font-size:16px;color:#F0D690;line-height:1.6;
+    color:#F0D690;line-height:1.7;
   }
 
   /* ============================================
-     POLICES POUR LE CORPS (la lettre d'Alpha)
+     POLICES POUR LE CORPS — orienté STYLO PROPRE
      ============================================ */
 
-  /* A1 — Kalam (current) */
-  .a1 .greet, .a1 .body, .a1 .quote{font-family:'Kalam','Bradley Hand',cursive}
-  .a1 .body p{font-weight:400}
-  .a1 .body p strong{font-weight:700}
+  /* A1 — Cedarville Cursive (cursif scolaire propre) */
+  .a1 .greet, .a1 .body, .a1 .quote{font-family:'Cedarville Cursive',cursive}
+  .a1 .greet{font-size:30px;font-weight:400}
+  .a1 .body p{font-size:17px}
 
-  /* A2 — Caveat */
-  .a2 .greet, .a2 .body, .a2 .quote{font-family:'Caveat','Brush Script MT',cursive}
-  .a2 .greet{font-weight:700;font-size:42px}
-  .a2 .body p{font-size:21px;font-weight:500}
-  .a2 .body p strong{font-weight:700}
-  .a2 .quote{font-size:19px}
+  /* A2 — La Belle Aurore (stylo plume fin) */
+  .a2 .greet, .a2 .body, .a2 .quote{font-family:'La Belle Aurore',cursive}
+  .a2 .greet{font-size:34px;font-weight:400}
+  .a2 .body p{font-size:18px}
 
-  /* A3 — Patrick Hand */
-  .a3 .greet, .a3 .body, .a3 .quote{font-family:'Patrick Hand',cursive}
-  .a3 .greet{font-weight:400;font-size:36px}
-  .a3 .body p{font-size:18px;font-weight:400}
-  .a3 .body p strong{font-weight:400;text-decoration:underline;text-decoration-color:rgba(212,182,106,0.4);text-underline-offset:3px}
+  /* A3 — Damion (signature fluide pen) */
+  .a3 .greet, .a3 .body, .a3 .quote{font-family:'Damion',cursive}
+  .a3 .greet{font-size:32px;font-weight:400}
+  .a3 .body p{font-size:18px}
 
-  /* A4 — Architects Daughter */
-  .a4 .greet, .a4 .body, .a4 .quote{font-family:'Architects Daughter',cursive}
-  .a4 .greet{font-size:30px}
-  .a4 .body p{font-size:16px;font-weight:400}
+  /* A4 — Mansalva (thin handwriting) */
+  .a4 .greet, .a4 .body, .a4 .quote{font-family:'Mansalva',cursive}
+  .a4 .greet{font-size:30px;font-weight:400}
+  .a4 .body p{font-size:18px}
 
-  /* A5 — Homemade Apple (cursive realistic) */
-  .a5 .greet, .a5 .body, .a5 .quote{font-family:'Homemade Apple',cursive}
-  .a5 .greet{font-size:24px}
-  .a5 .body p{font-size:14px;line-height:2;font-weight:400}
+  /* A5 — Calligraffitti (épais lent) */
+  .a5 .greet, .a5 .body, .a5 .quote{font-family:'Calligraffitti',cursive}
+  .a5 .greet{font-size:30px;font-weight:400}
+  .a5 .body p{font-size:17px}
 
-  /* A6 — Just Another Hand */
-  .a6 .greet, .a6 .body, .a6 .quote{font-family:'Just Another Hand',cursive}
-  .a6 .greet{font-size:42px;font-weight:400}
-  .a6 .body p{font-size:22px;line-height:1.5;font-weight:400}
+  /* A6 — Felipa (script bold mais doux) */
+  .a6 .greet, .a6 .body, .a6 .quote{font-family:'Felipa',cursive}
+  .a6 .greet{font-size:28px;font-weight:400}
+  .a6 .body p{font-size:16px}
 
-  /* A7 — Coming Soon */
-  .a7 .greet, .a7 .body, .a7 .quote{font-family:'Coming Soon',cursive}
-  .a7 .greet{font-size:32px;font-weight:400}
-  .a7 .body p{font-size:17px;font-weight:400}
+  /* A7 — Birthstone (moderne thin cursive) */
+  .a7 .greet, .a7 .body, .a7 .quote{font-family:'Birthstone',cursive}
+  .a7 .greet{font-size:36px;font-weight:400}
+  .a7 .body p{font-size:21px;line-height:1.6}
 
-  /* A8 — Gochi Hand */
-  .a8 .greet, .a8 .body, .a8 .quote{font-family:'Gochi Hand',cursive}
+  /* A8 — Vibur (thin pen casual) */
+  .a8 .greet, .a8 .body, .a8 .quote{font-family:'Vibur',cursive}
   .a8 .greet{font-size:32px;font-weight:400}
-  .a8 .body p{font-size:17px;font-weight:400}
+  .a8 .body p{font-size:19px}
 
-  /* A9 — Shadows Into Light Two */
-  .a9 .greet, .a9 .body, .a9 .quote{font-family:'Shadows Into Light Two',cursive}
-  .a9 .greet{font-size:34px;font-weight:400}
-  .a9 .body p{font-size:18px;font-weight:400}
+  /* A9 — Ms Madi (moderne fin élégant) */
+  .a9 .greet, .a9 .body, .a9 .quote{font-family:'Ms Madi',cursive}
+  .a9 .greet{font-size:36px;font-weight:400}
+  .a9 .body p{font-size:22px;line-height:1.55}
 
-  /* A10 — Permanent Marker */
-  .a10 .greet, .a10 .body, .a10 .quote{font-family:'Permanent Marker',cursive}
-  .a10 .greet{font-size:28px;font-weight:400}
-  .a10 .body p{font-size:15px;font-weight:400;line-height:1.65}
+  /* A10 — Style Script (cursive moderne propre) */
+  .a10 .greet, .a10 .body, .a10 .quote{font-family:'Style Script',cursive}
+  .a10 .greet{font-size:38px;font-weight:400}
+  .a10 .body p{font-size:21px;line-height:1.55}
 
-  /* A11 — Reenie Beanie */
-  .a11 .greet, .a11 .body, .a11 .quote{font-family:'Reenie Beanie',cursive}
+  /* A11 — Italianno (signature thin élégant) */
+  .a11 .greet, .a11 .body, .a11 .quote{font-family:'Italianno',cursive}
   .a11 .greet{font-size:42px;font-weight:400}
-  .a11 .body p{font-size:22px;line-height:1.5;font-weight:400}
+  .a11 .body p{font-size:23px;line-height:1.4}
 
-  /* A12 — Walter Turncoat */
-  .a12 .greet, .a12 .body, .a12 .quote{font-family:'Walter Turncoat',cursive}
-  .a12 .greet{font-size:30px;font-weight:400}
-  .a12 .body p{font-size:16px;font-weight:400}
+  /* A12 — Tangerine (calligraphique fin) */
+  .a12 .greet, .a12 .body, .a12 .quote{font-family:'Tangerine',cursive}
+  .a12 .greet{font-size:42px;font-weight:700}
+  .a12 .body p{font-size:23px;line-height:1.45}
 
   /* ============================================
-     SIGNATURES SEULES
+     SIGNATURES SEULES — orienté pro réaliste
      ============================================ */
   .sig-card{
     background:linear-gradient(180deg,rgba(20,37,64,0.45),rgba(10,22,40,0.25));
@@ -153,7 +149,7 @@
     color:#F0D690;line-height:1;
     text-shadow:0 0 18px rgba(212,182,106,0.30);
     transform:rotate(-2deg);transform-origin:left center;
-    margin-bottom:8px;
+    margin-bottom:8px;display:inline-block;
   }
   .sig-card .sig-swoosh{
     width:240px;height:24px;display:block;margin-top:2px;margin-bottom:14px;overflow:visible;
@@ -168,38 +164,31 @@
     text-transform:uppercase;font-weight:600;
   }
 
-  /* B1 — Kaushan Script (current) */
-  .b1 .signature{font-family:'Kaushan Script',cursive;font-size:46px;font-weight:400}
-  /* B2 — Sacramento */
-  .b2 .signature{font-family:'Sacramento',cursive;font-size:54px;font-weight:400}
-  /* B3 — Marck Script */
-  .b3 .signature{font-family:'Marck Script',cursive;font-size:50px;font-weight:400}
-  /* B4 — Yellowtail */
-  .b4 .signature{font-family:'Yellowtail',cursive;font-size:46px;font-weight:400}
-  /* B5 — Mr Dafoe */
-  .b5 .signature{font-family:'Mr Dafoe',cursive;font-size:54px;font-weight:400}
-  /* B6 — Allura */
-  .b6 .signature{font-family:'Allura',cursive;font-size:54px;font-weight:400}
-  /* B7 — Dancing Script Bold */
-  .b7 .signature{font-family:'Dancing Script',cursive;font-size:42px;font-weight:700}
-  /* B8 — Pacifico */
-  .b8 .signature{font-family:'Pacifico',cursive;font-size:38px;font-weight:400}
-  /* B9 — Pinyon Script */
-  .b9 .signature{font-family:'Pinyon Script',cursive;font-size:60px;font-weight:400}
+  .b1 .signature{font-family:'Damion',cursive;font-size:48px}
+  .b2 .signature{font-family:'La Belle Aurore',cursive;font-size:42px}
+  .b3 .signature{font-family:'Yesteryear',cursive;font-size:50px}
+  .b4 .signature{font-family:'Birthstone',cursive;font-size:60px}
+  .b5 .signature{font-family:'Mrs Saint Delafield',cursive;font-size:60px}
+  .b6 .signature{font-family:'Ephesis',cursive;font-size:50px}
+  .b7 .signature{font-family:'Imperial Script',cursive;font-size:62px;line-height:0.9}
+  .b8 .signature{font-family:'Niconne',cursive;font-size:54px}
+  .b9 .signature{font-family:'Style Script',cursive;font-size:54px}
+  .b10 .signature{font-family:'Italianno',cursive;font-size:60px}
+  .b11 .signature{font-family:'Mr De Haviland',cursive;font-size:62px}
+  .b12 .signature{font-family:'Petit Formal Script',cursive;font-size:36px;transform:none}
 </style>
 </head>
 <body>
 
-<h1>Test polices manuscrites — Lettre d'Alpha</h1>
-<p class="sub">12 polices pour le corps de la lettre + 9 polices pour la signature. Choisis une variante du corps + une variante de signature, puis dis-moi les numéros (ex : "A3 + B5"). Je pousse direct.</p>
+<h1>Test polices manuscrites V2 — Stylo réaliste</h1>
+<p class="sub">12 nouvelles polices pour le corps + 12 pour la signature, toutes orientées "écriture au stylo, pas dessin animé". Donne-moi A_ + B_ et je pousse.</p>
 
 <div class="section-title">— PARTIE 1 — Police pour le corps de la lettre —</div>
 
 <div class="grid">
 
-  <!-- A1 -->
   <div class="card a1">
-    <span class="num">A1</span><span class="font-name">Kalam (actuel)</span>
+    <span class="num">A1</span><span class="font-name">Cedarville Cursive</span>
     <div class="greet">Salut, c'est Alpha.</div>
     <div class="body">
       <p>J'ai démarré là où la plupart d'entre vous démarrez : à changer trop vite de produit, à brûler du budget sans savoir lire les signaux. <strong>C'est pour ça que j'ai créé GENESYS.</strong></p>
@@ -208,9 +197,8 @@
     <div class="quote">« Tu postes ta question. Je regarde le vrai blocage, pas juste le symptôme. »</div>
   </div>
 
-  <!-- A2 -->
   <div class="card a2">
-    <span class="num">A2</span><span class="font-name">Caveat</span>
+    <span class="num">A2</span><span class="font-name">La Belle Aurore</span>
     <div class="greet">Salut, c'est Alpha.</div>
     <div class="body">
       <p>J'ai démarré là où la plupart d'entre vous démarrez : à changer trop vite de produit, à brûler du budget sans savoir lire les signaux. <strong>C'est pour ça que j'ai créé GENESYS.</strong></p>
@@ -219,9 +207,8 @@
     <div class="quote">« Tu postes ta question. Je regarde le vrai blocage, pas juste le symptôme. »</div>
   </div>
 
-  <!-- A3 -->
   <div class="card a3">
-    <span class="num">A3</span><span class="font-name">Patrick Hand</span>
+    <span class="num">A3</span><span class="font-name">Damion</span>
     <div class="greet">Salut, c'est Alpha.</div>
     <div class="body">
       <p>J'ai démarré là où la plupart d'entre vous démarrez : à changer trop vite de produit, à brûler du budget sans savoir lire les signaux. <strong>C'est pour ça que j'ai créé GENESYS.</strong></p>
@@ -230,9 +217,8 @@
     <div class="quote">« Tu postes ta question. Je regarde le vrai blocage, pas juste le symptôme. »</div>
   </div>
 
-  <!-- A4 -->
   <div class="card a4">
-    <span class="num">A4</span><span class="font-name">Architects Daughter</span>
+    <span class="num">A4</span><span class="font-name">Mansalva</span>
     <div class="greet">Salut, c'est Alpha.</div>
     <div class="body">
       <p>J'ai démarré là où la plupart d'entre vous démarrez : à changer trop vite de produit, à brûler du budget sans savoir lire les signaux. <strong>C'est pour ça que j'ai créé GENESYS.</strong></p>
@@ -241,9 +227,8 @@
     <div class="quote">« Tu postes ta question. Je regarde le vrai blocage, pas juste le symptôme. »</div>
   </div>
 
-  <!-- A5 -->
   <div class="card a5">
-    <span class="num">A5</span><span class="font-name">Homemade Apple (cursif)</span>
+    <span class="num">A5</span><span class="font-name">Calligraffitti</span>
     <div class="greet">Salut, c'est Alpha.</div>
     <div class="body">
       <p>J'ai démarré là où la plupart d'entre vous démarrez : à changer trop vite de produit, à brûler du budget sans savoir lire les signaux. <strong>C'est pour ça que j'ai créé GENESYS.</strong></p>
@@ -252,9 +237,8 @@
     <div class="quote">« Tu postes ta question. Je regarde le vrai blocage, pas juste le symptôme. »</div>
   </div>
 
-  <!-- A6 -->
   <div class="card a6">
-    <span class="num">A6</span><span class="font-name">Just Another Hand</span>
+    <span class="num">A6</span><span class="font-name">Felipa (épais lent)</span>
     <div class="greet">Salut, c'est Alpha.</div>
     <div class="body">
       <p>J'ai démarré là où la plupart d'entre vous démarrez : à changer trop vite de produit, à brûler du budget sans savoir lire les signaux. <strong>C'est pour ça que j'ai créé GENESYS.</strong></p>
@@ -263,9 +247,8 @@
     <div class="quote">« Tu postes ta question. Je regarde le vrai blocage, pas juste le symptôme. »</div>
   </div>
 
-  <!-- A7 -->
   <div class="card a7">
-    <span class="num">A7</span><span class="font-name">Coming Soon</span>
+    <span class="num">A7</span><span class="font-name">Birthstone (thin moderne)</span>
     <div class="greet">Salut, c'est Alpha.</div>
     <div class="body">
       <p>J'ai démarré là où la plupart d'entre vous démarrez : à changer trop vite de produit, à brûler du budget sans savoir lire les signaux. <strong>C'est pour ça que j'ai créé GENESYS.</strong></p>
@@ -274,9 +257,8 @@
     <div class="quote">« Tu postes ta question. Je regarde le vrai blocage, pas juste le symptôme. »</div>
   </div>
 
-  <!-- A8 -->
   <div class="card a8">
-    <span class="num">A8</span><span class="font-name">Gochi Hand</span>
+    <span class="num">A8</span><span class="font-name">Vibur (thin pen)</span>
     <div class="greet">Salut, c'est Alpha.</div>
     <div class="body">
       <p>J'ai démarré là où la plupart d'entre vous démarrez : à changer trop vite de produit, à brûler du budget sans savoir lire les signaux. <strong>C'est pour ça que j'ai créé GENESYS.</strong></p>
@@ -285,9 +267,8 @@
     <div class="quote">« Tu postes ta question. Je regarde le vrai blocage, pas juste le symptôme. »</div>
   </div>
 
-  <!-- A9 -->
   <div class="card a9">
-    <span class="num">A9</span><span class="font-name">Shadows Into Light Two</span>
+    <span class="num">A9</span><span class="font-name">Ms Madi</span>
     <div class="greet">Salut, c'est Alpha.</div>
     <div class="body">
       <p>J'ai démarré là où la plupart d'entre vous démarrez : à changer trop vite de produit, à brûler du budget sans savoir lire les signaux. <strong>C'est pour ça que j'ai créé GENESYS.</strong></p>
@@ -296,9 +277,8 @@
     <div class="quote">« Tu postes ta question. Je regarde le vrai blocage, pas juste le symptôme. »</div>
   </div>
 
-  <!-- A10 -->
   <div class="card a10">
-    <span class="num">A10</span><span class="font-name">Permanent Marker</span>
+    <span class="num">A10</span><span class="font-name">Style Script</span>
     <div class="greet">Salut, c'est Alpha.</div>
     <div class="body">
       <p>J'ai démarré là où la plupart d'entre vous démarrez : à changer trop vite de produit, à brûler du budget sans savoir lire les signaux. <strong>C'est pour ça que j'ai créé GENESYS.</strong></p>
@@ -307,9 +287,8 @@
     <div class="quote">« Tu postes ta question. Je regarde le vrai blocage, pas juste le symptôme. »</div>
   </div>
 
-  <!-- A11 -->
   <div class="card a11">
-    <span class="num">A11</span><span class="font-name">Reenie Beanie</span>
+    <span class="num">A11</span><span class="font-name">Italianno (très fin)</span>
     <div class="greet">Salut, c'est Alpha.</div>
     <div class="body">
       <p>J'ai démarré là où la plupart d'entre vous démarrez : à changer trop vite de produit, à brûler du budget sans savoir lire les signaux. <strong>C'est pour ça que j'ai créé GENESYS.</strong></p>
@@ -318,9 +297,8 @@
     <div class="quote">« Tu postes ta question. Je regarde le vrai blocage, pas juste le symptôme. »</div>
   </div>
 
-  <!-- A12 -->
   <div class="card a12">
-    <span class="num">A12</span><span class="font-name">Walter Turncoat</span>
+    <span class="num">A12</span><span class="font-name">Tangerine 700</span>
     <div class="greet">Salut, c'est Alpha.</div>
     <div class="body">
       <p>J'ai démarré là où la plupart d'entre vous démarrez : à changer trop vite de produit, à brûler du budget sans savoir lire les signaux. <strong>C'est pour ça que j'ai créé GENESYS.</strong></p>
@@ -336,63 +314,84 @@
 <div class="grid">
 
   <div class="sig-card b1">
-    <span class="num">B1</span><span class="font-name">Kaushan Script (actuel)</span>
+    <span class="num">B1</span><span class="font-name">Damion</span>
     <span class="signature">Alpha Wolf Vega</span>
     <svg class="sig-swoosh" viewBox="0 0 230 22"><path d="M 4 18 Q 30 12, 90 11 T 175 7 Q 200 6, 222 3"/></svg>
     <span class="sig-role">Créateur de GENESYS · Architecte du protocole α-QUANTT</span>
   </div>
 
   <div class="sig-card b2">
-    <span class="num">B2</span><span class="font-name">Sacramento</span>
+    <span class="num">B2</span><span class="font-name">La Belle Aurore</span>
     <span class="signature">Alpha Wolf Vega</span>
     <svg class="sig-swoosh" viewBox="0 0 230 22"><path d="M 4 18 Q 30 12, 90 11 T 175 7 Q 200 6, 222 3"/></svg>
     <span class="sig-role">Créateur de GENESYS · Architecte du protocole α-QUANTT</span>
   </div>
 
   <div class="sig-card b3">
-    <span class="num">B3</span><span class="font-name">Marck Script</span>
+    <span class="num">B3</span><span class="font-name">Yesteryear</span>
     <span class="signature">Alpha Wolf Vega</span>
     <svg class="sig-swoosh" viewBox="0 0 230 22"><path d="M 4 18 Q 30 12, 90 11 T 175 7 Q 200 6, 222 3"/></svg>
     <span class="sig-role">Créateur de GENESYS · Architecte du protocole α-QUANTT</span>
   </div>
 
   <div class="sig-card b4">
-    <span class="num">B4</span><span class="font-name">Yellowtail</span>
+    <span class="num">B4</span><span class="font-name">Birthstone</span>
     <span class="signature">Alpha Wolf Vega</span>
     <svg class="sig-swoosh" viewBox="0 0 230 22"><path d="M 4 18 Q 30 12, 90 11 T 175 7 Q 200 6, 222 3"/></svg>
     <span class="sig-role">Créateur de GENESYS · Architecte du protocole α-QUANTT</span>
   </div>
 
   <div class="sig-card b5">
-    <span class="num">B5</span><span class="font-name">Mr Dafoe (sig pro)</span>
+    <span class="num">B5</span><span class="font-name">Mrs Saint Delafield</span>
     <span class="signature">Alpha Wolf Vega</span>
     <svg class="sig-swoosh" viewBox="0 0 230 22"><path d="M 4 18 Q 30 12, 90 11 T 175 7 Q 200 6, 222 3"/></svg>
     <span class="sig-role">Créateur de GENESYS · Architecte du protocole α-QUANTT</span>
   </div>
 
   <div class="sig-card b6">
-    <span class="num">B6</span><span class="font-name">Allura</span>
+    <span class="num">B6</span><span class="font-name">Ephesis</span>
     <span class="signature">Alpha Wolf Vega</span>
     <svg class="sig-swoosh" viewBox="0 0 230 22"><path d="M 4 18 Q 30 12, 90 11 T 175 7 Q 200 6, 222 3"/></svg>
     <span class="sig-role">Créateur de GENESYS · Architecte du protocole α-QUANTT</span>
   </div>
 
   <div class="sig-card b7">
-    <span class="num">B7</span><span class="font-name">Dancing Script 700</span>
+    <span class="num">B7</span><span class="font-name">Imperial Script</span>
     <span class="signature">Alpha Wolf Vega</span>
     <svg class="sig-swoosh" viewBox="0 0 230 22"><path d="M 4 18 Q 30 12, 90 11 T 175 7 Q 200 6, 222 3"/></svg>
     <span class="sig-role">Créateur de GENESYS · Architecte du protocole α-QUANTT</span>
   </div>
 
   <div class="sig-card b8">
-    <span class="num">B8</span><span class="font-name">Pacifico</span>
+    <span class="num">B8</span><span class="font-name">Niconne</span>
     <span class="signature">Alpha Wolf Vega</span>
     <svg class="sig-swoosh" viewBox="0 0 230 22"><path d="M 4 18 Q 30 12, 90 11 T 175 7 Q 200 6, 222 3"/></svg>
     <span class="sig-role">Créateur de GENESYS · Architecte du protocole α-QUANTT</span>
   </div>
 
   <div class="sig-card b9">
-    <span class="num">B9</span><span class="font-name">Pinyon Script (formel)</span>
+    <span class="num">B9</span><span class="font-name">Style Script</span>
+    <span class="signature">Alpha Wolf Vega</span>
+    <svg class="sig-swoosh" viewBox="0 0 230 22"><path d="M 4 18 Q 30 12, 90 11 T 175 7 Q 200 6, 222 3"/></svg>
+    <span class="sig-role">Créateur de GENESYS · Architecte du protocole α-QUANTT</span>
+  </div>
+
+  <div class="sig-card b10">
+    <span class="num">B10</span><span class="font-name">Italianno</span>
+    <span class="signature">Alpha Wolf Vega</span>
+    <svg class="sig-swoosh" viewBox="0 0 230 22"><path d="M 4 18 Q 30 12, 90 11 T 175 7 Q 200 6, 222 3"/></svg>
+    <span class="sig-role">Créateur de GENESYS · Architecte du protocole α-QUANTT</span>
+  </div>
+
+  <div class="sig-card b11">
+    <span class="num">B11</span><span class="font-name">Mr De Haviland</span>
+    <span class="signature">Alpha Wolf Vega</span>
+    <svg class="sig-swoosh" viewBox="0 0 230 22"><path d="M 4 18 Q 30 12, 90 11 T 175 7 Q 200 6, 222 3"/></svg>
+    <span class="sig-role">Créateur de GENESYS · Architecte du protocole α-QUANTT</span>
+  </div>
+
+  <div class="sig-card b12">
+    <span class="num">B12</span><span class="font-name">Petit Formal Script</span>
     <span class="signature">Alpha Wolf Vega</span>
     <svg class="sig-swoosh" viewBox="0 0 230 22"><path d="M 4 18 Q 30 12, 90 11 T 175 7 Q 200 6, 222 3"/></svg>
     <span class="sig-role">Créateur de GENESYS · Architecte du protocole α-QUANTT</span>
