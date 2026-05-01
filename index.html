@@ -1899,7 +1899,7 @@
   .solar-anim .solar-hub-glow{
     fill:url(#solarGlowGrad);
     animation:solarBreath 2s ease-in-out infinite;
-    transform-origin:300px 220px;transform-box:fill-box;
+    transform-box:fill-box;transform-origin:center;
   }
   @keyframes solarBreath{
     0%,100%{opacity:.45;transform:scale(0.85)}
@@ -1909,7 +1909,7 @@
     fill:url(#solarHubGrad);
     filter:drop-shadow(0 0 14px rgba(255,225,150,1)) drop-shadow(0 0 26px rgba(212,182,106,0.75));
     animation:solarCoreBreath 2s ease-in-out infinite;
-    transform-origin:300px 220px;transform-box:fill-box;
+    transform-box:fill-box;transform-origin:center;
   }
   @keyframes solarCoreBreath{
     0%,100%{transform:scale(0.92);opacity:0.92}
