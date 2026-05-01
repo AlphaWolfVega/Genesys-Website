@@ -819,17 +819,37 @@
     }
 
     /* === VRAIE RAISON DES ECHECS — tight & compact === */
-    .hl-vraie-pretitle{line-height:1.4 !important;margin-bottom:12px !important}
-    .hl-vraie-list{margin:0 0 12px 0 !important;gap:5px !important}
-    .hl-vraie-list li{font-size:11.5px !important;line-height:1.35 !important}
+    .hl-vraie-pretitle{line-height:1.35 !important;margin-bottom:10px !important}
+    .hl-vraie-list{margin:0 0 12px 0 !important;gap:3px !important}
+    .hl-vraie-list li{font-size:11px !important;line-height:1.3 !important;padding-left:18px !important}
+    .hl-vraie-list li::before{font-size:14px !important;width:13px !important}
+    .hl-vraie-verdict-wrap{display:flex;justify-content:center;width:100%;margin:0}
     .hl-vraie-bridge-bot{
       font-family:'Playfair Display',serif;
-      font-size:14px;font-weight:500;
+      font-size:13.5px;font-weight:500;
       color:var(--text);
       text-align:center;margin:0 !important;
       line-height:1.35;
+      display:inline-block;
+      padding:7px 16px;
+      border:1px solid rgba(212,182,106,0.45);
+      border-radius:6px;
+      background:rgba(212,182,106,0.04);
+      animation:hlVerdictPulse 2.6s ease-in-out infinite;
     }
     .hl-vraie-bridge-bot em{font-style:italic;color:var(--gold);font-weight:600}
+    @keyframes hlVerdictPulse{
+      0%, 100%{
+        box-shadow:0 0 0 rgba(212,182,106,0), 0 0 6px rgba(212,182,106,0.12);
+        border-color:rgba(212,182,106,0.4);
+        background:rgba(212,182,106,0.04);
+      }
+      50%{
+        box-shadow:0 0 22px rgba(212,182,106,0.55), 0 0 8px rgba(212,182,106,0.3);
+        border-color:rgba(212,182,106,0.9);
+        background:rgba(212,182,106,0.08);
+      }
+    }
 
     /* Down arrow (slide CTA finale) */
     .hero-lead-down{
@@ -1619,10 +1639,11 @@
     }
 
     /* === VRAIE RAISON DES ECHECS (mobile tweaks) === */
-    .hl-vraie-pretitle{line-height:1.4 !important;margin-bottom:12px !important}
-    .hl-vraie-list{margin-bottom:11px !important;gap:5px !important}
-    .hl-vraie-list li{font-size:11px !important;line-height:1.35 !important}
-    .hl-vraie-bridge-bot{font-size:13px !important;margin:0 !important}
+    .hl-vraie-pretitle{line-height:1.35 !important;margin-bottom:10px !important}
+    .hl-vraie-list{margin-bottom:11px !important;gap:3px !important}
+    .hl-vraie-list li{font-size:10.5px !important;line-height:1.3 !important;padding-left:17px !important}
+    .hl-vraie-list li::before{font-size:14px !important;width:13px !important}
+    .hl-vraie-bridge-bot{font-size:12.5px !important;padding:6px 14px !important}
 
     /* Continue arrow on last slide — gentle bounce + halo pulse (page scroll-down) */
     .hero-lead-down{
@@ -3675,8 +3696,14 @@
             <li>Tu copies tes concurrents au lieu de décoder leur structure</li>
             <li>Tu lances 2 ou 3 créatives par produit, jamais 12</li>
             <li>Tu ne tiens aucun journal de ce que tu as gagné ou perdu</li>
+            <li>Tu changes de produit toutes les 2 semaines parce que rien ne marche</li>
+            <li>Tu suis 10 formations qui se contredisent au lieu d'un seul système</li>
+            <li>Tu blâmes Meta ou l'algorithme quand ta créative est juste mauvaise</li>
+            <li>Tu testes la couleur du bouton avant de revoir ton hero</li>
           </ul>
-          <p class="hl-vraie-bridge-bot"><em>Voilà pourquoi tu tournes en rond.</em></p>
+          <div class="hl-vraie-verdict-wrap">
+            <p class="hl-vraie-bridge-bot"><em>Voilà pourquoi tu tournes en rond.</em></p>
+          </div>
           <span class="hero-lead-swipe" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg></span>
         </div>
       </div>
