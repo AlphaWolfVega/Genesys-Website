@@ -847,9 +847,38 @@
       border-radius:7px;
       background:linear-gradient(180deg,rgba(212,182,106,0.05) 0%,rgba(212,182,106,0.02) 100%);
       transform-origin:center;
+      position:relative;
+      overflow:hidden;
+      isolation:isolate;
       animation:hlVerdictBreathe 2s cubic-bezier(0.4,0,0.6,1) infinite;
     }
-    .hl-vraie-bridge-bot em{font-style:italic;color:var(--gold);font-weight:700}
+    .hl-vraie-bridge-bot em{font-style:italic;color:var(--gold);font-weight:700;position:relative;z-index:2}
+    /* Reflet metallique qui balaie la zone en diagonale, par-dessus le texte */
+    .hl-vraie-bridge-bot::before{
+      content:'';
+      position:absolute;
+      top:-50%;left:-30%;
+      width:55%;height:200%;
+      background:linear-gradient(105deg,
+        rgba(255,235,180,0) 0%,
+        rgba(255,235,180,0) 30%,
+        rgba(255,242,200,0.35) 45%,
+        rgba(255,250,225,0.7) 50%,
+        rgba(255,242,200,0.35) 55%,
+        rgba(255,235,180,0) 70%,
+        rgba(255,235,180,0) 100%);
+      transform:translateX(-180%) rotate(8deg);
+      animation:hlMetalShine 4.5s cubic-bezier(0.45,0,0.35,1) infinite;
+      pointer-events:none;
+      mix-blend-mode:screen;
+      z-index:1;
+      filter:blur(0.5px);
+    }
+    @keyframes hlMetalShine{
+      0%{transform:translateX(-180%) rotate(8deg)}
+      55%{transform:translateX(380%) rotate(8deg)}
+      100%{transform:translateX(380%) rotate(8deg)}
+    }
     /* Inspiration (0% → 50%) puis expiration (50% → 100%) — un cycle complet en 2s */
     @keyframes hlVerdictBreathe{
       0%, 100%{
