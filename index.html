@@ -1731,6 +1731,9 @@
   /* ===== SECTIONS ===== */
   section{padding:48px 0;position:relative}
   .section-header{text-align:center;max-width:800px;margin:0 auto 50px}
+  /* Timeline animee — section "Mon parcours" */
+  .story-anim-wrap{display:flex;justify-content:center;width:100%;max-width:380px;margin:18px auto 14px}
+  .story-anim{width:100%;height:auto;display:block;filter:drop-shadow(0 0 14px rgba(212,182,106,0.18))}
   @media(max-width:700px){
     section{padding:32px 0}
     .section-header{margin:0 auto 32px}
@@ -4200,6 +4203,59 @@
         <div class="line"></div>
       </div>
       <h2>Comment j'en suis arrivé là<br><em>où j'en suis aujourd'hui</em></h2>
+      <div class="story-anim-wrap" aria-hidden="true">
+        <svg viewBox="0 0 320 60" class="story-anim" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="storyPathGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%" stop-color="rgba(212,182,106,0.25)"/>
+              <stop offset="40%" stop-color="rgba(212,182,106,0.55)"/>
+              <stop offset="80%" stop-color="rgba(212,182,106,0.85)"/>
+              <stop offset="100%" stop-color="#F0D690"/>
+            </linearGradient>
+            <filter id="storyGlow" x="-100%" y="-100%" width="300%" height="300%">
+              <feGaussianBlur stdDeviation="1.8" result="b"/>
+              <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+            </filter>
+            <path id="storyPath" d="M 14 46 Q 60 42 90 36 T 170 24 T 250 14 T 306 8"/>
+          </defs>
+          <!-- Tracé pointillé sous-jacent (parcours total) -->
+          <use href="#storyPath" fill="none" stroke="rgba(212,182,106,0.25)" stroke-width="1.2" stroke-dasharray="2 4" stroke-linecap="round"/>
+          <!-- Tracé plein qui se révèle progressivement -->
+          <use href="#storyPath" fill="none" stroke="url(#storyPathGrad)" stroke-width="2" stroke-linecap="round" pathLength="100" stroke-dasharray="100" stroke-dashoffset="100" filter="url(#storyGlow)">
+            <animate attributeName="stroke-dashoffset" values="100;0;0" keyTimes="0;0.7;1" dur="5.5s" repeatCount="indefinite"/>
+          </use>
+          <!-- 5 jalons qui s'allument séquentiellement -->
+          <circle cx="14" cy="46" r="2.5" fill="#D4B66A" filter="url(#storyGlow)" opacity="0.4">
+            <animate attributeName="opacity" values="0.4;1;1;0.5;0.5" keyTimes="0;0.05;0.85;0.95;1" dur="5.5s" repeatCount="indefinite"/>
+            <animate attributeName="r" values="2.5;3.8;3;3;2.5" keyTimes="0;0.05;0.2;0.95;1" dur="5.5s" repeatCount="indefinite"/>
+          </circle>
+          <circle cx="90" cy="36" r="2.5" fill="#D4B66A" filter="url(#storyGlow)" opacity="0.3">
+            <animate attributeName="opacity" values="0.3;0.3;1;1;0.6;0.6" keyTimes="0;0.18;0.25;0.85;0.95;1" dur="5.5s" repeatCount="indefinite"/>
+            <animate attributeName="r" values="2.5;2.5;4;3;3;2.5" keyTimes="0;0.18;0.25;0.4;0.95;1" dur="5.5s" repeatCount="indefinite"/>
+          </circle>
+          <circle cx="170" cy="24" r="2.5" fill="#D4B66A" filter="url(#storyGlow)" opacity="0.3">
+            <animate attributeName="opacity" values="0.3;0.3;1;1;0.7;0.7" keyTimes="0;0.4;0.47;0.85;0.95;1" dur="5.5s" repeatCount="indefinite"/>
+            <animate attributeName="r" values="2.5;2.5;4;3;3;2.5" keyTimes="0;0.4;0.47;0.6;0.95;1" dur="5.5s" repeatCount="indefinite"/>
+          </circle>
+          <circle cx="250" cy="14" r="2.5" fill="#F0D690" filter="url(#storyGlow)" opacity="0.3">
+            <animate attributeName="opacity" values="0.3;0.3;1;1;0.85;0.85" keyTimes="0;0.6;0.65;0.85;0.95;1" dur="5.5s" repeatCount="indefinite"/>
+            <animate attributeName="r" values="2.5;2.5;4.5;3.2;3.2;2.5" keyTimes="0;0.6;0.65;0.78;0.95;1" dur="5.5s" repeatCount="indefinite"/>
+          </circle>
+          <!-- Jalon final = AUJOURD'HUI, pulse continu -->
+          <circle cx="306" cy="8" r="3" fill="#FFE4B0" filter="url(#storyGlow)" opacity="0.4">
+            <animate attributeName="opacity" values="0.4;0.4;1;1;1" keyTimes="0;0.78;0.85;0.95;1" dur="5.5s" repeatCount="indefinite"/>
+            <animate attributeName="r" values="3;3;5.5;4;4;3" keyTimes="0;0.78;0.85;0.92;0.97;1" dur="5.5s" repeatCount="indefinite"/>
+          </circle>
+          <!-- Point voyageur lumineux qui parcourt le tracé -->
+          <circle r="3.2" fill="#FFE4B0" filter="url(#storyGlow)">
+            <animateMotion dur="5.5s" begin="0s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.7;1" keySplines="0.4 0 0.5 1 ; 0 0 1 1">
+              <mpath href="#storyPath"/>
+            </animateMotion>
+            <animate attributeName="opacity" values="0;1;1;0;0" keyTimes="0;0.05;0.7;0.75;1" dur="5.5s" repeatCount="indefinite"/>
+            <animate attributeName="r" values="3.2;3.2;4;3.2;3.2" keyTimes="0;0.3;0.5;0.7;1" dur="5.5s" repeatCount="indefinite"/>
+          </circle>
+        </svg>
+      </div>
       <p>Pas une trajectoire propre. Pas une success story instagram. Juste 7 ans à apprendre, perdre, ajuster, recommencer.</p>
     </div>
 
