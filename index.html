@@ -818,36 +818,34 @@
       line-height:1.4 !important;letter-spacing:-0.005em;
     }
 
-    /* === VRAIE RAISON DES ECHECS — tight & compact === */
-    .hl-vraie-pretitle{line-height:1.35 !important;margin-bottom:10px !important}
-    .hl-vraie-list{margin:0 0 12px 0 !important;gap:3px !important}
-    .hl-vraie-list li{font-size:11px !important;line-height:1.3 !important;padding-left:18px !important}
-    .hl-vraie-list li::before{font-size:14px !important;width:13px !important}
+    /* === VRAIE RAISON DES ECHECS — air & breathing === */
+    .hl-vraie-pretitle{line-height:1.35 !important;margin-bottom:14px !important}
+    .hl-vraie-list{margin:0 0 16px 0 !important;gap:7px !important}
+    .hl-vraie-list li{font-size:11.5px !important;line-height:1.4 !important;padding-left:20px !important}
+    .hl-vraie-list li::before{font-size:14px !important;width:14px !important}
     .hl-vraie-verdict-wrap{display:flex;justify-content:center;width:100%;margin:0}
     .hl-vraie-bridge-bot{
       font-family:'Playfair Display',serif;
-      font-size:13.5px;font-weight:500;
+      font-size:14.5px;font-weight:600;
       color:var(--text);
       text-align:center;margin:0 !important;
-      line-height:1.35;
+      line-height:1.35;letter-spacing:0.005em;
       display:inline-block;
-      padding:7px 16px;
-      border:1px solid rgba(212,182,106,0.45);
-      border-radius:6px;
-      background:rgba(212,182,106,0.04);
-      animation:hlVerdictPulse 2.6s ease-in-out infinite;
+      padding:9px 22px;
+      border:1.5px solid rgba(212,182,106,0.6);
+      border-radius:7px;
+      background:linear-gradient(180deg,rgba(212,182,106,0.08) 0%,rgba(212,182,106,0.03) 100%);
+      animation:hlVerdictPulse 2.4s ease-in-out infinite;
     }
-    .hl-vraie-bridge-bot em{font-style:italic;color:var(--gold);font-weight:600}
+    .hl-vraie-bridge-bot em{font-style:italic;color:var(--gold);font-weight:700}
     @keyframes hlVerdictPulse{
       0%, 100%{
-        box-shadow:0 0 0 rgba(212,182,106,0), 0 0 6px rgba(212,182,106,0.12);
-        border-color:rgba(212,182,106,0.4);
-        background:rgba(212,182,106,0.04);
+        box-shadow:0 0 0 rgba(212,182,106,0), inset 0 0 8px rgba(212,182,106,0.05);
+        border-color:rgba(212,182,106,0.55);
       }
       50%{
-        box-shadow:0 0 22px rgba(212,182,106,0.55), 0 0 8px rgba(212,182,106,0.3);
-        border-color:rgba(212,182,106,0.9);
-        background:rgba(212,182,106,0.08);
+        box-shadow:0 0 28px rgba(212,182,106,0.6), 0 0 10px rgba(212,182,106,0.35), inset 0 0 12px rgba(212,182,106,0.12);
+        border-color:rgba(212,182,106,1);
       }
     }
 
@@ -1639,11 +1637,11 @@
     }
 
     /* === VRAIE RAISON DES ECHECS (mobile tweaks) === */
-    .hl-vraie-pretitle{line-height:1.35 !important;margin-bottom:10px !important}
-    .hl-vraie-list{margin-bottom:11px !important;gap:3px !important}
-    .hl-vraie-list li{font-size:10.5px !important;line-height:1.3 !important;padding-left:17px !important}
+    .hl-vraie-pretitle{line-height:1.35 !important;margin-bottom:14px !important}
+    .hl-vraie-list{margin-bottom:14px !important;gap:6px !important}
+    .hl-vraie-list li{font-size:11px !important;line-height:1.4 !important;padding-left:18px !important}
     .hl-vraie-list li::before{font-size:14px !important;width:13px !important}
-    .hl-vraie-bridge-bot{font-size:12.5px !important;padding:6px 14px !important}
+    .hl-vraie-bridge-bot{font-size:13.5px !important;padding:8px 18px !important}
 
     /* Continue arrow on last slide — gentle bounce + halo pulse (page scroll-down) */
     .hero-lead-down{
@@ -3687,18 +3685,18 @@
           <span class="hl-pretitle hl-pretitle-lg hl-vraie-pretitle">Les vraies raisons<br>de tes échecs</span>
           <span class="hl-pretitle-divider" aria-hidden="true"></span>
           <ul class="hl-diag-list hl-vraie-list">
-            <li>Tu choisis tes produits à l'instinct ou avec des logiciels de recherche, mais tu le fais mal</li>
+            <li>Tu choisis tes produits à l'instinct, sans méthode</li>
             <li>Tu lances sans calculer ton espérance de gain</li>
-            <li>Tu coupes une pub au bout de 24-48h en panique quand ça ne se passe pas comme prévu</li>
+            <li>Tu coupes une pub au bout de 24h en panique</li>
             <li>Tu doubles ton budget dès que ça marche</li>
             <li>Tu n'écris aucun stop-loss avant de lancer</li>
-            <li>Tu paries sans cadre</li>
-            <li>Tu copies tes concurrents au lieu de décoder leur structure</li>
-            <li>Tu lances 2 ou 3 créatives par produit, jamais 12</li>
-            <li>Tu ne tiens aucun journal de ce que tu as gagné ou perdu</li>
-            <li>Tu changes de produit toutes les 2 semaines parce que rien ne marche</li>
-            <li>Tu suis 10 formations qui se contredisent au lieu d'un seul système</li>
-            <li>Tu blâmes Meta ou l'algorithme quand ta créative est juste mauvaise</li>
+            <li>Tu paries sans cadre, sans plan de sortie</li>
+            <li>Tu copies tes concurrents au lieu de les décoder</li>
+            <li>Tu lances 3 créatives par produit, jamais 12</li>
+            <li>Tu ne tiens aucun journal de tes paris</li>
+            <li>Tu changes de produit toutes les 2 semaines</li>
+            <li>Tu suis 10 formations qui se contredisent</li>
+            <li>Tu blâmes Meta quand ta créative est mauvaise</li>
             <li>Tu testes la couleur du bouton avant de revoir ton hero</li>
           </ul>
           <div class="hl-vraie-verdict-wrap">
