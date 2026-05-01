@@ -4510,85 +4510,65 @@
               <feGaussianBlur stdDeviation="1.6" result="b"/>
               <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
             </filter>
-            <linearGradient id="ytChartGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-              <stop offset="0%" stop-color="rgba(212,182,106,0.4)"/>
-              <stop offset="100%" stop-color="#FFE4B0"/>
+            <filter id="ytSoftGlow" x="-100%" y="-100%" width="300%" height="300%">
+              <feGaussianBlur stdDeviation="2.6" result="b"/>
+              <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+            </filter>
+            <linearGradient id="ytEcgGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%" stop-color="rgba(212,182,106,0.55)"/>
+              <stop offset="50%" stop-color="rgba(240,214,144,0.85)"/>
+              <stop offset="100%" stop-color="rgba(212,182,106,0.55)"/>
             </linearGradient>
-            <linearGradient id="ytAreaGrad" x1="0%" y1="0%" x2="0%" y2="100%">
-              <stop offset="0%" stop-color="rgba(240,214,144,0.32)"/>
-              <stop offset="100%" stop-color="rgba(240,214,144,0)"/>
-            </linearGradient>
-            <clipPath id="ytAreaReveal">
-              <rect x="0" y="0" height="110" width="22">
-                <animate attributeName="width" values="22;298;298" keyTimes="0;0.86;1" dur="7s" repeatCount="indefinite"/>
-              </rect>
-            </clipPath>
-            <path id="ytCurveMotion" d="M 22 82 C 80 82 110 70 155 55 C 200 40 240 25 298 14"/>
           </defs>
 
-          <!-- Concurrents qui apparaissent puis s'écrasent au passage de la courbe -->
+          <!-- ECG line (60 BPM, 6 battements en 7s — rythme de repos) -->
+          <path d="M 22 70 L 47 70 L 49 67 L 51 67 L 53 70 L 56 70 L 58 73 L 59 56 L 60 84 L 61 73 L 63 70 L 67 70 L 69 67 L 73 65 L 77 67 L 79 70 L 87 70 L 89 67 L 91 67 L 93 70 L 96 70 L 98 73 L 99 56 L 100 84 L 101 73 L 103 70 L 107 70 L 109 67 L 113 65 L 117 67 L 119 70 L 127 70 L 129 67 L 131 67 L 133 70 L 136 70 L 138 73 L 139 56 L 140 84 L 141 73 L 143 70 L 147 70 L 149 67 L 153 65 L 157 67 L 159 70 L 167 70 L 169 67 L 171 67 L 173 70 L 176 70 L 178 73 L 179 56 L 180 84 L 181 73 L 183 70 L 187 70 L 189 67 L 193 65 L 197 67 L 199 70 L 207 70 L 209 67 L 211 67 L 213 70 L 216 70 L 218 73 L 219 56 L 220 84 L 221 73 L 223 70 L 227 70 L 229 67 L 233 65 L 237 67 L 239 70 L 247 70 L 249 67 L 251 67 L 253 70 L 256 70 L 258 73 L 259 56 L 260 84 L 261 73 L 263 70 L 267 70 L 269 67 L 273 65 L 277 67 L 279 70 L 298 70"
+            stroke="url(#ytEcgGrad)" stroke-width="1.4" fill="none" stroke-linecap="round" stroke-linejoin="round" filter="url(#ytGlow)" opacity="0.85"/>
+
+          <!-- Pulse de "vie" qui suit chaque QRS spike (flash blanc-or à chaque battement) -->
+          <circle cy="56" r="3.5" fill="#FFFDF0" filter="url(#ytSoftGlow)" opacity="0">
+            <animate attributeName="cx" values="60;100;140;180;220;260;260" keyTimes="0;0.143;0.286;0.429;0.571;0.714;1" dur="7s" repeatCount="indefinite" calcMode="discrete"/>
+            <animate attributeName="opacity" values="0;1;0;1;0;1;0;1;0;1;0;1;0;0" keyTimes="0;0.143;0.18;0.286;0.32;0.429;0.46;0.571;0.61;0.714;0.75;0.857;0.90;1" dur="7s" repeatCount="indefinite"/>
+          </circle>
+
+          <!-- 6 particules dorées qui montent à chaque battement (1 abonné = 1 battement) -->
           <g>
-            <circle cx="60" r="2.4" fill="rgba(232,148,107,0.78)" filter="url(#ytGlow)">
-              <animate attributeName="cy" values="50;50;82;82" keyTimes="0;0.18;0.26;1" dur="7s" repeatCount="indefinite"/>
-              <animate attributeName="opacity" values="0;0;0.9;0.9;0.15;0.15" keyTimes="0;0.13;0.18;0.24;0.30;1" dur="7s" repeatCount="indefinite"/>
+            <circle cx="60" cy="56" r="1.8" fill="#F0D690" filter="url(#ytGlow)" opacity="0">
+              <animate attributeName="cy" values="56;56;42;38" keyTimes="0;0.143;0.213;0.286" dur="7s" repeatCount="indefinite"/>
+              <animate attributeName="opacity" values="0;0;1;0.7;0" keyTimes="0;0.140;0.143;0.213;0.286" dur="7s" repeatCount="indefinite"/>
             </circle>
-            <circle cx="100" r="2.4" fill="rgba(232,148,107,0.78)" filter="url(#ytGlow)">
-              <animate attributeName="cy" values="46;46;82;82" keyTimes="0;0.30;0.38;1" dur="7s" repeatCount="indefinite"/>
-              <animate attributeName="opacity" values="0;0;0.9;0.9;0.15;0.15" keyTimes="0;0.25;0.30;0.36;0.42;1" dur="7s" repeatCount="indefinite"/>
+            <circle cx="100" cy="56" r="1.8" fill="#F0D690" filter="url(#ytGlow)" opacity="0">
+              <animate attributeName="cy" values="56;56;42;38" keyTimes="0;0.286;0.356;0.429" dur="7s" repeatCount="indefinite"/>
+              <animate attributeName="opacity" values="0;0;1;0.7;0" keyTimes="0;0.283;0.286;0.356;0.429" dur="7s" repeatCount="indefinite"/>
             </circle>
-            <circle cx="148" r="2.4" fill="rgba(232,148,107,0.78)" filter="url(#ytGlow)">
-              <animate attributeName="cy" values="40;40;82;82" keyTimes="0;0.42;0.50;1" dur="7s" repeatCount="indefinite"/>
-              <animate attributeName="opacity" values="0;0;0.9;0.9;0.15;0.15" keyTimes="0;0.37;0.42;0.48;0.54;1" dur="7s" repeatCount="indefinite"/>
+            <circle cx="140" cy="56" r="1.8" fill="#F0D690" filter="url(#ytGlow)" opacity="0">
+              <animate attributeName="cy" values="56;56;42;38" keyTimes="0;0.429;0.499;0.571" dur="7s" repeatCount="indefinite"/>
+              <animate attributeName="opacity" values="0;0;1;0.7;0" keyTimes="0;0.426;0.429;0.499;0.571" dur="7s" repeatCount="indefinite"/>
             </circle>
-            <circle cx="195" r="2.4" fill="rgba(232,148,107,0.78)" filter="url(#ytGlow)">
-              <animate attributeName="cy" values="34;34;82;82" keyTimes="0;0.55;0.63;1" dur="7s" repeatCount="indefinite"/>
-              <animate attributeName="opacity" values="0;0;0.9;0.9;0.15;0.15" keyTimes="0;0.50;0.55;0.61;0.67;1" dur="7s" repeatCount="indefinite"/>
+            <circle cx="180" cy="56" r="1.8" fill="#F0D690" filter="url(#ytGlow)" opacity="0">
+              <animate attributeName="cy" values="56;56;42;38" keyTimes="0;0.571;0.642;0.714" dur="7s" repeatCount="indefinite"/>
+              <animate attributeName="opacity" values="0;0;1;0.7;0" keyTimes="0;0.568;0.571;0.642;0.714" dur="7s" repeatCount="indefinite"/>
             </circle>
-            <circle cx="240" r="2.4" fill="rgba(232,148,107,0.78)" filter="url(#ytGlow)">
-              <animate attributeName="cy" values="30;30;82;82" keyTimes="0;0.68;0.76;1" dur="7s" repeatCount="indefinite"/>
-              <animate attributeName="opacity" values="0;0;0.9;0.9;0.15;0.15" keyTimes="0;0.63;0.68;0.74;0.80;1" dur="7s" repeatCount="indefinite"/>
+            <circle cx="220" cy="56" r="1.8" fill="#F0D690" filter="url(#ytGlow)" opacity="0">
+              <animate attributeName="cy" values="56;56;42;38" keyTimes="0;0.714;0.785;0.857" dur="7s" repeatCount="indefinite"/>
+              <animate attributeName="opacity" values="0;0;1;0.7;0" keyTimes="0;0.711;0.714;0.785;0.857" dur="7s" repeatCount="indefinite"/>
+            </circle>
+            <circle cx="260" cy="56" r="1.8" fill="#F0D690" filter="url(#ytGlow)" opacity="0">
+              <animate attributeName="cy" values="56;56;42;38" keyTimes="0;0.857;0.928;1" dur="7s" repeatCount="indefinite"/>
+              <animate attributeName="opacity" values="0;0;1;0.7;0" keyTimes="0;0.854;0.857;0.928;1" dur="7s" repeatCount="indefinite"/>
             </circle>
           </g>
 
-          <!-- Aire sous la courbe (révélée par clip-path) -->
-          <path d="M 22 82 C 80 82 110 70 155 55 C 200 40 240 25 298 14 L 298 84 L 22 84 Z"
-            fill="url(#ytAreaGrad)" clip-path="url(#ytAreaReveal)"/>
-
-          <!-- Courbe principale (révélée par stroke-dashoffset) -->
-          <path d="M 22 82 C 80 82 110 70 155 55 C 200 40 240 25 298 14"
-            stroke="url(#ytChartGrad)" stroke-width="1.8" fill="none" filter="url(#ytGlow)"
-            stroke-linecap="round" pathLength="100"
-            stroke-dasharray="100" stroke-dashoffset="100">
-            <animate attributeName="stroke-dashoffset" values="100;0;0" keyTimes="0;0.86;1" dur="7s" repeatCount="indefinite"/>
-          </path>
-
-          <!-- Tête de courbe : point lumineux qui suit la courbe -->
-          <circle r="3.2" fill="#FFFDF0" filter="url(#ytGlow)" opacity="0">
-            <animate attributeName="opacity" values="0;1;1;0" keyTimes="0;0.04;0.86;0.92" dur="7s" repeatCount="indefinite"/>
-            <animateMotion dur="7s" repeatCount="indefinite" calcMode="linear" keyTimes="0;0.86;1" keyPoints="0;1;1">
-              <mpath href="#ytCurveMotion"/>
-            </animateMotion>
-          </circle>
-
-          <!-- Halo final qui pulse au sommet (8 500 atteint) -->
-          <circle cx="298" cy="14" r="6" fill="none" stroke="#F0D690" stroke-width="1.2" filter="url(#ytGlow)" opacity="0">
-            <animate attributeName="opacity" values="0;0;0.85;0.4;0.85;0.4" keyTimes="0;0.86;0.88;0.92;0.96;1" dur="7s" repeatCount="indefinite"/>
-            <animate attributeName="r" values="6;6;9;6;9;6" keyTimes="0;0.86;0.88;0.92;0.96;1" dur="7s" repeatCount="indefinite"/>
-          </circle>
-
-          <!-- Compteur abonnés qui monte (0 → 100 → 1k → 3,5k → 5k → 8,5k) -->
+          <!-- Compteur épuré : 0 → 1 000 → 5 000 → 8 500 (4 paliers calmes) -->
           <g font-family="'Playfair Display',serif" text-anchor="middle" font-style="italic" font-weight="800" filter="url(#ytGlow)">
-            <text x="160" y="22" font-size="22" fill="#F0D690">0<animate attributeName="opacity" values="0;1;1;0;0" keyTimes="0;0.04;0.13;0.16;1" dur="7s" repeatCount="indefinite"/></text>
-            <text x="160" y="22" font-size="22" fill="#F0D690" opacity="0">100<animate attributeName="opacity" values="0;0;1;1;0;0" keyTimes="0;0.16;0.20;0.30;0.32;1" dur="7s" repeatCount="indefinite"/></text>
-            <text x="160" y="22" font-size="22" fill="#F0D690" opacity="0">1 000<animate attributeName="opacity" values="0;0;1;1;0;0" keyTimes="0;0.32;0.36;0.46;0.48;1" dur="7s" repeatCount="indefinite"/></text>
-            <text x="160" y="22" font-size="22" fill="#F0D690" opacity="0">3 500<animate attributeName="opacity" values="0;0;1;1;0;0" keyTimes="0;0.48;0.52;0.62;0.64;1" dur="7s" repeatCount="indefinite"/></text>
-            <text x="160" y="22" font-size="22" fill="#F0D690" opacity="0">5 000<animate attributeName="opacity" values="0;0;1;1;0;0" keyTimes="0;0.64;0.68;0.78;0.80;1" dur="7s" repeatCount="indefinite"/></text>
-            <text x="160" y="23" font-size="24" fill="#F0D690" opacity="0">8 500<animate attributeName="opacity" values="0;0;1;1" keyTimes="0;0.80;0.84;1" dur="7s" repeatCount="indefinite"/></text>
+            <text x="160" y="22" font-size="22" fill="#F0D690">0<animate attributeName="opacity" values="0;1;1;0;0" keyTimes="0;0.04;0.18;0.22;1" dur="7s" repeatCount="indefinite"/></text>
+            <text x="160" y="22" font-size="22" fill="#F0D690" opacity="0">1 000<animate attributeName="opacity" values="0;0;1;1;0;0" keyTimes="0;0.22;0.26;0.46;0.50;1" dur="7s" repeatCount="indefinite"/></text>
+            <text x="160" y="22" font-size="22" fill="#F0D690" opacity="0">5 000<animate attributeName="opacity" values="0;0;1;1;0;0" keyTimes="0;0.50;0.54;0.74;0.78;1" dur="7s" repeatCount="indefinite"/></text>
+            <text x="160" y="23" font-size="24" fill="#F0D690" opacity="0">8 500<animate attributeName="opacity" values="0;0;1;1" keyTimes="0;0.78;0.82;1" dur="7s" repeatCount="indefinite"/></text>
           </g>
-          <text x="160" y="38" text-anchor="middle" font-family="Inter,sans-serif" font-size="8.5" font-weight="700" letter-spacing="0.2em" fill="rgba(212,182,106,0.85)" opacity="0">ABONNÉS GENESIS<animate attributeName="opacity" values="0;0;0.85;0.85" keyTimes="0;0.85;0.92;1" dur="7s" repeatCount="indefinite"/></text>
+          <text x="160" y="38" text-anchor="middle" font-family="Inter,sans-serif" font-size="8.5" font-weight="700" letter-spacing="0.2em" fill="rgba(212,182,106,0.85)" opacity="0">ABONNÉS GENESIS<animate attributeName="opacity" values="0;0;0.85;0.85" keyTimes="0;0.82;0.88;1" dur="7s" repeatCount="indefinite"/></text>
 
-          <!-- Baseline + années -->
-          <line x1="22" y1="84" x2="298" y2="84" stroke="rgba(212,182,106,0.35)" stroke-width="1"/>
+          <!-- Années -->
           <g font-family="Inter,sans-serif" font-size="8" font-weight="700" text-anchor="middle">
             <text x="22" y="100" fill="rgba(212,182,106,0.65)">2021</text>
             <text x="77" y="100" fill="rgba(212,182,106,0.6)">2022</text>
