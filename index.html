@@ -1737,92 +1737,66 @@
   /* Deal anim — section "Tu apportes l'envie. On apporte tout le reste." */
   .deal-anim{display:flex;justify-content:center;width:100%;max-width:380px;margin:18px auto 14px}
   .deal-anim svg{width:100%;height:auto;display:block;filter:drop-shadow(0 0 14px rgba(212,182,106,0.18))}
-  /* Pillars blueprint — animation deux piliers (cockpit/architectural) */
+  /* Pillars blueprint — trading chart live entre 2 piliers */
   .pillars-blueprint{
     width:100%;max-width:560px;margin:28px auto 8px;
     filter:drop-shadow(0 0 18px rgba(212,182,106,0.12));
   }
   .pillars-blueprint svg{width:100%;height:auto;display:block;overflow:visible;font-family:'Inter',sans-serif}
-  .pillars-blueprint .bp-baseline{
-    stroke:rgba(212,182,106,0.55);stroke-width:1.2;
-    stroke-dasharray:480;stroke-dashoffset:480;
-    transition:stroke-dashoffset 1s ease-out;
-  }
   .pillars-blueprint .bp-pillar{
     stroke:var(--gold);stroke-width:2;stroke-linecap:square;
-    stroke-dasharray:130;stroke-dashoffset:130;
-    transition:stroke-dashoffset 1.1s cubic-bezier(.22,1,.36,1);
+    filter:drop-shadow(0 0 4px rgba(212,182,106,0.55));
   }
-  .pillars-blueprint .bp-beam{
-    stroke:var(--gold);stroke-width:1.6;stroke-linecap:square;
-    stroke-dasharray:240;stroke-dashoffset:240;
-    transition:stroke-dashoffset 1s cubic-bezier(.22,1,.36,1);
-  }
-  .pillars-blueprint .bp-fade-left,
-  .pillars-blueprint .bp-fade-right{opacity:0;transition:opacity .8s ease}
-  .pillars-blueprint .bp-cap{fill:var(--gold);opacity:0;transition:opacity .5s ease;filter:drop-shadow(0 0 6px rgba(212,182,106,0.6))}
-  .pillars-blueprint .bp-cap-base{r:2.5;opacity:0;transition:opacity .5s ease}
-  .pillars-blueprint .bp-pillar-label{
-    fill:rgba(212,182,106,0.9);font-size:11px;font-weight:700;letter-spacing:.18em;
-    opacity:0;transition:opacity .5s ease;
-  }
+  .pillars-blueprint .bp-cap{fill:var(--gold);filter:drop-shadow(0 0 6px rgba(212,182,106,0.7))}
+  .pillars-blueprint .bp-h-tick{stroke:rgba(212,182,106,0.18);stroke-width:1}
   .pillars-blueprint .bp-pillar-name{
     fill:var(--text);font-size:11px;font-weight:600;letter-spacing:.22em;
-    opacity:0;transition:opacity .6s ease;
   }
   .pillars-blueprint .bp-beam-label{
     fill:var(--gold);font-size:10px;font-weight:700;letter-spacing:.32em;
-    opacity:0;transition:opacity .8s ease;
   }
   .pillars-blueprint .bp-axis-label{
-    fill:rgba(212,182,106,0.5);font-size:9px;font-weight:600;letter-spacing:.18em;font-family:'JetBrains Mono',monospace;
-    opacity:0;transition:opacity .6s ease;
+    fill:rgba(212,182,106,0.55);font-size:9px;font-weight:600;letter-spacing:.05em;
+    font-family:'JetBrains Mono','Inter',monospace;
   }
-  .pillars-blueprint .bp-marker{
-    fill:var(--gold);
-    filter:drop-shadow(0 0 8px rgba(212,182,106,0.9));
-    opacity:0;
+  .pillars-blueprint .bp-live-label{
+    fill:rgba(255,90,90,0.95);font-size:9px;font-weight:800;letter-spacing:.18em;
+    font-family:'JetBrains Mono','Inter',monospace;
   }
-  /* Animation states triggered by reveal */
-  .pillars-blueprint.reveal.in .bp-baseline{stroke-dashoffset:0}
-  .pillars-blueprint.reveal.in .bp-pillar-left{stroke-dashoffset:0;transition-delay:.35s}
-  .pillars-blueprint.reveal.in .bp-pillar-right{stroke-dashoffset:0;transition-delay:.7s}
-  .pillars-blueprint.reveal.in .bp-fade-left{opacity:1;transition-delay:.5s}
-  .pillars-blueprint.reveal.in .bp-fade-right{opacity:1;transition-delay:.85s}
-  .pillars-blueprint.reveal.in .bp-cap-base{opacity:.9;transition-delay:.4s}
-  .pillars-blueprint.reveal.in .bp-pillar-label{opacity:1;transition-delay:.55s}
-  .pillars-blueprint.reveal.in .bp-pillar-label + .bp-pillar-label{transition-delay:.9s}
-  .pillars-blueprint.reveal.in .bp-beam{stroke-dashoffset:0;transition-delay:1.1s}
-  .pillars-blueprint.reveal.in .bp-cap{opacity:1;transition-delay:1.5s}
-  .pillars-blueprint.reveal.in .bp-pillar-name{opacity:1;transition-delay:1.7s}
-  .pillars-blueprint.reveal.in .bp-beam-label{opacity:1;transition-delay:1.95s}
-  .pillars-blueprint.reveal.in .bp-marker{
-    animation:bpMarkerTravel 2.4s cubic-bezier(.55,0,.45,1) forwards;
-    animation-delay:1.3s;
+  .pillars-blueprint .bp-live-dot{fill:#ff5454;animation:bpLiveBlink 1.2s ease-in-out infinite}
+  @keyframes bpLiveBlink{0%,100%{opacity:1}50%{opacity:.25}}
+  .pillars-blueprint .bp-ticker{
+    fill:var(--gold);font-size:13px;font-weight:800;letter-spacing:.04em;
+    font-family:'JetBrains Mono','Inter',monospace;
+    filter:drop-shadow(0 0 6px rgba(212,182,106,0.55));
   }
-  @keyframes bpMarkerTravel{
-    0%{opacity:0;cx:180}
-    10%{opacity:1}
-    50%{opacity:1;cx:300}
-    90%{opacity:1;cx:420}
-    100%{opacity:.95;cx:300}
+  /* Chart curve scrolling infinitely — seamless loop */
+  .pillars-blueprint .bp-scroll{
+    animation:bpScrollChart 9s linear infinite;
+    will-change:transform;
   }
+  @keyframes bpScrollChart{
+    from{transform:translateX(0)}
+    to{transform:translateX(-240px)}
+  }
+  .pillars-blueprint .bp-line{
+    fill:none;stroke:var(--gold);stroke-width:1.8;
+    stroke-linecap:round;stroke-linejoin:round;
+    filter:drop-shadow(0 0 5px rgba(212,182,106,0.6));
+  }
+  .pillars-blueprint .bp-fill{fill:url(#bpFill);stroke:none}
+  /* Reveal fade-in */
+  .pillars-blueprint{opacity:0;transform:translateY(20px);transition:opacity 1s ease,transform 1s ease}
+  .pillars-blueprint.in{opacity:1;transform:translateY(0)}
   @media (prefers-reduced-motion: reduce){
-    .pillars-blueprint .bp-baseline,
-    .pillars-blueprint .bp-pillar,
-    .pillars-blueprint .bp-beam{stroke-dashoffset:0;transition:none}
-    .pillars-blueprint .bp-cap,
-    .pillars-blueprint .bp-cap-base,
-    .pillars-blueprint .bp-pillar-label,
-    .pillars-blueprint .bp-pillar-name,
-    .pillars-blueprint .bp-beam-label,
-    .pillars-blueprint .bp-marker,
-    .pillars-blueprint .bp-fade-left,
-    .pillars-blueprint .bp-fade-right{opacity:1;transition:none;animation:none}
-    .pillars-blueprint .bp-marker{cx:300}
+    .pillars-blueprint .bp-scroll,
+    .pillars-blueprint .bp-live-dot{animation:none}
+    .pillars-blueprint{transition:none}
   }
   @media (max-width:640px){
-    .pillars-blueprint{max-width:340px;margin:22px auto 4px}
+    .pillars-blueprint{max-width:360px;margin:22px auto 4px}
+    .pillars-blueprint .bp-axis-label{font-size:8px}
+    .pillars-blueprint .bp-ticker{font-size:11px}
   }
   /* YT stats grid — section "2020 → 2026 / +6 ans sur YouTube" */
   .yt-stats-grid{
@@ -4931,36 +4905,53 @@
       <h2>Pour arrêter<br>de tourner en rond,<br><em>il te faut deux piliers</em></h2>
       <p>Un cadre que tu peux suivre et un endroit où on te corrige en direct lorsque tu fais des erreurs. Le reste, c'est du bruit.</p>
       <div class="pillars-blueprint reveal" aria-hidden="true">
-        <svg viewBox="0 0 600 220" preserveAspectRatio="xMidYMid meet">
+        <svg viewBox="0 0 600 240" preserveAspectRatio="xMidYMid meet">
           <defs>
             <pattern id="bpGrid" width="20" height="20" patternUnits="userSpaceOnUse">
               <path d="M 20 0 L 0 0 0 20" fill="none" stroke="rgba(212,182,106,0.06)" stroke-width="0.5"/>
             </pattern>
-            <linearGradient id="bpFade" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0%" stop-color="rgba(212,182,106,0.0)"/>
-              <stop offset="50%" stop-color="rgba(212,182,106,0.55)"/>
-              <stop offset="100%" stop-color="rgba(212,182,106,0.0)"/>
+            <linearGradient id="bpFill" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="rgba(212,182,106,0.45)"/>
+              <stop offset="100%" stop-color="rgba(212,182,106,0)"/>
             </linearGradient>
+            <linearGradient id="bpLineGrad" x1="0" y1="0" x2="1" y2="0">
+              <stop offset="0%" stop-color="rgba(212,182,106,0.7)"/>
+              <stop offset="100%" stop-color="rgba(212,182,106,1)"/>
+            </linearGradient>
+            <clipPath id="bpChartClip">
+              <rect x="180" y="40" width="240" height="150"/>
+            </clipPath>
           </defs>
-          <rect x="0" y="0" width="600" height="220" fill="url(#bpGrid)"/>
-          <line class="bp-baseline" x1="60" y1="190" x2="540" y2="190"/>
-          <text class="bp-axis-label" x="60" y="208">00</text>
-          <text class="bp-axis-label" x="540" y="208" text-anchor="end">∞</text>
-          <line class="bp-pillar bp-pillar-left" x1="180" y1="190" x2="180" y2="60"/>
-          <line class="bp-pillar bp-pillar-right" x1="420" y1="190" x2="420" y2="60"/>
-          <line class="bp-beam" x1="180" y1="60" x2="420" y2="60"/>
-          <line class="bp-fade-left" x1="180" y1="60" x2="180" y2="190" stroke="url(#bpFade)" stroke-width="1"/>
-          <line class="bp-fade-right" x1="420" y1="60" x2="420" y2="190" stroke="url(#bpFade)" stroke-width="1"/>
-          <circle class="bp-cap" cx="180" cy="60" r="4"/>
-          <circle class="bp-cap" cx="420" cy="60" r="4"/>
-          <circle class="bp-cap bp-cap-base" cx="180" cy="190" r="3"/>
-          <circle class="bp-cap bp-cap-base" cx="420" cy="190" r="3"/>
-          <text class="bp-pillar-label" x="180" y="178" text-anchor="middle">I</text>
-          <text class="bp-pillar-label" x="420" y="178" text-anchor="middle">II</text>
-          <text class="bp-pillar-name" x="180" y="40" text-anchor="middle">MÉTHODE</text>
-          <text class="bp-pillar-name" x="420" y="40" text-anchor="middle">COMMUNAUTÉ</text>
-          <text class="bp-beam-label" x="300" y="50" text-anchor="middle">PROGRESSION</text>
-          <circle class="bp-marker" cx="180" cy="60" r="3.5"/>
+          <rect x="0" y="0" width="600" height="240" fill="url(#bpGrid)"/>
+          <line class="bp-h-tick" x1="180" y1="60" x2="420" y2="60" stroke-dasharray="2 4"/>
+          <line class="bp-h-tick" x1="180" y1="115" x2="420" y2="115" stroke-dasharray="2 4"/>
+          <line class="bp-h-tick" x1="180" y1="170" x2="420" y2="170" stroke-dasharray="2 4"/>
+          <text class="bp-axis-label" x="172" y="64" text-anchor="end">+30%</text>
+          <text class="bp-axis-label" x="172" y="119" text-anchor="end">+15%</text>
+          <text class="bp-axis-label" x="172" y="174" text-anchor="end">0</text>
+          <text class="bp-axis-label" x="180" y="208" text-anchor="start">J0</text>
+          <text class="bp-axis-label" x="300" y="208" text-anchor="middle">J30</text>
+          <text class="bp-axis-label" x="420" y="208" text-anchor="end">J60</text>
+          <g clip-path="url(#bpChartClip)">
+            <g class="bp-scroll">
+              <path class="bp-fill" d="M 180 145 Q 195 115 210 140 Q 225 160 240 125 Q 255 100 270 130 Q 285 155 300 115 Q 315 90 330 125 Q 345 150 360 110 Q 375 85 390 130 Q 405 155 420 145 Q 435 115 450 140 Q 465 160 480 125 Q 495 100 510 130 Q 525 155 540 115 Q 555 90 570 125 Q 585 150 600 110 Q 615 85 630 130 Q 645 155 660 145 L 660 190 L 180 190 Z"/>
+              <path class="bp-line" d="M 180 145 Q 195 115 210 140 Q 225 160 240 125 Q 255 100 270 130 Q 285 155 300 115 Q 315 90 330 125 Q 345 150 360 110 Q 375 85 390 130 Q 405 155 420 145 Q 435 115 450 140 Q 465 160 480 125 Q 495 100 510 130 Q 525 155 540 115 Q 555 90 570 125 Q 585 150 600 110 Q 615 85 630 130 Q 645 155 660 145"/>
+            </g>
+          </g>
+          <line class="bp-pillar" x1="180" y1="40" x2="180" y2="190"/>
+          <line class="bp-pillar" x1="420" y1="40" x2="420" y2="190"/>
+          <circle class="bp-cap" cx="180" cy="40" r="3.5"/>
+          <circle class="bp-cap" cx="420" cy="40" r="3.5"/>
+          <circle class="bp-cap" cx="180" cy="190" r="3.5"/>
+          <circle class="bp-cap" cx="420" cy="190" r="3.5"/>
+          <text class="bp-pillar-name" x="180" y="226" text-anchor="middle">MÉTHODE</text>
+          <text class="bp-pillar-name" x="420" y="226" text-anchor="middle">COMMUNAUTÉ</text>
+          <g class="bp-header">
+            <circle class="bp-live-dot" cx="186" cy="24" r="3"/>
+            <text class="bp-live-label" x="194" y="28" text-anchor="start">LIVE</text>
+            <text class="bp-beam-label" x="300" y="28" text-anchor="middle">PROGRESSION</text>
+            <text class="bp-ticker" x="420" y="28" text-anchor="end" id="bpTicker">+24.7%</text>
+          </g>
         </svg>
       </div>
     </div>
