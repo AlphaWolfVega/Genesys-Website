@@ -1739,9 +1739,11 @@
   .deal-anim svg{width:100%;height:auto;display:block;filter:drop-shadow(0 0 14px rgba(212,182,106,0.18))}
   /* Pillars blueprint — trading chart live entre 2 piliers */
   .pillars-blueprint{
-    width:100%;max-width:560px;margin:28px auto 8px;
+    width:100%;max-width:620px;margin:28px auto 8px;
     filter:drop-shadow(0 0 18px rgba(212,182,106,0.12));
+    opacity:0;transform:translateY(20px);transition:opacity 1s ease,transform 1s ease;
   }
+  .pillars-blueprint.in{opacity:1;transform:translateY(0)}
   .pillars-blueprint svg{width:100%;height:auto;display:block;overflow:visible;font-family:'Inter',sans-serif}
   .pillars-blueprint .bp-pillar{
     stroke:var(--gold);stroke-width:2;stroke-linecap:square;
@@ -1750,34 +1752,35 @@
   .pillars-blueprint .bp-cap{fill:var(--gold);filter:drop-shadow(0 0 6px rgba(212,182,106,0.7))}
   .pillars-blueprint .bp-h-tick{stroke:rgba(212,182,106,0.18);stroke-width:1}
   .pillars-blueprint .bp-pillar-name{
-    fill:var(--text);font-size:11px;font-weight:600;letter-spacing:.22em;
+    fill:var(--text);font-size:14px;font-weight:700;letter-spacing:.24em;
   }
   .pillars-blueprint .bp-beam-label{
-    fill:var(--gold);font-size:10px;font-weight:700;letter-spacing:.32em;
+    fill:var(--gold);font-size:13px;font-weight:800;letter-spacing:.32em;
+    filter:drop-shadow(0 0 4px rgba(212,182,106,0.45));
   }
   .pillars-blueprint .bp-axis-label{
-    fill:rgba(212,182,106,0.55);font-size:9px;font-weight:600;letter-spacing:.05em;
+    fill:rgba(212,182,106,0.7);font-size:11px;font-weight:700;letter-spacing:.05em;
     font-family:'JetBrains Mono','Inter',monospace;
   }
   .pillars-blueprint .bp-live-label{
-    fill:rgba(255,90,90,0.95);font-size:9px;font-weight:800;letter-spacing:.18em;
+    fill:#ff6464;font-size:12px;font-weight:800;letter-spacing:.22em;
     font-family:'JetBrains Mono','Inter',monospace;
   }
-  .pillars-blueprint .bp-live-dot{fill:#ff5454;animation:bpLiveBlink 1.2s ease-in-out infinite}
+  .pillars-blueprint .bp-live-dot{fill:#ff5454;animation:bpLiveBlink 1.2s ease-in-out infinite;filter:drop-shadow(0 0 6px rgba(255,84,84,0.85))}
   @keyframes bpLiveBlink{0%,100%{opacity:1}50%{opacity:.25}}
   .pillars-blueprint .bp-ticker{
-    fill:var(--gold);font-size:13px;font-weight:800;letter-spacing:.04em;
+    fill:var(--gold);font-size:17px;font-weight:800;letter-spacing:.04em;
     font-family:'JetBrains Mono','Inter',monospace;
-    filter:drop-shadow(0 0 6px rgba(212,182,106,0.55));
+    filter:drop-shadow(0 0 6px rgba(212,182,106,0.6));
   }
-  /* Chart curve scrolling infinitely — seamless loop */
+  /* Chart curve scrolling LEFT-TO-RIGHT (content drifts to the right) */
   .pillars-blueprint .bp-scroll{
-    animation:bpScrollChart 9s linear infinite;
+    animation:bpScrollChart 11s linear infinite;
     will-change:transform;
   }
   @keyframes bpScrollChart{
-    from{transform:translateX(0)}
-    to{transform:translateX(-240px)}
+    from{transform:translateX(-240px)}
+    to{transform:translateX(0)}
   }
   .pillars-blueprint .bp-line{
     fill:none;stroke:var(--gold);stroke-width:1.8;
@@ -1785,18 +1788,43 @@
     filter:drop-shadow(0 0 5px rgba(212,182,106,0.6));
   }
   .pillars-blueprint .bp-fill{fill:url(#bpFill);stroke:none}
-  /* Reveal fade-in */
-  .pillars-blueprint{opacity:0;transform:translateY(20px);transition:opacity 1s ease,transform 1s ease}
-  .pillars-blueprint.in{opacity:1;transform:translateY(0)}
+  /* Peak markers — green, blink */
+  .pillars-blueprint .bp-peak-dot{
+    fill:#3ddc84;
+    filter:drop-shadow(0 0 6px rgba(61,220,132,0.95)) drop-shadow(0 0 12px rgba(61,220,132,0.5));
+    animation:bpPeakBlink 1.6s ease-in-out infinite;
+    transform-origin:center;transform-box:fill-box;
+  }
+  @keyframes bpPeakBlink{
+    0%,100%{opacity:1;transform:scale(1)}
+    50%{opacity:0.4;transform:scale(0.7)}
+  }
+  /* Trough markers — red, blink */
+  .pillars-blueprint .bp-trough-dot{
+    fill:#ff5454;
+    filter:drop-shadow(0 0 6px rgba(255,84,84,0.95)) drop-shadow(0 0 12px rgba(255,84,84,0.5));
+    animation:bpTroughBlink 1.6s ease-in-out infinite;
+    animation-delay:.8s;
+    transform-origin:center;transform-box:fill-box;
+  }
+  @keyframes bpTroughBlink{
+    0%,100%{opacity:1;transform:scale(1)}
+    50%{opacity:0.4;transform:scale(0.7)}
+  }
   @media (prefers-reduced-motion: reduce){
     .pillars-blueprint .bp-scroll,
-    .pillars-blueprint .bp-live-dot{animation:none}
+    .pillars-blueprint .bp-live-dot,
+    .pillars-blueprint .bp-peak-dot,
+    .pillars-blueprint .bp-trough-dot{animation:none}
     .pillars-blueprint{transition:none}
   }
   @media (max-width:640px){
-    .pillars-blueprint{max-width:360px;margin:22px auto 4px}
-    .pillars-blueprint .bp-axis-label{font-size:8px}
-    .pillars-blueprint .bp-ticker{font-size:11px}
+    .pillars-blueprint{max-width:380px;margin:22px auto 4px}
+    .pillars-blueprint .bp-axis-label{font-size:10px}
+    .pillars-blueprint .bp-ticker{font-size:14px}
+    .pillars-blueprint .bp-pillar-name{font-size:12px;letter-spacing:.18em}
+    .pillars-blueprint .bp-beam-label{font-size:11px;letter-spacing:.22em}
+    .pillars-blueprint .bp-live-label{font-size:10.5px}
   }
   /* Gears anim — section "Ce qu'il faut maîtriser" — 4 engrenages synchronisés */
   .gears-anim{
@@ -4965,7 +4993,7 @@
       <h2>Pour arrêter<br>de tourner en rond,<br><em>il te faut deux piliers</em></h2>
       <p>Un cadre que tu peux suivre et un endroit où on te corrige en direct lorsque tu fais des erreurs. Le reste, c'est du bruit.</p>
       <div class="pillars-blueprint reveal" aria-hidden="true">
-        <svg viewBox="0 0 600 240" preserveAspectRatio="xMidYMid meet">
+        <svg viewBox="0 0 600 280" preserveAspectRatio="xMidYMid meet">
           <defs>
             <pattern id="bpGrid" width="20" height="20" patternUnits="userSpaceOnUse">
               <path d="M 20 0 L 0 0 0 20" fill="none" stroke="rgba(212,182,106,0.06)" stroke-width="0.5"/>
@@ -4974,43 +5002,57 @@
               <stop offset="0%" stop-color="rgba(212,182,106,0.45)"/>
               <stop offset="100%" stop-color="rgba(212,182,106,0)"/>
             </linearGradient>
-            <linearGradient id="bpLineGrad" x1="0" y1="0" x2="1" y2="0">
-              <stop offset="0%" stop-color="rgba(212,182,106,0.7)"/>
-              <stop offset="100%" stop-color="rgba(212,182,106,1)"/>
-            </linearGradient>
             <clipPath id="bpChartClip">
-              <rect x="180" y="40" width="240" height="150"/>
+              <rect x="180" y="60" width="240" height="160"/>
             </clipPath>
           </defs>
-          <rect x="0" y="0" width="600" height="240" fill="url(#bpGrid)"/>
-          <line class="bp-h-tick" x1="180" y1="60" x2="420" y2="60" stroke-dasharray="2 4"/>
-          <line class="bp-h-tick" x1="180" y1="115" x2="420" y2="115" stroke-dasharray="2 4"/>
-          <line class="bp-h-tick" x1="180" y1="170" x2="420" y2="170" stroke-dasharray="2 4"/>
-          <text class="bp-axis-label" x="172" y="64" text-anchor="end">+30%</text>
-          <text class="bp-axis-label" x="172" y="119" text-anchor="end">+15%</text>
-          <text class="bp-axis-label" x="172" y="174" text-anchor="end">0</text>
-          <text class="bp-axis-label" x="180" y="208" text-anchor="start">J0</text>
-          <text class="bp-axis-label" x="300" y="208" text-anchor="middle">J30</text>
-          <text class="bp-axis-label" x="420" y="208" text-anchor="end">J60</text>
+          <rect x="0" y="0" width="600" height="280" fill="url(#bpGrid)"/>
+          <line class="bp-h-tick" x1="180" y1="80" x2="420" y2="80" stroke-dasharray="2 4"/>
+          <line class="bp-h-tick" x1="180" y1="140" x2="420" y2="140" stroke-dasharray="2 4"/>
+          <line class="bp-h-tick" x1="180" y1="200" x2="420" y2="200" stroke-dasharray="2 4"/>
+          <text class="bp-axis-label" x="172" y="84" text-anchor="end">+30%</text>
+          <text class="bp-axis-label" x="172" y="144" text-anchor="end">+15%</text>
+          <text class="bp-axis-label" x="172" y="204" text-anchor="end">0</text>
+          <text class="bp-axis-label" x="180" y="240" text-anchor="start">J0</text>
+          <text class="bp-axis-label" x="300" y="240" text-anchor="middle">J30</text>
+          <text class="bp-axis-label" x="420" y="240" text-anchor="end">J60</text>
           <g clip-path="url(#bpChartClip)">
             <g class="bp-scroll">
-              <path class="bp-fill" d="M 180 145 Q 195 115 210 140 Q 225 160 240 125 Q 255 100 270 130 Q 285 155 300 115 Q 315 90 330 125 Q 345 150 360 110 Q 375 85 390 130 Q 405 155 420 145 Q 435 115 450 140 Q 465 160 480 125 Q 495 100 510 130 Q 525 155 540 115 Q 555 90 570 125 Q 585 150 600 110 Q 615 85 630 130 Q 645 155 660 145 L 660 190 L 180 190 Z"/>
-              <path class="bp-line" d="M 180 145 Q 195 115 210 140 Q 225 160 240 125 Q 255 100 270 130 Q 285 155 300 115 Q 315 90 330 125 Q 345 150 360 110 Q 375 85 390 130 Q 405 155 420 145 Q 435 115 450 140 Q 465 160 480 125 Q 495 100 510 130 Q 525 155 540 115 Q 555 90 570 125 Q 585 150 600 110 Q 615 85 630 130 Q 645 155 660 145"/>
+              <path class="bp-fill" d="M 180 165 C 195 165 195 105 210 105 C 225 105 225 180 240 180 C 255 180 255 90 270 90 C 285 90 285 185 300 185 C 315 185 315 85 330 85 C 345 85 345 180 360 180 C 375 180 375 100 390 100 C 405 100 405 165 420 165 C 435 165 435 105 450 105 C 465 105 465 180 480 180 C 495 180 495 90 510 90 C 525 90 525 185 540 185 C 555 185 555 85 570 85 C 585 85 585 180 600 180 C 615 180 615 100 630 100 C 645 100 645 165 660 165 L 660 220 L 180 220 Z"/>
+              <path class="bp-line" d="M 180 165 C 195 165 195 105 210 105 C 225 105 225 180 240 180 C 255 180 255 90 270 90 C 285 90 285 185 300 185 C 315 185 315 85 330 85 C 345 85 345 180 360 180 C 375 180 375 100 390 100 C 405 100 405 165 420 165 C 435 165 435 105 450 105 C 465 105 465 180 480 180 C 495 180 495 90 510 90 C 525 90 525 185 540 185 C 555 185 555 85 570 85 C 585 85 585 180 600 180 C 615 180 615 100 630 100 C 645 100 645 165 660 165"/>
+              <g class="bp-peaks">
+                <circle class="bp-peak-dot" cx="210" cy="105" r="3.2"/>
+                <circle class="bp-peak-dot" cx="270" cy="90" r="3.2"/>
+                <circle class="bp-peak-dot" cx="330" cy="85" r="3.2"/>
+                <circle class="bp-peak-dot" cx="390" cy="100" r="3.2"/>
+                <circle class="bp-peak-dot" cx="450" cy="105" r="3.2"/>
+                <circle class="bp-peak-dot" cx="510" cy="90" r="3.2"/>
+                <circle class="bp-peak-dot" cx="570" cy="85" r="3.2"/>
+                <circle class="bp-peak-dot" cx="630" cy="100" r="3.2"/>
+              </g>
+              <g class="bp-troughs">
+                <circle class="bp-trough-dot" cx="240" cy="180" r="3"/>
+                <circle class="bp-trough-dot" cx="300" cy="185" r="3"/>
+                <circle class="bp-trough-dot" cx="360" cy="180" r="3"/>
+                <circle class="bp-trough-dot" cx="480" cy="180" r="3"/>
+                <circle class="bp-trough-dot" cx="540" cy="185" r="3"/>
+                <circle class="bp-trough-dot" cx="600" cy="180" r="3"/>
+              </g>
             </g>
           </g>
-          <line class="bp-pillar" x1="180" y1="40" x2="180" y2="190"/>
-          <line class="bp-pillar" x1="420" y1="40" x2="420" y2="190"/>
-          <circle class="bp-cap" cx="180" cy="40" r="3.5"/>
-          <circle class="bp-cap" cx="420" cy="40" r="3.5"/>
-          <circle class="bp-cap" cx="180" cy="190" r="3.5"/>
-          <circle class="bp-cap" cx="420" cy="190" r="3.5"/>
-          <text class="bp-pillar-name" x="180" y="226" text-anchor="middle">MÉTHODE</text>
-          <text class="bp-pillar-name" x="420" y="226" text-anchor="middle">COMMUNAUTÉ</text>
+          <line class="bp-pillar" x1="180" y1="55" x2="180" y2="220"/>
+          <line class="bp-pillar" x1="420" y1="55" x2="420" y2="220"/>
+          <circle class="bp-cap" cx="180" cy="55" r="4"/>
+          <circle class="bp-cap" cx="420" cy="55" r="4"/>
+          <circle class="bp-cap" cx="180" cy="220" r="4"/>
+          <circle class="bp-cap" cx="420" cy="220" r="4"/>
+          <text class="bp-pillar-name" x="180" y="262" text-anchor="middle">MÉTHODE</text>
+          <text class="bp-pillar-name" x="420" y="262" text-anchor="middle">COMMUNAUTÉ</text>
           <g class="bp-header">
-            <circle class="bp-live-dot" cx="186" cy="24" r="3"/>
-            <text class="bp-live-label" x="194" y="28" text-anchor="start">LIVE</text>
-            <text class="bp-beam-label" x="300" y="28" text-anchor="middle">PROGRESSION</text>
-            <text class="bp-ticker" x="420" y="28" text-anchor="end" id="bpTicker">+24.7%</text>
+            <circle class="bp-live-dot" cx="180" cy="32" r="4"/>
+            <text class="bp-live-label" x="190" y="36" text-anchor="start">LIVE</text>
+            <text class="bp-beam-label" x="300" y="36" text-anchor="middle">PROGRESSION</text>
+            <text class="bp-ticker" x="420" y="36" text-anchor="end">+24.7%</text>
           </g>
         </svg>
       </div>
