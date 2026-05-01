@@ -1737,9 +1737,54 @@
   /* Deal anim — section "Tu apportes l'envie. On apporte tout le reste." */
   .deal-anim{display:flex;justify-content:center;width:100%;max-width:380px;margin:18px auto 14px}
   .deal-anim svg{width:100%;height:auto;display:block;filter:drop-shadow(0 0 14px rgba(212,182,106,0.18))}
-  /* YT timeline anim — section "2021 → 2026 / +5 ans sur YouTube" */
-  .yt-timeline-anim{display:flex;justify-content:center;width:100%;max-width:380px;margin:18px auto 14px}
-  .yt-timeline-anim svg{width:100%;height:auto;display:block;filter:drop-shadow(0 0 14px rgba(212,182,106,0.18))}
+  /* YT stats grid — section "2021 → 2026 / +5 ans sur YouTube" */
+  .yt-stats-grid{
+    display:grid;
+    grid-template-columns:1fr auto 1fr auto 1fr auto 1fr;
+    align-items:center;
+    width:100%;max-width:560px;
+    margin:24px auto 18px;
+    padding:24px 14px;
+    border:1px solid rgba(212,182,106,0.30);
+    border-radius:8px;
+    background:linear-gradient(135deg,rgba(20,37,64,0.45) 0%,rgba(10,22,40,0.30) 100%);
+    box-shadow:0 8px 28px rgba(212,182,106,0.10);
+    box-sizing:border-box;
+  }
+  .yt-stat{display:flex;flex-direction:column;align-items:center;text-align:center;padding:0 6px;min-width:0}
+  .yt-stat-num{
+    font-family:'Playfair Display',serif;
+    font-style:italic;font-weight:800;
+    font-size:34px;line-height:1;
+    color:#F0D690;
+    letter-spacing:-0.012em;
+    margin-bottom:8px;
+    text-shadow:0 0 18px rgba(212,182,106,0.28);
+    font-variant-numeric:tabular-nums;
+    white-space:nowrap;
+  }
+  .yt-stat-label{
+    font-family:'Inter',sans-serif;
+    font-size:9px;font-weight:700;
+    text-transform:uppercase;
+    letter-spacing:0.16em;
+    color:rgba(245,238,222,0.72);
+    line-height:1.3;
+  }
+  .yt-stat-divider{
+    width:1px;height:42px;
+    background:linear-gradient(to bottom,transparent 0%,rgba(212,182,106,0.45) 50%,transparent 100%);
+  }
+  @media(max-width:600px){
+    .yt-stats-grid{
+      grid-template-columns:1fr 1fr;
+      gap:22px 6px;
+      padding:22px 14px;
+    }
+    .yt-stat-divider{display:none}
+    .yt-stat-num{font-size:26px}
+    .yt-stat-label{font-size:8.5px;letter-spacing:0.12em}
+  }
   /* Overload anim — section "Plus d'outils, plus de tutos..." */
   .overload-anim{display:flex;justify-content:center;width:100%;max-width:380px;margin:18px auto 14px}
   .overload-anim svg{width:100%;height:auto;display:block;filter:drop-shadow(0 0 12px rgba(212,182,106,0.15))}
@@ -4503,82 +4548,71 @@
         <div class="line"></div>
       </div>
       <h2>2021 → 2026<br><em>+5 ans sur YouTube</em></h2>
-      <div class="yt-timeline-anim" aria-hidden="true">
-        <svg viewBox="0 0 320 110" xmlns="http://www.w3.org/2000/svg">
-          <defs>
-            <filter id="ytGlow" x="-100%" y="-100%" width="300%" height="300%">
-              <feGaussianBlur stdDeviation="1.6" result="b"/>
-              <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
-            </filter>
-            <filter id="ytSoftGlow" x="-100%" y="-100%" width="300%" height="300%">
-              <feGaussianBlur stdDeviation="2.6" result="b"/>
-              <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
-            </filter>
-            <linearGradient id="ytEcgGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-              <stop offset="0%" stop-color="rgba(212,182,106,0.55)"/>
-              <stop offset="50%" stop-color="rgba(240,214,144,0.85)"/>
-              <stop offset="100%" stop-color="rgba(212,182,106,0.55)"/>
-            </linearGradient>
-          </defs>
-
-          <!-- ECG line (60 BPM, 6 battements en 7s — rythme de repos) -->
-          <path d="M 22 70 L 47 70 L 49 67 L 51 67 L 53 70 L 56 70 L 58 73 L 59 56 L 60 84 L 61 73 L 63 70 L 67 70 L 69 67 L 73 65 L 77 67 L 79 70 L 87 70 L 89 67 L 91 67 L 93 70 L 96 70 L 98 73 L 99 56 L 100 84 L 101 73 L 103 70 L 107 70 L 109 67 L 113 65 L 117 67 L 119 70 L 127 70 L 129 67 L 131 67 L 133 70 L 136 70 L 138 73 L 139 56 L 140 84 L 141 73 L 143 70 L 147 70 L 149 67 L 153 65 L 157 67 L 159 70 L 167 70 L 169 67 L 171 67 L 173 70 L 176 70 L 178 73 L 179 56 L 180 84 L 181 73 L 183 70 L 187 70 L 189 67 L 193 65 L 197 67 L 199 70 L 207 70 L 209 67 L 211 67 L 213 70 L 216 70 L 218 73 L 219 56 L 220 84 L 221 73 L 223 70 L 227 70 L 229 67 L 233 65 L 237 67 L 239 70 L 247 70 L 249 67 L 251 67 L 253 70 L 256 70 L 258 73 L 259 56 L 260 84 L 261 73 L 263 70 L 267 70 L 269 67 L 273 65 L 277 67 L 279 70 L 298 70"
-            stroke="url(#ytEcgGrad)" stroke-width="1.4" fill="none" stroke-linecap="round" stroke-linejoin="round" filter="url(#ytGlow)" opacity="0.85"/>
-
-          <!-- Pulse de "vie" qui suit chaque QRS spike (flash blanc-or à chaque battement) -->
-          <circle cy="56" r="3.5" fill="#FFFDF0" filter="url(#ytSoftGlow)" opacity="0">
-            <animate attributeName="cx" values="60;100;140;180;220;260;260" keyTimes="0;0.143;0.286;0.429;0.571;0.714;1" dur="7s" repeatCount="indefinite" calcMode="discrete"/>
-            <animate attributeName="opacity" values="0;1;0;1;0;1;0;1;0;1;0;1;0;0" keyTimes="0;0.143;0.18;0.286;0.32;0.429;0.46;0.571;0.61;0.714;0.75;0.857;0.90;1" dur="7s" repeatCount="indefinite"/>
-          </circle>
-
-          <!-- 6 particules dorées qui montent à chaque battement (1 abonné = 1 battement) -->
-          <g>
-            <circle cx="60" cy="56" r="1.8" fill="#F0D690" filter="url(#ytGlow)" opacity="0">
-              <animate attributeName="cy" values="56;56;42;38" keyTimes="0;0.143;0.213;0.286" dur="7s" repeatCount="indefinite"/>
-              <animate attributeName="opacity" values="0;0;1;0.7;0" keyTimes="0;0.140;0.143;0.213;0.286" dur="7s" repeatCount="indefinite"/>
-            </circle>
-            <circle cx="100" cy="56" r="1.8" fill="#F0D690" filter="url(#ytGlow)" opacity="0">
-              <animate attributeName="cy" values="56;56;42;38" keyTimes="0;0.286;0.356;0.429" dur="7s" repeatCount="indefinite"/>
-              <animate attributeName="opacity" values="0;0;1;0.7;0" keyTimes="0;0.283;0.286;0.356;0.429" dur="7s" repeatCount="indefinite"/>
-            </circle>
-            <circle cx="140" cy="56" r="1.8" fill="#F0D690" filter="url(#ytGlow)" opacity="0">
-              <animate attributeName="cy" values="56;56;42;38" keyTimes="0;0.429;0.499;0.571" dur="7s" repeatCount="indefinite"/>
-              <animate attributeName="opacity" values="0;0;1;0.7;0" keyTimes="0;0.426;0.429;0.499;0.571" dur="7s" repeatCount="indefinite"/>
-            </circle>
-            <circle cx="180" cy="56" r="1.8" fill="#F0D690" filter="url(#ytGlow)" opacity="0">
-              <animate attributeName="cy" values="56;56;42;38" keyTimes="0;0.571;0.642;0.714" dur="7s" repeatCount="indefinite"/>
-              <animate attributeName="opacity" values="0;0;1;0.7;0" keyTimes="0;0.568;0.571;0.642;0.714" dur="7s" repeatCount="indefinite"/>
-            </circle>
-            <circle cx="220" cy="56" r="1.8" fill="#F0D690" filter="url(#ytGlow)" opacity="0">
-              <animate attributeName="cy" values="56;56;42;38" keyTimes="0;0.714;0.785;0.857" dur="7s" repeatCount="indefinite"/>
-              <animate attributeName="opacity" values="0;0;1;0.7;0" keyTimes="0;0.711;0.714;0.785;0.857" dur="7s" repeatCount="indefinite"/>
-            </circle>
-            <circle cx="260" cy="56" r="1.8" fill="#F0D690" filter="url(#ytGlow)" opacity="0">
-              <animate attributeName="cy" values="56;56;42;38" keyTimes="0;0.857;0.928;1" dur="7s" repeatCount="indefinite"/>
-              <animate attributeName="opacity" values="0;0;1;0.7;0" keyTimes="0;0.854;0.857;0.928;1" dur="7s" repeatCount="indefinite"/>
-            </circle>
-          </g>
-
-          <!-- Compteur épuré : 0 → 1 000 → 5 000 → 8 500 (4 paliers calmes) -->
-          <g font-family="'Playfair Display',serif" text-anchor="middle" font-style="italic" font-weight="800" filter="url(#ytGlow)">
-            <text x="160" y="22" font-size="22" fill="#F0D690">0<animate attributeName="opacity" values="0;1;1;0;0" keyTimes="0;0.04;0.18;0.22;1" dur="7s" repeatCount="indefinite"/></text>
-            <text x="160" y="22" font-size="22" fill="#F0D690" opacity="0">1 000<animate attributeName="opacity" values="0;0;1;1;0;0" keyTimes="0;0.22;0.26;0.46;0.50;1" dur="7s" repeatCount="indefinite"/></text>
-            <text x="160" y="22" font-size="22" fill="#F0D690" opacity="0">5 000<animate attributeName="opacity" values="0;0;1;1;0;0" keyTimes="0;0.50;0.54;0.74;0.78;1" dur="7s" repeatCount="indefinite"/></text>
-            <text x="160" y="23" font-size="24" fill="#F0D690" opacity="0">8 500<animate attributeName="opacity" values="0;0;1;1" keyTimes="0;0.78;0.82;1" dur="7s" repeatCount="indefinite"/></text>
-          </g>
-          <text x="160" y="38" text-anchor="middle" font-family="Inter,sans-serif" font-size="8.5" font-weight="700" letter-spacing="0.2em" fill="rgba(212,182,106,0.85)" opacity="0">ABONNÉS GENESYS<animate attributeName="opacity" values="0;0;0.85;0.85" keyTimes="0;0.82;0.88;1" dur="7s" repeatCount="indefinite"/></text>
-
-          <!-- Années -->
-          <g font-family="Inter,sans-serif" font-size="8" font-weight="700" text-anchor="middle">
-            <text x="22" y="100" fill="rgba(212,182,106,0.65)">2021</text>
-            <text x="77" y="100" fill="rgba(212,182,106,0.6)">2022</text>
-            <text x="132" y="100" fill="rgba(212,182,106,0.6)">2023</text>
-            <text x="187" y="100" fill="rgba(212,182,106,0.6)">2024</text>
-            <text x="242" y="100" fill="rgba(212,182,106,0.6)">2025</text>
-            <text x="298" y="100" fill="#F0D690" font-weight="800">2026</text>
-          </g>
-        </svg>
+      <div class="yt-stats-grid" role="group" aria-label="Statistiques YouTube et expérience">
+        <div class="yt-stat">
+          <span class="yt-stat-num" data-target="5" data-suffix="+">5+</span>
+          <span class="yt-stat-label">Ans sur<br>YouTube</span>
+        </div>
+        <div class="yt-stat-divider" aria-hidden="true"></div>
+        <div class="yt-stat">
+          <span class="yt-stat-num" data-target="200" data-prefix="+">+200</span>
+          <span class="yt-stat-label">Vidéos<br>publiées</span>
+        </div>
+        <div class="yt-stat-divider" aria-hidden="true"></div>
+        <div class="yt-stat">
+          <span class="yt-stat-num" data-target="1000000" data-format="million" data-prefix="+">+1M</span>
+          <span class="yt-stat-label">Vues<br>cumulées</span>
+        </div>
+        <div class="yt-stat-divider" aria-hidden="true"></div>
+        <div class="yt-stat">
+          <span class="yt-stat-num" data-target="8500" data-format="space">8 500</span>
+          <span class="yt-stat-label">Abonnés<br>GENESYS</span>
+        </div>
       </div>
+      <script>
+      (function(){
+        const observed = new WeakSet();
+        const easeOut = t => 1 - Math.pow(1 - t, 3);
+        function fmt(value, type){
+          if(type === 'million'){
+            if(value < 1000) return Math.round(value).toString();
+            if(value < 1000000) return Math.round(value/1000) + 'K';
+            return '1M';
+          }
+          if(type === 'space'){
+            return Math.round(value).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
+          }
+          return Math.round(value).toString();
+        }
+        function animate(el){
+          if(observed.has(el)) return;
+          observed.add(el);
+          const target = parseFloat(el.dataset.target);
+          const suffix = el.dataset.suffix || '';
+          const prefix = el.dataset.prefix || '';
+          const type = el.dataset.format || 'int';
+          const duration = 1600;
+          const start = performance.now();
+          function frame(now){
+            const t = Math.min((now - start) / duration, 1);
+            const v = target * easeOut(t);
+            el.textContent = prefix + fmt(v, type) + suffix;
+            if(t < 1) requestAnimationFrame(frame);
+            else el.textContent = prefix + fmt(target, type) + suffix;
+          }
+          requestAnimationFrame(frame);
+        }
+        const obs = new IntersectionObserver(entries => {
+          entries.forEach(e => {
+            if(e.isIntersecting){
+              e.target.querySelectorAll('.yt-stat-num').forEach(animate);
+              obs.unobserve(e.target);
+            }
+          });
+        }, { threshold: 0.4 });
+        document.querySelectorAll('.yt-stats-grid').forEach(el => obs.observe(el));
+      })();
+      </script>
       <p>La plupart des "experts e-commerce" qui étaient là en 2022 ont déjà disparu, changé de niche, ou pivoté vers un autre business à la mode. <strong>Nous, on a toujours des boutiques qui tournent, on connaît la réalité du marché, on vit l'e-commerce toute l'année.</strong> +7 ans dans l'e-commerce. +13 ans d'expérience cumulés avec l'équipe. +5 ans sur YouTube à partager énormément de valeurs — méthodes, raisonnements, retours concrets sur les boutiques qu'on a lancées.</p>
     </div>
     <div class="trust-statement reveal"><span class="trust-statement-text">Profite de +13 ans d'expérience cumulée<br>et de chaque erreur qu'on a payée<br>à ta place pour seulement 49$ / mois<br>l'équivalent de 2-3 Uber Eats<br>que tu oublies la semaine d'après.</span></div>
