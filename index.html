@@ -843,20 +843,26 @@
       line-height:1.35;letter-spacing:0.005em;
       display:inline-block;
       padding:9px 22px;
-      border:1.5px solid rgba(212,182,106,0.6);
+      border:1.5px solid rgba(212,182,106,0.55);
       border-radius:7px;
-      background:linear-gradient(180deg,rgba(212,182,106,0.08) 0%,rgba(212,182,106,0.03) 100%);
-      animation:hlVerdictPulse 2.4s ease-in-out infinite;
+      background:linear-gradient(180deg,rgba(212,182,106,0.05) 0%,rgba(212,182,106,0.02) 100%);
+      transform-origin:center;
+      animation:hlVerdictBreathe 2s cubic-bezier(0.4,0,0.6,1) infinite;
     }
     .hl-vraie-bridge-bot em{font-style:italic;color:var(--gold);font-weight:700}
-    @keyframes hlVerdictPulse{
+    /* Inspiration (0% → 50%) puis expiration (50% → 100%) — un cycle complet en 2s */
+    @keyframes hlVerdictBreathe{
       0%, 100%{
-        box-shadow:0 0 0 rgba(212,182,106,0), inset 0 0 8px rgba(212,182,106,0.05);
-        border-color:rgba(212,182,106,0.55);
+        transform:scale(1);
+        box-shadow:0 0 0 rgba(212,182,106,0), inset 0 0 6px rgba(212,182,106,0.04);
+        border-color:rgba(212,182,106,0.45);
+        background:linear-gradient(180deg,rgba(212,182,106,0.04) 0%,rgba(212,182,106,0.015) 100%);
       }
       50%{
-        box-shadow:0 0 28px rgba(212,182,106,0.6), 0 0 10px rgba(212,182,106,0.35), inset 0 0 12px rgba(212,182,106,0.12);
-        border-color:rgba(212,182,106,1);
+        transform:scale(1.022);
+        box-shadow:0 0 26px rgba(212,182,106,0.5), 0 0 10px rgba(212,182,106,0.3), inset 0 0 14px rgba(212,182,106,0.12);
+        border-color:rgba(212,182,106,0.95);
+        background:linear-gradient(180deg,rgba(212,182,106,0.12) 0%,rgba(212,182,106,0.05) 100%);
       }
     }
 
@@ -3741,7 +3747,7 @@
             <li>Tu suis 10 formations qui se contredisent</li>
             <li>Tu blâmes Meta quand ta créative est mauvaise</li>
             <li>Tu confonds chiffre d'affaires et bénéfice réel</li>
-            <li>Tu réinjectes ton cash perso pour sauver une pub qui plonge</li>
+            <li>Tu zappes la phase de validation et passes direct au scaling</li>
             <li>Tu testes la couleur du bouton avant de revoir ton hero</li>
           </ul>
           <div class="hl-vraie-verdict-wrap">
