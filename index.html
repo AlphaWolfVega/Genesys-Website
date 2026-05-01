@@ -3489,34 +3489,22 @@
       </div>
       <div class="hero-lead-slide">
         <div class="hero-lead-card">
-          <!-- Boucle d'infini : UN SEUL element (comete doree) defile via animateMotion le long du lemniscate. Litteralement un seul objet qui bouge = impossible de disparaitre ou se dedoubler. -->
+          <!-- Boucle d'infini : UNE SEULE ligne doree qui defile sur le sigle infini. pathLength sur le path lui-meme, dasharray 35+65=100 tile parfait, 3s linear. -->
           <div class="hl-infinity-loop" aria-hidden="true">
             <svg viewBox="0 0 280 130" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg">
               <defs>
-                <path id="hlInfPath" d="M 200 65 C 200 35, 165 35, 140 65 C 115 95, 80 95, 80 65 C 80 35, 115 35, 140 65 C 165 95, 200 95, 200 65 Z"/>
-                <linearGradient id="hlCometGrad" x1="0%" y1="50%" x2="100%" y2="50%">
-                  <stop offset="0%" stop-color="#E5CB85" stop-opacity="0"/>
-                  <stop offset="55%" stop-color="#F0D690" stop-opacity="0.5"/>
-                  <stop offset="100%" stop-color="#FFF6D8" stop-opacity="1"/>
-                </linearGradient>
+                <path id="hlInfPath" pathLength="100" d="M 200 65 C 200 35, 165 35, 140 65 C 115 95, 80 95, 80 65 C 80 35, 115 35, 140 65 C 165 95, 200 95, 200 65 Z"/>
                 <filter id="hlInfFigGlow" x="-50%" y="-50%" width="200%" height="200%">
-                  <feGaussianBlur stdDeviation="2.6" result="b"/>
+                  <feGaussianBlur stdDeviation="3.2" result="b"/>
                   <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
                 </filter>
               </defs>
               <!-- Track tirets fixes (parcours total, dim) -->
-              <use href="#hlInfPath" pathLength="100" fill="none" stroke="#D4B66A" stroke-width="1.4" stroke-dasharray="0.6 1" opacity="0.3"/>
-              <!-- Wake : sillage dore qui illumine le pointille juste derriere la comete. Sync parfaite avec animateMotion (3s linear, dasharray 28+72=100=pathLength tile parfait). dashoffset 28 → -72 = wake toujours immediatement derriere la comete. -->
-              <use href="#hlInfPath" pathLength="100" fill="none" stroke="#E5CB85" stroke-width="2.2" stroke-linecap="round" stroke-dasharray="28 72" opacity="0.5" filter="url(#hlInfFigGlow)">
-                <animate attributeName="stroke-dashoffset" from="28" to="-72" dur="3s" calcMode="linear" repeatCount="indefinite"/>
+              <use href="#hlInfPath" fill="none" stroke="#D4B66A" stroke-width="1.4" stroke-dasharray="0.6 1" opacity="0.3"/>
+              <!-- UNE SEULE ligne lumineuse qui suit le 8 inversee. dasharray 35/65 = 100 = pathLength → tile exact, jamais de coupure visuelle. -->
+              <use href="#hlInfPath" fill="none" stroke="#E5CB85" stroke-width="2.8" stroke-linecap="round" stroke-dasharray="35 65" opacity="0.95" filter="url(#hlInfFigGlow)">
+                <animate attributeName="stroke-dashoffset" from="0" to="-100" dur="3s" calcMode="linear" repeatCount="indefinite"/>
               </use>
-              <!-- UN SEUL element principal : comete avec tete brillante + queue qui s'estompe, oriente automatiquement par le tangent du path (rotate=auto). Cycle 3s, jamais de disparition, jamais de dedoublement. -->
-              <g>
-                <animateMotion dur="3s" repeatCount="indefinite" rotate="auto">
-                  <mpath href="#hlInfPath"/>
-                </animateMotion>
-                <path d="M -32 0 Q -16 -2.5 0 -2.8 Q 16 -2.8 28 0 Q 16 2.8 0 2.8 Q -16 2.5 -32 0 Z" fill="url(#hlCometGrad)" filter="url(#hlInfFigGlow)"/>
-              </g>
             </svg>
           </div>
           <div class="hl-spin-anim hl-cinema" style="display:none" aria-hidden="true">
