@@ -1880,6 +1880,72 @@
     .gears-anim{max-width:360px;margin:18px auto 18px}
     .gears-anim .gear-label{font-size:13px;letter-spacing:.16em}
   }
+  /* Solar anim — section "Plus de 23 modules / Un seul système" */
+  .solar-anim{
+    width:100%;max-width:640px;margin:32px auto 14px;
+    filter:drop-shadow(0 0 22px rgba(212,182,106,0.10));
+    opacity:0;transform:translateY(20px);transition:opacity 1s ease,transform 1s ease;
+  }
+  .solar-anim.in{opacity:1;transform:translateY(0)}
+  .solar-anim svg{width:100%;height:auto;display:block;overflow:visible;font-family:'Inter',sans-serif}
+  .solar-anim .orbit-track{
+    fill:none;stroke:rgba(212,182,106,0.13);stroke-width:1;
+    stroke-dasharray:2 5;
+  }
+  .solar-anim .module-dot{
+    fill:var(--gold);
+    filter:drop-shadow(0 0 5px rgba(212,182,106,0.95)) drop-shadow(0 0 11px rgba(212,182,106,0.55));
+  }
+  .solar-anim .orbit-essentiels .module-dot{fill:#f5e3b0}
+  .solar-anim .orbit-tactique .module-dot{fill:#e6cf90}
+  .solar-anim .orbit-strategie .module-dot{fill:var(--gold)}
+  .solar-anim .orbit-mindset .module-dot{fill:#c9a463}
+  .solar-anim .orbit-securite .module-dot{fill:#b8924c}
+  .solar-anim .solar-hub-glow{
+    fill:url(#solarGlowGrad);
+    animation:solarHubGlowPulse 3.4s ease-in-out infinite;
+    transform-origin:300px 220px;transform-box:fill-box;
+  }
+  @keyframes solarHubGlowPulse{
+    0%,100%{opacity:.55;transform:scale(1)}
+    50%{opacity:1;transform:scale(1.18)}
+  }
+  .solar-anim .solar-hub-ring{
+    fill:none;stroke:rgba(212,182,106,0.55);stroke-width:1;stroke-dasharray:1 3;
+    animation:solarRingSpin 30s linear infinite;
+    transform-origin:300px 220px;transform-box:fill-box;
+  }
+  @keyframes solarRingSpin{from{transform:rotate(0)}to{transform:rotate(360deg)}}
+  .solar-anim .solar-hub-core{
+    fill:url(#solarHubGrad);
+    filter:drop-shadow(0 0 12px rgba(255,225,150,0.95)) drop-shadow(0 0 22px rgba(212,182,106,0.65));
+    animation:solarCorePulse 2.6s ease-in-out infinite;
+    transform-origin:300px 220px;transform-box:fill-box;
+  }
+  @keyframes solarCorePulse{
+    0%,100%{transform:scale(1)}
+    50%{transform:scale(1.08)}
+  }
+  .solar-anim .solar-hub-label{
+    fill:#0a1628;font-size:9.5px;font-weight:800;letter-spacing:.18em;
+  }
+  .solar-anim .orbit-label{
+    fill:var(--gold);font-size:11px;font-weight:800;letter-spacing:.22em;
+    filter:drop-shadow(0 0 4px rgba(212,182,106,0.5));
+  }
+  .solar-anim .orbit-link{stroke:rgba(212,182,106,0.55);stroke-width:1}
+  @media (prefers-reduced-motion: reduce){
+    .solar-anim .orbit animateTransform,
+    .solar-anim .solar-hub-glow,
+    .solar-anim .solar-hub-ring,
+    .solar-anim .solar-hub-core{animation:none}
+    .solar-anim{transition:none}
+  }
+  @media (max-width:640px){
+    .solar-anim{max-width:380px;margin:22px auto 10px}
+    .solar-anim .orbit-label{font-size:9px;letter-spacing:.16em}
+    .solar-anim .solar-hub-label{font-size:8px;letter-spacing:.14em}
+  }
   /* YT stats grid — section "2020 → 2026 / +6 ans sur YouTube" */
   .yt-stats-grid{
     display:grid;
@@ -5300,6 +5366,82 @@
       </div>
       <h2>Plus de 23 modules.<br><em>Un seul système.</em></h2>
       <p>Pas une accumulation de vidéos pour gonfler la valeur. Plus de 23 modules organisés par thème : essentiels, tactique, stratégie, mindset, sécurité. Tu regardes celui qui règle ton problème du moment.</p>
+      <div class="solar-anim reveal" aria-hidden="true">
+        <svg viewBox="0 0 600 420" preserveAspectRatio="xMidYMid meet">
+          <defs>
+            <pattern id="solarGrid" width="20" height="20" patternUnits="userSpaceOnUse">
+              <path d="M 20 0 L 0 0 0 20" fill="none" stroke="rgba(212,182,106,0.04)" stroke-width="0.5"/>
+            </pattern>
+            <radialGradient id="solarHubGrad" cx="50%" cy="50%" r="50%">
+              <stop offset="0%" stop-color="rgba(255,235,170,1)"/>
+              <stop offset="55%" stop-color="rgba(220,190,115,0.95)"/>
+              <stop offset="100%" stop-color="rgba(212,182,106,0.55)"/>
+            </radialGradient>
+            <radialGradient id="solarGlowGrad" cx="50%" cy="50%" r="50%">
+              <stop offset="0%" stop-color="rgba(212,182,106,0.5)"/>
+              <stop offset="100%" stop-color="rgba(212,182,106,0)"/>
+            </radialGradient>
+          </defs>
+          <rect width="600" height="420" fill="url(#solarGrid)"/>
+          <circle class="orbit-track" cx="300" cy="220" r="55"/>
+          <circle class="orbit-track" cx="300" cy="220" r="90"/>
+          <circle class="orbit-track" cx="300" cy="220" r="125"/>
+          <circle class="orbit-track" cx="300" cy="220" r="160"/>
+          <circle class="orbit-track" cx="300" cy="220" r="195"/>
+          <g class="orbit orbit-essentiels">
+            <animateTransform attributeName="transform" type="rotate" from="0 300 220" to="360 300 220" dur="16s" repeatCount="indefinite"/>
+            <circle class="module-dot" cx="355" cy="220" r="4"/>
+            <circle class="module-dot" cx="300" cy="275" r="4"/>
+            <circle class="module-dot" cx="245" cy="220" r="4"/>
+            <circle class="module-dot" cx="300" cy="165" r="4"/>
+          </g>
+          <g class="orbit orbit-tactique">
+            <animateTransform attributeName="transform" type="rotate" from="0 300 220" to="-360 300 220" dur="24s" repeatCount="indefinite"/>
+            <circle class="module-dot" cx="390" cy="220" r="4"/>
+            <circle class="module-dot" cx="327.8" cy="305.6" r="4"/>
+            <circle class="module-dot" cx="227.2" cy="272.9" r="4"/>
+            <circle class="module-dot" cx="227.2" cy="167.1" r="4"/>
+            <circle class="module-dot" cx="327.8" cy="134.4" r="4"/>
+          </g>
+          <g class="orbit orbit-strategie">
+            <animateTransform attributeName="transform" type="rotate" from="0 300 220" to="360 300 220" dur="34s" repeatCount="indefinite"/>
+            <circle class="module-dot" cx="388.4" cy="308.4" r="4"/>
+            <circle class="module-dot" cx="211.6" cy="308.4" r="4"/>
+            <circle class="module-dot" cx="211.6" cy="131.6" r="4"/>
+            <circle class="module-dot" cx="388.4" cy="131.6" r="4"/>
+          </g>
+          <g class="orbit orbit-mindset">
+            <animateTransform attributeName="transform" type="rotate" from="0 300 220" to="-360 300 220" dur="46s" repeatCount="indefinite"/>
+            <circle class="module-dot" cx="438.6" cy="300" r="4"/>
+            <circle class="module-dot" cx="266.7" cy="376.5" r="4"/>
+            <circle class="module-dot" cx="140.9" cy="236.7" r="4"/>
+            <circle class="module-dot" cx="234.9" cy="73.7" r="4"/>
+            <circle class="module-dot" cx="418.9" cy="113.1" r="4"/>
+          </g>
+          <g class="orbit orbit-securite">
+            <animateTransform attributeName="transform" type="rotate" from="0 300 220" to="360 300 220" dur="60s" repeatCount="indefinite"/>
+            <circle class="module-dot" cx="397.5" cy="388.9" r="4"/>
+            <circle class="module-dot" cx="169.5" cy="364.9" r="4"/>
+            <circle class="module-dot" cx="121.7" cy="140.7" r="4"/>
+            <circle class="module-dot" cx="320.4" cy="26" r="4"/>
+            <circle class="module-dot" cx="490.7" cy="179.4" r="4"/>
+          </g>
+          <circle class="solar-hub-glow" cx="300" cy="220" r="40"/>
+          <circle class="solar-hub-ring" cx="300" cy="220" r="24"/>
+          <circle class="solar-hub-core" cx="300" cy="220" r="16"/>
+          <text class="solar-hub-label" x="300" y="223" text-anchor="middle">SYSTÈME</text>
+          <line class="orbit-link" x1="300" y1="165" x2="300" y2="155"/>
+          <text class="orbit-label" x="300" y="148" text-anchor="middle">ESSENTIELS</text>
+          <line class="orbit-link" x1="385.6" y1="192.2" x2="394" y2="189.5"/>
+          <text class="orbit-label" x="400" y="193" text-anchor="start">TACTIQUE</text>
+          <line class="orbit-link" x1="373.4" y1="321.1" x2="380" y2="328"/>
+          <text class="orbit-label" x="385" y="335" text-anchor="start">STRATÉGIE</text>
+          <line class="orbit-link" x1="206" y1="349.4" x2="200" y2="357"/>
+          <text class="orbit-label" x="200" y="370" text-anchor="middle">MINDSET</text>
+          <line class="orbit-link" x1="114.6" y1="159.8" x2="106" y2="156.6"/>
+          <text class="orbit-label" x="100" y="160" text-anchor="end">SÉCURITÉ</text>
+        </svg>
+      </div>
     </div>
     <div class="modules-grid">
       <div class="mod"><div class="top"><span class="badge">Essentiel</span><span class="dur">12 h</span></div><h5><span class="mod-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5a3 3 0 1 0-5.997.125 4 4 0 0 0-2.526 5.77 4 4 0 0 0 .556 6.588A4 4 0 1 0 12 18Z"/><path d="M12 5a3 3 0 1 1 5.997.125 4 4 0 0 1 2.526 5.77 4 4 0 0 1-.556 6.588A4 4 0 1 1 12 18Z"/><path d="M15 13a4.5 4.5 0 0 1-3-4 4.5 4.5 0 0 1-3 4"/><path d="M17.6 6.5a3 3 0 0 0 .4-1.4"/><path d="M6 5.1a3 3 0 0 0 .4 1.4"/></svg></span> Ecom Neuro</h5><p>Psychologie du consommateur appliquée à la boutique. Biais, mécanismes d'achat, influence.</p></div>
