@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<title>GENESYS — Slide 5 (Les vraies raisons) — 4 propositions</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,500;1,700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0a1628;--bg-deep:#06101e;
+    --gold:#D4B66A;--gold-soft:#E5CB85;--gold-deep:#A88838;
+    --gold-faded:rgba(212,182,106,0.22);
+    --text:#e8eaee;--text-dim:#a8b0bd;
+    --red-warn:#E07A6E;--red-strong:#FF6B5C;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{overflow-x:clip;max-width:100vw}
+  body{
+    background:radial-gradient(ellipse at top,#14253f 0%,var(--bg) 50%,var(--bg-deep) 100%);
+    color:var(--text);font-family:'Inter',sans-serif;
+    min-height:100vh;padding:32px 16px 80px;
+  }
+  .page-header{max-width:980px;margin:0 auto 36px;text-align:center}
+  .page-header h1{
+    font-family:'Playfair Display',serif;font-size:24px;
+    color:var(--gold);font-weight:700;margin-bottom:12px;
+  }
+  .page-header p{font-size:14px;line-height:1.6;color:var(--text-dim);max-width:680px;margin:0 auto}
+  .page-header strong{color:var(--gold)}
+
+  .variants-grid{
+    display:grid;grid-template-columns:1fr;gap:48px;
+    max-width:1500px;margin:0 auto;
+  }
+  @media (min-width:760px){.variants-grid{grid-template-columns:1fr 1fr;gap:32px}}
+  @media (min-width:1320px){.variants-grid{grid-template-columns:repeat(4,1fr);gap:20px}}
+
+  .variant-col{display:flex;flex-direction:column;align-items:center}
+  .variant-label{text-align:center;margin-bottom:16px}
+  .variant-tag{
+    display:inline-block;background:linear-gradient(135deg,#1a2d4d,#0f1d33);
+    border:1px solid var(--gold);color:var(--gold);
+    font-size:11.5px;font-weight:700;letter-spacing:0.18em;
+    text-transform:uppercase;padding:6px 14px;border-radius:6px;margin-bottom:8px;
+  }
+  .variant-name{
+    font-family:'Playfair Display',serif;font-style:italic;
+    font-size:17px;color:var(--text);margin-bottom:4px;
+  }
+  .variant-desc{font-size:11px;color:var(--text-dim);max-width:280px;margin:0 auto;line-height:1.4}
+
+  .phone-frame{
+    width:100%;max-width:340px;
+    background:linear-gradient(180deg,#1c2c4a,#0d1a2f);
+    border-radius:30px;padding:12px 10px 16px;
+    box-shadow:0 24px 60px rgba(0,0,0,0.5),0 0 0 2px rgba(212,182,106,0.15);
+  }
+  .phone-frame::before{
+    content:"";display:block;width:54px;height:4px;
+    background:rgba(255,255,255,0.18);border-radius:3px;
+    margin:0 auto 12px;
+  }
+
+  .hero-lead-card{
+    width:100%;
+    background:linear-gradient(135deg,rgba(20,37,64,0.55) 0%,rgba(10,22,40,0.32) 100%);
+    border:1px solid var(--gold-faded);border-radius:16px;
+    padding:18px 14px 18px;
+    display:flex;flex-direction:column;align-items:center;
+    text-align:center;
+    box-shadow:0 8px 28px rgba(0,0,0,0.28);
+  }
+
+  /* === SHARED HEADER (trajectory + H2) === */
+  .s5-trajectory{width:90%;height:48px;margin-bottom:8px;position:relative}
+  .s5-trajectory svg{width:100%;height:100%;display:block}
+  .s5-headline{
+    font-family:'Playfair Display',serif;font-style:italic;font-weight:700;
+    font-size:18px;line-height:1.15;color:var(--gold);
+    margin-bottom:4px;
+  }
+  .s5-sub{font-size:11px;color:var(--text-dim);margin-bottom:12px;font-style:italic}
+
+  /* === BRIDGE (closing frame) === */
+  .s5-bridge-wrap{display:flex;justify-content:center;width:100%;margin:14px 0 4px}
+  .s5-bridge{
+    font-family:'Playfair Display',serif;font-style:italic;font-weight:700;
+    font-size:13.5px;line-height:1.35;color:var(--gold);
+    padding:11px 22px;
+    border:1.5px solid rgba(212,182,106,0.7);
+    border-radius:10px;
+    background:linear-gradient(180deg,rgba(212,182,106,0.1),rgba(212,182,106,0.035));
+    position:relative;display:inline-block;
+  }
+  .s5-bridge::before{
+    content:"";position:absolute;top:-1.5px;left:50%;
+    transform:translateX(-50%);width:62%;height:2px;
+    background:linear-gradient(90deg,transparent,var(--gold),transparent);
+  }
+
+  /* === V1 — Categorise === */
+  .v1-group{width:100%;margin-bottom:14px;text-align:left}
+  .v1-group:last-of-type{margin-bottom:6px}
+  .v1-group-head{
+    display:flex;align-items:center;gap:8px;
+    margin-bottom:6px;padding-bottom:5px;
+    border-bottom:1px solid rgba(212,182,106,0.2);
+  }
+  .v1-group-icon{
+    flex:0 0 22px;width:22px;height:22px;
+    color:var(--gold);
+    display:flex;align-items:center;justify-content:center;
+  }
+  .v1-group-icon svg{width:18px;height:18px}
+  .v1-group-title{
+    font-family:'Inter',sans-serif;font-weight:700;
+    font-size:10.5px;letter-spacing:0.13em;
+    text-transform:uppercase;color:var(--gold);
+  }
+  .v1-list{list-style:none;padding-left:30px}
+  .v1-list li{
+    font-size:10.5px;line-height:1.5;color:var(--text);
+    padding:2px 0 2px 14px;position:relative;
+  }
+  .v1-list li::before{
+    content:"✕";position:absolute;left:0;top:2px;
+    color:var(--red-warn);font-weight:700;font-size:9.5px;
+  }
+
+  /* === V2 — Numerote premium === */
+  .v2-list{
+    list-style:none;padding:0;width:100%;text-align:left;
+    display:flex;flex-direction:column;gap:5px;
+  }
+  .v2-list li{
+    display:flex;align-items:flex-start;gap:9px;
+    padding:5px 8px;
+    background:rgba(20,37,64,0.42);
+    border:1px solid rgba(212,182,106,0.15);
+    border-radius:7px;
+  }
+  .v2-num{
+    flex:0 0 22px;width:22px;height:22px;
+    background:linear-gradient(135deg,rgba(212,182,106,0.4),rgba(212,182,106,0.15));
+    border:1px solid rgba(212,182,106,0.55);
+    border-radius:50%;
+    color:var(--gold);
+    display:flex;align-items:center;justify-content:center;
+    font-family:'Playfair Display',serif;font-style:italic;font-weight:700;
+    font-size:10.5px;
+    margin-top:0;
+  }
+  .v2-text{
+    font-size:10.5px;line-height:1.4;color:var(--text);flex:1;
+    padding-top:3px;
+  }
+
+  /* === V3 — 2 colonnes === */
+  .v3-list{
+    list-style:none;padding:0;width:100%;text-align:left;
+    columns:2;column-gap:10px;
+  }
+  .v3-list li{
+    font-size:9.5px;line-height:1.45;color:var(--text);
+    padding:3px 0 3px 13px;position:relative;
+    break-inside:avoid;
+    margin-bottom:3px;
+  }
+  .v3-list li::before{
+    content:"✕";position:absolute;left:0;top:2px;
+    color:var(--red-warn);font-weight:700;font-size:10px;
+  }
+
+  /* === V4 — Cards thematiques === */
+  .v4-stack{
+    display:flex;flex-direction:column;gap:9px;width:100%;
+    text-align:left;
+  }
+  .v4-card{
+    background:linear-gradient(135deg,rgba(212,182,106,0.07),rgba(20,37,64,0.5));
+    border:1px solid rgba(212,182,106,0.28);
+    border-radius:10px;
+    padding:9px 11px 10px;
+  }
+  .v4-card-head{
+    display:flex;align-items:center;gap:8px;
+    margin-bottom:5px;padding-bottom:4px;
+    border-bottom:1px dashed rgba(212,182,106,0.2);
+  }
+  .v4-card-icon{
+    flex:0 0 22px;width:22px;height:22px;
+    background:linear-gradient(135deg,rgba(212,182,106,0.35),rgba(212,182,106,0.1));
+    border:1px solid rgba(212,182,106,0.5);
+    border-radius:50%;
+    color:var(--gold);
+    display:flex;align-items:center;justify-content:center;
+  }
+  .v4-card-icon svg{width:13px;height:13px}
+  .v4-card-title{
+    font-family:'Inter',sans-serif;font-weight:700;
+    font-size:11px;letter-spacing:0.06em;
+    color:var(--gold);text-transform:uppercase;
+  }
+  .v4-card-list{list-style:none;padding:0}
+  .v4-card-list li{
+    font-size:10px;line-height:1.45;color:var(--text);
+    padding:2px 0 2px 13px;position:relative;
+  }
+  .v4-card-list li::before{
+    content:"−";position:absolute;left:0;top:1px;
+    color:var(--red-warn);font-weight:700;font-size:13px;line-height:1.2;
+  }
+
+  /* === FOOTER === */
+  .page-footer{max-width:780px;margin:60px auto 0;text-align:center;padding-top:30px;border-top:1px solid var(--gold-faded)}
+  .page-footer p{font-size:13px;color:var(--text-dim);margin-bottom:10px;line-height:1.6}
+  .page-footer p strong{color:var(--gold)}
+  .my-vote{
+    display:inline-block;background:linear-gradient(135deg,var(--gold),#A88838);
+    color:var(--bg-deep);font-size:9px;font-weight:700;
+    letter-spacing:0.14em;text-transform:uppercase;
+    padding:3px 8px;border-radius:4px;margin-left:6px;
+    vertical-align:middle;
+  }
+</style>
+</head>
+<body>
+
+<header class="page-header">
+  <h1>Slide 5 — Les vraies raisons de tes échecs</h1>
+  <p>
+    4 propositions de mise en forme pour les 15 erreurs. Choisis celle qui claque le plus.
+    Le H2, la trajectoire crash et le cadre "Voilà pourquoi tu tournes en rond" sont identiques dans les 4.
+  </p>
+</header>
+
+<div class="variants-grid">
+
+  <!-- ====================================================== -->
+  <!-- V1 — CATEGORISE -->
+  <!-- ====================================================== -->
+  <div class="variant-col">
+    <div class="variant-label">
+      <span class="variant-tag">Variante 1</span>
+      <div class="variant-name">"Catégorisé" <span class="my-vote">MON VOTE</span></div>
+      <div class="variant-desc">15 erreurs regroupées en 4 zones thématiques. Cognitive load divisé par 4.</div>
+    </div>
+    <div class="phone-frame">
+      <div class="hero-lead-card">
+        <div class="s5-trajectory">
+          <svg viewBox="0 0 280 60" xmlns="http://www.w3.org/2000/svg">
+            <defs><linearGradient id="g1" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#D4B66A"/><stop offset="60%" stop-color="#E5CB85"/><stop offset="100%" stop-color="#FF6B5C"/></linearGradient></defs>
+            <path d="M 10 50 Q 80 40 130 25 T 200 12 L 220 18 L 250 50" fill="none" stroke="url(#g1)" stroke-width="2.4" stroke-linecap="round"/>
+            <circle cx="250" cy="50" r="5" fill="#FF6B5C"><animate attributeName="r" values="4;7;4" dur="1.6s" repeatCount="indefinite"/></circle>
+          </svg>
+        </div>
+        <h3 class="s5-headline">Les vraies raisons<br>de tes échecs</h3>
+        <p class="s5-sub">Ce que personne ne te dit clairement :</p>
+
+        <div class="v1-group">
+          <div class="v1-group-head">
+            <div class="v1-group-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2" fill="currentColor"/></svg></div>
+            <span class="v1-group-title">Choix produit</span>
+          </div>
+          <ul class="v1-list">
+            <li>Tu choisis tes produits à l'instinct, sans méthode</li>
+            <li>Tu copies tes concurrents au lieu de les décoder</li>
+            <li>Tu changes de produit toutes les 2 semaines</li>
+          </ul>
+        </div>
+
+        <div class="v1-group">
+          <div class="v1-group-head">
+            <div class="v1-group-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m3 11 18-5v12L3 14v-3z"/><path d="M11.6 16.8a3 3 0 1 1-5.8-1.6"/></svg></div>
+            <span class="v1-group-title">Pubs &amp; scaling</span>
+          </div>
+          <ul class="v1-list">
+            <li>Tu coupes une pub au bout de 24h en panique</li>
+            <li>Tu doubles ton budget dès que ça marche</li>
+            <li>Tu lances 3 créatives par produit, jamais 12</li>
+            <li>Tu blâmes Meta quand ta créative est mauvaise</li>
+          </ul>
+        </div>
+
+        <div class="v1-group">
+          <div class="v1-group-head">
+            <div class="v1-group-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/></svg></div>
+            <span class="v1-group-title">Méthode &amp; cadre</span>
+          </div>
+          <ul class="v1-list">
+            <li>Tu lances sans calculer ton espérance de gain</li>
+            <li>Tu n'écris aucun stop-loss avant de lancer</li>
+            <li>Tu paries sans cadre, sans plan de sortie</li>
+            <li>Tu ne tiens aucun journal de tes paris</li>
+            <li>Tu zappes la phase de validation et passes au scaling</li>
+          </ul>
+        </div>
+
+        <div class="v1-group">
+          <div class="v1-group-head">
+            <div class="v1-group-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9.663 17h4.673M12 3v1M3 12h1M20 12h1M5.6 5.6l.7.7M17.7 17.7l.7.7M5.6 18.4l.7-.7M17.7 6.3l.7-.7M9 13a3 3 0 1 1 6 0 4 4 0 0 1-1 2.5L13 17H11l-1-1.5A4 4 0 0 1 9 13z"/></svg></div>
+            <span class="v1-group-title">Mental &amp; priorités</span>
+          </div>
+          <ul class="v1-list">
+            <li>Tu suis 10 formations qui se contredisent</li>
+            <li>Tu confonds chiffre d'affaires et bénéfice réel</li>
+            <li>Tu testes la couleur du bouton avant de revoir ton hero</li>
+          </ul>
+        </div>
+
+        <div class="s5-bridge-wrap">
+          <div class="s5-bridge"><em>Voilà pourquoi tu tournes en rond.</em></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ====================================================== -->
+  <!-- V2 — NUMEROTE PREMIUM -->
+  <!-- ====================================================== -->
+  <div class="variant-col">
+    <div class="variant-label">
+      <span class="variant-tag">Variante 2</span>
+      <div class="variant-name">"Numéroté Premium"</div>
+      <div class="variant-desc">15 cartes numérotées (01-15) en cercles dorés Playfair italic. Effet checklist haut de gamme.</div>
+    </div>
+    <div class="phone-frame">
+      <div class="hero-lead-card">
+        <div class="s5-trajectory">
+          <svg viewBox="0 0 280 60" xmlns="http://www.w3.org/2000/svg">
+            <defs><linearGradient id="g2" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#D4B66A"/><stop offset="60%" stop-color="#E5CB85"/><stop offset="100%" stop-color="#FF6B5C"/></linearGradient></defs>
+            <path d="M 10 50 Q 80 40 130 25 T 200 12 L 220 18 L 250 50" fill="none" stroke="url(#g2)" stroke-width="2.4" stroke-linecap="round"/>
+            <circle cx="250" cy="50" r="5" fill="#FF6B5C"><animate attributeName="r" values="4;7;4" dur="1.6s" repeatCount="indefinite"/></circle>
+          </svg>
+        </div>
+        <h3 class="s5-headline">Les vraies raisons<br>de tes échecs</h3>
+        <p class="s5-sub">Ce que personne ne te dit clairement :</p>
+
+        <ul class="v2-list">
+          <li><span class="v2-num">1</span><span class="v2-text">Tu choisis tes produits à l'instinct, sans méthode</span></li>
+          <li><span class="v2-num">2</span><span class="v2-text">Tu lances sans calculer ton espérance de gain</span></li>
+          <li><span class="v2-num">3</span><span class="v2-text">Tu coupes une pub au bout de 24h en panique</span></li>
+          <li><span class="v2-num">4</span><span class="v2-text">Tu doubles ton budget dès que ça marche</span></li>
+          <li><span class="v2-num">5</span><span class="v2-text">Tu n'écris aucun stop-loss avant de lancer</span></li>
+          <li><span class="v2-num">6</span><span class="v2-text">Tu paries sans cadre, sans plan de sortie</span></li>
+          <li><span class="v2-num">7</span><span class="v2-text">Tu copies tes concurrents au lieu de les décoder</span></li>
+          <li><span class="v2-num">8</span><span class="v2-text">Tu lances 3 créatives par produit, jamais 12</span></li>
+          <li><span class="v2-num">9</span><span class="v2-text">Tu ne tiens aucun journal de tes paris</span></li>
+          <li><span class="v2-num">10</span><span class="v2-text">Tu changes de produit toutes les 2 semaines</span></li>
+          <li><span class="v2-num">11</span><span class="v2-text">Tu suis 10 formations qui se contredisent</span></li>
+          <li><span class="v2-num">12</span><span class="v2-text">Tu blâmes Meta quand ta créative est mauvaise</span></li>
+          <li><span class="v2-num">13</span><span class="v2-text">Tu confonds chiffre d'affaires et bénéfice réel</span></li>
+          <li><span class="v2-num">14</span><span class="v2-text">Tu zappes la validation et passes au scaling</span></li>
+          <li><span class="v2-num">15</span><span class="v2-text">Tu testes la couleur du bouton avant de revoir ton hero</span></li>
+        </ul>
+
+        <div class="s5-bridge-wrap">
+          <div class="s5-bridge"><em>Voilà pourquoi tu tournes en rond.</em></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ====================================================== -->
+  <!-- V3 — DEUX COLONNES -->
+  <!-- ====================================================== -->
+  <div class="variant-col">
+    <div class="variant-label">
+      <span class="variant-tag">Variante 3</span>
+      <div class="variant-name">"Deux colonnes"</div>
+      <div class="variant-desc">15 erreurs en 2 colonnes compactes. Plus scannable, moins de scroll, dense visuellement.</div>
+    </div>
+    <div class="phone-frame">
+      <div class="hero-lead-card">
+        <div class="s5-trajectory">
+          <svg viewBox="0 0 280 60" xmlns="http://www.w3.org/2000/svg">
+            <defs><linearGradient id="g3" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#D4B66A"/><stop offset="60%" stop-color="#E5CB85"/><stop offset="100%" stop-color="#FF6B5C"/></linearGradient></defs>
+            <path d="M 10 50 Q 80 40 130 25 T 200 12 L 220 18 L 250 50" fill="none" stroke="url(#g3)" stroke-width="2.4" stroke-linecap="round"/>
+            <circle cx="250" cy="50" r="5" fill="#FF6B5C"><animate attributeName="r" values="4;7;4" dur="1.6s" repeatCount="indefinite"/></circle>
+          </svg>
+        </div>
+        <h3 class="s5-headline">Les vraies raisons<br>de tes échecs</h3>
+        <p class="s5-sub">Ce que personne ne te dit clairement :</p>
+
+        <ul class="v3-list">
+          <li>Tu choisis tes produits à l'instinct</li>
+          <li>Tu lances sans calculer l'espérance de gain</li>
+          <li>Tu coupes une pub au bout de 24h en panique</li>
+          <li>Tu doubles ton budget dès que ça marche</li>
+          <li>Tu n'écris aucun stop-loss</li>
+          <li>Tu paries sans plan de sortie</li>
+          <li>Tu copies tes concurrents sans les décoder</li>
+          <li>Tu lances 3 créatives, jamais 12</li>
+          <li>Tu ne tiens aucun journal</li>
+          <li>Tu changes de produit toutes les 2 semaines</li>
+          <li>Tu suis 10 formations contradictoires</li>
+          <li>Tu blâmes Meta quand ta créa est faible</li>
+          <li>Tu confonds CA et bénéfice réel</li>
+          <li>Tu zappes la validation</li>
+          <li>Tu testes la couleur du bouton avant le hero</li>
+        </ul>
+
+        <div class="s5-bridge-wrap">
+          <div class="s5-bridge"><em>Voilà pourquoi tu tournes en rond.</em></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ====================================================== -->
+  <!-- V4 — CARDS THEMATIQUES -->
+  <!-- ====================================================== -->
+  <div class="variant-col">
+    <div class="variant-label">
+      <span class="variant-tag">Variante 4</span>
+      <div class="variant-name">"Cards thématiques"</div>
+      <div class="variant-desc">4 cards empilées avec icône + titre + erreurs. Maximum hiérarchie, look premium.</div>
+    </div>
+    <div class="phone-frame">
+      <div class="hero-lead-card">
+        <div class="s5-trajectory">
+          <svg viewBox="0 0 280 60" xmlns="http://www.w3.org/2000/svg">
+            <defs><linearGradient id="g4" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#D4B66A"/><stop offset="60%" stop-color="#E5CB85"/><stop offset="100%" stop-color="#FF6B5C"/></linearGradient></defs>
+            <path d="M 10 50 Q 80 40 130 25 T 200 12 L 220 18 L 250 50" fill="none" stroke="url(#g4)" stroke-width="2.4" stroke-linecap="round"/>
+            <circle cx="250" cy="50" r="5" fill="#FF6B5C"><animate attributeName="r" values="4;7;4" dur="1.6s" repeatCount="indefinite"/></circle>
+          </svg>
+        </div>
+        <h3 class="s5-headline">Les vraies raisons<br>de tes échecs</h3>
+        <p class="s5-sub">Ce que personne ne te dit clairement :</p>
+
+        <div class="v4-stack">
+          <div class="v4-card">
+            <div class="v4-card-head">
+              <div class="v4-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2" fill="currentColor"/></svg></div>
+              <span class="v4-card-title">Choix produit</span>
+            </div>
+            <ul class="v4-card-list">
+              <li>Choisis à l'instinct, sans méthode</li>
+              <li>Copies les concurrents sans les décoder</li>
+              <li>Changes de produit toutes les 2 semaines</li>
+            </ul>
+          </div>
+
+          <div class="v4-card">
+            <div class="v4-card-head">
+              <div class="v4-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m3 11 18-5v12L3 14v-3z"/><path d="M11.6 16.8a3 3 0 1 1-5.8-1.6"/></svg></div>
+              <span class="v4-card-title">Pubs &amp; scaling</span>
+            </div>
+            <ul class="v4-card-list">
+              <li>Coupes une pub au bout de 24h en panique</li>
+              <li>Doubles ton budget dès que ça marche</li>
+              <li>Lances 3 créatives par produit, jamais 12</li>
+              <li>Blâmes Meta quand la créa est faible</li>
+            </ul>
+          </div>
+
+          <div class="v4-card">
+            <div class="v4-card-head">
+              <div class="v4-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/></svg></div>
+              <span class="v4-card-title">Méthode &amp; cadre</span>
+            </div>
+            <ul class="v4-card-list">
+              <li>Lances sans calculer l'espérance de gain</li>
+              <li>N'écris aucun stop-loss avant de lancer</li>
+              <li>Paries sans cadre, sans plan de sortie</li>
+              <li>Ne tiens aucun journal de tes paris</li>
+              <li>Zappes la validation, passes direct au scaling</li>
+            </ul>
+          </div>
+
+          <div class="v4-card">
+            <div class="v4-card-head">
+              <div class="v4-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 13a3 3 0 1 1 6 0 4 4 0 0 1-1 2.5L13 17H11l-1-1.5A4 4 0 0 1 9 13z"/><path d="M12 3v1M21 12h-1M3 12H2M5.6 5.6l.7.7M17.7 17.7l.7.7"/></svg></div>
+              <span class="v4-card-title">Mental &amp; priorités</span>
+            </div>
+            <ul class="v4-card-list">
+              <li>Suis 10 formations qui se contredisent</li>
+              <li>Confonds chiffre d'affaires et bénéfice réel</li>
+              <li>Testes la couleur du bouton avant le hero</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="s5-bridge-wrap">
+          <div class="s5-bridge"><em>Voilà pourquoi tu tournes en rond.</em></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<footer class="page-footer">
+  <p style="font-size:14px;color:var(--text);margin-bottom:14px"><strong>Récap des 4 propositions :</strong></p>
+  <p>
+    <strong>V1 — Catégorisé</strong> : 15 erreurs regroupées en 4 zones thématiques (Produit / Pubs / Méthode / Mental). Headers gold uppercase + sub-divider doré, items en liste classique. Cognitive load divisé par 4.
+  </p>
+  <p>
+    <strong>V2 — Numéroté Premium</strong> : 15 cartes numérotées 1-15 (cercles dorés Playfair italic). Effet checklist haut de gamme. Garde la séquence linéaire.
+  </p>
+  <p>
+    <strong>V3 — Deux colonnes</strong> : 15 erreurs raccourcies en 2 colonnes compactes. Plus scannable, dense, moins de scroll vertical.
+  </p>
+  <p>
+    <strong>V4 — Cards thématiques</strong> : 4 cards empilées avec icône + titre + erreurs internes. Le plus structuré visuellement.
+  </p>
+  <p style="margin-top:18px;font-size:12px;opacity:0.85">
+    <strong>Mon vote :</strong> V1 — la catégorisation respecte la même logique narrative que le reste de la page (chaque "zone" devient un thème abordable individuellement), reste léger visuellement (pas de cards qui alourdissent), et donne immédiatement la sensation que <em>tout est catégorisable, donc résoluble</em> — exactement ce qu'apporte α-QUANTT plus bas.
+  </p>
+</footer>
+
+</body>
+</html>
