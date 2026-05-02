@@ -1,0 +1,923 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>V1 — 20 effets terreur reptilienne 49 $ → 79 $</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,400;0,700;1,700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --gold:#D4B66A;
+  --gold-light:#E0C57A;
+  --warm:#F5D89A;
+  --red:#E07A6E;
+  --red-vivid:#FF4040;
+  --red-deep:#B32424;
+  --bg:#0A1628;
+  --bg-2:#142540;
+  --text:#E8E4D8;
+  --muted:#9aa3b2;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif}
+body{padding:60px 20px 80px;min-height:100vh}
+h1{font-size:30px;text-align:center;margin-bottom:6px;letter-spacing:-0.01em;font-weight:800}
+.sub{text-align:center;color:var(--muted);font-size:14px;margin-bottom:50px;max-width:780px;margin-left:auto;margin-right:auto;line-height:1.65}
+.sub em{color:var(--red);font-style:normal}
+
+.grid{
+  max-width:1480px;margin:0 auto;
+  display:grid;grid-template-columns:repeat(auto-fill,minmax(310px,1fr));
+  gap:40px 24px;
+}
+.card{
+  background:linear-gradient(180deg,rgba(20,37,64,0.5),rgba(10,22,40,0.2));
+  border:1px solid rgba(212,182,106,0.18);
+  border-radius:14px;
+  padding:24px 18px 22px;
+  display:flex;flex-direction:column;align-items:center;gap:14px;
+  position:relative;min-height:300px;
+}
+.num{
+  position:absolute;top:14px;left:18px;
+  font-family:'JetBrains Mono',monospace;
+  font-size:11px;color:var(--gold);font-weight:700;letter-spacing:0.1em;
+}
+.card-title{
+  margin-top:30px;font-size:14.5px;font-weight:700;
+  text-align:center;letter-spacing:0.02em;
+}
+.card-desc{
+  font-size:11.5px;color:var(--muted);
+  text-align:center;line-height:1.5;
+  max-width:280px;
+}
+.card-mech{
+  font-size:10.5px;color:rgba(224,122,110,0.85);
+  text-align:center;line-height:1.45;
+  font-style:italic;
+}
+
+/* ===== SCÈNE COMMUNE ===== */
+.scene{
+  position:relative;width:280px;height:90px;
+  display:flex;align-items:center;justify-content:center;gap:14px;
+  margin:8px 0;
+}
+.scene .side{
+  display:flex;flex-direction:column;align-items:center;gap:3px;
+  flex-shrink:0;min-width:60px;z-index:2;
+}
+.scene .amount{
+  font-family:'Playfair Display',serif;font-weight:700;
+  font-size:30px;line-height:1;letter-spacing:-0.01em;
+  color:var(--gold);
+  text-shadow:0 0 14px rgba(212,182,106,0.35);
+}
+.scene .amount-soon{color:var(--red)}
+.scene .label{
+  font-family:'Inter',sans-serif;font-size:9px;font-weight:700;
+  letter-spacing:0.16em;text-transform:uppercase;
+  color:rgba(212,182,106,0.7);
+}
+.scene .label-soon{color:rgba(224,122,110,0.85)}
+.scene .center{
+  position:relative;flex:1 1 auto;height:60px;min-width:120px;max-width:160px;
+  display:flex;align-items:center;justify-content:center;
+}
+.scene .center svg{width:100%;height:100%;display:block;overflow:visible}
+
+/* ============================================
+   T1 — COUNTDOWN BRUTAL
+   ============================================ */
+.t1 .center{display:flex;flex-direction:column;gap:4px}
+.t1 .countdown{
+  font-family:'JetBrains Mono',monospace;
+  font-size:20px;font-weight:700;color:var(--red-vivid);
+  letter-spacing:0.04em;
+  text-shadow:0 0 10px rgba(255,64,64,0.7);
+  animation:t1Tick 1s steps(2) infinite;
+}
+.t1 .cd-label{
+  font-size:8px;letter-spacing:0.18em;color:var(--red);
+  text-transform:uppercase;font-weight:700;
+}
+@keyframes t1Tick{
+  0%,100%{opacity:1}
+  50%{opacity:0.55}
+}
+.t1 .amount-soon{animation:t1RedFlash 4s ease-in-out infinite}
+@keyframes t1RedFlash{
+  0%,80%,100%{transform:scale(1);text-shadow:0 0 14px rgba(224,122,110,0.4)}
+  85%{transform:scale(1.12);text-shadow:0 0 24px rgba(255,64,64,0.85);color:var(--red-vivid)}
+}
+
+/* ============================================
+   T2 — FISSURE QUI SE PROPAGE
+   ============================================ */
+.t2 .crack{stroke:url(#t2grad);stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round;fill:none;
+  stroke-dasharray:160;stroke-dashoffset:160;
+  animation:t2Crack 4s ease-in-out infinite;
+  filter:drop-shadow(0 0 4px rgba(224,122,110,0.7));
+}
+@keyframes t2Crack{
+  0%{stroke-dashoffset:160}
+  60%{stroke-dashoffset:0}
+  85%{stroke-dashoffset:0;opacity:1}
+  95%{stroke-dashoffset:0;opacity:0}
+  100%{stroke-dashoffset:160;opacity:0}
+}
+.t2 .amount-soon{animation:t2Slam 4s ease-in-out infinite}
+@keyframes t2Slam{
+  0%,55%,100%{transform:scale(1)}
+  62%{transform:scale(1.20);color:var(--red-vivid);text-shadow:0 0 26px rgba(255,64,64,0.9)}
+  72%{transform:scale(1)}
+}
+
+/* ============================================
+   T3 — SLAM VERTICAL
+   ============================================ */
+.t3 .center::before{content:"⬇";color:rgba(224,122,110,0.4);font-size:24px}
+.t3 .amount-soon{
+  display:inline-block;
+  animation:t3Slam 5s ease-in-out infinite;
+}
+@keyframes t3Slam{
+  0%,80%,100%{transform:translateY(0);color:var(--red);text-shadow:0 0 14px rgba(224,122,110,0.4)}
+  82%{transform:translateY(-30px);opacity:0}
+  85%{transform:translateY(-30px);opacity:0}
+  90%{transform:translateY(0);color:var(--red-vivid);text-shadow:0 0 30px rgba(255,64,64,0.95);scale:1.18}
+  95%{transform:translateY(0);scale:1}
+}
+.t3 .scene{animation:t3Shake 5s ease-in-out infinite}
+@keyframes t3Shake{
+  0%,87%,100%{transform:translateX(0)}
+  88%{transform:translateX(-3px)}
+  89%{transform:translateX(3px)}
+  90%{transform:translateX(-2px)}
+  91%{transform:translateX(0)}
+}
+
+/* ============================================
+   T4 — THERMOMÈTRE QUI MONTE
+   ============================================ */
+.t4 .thermo{
+  position:relative;width:14px;height:50px;
+  border:1.5px solid rgba(224,122,110,0.6);border-radius:8px;
+  background:rgba(10,22,40,0.6);
+  overflow:hidden;
+}
+.t4 .thermo::after{
+  content:"";position:absolute;left:0;right:0;bottom:0;
+  background:linear-gradient(180deg,var(--red-vivid) 0%,var(--red) 100%);
+  height:0;
+  animation:t4Fill 4s ease-in-out infinite;
+  box-shadow:0 0 12px rgba(255,64,64,0.7);
+}
+@keyframes t4Fill{
+  0%{height:0%}
+  60%{height:100%}
+  85%{height:100%}
+  90%{height:0%}
+  100%{height:0%}
+}
+.t4 .amount-soon{animation:t4Boom 4s ease-in-out infinite}
+@keyframes t4Boom{
+  0%,55%,100%{color:var(--red);transform:scale(1)}
+  60%{color:var(--red-vivid);transform:scale(1.15);text-shadow:0 0 28px rgba(255,64,64,0.9)}
+  75%{color:var(--red);transform:scale(1)}
+}
+
+/* ============================================
+   T5 — GLITCH/STATIC
+   ============================================ */
+.t5 .amount-soon{
+  position:relative;display:inline-block;
+  animation:t5Glitch 5s ease-in-out infinite;
+}
+.t5 .amount-soon::before,
+.t5 .amount-soon::after{
+  content:"79 $";position:absolute;top:0;left:0;
+  width:100%;height:100%;
+}
+.t5 .amount-soon::before{
+  color:#FF00C8;animation:t5GlitchR 5s ease-in-out infinite;
+  clip-path:polygon(0 0,100% 0,100% 33%,0 33%);
+}
+.t5 .amount-soon::after{
+  color:#00FFFF;animation:t5GlitchB 5s ease-in-out infinite;
+  clip-path:polygon(0 66%,100% 66%,100% 100%,0 100%);
+}
+@keyframes t5Glitch{
+  0%,82%,100%{transform:translateX(0);opacity:1}
+  83%{transform:translateX(-3px);opacity:0.7}
+  84%{transform:translateX(2px);opacity:1}
+  85%{transform:translateX(-1px);opacity:0.5}
+  86%{transform:translateX(0);opacity:1;color:var(--red-vivid)}
+  90%{color:var(--red)}
+}
+@keyframes t5GlitchR{
+  0%,82%,100%{opacity:0;transform:translateX(0)}
+  83%,86%{opacity:1;transform:translateX(-4px)}
+}
+@keyframes t5GlitchB{
+  0%,82%,100%{opacity:0;transform:translateX(0)}
+  83%,86%{opacity:1;transform:translateX(4px)}
+}
+.t5 .amount.amount-now{
+  animation:t5Vacillate 5s ease-in-out infinite;
+}
+@keyframes t5Vacillate{
+  0%,80%,90%,100%{opacity:1}
+  82%,84%,86%{opacity:0.45}
+}
+
+/* ============================================
+   T6 — BULLET IMPACT
+   ============================================ */
+.t6 .bullet{
+  fill:var(--red-vivid);
+  filter:drop-shadow(0 0 8px rgba(255,64,64,1));
+}
+.t6 .amount-soon{animation:t6Explode 3s ease-in-out infinite}
+@keyframes t6Explode{
+  0%,33%,100%{transform:scale(1);color:var(--red);text-shadow:0 0 14px rgba(224,122,110,0.4)}
+  35%{transform:scale(1.4);color:var(--red-vivid);text-shadow:0 0 40px rgba(255,64,64,1),0 0 80px rgba(255,64,64,0.6)}
+  45%{transform:scale(1);color:var(--red)}
+}
+.t6 .shockwave{
+  position:absolute;top:50%;right:8px;width:8px;height:8px;border-radius:50%;
+  border:2px solid var(--red-vivid);
+  transform:translate(50%,-50%) scale(0);
+  animation:t6Wave 3s ease-out infinite;
+  pointer-events:none;
+  opacity:0;
+}
+@keyframes t6Wave{
+  0%,33%,100%{transform:translate(50%,-50%) scale(0);opacity:0}
+  36%{transform:translate(50%,-50%) scale(1);opacity:1}
+  50%{transform:translate(50%,-50%) scale(8);opacity:0}
+}
+
+/* ============================================
+   T7 — ZONE D'ALERTE CLIGNOTANTE
+   ============================================ */
+.t7 .pr-soon{position:relative}
+.t7 .pr-soon::before{
+  content:"";position:absolute;inset:-12px -10px;border-radius:8px;
+  border:2px solid var(--red-vivid);
+  animation:t7Alert 4s ease-in-out infinite;
+  opacity:0;pointer-events:none;
+  box-shadow:0 0 16px rgba(255,64,64,0.6);
+}
+@keyframes t7Alert{
+  0%,30%,40%,100%{opacity:0}
+  32%,42%{opacity:1}
+}
+.t7 .label-soon{
+  animation:t7Switch 4s steps(1) infinite;
+}
+@keyframes t7Switch{
+  0%,30%{content:"BIENTÔT"}
+  32%,44%{color:var(--red-vivid)}
+}
+.t7 .center::before{content:"⚠";color:var(--red);font-size:28px;animation:t7WarnPulse 4s ease-in-out infinite}
+@keyframes t7WarnPulse{
+  0%,30%,100%{opacity:0.5;transform:scale(1)}
+  32%,42%{opacity:1;transform:scale(1.15);color:var(--red-vivid)}
+}
+
+/* ============================================
+   T8 — SCEAU QUI SE BRISE
+   ============================================ */
+.t8 .seal{
+  width:36px;height:36px;border-radius:50%;
+  background:radial-gradient(circle,var(--red) 0%,var(--red-deep) 100%);
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Playfair Display',serif;font-style:italic;
+  color:var(--warm);font-weight:700;font-size:18px;
+  box-shadow:0 0 14px rgba(176,36,36,0.6),inset 0 -3px 6px rgba(0,0,0,0.4);
+  animation:t8Seal 5s ease-in-out infinite;
+}
+@keyframes t8Seal{
+  0%,55%,100%{transform:rotate(0) scale(1);opacity:1}
+  60%{transform:rotate(-3deg) scale(1.05)}
+  65%{transform:rotate(8deg) scale(0.95);opacity:0.5}
+  70%{transform:rotate(-15deg) scale(0.8);opacity:0}
+  90%{opacity:0}
+  98%{opacity:1;transform:rotate(0) scale(1)}
+}
+
+/* ============================================
+   T9 — EARTHQUAKE SHAKE (49 tremble, 79 stable)
+   ============================================ */
+.t9 .pr-now{animation:t9Shake 3s ease-in-out infinite}
+@keyframes t9Shake{
+  0%,40%,100%{transform:translateX(0)}
+  42%{transform:translate(-2px,1px)}
+  44%{transform:translate(2px,-1px)}
+  46%{transform:translate(-2px,-1px)}
+  48%{transform:translate(2px,1px)}
+  50%{transform:translate(-1px,1px)}
+  52%{transform:translate(1px,-1px)}
+  54%{transform:translateX(0)}
+}
+.t9 .pr-now .amount{animation:t9Crumble 3s ease-in-out infinite}
+@keyframes t9Crumble{
+  0%,40%,100%{opacity:1;color:var(--gold)}
+  50%{opacity:0.7;color:rgba(212,182,106,0.6)}
+}
+.t9 .center::before{content:"💥";font-size:22px;opacity:0.6;animation:t9Quake 3s ease-in-out infinite}
+@keyframes t9Quake{
+  0%,40%,60%,100%{opacity:0;transform:scale(0.6)}
+  45%,55%{opacity:1;transform:scale(1.2)}
+}
+
+/* ============================================
+   T10 — DRIP-DOWN RED (49 saigne)
+   ============================================ */
+.t10 .pr-now{position:relative}
+.t10 .pr-now::after{
+  content:"";position:absolute;left:50%;top:100%;
+  width:3px;height:0;
+  background:linear-gradient(180deg,transparent 0%,var(--red-vivid) 50%,transparent 100%);
+  transform:translateX(-50%);
+  animation:t10Drip 4s ease-in-out infinite;
+  filter:drop-shadow(0 0 4px var(--red-vivid));
+}
+@keyframes t10Drip{
+  0%,40%{height:0;opacity:0}
+  50%{height:30px;opacity:1}
+  70%{height:50px;opacity:0.4}
+  85%{height:60px;opacity:0}
+  100%{height:0;opacity:0}
+}
+.t10 .pr-soon{transform:translateY(-8px)}
+.t10 .amount-soon{animation:t10Rise 4s ease-in-out infinite}
+@keyframes t10Rise{
+  0%,40%,100%{transform:translateY(0);color:var(--red)}
+  60%{transform:translateY(-4px);color:var(--red-vivid);text-shadow:0 0 22px rgba(255,64,64,0.8)}
+  80%{transform:translateY(0);color:var(--red)}
+}
+
+/* ============================================
+   T11 — CADENAS QUI S'OUVRE
+   ============================================ */
+.t11 .lock{font-size:30px;color:var(--gold);
+  animation:t11Lock 5s ease-in-out infinite;
+  filter:drop-shadow(0 0 6px rgba(212,182,106,0.5));
+}
+@keyframes t11Lock{
+  0%,55%,100%{content:"🔒";opacity:1}
+  60%{content:"🔓";opacity:1}
+  85%{opacity:0.4}
+  90%{opacity:1}
+}
+.t11 .lock::before{content:"🔒"}
+.t11 .lock.open::before{content:"🔓"}
+.t11 .amount-soon{animation:t11Reveal 5s ease-in-out infinite}
+@keyframes t11Reveal{
+  0%,55%,100%{opacity:0.4;transform:scale(0.95)}
+  62%{opacity:1;transform:scale(1.18);color:var(--red-vivid);text-shadow:0 0 30px rgba(255,64,64,0.9)}
+  80%{opacity:1;transform:scale(1);color:var(--red)}
+}
+
+/* ============================================
+   T12 — STAMP +30$ ÉCRASEMENT
+   ============================================ */
+.t12 .stamp{
+  position:absolute;top:50%;left:50%;
+  transform:translate(-50%,-50%) rotate(-12deg) scale(0);
+  font-family:'Playfair Display',serif;font-weight:700;font-style:italic;
+  font-size:22px;color:var(--red-vivid);
+  border:3px solid var(--red-vivid);padding:4px 12px;
+  border-radius:6px;
+  text-shadow:none;
+  box-shadow:0 0 20px rgba(255,64,64,0.6);
+  background:rgba(10,22,40,0.85);
+  animation:t12Stamp 4s ease-out infinite;
+  opacity:0;z-index:5;
+}
+@keyframes t12Stamp{
+  0%,40%,100%{transform:translate(-50%,-50%) rotate(-12deg) scale(0);opacity:0}
+  45%{transform:translate(-50%,-50%) rotate(-12deg) scale(2);opacity:0.5}
+  48%{transform:translate(-50%,-50%) rotate(-12deg) scale(1.05);opacity:1}
+  52%{transform:translate(-50%,-50%) rotate(-12deg) scale(1);opacity:1}
+  80%{transform:translate(-50%,-50%) rotate(-12deg) scale(1);opacity:1}
+  90%{opacity:0}
+}
+
+/* ============================================
+   T13 — KNIFE SLASH (lame qui barre 49)
+   ============================================ */
+.t13 .pr-now{position:relative}
+.t13 .pr-now::after{
+  content:"";position:absolute;top:50%;left:-10%;
+  width:120%;height:3px;
+  background:linear-gradient(90deg,transparent 0%,var(--red-vivid) 30%,var(--red-vivid) 70%,transparent 100%);
+  transform-origin:left center;
+  transform:translateY(-50%) rotate(-15deg) scaleX(0);
+  animation:t13Slash 4s ease-in-out infinite;
+  filter:drop-shadow(0 0 6px rgba(255,64,64,0.8));
+}
+@keyframes t13Slash{
+  0%,40%,100%{transform:translateY(-50%) rotate(-15deg) scaleX(0);opacity:0}
+  45%{transform:translateY(-50%) rotate(-15deg) scaleX(1);opacity:1}
+  85%{transform:translateY(-50%) rotate(-15deg) scaleX(1);opacity:1}
+  95%{opacity:0}
+}
+.t13 .center::before{content:"";display:block;width:30px;height:30px;
+  background:linear-gradient(135deg,#999 0%,#FFF 50%,#999 100%);
+  clip-path:polygon(0 50%,80% 0,100% 50%,80% 100%);
+  animation:t13Knife 4s ease-in-out infinite;
+  opacity:0;
+}
+@keyframes t13Knife{
+  0%,30%,100%{opacity:0;transform:translateX(-100px) rotate(-30deg)}
+  40%{opacity:1;transform:translateX(0) rotate(-15deg)}
+  45%{opacity:1;transform:translateX(0) rotate(-15deg)}
+  60%{opacity:0;transform:translateX(60px) rotate(-15deg)}
+}
+
+/* ============================================
+   T14 — FUEL GAUGE (vert→rouge→empty)
+   ============================================ */
+.t14 .gauge{
+  width:100px;height:14px;border:1.5px solid rgba(212,182,106,0.5);
+  border-radius:8px;overflow:hidden;background:rgba(10,22,40,0.6);
+  position:relative;
+}
+.t14 .gauge::after{
+  content:"";position:absolute;left:0;top:0;bottom:0;width:100%;
+  background:linear-gradient(90deg,#3DD66B 0%,#FFD43B 40%,var(--red-vivid) 80%,var(--red-vivid) 100%);
+  animation:t14Drain 5s ease-in-out infinite;
+  transform-origin:left center;
+}
+@keyframes t14Drain{
+  0%{width:100%;filter:hue-rotate(0deg)}
+  60%{width:8%;filter:hue-rotate(0deg)}
+  70%{width:8%}
+  85%{width:8%;opacity:1}
+  92%{width:0%;opacity:0}
+  100%{width:100%;opacity:1}
+}
+.t14 .center::after{content:"⛽";position:absolute;font-size:14px;color:var(--red);right:-22px;top:50%;transform:translateY(-50%)}
+.t14 .amount-soon{animation:t14Warn 5s ease-in-out infinite}
+@keyframes t14Warn{
+  0%,55%,100%{transform:scale(1);color:var(--red)}
+  65%{transform:scale(1.15);color:var(--red-vivid);text-shadow:0 0 24px rgba(255,64,64,0.85)}
+  80%{transform:scale(1);color:var(--red)}
+}
+
+/* ============================================
+   T15 — CAMERA ZOOM PUNCH
+   ============================================ */
+.t15 .amount-soon{
+  display:inline-block;
+  animation:t15Punch 4s ease-out infinite;
+  transform-origin:center;
+}
+@keyframes t15Punch{
+  0%,40%,100%{transform:scale(1) translateZ(0);color:var(--red);filter:blur(0)}
+  44%{transform:scale(1.6);color:var(--red-vivid);text-shadow:0 0 40px rgba(255,64,64,1);filter:blur(0.5px)}
+  50%{transform:scale(1.35);text-shadow:0 0 30px rgba(255,64,64,0.85);filter:blur(0)}
+  60%{transform:scale(1.1);color:var(--red)}
+  70%{transform:scale(1)}
+}
+.t15 .pr-soon::after{
+  content:"";position:absolute;inset:-20px;
+  background:radial-gradient(circle,transparent 30%,rgba(255,64,64,0.3) 60%,transparent 100%);
+  animation:t15Vignette 4s ease-out infinite;
+  opacity:0;pointer-events:none;
+}
+@keyframes t15Vignette{
+  0%,40%,100%{opacity:0;transform:scale(0.5)}
+  44%{opacity:1;transform:scale(1.2)}
+  60%{opacity:0;transform:scale(1.6)}
+}
+.t15 .pr-soon{position:relative}
+
+/* ============================================
+   T16 — SIRÈNE GYROPHARE
+   ============================================ */
+.t16 .scene{position:relative}
+.t16 .scene::before,
+.t16 .scene::after{
+  content:"";position:absolute;top:0;bottom:0;width:50%;
+  background:radial-gradient(ellipse,rgba(255,64,64,0.45) 0%,transparent 70%);
+  pointer-events:none;
+  animation:t16Siren 2s ease-in-out infinite;
+}
+.t16 .scene::before{left:0;animation-delay:0s}
+.t16 .scene::after{right:0;animation-delay:1s}
+@keyframes t16Siren{
+  0%,40%,60%,100%{opacity:0}
+  10%,30%{opacity:0.85}
+}
+.t16 .amount-soon{animation:t16Pulse 2s ease-in-out infinite;animation-delay:1s}
+@keyframes t16Pulse{
+  0%,40%,60%,100%{transform:scale(1);color:var(--red)}
+  10%,30%{transform:scale(1.10);color:var(--red-vivid);text-shadow:0 0 20px rgba(255,64,64,0.9)}
+}
+
+/* ============================================
+   T17 — SABLIER QUI S'ÉCOULE
+   ============================================ */
+.t17 .hourglass{font-size:32px;animation:t17Flip 6s linear infinite;display:inline-block}
+@keyframes t17Flip{
+  0%,80%{transform:rotate(0)}
+  90%{transform:rotate(180deg)}
+  100%{transform:rotate(180deg)}
+}
+.t17 .accumulate{
+  position:absolute;bottom:8px;right:50%;transform:translateX(50%);
+  font-family:'Playfair Display',serif;font-style:italic;font-weight:700;
+  color:var(--red-vivid);font-size:14px;
+  text-shadow:0 0 8px rgba(255,64,64,0.6);
+  animation:t17Acc 6s ease-in-out infinite;
+  opacity:0;
+}
+@keyframes t17Acc{
+  0%{opacity:0;transform:translate(50%,0)}
+  20%{opacity:1;transform:translate(50%,-2px)}
+  60%{opacity:1;transform:translate(50%,-4px)}
+  85%{opacity:0.5;transform:translate(50%,-8px)}
+  100%{opacity:0;transform:translate(50%,-12px)}
+}
+
+/* ============================================
+   T18 — DOMINOS QUI TOMBENT
+   ============================================ */
+.t18 .dominos{display:flex;gap:6px;align-items:center;justify-content:center;height:40px}
+.t18 .dom{
+  width:6px;height:30px;background:var(--gold);border-radius:1px;
+  transform-origin:bottom center;
+  box-shadow:0 0 4px rgba(212,182,106,0.5);
+}
+.t18 .dom:nth-child(1){animation:t18Fall 4s ease-in-out infinite;animation-delay:0s}
+.t18 .dom:nth-child(2){animation:t18Fall 4s ease-in-out infinite;animation-delay:0.25s}
+.t18 .dom:nth-child(3){animation:t18Fall 4s ease-in-out infinite;animation-delay:0.5s}
+.t18 .dom:nth-child(4){animation:t18Fall 4s ease-in-out infinite;animation-delay:0.75s}
+@keyframes t18Fall{
+  0%,18%,100%{transform:rotate(0);background:var(--gold)}
+  25%{transform:rotate(70deg);background:var(--red-vivid)}
+  85%{transform:rotate(70deg);background:var(--red)}
+  92%{transform:rotate(0)}
+}
+.t18 .amount-soon{animation:t18Surge 4s ease-in-out infinite}
+@keyframes t18Surge{
+  0%,82%,100%{transform:scale(1);color:var(--red)}
+  86%{transform:scale(1.25);color:var(--red-vivid);text-shadow:0 0 32px rgba(255,64,64,0.95)}
+  93%{transform:scale(1)}
+}
+
+/* ============================================
+   T19 — ECG QUI S'EMBALLE
+   ============================================ */
+.t19 .ecg{stroke:var(--red-vivid);stroke-width:1.8;fill:none;
+  stroke-linecap:round;stroke-linejoin:round;
+  filter:drop-shadow(0 0 4px rgba(255,64,64,0.8));
+  stroke-dasharray:300;stroke-dashoffset:300;
+  animation:t19Trace 3s linear infinite;
+}
+@keyframes t19Trace{
+  0%{stroke-dashoffset:300}
+  100%{stroke-dashoffset:-300}
+}
+.t19 .amount-soon{animation:t19Beat 3s ease-in-out infinite}
+@keyframes t19Beat{
+  0%,100%{transform:scale(1);color:var(--red)}
+  20%,40%,60%,80%{transform:scale(1.06);color:var(--red-vivid);text-shadow:0 0 14px rgba(255,64,64,0.6)}
+  10%,30%,50%,70%,90%{transform:scale(1);color:var(--red)}
+}
+
+/* ============================================
+   T20 — VERROU QUI CLAQUE
+   ============================================ */
+.t20 .lockicon{
+  width:36px;height:30px;position:relative;
+  border:2.5px solid var(--gold);border-radius:4px;
+  margin-top:14px;
+  animation:t20Click 4s ease-in-out infinite;
+}
+.t20 .lockicon::before{
+  content:"";position:absolute;width:18px;height:14px;
+  border:2.5px solid var(--gold);border-bottom:none;
+  border-radius:9px 9px 0 0;
+  top:-14px;left:50%;transform:translateX(-50%);
+  animation:t20Shackle 4s ease-in-out infinite;
+}
+@keyframes t20Click{
+  0%,55%,100%{border-color:var(--gold);box-shadow:0 0 0 rgba(212,182,106,0)}
+  60%{border-color:var(--red-vivid);box-shadow:0 0 18px rgba(255,64,64,0.85)}
+  72%{border-color:var(--red);box-shadow:0 0 8px rgba(224,122,110,0.4)}
+}
+@keyframes t20Shackle{
+  0%,50%,100%{border-color:var(--gold);transform:translateX(-50%) translateY(0)}
+  55%{transform:translateX(-50%) translateY(-3px)}
+  60%{transform:translateX(-50%) translateY(0);border-color:var(--red-vivid)}
+  72%{border-color:var(--red)}
+}
+.t20 .amount-soon{animation:t20RedClick 4s ease-in-out infinite}
+@keyframes t20RedClick{
+  0%,55%,100%{color:var(--red);transform:scale(1)}
+  60%{color:var(--red-vivid);transform:scale(1.18);text-shadow:0 0 28px rgba(255,64,64,0.9)}
+  72%{color:var(--red);transform:scale(1)}
+}
+
+</style>
+</head>
+<body>
+
+<h1>20 effets terreur reptilienne — 49 $ → 79 $</h1>
+<p class="sub">Le but : <em>frapper le cerveau primitif</em> pour qu'il décide "il faut que je passe à l'action maintenant". Tous les effets jouent en boucle (3-6 s), aucun n'est stuck. Choisis le ou les numéros qui te font réagir.</p>
+
+<div class="grid">
+
+  <!-- T1 -->
+  <div class="card t1">
+    <span class="num">T1</span>
+    <div class="scene">
+      <div class="side pr-now"><span class="amount">49 $</span><span class="label">Actuellement</span></div>
+      <div class="center">
+        <div class="cd-label">Tarif bloqué</div>
+        <div class="countdown">47:23:08</div>
+      </div>
+      <div class="side pr-soon"><span class="amount amount-soon">79 $</span><span class="label label-soon">Bientôt</span></div>
+    </div>
+    <div class="card-title">Countdown brutal</div>
+    <div class="card-desc">Vrai timer LED rouge qui tic-tac. Le 79 flashe rouge à chaque palier.</div>
+    <div class="card-mech">Le viewer voit le temps lui filer en direct.</div>
+  </div>
+
+  <!-- T2 -->
+  <div class="card t2">
+    <span class="num">T2</span>
+    <div class="scene">
+      <div class="side pr-now"><span class="amount">49 $</span><span class="label">Actuellement</span></div>
+      <div class="center">
+        <svg viewBox="0 0 160 60" xmlns="http://www.w3.org/2000/svg">
+          <defs><linearGradient id="t2grad" x1="0%" y1="50%" x2="100%" y2="50%"><stop offset="0%" stop-color="#D4B66A"/><stop offset="100%" stop-color="#FF4040"/></linearGradient></defs>
+          <path class="crack" d="M 4 30 L 30 25 L 50 35 L 80 28 L 110 38 L 140 26 L 156 32"/>
+        </svg>
+      </div>
+      <div class="side pr-soon"><span class="amount amount-soon">79 $</span><span class="label label-soon">Bientôt</span></div>
+    </div>
+    <div class="card-title">Fissure qui se propage</div>
+    <div class="card-desc">Crack dorée → rouge qui trace de gauche à droite. Le 79 claque à l'arrivée.</div>
+    <div class="card-mech">Fissure = quelque chose se brise = danger structurel.</div>
+  </div>
+
+  <!-- T3 -->
+  <div class="card t3">
+    <span class="num">T3</span>
+    <div class="scene">
+      <div class="side pr-now"><span class="amount">49 $</span><span class="label">Actuellement</span></div>
+      <div class="center"></div>
+      <div class="side pr-soon"><span class="amount amount-soon">79 $</span><span class="label label-soon">Bientôt</span></div>
+    </div>
+    <div class="card-title">Slam vertical</div>
+    <div class="card-desc">Le 79 disparaît, retombe brutalement avec un mini-shake horizontal.</div>
+    <div class="card-mech">Impact descendant = chute, écrasement, sursaut response.</div>
+  </div>
+
+  <!-- T4 -->
+  <div class="card t4">
+    <span class="num">T4</span>
+    <div class="scene">
+      <div class="side pr-now"><span class="amount">49 $</span><span class="label">Actuellement</span></div>
+      <div class="center"><div class="thermo"></div></div>
+      <div class="side pr-soon"><span class="amount amount-soon">79 $</span><span class="label label-soon">Bientôt</span></div>
+    </div>
+    <div class="card-title">Thermomètre rouge</div>
+    <div class="card-desc">Une jauge verticale qui se remplit en rouge, le 79 explose à plein.</div>
+    <div class="card-mech">Remplissage rouge = chaleur, fièvre, danger physique.</div>
+  </div>
+
+  <!-- T5 -->
+  <div class="card t5">
+    <span class="num">T5</span>
+    <div class="scene">
+      <div class="side pr-now"><span class="amount amount-now">49 $</span><span class="label">Actuellement</span></div>
+      <div class="center"></div>
+      <div class="side pr-soon"><span class="amount amount-soon">79 $</span><span class="label label-soon">Bientôt</span></div>
+    </div>
+    <div class="card-title">Glitch / static</div>
+    <div class="card-desc">Le 79 glitche RGB, le 49 vacille comme s'il allait disparaître.</div>
+    <div class="card-mech">Glitch = système incontrôlable, cyber-thriller.</div>
+  </div>
+
+  <!-- T6 -->
+  <div class="card t6">
+    <span class="num">T6</span>
+    <div class="scene">
+      <div class="side pr-now"><span class="amount">49 $</span><span class="label">Actuellement</span></div>
+      <div class="center">
+        <svg viewBox="0 0 160 60" xmlns="http://www.w3.org/2000/svg">
+          <circle class="bullet" r="4">
+            <animateMotion dur="3s" repeatCount="indefinite" begin="0s" rotate="auto">
+              <mpath href="#t6path"/>
+            </animateMotion>
+            <animate attributeName="opacity" values="0;0;1;1;0" keyTimes="0;0.30;0.33;0.45;0.55" dur="3s" repeatCount="indefinite"/>
+          </circle>
+          <path id="t6path" d="M 4 50 L 156 10" fill="none"/>
+        </svg>
+      </div>
+      <div class="side pr-soon"><span class="amount amount-soon">79 $</span><span class="label label-soon">Bientôt</span><div class="shockwave"></div></div>
+    </div>
+    <div class="card-title">Bullet impact</div>
+    <div class="card-desc">Une particule rouge zip à 300 ms du 49 vers le 79, qui explose avec onde de choc.</div>
+    <div class="card-mech">Objet rapide qui frappe = réflexe de défense brut.</div>
+  </div>
+
+  <!-- T7 -->
+  <div class="card t7">
+    <span class="num">T7</span>
+    <div class="scene">
+      <div class="side pr-now"><span class="amount">49 $</span><span class="label">Actuellement</span></div>
+      <div class="center"></div>
+      <div class="side pr-soon"><span class="amount amount-soon">79 $</span><span class="label label-soon">Bientôt</span></div>
+    </div>
+    <div class="card-title">Zone d'alerte</div>
+    <div class="card-desc">Halo rouge qui clignote 2× rapidement autour du 79. Style alarme.</div>
+    <div class="card-mech">Flash rouge intermittent = alerte universelle (gyrophare).</div>
+  </div>
+
+  <!-- T8 -->
+  <div class="card t8">
+    <span class="num">T8</span>
+    <div class="scene">
+      <div class="side pr-now"><span class="amount">49 $</span><span class="label">Actuellement</span></div>
+      <div class="center"><div class="seal">α</div></div>
+      <div class="side pr-soon"><span class="amount amount-soon">79 $</span><span class="label label-soon">Bientôt</span></div>
+    </div>
+    <div class="card-title">Sceau qui se brise</div>
+    <div class="card-desc">Un sceau rouge officiel qui se fissure et tombe.</div>
+    <div class="card-mech">Engagement rompu, irréversibilité, émotion limbique.</div>
+  </div>
+
+  <!-- T9 -->
+  <div class="card t9">
+    <span class="num">T9</span>
+    <div class="scene">
+      <div class="side pr-now"><span class="amount">49 $</span><span class="label">Actuellement</span></div>
+      <div class="center"></div>
+      <div class="side pr-soon"><span class="amount amount-soon">79 $</span><span class="label label-soon">Bientôt</span></div>
+    </div>
+    <div class="card-title">Earthquake</div>
+    <div class="card-desc">Le 49 tremble + s'estompe, le 79 reste imperturbable.</div>
+    <div class="card-mech">Le présent vacille pendant que le futur menaçant tient bon.</div>
+  </div>
+
+  <!-- T10 -->
+  <div class="card t10">
+    <span class="num">T10</span>
+    <div class="scene">
+      <div class="side pr-now"><span class="amount">49 $</span><span class="label">Actuellement</span></div>
+      <div class="center">⤴</div>
+      <div class="side pr-soon"><span class="amount amount-soon">79 $</span><span class="label label-soon">Bientôt</span></div>
+    </div>
+    <div class="card-title">Drip-down rouge</div>
+    <div class="card-desc">Le 49 "saigne" vers le bas, le 79 monte d'un cran.</div>
+    <div class="card-mech">Sang = perte vitale immédiate, instinct de protection.</div>
+  </div>
+
+  <!-- T11 -->
+  <div class="card t11">
+    <span class="num">T11</span>
+    <div class="scene">
+      <div class="side pr-now"><span class="amount">49 $</span><span class="label">Actuellement</span></div>
+      <div class="center"><span class="lock">🔒</span></div>
+      <div class="side pr-soon"><span class="amount amount-soon">79 $</span><span class="label label-soon">Bientôt</span></div>
+    </div>
+    <div class="card-title">Cadenas qui s'ouvre</div>
+    <div class="card-desc">Le verrou s'ouvre et libère le 79 qui surgit en rouge vif.</div>
+    <div class="card-mech">Sécurité levée = barrière qui saute, danger libéré.</div>
+  </div>
+
+  <!-- T12 -->
+  <div class="card t12">
+    <span class="num">T12</span>
+    <div class="scene">
+      <div class="side pr-now"><span class="amount">49 $</span><span class="label">Actuellement</span></div>
+      <div class="center"></div>
+      <div class="side pr-soon"><span class="amount amount-soon">79 $</span><span class="label label-soon">Bientôt</span></div>
+      <div class="stamp">+30 $/MOIS</div>
+    </div>
+    <div class="card-title">Stamp +30 $</div>
+    <div class="card-desc">Un tampon rouge "+30 $" s'écrase sur la zone, reste 3 s, disparaît.</div>
+    <div class="card-mech">Tampon = officialisation, irréversibilité du chiffre supplémentaire.</div>
+  </div>
+
+  <!-- T13 -->
+  <div class="card t13">
+    <span class="num">T13</span>
+    <div class="scene">
+      <div class="side pr-now"><span class="amount">49 $</span><span class="label">Actuellement</span></div>
+      <div class="center"></div>
+      <div class="side pr-soon"><span class="amount amount-soon">79 $</span><span class="label label-soon">Bientôt</span></div>
+    </div>
+    <div class="card-title">Knife slash</div>
+    <div class="card-desc">Une lame traverse et barre le 49 d'une diagonale rouge.</div>
+    <div class="card-mech">Lame = coupure nette, le 49 est éliminé sans appel.</div>
+  </div>
+
+  <!-- T14 -->
+  <div class="card t14">
+    <span class="num">T14</span>
+    <div class="scene">
+      <div class="side pr-now"><span class="amount">49 $</span><span class="label">Actuellement</span></div>
+      <div class="center"><div class="gauge"></div></div>
+      <div class="side pr-soon"><span class="amount amount-soon">79 $</span><span class="label label-soon">Bientôt</span></div>
+    </div>
+    <div class="card-title">Fuel gauge</div>
+    <div class="card-desc">Jauge qui passe vert→jaune→rouge→empty. À zéro, le 79 frappe.</div>
+    <div class="card-mech">Jauge à plat = réservoir vide = panique immédiate.</div>
+  </div>
+
+  <!-- T15 -->
+  <div class="card t15">
+    <span class="num">T15</span>
+    <div class="scene">
+      <div class="side pr-now"><span class="amount">49 $</span><span class="label">Actuellement</span></div>
+      <div class="center">→</div>
+      <div class="side pr-soon"><span class="amount amount-soon">79 $</span><span class="label label-soon">Bientôt</span></div>
+    </div>
+    <div class="card-title">Camera zoom punch</div>
+    <div class="card-desc">Le 79 zoom-in violent (1.6x), distortion blur, vignette rouge.</div>
+    <div class="card-mech">Zoom punch = focus brutal forcé, le viewer ne peut pas regarder ailleurs.</div>
+  </div>
+
+  <!-- T16 -->
+  <div class="card t16">
+    <span class="num">T16</span>
+    <div class="scene">
+      <div class="side pr-now"><span class="amount">49 $</span><span class="label">Actuellement</span></div>
+      <div class="center"></div>
+      <div class="side pr-soon"><span class="amount amount-soon">79 $</span><span class="label label-soon">Bientôt</span></div>
+    </div>
+    <div class="card-title">Sirène gyrophare</div>
+    <div class="card-desc">Lumière rouge qui balaye latéralement (gauche ↔ droite). Code police.</div>
+    <div class="card-mech">Gyrophare = urgence d'État, autorité, intervention immédiate.</div>
+  </div>
+
+  <!-- T17 -->
+  <div class="card t17">
+    <span class="num">T17</span>
+    <div class="scene">
+      <div class="side pr-now"><span class="amount">49 $</span><span class="label">Actuellement</span></div>
+      <div class="center"><span class="hourglass">⏳</span></div>
+      <div class="side pr-soon"><span class="amount amount-soon">79 $</span><span class="label label-soon">Bientôt</span><span class="accumulate">+30 $</span></div>
+    </div>
+    <div class="card-title">Sablier qui s'écoule</div>
+    <div class="card-desc">Sablier en boucle, "+30 $" qui monte sous le 79 et s'estompe.</div>
+    <div class="card-mech">Sable qui tombe = mort programmée du tarif actuel.</div>
+  </div>
+
+  <!-- T18 -->
+  <div class="card t18">
+    <span class="num">T18</span>
+    <div class="scene">
+      <div class="side pr-now"><span class="amount">49 $</span><span class="label">Actuellement</span></div>
+      <div class="center"><div class="dominos"><span class="dom"></span><span class="dom"></span><span class="dom"></span><span class="dom"></span></div></div>
+      <div class="side pr-soon"><span class="amount amount-soon">79 $</span><span class="label label-soon">Bientôt</span></div>
+    </div>
+    <div class="card-title">Dominos cascade</div>
+    <div class="card-desc">4 dominos dorés qui tombent en cascade vers le 79. Dernier = surge.</div>
+    <div class="card-mech">Effet domino = chaîne de causalité inéluctable.</div>
+  </div>
+
+  <!-- T19 -->
+  <div class="card t19">
+    <span class="num">T19</span>
+    <div class="scene">
+      <div class="side pr-now"><span class="amount">49 $</span><span class="label">Actuellement</span></div>
+      <div class="center">
+        <svg viewBox="0 0 160 60" xmlns="http://www.w3.org/2000/svg">
+          <path class="ecg" d="M 0 30 L 20 30 L 24 10 L 28 50 L 32 30 L 60 30 L 64 5 L 68 55 L 72 30 L 100 30 L 104 8 L 108 52 L 112 30 L 160 30"/>
+        </svg>
+      </div>
+      <div class="side pr-soon"><span class="amount amount-soon">79 $</span><span class="label label-soon">Bientôt</span></div>
+    </div>
+    <div class="card-title">ECG accéléré</div>
+    <div class="card-desc">Tracé cardiaque rouge qui défile, le 79 bat au rythme.</div>
+    <div class="card-mech">Battement de cœur visible = stress physiologique mimétique.</div>
+  </div>
+
+  <!-- T20 -->
+  <div class="card t20">
+    <span class="num">T20</span>
+    <div class="scene">
+      <div class="side pr-now"><span class="amount">49 $</span><span class="label">Actuellement</span></div>
+      <div class="center"><div class="lockicon"></div></div>
+      <div class="side pr-soon"><span class="amount amount-soon">79 $</span><span class="label label-soon">Bientôt</span></div>
+    </div>
+    <div class="card-title">Verrou qui claque</div>
+    <div class="card-desc">Cadenas doré qui claque rouge à chaque cycle. Le 79 frappe à l'unisson.</div>
+    <div class="card-mech">Clic métallique visuel = enfermement, point de non-retour.</div>
+  </div>
+
+</div>
+
+</body>
+</html>
