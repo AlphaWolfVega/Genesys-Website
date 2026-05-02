@@ -3304,6 +3304,24 @@
     background:var(--gold);
     border-radius:50%;
     box-shadow:0 0 10px rgba(212,182,106,0.55);
+    animation:bioBulletBreath 3.6s ease-in-out infinite;
+    will-change:opacity,transform,box-shadow;
+  }
+  .founder .bio-bullets li:nth-child(2)::before{animation-delay:0.20s}
+  .founder .bio-bullets li:nth-child(3)::before{animation-delay:0.40s}
+  .founder .bio-bullets li:nth-child(4)::before{animation-delay:0.60s}
+  .founder .bio-bullets li:nth-child(5)::before{animation-delay:0.80s}
+  @keyframes bioBulletBreath{
+    0%, 100%{
+      opacity:0.62;
+      box-shadow:0 0 7px rgba(212,182,106,0.30);
+      transform:scale(0.92);
+    }
+    50%{
+      opacity:1;
+      box-shadow:0 0 14px rgba(212,182,106,0.70);
+      transform:scale(1.06);
+    }
   }
   .founder .bio-bullets li strong{
     color:var(--text);
