@@ -3188,6 +3188,78 @@
     filter:saturate(0.95) contrast(1.02);
   }
   .founder-photo:has(img)::after{content:none}
+  /* ===== TEAM ANIMATION (3 avatars online + breathing halo) ===== */
+  .team-anim{
+    display:flex;
+    justify-content:center;
+    margin:-20px auto 50px;
+  }
+  .team-anim-row{
+    display:inline-flex;
+    gap:36px;
+    align-items:center;
+  }
+  .team-avatar{
+    position:relative;
+    width:60px;height:60px;
+    border-radius:50%;
+    background:linear-gradient(135deg,rgba(212,182,106,0.16) 0%,rgba(10,22,40,0.6) 100%);
+    border:1px solid rgba(212,182,106,0.45);
+    display:flex;align-items:center;justify-content:center;
+    font-family:'Inter',sans-serif;
+    font-size:19px;font-weight:800;
+    color:var(--gold);
+    box-shadow:0 0 16px rgba(212,182,106,0.22);
+    animation:teamAvatarBreath 3.6s ease-in-out infinite;
+    will-change:transform,box-shadow;
+  }
+  .team-avatar span{
+    line-height:1;
+  }
+  .team-avatar::after{
+    content:"";
+    position:absolute;
+    bottom:2px;right:2px;
+    width:12px;height:12px;
+    border-radius:50%;
+    background:#5BD16F;
+    box-shadow:0 0 0 2px #0A1628, 0 0 10px rgba(91,209,111,0.65);
+    animation:teamOnlinePulse 2.4s ease-in-out infinite;
+  }
+  .team-avatar:nth-child(2){animation-delay:0.4s}
+  .team-avatar:nth-child(3){animation-delay:0.8s}
+  .team-avatar:nth-child(2)::after{animation-delay:0.5s}
+  .team-avatar:nth-child(3)::after{animation-delay:1s}
+
+  @keyframes teamAvatarBreath{
+    0%, 100%{
+      box-shadow:0 0 12px rgba(212,182,106,0.20);
+      transform:scale(1);
+      border-color:rgba(212,182,106,0.35);
+    }
+    50%{
+      box-shadow:0 0 26px rgba(212,182,106,0.55);
+      transform:scale(1.05);
+      border-color:rgba(212,182,106,0.6);
+    }
+  }
+  @keyframes teamOnlinePulse{
+    0%, 100%{
+      transform:scale(1);
+      box-shadow:0 0 0 2px #0A1628, 0 0 8px rgba(91,209,111,0.55);
+    }
+    50%{
+      transform:scale(1.18);
+      box-shadow:0 0 0 2px #0A1628, 0 0 14px rgba(91,209,111,0.85);
+    }
+  }
+  @media(max-width:600px){
+    .team-anim{margin:-10px auto 36px}
+    .team-anim-row{gap:24px}
+    .team-avatar{width:50px;height:50px;font-size:16px}
+    .team-avatar::after{width:10px;height:10px;bottom:1px;right:1px}
+  }
+
   /* ===== TEAM CAROUSEL ===== */
   .team-carousel{position:relative}
   .team-slides{position:relative}
@@ -6782,7 +6854,15 @@
         <span class="label">L'équipe</span>
         <div class="line"></div>
       </div>
-      <h2>Qui te répond<br><em>quand ça bloque</em></h2>
+      <h2>Une équipe d'experts<br><em>à ton service</em></h2>
+    </div>
+
+    <div class="team-anim reveal" aria-hidden="true">
+      <div class="team-anim-row">
+        <div class="team-avatar"><span>A</span></div>
+        <div class="team-avatar"><span>S</span></div>
+        <div class="team-avatar"><span>A</span></div>
+      </div>
     </div>
 
     <div class="team-carousel reveal">
