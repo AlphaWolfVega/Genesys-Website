@@ -4166,28 +4166,29 @@
     .fork-coda{font-size:12.5px}
   }
 
-  /* Reassurance grid (3 left | divider | 3 right) */
+  /* Reassurance grid (3 left | divider | 3 right) — all items single-line */
   .reassure-grid{
     margin:38px auto 0;
     display:grid;
     grid-template-columns:1fr auto 1fr;
-    gap:0 30px;
-    max-width:580px;
+    column-gap:36px;
+    max-width:720px;
     align-items:stretch;
   }
   .reassure-col{
     display:flex;flex-direction:column;
     justify-content:center;
+    align-items:flex-start;
     gap:14px;
+    text-align:left;
   }
-  .reassure-col:first-child{align-items:flex-start;text-align:left}
-  .reassure-col:last-child{align-items:flex-end;text-align:right}
   .reassure-item{
     font-family:'Inter',sans-serif;
     font-size:11px;color:var(--text-faint);
-    letter-spacing:0.22em;
+    letter-spacing:0.20em;
     text-transform:uppercase;
     display:inline-flex;align-items:center;gap:8px;
+    white-space:nowrap;
   }
   .reassure-col:first-child .reassure-item{flex-direction:row}
   .reassure-col:last-child .reassure-item{flex-direction:row-reverse}
@@ -4211,13 +4212,13 @@
   }
   @media(max-width:600px){
     .reassure-grid{
-      grid-template-columns:1fr auto 1fr;
-      gap:0 14px;
+      column-gap:14px;
       max-width:100%;
-      padding:0 6px;
+      padding:0 4px;
     }
-    .reassure-item{font-size:9.5px;letter-spacing:0.10em;gap:6px}
+    .reassure-item{font-size:8.5px;letter-spacing:0.06em;gap:5px}
     .reassure-item strong{font-size:11px}
+    .reassure-item::before{font-size:10px}
   }
 
   /* ===== FOOTER ===== */
@@ -6880,7 +6881,7 @@
 
               <div class="bio-context">
                 <p>Pas savoir quel produit choisir. Brûler du budget pub sans savoir lire les signaux. Empiler des méthodes qui se contredisent. <strong>C'est de là qu'est née GENESYS.</strong></p>
-                <p>Plusieurs millions d'euros plus tard, à travers plusieurs boutiques sur Shopify (dont <strong>trois encore actives en ce moment</strong>), j'ai distillé tout ce que j'ai appris dans <strong class="protocole-name">le protocole α-QUANTT</strong> : la méthode que tu vas suivre dedans.</p>
+                <p>Plusieurs millions d'euros plus tard, à travers plusieurs boutiques sur Shopify (dont <strong>trois encore actives en ce moment</strong>), j'ai distillé tout ce que j'ai appris dans <strong class="protocole-name">le protocole α-QUANTT</strong> : la méthode que tu vas suivre dans le Skool GENESYS.</p>
               </div>
 
               <div class="bio-section-title">Mon rôle dans GENESYS</div>
