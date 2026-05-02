@@ -1006,19 +1006,28 @@
     .hl-vraie-list{margin:0 0 16px 0 !important;gap:7px !important}
     .hl-vraie-list li{font-size:11.5px !important;line-height:1.4 !important;padding-left:20px !important}
     .hl-vraie-list li::before{font-size:14px !important;width:14px !important}
-    .hl-vraie-verdict-wrap{display:flex;justify-content:center;width:100%;margin:0}
+    .hl-vraie-verdict-wrap{display:flex;justify-content:center;width:100%;margin:14px 0 4px}
     .hl-vraie-bridge-bot{
       font-family:'Playfair Display',serif;
       font-size:14.5px;font-weight:600;
       text-align:center;margin:0 !important;
       line-height:1.35;letter-spacing:0.005em;
       display:inline-block;
-      padding:9px 22px;
-      border:1.5px solid rgba(212,182,106,0.55);
-      border-radius:7px;
-      background:linear-gradient(180deg,rgba(212,182,106,0.05) 0%,rgba(212,182,106,0.02) 100%);
+      padding:14px 28px;
+      border:1.5px solid rgba(212,182,106,0.7);
+      border-radius:10px;
+      background:linear-gradient(180deg,rgba(212,182,106,0.1) 0%,rgba(212,182,106,0.035) 100%);
       transform-origin:center;
       animation:hlVerdictBreathe 2s cubic-bezier(0.4,0,0.6,1) infinite;
+      position:relative;
+    }
+    .hl-vraie-bridge-bot::before{
+      content:"";
+      position:absolute;top:-1.5px;left:50%;
+      transform:translateX(-50%);
+      width:62%;height:2px;
+      background:linear-gradient(90deg,transparent,var(--gold),transparent);
+      pointer-events:none;
     }
     /* Texte metallique : gradient or → blanc → or qui traverse le texte (background-clip:text) */
     .hl-vraie-bridge-bot em{
@@ -1907,7 +1916,7 @@
     .hl-vraie-list{margin-bottom:14px !important;gap:6px !important}
     .hl-vraie-list li{font-size:11px !important;line-height:1.4 !important;padding-left:18px !important}
     .hl-vraie-list li::before{font-size:14px !important;width:13px !important}
-    .hl-vraie-bridge-bot{font-size:13.5px !important;padding:8px 18px !important}
+    .hl-vraie-bridge-bot{font-size:13.5px !important;padding:12px 24px !important}
 
     /* Continue arrow on last slide — gentle bounce + halo pulse (page scroll-down) */
     .hero-lead-down{
