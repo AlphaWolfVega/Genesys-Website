@@ -1,0 +1,811 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<title>GENESYS — Carrousel Hero refonte cohérence V4-C (6 slides)</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0a1628;
+    --bg-deep:#06101e;
+    --gold:#D4B66A;
+    --gold-soft:#E5CB85;
+    --gold-faded:rgba(212,182,106,0.22);
+    --text:#e8eaee;
+    --text-dim:#a8b0bd;
+    --red-warn:#E07A6E;
+    --red-strong:#FF6B5C;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{overflow-x:clip;max-width:100vw}
+  body{
+    background:radial-gradient(ellipse at top, #14253f 0%, var(--bg) 50%, var(--bg-deep) 100%);
+    color:var(--text);
+    font-family:'Inter',sans-serif;
+    min-height:100vh;
+    padding:32px 16px 80px;
+  }
+
+  /* === HEADER === */
+  .page-header{max-width:980px;margin:0 auto 36px;text-align:center}
+  .page-header h1{
+    font-family:'Playfair Display',serif;font-size:26px;
+    color:var(--gold);font-weight:700;margin-bottom:12px;line-height:1.2;
+  }
+  .page-header p{font-size:14px;line-height:1.6;color:var(--text-dim);max-width:720px;margin:0 auto}
+  .page-header strong{color:var(--gold)}
+  .page-header .arc-line{
+    display:flex;justify-content:center;flex-wrap:wrap;gap:6px;
+    margin-top:18px;font-size:11px;color:var(--text-dim);
+  }
+  .page-header .arc-line span{
+    background:rgba(212,182,106,0.1);border:1px solid var(--gold-faded);
+    padding:4px 10px;border-radius:4px;
+  }
+  .page-header .arc-line span strong{color:var(--gold)}
+
+  /* === PHONE PREVIEW === */
+  .phone-frame{
+    max-width:420px;margin:0 auto;
+    background:linear-gradient(180deg,#1c2c4a,#0d1a2f);
+    border-radius:36px;
+    padding:14px 10px 18px;
+    box-shadow:0 30px 80px rgba(0,0,0,0.5),0 0 0 2px rgba(212,182,106,0.15);
+    position:relative;
+  }
+  .phone-frame::before{
+    content:"";display:block;width:60px;height:5px;
+    background:rgba(255,255,255,0.18);border-radius:3px;
+    margin:0 auto 14px;
+  }
+
+  .carousel-wrap{
+    position:relative;
+    background:transparent;
+    border-radius:24px;
+    overflow:hidden;
+  }
+  .carousel-track{
+    display:flex;
+    transition:transform 0.45s cubic-bezier(0.22,1,0.36,1);
+    will-change:transform;
+  }
+  .carousel-slide{
+    flex:0 0 100%;width:100%;
+    padding:6px;
+  }
+
+  /* === HERO LEAD CARD (mimic prod) === */
+  .hero-lead-card{
+    width:100%;
+    background:linear-gradient(135deg,rgba(20,37,64,0.55) 0%,rgba(10,22,40,0.32) 100%);
+    border:1px solid var(--gold-faded);
+    border-radius:16px;
+    padding:24px 20px;
+    min-height:480px;
+    display:flex;flex-direction:column;justify-content:center;align-items:center;
+    text-align:center;
+    box-shadow:0 8px 28px rgba(0,0,0,0.28);
+    position:relative;
+  }
+
+  .hero-lead-downhint{
+    display:flex;flex-direction:column;align-items:center;gap:0;
+    margin:-4px 0 12px;color:rgba(212,182,106,0.7);
+  }
+  .hero-lead-downhint svg{width:18px;height:18px;display:block;margin-top:-5px;animation:downhint 1.6s ease-in-out infinite}
+  .hero-lead-downhint svg:nth-child(2){animation-delay:0.18s;opacity:0.55}
+  @keyframes downhint{
+    0%,100%{transform:translateY(0);opacity:0.85}
+    50%{transform:translateY(5px);opacity:0.35}
+  }
+
+  .hl-pretitle{
+    font-size:10.5px;font-weight:700;letter-spacing:0.22em;
+    text-transform:uppercase;color:var(--gold);opacity:0.85;
+    margin-bottom:6px;display:block;
+  }
+  .hl-pretitle-divider{
+    display:block;width:48px;height:1.5px;
+    background:linear-gradient(90deg,transparent,var(--gold),transparent);
+    margin:0 auto 14px;
+  }
+  .hero-lead-intro-p{
+    font-size:13px;line-height:1.55;color:var(--text);font-weight:400;
+    margin:0 0 14px;
+  }
+  .hero-lead-card strong{color:var(--gold);font-weight:700}
+
+  /* === SWIPE HINT === */
+  .hero-lead-swipe{
+    display:inline-flex;margin-top:14px;
+    color:rgba(212,182,106,0.55);
+    animation:swipe 1.8s ease-in-out infinite;
+  }
+  .hero-lead-swipe svg{width:18px;height:18px;display:block}
+  @keyframes swipe{
+    0%,100%{transform:translateX(0);opacity:0.55}
+    50%{transform:translateX(6px);opacity:1}
+  }
+
+  /* ============================================ */
+  /* SLIDE 1 — V4-C (3 profils)                   */
+  /* ============================================ */
+  .hl-profiles{
+    display:flex;flex-direction:column;gap:8px;
+    width:100%;margin:0 0 8px;
+  }
+  .hl-profile{
+    display:flex;align-items:center;gap:10px;
+    padding:10px 12px;
+    border:1px solid var(--gold-faded);border-radius:10px;
+    background:rgba(20,37,64,0.42);text-align:left;
+  }
+  .hl-profile-icon{
+    flex:0 0 32px;width:32px;height:32px;
+    display:flex;align-items:center;justify-content:center;
+    color:var(--gold);
+  }
+  .hl-profile-icon svg{width:24px;height:24px}
+  .hl-profile-text{font-size:12px;line-height:1.4;color:var(--text);flex:1}
+  .hl-profile-text strong{color:var(--gold)}
+  .hero-lead-shopify{display:flex;justify-content:center;margin-top:8px}
+  .hero-lead-shopify svg{
+    width:36px;height:auto;display:block;
+    animation:shopifyPulse 2.6s ease-in-out infinite;
+    filter:drop-shadow(0 0 12px rgba(212,182,106,0.4));
+  }
+  @keyframes shopifyPulse{
+    0%,100%{transform:scale(1) rotate(0deg)}
+    50%{transform:scale(1.08) rotate(-3deg)}
+  }
+
+  /* ============================================ */
+  /* SLIDE 2 — Réalité du marché                  */
+  /* ============================================ */
+  .s2-warning{
+    font-size:10.5px;font-weight:700;letter-spacing:0.22em;
+    text-transform:uppercase;color:var(--red-warn);
+    margin-bottom:14px;display:block;
+  }
+  .s2-bignum{
+    font-family:'Playfair Display',serif;font-style:italic;
+    font-size:72px;line-height:1;color:var(--red-strong);font-weight:700;
+    margin-bottom:6px;
+    text-shadow:0 0 24px rgba(255,107,92,0.4);
+    animation:numPulse 2.4s ease-in-out infinite;
+  }
+  @keyframes numPulse{
+    0%,100%{transform:scale(1);text-shadow:0 0 24px rgba(255,107,92,0.4)}
+    50%{transform:scale(1.04);text-shadow:0 0 36px rgba(255,107,92,0.6)}
+  }
+  .s2-bignum-sub{
+    font-size:13px;color:var(--text);line-height:1.45;margin-bottom:14px;
+  }
+  .s2-bignum-sub strong{color:var(--gold)}
+  .s2-divider{
+    width:48px;height:1px;
+    background:linear-gradient(90deg,transparent,var(--gold-faded),transparent);
+    margin:6px auto 12px;
+  }
+  .s2-factors{
+    display:flex;flex-direction:column;gap:6px;width:100%;margin:8px 0;
+  }
+  .s2-factor{
+    display:flex;align-items:center;gap:10px;
+    padding:8px 10px;
+    background:rgba(20,37,64,0.4);
+    border:1px solid var(--gold-faded);border-radius:8px;
+    font-size:11.5px;color:var(--text);text-align:left;
+  }
+  .s2-factor-icon{
+    flex:0 0 22px;width:22px;height:22px;
+    color:var(--red-warn);display:flex;align-items:center;justify-content:center;
+  }
+  .s2-factor-icon svg{width:18px;height:18px}
+  .s2-factor strong{color:var(--gold)}
+  .s2-closing{
+    font-size:12.5px;color:var(--text-dim);font-style:italic;
+    margin-top:10px;
+  }
+  .s2-closing strong{color:var(--gold);font-style:normal;font-weight:600}
+
+  /* ============================================ */
+  /* SLIDE 3 — Tu tournes en rond (infinity)      */
+  /* ============================================ */
+  .hl-infinity-loop{width:140px;height:65px;margin:0 auto 14px}
+  .hl-spin-text{font-size:13px;line-height:1.55;color:var(--text);margin-bottom:10px}
+  .hl-spin-text strong{color:var(--gold);font-weight:600}
+  .hl-spin-dots{
+    display:inline-block;color:var(--gold);
+    animation:spinDots 1.4s ease-in-out infinite;
+  }
+  @keyframes spinDots{0%,100%{opacity:0.4}50%{opacity:1}}
+  .hl-gold-hr{
+    border:0;width:60%;height:1px;
+    background:linear-gradient(90deg,transparent,var(--gold),transparent);
+    margin:10px auto;
+  }
+  .hl-spin-before{
+    font-size:10.5px;font-weight:700;letter-spacing:0.22em;
+    color:var(--gold);text-transform:uppercase;margin-bottom:4px;
+  }
+  .hl-spin-tease{font-size:12px;color:var(--text-dim);font-style:italic}
+
+  /* ============================================ */
+  /* SLIDE 4 — Diagnostic interactif              */
+  /* ============================================ */
+  .s4-headline{
+    font-family:'Playfair Display',serif;font-style:italic;font-weight:400;
+    font-size:20px;color:var(--gold);margin-bottom:6px;line-height:1.2;
+  }
+  .s4-sub{
+    font-size:11.5px;color:var(--text-dim);margin-bottom:14px;
+    line-height:1.4;
+  }
+  .s4-tap-prompt{
+    display:flex;align-items:center;justify-content:center;gap:6px;
+    font-size:10px;font-weight:700;letter-spacing:0.16em;
+    text-transform:uppercase;color:var(--gold);
+    margin-bottom:10px;
+    animation:tapBlink 2s ease-in-out infinite;
+  }
+  .s4-tap-prompt svg{width:12px;height:12px}
+  @keyframes tapBlink{0%,100%{opacity:0.7}50%{opacity:1}}
+
+  .s4-grid{
+    display:grid;grid-template-columns:repeat(2,1fr);gap:6px;width:100%;margin-bottom:8px;
+  }
+  .s4-step{
+    background:rgba(20,37,64,0.5);
+    border:1px solid var(--gold-faded);border-radius:8px;
+    padding:8px 6px;cursor:pointer;
+    transition:all 0.3s ease;
+    display:flex;flex-direction:column;align-items:center;gap:4px;
+    color:var(--text);font-size:10.5px;line-height:1.25;
+    text-align:center;font-weight:500;
+    user-select:none;
+  }
+  .s4-step:active{transform:scale(0.97)}
+  .s4-step svg{width:18px;height:18px;color:var(--gold)}
+  .s4-step.is-active{
+    background:linear-gradient(135deg,rgba(212,182,106,0.35),rgba(212,182,106,0.18));
+    border-color:var(--gold);
+    box-shadow:0 0 18px rgba(212,182,106,0.45);
+    color:#fff;
+  }
+  .s4-step.is-active svg{color:var(--gold-soft)}
+  .s4-step.is-dimmed{
+    opacity:0.28;filter:saturate(0.5);
+  }
+  .s4-step-num{
+    position:absolute;font-size:0;
+  }
+
+  .s4-fallback{
+    width:100%;
+    background:rgba(20,37,64,0.4);
+    border:1px dashed var(--gold-faded);border-radius:8px;
+    padding:9px 10px;cursor:pointer;
+    transition:all 0.3s ease;
+    display:flex;align-items:center;justify-content:center;gap:8px;
+    color:var(--text-dim);font-size:10.5px;line-height:1.3;
+    margin-bottom:10px;user-select:none;
+  }
+  .s4-fallback svg{width:16px;height:16px}
+  .s4-fallback.is-active{
+    background:linear-gradient(135deg,rgba(212,182,106,0.25),rgba(212,182,106,0.12));
+    border-style:solid;border-color:var(--gold);
+    color:var(--text);
+    box-shadow:0 0 14px rgba(212,182,106,0.3);
+  }
+  .s4-fallback.is-dimmed{opacity:0.28;filter:saturate(0.5)}
+
+  .s4-verdict{
+    width:100%;background:rgba(212,182,106,0.08);
+    border-left:3px solid var(--gold);border-radius:0 8px 8px 0;
+    padding:10px 12px;text-align:left;
+    font-size:11.5px;line-height:1.5;color:var(--text);
+    min-height:0;max-height:0;overflow:hidden;opacity:0;
+    transition:max-height 0.4s ease,opacity 0.3s ease,padding 0.4s ease,margin 0.4s ease;
+    margin-top:0;
+  }
+  .s4-verdict.is-visible{
+    max-height:200px;opacity:1;padding:10px 12px;margin-top:6px;
+  }
+  .s4-verdict strong{color:var(--gold)}
+
+  /* ============================================ */
+  /* SLIDE 5 — 15 vraies raisons                  */
+  /* ============================================ */
+  .s5-trajectory{
+    width:100%;height:60px;margin-bottom:10px;position:relative;
+  }
+  .s5-headline{
+    font-family:'Playfair Display',serif;font-style:italic;font-weight:700;
+    font-size:20px;color:var(--gold);margin-bottom:4px;line-height:1.2;
+  }
+  .s5-sub{font-size:11px;color:var(--text-dim);margin-bottom:10px}
+  .s5-list{
+    list-style:none;padding:0;margin:0 0 8px;
+    text-align:left;width:100%;
+  }
+  .s5-list li{
+    font-size:10.5px;line-height:1.5;color:var(--text);
+    padding:3px 0 3px 18px;position:relative;
+  }
+  .s5-list li::before{
+    content:"✕";position:absolute;left:0;top:3px;
+    color:var(--red-warn);font-weight:700;font-size:10px;
+  }
+  .s5-bridge{
+    font-size:13px;color:var(--gold);font-weight:600;font-style:italic;
+    margin-top:8px;
+  }
+
+  /* ============================================ */
+  /* SLIDE 6 — Solution + offer                   */
+  /* ============================================ */
+  .s6-kicker{
+    font-size:10.5px;font-weight:700;letter-spacing:0.22em;
+    color:var(--gold);text-transform:uppercase;margin-bottom:10px;display:block;
+  }
+  .s6-cta-headline{
+    font-size:13px;color:var(--text);line-height:1.55;margin-bottom:12px;
+  }
+  .s6-cta-headline strong{color:var(--gold);font-weight:700}
+  .s6-protocol{
+    font-family:'Playfair Display',serif;font-style:italic;font-weight:400;
+    font-size:22px;color:var(--gold);margin:6px 0 4px;line-height:1.2;
+  }
+  .s6-price-line{
+    font-size:14px;color:var(--text);margin-bottom:14px;
+  }
+  .s6-price-line strong{color:var(--gold);font-weight:700}
+  .s6-pillars{
+    display:grid;grid-template-columns:repeat(2,1fr);gap:6px;width:100%;margin:6px 0 12px;
+  }
+  .s6-pillar{
+    background:rgba(20,37,64,0.5);border:1px solid var(--gold-faded);
+    border-radius:8px;padding:8px 6px;
+    font-size:10px;color:var(--text);line-height:1.3;text-align:center;
+  }
+  .s6-pillar svg{width:16px;height:16px;color:var(--gold);display:block;margin:0 auto 4px}
+  .s6-pillar strong{color:var(--gold);font-weight:700;display:block;margin-bottom:2px;font-size:10.5px}
+  .s6-cta-btn{
+    display:inline-block;
+    background:linear-gradient(135deg,var(--gold),#A88838);
+    color:var(--bg-deep);font-weight:700;font-size:12px;
+    padding:10px 22px;border-radius:8px;
+    text-decoration:none;letter-spacing:0.04em;
+    box-shadow:0 4px 14px rgba(212,182,106,0.4);
+    margin-top:6px;
+  }
+  .s6-fine{
+    font-size:10px;color:var(--text-dim);margin-top:8px;
+    line-height:1.4;
+  }
+
+  /* ============================================ */
+  /* CONTROLS — dots + arrows                     */
+  /* ============================================ */
+  .carousel-controls{
+    display:flex;align-items:center;justify-content:center;gap:10px;
+    margin-top:14px;
+  }
+  .carousel-arrow{
+    width:36px;height:36px;border-radius:50%;
+    background:linear-gradient(180deg,rgba(212,182,106,0.2),rgba(212,182,106,0.08));
+    border:1px solid rgba(212,182,106,0.45);color:var(--gold);
+    cursor:pointer;display:flex;align-items:center;justify-content:center;
+    transition:transform 0.18s,background 0.25s;
+  }
+  .carousel-arrow:hover{
+    background:linear-gradient(180deg,rgba(212,182,106,0.36),rgba(212,182,106,0.16));
+    transform:scale(1.06);
+  }
+  .carousel-arrow:active{transform:scale(0.94)}
+  .carousel-arrow svg{width:16px;height:16px}
+  .carousel-arrow:disabled{opacity:0.3;cursor:default}
+
+  .carousel-dots{
+    display:flex;gap:6px;align-items:center;
+  }
+  .carousel-dot{
+    width:7px;height:7px;border-radius:50%;
+    background:rgba(212,182,106,0.32);
+    border:0;padding:0;cursor:pointer;
+    transition:width 0.3s,background 0.3s,border-radius 0.3s;
+  }
+  .carousel-dot.active{
+    width:24px;border-radius:3px;background:var(--gold);
+  }
+
+  /* === FOOTER NOTES === */
+  .page-footer{
+    max-width:980px;margin:50px auto 0;padding-top:30px;
+    border-top:1px solid var(--gold-faded);
+  }
+  .page-footer h3{
+    font-family:'Playfair Display',serif;font-size:18px;color:var(--gold);
+    margin-bottom:14px;text-align:center;
+  }
+  .page-footer ol{
+    max-width:720px;margin:0 auto;padding-left:24px;
+    font-size:13px;color:var(--text-dim);line-height:1.7;
+  }
+  .page-footer ol li{margin-bottom:8px}
+  .page-footer ol li strong{color:var(--gold)}
+  .page-footer .verdict{
+    text-align:center;margin-top:24px;font-size:12.5px;color:var(--text-dim);
+    font-style:italic;
+  }
+</style>
+</head>
+<body>
+
+<header class="page-header">
+  <h1>Carrousel Hero — Refonte cohérente A→Z (6 slides)</h1>
+  <p>
+    Tous les slides reconstruits pour <strong>raconter une histoire continue</strong> à partir des 3 profils V4-C.
+    Le viewer entre dans le carrousel, traverse 6 étapes psychologiques, et arrive sur l'offre dans un état de "j'ai besoin de ça".
+  </p>
+  <div class="arc-line">
+    <span><strong>1</strong> Identification</span>
+    <span><strong>2</strong> Légitimation</span>
+    <span><strong>3</strong> Pivot émotionnel</span>
+    <span><strong>4</strong> Diagnostic interactif</span>
+    <span><strong>5</strong> Causes profondes</span>
+    <span><strong>6</strong> Solution + Offer</span>
+  </div>
+</header>
+
+<div class="phone-frame">
+  <div class="carousel-wrap">
+    <div class="carousel-track" id="track">
+
+      <!-- ============= SLIDE 1 — V4-C ============= -->
+      <div class="carousel-slide">
+        <div class="hero-lead-card">
+          <div class="hero-lead-downhint">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+          </div>
+          <span class="hl-pretitle">Avant d'aller plus loin</span>
+          <span class="hl-pretitle-divider"></span>
+          <p class="hero-lead-intro-p">Soyons honnêtes 5 secondes :<br>Si tu es sur cette page,<br>c'est probablement que :</p>
+          <div class="hl-profiles">
+            <div class="hl-profile">
+              <div class="hl-profile-icon"><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="6,4 6,20 20,12"/></svg></div>
+              <div class="hl-profile-text">Tu consommes du <strong>contenu e-com gratuit</strong> mais tu ne passes jamais à l'action.</div>
+            </div>
+            <div class="hl-profile">
+              <div class="hl-profile-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="3" width="16" height="18" rx="2"/><line x1="8" y1="8" x2="16" y2="8"/><line x1="8" y1="12" x2="16" y2="12"/><line x1="8" y1="16" x2="13" y2="16"/></svg></div>
+              <div class="hl-profile-text">Tu as testé des <strong>formations payantes / mentorings</strong> mais ça n'a rien donné.</div>
+            </div>
+            <div class="hl-profile">
+              <div class="hl-profile-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3,6 9,14 13,10 21,18"/><polyline points="14,18 21,18 21,11"/></svg></div>
+              <div class="hl-profile-text">Tu as <strong>lancé une boutique ou plusieurs</strong>, mais aucune ne décolle.</div>
+            </div>
+          </div>
+          <div class="hero-lead-shopify">
+            <svg viewBox="0 0 109 124" xmlns="http://www.w3.org/2000/svg"><path fill="#D4B66A" d="M74.7 14.8c-.1-.5-.5-.7-.8-.8-.3 0-6.7-.5-6.7-.5s-4.5-4.4-4.9-4.9c-.5-.5-1.4-.3-1.7-.2-.1 0-1 .3-2.5.8C56.5 5.8 54.4 2 50.5 2c-.1 0-.3 0-.4.1-.1-.2-.2-.3-.4-.5-1.2-1.3-2.7-1.9-4.5-1.9-3.5.1-7 2.6-9.8 7-2 3.1-3.6 7-4 10.1-4.1 1.3-7 2.2-7.1 2.2-2.3.7-2.4.8-2.7 3-.2 1.6-6.2 47.9-6.2 47.9l46.6 8.7 25.3-5.5c-.1-.1-13-67.5-13-67.5zM57.6 9.7c-1.2.4-2.6.8-4.1 1.3 0-2.1-.3-5-1.2-7.5 3 .6 4.5 4 5.3 6.2zM50 11.9c-2.8.9-5.8 1.8-8.8 2.7.9-3.3 2.5-6.5 4.6-8.7.7-.8 1.8-1.7 3-2.2 1.2 2.4 1.4 5.8 1.2 8.2zm-4.4-12c1 0 1.8.2 2.5.7-1.2.6-2.4 1.5-3.5 2.7-2.7 2.9-4.7 7.4-5.6 11.7-2.4.7-4.8 1.5-7 2.2C33.4 9.7 39 .1 45.6-.1z"/><path fill="#FFFFFF" d="M73.9 14c-.3 0-6.7-.5-6.7-.5s-4.5-4.4-4.9-4.9c-.2-.2-.4-.3-.7-.3l-3.5 71.8 25.3-5.5s-13-67.5-13-67.5c-.1-.6-.5-.9-1-1z"/><path fill="#0A1628" d="M50.2 27.2 47.3 36s-2.7-1.4-5.9-1.2c-4.7.3-4.8 3.2-4.7 4 .3 4.1 11 5 11.6 14.5.5 7.5-3.9 12.6-10.3 13-7.6.5-11.8-4-11.8-4l1.6-6.9s4.2 3.2 7.6 3c2.2-.1 3-1.9 2.9-3.2-.3-5.3-9.1-5-9.7-13.7-.4-7.3 4.4-14.7 15-15.4 4.1-.3 6.6.7 6.6.7z"/></svg>
+          </div>
+          <span class="hero-lead-swipe"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg></span>
+        </div>
+      </div>
+
+      <!-- ============= SLIDE 2 — Réalité du marché ============= -->
+      <div class="carousel-slide">
+        <div class="hero-lead-card">
+          <span class="s2-warning">⚠ La réalité du marché</span>
+          <div class="s2-bignum">9/10</div>
+          <div class="s2-bignum-sub">
+            des nouvelles boutiques e-com<br>
+            ferment dans les <strong>4 premiers mois</strong>.
+          </div>
+          <div class="s2-divider"></div>
+          <p style="font-size:12px;color:var(--text-dim);margin-bottom:8px;line-height:1.5">
+            <strong style="color:var(--gold)">Tu n'es pas seul à galérer.</strong><br>
+            Tu joues juste avec les mauvaises cartes.
+          </p>
+          <div class="s2-factors">
+            <div class="s2-factor">
+              <div class="s2-factor-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><polyline points="3,17 9,11 13,15 21,7"/><polyline points="14,7 21,7 21,14"/></svg></div>
+              <span><strong>×3</strong> sur les CPM Meta depuis 2020</span>
+            </div>
+            <div class="s2-factor">
+              <div class="s2-factor-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 3v18M7 3v18"/><circle cx="12" cy="12" r="2"/></svg></div>
+              <span><strong>23+</strong> formateurs FR qui se contredisent</span>
+            </div>
+            <div class="s2-factor">
+              <div class="s2-factor-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v6M12 16v6M2 12h6M16 12h6"/></svg></div>
+              <span><strong>1500–5000 €</strong> de mentoring sans suivi</span>
+            </div>
+          </div>
+          <p class="s2-closing">
+            Le problème, ce n'est plus l'info.<br>
+            <strong>C'est le chaos qui l'entoure.</strong>
+          </p>
+          <span class="hero-lead-swipe"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg></span>
+        </div>
+      </div>
+
+      <!-- ============= SLIDE 3 — Tu tournes en rond ============= -->
+      <div class="carousel-slide">
+        <div class="hero-lead-card">
+          <p style="font-size:11px;font-weight:700;letter-spacing:0.22em;color:var(--gold);text-transform:uppercase;margin-bottom:10px">Du coup,</p>
+          <div class="hl-infinity-loop">
+            <svg viewBox="0 0 280 130" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <path id="hlInfPath" pathLength="100" d="M 200 65 C 200 35, 165 35, 140 65 C 115 95, 80 95, 80 65 C 80 35, 115 35, 140 65 C 165 95, 200 95, 200 65 Z"/>
+              </defs>
+              <use href="#hlInfPath" fill="none" stroke="#D4B66A" stroke-width="1.4" stroke-dasharray="0.6 1" opacity="0.3"/>
+              <use href="#hlInfPath" fill="none" stroke="#E5CB85" stroke-width="2.8" stroke-linecap="round" stroke-dasharray="35 65" opacity="0.95">
+                <animate attributeName="stroke-dashoffset" from="0" to="-100" dur="3s" calcMode="linear" repeatCount="indefinite"/>
+              </use>
+            </svg>
+          </div>
+          <p class="hl-spin-text">
+            <strong>Tu tournes en rond</strong><span class="hl-spin-dots">...</span><br>
+            tu retombes dans les <strong>mêmes pièges</strong><span class="hl-spin-dots">...</span><br>
+            tu n'arrives pas à <strong>décoller</strong><span class="hl-spin-dots">...</span><br>
+            et tu commences à douter de toi.
+          </p>
+          <hr class="hl-gold-hr">
+          <p class="hl-spin-before">MAIS&nbsp;CE&nbsp;N'EST&nbsp;PAS&nbsp;UNE&nbsp;FATALITÉ</p>
+          <p class="hl-spin-tease">Avant de te montrer la solution,<br>regardons où tu es exactement.</p>
+          <span class="hero-lead-swipe"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg></span>
+        </div>
+      </div>
+
+      <!-- ============= SLIDE 4 — Diagnostic interactif ============= -->
+      <div class="carousel-slide">
+        <div class="hero-lead-card">
+          <span class="hl-pretitle">Diagnostic 30 secondes</span>
+          <span class="hl-pretitle-divider"></span>
+          <h3 class="s4-headline">Où es-tu coincé exactement&nbsp;?</h3>
+          <p class="s4-sub">Le cycle classique des e-commerçants bloqués.<br>Clique sur ton étape actuelle.</p>
+          <div class="s4-tap-prompt">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14"/><path d="m19 12-7 7-7-7"/></svg>
+            <span>Clique sur ton étape</span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14"/><path d="m19 12-7 7-7-7"/></svg>
+          </div>
+          <div class="s4-grid" id="s4Grid">
+            <button class="s4-step" data-step="1" data-verdict="<strong>Étape 1 — Tu consommes.</strong> Tu accumules de l'info sans cadre. Sans système, le contenu gratuit reste un divertissement, pas une formation. Voilà pourquoi tu ne passes pas à l'action.">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 8s2-2 4-2 4 2 4 2-2 2-4 2-4-2-4-2z"/><circle cx="6" cy="8" r="1"/><path d="M14 8s2-2 4-2 4 2 4 2-2 2-4 2-4-2-4-2z"/><circle cx="18" cy="8" r="1"/><path d="M3 17h18"/></svg>
+              Tu regardes du<br>contenu YouTube
+            </button>
+            <button class="s4-step" data-step="2" data-verdict="<strong>Étape 2 — Tu cherches LE produit gagnant.</strong> Tu passes des heures sur AdSpy/Minea/Pinterest. Sans méthode de validation, tu choisis à l'instinct. 80% des produits que tu testes meurent à la première pub.">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><line x1="20" y1="20" x2="16" y2="16"/></svg>
+              Tu cherches<br>LE produit gagnant
+            </button>
+            <button class="s4-step" data-step="3" data-verdict="<strong>Étape 3 — Tu construis ta boutique.</strong> Theme Shopify, copy traduit du concurrent US, design trop chargé. Tu confonds construction et conversion. Une boutique qui ne vend pas, c'est une vitrine qui ne convertit pas.">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12V6a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v6"/><path d="M3 12l9-5 9 5"/><path d="M5 16h14M5 20h14"/></svg>
+              Tu construis<br>ta boutique
+            </button>
+            <button class="s4-step" data-step="4" data-verdict="<strong>Étape 4 — Tu lances tes premières pubs.</strong> 3 créatives, budget timide, audience large copiée d'un YouTube. Tu coupes au bout de 24h en panique. Tu ne sais pas lire les métriques, donc tout te semble mauvais.">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l18-8-3 18-7-7z"/><path d="M11 14l-3 7"/></svg>
+              Tu lances<br>tes premières pubs
+            </button>
+            <button class="s4-step" data-step="5" data-verdict="<strong>Étape 5 — Pas de ventes.</strong> Tu blâmes Meta, l'algo, le marché. La vraie raison : ton angle est faible, ta créative ressemble à 100 autres, ta page produit n'a pas de hook. Tu vends comme tout le monde — donc personne n'achète.">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="8" y1="15" x2="16" y2="15"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/></svg>
+              Pas de ventes<br>(silence radio)
+            </button>
+            <button class="s4-step" data-step="6" data-verdict="<strong>Étape 6 — Tu changes de produit.</strong> Au lieu de corriger ton angle ou ton hook, tu repars de zéro avec un autre produit. Tu confonds problème de produit et problème de présentation. Tu jettes 80% du travail à chaque pivot.">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 0 1 14.5-7L21 8"/><path d="M21 3v5h-5"/><path d="M21 12a9 9 0 0 1-14.5 7L3 16"/><path d="M3 21v-5h5"/></svg>
+              Tu changes<br>de produit
+            </button>
+            <button class="s4-step" data-step="7" data-verdict="<strong>Étape 7 — Tu perds de l'argent.</strong> Pubs payées, stocks invendus, abonnements Shopify/apps qui s'accumulent. Tu n'as pas calculé ton seuil de rentabilité avant de lancer. Chaque jour qui passe = perte qui grossit.">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+              Tu perds<br>de l'argent
+            </button>
+            <button class="s4-step" data-step="8" data-verdict="<strong>Étape 8 — Tu doutes.</strong> Tu te demandes si t'es fait pour ça. Si l'e-com c'est mort. Si t'aurais pas dû rester salarié. C'est l'étape la plus dangereuse — pas parce que tu vas abandonner, mais parce que tu vas tout recommencer dans 6 mois sans rien changer.">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+              Tu doutes<br>de toi
+            </button>
+          </div>
+          <button class="s4-fallback" id="s4Fallback" data-verdict="<strong>Tu es plus avancé(e).</strong> Tu fais déjà du chiffre mais tu plafonnes. Le problème n'est plus l'apprentissage — c'est l'optimisation. GENESYS te parle aussi : on a un module dédié au scaling et aux paliers 5K → 50K €/mois.">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/></svg>
+            <span>Je ne me reconnais dans aucune de ces étapes</span>
+          </button>
+          <div class="s4-verdict" id="s4Verdict"></div>
+          <span class="hero-lead-swipe"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg></span>
+        </div>
+      </div>
+
+      <!-- ============= SLIDE 5 — 15 vraies raisons ============= -->
+      <div class="carousel-slide">
+        <div class="hero-lead-card">
+          <div class="s5-trajectory">
+            <svg viewBox="0 0 280 60" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%">
+              <defs>
+                <linearGradient id="s5Grad" x1="0%" y1="0%" x2="100%" y2="0%">
+                  <stop offset="0%" stop-color="#D4B66A"/>
+                  <stop offset="60%" stop-color="#E5CB85"/>
+                  <stop offset="100%" stop-color="#FF6B5C"/>
+                </linearGradient>
+              </defs>
+              <path d="M 10 50 Q 80 40 130 25 T 200 12 L 220 18 L 250 50" fill="none" stroke="url(#s5Grad)" stroke-width="2.4" stroke-linecap="round"/>
+              <circle cx="250" cy="50" r="5" fill="#FF6B5C">
+                <animate attributeName="r" values="4;7;4" dur="1.6s" repeatCount="indefinite"/>
+              </circle>
+            </svg>
+          </div>
+          <h3 class="s5-headline">Les vraies raisons<br>de tes échecs</h3>
+          <p class="s5-sub">Ce que personne ne te dit clairement :</p>
+          <ul class="s5-list">
+            <li>Tu choisis tes produits à l'instinct, sans méthode</li>
+            <li>Tu lances sans calculer ton espérance de gain</li>
+            <li>Tu coupes une pub au bout de 24h en panique</li>
+            <li>Tu doubles ton budget dès que ça marche</li>
+            <li>Tu ne fixes aucun stop-loss avant de lancer</li>
+            <li>Tu copies tes concurrents au lieu de les décoder</li>
+            <li>Tu lances 3 créatives par produit, jamais 12</li>
+            <li>Tu ne tiens aucun journal de tes paris</li>
+            <li>Tu changes de produit toutes les 2 semaines</li>
+            <li>Tu suis 10 formations qui se contredisent</li>
+            <li>Tu blâmes Meta quand ta créative est mauvaise</li>
+            <li>Tu confonds chiffre d'affaires et bénéfice réel</li>
+            <li>Tu zappes la phase de validation et passes au scaling</li>
+            <li>Tu testes la couleur du bouton avant de revoir ton hero</li>
+            <li>Tu cherches un produit gagnant, pas une offre gagnante</li>
+          </ul>
+          <p class="s5-bridge">Voilà pourquoi tu tournes en rond.</p>
+          <span class="hero-lead-swipe"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg></span>
+        </div>
+      </div>
+
+      <!-- ============= SLIDE 6 — Solution + offer ============= -->
+      <div class="carousel-slide">
+        <div class="hero-lead-card">
+          <span class="s6-kicker">Soyons clair</span>
+          <p class="s6-cta-headline">
+            Si tu t'es reconnu(e) dans <strong>une ou plusieurs</strong> des situations précédentes, et que tu es prêt(e) à <strong>sortir du cycle</strong>, voici la solution :
+          </p>
+          <div class="s6-protocol">Le Protocole α-QUANTT</div>
+          <p class="s6-price-line">dans <strong>GENESYS</strong>, à <strong>49 $/mois</strong>.</p>
+          <div class="s6-pillars">
+            <div class="s6-pillar">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+              <strong>Méthode</strong>
+              Séquence claire, pas du chaos
+            </div>
+            <div class="s6-pillar">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+              <strong>Communauté</strong>
+              Feedback rapide, pas seul(e)
+            </div>
+            <div class="s6-pillar">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+              <strong>Lives directs</strong>
+              Réponses concrètes
+            </div>
+            <div class="s6-pillar">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+              <strong>23 modules</strong>
+              100h+ de contenu
+            </div>
+          </div>
+          <a href="#" class="s6-cta-btn">Rejoindre GENESYS →</a>
+          <p class="s6-fine">
+            49 $/mois · sans engagement<br>
+            <strong style="color:var(--red-warn)">Bientôt 79 $/mois</strong> — les membres actuels gardent 49 $ à vie.
+          </p>
+          <span class="hero-lead-swipe" style="opacity:0.3"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg></span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="carousel-controls">
+    <button class="carousel-arrow" id="prevBtn" aria-label="Précédent">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
+    </button>
+    <div class="carousel-dots" id="dots"></div>
+    <button class="carousel-arrow" id="nextBtn" aria-label="Suivant">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
+    </button>
+  </div>
+</div>
+
+<footer class="page-footer">
+  <h3>Logique narrative slide-par-slide</h3>
+  <ol>
+    <li><strong>Slide 1 (Identification)</strong> — 3 profils douleur. Le viewer dit "C'est moi".</li>
+    <li><strong>Slide 2 (Légitimation)</strong> — "9/10 ferment". Tu n'es pas seul(e), c'est le marché qui est cassé. Le viewer dit "Pas que moi alors".</li>
+    <li><strong>Slide 3 (Pivot émotionnel)</strong> — Animation infinity loop. "Du coup tu tournes en rond, mais ce n'est pas une fatalité." Le viewer dit "Mais POURQUOI ?".</li>
+    <li><strong>Slide 4 (Diagnostic interactif)</strong> — 8 étapes du cycle classique + fallback "je ne me reconnais dans aucune". Clic = autres grisées + verdict adapté à l'étape choisie. Le viewer dit "Voilà mon problème exact".</li>
+    <li><strong>Slide 5 (Causes profondes)</strong> — 15 erreurs concrètes que personne ne dit clairement. Le viewer dit "Ah merde je fais ça".</li>
+    <li><strong>Slide 6 (Solution + Offer)</strong> — α-QUANTT dans GENESYS à 49 $/mois. 4 piliers + CTA. Le viewer dit "OK je veux ça".</li>
+  </ol>
+  <p class="verdict">
+    Une fois validé, j'implémente en prod avec audit 9 agents (3 debug + 3 responsive + 3 non-régression).
+  </p>
+</footer>
+
+<script>
+(function(){
+  const track = document.getElementById('track');
+  const slides = track.children;
+  const total = slides.length;
+  const dotsContainer = document.getElementById('dots');
+  const prevBtn = document.getElementById('prevBtn');
+  const nextBtn = document.getElementById('nextBtn');
+  let current = 0;
+
+  // Build dots
+  for(let i=0; i<total; i++){
+    const dot = document.createElement('button');
+    dot.className = 'carousel-dot' + (i===0?' active':'');
+    dot.setAttribute('aria-label','Aller au slide '+(i+1));
+    dot.addEventListener('click', () => goTo(i));
+    dotsContainer.appendChild(dot);
+  }
+
+  function goTo(idx){
+    current = Math.max(0, Math.min(total-1, idx));
+    track.style.transform = 'translateX(-' + (current*100) + '%)';
+    [...dotsContainer.children].forEach((d,i)=>d.classList.toggle('active', i===current));
+    prevBtn.disabled = (current===0);
+    nextBtn.disabled = (current===total-1);
+  }
+
+  prevBtn.addEventListener('click', ()=>goTo(current-1));
+  nextBtn.addEventListener('click', ()=>goTo(current+1));
+
+  // Swipe support
+  let startX = 0, isDown = false;
+  track.addEventListener('touchstart', e => { startX = e.touches[0].clientX; isDown = true; }, {passive:true});
+  track.addEventListener('touchend', e => {
+    if(!isDown) return; isDown = false;
+    const dx = e.changedTouches[0].clientX - startX;
+    if(dx > 50) goTo(current-1);
+    else if(dx < -50) goTo(current+1);
+  });
+
+  // Keyboard
+  document.addEventListener('keydown', e => {
+    if(e.key === 'ArrowLeft') goTo(current-1);
+    if(e.key === 'ArrowRight') goTo(current+1);
+  });
+
+  goTo(0);
+
+  // ===== SLIDE 4 INTERACTIVE LOGIC =====
+  const grid = document.getElementById('s4Grid');
+  const fallback = document.getElementById('s4Fallback');
+  const verdict = document.getElementById('s4Verdict');
+  const allSteps = grid.querySelectorAll('.s4-step');
+
+  function clearAll(){
+    allSteps.forEach(s => s.classList.remove('is-active','is-dimmed'));
+    fallback.classList.remove('is-active','is-dimmed');
+  }
+
+  function activate(node, others, verdictText){
+    clearAll();
+    node.classList.add('is-active');
+    others.forEach(o => o.classList.add('is-dimmed'));
+    verdict.innerHTML = verdictText;
+    verdict.classList.add('is-visible');
+  }
+
+  allSteps.forEach(step => {
+    step.addEventListener('click', () => {
+      const dimmed = [...allSteps].filter(s => s !== step);
+      dimmed.push(fallback);
+      activate(step, dimmed, step.dataset.verdict);
+    });
+  });
+
+  fallback.addEventListener('click', () => {
+    activate(fallback, [...allSteps], fallback.dataset.verdict);
+  });
+})();
+</script>
+
+</body>
+</html>
