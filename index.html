@@ -3569,6 +3569,39 @@
   .stack-deal .delta strong{font-weight:800;font-size:15px}
 
   /* ===== TESTIMONIALS ===== */
+  .testi-anim{
+    display:flex;justify-content:center;align-items:center;
+    margin:-20px auto 50px;
+    position:relative;
+  }
+  .testi-stars{
+    display:inline-flex;
+    gap:18px;
+    font-size:38px;
+    line-height:1;
+    color:rgba(212,182,106,0.18);
+  }
+  .testi-stars .ts-star{
+    display:inline-block;
+    animation:tsStarFill 5s ease-in-out infinite;
+    will-change:transform,color;
+  }
+  .testi-stars .ts-star:nth-child(1){animation-delay:0s}
+  .testi-stars .ts-star:nth-child(2){animation-delay:0.25s}
+  .testi-stars .ts-star:nth-child(3){animation-delay:0.50s}
+  .testi-stars .ts-star:nth-child(4){animation-delay:0.75s}
+  .testi-stars .ts-star:nth-child(5){animation-delay:1.00s}
+  @keyframes tsStarFill{
+    0%   {color:rgba(212,182,106,0.18); text-shadow:none; transform:scale(1)}
+    5%   {color:var(--gold); text-shadow:0 0 20px rgba(212,182,106,0.75); transform:scale(1.22)}
+    12%, 78%{color:var(--gold); text-shadow:0 0 14px rgba(212,182,106,0.45); transform:scale(1)}
+    88%, 100%{color:rgba(212,182,106,0.18); text-shadow:none; transform:scale(1)}
+  }
+  @media(max-width:600px){
+    .testi-anim{margin:-10px auto 36px}
+    .testi-stars{font-size:30px;gap:13px}
+  }
+
   .testi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
   @media(max-width:900px){.testi-grid{grid-template-columns:1fr}}
   .testi{
@@ -6828,8 +6861,16 @@
         <span class="label">Ils l'ont fait avant toi</span>
         <div class="line"></div>
       </div>
-      <h2>Ce que disent les membres<br>quand ils arrêtent de tourner <em>en rond</em></h2>
-      <p>Pas des promesses abstraites. Des retours sur ce que le cadre, les corrections et la communauté changent au quotidien.</p>
+      <h2>Témoignages</h2>
+    </div>
+    <div class="testi-anim reveal" aria-hidden="true">
+      <div class="testi-stars">
+        <span class="ts-star">&#9733;</span>
+        <span class="ts-star">&#9733;</span>
+        <span class="ts-star">&#9733;</span>
+        <span class="ts-star">&#9733;</span>
+        <span class="ts-star">&#9733;</span>
+      </div>
     </div>
     <div class="testi-grid">
       <div class="testi reveal">
