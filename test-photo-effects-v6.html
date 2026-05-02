@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>V6 — 20 effets photo (connexion + sympathie)</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&family=Caveat:wght@500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --gold:#D4B66A;
+  --gold-light:#E0C57A;
+  --gold-warm:#F5D89A;
+  --bg:#0A1628;
+  --bg-2:#142540;
+  --text:#E8E4D8;
+  --muted:#9aa3b2;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif}
+body{padding:60px 20px 80px;min-height:100vh}
+h1{font-size:30px;text-align:center;margin-bottom:6px;letter-spacing:-0.01em;font-weight:800}
+.sub{text-align:center;color:var(--muted);font-size:14px;margin-bottom:50px;max-width:780px;margin-left:auto;margin-right:auto;line-height:1.65}
+.sub em{color:var(--gold);font-style:normal}
+
+.grid{
+  max-width:1480px;margin:0 auto;
+  display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));
+  gap:40px 24px;
+}
+.card{
+  background:linear-gradient(180deg,rgba(20,37,64,0.5),rgba(10,22,40,0.2));
+  border:1px solid rgba(212,182,106,0.18);
+  border-radius:14px;
+  padding:24px 18px 22px;
+  display:flex;flex-direction:column;align-items:center;gap:14px;
+  position:relative;
+}
+.num{
+  position:absolute;top:14px;left:18px;
+  font-family:'JetBrains Mono','Menlo',monospace;
+  font-size:11px;color:var(--gold);font-weight:700;letter-spacing:0.1em;
+}
+.card-title{
+  margin-top:30px;font-size:14.5px;font-weight:700;
+  text-align:center;letter-spacing:0.02em;
+}
+.card-desc{
+  font-size:11.5px;color:var(--muted);
+  text-align:center;line-height:1.5;
+  max-width:260px;
+}
+.card-mech{
+  font-size:10.5px;color:rgba(212,182,106,0.75);
+  text-align:center;line-height:1.45;
+  font-style:italic;
+}
+
+/* ===== Photo wrap (base) ===== */
+.photo{
+  position:relative;width:200px;aspect-ratio:3/4;
+  border-radius:10px;overflow:hidden;
+  background:#0A1628;
+  isolation:isolate;
+}
+.photo img{
+  width:100%;height:100%;object-fit:cover;display:block;
+  position:relative;z-index:1;
+}
+
+/* ============================================
+   EFFECT 1 — HALO RESPIRATOIRE DORÉ CHAUD
+   ============================================ */
+.fx-1 .photo{
+  animation:halo1 4s ease-in-out infinite;
+}
+@keyframes halo1{
+  0%,100%{box-shadow:0 0 24px rgba(212,182,106,0.20),0 0 48px rgba(212,182,106,0.08)}
+  50%{box-shadow:0 0 42px rgba(212,182,106,0.55),0 0 90px rgba(212,182,106,0.20)}
+}
+
+/* ============================================
+   EFFECT 2 — PULSE CARDIAQUE (HEARTBEAT SOFT)
+   ============================================ */
+.fx-2 .photo{
+  animation:heartbeat 5s ease-in-out infinite;
+}
+@keyframes heartbeat{
+  0%,5%,18%,100%{transform:scale(1)}
+  9%{transform:scale(1.022)}
+  14%{transform:scale(1.012)}
+  /* second beat */
+  22%{transform:scale(1.022)}
+  27%{transform:scale(1)}
+}
+
+/* ============================================
+   EFFECT 3 — LUEUR DORÉE SUR VISAGE
+   ============================================ */
+.fx-3 .photo::after{
+  content:"";position:absolute;inset:0;z-index:2;pointer-events:none;
+  background:radial-gradient(ellipse 45% 35% at 50% 30%,rgba(245,216,154,0.45) 0%,rgba(245,216,154,0.12) 40%,transparent 75%);
+  mix-blend-mode:overlay;
+  animation:facelight 5s ease-in-out infinite;
+}
+@keyframes facelight{
+  0%,100%{opacity:0.35}
+  50%{opacity:0.85}
+}
+
+/* ============================================
+   EFFECT 4 — SLOW ZOOM-IN (KEN BURNS)
+   ============================================ */
+.fx-4 .photo img{
+  animation:kenBurns 10s ease-in-out infinite;
+  transform-origin:50% 35%;
+}
+@keyframes kenBurns{
+  0%,100%{transform:scale(1)}
+  50%{transform:scale(1.06)}
+}
+
+/* ============================================
+   EFFECT 5 — TILT 3D PARALLAX (HOVER)
+   ============================================ */
+.fx-5 .photo{
+  perspective:600px;transition:transform 0.6s ease;
+  transform-style:preserve-3d;
+}
+.fx-5 .photo img{
+  transition:transform 0.6s ease;
+}
+.fx-5 .photo:hover img{
+  transform:rotateY(8deg) rotateX(-4deg) scale(1.02);
+}
+
+/* ============================================
+   EFFECT 6 — EYE-CONTACT PULSE
+   ============================================ */
+.fx-6 .photo::after{
+  content:"";position:absolute;inset:0;z-index:2;pointer-events:none;
+  background:
+    radial-gradient(circle 14px at 42% 30%,rgba(245,216,154,0.55) 0%,transparent 70%),
+    radial-gradient(circle 14px at 58% 30%,rgba(245,216,154,0.55) 0%,transparent 70%);
+  mix-blend-mode:screen;
+  animation:eyepulse 6s ease-in-out infinite;
+}
+@keyframes eyepulse{
+  0%,100%{opacity:0.20}
+  50%{opacity:0.85}
+}
+
+/* ============================================
+   EFFECT 7 — SOFT GOLDEN HOUR (BG SHIFT)
+   ============================================ */
+.fx-7 .photo::before{
+  content:"";position:absolute;inset:0;z-index:0;
+  background:linear-gradient(135deg,#142540 0%,#1a2c50 100%);
+  animation:goldenhour 8s ease-in-out infinite;
+}
+@keyframes goldenhour{
+  0%,100%{background:linear-gradient(135deg,#142540 0%,#1a2c50 100%)}
+  50%{background:linear-gradient(135deg,#3a2a1c 0%,#5c3f25 100%)}
+}
+.fx-7 .photo img{mix-blend-mode:luminosity;opacity:0.96}
+
+/* ============================================
+   EFFECT 8 — LENS FLARE CINÉMA
+   ============================================ */
+.fx-8 .photo::after{
+  content:"";position:absolute;width:60px;height:60px;border-radius:50%;
+  z-index:3;pointer-events:none;
+  background:radial-gradient(circle,rgba(245,216,154,0.85) 0%,rgba(245,216,154,0.35) 30%,transparent 70%);
+  filter:blur(2px);
+  animation:lensflare 7s ease-in-out infinite;
+  top:-30px;left:-30px;
+  mix-blend-mode:screen;
+}
+@keyframes lensflare{
+  0%,100%{opacity:0;transform:translate(0,0)}
+  20%,80%{opacity:0}
+  35%{opacity:1;transform:translate(120px,80px)}
+  50%{opacity:1;transform:translate(220px,200px)}
+  65%{opacity:0;transform:translate(280px,280px)}
+}
+
+/* ============================================
+   EFFECT 9 — WINDOW LIGHT REVEAL
+   ============================================ */
+.fx-9 .photo::after{
+  content:"";position:absolute;inset:0;z-index:2;pointer-events:none;
+  background:repeating-linear-gradient(105deg,
+    transparent 0,transparent 18px,
+    rgba(245,216,154,0.20) 18px,rgba(245,216,154,0.20) 22px,
+    transparent 22px,transparent 40px);
+  mix-blend-mode:soft-light;
+  animation:winlight 8s ease-in-out infinite;
+  opacity:0;
+}
+@keyframes winlight{
+  0%,100%{opacity:0;transform:translateX(-30%)}
+  40%{opacity:0.8;transform:translateX(0%)}
+  60%{opacity:0.6;transform:translateX(15%)}
+  85%{opacity:0;transform:translateX(40%)}
+}
+
+/* ============================================
+   EFFECT 10 — PARTICULES DORÉES FLOTTANTES
+   ============================================ */
+.fx-10 .photo::before,
+.fx-10 .photo::after{
+  content:"";position:absolute;width:4px;height:4px;border-radius:50%;
+  background:radial-gradient(circle,#F5D89A 0%,transparent 70%);
+  box-shadow:0 0 6px rgba(245,216,154,0.8);
+  z-index:3;pointer-events:none;
+}
+.fx-10 .photo::before{
+  top:80%;left:20%;
+  animation:particle1 12s ease-in-out infinite;
+}
+.fx-10 .photo::after{
+  top:80%;left:75%;
+  animation:particle2 14s ease-in-out infinite;
+}
+@keyframes particle1{
+  0%,100%{transform:translate(0,0);opacity:0}
+  20%{opacity:1}
+  50%{transform:translate(30px,-180px);opacity:0.7}
+  80%{transform:translate(-20px,-260px);opacity:0}
+}
+@keyframes particle2{
+  0%,100%{transform:translate(0,0);opacity:0}
+  25%{opacity:0.9}
+  50%{transform:translate(-40px,-200px);opacity:0.6}
+  85%{transform:translate(20px,-280px);opacity:0}
+}
+
+/* ============================================
+   EFFECT 11 — STEAM / SOUFFLE
+   ============================================ */
+.fx-11 .photo::after{
+  content:"";position:absolute;left:50%;bottom:-20px;
+  width:60px;height:120px;border-radius:50% 50% 40% 40%;
+  background:radial-gradient(ellipse,rgba(245,216,154,0.18) 0%,transparent 70%);
+  filter:blur(8px);transform:translateX(-50%);
+  z-index:3;pointer-events:none;
+  animation:steam 6s ease-in-out infinite;
+  opacity:0;
+}
+@keyframes steam{
+  0%,100%{opacity:0;transform:translate(-50%,0) scale(0.8)}
+  40%{opacity:0.85;transform:translate(-50%,-80px) scale(1)}
+  80%{opacity:0;transform:translate(-50%,-180px) scale(1.4)}
+}
+
+/* ============================================
+   EFFECT 12 — SCINTILLEMENT LIQUIDE
+   ============================================ */
+.fx-12 .photo::after{
+  content:"";position:absolute;inset:0;z-index:3;pointer-events:none;
+  background:
+    radial-gradient(circle 2px at 25% 35%,#F5D89A 0%,transparent 100%),
+    radial-gradient(circle 1.5px at 70% 50%,#F5D89A 0%,transparent 100%),
+    radial-gradient(circle 2px at 45% 75%,#F5D89A 0%,transparent 100%),
+    radial-gradient(circle 1.5px at 80% 25%,#F5D89A 0%,transparent 100%);
+  animation:sparkle 4s ease-in-out infinite;
+}
+@keyframes sparkle{
+  0%,100%{opacity:0}
+  25%{opacity:1}
+  50%{opacity:0.3}
+  75%{opacity:0.8}
+}
+
+/* ============================================
+   EFFECT 13 — COCHE DORÉE FLASH
+   ============================================ */
+.fx-13 .photo::after{
+  content:"✓";position:absolute;top:12px;right:12px;
+  width:24px;height:24px;border-radius:50%;
+  background:radial-gradient(circle,#F5D89A 0%,#D4B66A 100%);
+  color:#0A1628;font-size:14px;font-weight:800;
+  display:flex;align-items:center;justify-content:center;
+  z-index:3;pointer-events:none;
+  box-shadow:0 0 14px rgba(245,216,154,0.7);
+  animation:checkflash 8s ease-in-out infinite;
+  opacity:0;transform:scale(0.5);
+}
+@keyframes checkflash{
+  0%,100%{opacity:0;transform:scale(0.5)}
+  10%{opacity:1;transform:scale(1.1)}
+  18%{opacity:1;transform:scale(1)}
+  25%{opacity:1;transform:scale(1)}
+  35%{opacity:0;transform:scale(0.5)}
+}
+
+/* ============================================
+   EFFECT 14 — ÉTOILES CASCADE
+   ============================================ */
+.fx-14 .stars{
+  position:absolute;top:10px;left:50%;transform:translateX(-50%);
+  display:flex;gap:4px;z-index:3;pointer-events:none;
+}
+.fx-14 .stars span{
+  font-size:14px;color:rgba(245,216,154,0.3);
+  animation:starlight 7s ease-in-out infinite;
+  text-shadow:0 0 8px rgba(245,216,154,0.6);
+}
+.fx-14 .stars span:nth-child(1){animation-delay:0s}
+.fx-14 .stars span:nth-child(2){animation-delay:0.15s}
+.fx-14 .stars span:nth-child(3){animation-delay:0.30s}
+.fx-14 .stars span:nth-child(4){animation-delay:0.45s}
+.fx-14 .stars span:nth-child(5){animation-delay:0.60s}
+@keyframes starlight{
+  0%,100%{color:rgba(245,216,154,0.25);text-shadow:none}
+  20%,40%{color:#F5D89A;text-shadow:0 0 12px rgba(245,216,154,0.9)}
+  70%{color:rgba(245,216,154,0.25);text-shadow:none}
+}
+
+/* ============================================
+   EFFECT 15 — PLUS ONE FLOAT
+   ============================================ */
+.fx-15 .plus-one{
+  position:absolute;top:60%;right:15%;
+  font-family:'Inter',sans-serif;font-weight:800;
+  font-size:14px;color:#F5D89A;
+  text-shadow:0 0 10px rgba(245,216,154,0.8);
+  z-index:3;pointer-events:none;
+  animation:plusone 8s ease-in-out infinite;
+  opacity:0;
+}
+@keyframes plusone{
+  0%,100%{opacity:0;transform:translateY(0)}
+  10%{opacity:1;transform:translateY(-10px)}
+  30%{opacity:1;transform:translateY(-40px)}
+  50%{opacity:0;transform:translateY(-80px)}
+}
+
+/* ============================================
+   EFFECT 16 — SIGNATURE QUI SE TRACE
+   ============================================ */
+.fx-16 .sig{
+  position:absolute;bottom:14px;left:50%;transform:translateX(-50%);
+  font-family:'Caveat',cursive;font-size:24px;font-weight:700;
+  color:#F5D89A;
+  text-shadow:0 0 8px rgba(245,216,154,0.6);
+  z-index:3;pointer-events:none;
+  background:linear-gradient(90deg,#F5D89A 0%,#F5D89A 50%,transparent 50%,transparent 100%);
+  background-size:200% 100%;
+  background-clip:text;
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+  animation:sigtrace 8s ease-in-out infinite;
+}
+@keyframes sigtrace{
+  0%,100%{background-position:100% 0;opacity:0}
+  20%{opacity:1;background-position:100% 0}
+  45%{opacity:1;background-position:0% 0}
+  70%{opacity:1;background-position:0% 0}
+  85%{opacity:0;background-position:0% 0}
+}
+
+/* ============================================
+   EFFECT 17 — INITIAL α MONOGRAMME
+   ============================================ */
+.fx-17 .photo::after{
+  content:"α";position:absolute;bottom:10px;right:12px;
+  font-family:'Playfair Display',serif;font-style:italic;
+  font-size:24px;font-weight:700;
+  color:#F5D89A;
+  text-shadow:0 0 10px rgba(245,216,154,0.8);
+  z-index:3;pointer-events:none;
+  animation:monogram 4s ease-in-out infinite;
+}
+@keyframes monogram{
+  0%,100%{opacity:0.30}
+  50%{opacity:0.85}
+}
+
+/* ============================================
+   EFFECT 18 — AURA MANDORLE
+   ============================================ */
+.fx-18 .photo::before{
+  content:"";position:absolute;inset:-15%;z-index:0;
+  background:radial-gradient(ellipse 40% 60% at 50% 50%,rgba(245,216,154,0.45) 0%,rgba(245,216,154,0.15) 40%,transparent 75%);
+  filter:blur(20px);
+  animation:mandorle 7s ease-in-out infinite;
+  pointer-events:none;
+}
+.fx-18 .photo{overflow:visible}
+@keyframes mandorle{
+  0%,100%{opacity:0.20;transform:scale(0.92)}
+  50%{opacity:0.85;transform:scale(1.08)}
+}
+
+/* ============================================
+   EFFECT 19 — TOUCH RIPPLE (HOVER)
+   ============================================ */
+.fx-19 .photo{cursor:pointer;}
+.fx-19 .photo::after{
+  content:"";position:absolute;top:50%;left:50%;
+  width:0;height:0;border-radius:50%;
+  background:radial-gradient(circle,rgba(245,216,154,0.5) 0%,transparent 70%);
+  transform:translate(-50%,-50%);
+  z-index:3;pointer-events:none;
+  transition:none;
+}
+.fx-19 .photo:hover::after{
+  animation:ripple 0.9s ease-out;
+}
+@keyframes ripple{
+  0%{width:0;height:0;opacity:1}
+  100%{width:400px;height:400px;opacity:0}
+}
+
+/* ============================================
+   EFFECT 20 — TILT TO FACE VIEWER (HOVER)
+   ============================================ */
+.fx-20 .photo{
+  perspective:800px;cursor:pointer;
+}
+.fx-20 .photo img{
+  transition:transform 1.2s ease;
+  transform-origin:50% 30%;
+}
+.fx-20 .photo:hover img{
+  transform:scale(1.04) rotateY(0deg);
+}
+.fx-20 .photo img{
+  transform:scale(1) rotateY(-4deg);
+}
+
+/* hover hint */
+.hover-tag{
+  font-size:9px;color:var(--gold);font-weight:700;
+  letter-spacing:0.18em;text-transform:uppercase;
+  margin-top:-4px;
+}
+</style>
+</head>
+<body>
+
+<h1>20 effets photo — connexion + sympathie</h1>
+<p class="sub">L'objectif : que le viewer ressente une connexion humaine en moins d'une seconde. <em>Tous les effets passent et disparaissent</em> — aucun n'est stuck. Choisis le ou les effets qui te parlent et je l'applique sur ta slide team.</p>
+
+<div class="grid">
+
+  <!-- 1 -->
+  <div class="card fx-1">
+    <span class="num">01</span>
+    <div class="photo"><img src="assets/alpha-wolf-vega.webp" alt="Alpha"></div>
+    <div class="card-title">Halo respiratoire</div>
+    <div class="card-desc">Glow doré qui respire à 4 s. Aura calme.</div>
+    <div class="card-mech">Rythme respiratoire = baisse cortisol, mirror neurons.</div>
+  </div>
+
+  <!-- 2 -->
+  <div class="card fx-2">
+    <span class="num">02</span>
+    <div class="photo"><img src="assets/alpha-wolf-vega.webp" alt="Alpha"></div>
+    <div class="card-title">Pulse cardiaque</div>
+    <div class="card-desc">Deux micro-scales (1.022) toutes les 5 s. Comme un pouls.</div>
+    <div class="card-mech">Signal de vie, le cerveau primitif détecte "être vivant".</div>
+  </div>
+
+  <!-- 3 -->
+  <div class="card fx-3">
+    <span class="num">03</span>
+    <div class="photo"><img src="assets/alpha-wolf-vega.webp" alt="Alpha"></div>
+    <div class="card-title">Lueur visage</div>
+    <div class="card-desc">Radial-gradient localisé sur le visage qui pulse 5 s.</div>
+    <div class="card-mech">Focus inconscient sur le visage = traitement social activé.</div>
+  </div>
+
+  <!-- 4 -->
+  <div class="card fx-4">
+    <span class="num">04</span>
+    <div class="photo"><img src="assets/alpha-wolf-vega.webp" alt="Alpha"></div>
+    <div class="card-title">Slow zoom-in (Ken Burns)</div>
+    <div class="card-desc">1.00 → 1.06 sur 10 s. Comme s'il s'avançait.</div>
+    <div class="card-mech">Approche = intention de contact, baisse les défenses.</div>
+  </div>
+
+  <!-- 5 -->
+  <div class="card fx-5">
+    <span class="num">05</span>
+    <div class="photo"><img src="assets/alpha-wolf-vega.webp" alt="Alpha"></div>
+    <div class="card-title">Tilt 3D au survol</div>
+    <div class="card-desc">Survole la photo : elle s'incline.</div>
+    <div class="hover-tag">↑ Survole</div>
+    <div class="card-mech">La photo "réagit" = présence consciente.</div>
+  </div>
+
+  <!-- 6 -->
+  <div class="card fx-6">
+    <span class="num">06</span>
+    <div class="photo"><img src="assets/alpha-wolf-vega.webp" alt="Alpha"></div>
+    <div class="card-title">Eye-contact pulse</div>
+    <div class="card-desc">Glow chaud localisé sur les yeux. Cycle 6 s.</div>
+    <div class="card-mech">Eye-contact = neurone miroir activé instantanément.</div>
+  </div>
+
+  <!-- 7 -->
+  <div class="card fx-7">
+    <span class="num">07</span>
+    <div class="photo"><img src="assets/alpha-wolf-vega.webp" alt="Alpha"></div>
+    <div class="card-title">Golden hour</div>
+    <div class="card-desc">Le fond passe d'un froid à un or chaud lentement.</div>
+    <div class="card-mech">Chaleur visuelle = chaleur émotionnelle perçue.</div>
+  </div>
+
+  <!-- 8 -->
+  <div class="card fx-8">
+    <span class="num">08</span>
+    <div class="photo"><img src="assets/alpha-wolf-vega.webp" alt="Alpha"></div>
+    <div class="card-title">Lens flare cinéma</div>
+    <div class="card-desc">Halo doré qui traverse en diagonale. Cycle 7 s.</div>
+    <div class="card-mech">Code visuel "interview pro" = crédibilité instinctive.</div>
+  </div>
+
+  <!-- 9 -->
+  <div class="card fx-9">
+    <span class="num">09</span>
+    <div class="photo"><img src="assets/alpha-wolf-vega.webp" alt="Alpha"></div>
+    <div class="card-title">Window light reveal</div>
+    <div class="card-desc">Bandes de lumière (stores) qui balayent puis disparaissent.</div>
+    <div class="card-mech">Lumière naturelle = "moment honnête, pas studio".</div>
+  </div>
+
+  <!-- 10 -->
+  <div class="card fx-10">
+    <span class="num">10</span>
+    <div class="photo"><img src="assets/alpha-wolf-vega.webp" alt="Alpha"></div>
+    <div class="card-title">Particules flottantes</div>
+    <div class="card-desc">2-5 particules qui dérivent comme du pollen.</div>
+    <div class="card-mech">Environnement vivant = scène réaliste.</div>
+  </div>
+
+  <!-- 11 -->
+  <div class="card fx-11">
+    <span class="num">11</span>
+    <div class="photo"><img src="assets/alpha-wolf-vega.webp" alt="Alpha"></div>
+    <div class="card-title">Souffle / chaleur</div>
+    <div class="card-desc">Brume dorée qui monte d'en bas et se dissipe.</div>
+    <div class="card-mech">Confort domestique, baisse de vigilance.</div>
+  </div>
+
+  <!-- 12 -->
+  <div class="card fx-12">
+    <span class="num">12</span>
+    <div class="photo"><img src="assets/alpha-wolf-vega.webp" alt="Alpha"></div>
+    <div class="card-title">Scintillement liquide</div>
+    <div class="card-desc">Étincelles dorées qui apparaissent à des endroits aléatoires.</div>
+    <div class="card-mech">Variation continue = œil retient, "vivant".</div>
+  </div>
+
+  <!-- 13 -->
+  <div class="card fx-13">
+    <span class="num">13</span>
+    <div class="photo"><img src="assets/alpha-wolf-vega.webp" alt="Alpha"></div>
+    <div class="card-title">Coche flash</div>
+    <div class="card-desc">Une coche dorée apparaît 1 s puis disparaît. Cycle 8 s.</div>
+    <div class="card-mech">Pattern de vérification = trust signal automatique.</div>
+  </div>
+
+  <!-- 14 -->
+  <div class="card fx-14">
+    <span class="num">14</span>
+    <div class="photo">
+      <img src="assets/alpha-wolf-vega.webp" alt="Alpha">
+      <div class="stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
+    </div>
+    <div class="card-title">Étoiles cascade</div>
+    <div class="card-desc">5 étoiles qui s'allument l'une après l'autre.</div>
+    <div class="card-mech">5 étoiles = code social validation universel.</div>
+  </div>
+
+  <!-- 15 -->
+  <div class="card fx-15">
+    <span class="num">15</span>
+    <div class="photo">
+      <img src="assets/alpha-wolf-vega.webp" alt="Alpha">
+      <div class="plus-one">+1</div>
+    </div>
+    <div class="card-title">+1 silencieux</div>
+    <div class="card-desc">Un "+1" doré flotte vers le haut et disparaît.</div>
+    <div class="card-mech">Signal social viral, "d'autres valident".</div>
+  </div>
+
+  <!-- 16 -->
+  <div class="card fx-16">
+    <span class="num">16</span>
+    <div class="photo">
+      <img src="assets/alpha-wolf-vega.webp" alt="Alpha">
+      <div class="sig">Alpha</div>
+    </div>
+    <div class="card-title">Signature qui se trace</div>
+    <div class="card-desc">La signature dorée se dessine, reste, disparaît.</div>
+    <div class="card-mech">Signature = engagement personnel, "il signe devant moi".</div>
+  </div>
+
+  <!-- 17 -->
+  <div class="card fx-17">
+    <span class="num">17</span>
+    <div class="photo"><img src="assets/alpha-wolf-vega.webp" alt="Alpha"></div>
+    <div class="card-title">Monogramme α</div>
+    <div class="card-desc">Un α grec doré qui pulse en bas-droite.</div>
+    <div class="card-mech">Symbole = identité forte mémorisée.</div>
+  </div>
+
+  <!-- 18 -->
+  <div class="card fx-18">
+    <span class="num">18</span>
+    <div class="photo"><img src="assets/alpha-wolf-vega.webp" alt="Alpha"></div>
+    <div class="card-title">Aura mandorle</div>
+    <div class="card-desc">Halo ovale doré diffus autour de la silhouette.</div>
+    <div class="card-mech">Code visuel "figure d'autorité bienveillante".</div>
+  </div>
+
+  <!-- 19 -->
+  <div class="card fx-19">
+    <span class="num">19</span>
+    <div class="photo"><img src="assets/alpha-wolf-vega.webp" alt="Alpha"></div>
+    <div class="card-title">Touch ripple</div>
+    <div class="card-desc">Survole la photo : une onde dorée se diffuse depuis le centre.</div>
+    <div class="hover-tag">↑ Survole</div>
+    <div class="card-mech">Interaction = engagement actif, mémorisation x3.</div>
+  </div>
+
+  <!-- 20 -->
+  <div class="card fx-20">
+    <span class="num">20</span>
+    <div class="photo"><img src="assets/alpha-wolf-vega.webp" alt="Alpha"></div>
+    <div class="card-title">Tilt to face viewer</div>
+    <div class="card-desc">Survole : sa tête semble se tourner vers toi.</div>
+    <div class="hover-tag">↑ Survole</div>
+    <div class="card-mech">"Il me regarde" = présence consciente, connexion intime.</div>
+  </div>
+
+</div>
+
+</body>
+</html>
