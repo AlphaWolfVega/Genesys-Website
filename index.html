@@ -3188,6 +3188,53 @@
     filter:saturate(0.95) contrast(1.02);
   }
   .founder-photo:has(img)::after{content:none}
+  /* ===== TEAM H2 — line1 fits single line, line2 metallic shine ===== */
+  .h2-team{
+    line-height:1.1;
+  }
+  .h2-team .h2-team-line1{
+    display:block;
+    font-size:clamp(28px, 5vw, 56px);
+    font-weight:800;
+    letter-spacing:-0.015em;
+    white-space:nowrap;
+  }
+  .h2-team .h2-team-shine{
+    display:inline-block;
+    margin-top:6px;
+    font-family:'Playfair Display',serif;
+    font-style:italic;
+    font-weight:700;
+    font-size:clamp(40px, 7.5vw, 80px);
+    letter-spacing:0;
+    background:linear-gradient(
+      115deg,
+      #D4B66A 0%,
+      #D4B66A 38%,
+      #FFF1C5 48%,
+      #FFFFFF 50%,
+      #FFF1C5 52%,
+      #D4B66A 62%,
+      #D4B66A 100%
+    );
+    background-size:280% 100%;
+    background-position:-100% 0;
+    -webkit-background-clip:text;
+    background-clip:text;
+    -webkit-text-fill-color:transparent;
+    color:transparent;
+    animation:h2TeamShine 4s ease-in-out infinite;
+  }
+  @keyframes h2TeamShine{
+    0%   {background-position:-100% 0}
+    22%  {background-position:200% 0}
+    100% {background-position:200% 0}
+  }
+  @media(max-width:600px){
+    .h2-team .h2-team-line1{font-size:24px;letter-spacing:-0.012em}
+    .h2-team .h2-team-shine{font-size:36px}
+  }
+
   /* ===== TEAM ANIMATION (3 avatars online + breathing halo) ===== */
   .team-anim{
     display:flex;
@@ -6855,15 +6902,7 @@
         <span class="label">L'équipe</span>
         <div class="line"></div>
       </div>
-      <h2>Une équipe d'experts<br><em>à ton service</em></h2>
-    </div>
-
-    <div class="team-anim reveal" aria-hidden="true">
-      <div class="team-anim-row">
-        <div class="team-avatar"><span>A</span></div>
-        <div class="team-avatar"><span>S</span></div>
-        <div class="team-avatar"><span>A</span></div>
-      </div>
+      <h2 class="h2-team"><span class="h2-team-line1">Une équipe d'experts</span><br><em class="h2-team-shine">à ton service</em></h2>
     </div>
 
     <div class="team-carousel reveal">
