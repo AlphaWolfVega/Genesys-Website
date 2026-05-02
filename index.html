@@ -325,7 +325,7 @@
   }
   .hero-price-warn strong{font-weight:700;font-style:normal;color:var(--gold)}
 
-  /* ===== Price rise — 49 $ → 79 $ animated arrow ===== */
+  /* ===== Price rise — particles flying 49 $ → 79 $ (G4) ===== */
   .price-rise{
     margin:18px auto 0;display:flex;align-items:center;justify-content:center;
     gap:18px;max-width:540px;
@@ -339,11 +339,12 @@
     font-size:34px;line-height:1;letter-spacing:-0.01em;
     color:var(--gold);
     text-shadow:0 0 18px rgba(212,182,106,0.35);
+    display:inline-block;
   }
   .price-rise .pr-amount-soon{
     color:#E07A6E;
     text-shadow:0 0 14px rgba(224,122,110,0.30);
-    animation:prSoonPulse 4s ease-in-out infinite;
+    animation:prSoonPulse 3s linear infinite;
   }
   .price-rise .pr-label{
     font-family:'Inter',sans-serif;font-size:10px;font-weight:700;
@@ -358,44 +359,26 @@
   .price-rise .pr-arrow svg{
     width:100%;height:100%;display:block;overflow:visible;
   }
-  .price-rise .pr-path,
-  .price-rise .pr-head{
+  .price-rise .pr-guide{
     fill:none;
-    stroke:url(#prGradient);
-    stroke-width:2.2;
+    stroke:rgba(212,182,106,0.18);
+    stroke-width:1;
     stroke-linecap:round;
-    stroke-linejoin:round;
+    stroke-dasharray:2 4;
   }
-  .price-rise .pr-path{
-    stroke-dasharray:240;
-    stroke-dashoffset:240;
-    animation:prTrace 4s ease-in-out infinite;
-    filter:drop-shadow(0 0 6px rgba(212,182,106,0.45));
-  }
-  .price-rise .pr-head{
-    opacity:0;
-    animation:prHead 4s ease-in-out infinite;
-    filter:drop-shadow(0 0 8px rgba(224,122,110,0.55));
-  }
-  @keyframes prTrace{
-    0%{stroke-dashoffset:240;opacity:1}
-    55%{stroke-dashoffset:0;opacity:1}
-    80%{stroke-dashoffset:0;opacity:1}
-    95%{stroke-dashoffset:0;opacity:0}
-    100%{stroke-dashoffset:240;opacity:0}
-  }
-  @keyframes prHead{
-    0%,55%{opacity:0;transform:scale(0.7)}
-    62%{opacity:1;transform:scale(1.15)}
-    70%{opacity:1;transform:scale(1)}
-    85%{opacity:1;transform:scale(1)}
-    95%{opacity:0;transform:scale(1)}
-    100%{opacity:0;transform:scale(0.7)}
+  .price-rise .pr-particle{
+    fill:url(#prParticleGradient);
+    filter:drop-shadow(0 0 4px rgba(224,197,122,0.85));
   }
   @keyframes prSoonPulse{
-    0%,60%,100%{transform:scale(1);text-shadow:0 0 14px rgba(224,122,110,0.30)}
-    66%{transform:scale(1.08);text-shadow:0 0 22px rgba(224,122,110,0.65)}
-    72%{transform:scale(1);text-shadow:0 0 16px rgba(224,122,110,0.40)}
+    0%,16%,36%,56%,76%,96%,100%{
+      transform:scale(1);
+      text-shadow:0 0 14px rgba(224,122,110,0.30);
+    }
+    20%,40%,60%,80%{
+      transform:scale(1.10);
+      text-shadow:0 0 24px rgba(224,122,110,0.75);
+    }
   }
   /* Pretitle "AVANT D'ALLER PLUS LOIN" + gold divider — used on desktop + mobile */
   .hl-pretitle{
@@ -5525,14 +5508,49 @@
       <div class="pr-arrow" aria-hidden="true">
         <svg viewBox="0 0 200 60" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
           <defs>
-            <linearGradient id="prGradient" x1="0%" y1="100%" x2="100%" y2="0%">
-              <stop offset="0%" stop-color="#D4B66A"/>
-              <stop offset="55%" stop-color="#E0C57A"/>
-              <stop offset="100%" stop-color="#E07A6E"/>
-            </linearGradient>
+            <radialGradient id="prParticleGradient" cx="50%" cy="50%" r="50%">
+              <stop offset="0%" stop-color="#FFF1C7" stop-opacity="1"/>
+              <stop offset="40%" stop-color="#E0C57A" stop-opacity="1"/>
+              <stop offset="100%" stop-color="#D4B66A" stop-opacity="0"/>
+            </radialGradient>
+            <path id="prCurve" d="M 4 50 C 60 50 100 18 192 10"/>
           </defs>
-          <path class="pr-path" d="M 4 50 C 60 50 100 18 192 10"/>
-          <path class="pr-head" d="M 180 4 L 196 10 L 180 16"/>
+          <use href="#prCurve" class="pr-guide"/>
+          <circle class="pr-particle" r="2.6">
+            <animateMotion dur="3s" repeatCount="indefinite" begin="0s" rotate="auto">
+              <mpath href="#prCurve"/>
+            </animateMotion>
+            <animate attributeName="opacity" values="0;1;1;0" keyTimes="0;0.1;0.85;1" dur="3s" repeatCount="indefinite" begin="0s"/>
+            <animate attributeName="r" values="1.8;2.8;3.2;1.6" keyTimes="0;0.4;0.85;1" dur="3s" repeatCount="indefinite" begin="0s"/>
+          </circle>
+          <circle class="pr-particle" r="2.6">
+            <animateMotion dur="3s" repeatCount="indefinite" begin="0.6s" rotate="auto">
+              <mpath href="#prCurve"/>
+            </animateMotion>
+            <animate attributeName="opacity" values="0;1;1;0" keyTimes="0;0.1;0.85;1" dur="3s" repeatCount="indefinite" begin="0.6s"/>
+            <animate attributeName="r" values="1.8;2.8;3.2;1.6" keyTimes="0;0.4;0.85;1" dur="3s" repeatCount="indefinite" begin="0.6s"/>
+          </circle>
+          <circle class="pr-particle" r="2.6">
+            <animateMotion dur="3s" repeatCount="indefinite" begin="1.2s" rotate="auto">
+              <mpath href="#prCurve"/>
+            </animateMotion>
+            <animate attributeName="opacity" values="0;1;1;0" keyTimes="0;0.1;0.85;1" dur="3s" repeatCount="indefinite" begin="1.2s"/>
+            <animate attributeName="r" values="1.8;2.8;3.2;1.6" keyTimes="0;0.4;0.85;1" dur="3s" repeatCount="indefinite" begin="1.2s"/>
+          </circle>
+          <circle class="pr-particle" r="2.6">
+            <animateMotion dur="3s" repeatCount="indefinite" begin="1.8s" rotate="auto">
+              <mpath href="#prCurve"/>
+            </animateMotion>
+            <animate attributeName="opacity" values="0;1;1;0" keyTimes="0;0.1;0.85;1" dur="3s" repeatCount="indefinite" begin="1.8s"/>
+            <animate attributeName="r" values="1.8;2.8;3.2;1.6" keyTimes="0;0.4;0.85;1" dur="3s" repeatCount="indefinite" begin="1.8s"/>
+          </circle>
+          <circle class="pr-particle" r="2.6">
+            <animateMotion dur="3s" repeatCount="indefinite" begin="2.4s" rotate="auto">
+              <mpath href="#prCurve"/>
+            </animateMotion>
+            <animate attributeName="opacity" values="0;1;1;0" keyTimes="0;0.1;0.85;1" dur="3s" repeatCount="indefinite" begin="2.4s"/>
+            <animate attributeName="r" values="1.8;2.8;3.2;1.6" keyTimes="0;0.4;0.85;1" dur="3s" repeatCount="indefinite" begin="2.4s"/>
+          </circle>
         </svg>
       </div>
       <div class="pr-side pr-soon">
