@@ -732,6 +732,20 @@
     .hl-cta-exit em{color:rgba(212,182,106,0.7);font-style:italic;font-weight:600}
     .hl-cta-explore{font-family:'Inter',sans-serif;font-weight:700;color:var(--gold);font-size:9.5px;letter-spacing:0.04em;text-align:center;margin:10px 0 5px;text-shadow:0 0 18px rgba(212,182,106,0.25);hyphens:none;word-break:keep-all}
 
+    /* CTA hierarchical block — Desktop overrides */
+    .hl-cta-setup{font-family:'Inter',sans-serif;font-weight:400;font-size:10.5px;line-height:1.55;color:rgba(232,234,238,0.82);margin:0 0 10px;letter-spacing:0.005em}
+    .hl-cta-setup strong{color:var(--gold);font-weight:600}
+    .hl-cta-price-inline{font-family:'Playfair Display',serif;font-style:italic;font-size:14px;font-weight:700;color:var(--gold);letter-spacing:-0.005em;text-shadow:0 0 14px rgba(212,182,106,0.45);display:inline-block;margin:0 1px}
+    .hl-cta-solution-box{width:100%;background:linear-gradient(135deg,rgba(212,182,106,0.13) 0%,rgba(212,182,106,0.04) 100%);border:1.5px solid rgba(212,182,106,0.55);border-radius:11px;padding:11px 12px 10px;margin:2px 0 9px;text-align:center;position:relative;box-shadow:0 0 22px rgba(212,182,106,0.12),inset 0 1px 0 rgba(212,182,106,0.22)}
+    .hl-cta-solution-box::before{content:"";position:absolute;top:-1.5px;left:50%;transform:translateX(-50%);width:62%;height:2px;background:linear-gradient(90deg,transparent,var(--gold),transparent);pointer-events:none}
+    .hl-cta-solution-pretitle{font-family:'Inter',sans-serif;font-weight:700;font-size:9px;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);opacity:0.78;display:block;margin-bottom:3px}
+    .hl-cta-protocol{font-family:'Playfair Display',serif;font-style:italic;font-weight:700;font-size:18px;line-height:1.2;color:var(--gold);letter-spacing:-0.012em;text-shadow:0 0 18px rgba(212,182,106,0.32);margin:0 0 3px}
+    .hl-cta-greek{font-family:'Playfair Display',serif;font-style:italic;text-transform:none}
+    .hl-cta-location{font-family:'Inter',sans-serif;font-weight:400;font-size:10px;line-height:1.4;color:var(--text);margin:0}
+    .hl-cta-location strong{color:var(--gold);font-weight:700;letter-spacing:0.04em}
+    .hl-cta-closing{font-family:'Inter',sans-serif;font-weight:400;font-style:italic;font-size:10px;line-height:1.5;color:rgba(232,234,238,0.78);margin:0 0 9px}
+    .hl-cta-closing strong{color:var(--gold);font-weight:600;font-style:normal}
+
     /* Mini-carousel BASE styles (duplicated for desktop) */
     .hl-cta-teaser{display:flex;align-items:center;justify-content:center;gap:12px;margin:6px 0 12px;font-family:'Inter',sans-serif;font-size:11.5px;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);animation:hlTeaserPulse 1.8s ease-in-out infinite}
     .hl-cta-teaser-arrow{display:inline-block;font-size:16px;line-height:1;animation:hlTeaserArrows 1.4s ease-in-out infinite}
@@ -1314,6 +1328,70 @@
     }
     .hl-cta-exit em{color:rgba(212,182,106,0.7);font-style:italic;font-weight:600}
     .hl-cta-claim-inline{color:var(--gold);font-weight:800;font-size:1.05em;text-shadow:0 0 14px rgba(212,182,106,0.25);}
+
+    /* === CTA hierarchical block (Soyons clair — Mobile) === */
+    .hl-cta-setup{
+      font-family:'Inter',sans-serif;font-weight:400;
+      font-size:10px;line-height:1.55;color:rgba(232,234,238,0.82);
+      margin:0 0 10px !important;
+      letter-spacing:0.005em;
+    }
+    .hl-cta-setup strong{color:var(--gold);font-weight:600}
+    .hl-cta-price-inline{
+      font-family:'Playfair Display',serif;font-style:italic;
+      font-size:13.5px;font-weight:700;color:var(--gold);
+      letter-spacing:-0.005em;
+      text-shadow:0 0 14px rgba(212,182,106,0.45);
+      display:inline-block;margin:0 1px;
+    }
+    .hl-cta-solution-box{
+      width:100%;
+      background:linear-gradient(135deg,rgba(212,182,106,0.13) 0%,rgba(212,182,106,0.04) 100%);
+      border:1.5px solid rgba(212,182,106,0.55);
+      border-radius:11px;
+      padding:11px 12px 10px;
+      margin:2px 0 9px;
+      text-align:center;position:relative;
+      box-shadow:0 0 22px rgba(212,182,106,0.12),inset 0 1px 0 rgba(212,182,106,0.22);
+    }
+    .hl-cta-solution-box::before{
+      content:"";
+      position:absolute;top:-1.5px;left:50%;
+      transform:translateX(-50%);
+      width:62%;height:2px;
+      background:linear-gradient(90deg,transparent,var(--gold),transparent);
+      pointer-events:none;
+    }
+    .hl-cta-solution-pretitle{
+      font-family:'Inter',sans-serif;font-weight:700;
+      font-size:8.5px;letter-spacing:0.2em;text-transform:uppercase;
+      color:var(--gold);opacity:0.78;
+      display:block;margin-bottom:3px;
+    }
+    .hl-cta-protocol{
+      font-family:'Playfair Display',serif;font-style:italic;font-weight:700;
+      font-size:17px;line-height:1.2;color:var(--gold);
+      letter-spacing:-0.012em;
+      text-shadow:0 0 18px rgba(212,182,106,0.32);
+      margin:0 0 3px !important;
+    }
+    .hl-cta-greek{
+      font-family:'Playfair Display',serif;font-style:italic;
+      text-transform:none;
+    }
+    .hl-cta-location{
+      font-family:'Inter',sans-serif;font-weight:400;
+      font-size:9.5px;line-height:1.4;color:var(--text);
+      margin:0 !important;
+    }
+    .hl-cta-location strong{color:var(--gold);font-weight:700;letter-spacing:0.04em}
+    .hl-cta-closing{
+      font-family:'Inter',sans-serif;font-weight:400;font-style:italic;
+      font-size:9.8px;line-height:1.5;color:rgba(232,234,238,0.78);
+      margin:0 0 9px !important;
+    }
+    .hl-cta-closing strong{color:var(--gold);font-weight:600;font-style:normal}
+
     /* === MINI-CAROUSEL inside slide CTA — slidable cards (dopamine effect) === */
     .hl-cta-mini{width:100%;max-width:100%;margin:0 0 9px;position:relative;overflow:hidden;box-sizing:border-box}
     .hl-cta-mini-track{
@@ -5614,7 +5692,13 @@
       <div class="hero-lead-slide hero-lead-slide-cta">
         <div class="hero-lead-card">
           <p class="hl-cta-kicker">Soyons clair.</p>
-          <p class="hl-cta-body">Si tu t'es reconnu dans une ou plusieurs des situations précédentes, et que tu es prêt à investir <strong>49&nbsp;$/mois</strong> sur toi-même, alors <strong class="hl-cta-claim-inline">le Protocole α-QUANTT disponible dans GENESYS</strong> est exactement ce qu'il te faut pour atteindre tes objectifs.</p>
+          <p class="hl-cta-setup">Si tu t'es reconnu dans <strong>une ou plusieurs</strong> des situations précédentes, et que tu es prêt à investir <span class="hl-cta-price-inline">49&nbsp;$/mois</span> sur toi-même…</p>
+          <div class="hl-cta-solution-box">
+            <span class="hl-cta-solution-pretitle">Alors la solution est claire</span>
+            <p class="hl-cta-protocol">Le Protocole <span class="hl-cta-greek">α</span>-QUANTT</p>
+            <p class="hl-cta-location">disponible dans <strong>GENESYS</strong></p>
+          </div>
+          <p class="hl-cta-closing">est exactement ce qu'il te faut pour atteindre <strong>tes objectifs</strong>.</p>
           <div class="hl-cta-teaser" aria-hidden="true">
             <span class="hl-cta-teaser-arrow">←</span>
             <span class="hl-cta-teaser-text">Pourquoi rejoindre GENESYS</span>
