@@ -592,6 +592,32 @@
       0%, 100%{transform:scale(1) rotate(0deg);filter:drop-shadow(0 0 10px rgba(212,182,106,0.3))}
       50%{transform:scale(1.08) rotate(-3deg);filter:drop-shadow(0 0 22px rgba(212,182,106,0.65))}
     }
+    /* === Slide 1 — Profils (V3-B : icônes carrées + cards) === */
+    .hl-profiles{display:flex;flex-direction:column;gap:10px;margin:0 auto 4px;max-width:100%}
+    .hl-profile{
+      display:flex;align-items:center;gap:14px;
+      background:linear-gradient(180deg, rgba(20,37,64,0.55), rgba(10,22,40,0.25));
+      border:1px solid rgba(212,182,106,0.18);
+      border-left:2px solid var(--gold);
+      border-radius:10px;
+      padding:11px 14px;
+      text-align:left;
+    }
+    .hl-profile-icon{
+      flex-shrink:0;width:42px;height:42px;border-radius:10px;
+      background:linear-gradient(180deg, rgba(212,182,106,0.14), rgba(20,37,64,0.4));
+      border:1px solid rgba(212,182,106,0.4);
+      display:flex;align-items:center;justify-content:center;
+      color:var(--gold);
+      box-shadow:0 0 14px rgba(212,182,106,0.18);
+    }
+    .hl-profile-icon svg{width:22px;height:22px;display:block;filter:drop-shadow(0 0 4px rgba(212,182,106,0.45))}
+    .hl-profile-text{
+      font-family:'Inter',sans-serif;
+      font-size:13.5px;line-height:1.5;
+      color:var(--text);font-weight:500;
+    }
+    .hl-profile-text strong{color:var(--gold);font-weight:700}
     /* Slide 2 — sources d'apprentissage (3 badges navy homogenes, desktop) */
     .hl-sources{display:flex;justify-content:center;align-items:flex-start;gap:18px;margin:0 auto 22px;max-width:100%}
     .hl-source{flex:1 1 0;min-width:0;display:flex;flex-direction:column;align-items:center;text-align:center;gap:10px}
@@ -5225,7 +5251,27 @@
           </span>
           <span class="hl-pretitle hl-pretitle-lg">Avant d'aller plus loin</span>
           <span class="hl-pretitle-divider" aria-hidden="true"></span>
-          <p class="hero-lead-intro-p">Soyons honnêtes 5 secondes :<br>Si tu es sur cette page<br>c'est probablement que<br><strong>tu as du mal à décoller<br>en e-commerce</strong>.</p>
+          <p class="hero-lead-intro-p">Soyons honnêtes 5 secondes :<br>Si tu es sur cette page, c'est probablement que :</p>
+          <div class="hl-profiles" aria-label="Trois profils types">
+            <div class="hl-profile">
+              <div class="hl-profile-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21V5a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v16M3 21h18M9 12h2M16 8l5 5-5 5"/></svg>
+              </div>
+              <div class="hl-profile-text">Tu veux <strong>changer de carrière</strong> et te lancer dans l'e-commerce.</div>
+            </div>
+            <div class="hl-profile">
+              <div class="hl-profile-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l9-8 9 8M5 9v11h14V9M9 21V12h6v9"/></svg>
+              </div>
+              <div class="hl-profile-text">Tu cherches un <strong>complément de revenu</strong> depuis chez toi.</div>
+            </div>
+            <div class="hl-profile">
+              <div class="hl-profile-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l6-6 4 4 8-8M14 7h7v7"/></svg>
+              </div>
+              <div class="hl-profile-text">Tu as déjà <strong>essayé de lancer une boutique</strong>, mais tu veux <strong>de meilleurs résultats</strong>.</div>
+            </div>
+          </div>
           <div class="hero-lead-shopify" aria-hidden="true">
             <svg viewBox="0 0 109.5 124.5" xmlns="http://www.w3.org/2000/svg">
               <path fill="#D4B66A" d="M74.7,14.8c0,0-1.4,0.4-3.7,1.1c-0.4-1.3-1-2.8-1.8-4.4c-2.6-5-6.5-7.7-11.1-7.7c0,0,0,0-0.1,0c-0.3,0-0.6,0-1,0.1 c-0.1-0.2-0.3-0.3-0.4-0.5c-2-2.2-4.6-3.2-7.7-3.1c-6,0.2-12,4.5-16.8,12.2c-3.4,5.4-6,12.2-6.7,17.5c-6.9,2.1-11.7,3.6-11.8,3.7 c-3.5,1.1-3.6,1.2-4,4.5c-0.3,2.5-9.5,73-9.5,73L77,124.5l33-8.2c0,0-15.2-103-15.3-103.7C94.5,12.1,93.6,11.7,74.7,14.8z M62.7,17.6 c-3.2,1-6.7,2.1-10.2,3.2c1-3.8,2.9-7.6,5.2-10.1c0.9-0.9,2.1-2,3.5-2.6C62.6,11.1,62.7,15.1,62.7,17.6z M55,2.7c1.1,0,2.1,0.2,2.9,0.7 c-1.3,0.7-2.6,1.7-3.8,3c-3.1,3.4-5.5,8.6-6.5,13.6c-2.9,0.9-5.7,1.8-8.3,2.6C41.1,14,47.7,2.9,55,2.7z M44.1,59.2 c0.4,6,16.1,7.3,16.9,21.2c0.7,11-5.8,18.5-15.2,19.1c-11.3,0.7-17.6-6-17.6-6l2.4-10.2c0,0,6.3,4.8,11.4,4.4c3.3-0.2,4.5-2.9,4.4-4.9 c-0.5-7.8-13.3-7.3-14-20.1c-0.7-10.8,6.4-21.7,22-22.7c6-0.4,9.1,1.1,9.1,1.1l-3.6,13.4c0,0-4-1.8-8.7-1.5 C44.3,53.4,44.1,57.7,44.1,59.2z M65.4,16.8c0-2.3-0.3-5.6-1.4-8.4c3.6,0.7,5.3,4.7,6.1,7.1C68.7,15.9,67.1,16.4,65.4,16.8z"/>
