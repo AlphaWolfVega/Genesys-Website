@@ -3292,6 +3292,33 @@
     filter:saturate(0.95) contrast(1.02);
   }
   .founder-photo:has(img)::after{content:none}
+
+  /* ===== Monogramme α — bottom-right corner of Alpha photo only ===== */
+  .founder-photo-alpha .photo-monogram{
+    position:absolute;
+    bottom:32px;right:34px;
+    z-index:3;pointer-events:none;
+    font-family:'Playfair Display',serif;
+    font-style:italic;font-weight:700;
+    font-size:32px;line-height:1;
+    color:#F5D89A;
+    text-shadow:0 0 12px rgba(245,216,154,0.85),0 0 22px rgba(245,216,154,0.45);
+    animation:photoMonogram 4s ease-in-out infinite;
+    text-transform:none;
+  }
+  @keyframes photoMonogram{
+    0%,100%{
+      opacity:0.30;
+      text-shadow:0 0 8px rgba(245,216,154,0.4),0 0 16px rgba(245,216,154,0.2);
+    }
+    50%{
+      opacity:0.95;
+      text-shadow:0 0 14px rgba(245,216,154,0.95),0 0 28px rgba(245,216,154,0.55);
+    }
+  }
+  @media (max-width:768px){
+    .founder-photo-alpha .photo-monogram{font-size:26px;bottom:26px;right:28px}
+  }
   /* ===== TEAM H2 — line1 nowrap + line2 plain gold, tight gap ===== */
   .h2-team{
     line-height:1;
@@ -7022,7 +7049,7 @@
         <!-- SLIDE 1 — Alpha Wolf Vega -->
         <div class="team-slide active">
           <div class="founder">
-            <div class="founder-photo"><img src="assets/alpha-wolf-vega.webp" alt="Alpha Wolf Vega — Fondateur GENESYS"></div>
+            <div class="founder-photo founder-photo-alpha"><img src="assets/alpha-wolf-vega.webp" alt="Alpha Wolf Vega — Fondateur GENESYS"><span class="photo-monogram" aria-hidden="true">α</span></div>
             <div>
               <div class="role">— UN ACCÈS DIRECT À MOI —</div>
               <h3>Alpha Wolf Vega</h3>
