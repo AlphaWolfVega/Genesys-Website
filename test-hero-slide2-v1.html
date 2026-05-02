@@ -1,0 +1,658 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<title>GENESYS — Test Slide 2 (3 variantes coherentes V4-C → Slide 3)</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0a1628;
+    --bg-deep:#06101e;
+    --gold:#D4B66A;
+    --gold-soft:#E5CB85;
+    --gold-faded:rgba(212,182,106,0.22);
+    --text:#e8eaee;
+    --text-dim:#a8b0bd;
+    --red-warn:#E07A6E;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{
+    overflow-x:clip;
+    max-width:100vw;
+  }
+  body{
+    background:radial-gradient(ellipse at top, #14253f 0%, var(--bg) 50%, var(--bg-deep) 100%);
+    color:var(--text);
+    font-family:'Inter',sans-serif;
+    min-height:100vh;
+    padding:32px 16px 80px;
+  }
+
+  /* === HEADER PAGE === */
+  .page-header{
+    max-width:980px;margin:0 auto 48px;text-align:center;
+  }
+  .page-header h1{
+    font-family:'Playfair Display',serif;
+    font-size:28px;color:var(--gold);font-weight:700;
+    margin-bottom:14px;
+  }
+  .page-header p{
+    font-size:14.5px;line-height:1.6;color:var(--text-dim);
+    max-width:720px;margin:0 auto 8px;
+  }
+  .page-header .lock-line{
+    display:inline-block;background:rgba(212,182,106,0.12);
+    border:1px solid var(--gold-faded);border-radius:20px;
+    padding:6px 14px;margin-top:14px;
+    font-size:11.5px;letter-spacing:0.06em;color:var(--gold);
+  }
+
+  /* === GRID DES 3 VARIANTES === */
+  .variants-grid{
+    display:grid;
+    grid-template-columns:1fr;
+    gap:48px;
+    max-width:1200px;margin:0 auto;
+  }
+  @media (min-width:980px){
+    .variants-grid{grid-template-columns:repeat(3,1fr);gap:24px}
+  }
+
+  .variant-col{
+    display:flex;flex-direction:column;align-items:center;
+  }
+  .variant-label{
+    text-align:center;margin-bottom:16px;
+  }
+  .variant-tag{
+    display:inline-block;
+    background:linear-gradient(135deg,#1a2d4d,#0f1d33);
+    border:1px solid var(--gold);
+    color:var(--gold);font-size:12px;font-weight:700;
+    letter-spacing:0.18em;text-transform:uppercase;
+    padding:6px 14px;border-radius:6px;
+    margin-bottom:8px;
+  }
+  .variant-name{
+    font-family:'Playfair Display',serif;font-style:italic;
+    font-size:18px;color:var(--text);
+    margin-bottom:4px;
+  }
+  .variant-desc{
+    font-size:11.5px;color:var(--text-dim);
+    max-width:280px;line-height:1.4;
+  }
+
+  /* === STACK DE 3 CARDS PAR VARIANT (slide 1 + slide 2 + slide 3) === */
+  .slides-stack{
+    display:flex;flex-direction:column;
+    gap:18px;width:100%;max-width:340px;
+  }
+  .slide-tag{
+    text-align:center;font-size:10.5px;letter-spacing:0.16em;
+    color:var(--text-dim);text-transform:uppercase;
+    margin-bottom:-6px;
+  }
+
+  /* === HERO LEAD CARD (mimic prod) === */
+  .hero-lead-card{
+    width:100%;
+    background:linear-gradient(135deg,rgba(20,37,64,0.55) 0%,rgba(10,22,40,0.32) 100%);
+    border:1px solid var(--gold-faded);
+    border-radius:16px;
+    padding:22px 18px;
+    min-height:340px;
+    display:flex;flex-direction:column;justify-content:center;align-items:center;
+    text-align:center;
+    box-shadow:0 8px 28px rgba(0,0,0,0.28);
+    position:relative;
+  }
+  .hero-lead-card.is-locked::before{
+    content:"V4-C VALIDE";
+    position:absolute;top:8px;right:8px;
+    background:rgba(212,182,106,0.18);color:var(--gold);
+    font-size:8.5px;letter-spacing:0.12em;
+    padding:3px 8px;border-radius:4px;
+    font-weight:600;
+  }
+  .hero-lead-card.is-locked.s3::before{content:"SLIDE 3 — INCHANGE"}
+  .hero-lead-card.is-test::before{
+    content:"NOUVEAU SLIDE 2";
+    position:absolute;top:8px;right:8px;
+    background:rgba(224,122,110,0.2);color:#FFB89C;
+    font-size:8.5px;letter-spacing:0.12em;
+    padding:3px 8px;border-radius:4px;
+    font-weight:600;
+  }
+
+  .hero-lead-downhint{
+    display:flex;flex-direction:column;align-items:center;
+    gap:0;margin:-4px 0 12px;color:rgba(212,182,106,0.7);
+  }
+  .hero-lead-downhint svg{width:18px;height:18px;display:block;margin-top:-5px;animation:downhint 1.6s ease-in-out infinite}
+  .hero-lead-downhint svg:nth-child(2){animation-delay:0.18s;opacity:0.55}
+  @keyframes downhint{
+    0%,100%{transform:translateY(0);opacity:0.85}
+    50%{transform:translateY(5px);opacity:0.35}
+  }
+
+  .hl-pretitle{
+    font-size:10px;font-weight:700;
+    letter-spacing:0.22em;text-transform:uppercase;
+    color:var(--gold);opacity:0.85;
+    margin-bottom:6px;display:block;
+  }
+  .hl-pretitle-divider{
+    display:block;width:48px;height:1.5px;
+    background:linear-gradient(90deg, transparent, var(--gold), transparent);
+    margin:0 auto 14px;
+  }
+  .hero-lead-intro-p{
+    font-size:12.5px;line-height:1.55;
+    color:var(--text);font-weight:400;
+    margin:0 0 14px;
+  }
+  .hero-lead-card strong{color:var(--gold);font-weight:700}
+
+  /* === SLIDE 1 V4-C — Profils === */
+  .hl-profiles{
+    display:flex;flex-direction:column;
+    gap:8px;width:100%;margin:0 0 8px;
+  }
+  .hl-profile{
+    display:flex;align-items:center;gap:10px;
+    padding:10px 12px;
+    border:1px solid var(--gold-faded);
+    border-radius:10px;
+    background:rgba(20,37,64,0.42);
+    text-align:left;
+  }
+  .hl-profile-icon{
+    flex:0 0 32px;width:32px;height:32px;
+    display:flex;align-items:center;justify-content:center;
+    color:var(--gold);
+  }
+  .hl-profile-icon svg{width:24px;height:24px}
+  .hl-profile-text{
+    font-size:12px;line-height:1.4;color:var(--text);flex:1;
+  }
+  .hl-profile-text strong{color:var(--gold)}
+
+  .hero-lead-shopify{display:flex;justify-content:center;margin-top:8px}
+  .hero-lead-shopify svg{
+    width:36px;height:auto;display:block;
+    animation:shopifyPulse 2.6s ease-in-out infinite;
+    filter:drop-shadow(0 0 12px rgba(212,182,106,0.4));
+  }
+  @keyframes shopifyPulse{
+    0%,100%{transform:scale(1) rotate(0deg)}
+    50%{transform:scale(1.08) rotate(-3deg)}
+  }
+
+  /* === SLIDE 2 V1 — EMPATHIQUE === */
+  .s2-v1-h{
+    font-family:'Playfair Display',serif;font-style:italic;
+    font-size:22px;color:var(--gold);font-weight:400;
+    margin-bottom:10px;line-height:1.2;
+  }
+  .s2-v1-body{
+    font-size:13px;line-height:1.6;color:var(--text);
+    margin-bottom:8px;
+  }
+  .s2-v1-body strong{color:var(--gold);font-weight:600}
+  .s2-v1-stats{
+    display:flex;justify-content:center;gap:14px;
+    margin:12px 0 6px;flex-wrap:wrap;
+  }
+  .s2-v1-stat{
+    background:rgba(224,122,110,0.1);
+    border:1px solid rgba(224,122,110,0.3);
+    border-radius:8px;padding:8px 10px;
+    flex:1;min-width:80px;
+  }
+  .s2-v1-stat-num{
+    font-family:'Playfair Display',serif;
+    font-size:18px;color:#FFB89C;font-weight:700;
+    display:block;margin-bottom:2px;
+  }
+  .s2-v1-stat-lbl{
+    font-size:9.5px;letter-spacing:0.12em;text-transform:uppercase;
+    color:var(--text-dim);
+  }
+
+  /* === SLIDE 2 V2 — STATS BRUTALES === */
+  .s2-v2-h{
+    font-size:11px;font-weight:700;letter-spacing:0.22em;
+    text-transform:uppercase;color:var(--red-warn);
+    margin-bottom:14px;display:block;
+  }
+  .s2-v2-bignum{
+    font-family:'Playfair Display',serif;font-style:italic;
+    font-size:64px;line-height:1;color:#FF6B5C;
+    font-weight:700;margin-bottom:4px;
+    text-shadow:0 0 24px rgba(255,107,92,0.4);
+    animation:numPulse 2.4s ease-in-out infinite;
+  }
+  @keyframes numPulse{
+    0%,100%{transform:scale(1);text-shadow:0 0 24px rgba(255,107,92,0.4)}
+    50%{transform:scale(1.05);text-shadow:0 0 36px rgba(255,107,92,0.65)}
+  }
+  .s2-v2-bignum-sub{
+    font-size:13px;color:var(--text);line-height:1.4;
+    margin-bottom:14px;
+  }
+  .s2-v2-bignum-sub strong{color:var(--gold)}
+  .s2-v2-divider{
+    width:48px;height:1px;
+    background:linear-gradient(90deg,transparent,var(--gold-faded),transparent);
+    margin:8px auto 12px;
+  }
+  .s2-v2-body{
+    font-size:12.5px;line-height:1.55;color:var(--text-dim);
+    font-style:italic;
+  }
+  .s2-v2-body strong{color:var(--gold);font-style:normal;font-weight:600}
+
+  /* === SLIDE 2 V3 — PIVOT QUESTION === */
+  .s2-v3-prefix{
+    font-size:10.5px;font-weight:700;letter-spacing:0.2em;
+    text-transform:uppercase;color:var(--gold);opacity:0.85;
+    margin-bottom:10px;display:block;
+  }
+  .s2-v3-question{
+    font-family:'Playfair Display',serif;font-style:italic;
+    font-size:24px;color:var(--text);font-weight:400;
+    line-height:1.3;margin-bottom:14px;
+  }
+  .s2-v3-question strong{color:var(--gold);font-weight:700}
+  .s2-v3-checks{
+    display:flex;flex-direction:column;gap:6px;
+    width:100%;margin:6px 0;
+  }
+  .s2-v3-check{
+    display:flex;align-items:flex-start;gap:8px;
+    font-size:12px;line-height:1.45;color:var(--text);
+    text-align:left;
+  }
+  .s2-v3-check svg{
+    flex:0 0 16px;width:16px;height:16px;
+    color:var(--gold);margin-top:1px;
+  }
+  .s2-v3-bridge{
+    font-size:12px;color:var(--text-dim);
+    margin-top:14px;font-style:italic;
+  }
+  .s2-v3-bridge strong{color:var(--gold);font-style:normal}
+
+  /* === SLIDE 3 — SAME AS PROD (infinity loop + spin text) === */
+  .hl-infinity-loop{
+    width:120px;height:60px;margin:0 auto 14px;
+  }
+  .hl-spin-text{
+    font-size:13px;line-height:1.55;color:var(--text);
+    margin-bottom:10px;
+  }
+  .hl-spin-text strong{color:var(--gold);font-weight:600}
+  .hl-spin-dots{
+    display:inline-block;color:var(--gold);
+    animation:spinDots 1.4s ease-in-out infinite;
+  }
+  @keyframes spinDots{
+    0%,100%{opacity:0.4}
+    50%{opacity:1}
+  }
+  .hl-gold-hr{
+    border:0;width:60%;height:1px;
+    background:linear-gradient(90deg,transparent,var(--gold),transparent);
+    margin:10px auto;
+  }
+  .hl-spin-before{
+    font-size:10.5px;font-weight:700;letter-spacing:0.22em;
+    color:var(--gold);text-transform:uppercase;margin-bottom:4px;
+  }
+  .hl-spin-tease{
+    font-size:12px;color:var(--text-dim);font-style:italic;
+  }
+
+  /* === SWIPE HINT === */
+  .hero-lead-swipe{
+    display:inline-flex;margin-top:14px;
+    color:rgba(212,182,106,0.55);
+    animation:swipe 1.8s ease-in-out infinite;
+  }
+  .hero-lead-swipe svg{width:18px;height:18px;display:block}
+  @keyframes swipe{
+    0%,100%{transform:translateX(0);opacity:0.55}
+    50%{transform:translateX(6px);opacity:1}
+  }
+
+  /* === ARROW BETWEEN SLIDES (visual flow indicator) === */
+  .flow-arrow{
+    display:flex;justify-content:center;
+    color:var(--gold);opacity:0.5;
+    margin:-6px 0;
+  }
+  .flow-arrow svg{
+    width:24px;height:24px;
+    animation:flowArrow 1.6s ease-in-out infinite;
+  }
+  @keyframes flowArrow{
+    0%,100%{transform:translateY(0);opacity:0.4}
+    50%{transform:translateY(4px);opacity:0.8}
+  }
+
+  /* === MY VOTE BADGE === */
+  .my-vote{
+    display:inline-block;background:linear-gradient(135deg,var(--gold),#A88838);
+    color:var(--bg-deep);font-size:10px;font-weight:700;
+    letter-spacing:0.14em;text-transform:uppercase;
+    padding:4px 10px;border-radius:4px;margin-left:8px;
+    vertical-align:middle;
+  }
+
+  /* === FOOTER === */
+  .page-footer{
+    max-width:980px;margin:60px auto 0;text-align:center;
+    padding-top:32px;border-top:1px solid var(--gold-faded);
+  }
+  .page-footer p{
+    font-size:13px;color:var(--text-dim);margin-bottom:8px;
+  }
+  .page-footer strong{color:var(--gold)}
+</style>
+</head>
+<body>
+
+<header class="page-header">
+  <h1>Slide 2 — 3 variantes pour cohérence narrative</h1>
+  <p>
+    Slide 1 (V4-C validée) parle déjà de <strong>contenu gratuit / formations payantes / boutique qui ne décolle pas</strong>.
+    La slide 2 actuelle est <strong>redondante</strong> (badges YouTube + Formation 1497€ + mentoring 1500-5000€).
+    Voici 3 variantes qui complètent slide 1 sans répéter, et qui mènent fluide vers slide 3 ("tu tournes en rond").
+  </p>
+  <span class="lock-line">Slide 1 V4-C + Slide 3 actuelle inchangées dans les 3 propositions</span>
+</header>
+
+<div class="variants-grid">
+
+  <!-- ====================================================== -->
+  <!-- VARIANT 1 — EMPATHIQUE -->
+  <!-- ====================================================== -->
+  <div class="variant-col">
+    <div class="variant-label">
+      <span class="variant-tag">Variante 1</span>
+      <div class="variant-name">"C'est pas toi le problème"</div>
+      <div class="variant-desc">Empathique / déculpabilisant. Reconnaît l'effort, blâme le système.</div>
+    </div>
+
+    <div class="slides-stack">
+      <div class="slide-tag">SLIDE 1 (V4-C)</div>
+      <div class="hero-lead-card is-locked">
+        <div class="hero-lead-downhint">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </div>
+        <span class="hl-pretitle">Avant d'aller plus loin</span>
+        <span class="hl-pretitle-divider"></span>
+        <p class="hero-lead-intro-p">Soyons honnêtes 5 secondes :<br>Si tu es sur cette page,<br>c'est probablement que :</p>
+        <div class="hl-profiles">
+          <div class="hl-profile">
+            <div class="hl-profile-icon"><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="6,4 6,20 20,12"/></svg></div>
+            <div class="hl-profile-text">Tu consommes du <strong>contenu e-com gratuit</strong> mais tu ne passes jamais à l'action.</div>
+          </div>
+          <div class="hl-profile">
+            <div class="hl-profile-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="3" width="16" height="18" rx="2"/><line x1="8" y1="8" x2="16" y2="8"/><line x1="8" y1="12" x2="16" y2="12"/><line x1="8" y1="16" x2="13" y2="16"/></svg></div>
+            <div class="hl-profile-text">Tu as testé des <strong>formations payantes / mentorings</strong> mais ça n'a rien donné.</div>
+          </div>
+          <div class="hl-profile">
+            <div class="hl-profile-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3,6 9,14 13,10 21,18"/><polyline points="14,18 21,18 21,11"/></svg></div>
+            <div class="hl-profile-text">Tu as <strong>lancé une boutique ou plusieurs</strong>, mais aucune ne décolle.</div>
+          </div>
+        </div>
+        <div class="hero-lead-shopify">
+          <svg viewBox="0 0 109 124" xmlns="http://www.w3.org/2000/svg"><path fill="#D4B66A" d="M74.7 14.8c-.1-.5-.5-.7-.8-.8-.3 0-6.7-.5-6.7-.5s-4.5-4.4-4.9-4.9c-.5-.5-1.4-.3-1.7-.2-.1 0-1 .3-2.5.8C56.5 5.8 54.4 2 50.5 2c-.1 0-.3 0-.4.1-.1-.2-.2-.3-.4-.5-1.2-1.3-2.7-1.9-4.5-1.9-3.5.1-7 2.6-9.8 7-2 3.1-3.6 7-4 10.1-4.1 1.3-7 2.2-7.1 2.2-2.3.7-2.4.8-2.7 3-.2 1.6-6.2 47.9-6.2 47.9l46.6 8.7 25.3-5.5c-.1-.1-13-67.5-13-67.5zM57.6 9.7c-1.2.4-2.6.8-4.1 1.3 0-2.1-.3-5-1.2-7.5 3 .6 4.5 4 5.3 6.2zM50 11.9c-2.8.9-5.8 1.8-8.8 2.7.9-3.3 2.5-6.5 4.6-8.7.7-.8 1.8-1.7 3-2.2 1.2 2.4 1.4 5.8 1.2 8.2zm-4.4-12c1 0 1.8.2 2.5.7-1.2.6-2.4 1.5-3.5 2.7-2.7 2.9-4.7 7.4-5.6 11.7-2.4.7-4.8 1.5-7 2.2C33.4 9.7 39 .1 45.6-.1z"/><path fill="#FFFFFF" d="M73.9 14c-.3 0-6.7-.5-6.7-.5s-4.5-4.4-4.9-4.9c-.2-.2-.4-.3-.7-.3l-3.5 71.8 25.3-5.5s-13-67.5-13-67.5c-.1-.6-.5-.9-1-1z"/><path fill="#0A1628" d="M50.2 27.2 47.3 36s-2.7-1.4-5.9-1.2c-4.7.3-4.8 3.2-4.7 4 .3 4.1 11 5 11.6 14.5.5 7.5-3.9 12.6-10.3 13-7.6.5-11.8-4-11.8-4l1.6-6.9s4.2 3.2 7.6 3c2.2-.1 3-1.9 2.9-3.2-.3-5.3-9.1-5-9.7-13.7-.4-7.3 4.4-14.7 15-15.4 4.1-.3 6.6.7 6.6.7z"/></svg>
+        </div>
+        <span class="hero-lead-swipe"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg></span>
+      </div>
+
+      <div class="flow-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12l7 7 7-7"/></svg></div>
+
+      <div class="slide-tag">SLIDE 2 — V1</div>
+      <div class="hero-lead-card is-test">
+        <div class="s2-v1-h">Et tu sais quoi&nbsp;?</div>
+        <div class="s2-v1-body">
+          <strong>Ce n'est pas ta faute.</strong> Pas vraiment.<br><br>
+          Le marché e-com a explosé en complexité depuis 2022.<br>
+          Les CPM Meta ont triplé.<br>
+          Les conseils gratuits sont devenus du <strong>bruit</strong>.<br>
+          Les mentorings se multiplient sans cohérence.
+        </div>
+        <div class="s2-v1-stats">
+          <div class="s2-v1-stat">
+            <span class="s2-v1-stat-num">×3</span>
+            <span class="s2-v1-stat-lbl">CPM Meta</span>
+          </div>
+          <div class="s2-v1-stat">
+            <span class="s2-v1-stat-num">90%</span>
+            <span class="s2-v1-stat-lbl">echec 4 mois</span>
+          </div>
+          <div class="s2-v1-stat">
+            <span class="s2-v1-stat-num">23+</span>
+            <span class="s2-v1-stat-lbl">gourous FR</span>
+          </div>
+        </div>
+        <div class="s2-v1-body" style="margin-top:8px">
+          Tu n'as pas échoué. Tu as juste navigué dans un <strong>système cassé sans GPS</strong>.
+        </div>
+        <span class="hero-lead-swipe"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg></span>
+      </div>
+
+      <div class="flow-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12l7 7 7-7"/></svg></div>
+
+      <div class="slide-tag">SLIDE 3 (inchangée)</div>
+      <div class="hero-lead-card is-locked s3">
+        <div class="hl-infinity-loop">
+          <svg viewBox="0 0 280 130" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <path id="hlInf1" pathLength="100" d="M 200 65 C 200 35, 165 35, 140 65 C 115 95, 80 95, 80 65 C 80 35, 115 35, 140 65 C 165 95, 200 95, 200 65 Z"/>
+            </defs>
+            <use href="#hlInf1" fill="none" stroke="#D4B66A" stroke-width="1.4" stroke-dasharray="0.6 1" opacity="0.3"/>
+            <use href="#hlInf1" fill="none" stroke="#E5CB85" stroke-width="2.8" stroke-linecap="round" stroke-dasharray="35 65" opacity="0.95">
+              <animate attributeName="stroke-dashoffset" from="0" to="-100" dur="3s" calcMode="linear" repeatCount="indefinite"/>
+            </use>
+          </svg>
+        </div>
+        <p class="hl-spin-text">Et malgré tout ça<span class="hl-spin-dots">...</span><br><strong>tu tournes en rond</strong><span class="hl-spin-dots">...</span><br><strong>tu n'arrives pas à décoller</strong><span class="hl-spin-dots">...</span><br>et je vais t'expliquer pourquoi.</p>
+        <hr class="hl-gold-hr">
+        <p class="hl-spin-before">MAIS&nbsp;AVANT</p>
+        <p class="hl-spin-tease">je te laisse découvrir la suite.</p>
+        <span class="hero-lead-swipe"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg></span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ====================================================== -->
+  <!-- VARIANT 2 — STATS BRUTALES -->
+  <!-- ====================================================== -->
+  <div class="variant-col">
+    <div class="variant-label">
+      <span class="variant-tag">Variante 2</span>
+      <div class="variant-name">"9 sur 10 échouent" <span class="my-vote">MON VOTE</span></div>
+      <div class="variant-desc">Brutal / réalité du marché. Stats choc + bridge vers slide 3.</div>
+    </div>
+
+    <div class="slides-stack">
+      <div class="slide-tag">SLIDE 1 (V4-C)</div>
+      <div class="hero-lead-card is-locked">
+        <div class="hero-lead-downhint">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </div>
+        <span class="hl-pretitle">Avant d'aller plus loin</span>
+        <span class="hl-pretitle-divider"></span>
+        <p class="hero-lead-intro-p">Soyons honnêtes 5 secondes :<br>Si tu es sur cette page,<br>c'est probablement que :</p>
+        <div class="hl-profiles">
+          <div class="hl-profile">
+            <div class="hl-profile-icon"><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="6,4 6,20 20,12"/></svg></div>
+            <div class="hl-profile-text">Tu consommes du <strong>contenu e-com gratuit</strong> mais tu ne passes jamais à l'action.</div>
+          </div>
+          <div class="hl-profile">
+            <div class="hl-profile-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="3" width="16" height="18" rx="2"/><line x1="8" y1="8" x2="16" y2="8"/><line x1="8" y1="12" x2="16" y2="12"/><line x1="8" y1="16" x2="13" y2="16"/></svg></div>
+            <div class="hl-profile-text">Tu as testé des <strong>formations payantes / mentorings</strong> mais ça n'a rien donné.</div>
+          </div>
+          <div class="hl-profile">
+            <div class="hl-profile-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3,6 9,14 13,10 21,18"/><polyline points="14,18 21,18 21,11"/></svg></div>
+            <div class="hl-profile-text">Tu as <strong>lancé une boutique ou plusieurs</strong>, mais aucune ne décolle.</div>
+          </div>
+        </div>
+        <div class="hero-lead-shopify">
+          <svg viewBox="0 0 109 124" xmlns="http://www.w3.org/2000/svg"><path fill="#D4B66A" d="M74.7 14.8c-.1-.5-.5-.7-.8-.8-.3 0-6.7-.5-6.7-.5s-4.5-4.4-4.9-4.9c-.5-.5-1.4-.3-1.7-.2-.1 0-1 .3-2.5.8C56.5 5.8 54.4 2 50.5 2c-.1 0-.3 0-.4.1-.1-.2-.2-.3-.4-.5-1.2-1.3-2.7-1.9-4.5-1.9-3.5.1-7 2.6-9.8 7-2 3.1-3.6 7-4 10.1-4.1 1.3-7 2.2-7.1 2.2-2.3.7-2.4.8-2.7 3-.2 1.6-6.2 47.9-6.2 47.9l46.6 8.7 25.3-5.5c-.1-.1-13-67.5-13-67.5zM57.6 9.7c-1.2.4-2.6.8-4.1 1.3 0-2.1-.3-5-1.2-7.5 3 .6 4.5 4 5.3 6.2zM50 11.9c-2.8.9-5.8 1.8-8.8 2.7.9-3.3 2.5-6.5 4.6-8.7.7-.8 1.8-1.7 3-2.2 1.2 2.4 1.4 5.8 1.2 8.2zm-4.4-12c1 0 1.8.2 2.5.7-1.2.6-2.4 1.5-3.5 2.7-2.7 2.9-4.7 7.4-5.6 11.7-2.4.7-4.8 1.5-7 2.2C33.4 9.7 39 .1 45.6-.1z"/><path fill="#FFFFFF" d="M73.9 14c-.3 0-6.7-.5-6.7-.5s-4.5-4.4-4.9-4.9c-.2-.2-.4-.3-.7-.3l-3.5 71.8 25.3-5.5s-13-67.5-13-67.5c-.1-.6-.5-.9-1-1z"/><path fill="#0A1628" d="M50.2 27.2 47.3 36s-2.7-1.4-5.9-1.2c-4.7.3-4.8 3.2-4.7 4 .3 4.1 11 5 11.6 14.5.5 7.5-3.9 12.6-10.3 13-7.6.5-11.8-4-11.8-4l1.6-6.9s4.2 3.2 7.6 3c2.2-.1 3-1.9 2.9-3.2-.3-5.3-9.1-5-9.7-13.7-.4-7.3 4.4-14.7 15-15.4 4.1-.3 6.6.7 6.6.7z"/></svg>
+        </div>
+        <span class="hero-lead-swipe"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg></span>
+      </div>
+
+      <div class="flow-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12l7 7 7-7"/></svg></div>
+
+      <div class="slide-tag">SLIDE 2 — V2</div>
+      <div class="hero-lead-card is-test">
+        <span class="s2-v2-h">⚠ La réalité du marché</span>
+        <div class="s2-v2-bignum">9/10</div>
+        <div class="s2-v2-bignum-sub">
+          des nouvelles boutiques e-com<br>
+          ferment dans les <strong>4 premiers mois</strong>.
+        </div>
+        <div class="s2-v2-divider"></div>
+        <div class="s2-v2-body">
+          Et toi, tu es là, à essayer de <strong>faire partie du 10%</strong>.<br>
+          Sans méthode, sans cadre, sans personne pour te dire si tu vas dans la bonne direction.
+        </div>
+        <span class="hero-lead-swipe"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg></span>
+      </div>
+
+      <div class="flow-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12l7 7 7-7"/></svg></div>
+
+      <div class="slide-tag">SLIDE 3 (inchangée)</div>
+      <div class="hero-lead-card is-locked s3">
+        <div class="hl-infinity-loop">
+          <svg viewBox="0 0 280 130" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <path id="hlInf2" pathLength="100" d="M 200 65 C 200 35, 165 35, 140 65 C 115 95, 80 95, 80 65 C 80 35, 115 35, 140 65 C 165 95, 200 95, 200 65 Z"/>
+            </defs>
+            <use href="#hlInf2" fill="none" stroke="#D4B66A" stroke-width="1.4" stroke-dasharray="0.6 1" opacity="0.3"/>
+            <use href="#hlInf2" fill="none" stroke="#E5CB85" stroke-width="2.8" stroke-linecap="round" stroke-dasharray="35 65" opacity="0.95">
+              <animate attributeName="stroke-dashoffset" from="0" to="-100" dur="3s" calcMode="linear" repeatCount="indefinite"/>
+            </use>
+          </svg>
+        </div>
+        <p class="hl-spin-text">Et malgré tout ça<span class="hl-spin-dots">...</span><br><strong>tu tournes en rond</strong><span class="hl-spin-dots">...</span><br><strong>tu n'arrives pas à décoller</strong><span class="hl-spin-dots">...</span><br>et je vais t'expliquer pourquoi.</p>
+        <hr class="hl-gold-hr">
+        <p class="hl-spin-before">MAIS&nbsp;AVANT</p>
+        <p class="hl-spin-tease">je te laisse découvrir la suite.</p>
+        <span class="hero-lead-swipe"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg></span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ====================================================== -->
+  <!-- VARIANT 3 — PIVOT QUESTION -->
+  <!-- ====================================================== -->
+  <div class="variant-col">
+    <div class="variant-label">
+      <span class="variant-tag">Variante 3</span>
+      <div class="variant-name">"Et la vraie question…"</div>
+      <div class="variant-desc">Pivot émotionnel qui se transforme en question existentielle. Bridge ultra-fluide.</div>
+    </div>
+
+    <div class="slides-stack">
+      <div class="slide-tag">SLIDE 1 (V4-C)</div>
+      <div class="hero-lead-card is-locked">
+        <div class="hero-lead-downhint">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </div>
+        <span class="hl-pretitle">Avant d'aller plus loin</span>
+        <span class="hl-pretitle-divider"></span>
+        <p class="hero-lead-intro-p">Soyons honnêtes 5 secondes :<br>Si tu es sur cette page,<br>c'est probablement que :</p>
+        <div class="hl-profiles">
+          <div class="hl-profile">
+            <div class="hl-profile-icon"><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="6,4 6,20 20,12"/></svg></div>
+            <div class="hl-profile-text">Tu consommes du <strong>contenu e-com gratuit</strong> mais tu ne passes jamais à l'action.</div>
+          </div>
+          <div class="hl-profile">
+            <div class="hl-profile-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="3" width="16" height="18" rx="2"/><line x1="8" y1="8" x2="16" y2="8"/><line x1="8" y1="12" x2="16" y2="12"/><line x1="8" y1="16" x2="13" y2="16"/></svg></div>
+            <div class="hl-profile-text">Tu as testé des <strong>formations payantes / mentorings</strong> mais ça n'a rien donné.</div>
+          </div>
+          <div class="hl-profile">
+            <div class="hl-profile-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3,6 9,14 13,10 21,18"/><polyline points="14,18 21,18 21,11"/></svg></div>
+            <div class="hl-profile-text">Tu as <strong>lancé une boutique ou plusieurs</strong>, mais aucune ne décolle.</div>
+          </div>
+        </div>
+        <div class="hero-lead-shopify">
+          <svg viewBox="0 0 109 124" xmlns="http://www.w3.org/2000/svg"><path fill="#D4B66A" d="M74.7 14.8c-.1-.5-.5-.7-.8-.8-.3 0-6.7-.5-6.7-.5s-4.5-4.4-4.9-4.9c-.5-.5-1.4-.3-1.7-.2-.1 0-1 .3-2.5.8C56.5 5.8 54.4 2 50.5 2c-.1 0-.3 0-.4.1-.1-.2-.2-.3-.4-.5-1.2-1.3-2.7-1.9-4.5-1.9-3.5.1-7 2.6-9.8 7-2 3.1-3.6 7-4 10.1-4.1 1.3-7 2.2-7.1 2.2-2.3.7-2.4.8-2.7 3-.2 1.6-6.2 47.9-6.2 47.9l46.6 8.7 25.3-5.5c-.1-.1-13-67.5-13-67.5zM57.6 9.7c-1.2.4-2.6.8-4.1 1.3 0-2.1-.3-5-1.2-7.5 3 .6 4.5 4 5.3 6.2zM50 11.9c-2.8.9-5.8 1.8-8.8 2.7.9-3.3 2.5-6.5 4.6-8.7.7-.8 1.8-1.7 3-2.2 1.2 2.4 1.4 5.8 1.2 8.2zm-4.4-12c1 0 1.8.2 2.5.7-1.2.6-2.4 1.5-3.5 2.7-2.7 2.9-4.7 7.4-5.6 11.7-2.4.7-4.8 1.5-7 2.2C33.4 9.7 39 .1 45.6-.1z"/><path fill="#FFFFFF" d="M73.9 14c-.3 0-6.7-.5-6.7-.5s-4.5-4.4-4.9-4.9c-.2-.2-.4-.3-.7-.3l-3.5 71.8 25.3-5.5s-13-67.5-13-67.5c-.1-.6-.5-.9-1-1z"/><path fill="#0A1628" d="M50.2 27.2 47.3 36s-2.7-1.4-5.9-1.2c-4.7.3-4.8 3.2-4.7 4 .3 4.1 11 5 11.6 14.5.5 7.5-3.9 12.6-10.3 13-7.6.5-11.8-4-11.8-4l1.6-6.9s4.2 3.2 7.6 3c2.2-.1 3-1.9 2.9-3.2-.3-5.3-9.1-5-9.7-13.7-.4-7.3 4.4-14.7 15-15.4 4.1-.3 6.6.7 6.6.7z"/></svg>
+        </div>
+        <span class="hero-lead-swipe"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg></span>
+      </div>
+
+      <div class="flow-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12l7 7 7-7"/></svg></div>
+
+      <div class="slide-tag">SLIDE 2 — V3</div>
+      <div class="hero-lead-card is-test">
+        <span class="s2-v3-prefix">Et la vraie question…</span>
+        <div class="s2-v3-question">Pourquoi est-ce que ça <strong>ne fonctionne pas</strong> pour toi&nbsp;?</div>
+        <div class="s2-v3-checks">
+          <div class="s2-v3-check">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            <span>Tu as <strong>étudié</strong> (heures de YouTube, podcasts, threads).</span>
+          </div>
+          <div class="s2-v3-check">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            <span>Tu as <strong>investi</strong> (formations, mentorings, outils).</span>
+          </div>
+          <div class="s2-v3-check">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            <span>Tu as <strong>essayé</strong> (lancé, testé, ajusté, recommencé).</span>
+          </div>
+        </div>
+        <div class="s2-v3-bridge">
+          Et pourtant <strong>rien ne décolle</strong>.<br>
+          Tu commences à te demander si t'es passé à côté de quelque chose.
+        </div>
+        <span class="hero-lead-swipe"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg></span>
+      </div>
+
+      <div class="flow-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12l7 7 7-7"/></svg></div>
+
+      <div class="slide-tag">SLIDE 3 (inchangée)</div>
+      <div class="hero-lead-card is-locked s3">
+        <div class="hl-infinity-loop">
+          <svg viewBox="0 0 280 130" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <path id="hlInf3" pathLength="100" d="M 200 65 C 200 35, 165 35, 140 65 C 115 95, 80 95, 80 65 C 80 35, 115 35, 140 65 C 165 95, 200 95, 200 65 Z"/>
+            </defs>
+            <use href="#hlInf3" fill="none" stroke="#D4B66A" stroke-width="1.4" stroke-dasharray="0.6 1" opacity="0.3"/>
+            <use href="#hlInf3" fill="none" stroke="#E5CB85" stroke-width="2.8" stroke-linecap="round" stroke-dasharray="35 65" opacity="0.95">
+              <animate attributeName="stroke-dashoffset" from="0" to="-100" dur="3s" calcMode="linear" repeatCount="indefinite"/>
+            </use>
+          </svg>
+        </div>
+        <p class="hl-spin-text">Et malgré tout ça<span class="hl-spin-dots">...</span><br><strong>tu tournes en rond</strong><span class="hl-spin-dots">...</span><br><strong>tu n'arrives pas à décoller</strong><span class="hl-spin-dots">...</span><br>et je vais t'expliquer pourquoi.</p>
+        <hr class="hl-gold-hr">
+        <p class="hl-spin-before">MAIS&nbsp;AVANT</p>
+        <p class="hl-spin-tease">je te laisse découvrir la suite.</p>
+        <span class="hero-lead-swipe"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg></span>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<footer class="page-footer">
+  <p><strong>Mon vote</strong> : Variante 2 (9/10 échouent).</p>
+  <p>Pourquoi : la stat brute crée un choc reptilien, légitime "tu tournes en rond" de slide 3, et amène naturellement le diagnostic interactif de slide 4.</p>
+  <p style="margin-top:14px;font-size:11.5px;opacity:0.7">Variante 1 risque de "déculpabiliser trop tôt" → baisse de tension émotionnelle. Variante 3 est élégante mais redonde un peu avec slide 4 (qui est déjà une question/diagnostic).</p>
+</footer>
+
+</body>
+</html>
