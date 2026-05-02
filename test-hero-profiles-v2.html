@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>V2 — Déclinaisons éditoriales (3 profils)</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,400;0,700;1,700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --gold:#D4B66A;
+  --gold-light:#E0C57A;
+  --warm:#F5D89A;
+  --bg:#0A1628;
+  --bg-2:#142540;
+  --line-soft:rgba(212,182,106,0.18);
+  --text:#E8E4D8;
+  --muted:#9aa3b2;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif}
+body{padding:60px 20px 80px;min-height:100vh}
+h1{font-size:30px;text-align:center;margin-bottom:6px;letter-spacing:-0.01em;font-weight:800}
+.sub{text-align:center;color:var(--muted);font-size:14px;margin-bottom:50px;max-width:780px;margin-left:auto;margin-right:auto;line-height:1.65}
+.sub em{color:var(--gold);font-style:normal}
+
+.versions{
+  max-width:480px;margin:0 auto;
+  display:flex;flex-direction:column;gap:80px;
+}
+
+/* ============================================================
+   STYLES ORIGINAUX RÉPLIQUÉS DE LA LANDING (à NE PAS MODIFIER)
+============================================================ */
+.hero-lead-card{
+  background:linear-gradient(180deg, rgba(20,37,64,0.6) 0%, rgba(10,22,40,0.4) 100%);
+  border:1px solid rgba(212,182,106,0.18);
+  border-radius:18px;
+  padding:54px 26px 36px;
+  position:relative;
+}
+.version-num{
+  position:absolute;top:-14px;left:24px;
+  background:var(--gold);color:#0A1628;
+  font-family:'JetBrains Mono',monospace;
+  font-size:11px;font-weight:800;letter-spacing:0.16em;
+  padding:5px 12px;border-radius:99px;
+  z-index:2;
+}
+.version-name{
+  position:absolute;top:-14px;right:24px;
+  background:rgba(10,22,40,0.95);color:var(--gold);
+  font-family:'Inter',sans-serif;
+  font-size:11px;font-weight:700;letter-spacing:0.06em;
+  padding:5px 12px;border-radius:99px;
+  border:1px solid var(--line-soft);
+  z-index:2;
+}
+
+/* Down hint (flèche du haut — répliqué) */
+.hero-lead-downhint{
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:0;color:rgba(212,182,106,0.7);
+}
+.hero-lead-downhint svg{
+  width:24px;height:24px;display:block;margin-top:-7px;
+  animation:heroLeadDownHint 1.6s ease-in-out infinite;
+}
+.hero-lead-downhint svg:nth-child(2){animation-delay:0.18s;opacity:0.55}
+.hero-lead-downhint-top{margin-top:-24px !important;margin-bottom:18px !important}
+@keyframes heroLeadDownHint{
+  0%, 100%{transform:translateY(0);opacity:0.85}
+  50%{transform:translateY(5px);opacity:0.35}
+}
+
+/* Pretitle "AVANT D'ALLER PLUS LOIN" (répliqué) */
+.hl-pretitle{
+  font-family:'Inter',sans-serif;
+  font-size:10.5px;font-weight:700;
+  letter-spacing:0.22em;text-transform:uppercase;
+  color:var(--gold);opacity:0.85;
+  margin-bottom:8px;display:block;text-align:center;
+}
+.hl-pretitle-lg{font-size:13px !important;letter-spacing:0.26em !important}
+.hl-pretitle-divider{
+  display:block;width:54px;height:1.5px;
+  background:linear-gradient(90deg, transparent, var(--gold), transparent);
+  margin:0 auto 14px;
+}
+
+/* Intro paragraph (répliqué) */
+.hero-lead-intro-p{
+  font-family:'Inter',sans-serif;
+  font-size:16px;line-height:1.6;
+  color:var(--text);font-weight:400;
+  text-align:center;margin:0 0 22px;
+}
+.hero-lead-intro-p strong{color:var(--gold);font-weight:700}
+
+/* Logo Shopify GOLD (répliqué — pas vert !) */
+.hero-lead-shopify{display:flex;justify-content:center;margin-top:20px}
+.hero-lead-shopify svg{
+  width:46px;height:auto;display:block;
+  animation:hlShopifyPulse 2.6s ease-in-out infinite;
+  filter:drop-shadow(0 0 14px rgba(212,182,106,0.4));
+}
+@keyframes hlShopifyPulse{
+  0%, 100%{transform:scale(1) rotate(0deg);filter:drop-shadow(0 0 10px rgba(212,182,106,0.3))}
+  50%{transform:scale(1.08) rotate(-3deg);filter:drop-shadow(0 0 22px rgba(212,182,106,0.65))}
+}
+
+/* ============================================================
+   VARIATIONS À PARTIR DU V2 ÉDITORIAL — UNIQUEMENT LA ZONE PROFILS
+============================================================ */
+
+/* Profils common base */
+.profiles{margin-top:8px}
+.profile-text{
+  font-size:14.5px;line-height:1.55;
+  color:var(--text);font-weight:500;
+}
+.profile-text strong{color:var(--gold);font-weight:700}
+
+/* ===== V2-A — Original éditorial (chiffres 36px + border-left or) ===== */
+.va .profiles{display:flex;flex-direction:column;gap:18px}
+.va .profile{
+  display:flex;align-items:flex-start;gap:14px;
+  border-left:2px solid var(--gold);padding-left:14px;
+}
+.va .profile-num{
+  font-family:'Playfair Display',serif;font-style:italic;
+  font-size:36px;font-weight:700;color:var(--gold);
+  line-height:1;flex-shrink:0;width:38px;
+  text-shadow:0 0 14px rgba(212,182,106,0.4);
+}
+.va .profile-text{padding-top:8px}
+
+/* ===== V2-B — Chiffres XXL (52px) + plus d'air vertical ===== */
+.vb .profiles{display:flex;flex-direction:column;gap:24px}
+.vb .profile{
+  display:flex;align-items:flex-start;gap:16px;
+  border-left:2px solid var(--gold);padding-left:16px;
+}
+.vb .profile-num{
+  font-family:'Playfair Display',serif;font-style:italic;
+  font-size:52px;font-weight:700;color:var(--gold);
+  line-height:0.9;flex-shrink:0;width:48px;
+  text-shadow:0 0 18px rgba(212,182,106,0.45);
+}
+.vb .profile-text{padding-top:14px}
+
+/* ===== V2-C — Chiffres encerclés (cercle doré) ===== */
+.vc .profiles{display:flex;flex-direction:column;gap:18px}
+.vc .profile{
+  display:flex;align-items:center;gap:14px;
+}
+.vc .profile-num{
+  flex-shrink:0;width:42px;height:42px;border-radius:50%;
+  border:1.5px solid var(--gold);
+  background:linear-gradient(180deg,rgba(212,182,106,0.10),rgba(212,182,106,0.02));
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Playfair Display',serif;font-style:italic;font-weight:700;
+  color:var(--gold);font-size:22px;line-height:1;
+  box-shadow:0 0 16px rgba(212,182,106,0.25);
+}
+
+/* ===== V2-D — Sans border-left, chiffres flottants serif (minimaliste) ===== */
+.vd .profiles{display:flex;flex-direction:column;gap:20px}
+.vd .profile{
+  display:flex;align-items:flex-start;gap:18px;
+}
+.vd .profile-num{
+  font-family:'Playfair Display',serif;font-style:italic;
+  font-size:42px;font-weight:700;color:var(--gold);
+  line-height:1;flex-shrink:0;width:32px;
+  text-shadow:0 0 12px rgba(212,182,106,0.35);
+  text-align:right;
+}
+.vd .profile-text{padding-top:10px;border-bottom:1px solid var(--line-soft);padding-bottom:14px}
+.vd .profile:last-child .profile-text{border-bottom:none;padding-bottom:0}
+
+/* ===== V2-E — Chiffres avec ligne pointillée verticale entre les blocs ===== */
+.ve .profiles{
+  display:flex;flex-direction:column;gap:0;
+  position:relative;
+}
+.ve .profile{
+  display:flex;align-items:flex-start;gap:16px;
+  padding:14px 0;position:relative;
+}
+.ve .profile + .profile::before{
+  content:"";position:absolute;left:14px;top:-2px;height:6px;
+  width:1px;border-left:1px dashed rgba(212,182,106,0.5);
+}
+.ve .profile-num{
+  font-family:'Playfair Display',serif;font-style:italic;
+  font-size:38px;font-weight:700;color:var(--gold);
+  line-height:1;flex-shrink:0;width:32px;text-align:center;
+  text-shadow:0 0 14px rgba(212,182,106,0.4);
+}
+.ve .profile-text{padding-top:10px}
+
+/* ===== V2-F — Chiffres en cards-bouton avec hover dor é ===== */
+.vf .profiles{display:flex;flex-direction:column;gap:10px}
+.vf .profile{
+  display:flex;align-items:center;gap:14px;
+  padding:14px 16px;
+  background:linear-gradient(180deg,rgba(20,37,64,0.5),rgba(10,22,40,0.2));
+  border:1px solid var(--line-soft);
+  border-radius:10px;
+  transition:border-color 0.3s ease,background 0.3s ease;
+}
+@media (hover:hover){
+  .vf .profile:hover{
+    border-color:var(--gold);
+    background:linear-gradient(180deg,rgba(212,182,106,0.10),rgba(20,37,64,0.5));
+  }
+}
+.vf .profile-num{
+  font-family:'Playfair Display',serif;font-style:italic;
+  font-size:32px;font-weight:700;color:var(--gold);
+  line-height:1;flex-shrink:0;width:28px;
+  text-shadow:0 0 12px rgba(212,182,106,0.4);
+}
+.vf .profile-text{font-size:13.5px}
+
+/* ===== Notes section ===== */
+.notes{
+  max-width:480px;margin:60px auto 0;
+  background:rgba(20,37,64,0.4);border:1px solid var(--line-soft);
+  border-radius:12px;padding:24px;
+}
+.notes h3{font-size:14px;color:var(--gold);margin-bottom:12px;letter-spacing:0.04em;text-transform:uppercase;font-weight:700}
+.notes p{font-size:13px;color:var(--muted);line-height:1.6;margin-bottom:8px}
+.notes p strong{color:var(--text)}
+</style>
+</head>
+<body>
+
+<h1>Déclinaisons V2 — Style éditorial (chiffres Playfair dorés)</h1>
+<p class="sub">6 variations <em>uniquement sur la zone des 3 profils</em>. Tout le reste (flèche down hint, pretitle, divider, logo Shopify or animé) reste <em>strictement identique à la version actuelle de la landing</em>.</p>
+
+<div class="versions">
+
+  <!-- ============ V2-A — Original éditorial ============ -->
+  <div class="hero-lead-card va">
+    <span class="version-num">V2-A</span>
+    <span class="version-name">Original</span>
+    <span class="hero-lead-downhint hero-lead-downhint-top" aria-hidden="true">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+    </span>
+    <span class="hl-pretitle hl-pretitle-lg">Avant d'aller plus loin</span>
+    <span class="hl-pretitle-divider" aria-hidden="true"></span>
+    <p class="hero-lead-intro-p">Soyons honnêtes 5 secondes :<br>Si tu es sur cette page, c'est probablement que :</p>
+    <div class="profiles">
+      <div class="profile">
+        <div class="profile-num">1</div>
+        <div class="profile-text">Tu veux <strong>changer de carrière</strong> et te lancer dans l'e-commerce.</div>
+      </div>
+      <div class="profile">
+        <div class="profile-num">2</div>
+        <div class="profile-text">Tu cherches un <strong>complément de revenu</strong> depuis chez toi.</div>
+      </div>
+      <div class="profile">
+        <div class="profile-num">3</div>
+        <div class="profile-text">Tu as <strong>déjà une boutique</strong>, mais elle ne décolle pas.</div>
+      </div>
+    </div>
+    <div class="hero-lead-shopify" aria-hidden="true">
+      <svg viewBox="0 0 109.5 124.5" xmlns="http://www.w3.org/2000/svg">
+        <path fill="#D4B66A" d="M74.7,14.8c0,0-1.4,0.4-3.7,1.1c-0.4-1.3-1-2.8-1.8-4.4c-2.6-5-6.5-7.7-11.1-7.7c0,0,0,0-0.1,0c-0.3,0-0.6,0-1,0.1 c-0.1-0.2-0.3-0.3-0.4-0.5c-2-2.2-4.6-3.2-7.7-3.1c-6,0.2-12,4.5-16.8,12.2c-3.4,5.4-6,12.2-6.7,17.5c-6.9,2.1-11.7,3.6-11.8,3.7 c-3.5,1.1-3.6,1.2-4,4.5c-0.3,2.5-9.5,73-9.5,73L77,124.5l33-8.2c0,0-15.2-103-15.3-103.7C94.5,12.1,93.6,11.7,74.7,14.8z M62.7,17.6 c-3.2,1-6.7,2.1-10.2,3.2c1-3.8,2.9-7.6,5.2-10.1c0.9-0.9,2.1-2,3.5-2.6C62.6,11.1,62.7,15.1,62.7,17.6z M55,2.7c1.1,0,2.1,0.2,2.9,0.7 c-1.3,0.7-2.6,1.7-3.8,3c-3.1,3.4-5.5,8.6-6.5,13.6c-2.9,0.9-5.7,1.8-8.3,2.6C41.1,14,47.7,2.9,55,2.7z M44.1,59.2 c0.4,6,16.1,7.3,16.9,21.2c0.7,11-5.8,18.5-15.2,19.1c-11.3,0.7-17.6-6-17.6-6l2.4-10.2c0,0,6.3,4.8,11.4,4.4c3.3-0.2,4.5-2.9,4.4-4.9 c-0.5-7.8-13.3-7.3-14-20.1c-0.7-10.8,6.4-21.7,22-22.7c6-0.4,9.1,1.1,9.1,1.1l-3.6,13.4c0,0-4-1.8-8.7-1.5 C44.3,53.4,44.1,57.7,44.1,59.2z M65.4,16.8c0-2.3-0.3-5.6-1.4-8.4c3.6,0.7,5.3,4.7,6.1,7.1C68.7,15.9,67.1,16.4,65.4,16.8z"/>
+        <path fill="#A88838" d="M94.7,12.6c-0.2-0.1-19.7,0.4-19.7,0.4S60.4,2.5,59,1.1c-0.5-0.5-1.2-0.8-1.9-0.9L77.1,124.5l33-8.2 c0,0-15.2-103-15.3-103.7C94.7,12.5,94.7,12.6,94.7,12.6z"/>
+        <path fill="#0A1628" d="M58.6,42.7l-3.8,14.4c0,0-4.3-2-9.4-1.6c-7.5,0.5-7.5,5.2-7.5,6.4c0.4,6.4,17.3,7.8,18.3,22.9 c0.7,11.9-6.3,20-16.4,20.7c-12.2,0.8-18.9-6.4-18.9-6.4l2.6-11c0,0,6.7,5.1,12.1,4.7c3.5-0.2,4.8-3.1,4.7-5.1 c-0.5-8.4-14.3-7.9-15.2-21.7c-0.7-11.6,6.9-23.4,23.6-24.4C54.7,40.9,58.6,42.7,58.6,42.7z"/>
+      </svg>
+    </div>
+  </div>
+
+  <!-- ============ V2-B — Chiffres XXL (52px) ============ -->
+  <div class="hero-lead-card vb">
+    <span class="version-num">V2-B</span>
+    <span class="version-name">Chiffres XXL</span>
+    <span class="hero-lead-downhint hero-lead-downhint-top" aria-hidden="true">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+    </span>
+    <span class="hl-pretitle hl-pretitle-lg">Avant d'aller plus loin</span>
+    <span class="hl-pretitle-divider" aria-hidden="true"></span>
+    <p class="hero-lead-intro-p">Soyons honnêtes 5 secondes :<br>Si tu es sur cette page, c'est probablement que :</p>
+    <div class="profiles">
+      <div class="profile">
+        <div class="profile-num">1</div>
+        <div class="profile-text">Tu veux <strong>changer de carrière</strong> et te lancer dans l'e-commerce.</div>
+      </div>
+      <div class="profile">
+        <div class="profile-num">2</div>
+        <div class="profile-text">Tu cherches un <strong>complément de revenu</strong> depuis chez toi.</div>
+      </div>
+      <div class="profile">
+        <div class="profile-num">3</div>
+        <div class="profile-text">Tu as <strong>déjà une boutique</strong>, mais elle ne décolle pas.</div>
+      </div>
+    </div>
+    <div class="hero-lead-shopify" aria-hidden="true">
+      <svg viewBox="0 0 109.5 124.5" xmlns="http://www.w3.org/2000/svg">
+        <path fill="#D4B66A" d="M74.7,14.8c0,0-1.4,0.4-3.7,1.1c-0.4-1.3-1-2.8-1.8-4.4c-2.6-5-6.5-7.7-11.1-7.7c0,0,0,0-0.1,0c-0.3,0-0.6,0-1,0.1 c-0.1-0.2-0.3-0.3-0.4-0.5c-2-2.2-4.6-3.2-7.7-3.1c-6,0.2-12,4.5-16.8,12.2c-3.4,5.4-6,12.2-6.7,17.5c-6.9,2.1-11.7,3.6-11.8,3.7 c-3.5,1.1-3.6,1.2-4,4.5c-0.3,2.5-9.5,73-9.5,73L77,124.5l33-8.2c0,0-15.2-103-15.3-103.7C94.5,12.1,93.6,11.7,74.7,14.8z M62.7,17.6 c-3.2,1-6.7,2.1-10.2,3.2c1-3.8,2.9-7.6,5.2-10.1c0.9-0.9,2.1-2,3.5-2.6C62.6,11.1,62.7,15.1,62.7,17.6z M55,2.7c1.1,0,2.1,0.2,2.9,0.7 c-1.3,0.7-2.6,1.7-3.8,3c-3.1,3.4-5.5,8.6-6.5,13.6c-2.9,0.9-5.7,1.8-8.3,2.6C41.1,14,47.7,2.9,55,2.7z M44.1,59.2 c0.4,6,16.1,7.3,16.9,21.2c0.7,11-5.8,18.5-15.2,19.1c-11.3,0.7-17.6-6-17.6-6l2.4-10.2c0,0,6.3,4.8,11.4,4.4c3.3-0.2,4.5-2.9,4.4-4.9 c-0.5-7.8-13.3-7.3-14-20.1c-0.7-10.8,6.4-21.7,22-22.7c6-0.4,9.1,1.1,9.1,1.1l-3.6,13.4c0,0-4-1.8-8.7-1.5 C44.3,53.4,44.1,57.7,44.1,59.2z M65.4,16.8c0-2.3-0.3-5.6-1.4-8.4c3.6,0.7,5.3,4.7,6.1,7.1C68.7,15.9,67.1,16.4,65.4,16.8z"/>
+        <path fill="#A88838" d="M94.7,12.6c-0.2-0.1-19.7,0.4-19.7,0.4S60.4,2.5,59,1.1c-0.5-0.5-1.2-0.8-1.9-0.9L77.1,124.5l33-8.2 c0,0-15.2-103-15.3-103.7C94.7,12.5,94.7,12.6,94.7,12.6z"/>
+        <path fill="#0A1628" d="M58.6,42.7l-3.8,14.4c0,0-4.3-2-9.4-1.6c-7.5,0.5-7.5,5.2-7.5,6.4c0.4,6.4,17.3,7.8,18.3,22.9 c0.7,11.9-6.3,20-16.4,20.7c-12.2,0.8-18.9-6.4-18.9-6.4l2.6-11c0,0,6.7,5.1,12.1,4.7c3.5-0.2,4.8-3.1,4.7-5.1 c-0.5-8.4-14.3-7.9-15.2-21.7c-0.7-11.6,6.9-23.4,23.6-24.4C54.7,40.9,58.6,42.7,58.6,42.7z"/>
+      </svg>
+    </div>
+  </div>
+
+  <!-- ============ V2-C — Chiffres encerclés ============ -->
+  <div class="hero-lead-card vc">
+    <span class="version-num">V2-C</span>
+    <span class="version-name">Encerclés</span>
+    <span class="hero-lead-downhint hero-lead-downhint-top" aria-hidden="true">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+    </span>
+    <span class="hl-pretitle hl-pretitle-lg">Avant d'aller plus loin</span>
+    <span class="hl-pretitle-divider" aria-hidden="true"></span>
+    <p class="hero-lead-intro-p">Soyons honnêtes 5 secondes :<br>Si tu es sur cette page, c'est probablement que :</p>
+    <div class="profiles">
+      <div class="profile">
+        <div class="profile-num">1</div>
+        <div class="profile-text">Tu veux <strong>changer de carrière</strong> et te lancer dans l'e-commerce.</div>
+      </div>
+      <div class="profile">
+        <div class="profile-num">2</div>
+        <div class="profile-text">Tu cherches un <strong>complément de revenu</strong> depuis chez toi.</div>
+      </div>
+      <div class="profile">
+        <div class="profile-num">3</div>
+        <div class="profile-text">Tu as <strong>déjà une boutique</strong>, mais elle ne décolle pas.</div>
+      </div>
+    </div>
+    <div class="hero-lead-shopify" aria-hidden="true">
+      <svg viewBox="0 0 109.5 124.5" xmlns="http://www.w3.org/2000/svg">
+        <path fill="#D4B66A" d="M74.7,14.8c0,0-1.4,0.4-3.7,1.1c-0.4-1.3-1-2.8-1.8-4.4c-2.6-5-6.5-7.7-11.1-7.7c0,0,0,0-0.1,0c-0.3,0-0.6,0-1,0.1 c-0.1-0.2-0.3-0.3-0.4-0.5c-2-2.2-4.6-3.2-7.7-3.1c-6,0.2-12,4.5-16.8,12.2c-3.4,5.4-6,12.2-6.7,17.5c-6.9,2.1-11.7,3.6-11.8,3.7 c-3.5,1.1-3.6,1.2-4,4.5c-0.3,2.5-9.5,73-9.5,73L77,124.5l33-8.2c0,0-15.2-103-15.3-103.7C94.5,12.1,93.6,11.7,74.7,14.8z M62.7,17.6 c-3.2,1-6.7,2.1-10.2,3.2c1-3.8,2.9-7.6,5.2-10.1c0.9-0.9,2.1-2,3.5-2.6C62.6,11.1,62.7,15.1,62.7,17.6z M55,2.7c1.1,0,2.1,0.2,2.9,0.7 c-1.3,0.7-2.6,1.7-3.8,3c-3.1,3.4-5.5,8.6-6.5,13.6c-2.9,0.9-5.7,1.8-8.3,2.6C41.1,14,47.7,2.9,55,2.7z M44.1,59.2 c0.4,6,16.1,7.3,16.9,21.2c0.7,11-5.8,18.5-15.2,19.1c-11.3,0.7-17.6-6-17.6-6l2.4-10.2c0,0,6.3,4.8,11.4,4.4c3.3-0.2,4.5-2.9,4.4-4.9 c-0.5-7.8-13.3-7.3-14-20.1c-0.7-10.8,6.4-21.7,22-22.7c6-0.4,9.1,1.1,9.1,1.1l-3.6,13.4c0,0-4-1.8-8.7-1.5 C44.3,53.4,44.1,57.7,44.1,59.2z M65.4,16.8c0-2.3-0.3-5.6-1.4-8.4c3.6,0.7,5.3,4.7,6.1,7.1C68.7,15.9,67.1,16.4,65.4,16.8z"/>
+        <path fill="#A88838" d="M94.7,12.6c-0.2-0.1-19.7,0.4-19.7,0.4S60.4,2.5,59,1.1c-0.5-0.5-1.2-0.8-1.9-0.9L77.1,124.5l33-8.2 c0,0-15.2-103-15.3-103.7C94.7,12.5,94.7,12.6,94.7,12.6z"/>
+        <path fill="#0A1628" d="M58.6,42.7l-3.8,14.4c0,0-4.3-2-9.4-1.6c-7.5,0.5-7.5,5.2-7.5,6.4c0.4,6.4,17.3,7.8,18.3,22.9 c0.7,11.9-6.3,20-16.4,20.7c-12.2,0.8-18.9-6.4-18.9-6.4l2.6-11c0,0,6.7,5.1,12.1,4.7c3.5-0.2,4.8-3.1,4.7-5.1 c-0.5-8.4-14.3-7.9-15.2-21.7c-0.7-11.6,6.9-23.4,23.6-24.4C54.7,40.9,58.6,42.7,58.6,42.7z"/>
+      </svg>
+    </div>
+  </div>
+
+  <!-- ============ V2-D — Sans border-left + séparateurs entre lignes ============ -->
+  <div class="hero-lead-card vd">
+    <span class="version-num">V2-D</span>
+    <span class="version-name">Minimaliste</span>
+    <span class="hero-lead-downhint hero-lead-downhint-top" aria-hidden="true">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+    </span>
+    <span class="hl-pretitle hl-pretitle-lg">Avant d'aller plus loin</span>
+    <span class="hl-pretitle-divider" aria-hidden="true"></span>
+    <p class="hero-lead-intro-p">Soyons honnêtes 5 secondes :<br>Si tu es sur cette page, c'est probablement que :</p>
+    <div class="profiles">
+      <div class="profile">
+        <div class="profile-num">1</div>
+        <div class="profile-text">Tu veux <strong>changer de carrière</strong> et te lancer dans l'e-commerce.</div>
+      </div>
+      <div class="profile">
+        <div class="profile-num">2</div>
+        <div class="profile-text">Tu cherches un <strong>complément de revenu</strong> depuis chez toi.</div>
+      </div>
+      <div class="profile">
+        <div class="profile-num">3</div>
+        <div class="profile-text">Tu as <strong>déjà une boutique</strong>, mais elle ne décolle pas.</div>
+      </div>
+    </div>
+    <div class="hero-lead-shopify" aria-hidden="true">
+      <svg viewBox="0 0 109.5 124.5" xmlns="http://www.w3.org/2000/svg">
+        <path fill="#D4B66A" d="M74.7,14.8c0,0-1.4,0.4-3.7,1.1c-0.4-1.3-1-2.8-1.8-4.4c-2.6-5-6.5-7.7-11.1-7.7c0,0,0,0-0.1,0c-0.3,0-0.6,0-1,0.1 c-0.1-0.2-0.3-0.3-0.4-0.5c-2-2.2-4.6-3.2-7.7-3.1c-6,0.2-12,4.5-16.8,12.2c-3.4,5.4-6,12.2-6.7,17.5c-6.9,2.1-11.7,3.6-11.8,3.7 c-3.5,1.1-3.6,1.2-4,4.5c-0.3,2.5-9.5,73-9.5,73L77,124.5l33-8.2c0,0-15.2-103-15.3-103.7C94.5,12.1,93.6,11.7,74.7,14.8z M62.7,17.6 c-3.2,1-6.7,2.1-10.2,3.2c1-3.8,2.9-7.6,5.2-10.1c0.9-0.9,2.1-2,3.5-2.6C62.6,11.1,62.7,15.1,62.7,17.6z M55,2.7c1.1,0,2.1,0.2,2.9,0.7 c-1.3,0.7-2.6,1.7-3.8,3c-3.1,3.4-5.5,8.6-6.5,13.6c-2.9,0.9-5.7,1.8-8.3,2.6C41.1,14,47.7,2.9,55,2.7z M44.1,59.2 c0.4,6,16.1,7.3,16.9,21.2c0.7,11-5.8,18.5-15.2,19.1c-11.3,0.7-17.6-6-17.6-6l2.4-10.2c0,0,6.3,4.8,11.4,4.4c3.3-0.2,4.5-2.9,4.4-4.9 c-0.5-7.8-13.3-7.3-14-20.1c-0.7-10.8,6.4-21.7,22-22.7c6-0.4,9.1,1.1,9.1,1.1l-3.6,13.4c0,0-4-1.8-8.7-1.5 C44.3,53.4,44.1,57.7,44.1,59.2z M65.4,16.8c0-2.3-0.3-5.6-1.4-8.4c3.6,0.7,5.3,4.7,6.1,7.1C68.7,15.9,67.1,16.4,65.4,16.8z"/>
+        <path fill="#A88838" d="M94.7,12.6c-0.2-0.1-19.7,0.4-19.7,0.4S60.4,2.5,59,1.1c-0.5-0.5-1.2-0.8-1.9-0.9L77.1,124.5l33-8.2 c0,0-15.2-103-15.3-103.7C94.7,12.5,94.7,12.6,94.7,12.6z"/>
+        <path fill="#0A1628" d="M58.6,42.7l-3.8,14.4c0,0-4.3-2-9.4-1.6c-7.5,0.5-7.5,5.2-7.5,6.4c0.4,6.4,17.3,7.8,18.3,22.9 c0.7,11.9-6.3,20-16.4,20.7c-12.2,0.8-18.9-6.4-18.9-6.4l2.6-11c0,0,6.7,5.1,12.1,4.7c3.5-0.2,4.8-3.1,4.7-5.1 c-0.5-8.4-14.3-7.9-15.2-21.7c-0.7-11.6,6.9-23.4,23.6-24.4C54.7,40.9,58.6,42.7,58.6,42.7z"/>
+      </svg>
+    </div>
+  </div>
+
+  <!-- ============ V2-E — Ligne pointillée verticale entre blocs ============ -->
+  <div class="hero-lead-card ve">
+    <span class="version-num">V2-E</span>
+    <span class="version-name">Pointillée</span>
+    <span class="hero-lead-downhint hero-lead-downhint-top" aria-hidden="true">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+    </span>
+    <span class="hl-pretitle hl-pretitle-lg">Avant d'aller plus loin</span>
+    <span class="hl-pretitle-divider" aria-hidden="true"></span>
+    <p class="hero-lead-intro-p">Soyons honnêtes 5 secondes :<br>Si tu es sur cette page, c'est probablement que :</p>
+    <div class="profiles">
+      <div class="profile">
+        <div class="profile-num">1</div>
+        <div class="profile-text">Tu veux <strong>changer de carrière</strong> et te lancer dans l'e-commerce.</div>
+      </div>
+      <div class="profile">
+        <div class="profile-num">2</div>
+        <div class="profile-text">Tu cherches un <strong>complément de revenu</strong> depuis chez toi.</div>
+      </div>
+      <div class="profile">
+        <div class="profile-num">3</div>
+        <div class="profile-text">Tu as <strong>déjà une boutique</strong>, mais elle ne décolle pas.</div>
+      </div>
+    </div>
+    <div class="hero-lead-shopify" aria-hidden="true">
+      <svg viewBox="0 0 109.5 124.5" xmlns="http://www.w3.org/2000/svg">
+        <path fill="#D4B66A" d="M74.7,14.8c0,0-1.4,0.4-3.7,1.1c-0.4-1.3-1-2.8-1.8-4.4c-2.6-5-6.5-7.7-11.1-7.7c0,0,0,0-0.1,0c-0.3,0-0.6,0-1,0.1 c-0.1-0.2-0.3-0.3-0.4-0.5c-2-2.2-4.6-3.2-7.7-3.1c-6,0.2-12,4.5-16.8,12.2c-3.4,5.4-6,12.2-6.7,17.5c-6.9,2.1-11.7,3.6-11.8,3.7 c-3.5,1.1-3.6,1.2-4,4.5c-0.3,2.5-9.5,73-9.5,73L77,124.5l33-8.2c0,0-15.2-103-15.3-103.7C94.5,12.1,93.6,11.7,74.7,14.8z M62.7,17.6 c-3.2,1-6.7,2.1-10.2,3.2c1-3.8,2.9-7.6,5.2-10.1c0.9-0.9,2.1-2,3.5-2.6C62.6,11.1,62.7,15.1,62.7,17.6z M55,2.7c1.1,0,2.1,0.2,2.9,0.7 c-1.3,0.7-2.6,1.7-3.8,3c-3.1,3.4-5.5,8.6-6.5,13.6c-2.9,0.9-5.7,1.8-8.3,2.6C41.1,14,47.7,2.9,55,2.7z M44.1,59.2 c0.4,6,16.1,7.3,16.9,21.2c0.7,11-5.8,18.5-15.2,19.1c-11.3,0.7-17.6-6-17.6-6l2.4-10.2c0,0,6.3,4.8,11.4,4.4c3.3-0.2,4.5-2.9,4.4-4.9 c-0.5-7.8-13.3-7.3-14-20.1c-0.7-10.8,6.4-21.7,22-22.7c6-0.4,9.1,1.1,9.1,1.1l-3.6,13.4c0,0-4-1.8-8.7-1.5 C44.3,53.4,44.1,57.7,44.1,59.2z M65.4,16.8c0-2.3-0.3-5.6-1.4-8.4c3.6,0.7,5.3,4.7,6.1,7.1C68.7,15.9,67.1,16.4,65.4,16.8z"/>
+        <path fill="#A88838" d="M94.7,12.6c-0.2-0.1-19.7,0.4-19.7,0.4S60.4,2.5,59,1.1c-0.5-0.5-1.2-0.8-1.9-0.9L77.1,124.5l33-8.2 c0,0-15.2-103-15.3-103.7C94.7,12.5,94.7,12.6,94.7,12.6z"/>
+        <path fill="#0A1628" d="M58.6,42.7l-3.8,14.4c0,0-4.3-2-9.4-1.6c-7.5,0.5-7.5,5.2-7.5,6.4c0.4,6.4,17.3,7.8,18.3,22.9 c0.7,11.9-6.3,20-16.4,20.7c-12.2,0.8-18.9-6.4-18.9-6.4l2.6-11c0,0,6.7,5.1,12.1,4.7c3.5-0.2,4.8-3.1,4.7-5.1 c-0.5-8.4-14.3-7.9-15.2-21.7c-0.7-11.6,6.9-23.4,23.6-24.4C54.7,40.9,58.6,42.7,58.6,42.7z"/>
+      </svg>
+    </div>
+  </div>
+
+  <!-- ============ V2-F — Cards bouton avec hover ============ -->
+  <div class="hero-lead-card vf">
+    <span class="version-num">V2-F</span>
+    <span class="version-name">Cards hover</span>
+    <span class="hero-lead-downhint hero-lead-downhint-top" aria-hidden="true">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+    </span>
+    <span class="hl-pretitle hl-pretitle-lg">Avant d'aller plus loin</span>
+    <span class="hl-pretitle-divider" aria-hidden="true"></span>
+    <p class="hero-lead-intro-p">Soyons honnêtes 5 secondes :<br>Si tu es sur cette page, c'est probablement que :</p>
+    <div class="profiles">
+      <div class="profile">
+        <div class="profile-num">1</div>
+        <div class="profile-text">Tu veux <strong>changer de carrière</strong> et te lancer dans l'e-commerce.</div>
+      </div>
+      <div class="profile">
+        <div class="profile-num">2</div>
+        <div class="profile-text">Tu cherches un <strong>complément de revenu</strong> depuis chez toi.</div>
+      </div>
+      <div class="profile">
+        <div class="profile-num">3</div>
+        <div class="profile-text">Tu as <strong>déjà une boutique</strong>, mais elle ne décolle pas.</div>
+      </div>
+    </div>
+    <div class="hero-lead-shopify" aria-hidden="true">
+      <svg viewBox="0 0 109.5 124.5" xmlns="http://www.w3.org/2000/svg">
+        <path fill="#D4B66A" d="M74.7,14.8c0,0-1.4,0.4-3.7,1.1c-0.4-1.3-1-2.8-1.8-4.4c-2.6-5-6.5-7.7-11.1-7.7c0,0,0,0-0.1,0c-0.3,0-0.6,0-1,0.1 c-0.1-0.2-0.3-0.3-0.4-0.5c-2-2.2-4.6-3.2-7.7-3.1c-6,0.2-12,4.5-16.8,12.2c-3.4,5.4-6,12.2-6.7,17.5c-6.9,2.1-11.7,3.6-11.8,3.7 c-3.5,1.1-3.6,1.2-4,4.5c-0.3,2.5-9.5,73-9.5,73L77,124.5l33-8.2c0,0-15.2-103-15.3-103.7C94.5,12.1,93.6,11.7,74.7,14.8z M62.7,17.6 c-3.2,1-6.7,2.1-10.2,3.2c1-3.8,2.9-7.6,5.2-10.1c0.9-0.9,2.1-2,3.5-2.6C62.6,11.1,62.7,15.1,62.7,17.6z M55,2.7c1.1,0,2.1,0.2,2.9,0.7 c-1.3,0.7-2.6,1.7-3.8,3c-3.1,3.4-5.5,8.6-6.5,13.6c-2.9,0.9-5.7,1.8-8.3,2.6C41.1,14,47.7,2.9,55,2.7z M44.1,59.2 c0.4,6,16.1,7.3,16.9,21.2c0.7,11-5.8,18.5-15.2,19.1c-11.3,0.7-17.6-6-17.6-6l2.4-10.2c0,0,6.3,4.8,11.4,4.4c3.3-0.2,4.5-2.9,4.4-4.9 c-0.5-7.8-13.3-7.3-14-20.1c-0.7-10.8,6.4-21.7,22-22.7c6-0.4,9.1,1.1,9.1,1.1l-3.6,13.4c0,0-4-1.8-8.7-1.5 C44.3,53.4,44.1,57.7,44.1,59.2z M65.4,16.8c0-2.3-0.3-5.6-1.4-8.4c3.6,0.7,5.3,4.7,6.1,7.1C68.7,15.9,67.1,16.4,65.4,16.8z"/>
+        <path fill="#A88838" d="M94.7,12.6c-0.2-0.1-19.7,0.4-19.7,0.4S60.4,2.5,59,1.1c-0.5-0.5-1.2-0.8-1.9-0.9L77.1,124.5l33-8.2 c0,0-15.2-103-15.3-103.7C94.7,12.5,94.7,12.6,94.7,12.6z"/>
+        <path fill="#0A1628" d="M58.6,42.7l-3.8,14.4c0,0-4.3-2-9.4-1.6c-7.5,0.5-7.5,5.2-7.5,6.4c0.4,6.4,17.3,7.8,18.3,22.9 c0.7,11.9-6.3,20-16.4,20.7c-12.2,0.8-18.9-6.4-18.9-6.4l2.6-11c0,0,6.7,5.1,12.1,4.7c3.5-0.2,4.8-3.1,4.7-5.1 c-0.5-8.4-14.3-7.9-15.2-21.7c-0.7-11.6,6.9-23.4,23.6-24.4C54.7,40.9,58.6,42.7,58.6,42.7z"/>
+      </svg>
+    </div>
+  </div>
+
+</div>
+
+<div class="notes">
+  <h3>Différences entre les 6 versions</h3>
+  <p><strong>V2-A (Original)</strong> : chiffres Playfair italic 36px + barre dorée verticale à gauche.</p>
+  <p><strong>V2-B (Chiffres XXL)</strong> : mêmes chiffres mais à 52px, plus d'air vertical entre les lignes. Plus visuel.</p>
+  <p><strong>V2-C (Encerclés)</strong> : chiffres dans un cercle doré 42px. Plus géométrique, plus "list".</p>
+  <p><strong>V2-D (Minimaliste)</strong> : pas de barre verticale, séparateurs horizontaux subtils entre lignes. Plus aéré.</p>
+  <p><strong>V2-E (Pointillée)</strong> : ligne verticale en pointillés or qui relie les 3 chiffres. Évoque un parcours.</p>
+  <p><strong>V2-F (Cards hover)</strong> : chaque profil dans sa propre carte qui s'illumine en or au survol. Plus interactif.</p>
+  <p style="margin-top:14px;color:var(--gold)"><strong>Top picks selon le ressenti voulu :</strong> V2-A si tu veux du sobre éditorial. V2-B si tu veux plus d'impact visuel. V2-F si tu veux que le viewer puisse "cocher mentalement" son cas.</p>
+</div>
+
+</body>
+</html>
