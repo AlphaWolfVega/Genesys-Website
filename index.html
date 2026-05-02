@@ -3188,7 +3188,7 @@
     filter:saturate(0.95) contrast(1.02);
   }
   .founder-photo:has(img)::after{content:none}
-  /* ===== TEAM H2 — line1 fits single line, line2 plain gold (no shimmer) ===== */
+  /* ===== TEAM H2 — line1 nowrap + line2 plain gold, tight gap ===== */
   .h2-team{
     line-height:1;
   }
@@ -3201,19 +3201,19 @@
     line-height:1;
   }
   .h2-team .h2-team-shine{
-    display:inline-block;
-    margin-top:0;
+    display:block;
+    margin-top:4px;
     font-family:'Playfair Display',serif;
     font-style:italic;
     font-weight:700;
     font-size:clamp(48px, 10vw, 108px);
     letter-spacing:0;
     color:var(--gold);
-    line-height:1.05;
+    line-height:1;
   }
   @media(max-width:600px){
     .h2-team .h2-team-line1{font-size:26px;letter-spacing:-0.012em}
-    .h2-team .h2-team-shine{font-size:46px}
+    .h2-team .h2-team-shine{font-size:46px;margin-top:2px}
   }
 
   /* ===== TEAM ANIMATION (3 avatars online + breathing halo) ===== */
@@ -6883,7 +6883,7 @@
         <span class="label">L'équipe</span>
         <div class="line"></div>
       </div>
-      <h2 class="h2-team"><span class="h2-team-line1">Une équipe d'experts</span><br><em class="h2-team-shine">à ton service</em></h2>
+      <h2 class="h2-team"><span class="h2-team-line1">Une équipe d'experts</span><em class="h2-team-shine">à ton service</em></h2>
     </div>
 
     <div class="team-carousel reveal">
@@ -6918,7 +6918,7 @@
               </div>
               <div class="founder-signature">
                 <img class="sig-handwritten" src="assets/signature-alpha-gold.png" alt="Alpha Wolf Vega — signature manuscrite">
-                <span class="sig-role">Fondateur de GENESYS<br>Architecte du protocole α-QUANTT</span>
+                <span class="sig-role">Fondateur de GENESYS<br>Architecte du protocole <span class="greek-alpha">α</span>-QUANTT</span>
               </div>
             </div>
           </div>
