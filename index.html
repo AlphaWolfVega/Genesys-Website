@@ -335,7 +335,7 @@
       transparent 100%);
   }
 
-  /* ===== Price rise — particles flying 49 $ → 79 $ (G4) ===== */
+  /* ===== Price rise — fissure crack 49 $ → 79 $ (T2) ===== */
   .price-rise{
     margin:22px auto 0;display:flex;align-items:center;justify-content:center;
     gap:18px;max-width:540px;
@@ -354,7 +354,7 @@
   .price-rise .pr-amount-soon{
     color:#E07A6E;
     text-shadow:0 0 14px rgba(224,122,110,0.30);
-    animation:prSoonPulse 3s linear infinite;
+    animation:prSlam 4s ease-in-out infinite;
   }
   .price-rise .pr-label{
     font-family:'Inter',sans-serif;font-size:10px;font-weight:700;
@@ -369,25 +369,57 @@
   .price-rise .pr-arrow svg{
     width:100%;height:100%;display:block;overflow:visible;
   }
-  .price-rise .pr-guide{
+  .price-rise .pr-crack{
     fill:none;
-    stroke:rgba(212,182,106,0.18);
-    stroke-width:1;
+    stroke:url(#prCrackGradient);
+    stroke-width:2.4;
     stroke-linecap:round;
-    stroke-dasharray:2 4;
+    stroke-linejoin:round;
+    stroke-dasharray:200;
+    stroke-dashoffset:200;
+    filter:drop-shadow(0 0 6px rgba(224,122,110,0.75));
+    animation:prCrack 4s ease-in-out infinite;
   }
-  .price-rise .pr-particle{
-    fill:url(#prParticleGradient);
-    filter:drop-shadow(0 0 4px rgba(224,197,122,0.85));
+  .price-rise .pr-crack-shard{
+    fill:none;
+    stroke:url(#prCrackGradient);
+    stroke-width:1.4;
+    stroke-linecap:round;
+    stroke-dasharray:40;
+    stroke-dashoffset:40;
+    opacity:0;
+    filter:drop-shadow(0 0 4px rgba(224,122,110,0.6));
+    animation:prCrackShard 4s ease-in-out infinite;
   }
-  @keyframes prSoonPulse{
-    0%,16%,36%,56%,76%,96%,100%{
+  @keyframes prCrack{
+    0%{stroke-dashoffset:200;opacity:1}
+    60%{stroke-dashoffset:0;opacity:1}
+    85%{stroke-dashoffset:0;opacity:1}
+    95%{stroke-dashoffset:0;opacity:0}
+    100%{stroke-dashoffset:200;opacity:0}
+  }
+  @keyframes prCrackShard{
+    0%,40%{stroke-dashoffset:40;opacity:0}
+    65%{stroke-dashoffset:0;opacity:0.8}
+    85%{stroke-dashoffset:0;opacity:0.8}
+    95%{opacity:0}
+    100%{opacity:0}
+  }
+  @keyframes prSlam{
+    0%,55%,100%{
       transform:scale(1);
+      color:#E07A6E;
       text-shadow:0 0 14px rgba(224,122,110,0.30);
     }
-    20%,40%,60%,80%{
-      transform:scale(1.10);
-      text-shadow:0 0 24px rgba(224,122,110,0.75);
+    62%{
+      transform:scale(1.22);
+      color:#FF4040;
+      text-shadow:0 0 32px rgba(255,64,64,0.95),0 0 60px rgba(255,64,64,0.4);
+    }
+    72%{
+      transform:scale(1);
+      color:#E07A6E;
+      text-shadow:0 0 14px rgba(224,122,110,0.30);
     }
   }
   /* Pretitle "AVANT D'ALLER PLUS LOIN" + gold divider — used on desktop + mobile */
@@ -5520,49 +5552,17 @@
       <div class="pr-arrow" aria-hidden="true">
         <svg viewBox="0 0 200 60" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
           <defs>
-            <radialGradient id="prParticleGradient" cx="50%" cy="50%" r="50%">
-              <stop offset="0%" stop-color="#FFF1C7" stop-opacity="1"/>
-              <stop offset="40%" stop-color="#E0C57A" stop-opacity="1"/>
-              <stop offset="100%" stop-color="#D4B66A" stop-opacity="0"/>
-            </radialGradient>
-            <path id="prCurve" d="M 4 50 C 60 50 100 18 192 10"/>
+            <linearGradient id="prCrackGradient" x1="0%" y1="50%" x2="100%" y2="50%">
+              <stop offset="0%" stop-color="#D4B66A"/>
+              <stop offset="40%" stop-color="#E0C57A"/>
+              <stop offset="70%" stop-color="#E07A6E"/>
+              <stop offset="100%" stop-color="#FF4040"/>
+            </linearGradient>
           </defs>
-          <use href="#prCurve" class="pr-guide"/>
-          <circle class="pr-particle" r="2.6">
-            <animateMotion dur="3s" repeatCount="indefinite" begin="0s" rotate="auto">
-              <mpath href="#prCurve"/>
-            </animateMotion>
-            <animate attributeName="opacity" values="0;1;1;0" keyTimes="0;0.1;0.85;1" dur="3s" repeatCount="indefinite" begin="0s"/>
-            <animate attributeName="r" values="1.8;2.8;3.2;1.6" keyTimes="0;0.4;0.85;1" dur="3s" repeatCount="indefinite" begin="0s"/>
-          </circle>
-          <circle class="pr-particle" r="2.6">
-            <animateMotion dur="3s" repeatCount="indefinite" begin="0.6s" rotate="auto">
-              <mpath href="#prCurve"/>
-            </animateMotion>
-            <animate attributeName="opacity" values="0;1;1;0" keyTimes="0;0.1;0.85;1" dur="3s" repeatCount="indefinite" begin="0.6s"/>
-            <animate attributeName="r" values="1.8;2.8;3.2;1.6" keyTimes="0;0.4;0.85;1" dur="3s" repeatCount="indefinite" begin="0.6s"/>
-          </circle>
-          <circle class="pr-particle" r="2.6">
-            <animateMotion dur="3s" repeatCount="indefinite" begin="1.2s" rotate="auto">
-              <mpath href="#prCurve"/>
-            </animateMotion>
-            <animate attributeName="opacity" values="0;1;1;0" keyTimes="0;0.1;0.85;1" dur="3s" repeatCount="indefinite" begin="1.2s"/>
-            <animate attributeName="r" values="1.8;2.8;3.2;1.6" keyTimes="0;0.4;0.85;1" dur="3s" repeatCount="indefinite" begin="1.2s"/>
-          </circle>
-          <circle class="pr-particle" r="2.6">
-            <animateMotion dur="3s" repeatCount="indefinite" begin="1.8s" rotate="auto">
-              <mpath href="#prCurve"/>
-            </animateMotion>
-            <animate attributeName="opacity" values="0;1;1;0" keyTimes="0;0.1;0.85;1" dur="3s" repeatCount="indefinite" begin="1.8s"/>
-            <animate attributeName="r" values="1.8;2.8;3.2;1.6" keyTimes="0;0.4;0.85;1" dur="3s" repeatCount="indefinite" begin="1.8s"/>
-          </circle>
-          <circle class="pr-particle" r="2.6">
-            <animateMotion dur="3s" repeatCount="indefinite" begin="2.4s" rotate="auto">
-              <mpath href="#prCurve"/>
-            </animateMotion>
-            <animate attributeName="opacity" values="0;1;1;0" keyTimes="0;0.1;0.85;1" dur="3s" repeatCount="indefinite" begin="2.4s"/>
-            <animate attributeName="r" values="1.8;2.8;3.2;1.6" keyTimes="0;0.4;0.85;1" dur="3s" repeatCount="indefinite" begin="2.4s"/>
-          </circle>
+          <path class="pr-crack" d="M 4 38 L 28 30 L 52 42 L 78 26 L 104 40 L 132 22 L 160 34 L 188 14 L 196 10"/>
+          <path class="pr-crack-shard" d="M 78 26 L 70 16"/>
+          <path class="pr-crack-shard" d="M 132 22 L 142 8"/>
+          <path class="pr-crack-shard" d="M 104 40 L 96 50"/>
         </svg>
       </div>
       <div class="pr-side pr-soon">
