@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>V1 — 6 versions section "Avant d'aller plus loin" (3 profils)</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,400;0,700;1,700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --gold:#D4B66A;
+  --gold-light:#E0C57A;
+  --warm:#F5D89A;
+  --bg:#0A1628;
+  --bg-2:#142540;
+  --line-soft:rgba(212,182,106,0.18);
+  --text:#E8E4D8;
+  --muted:#9aa3b2;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif}
+body{padding:60px 20px 80px;min-height:100vh}
+h1{font-size:30px;text-align:center;margin-bottom:6px;letter-spacing:-0.01em;font-weight:800}
+.sub{text-align:center;color:var(--muted);font-size:14px;margin-bottom:50px;max-width:780px;margin-left:auto;margin-right:auto;line-height:1.65}
+.sub em{color:var(--gold);font-style:normal}
+
+.versions{
+  max-width:480px;margin:0 auto;
+  display:flex;flex-direction:column;gap:80px;
+}
+.version{
+  background:linear-gradient(180deg,rgba(20,37,64,0.4),rgba(10,22,40,0.2));
+  border:1px solid var(--line-soft);
+  border-radius:18px;
+  padding:50px 26px 40px;
+  position:relative;
+}
+.version-num{
+  position:absolute;top:-14px;left:24px;
+  background:var(--gold);color:#0A1628;
+  font-family:'JetBrains Mono',monospace;
+  font-size:11px;font-weight:800;letter-spacing:0.16em;
+  padding:5px 12px;border-radius:99px;
+}
+.version-name{
+  position:absolute;top:-14px;right:24px;
+  background:rgba(10,22,40,0.95);color:var(--gold);
+  font-family:'Inter',sans-serif;
+  font-size:11px;font-weight:700;letter-spacing:0.06em;
+  padding:5px 12px;border-radius:99px;
+  border:1px solid var(--line-soft);
+}
+
+/* ===== Lead common ===== */
+.hl-pretitle{
+  font-family:'Inter',sans-serif;font-size:10.5px;font-weight:700;
+  letter-spacing:0.24em;text-transform:uppercase;color:var(--gold);
+  display:block;text-align:center;margin-bottom:8px;
+}
+.hl-pretitle-divider{
+  width:54px;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent);
+  margin:0 auto 18px;
+}
+.lead-intro{
+  text-align:center;color:var(--text);
+  font-size:15.5px;line-height:1.6;font-weight:500;
+  margin-bottom:22px;
+}
+.lead-intro strong{color:var(--gold);font-weight:600}
+
+/* ===== Logo Shopify (commun) ===== */
+.shopify-icon{
+  display:flex;justify-content:center;margin-top:24px;
+  filter:drop-shadow(0 0 14px rgba(212,182,106,0.4));
+}
+.shopify-icon svg{width:46px;height:auto}
+@keyframes shopifyPulse{
+  0%,100%{transform:scale(1);filter:drop-shadow(0 0 14px rgba(212,182,106,0.4))}
+  50%{transform:scale(1.05);filter:drop-shadow(0 0 22px rgba(212,182,106,0.7))}
+}
+.shopify-icon svg{animation:shopifyPulse 2.6s ease-in-out infinite}
+
+/* ===== V1 — 3 CARDS VERTICALES MINIMALISTES (icône + texte) ===== */
+.v1 .profiles{display:flex;flex-direction:column;gap:10px;margin-top:8px}
+.v1 .profile{
+  display:flex;align-items:center;gap:14px;
+  padding:14px 16px;
+  background:rgba(20,37,64,0.5);
+  border:1px solid var(--line-soft);
+  border-radius:10px;
+  transition:transform 0.2s ease;
+}
+.v1 .profile-icon{
+  flex-shrink:0;width:34px;height:34px;border-radius:50%;
+  background:linear-gradient(135deg,var(--gold) 0%,var(--gold-light) 100%);
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Playfair Display',serif;font-style:italic;font-weight:700;
+  color:#0A1628;font-size:16px;
+}
+.v1 .profile-text{
+  font-size:13.5px;line-height:1.45;color:var(--text);font-weight:500;
+}
+.v1 .profile-text strong{color:var(--gold);font-weight:700}
+
+/* ===== V2 — 3 BLOCS NUMÉROTÉS GROS (style éditorial) ===== */
+.v2 .profiles{display:flex;flex-direction:column;gap:18px;margin-top:8px}
+.v2 .profile{
+  display:flex;align-items:flex-start;gap:14px;
+  padding:0 4px;
+  border-left:2px solid var(--gold);padding-left:14px;
+}
+.v2 .profile-num{
+  font-family:'Playfair Display',serif;font-style:italic;
+  font-size:36px;font-weight:700;color:var(--gold);
+  line-height:1;flex-shrink:0;width:38px;
+  text-shadow:0 0 14px rgba(212,182,106,0.4);
+}
+.v2 .profile-text{
+  font-size:14px;line-height:1.55;color:var(--text);font-weight:500;
+  padding-top:8px;
+}
+.v2 .profile-text strong{color:var(--gold);font-weight:700}
+
+/* ===== V3 — 3 PUCES À COCHE DORÉE (compact mass-market) ===== */
+.v3 .profiles{display:flex;flex-direction:column;gap:12px;margin-top:8px}
+.v3 .profile{
+  display:flex;align-items:flex-start;gap:12px;
+  font-size:14.5px;line-height:1.55;color:var(--text);font-weight:500;
+}
+.v3 .profile::before{
+  content:"";flex-shrink:0;width:18px;height:18px;border-radius:50%;
+  background:radial-gradient(circle,var(--gold) 30%,rgba(212,182,106,0.2) 31%,rgba(212,182,106,0.2) 100%);
+  border:1px solid var(--gold);
+  margin-top:3px;
+  box-shadow:0 0 10px rgba(212,182,106,0.4);
+  position:relative;
+}
+.v3 .profile strong{color:var(--gold);font-weight:700}
+
+/* ===== V4 — CARDS HORIZONTALES COMPACTES (3 col mobile-stacked) ===== */
+.v4 .profiles{
+  display:grid;grid-template-columns:1fr;gap:8px;margin-top:8px;
+}
+.v4 .profile{
+  background:linear-gradient(135deg,rgba(20,37,64,0.7) 0%,rgba(10,22,40,0.4) 100%);
+  border:1px solid var(--line-soft);
+  border-radius:8px;
+  padding:14px 16px;
+  position:relative;overflow:hidden;
+}
+.v4 .profile::before{
+  content:"";position:absolute;left:0;top:0;bottom:0;width:3px;
+  background:linear-gradient(180deg,var(--gold) 0%,transparent 100%);
+}
+.v4 .profile-num{
+  font-family:'JetBrains Mono',monospace;
+  font-size:10px;font-weight:700;color:var(--gold);
+  letter-spacing:0.16em;display:block;margin-bottom:4px;
+}
+.v4 .profile-text{
+  font-size:13.5px;line-height:1.45;color:var(--text);font-weight:500;
+}
+.v4 .profile-text strong{color:var(--gold);font-weight:700}
+
+/* ===== V5 — CARDS PREMIUM AVEC ICÔNES SVG (chaque profil = pictogramme) ===== */
+.v5 .profiles{display:flex;flex-direction:column;gap:10px;margin-top:8px}
+.v5 .profile{
+  display:flex;align-items:center;gap:14px;
+  padding:13px 16px;
+  background:linear-gradient(180deg,rgba(20,37,64,0.6),rgba(10,22,40,0.3));
+  border:1px solid var(--line-soft);
+  border-radius:10px;
+}
+.v5 .profile-icon-svg{
+  flex-shrink:0;width:32px;height:32px;
+  display:flex;align-items:center;justify-content:center;
+  color:var(--gold);
+  filter:drop-shadow(0 0 6px rgba(212,182,106,0.45));
+}
+.v5 .profile-icon-svg svg{width:24px;height:24px}
+.v5 .profile-text{
+  font-size:13.5px;line-height:1.45;color:var(--text);font-weight:500;
+}
+.v5 .profile-text strong{color:var(--gold);font-weight:700}
+
+/* ===== V6 — TIMELINE VERTICALE (style "ton chemin") ===== */
+.v6 .profiles{position:relative;padding-left:28px;margin-top:8px}
+.v6 .profiles::before{
+  content:"";position:absolute;left:9px;top:8px;bottom:8px;width:1px;
+  background:linear-gradient(180deg,var(--gold) 0%,rgba(212,182,106,0.3) 100%);
+}
+.v6 .profile{
+  position:relative;padding:8px 0 16px;
+  font-size:14px;line-height:1.5;color:var(--text);font-weight:500;
+}
+.v6 .profile:last-child{padding-bottom:0}
+.v6 .profile::before{
+  content:"";position:absolute;left:-23px;top:14px;
+  width:9px;height:9px;border-radius:50%;
+  background:var(--gold);
+  box-shadow:0 0 0 3px rgba(212,182,106,0.18),0 0 12px rgba(212,182,106,0.6);
+}
+.v6 .profile strong{color:var(--gold);font-weight:700}
+
+/* ===== Notes section ===== */
+.notes{
+  max-width:480px;margin:60px auto 0;
+  background:rgba(20,37,64,0.4);border:1px solid var(--line-soft);
+  border-radius:12px;padding:24px;
+}
+.notes h3{font-size:14px;color:var(--gold);margin-bottom:12px;letter-spacing:0.04em;text-transform:uppercase;font-weight:700}
+.notes p{font-size:13px;color:var(--muted);line-height:1.6;margin-bottom:8px}
+.notes p strong{color:var(--text)}
+</style>
+</head>
+<body>
+
+<h1>6 versions — section "Avant d'aller plus loin"</h1>
+<p class="sub">3 profils possibles au lieu d'un seul "tu as du mal". <em>Ouvre le funnel à plus de monde</em>. Choisis la mise en page qui parle le plus à ton viewer cible — j'applique sur la landing.</p>
+
+<div class="versions">
+
+  <!-- ============ V1 — Cards minimalistes avec initiales ============ -->
+  <div class="version v1">
+    <span class="version-num">V1</span>
+    <span class="version-name">Cards initiales</span>
+    <span class="hl-pretitle">Avant d'aller plus loin</span>
+    <div class="hl-pretitle-divider"></div>
+    <p class="lead-intro">Soyons honnêtes 5 secondes :<br>Si tu es sur cette page, c'est probablement que <strong>tu te reconnais ici</strong> :</p>
+    <div class="profiles">
+      <div class="profile">
+        <div class="profile-icon">A</div>
+        <div class="profile-text">Tu veux <strong>changer de carrière</strong> et te lancer dans l'e-commerce.</div>
+      </div>
+      <div class="profile">
+        <div class="profile-icon">B</div>
+        <div class="profile-text">Tu cherches un <strong>revenu complémentaire</strong> depuis chez toi.</div>
+      </div>
+      <div class="profile">
+        <div class="profile-icon">C</div>
+        <div class="profile-text">Tu as déjà une boutique mais elle <strong>ne décolle pas</strong>.</div>
+      </div>
+    </div>
+    <div class="shopify-icon">
+      <svg viewBox="0 0 109 124" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <path d="M74.7 14.8s-1.4.4-3.6 1.1c-.4-1.2-.9-2.6-1.7-4-2.5-4.7-6.1-7.2-10.5-7.2h-.9c-.1-.2-.3-.3-.4-.5-1.9-2.1-4.4-3.1-7.4-3-5.7.2-11.5 4.3-16.1 11.7-3.3 5.2-5.7 11.7-6.4 16.7-6.6 2-11.2 3.5-11.3 3.5-3.3 1-3.4 1.1-3.8 4.2-.3 2.3-9 69.9-9 69.9l73.4 12.7L107.7 105S75.5 14.7 74.7 14.8zm-19.6-4.9c-1.7.5-3.6 1.1-5.7 1.7 0-3-.4-7.2-1.8-10.8 4.5.8 6.7 5.9 7.5 9.1zM45.4 14c-3.9 1.2-8.1 2.5-12.4 3.8 1.2-4.6 3.5-9.2 6.3-12.2 1.1-1.1 2.5-2.4 4.2-3.1C45 5.6 45.5 10.4 45.4 14zM38.5 1c1.4 0 2.6.3 3.6.9-1.6.8-3.1 2-4.6 3.5-3.7 4-6.5 10.2-7.7 16.2-3.6 1.1-7.2 2.2-10.5 3.2 2-9.5 10-23.5 19.2-23.8z" fill="#95BF47"/>
+        <path d="M71.1 15.9c-.8 0-32.4 9.9-32.4 9.9L25 67.7s10.6 5.5 21.6 11.2c14.2 7.4 27.4 14 27.4 14l11-90.5c0 0-13.1-2.6-13.9-2.5z" fill="#5E8E3E"/>
+        <path d="M59.6 39.3l-3.9 14.6s-4.4-2-9.6-1.7c-7.7.5-7.7 5.3-7.7 6.5.4 6.6 17.7 8 18.7 23.5.7 12.2-6.5 20.5-16.9 21.2-12.5.7-19.4-6.6-19.4-6.6l2.6-11.3s6.9 5.2 12.4 4.9c3.6-.2 4.9-3.2 4.8-5.3-.5-8.6-14.6-8.1-15.5-22.3-.7-11.9 7.1-24 24.3-25.1 6.6-.4 10.2 1.6 10.2 1.6z" fill="#fff"/>
+      </svg>
+    </div>
+  </div>
+
+  <!-- ============ V2 — Blocs numérotés gros (éditorial) ============ -->
+  <div class="version v2">
+    <span class="version-num">V2</span>
+    <span class="version-name">Éditorial</span>
+    <span class="hl-pretitle">Avant d'aller plus loin</span>
+    <div class="hl-pretitle-divider"></div>
+    <p class="lead-intro">Soyons honnêtes 5 secondes :<br>Si tu es sur cette page, c'est probablement que :</p>
+    <div class="profiles">
+      <div class="profile">
+        <div class="profile-num">1</div>
+        <div class="profile-text">Tu veux <strong>changer de carrière</strong> et te lancer dans l'e-commerce.</div>
+      </div>
+      <div class="profile">
+        <div class="profile-num">2</div>
+        <div class="profile-text">Tu cherches un <strong>complément de revenu</strong> depuis chez toi.</div>
+      </div>
+      <div class="profile">
+        <div class="profile-num">3</div>
+        <div class="profile-text">Tu as <strong>déjà une boutique</strong>, mais elle ne décolle pas.</div>
+      </div>
+    </div>
+    <div class="shopify-icon">
+      <svg viewBox="0 0 109 124" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <path d="M74.7 14.8s-1.4.4-3.6 1.1c-.4-1.2-.9-2.6-1.7-4-2.5-4.7-6.1-7.2-10.5-7.2h-.9c-.1-.2-.3-.3-.4-.5-1.9-2.1-4.4-3.1-7.4-3-5.7.2-11.5 4.3-16.1 11.7-3.3 5.2-5.7 11.7-6.4 16.7-6.6 2-11.2 3.5-11.3 3.5-3.3 1-3.4 1.1-3.8 4.2-.3 2.3-9 69.9-9 69.9l73.4 12.7L107.7 105S75.5 14.7 74.7 14.8z" fill="#95BF47"/>
+        <path d="M71.1 15.9c-.8 0-32.4 9.9-32.4 9.9L25 67.7s10.6 5.5 21.6 11.2c14.2 7.4 27.4 14 27.4 14l11-90.5c0 0-13.1-2.6-13.9-2.5z" fill="#5E8E3E"/>
+        <path d="M59.6 39.3l-3.9 14.6s-4.4-2-9.6-1.7c-7.7.5-7.7 5.3-7.7 6.5.4 6.6 17.7 8 18.7 23.5.7 12.2-6.5 20.5-16.9 21.2-12.5.7-19.4-6.6-19.4-6.6l2.6-11.3s6.9 5.2 12.4 4.9c3.6-.2 4.9-3.2 4.8-5.3-.5-8.6-14.6-8.1-15.5-22.3-.7-11.9 7.1-24 24.3-25.1 6.6-.4 10.2 1.6 10.2 1.6z" fill="#fff"/>
+      </svg>
+    </div>
+  </div>
+
+  <!-- ============ V3 — Puces à coche dorée (compact mass-market) ============ -->
+  <div class="version v3">
+    <span class="version-num">V3</span>
+    <span class="version-name">Puces dorées</span>
+    <span class="hl-pretitle">Avant d'aller plus loin</span>
+    <div class="hl-pretitle-divider"></div>
+    <p class="lead-intro">Soyons honnêtes 5 secondes :<br>Si tu es sur cette page, c'est probablement que :</p>
+    <div class="profiles">
+      <div class="profile">Tu veux <strong>changer de carrière</strong> et te lancer dans l'e-commerce.</div>
+      <div class="profile">Tu cherches un <strong>revenu complémentaire</strong> depuis chez toi.</div>
+      <div class="profile">Tu as déjà testé une boutique e-com mais tu veux <strong>de meilleurs résultats</strong>.</div>
+    </div>
+    <div class="shopify-icon">
+      <svg viewBox="0 0 109 124" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <path d="M74.7 14.8s-1.4.4-3.6 1.1c-.4-1.2-.9-2.6-1.7-4-2.5-4.7-6.1-7.2-10.5-7.2h-.9c-.1-.2-.3-.3-.4-.5-1.9-2.1-4.4-3.1-7.4-3-5.7.2-11.5 4.3-16.1 11.7-3.3 5.2-5.7 11.7-6.4 16.7-6.6 2-11.2 3.5-11.3 3.5-3.3 1-3.4 1.1-3.8 4.2-.3 2.3-9 69.9-9 69.9l73.4 12.7L107.7 105S75.5 14.7 74.7 14.8z" fill="#95BF47"/>
+        <path d="M71.1 15.9c-.8 0-32.4 9.9-32.4 9.9L25 67.7s10.6 5.5 21.6 11.2c14.2 7.4 27.4 14 27.4 14l11-90.5c0 0-13.1-2.6-13.9-2.5z" fill="#5E8E3E"/>
+        <path d="M59.6 39.3l-3.9 14.6s-4.4-2-9.6-1.7c-7.7.5-7.7 5.3-7.7 6.5.4 6.6 17.7 8 18.7 23.5.7 12.2-6.5 20.5-16.9 21.2-12.5.7-19.4-6.6-19.4-6.6l2.6-11.3s6.9 5.2 12.4 4.9c3.6-.2 4.9-3.2 4.8-5.3-.5-8.6-14.6-8.1-15.5-22.3-.7-11.9 7.1-24 24.3-25.1 6.6-.4 10.2 1.6 10.2 1.6z" fill="#fff"/>
+      </svg>
+    </div>
+  </div>
+
+  <!-- ============ V4 — Cards verticales avec barre de gauche dorée ============ -->
+  <div class="version v4">
+    <span class="version-num">V4</span>
+    <span class="version-name">Cards barrées</span>
+    <span class="hl-pretitle">Avant d'aller plus loin</span>
+    <div class="hl-pretitle-divider"></div>
+    <p class="lead-intro">Soyons honnêtes 5 secondes :<br>Si tu es sur cette page, c'est probablement que :</p>
+    <div class="profiles">
+      <div class="profile">
+        <span class="profile-num">CAS 01</span>
+        <div class="profile-text">Tu veux <strong>changer de carrière</strong> et te lancer dans l'e-commerce.</div>
+      </div>
+      <div class="profile">
+        <span class="profile-num">CAS 02</span>
+        <div class="profile-text">Tu veux un <strong>complément de revenu</strong> depuis chez toi.</div>
+      </div>
+      <div class="profile">
+        <span class="profile-num">CAS 03</span>
+        <div class="profile-text">Tu as une boutique mais tu veux <strong>de meilleurs résultats</strong>.</div>
+      </div>
+    </div>
+    <div class="shopify-icon">
+      <svg viewBox="0 0 109 124" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <path d="M74.7 14.8s-1.4.4-3.6 1.1c-.4-1.2-.9-2.6-1.7-4-2.5-4.7-6.1-7.2-10.5-7.2h-.9c-.1-.2-.3-.3-.4-.5-1.9-2.1-4.4-3.1-7.4-3-5.7.2-11.5 4.3-16.1 11.7-3.3 5.2-5.7 11.7-6.4 16.7-6.6 2-11.2 3.5-11.3 3.5-3.3 1-3.4 1.1-3.8 4.2-.3 2.3-9 69.9-9 69.9l73.4 12.7L107.7 105S75.5 14.7 74.7 14.8z" fill="#95BF47"/>
+        <path d="M71.1 15.9c-.8 0-32.4 9.9-32.4 9.9L25 67.7s10.6 5.5 21.6 11.2c14.2 7.4 27.4 14 27.4 14l11-90.5c0 0-13.1-2.6-13.9-2.5z" fill="#5E8E3E"/>
+        <path d="M59.6 39.3l-3.9 14.6s-4.4-2-9.6-1.7c-7.7.5-7.7 5.3-7.7 6.5.4 6.6 17.7 8 18.7 23.5.7 12.2-6.5 20.5-16.9 21.2-12.5.7-19.4-6.6-19.4-6.6l2.6-11.3s6.9 5.2 12.4 4.9c3.6-.2 4.9-3.2 4.8-5.3-.5-8.6-14.6-8.1-15.5-22.3-.7-11.9 7.1-24 24.3-25.1 6.6-.4 10.2 1.6 10.2 1.6z" fill="#fff"/>
+      </svg>
+    </div>
+  </div>
+
+  <!-- ============ V5 — Cards avec pictogrammes SVG (chaque cas a son icône) ============ -->
+  <div class="version v5">
+    <span class="version-num">V5</span>
+    <span class="version-name">Pictogrammes</span>
+    <span class="hl-pretitle">Avant d'aller plus loin</span>
+    <div class="hl-pretitle-divider"></div>
+    <p class="lead-intro">Soyons honnêtes 5 secondes :<br>Si tu es sur cette page, c'est probablement que :</p>
+    <div class="profiles">
+      <div class="profile">
+        <div class="profile-icon-svg">
+          <!-- Icône reconversion (porte) -->
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21V5a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v16M3 21h18M9 12h2M16 8l5 5-5 5"/></svg>
+        </div>
+        <div class="profile-text">Tu veux <strong>changer de carrière</strong> et te lancer dans l'e-commerce.</div>
+      </div>
+      <div class="profile">
+        <div class="profile-icon-svg">
+          <!-- Icône maison + revenu -->
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l9-8 9 8M5 9v11h14V9M9 21V12h6v9"/></svg>
+        </div>
+        <div class="profile-text">Tu cherches un <strong>complément de revenu</strong> depuis chez toi.</div>
+      </div>
+      <div class="profile">
+        <div class="profile-icon-svg">
+          <!-- Icône courbe ascendante -->
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l6-6 4 4 8-8M14 7h7v7"/></svg>
+        </div>
+        <div class="profile-text">Tu as une boutique mais tu veux <strong>de meilleurs résultats</strong>.</div>
+      </div>
+    </div>
+    <div class="shopify-icon">
+      <svg viewBox="0 0 109 124" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <path d="M74.7 14.8s-1.4.4-3.6 1.1c-.4-1.2-.9-2.6-1.7-4-2.5-4.7-6.1-7.2-10.5-7.2h-.9c-.1-.2-.3-.3-.4-.5-1.9-2.1-4.4-3.1-7.4-3-5.7.2-11.5 4.3-16.1 11.7-3.3 5.2-5.7 11.7-6.4 16.7-6.6 2-11.2 3.5-11.3 3.5-3.3 1-3.4 1.1-3.8 4.2-.3 2.3-9 69.9-9 69.9l73.4 12.7L107.7 105S75.5 14.7 74.7 14.8z" fill="#95BF47"/>
+        <path d="M71.1 15.9c-.8 0-32.4 9.9-32.4 9.9L25 67.7s10.6 5.5 21.6 11.2c14.2 7.4 27.4 14 27.4 14l11-90.5c0 0-13.1-2.6-13.9-2.5z" fill="#5E8E3E"/>
+        <path d="M59.6 39.3l-3.9 14.6s-4.4-2-9.6-1.7c-7.7.5-7.7 5.3-7.7 6.5.4 6.6 17.7 8 18.7 23.5.7 12.2-6.5 20.5-16.9 21.2-12.5.7-19.4-6.6-19.4-6.6l2.6-11.3s6.9 5.2 12.4 4.9c3.6-.2 4.9-3.2 4.8-5.3-.5-8.6-14.6-8.1-15.5-22.3-.7-11.9 7.1-24 24.3-25.1 6.6-.4 10.2 1.6 10.2 1.6z" fill="#fff"/>
+      </svg>
+    </div>
+  </div>
+
+  <!-- ============ V6 — Timeline verticale avec dots dorés ============ -->
+  <div class="version v6">
+    <span class="version-num">V6</span>
+    <span class="version-name">Timeline</span>
+    <span class="hl-pretitle">Avant d'aller plus loin</span>
+    <div class="hl-pretitle-divider"></div>
+    <p class="lead-intro">Soyons honnêtes 5 secondes :<br>Si tu es sur cette page, c'est probablement que :</p>
+    <div class="profiles">
+      <div class="profile">Tu veux <strong>changer de carrière</strong> et te lancer dans l'e-commerce.</div>
+      <div class="profile">Tu veux un <strong>complément de revenu</strong> depuis chez toi.</div>
+      <div class="profile">Tu as déjà une boutique mais tu veux <strong>de meilleurs résultats</strong>.</div>
+    </div>
+    <div class="shopify-icon">
+      <svg viewBox="0 0 109 124" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <path d="M74.7 14.8s-1.4.4-3.6 1.1c-.4-1.2-.9-2.6-1.7-4-2.5-4.7-6.1-7.2-10.5-7.2h-.9c-.1-.2-.3-.3-.4-.5-1.9-2.1-4.4-3.1-7.4-3-5.7.2-11.5 4.3-16.1 11.7-3.3 5.2-5.7 11.7-6.4 16.7-6.6 2-11.2 3.5-11.3 3.5-3.3 1-3.4 1.1-3.8 4.2-.3 2.3-9 69.9-9 69.9l73.4 12.7L107.7 105S75.5 14.7 74.7 14.8z" fill="#95BF47"/>
+        <path d="M71.1 15.9c-.8 0-32.4 9.9-32.4 9.9L25 67.7s10.6 5.5 21.6 11.2c14.2 7.4 27.4 14 27.4 14l11-90.5c0 0-13.1-2.6-13.9-2.5z" fill="#5E8E3E"/>
+        <path d="M59.6 39.3l-3.9 14.6s-4.4-2-9.6-1.7c-7.7.5-7.7 5.3-7.7 6.5.4 6.6 17.7 8 18.7 23.5.7 12.2-6.5 20.5-16.9 21.2-12.5.7-19.4-6.6-19.4-6.6l2.6-11.3s6.9 5.2 12.4 4.9c3.6-.2 4.9-3.2 4.8-5.3-.5-8.6-14.6-8.1-15.5-22.3-.7-11.9 7.1-24 24.3-25.1 6.6-.4 10.2 1.6 10.2 1.6z" fill="#fff"/>
+      </svg>
+    </div>
+  </div>
+
+</div>
+
+<div class="notes">
+  <h3>Mes recommandations</h3>
+  <p><strong>V2 (éditorial)</strong> : le plus premium et lisible. Les chiffres en Playfair italic dorés évoquent les manuscrits anciens, font écho au reste de la landing.</p>
+  <p><strong>V5 (pictogrammes)</strong> : le plus mass-market — chaque cas a son icône reconnaissable instinctivement (porte = reconversion, maison = revenu à domicile, courbe = scaling).</p>
+  <p><strong>V3 (puces dorées)</strong> : le plus compact si tu veux que la section reste courte et ne pousse pas trop le contenu en dessous.</p>
+  <p style="margin-top:14px;color:var(--gold)"><strong>Mon vote : V2</strong> — il colle parfaitement au ton premium de la landing tout en étant clair pour les 3 profils.</p>
+</div>
+
+</body>
+</html>
