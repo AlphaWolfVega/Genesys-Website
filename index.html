@@ -3188,51 +3188,32 @@
     filter:saturate(0.95) contrast(1.02);
   }
   .founder-photo:has(img)::after{content:none}
-  /* ===== TEAM H2 — line1 fits single line, line2 metallic shine ===== */
+  /* ===== TEAM H2 — line1 fits single line, line2 plain gold (no shimmer) ===== */
   .h2-team{
-    line-height:1.1;
+    line-height:1;
   }
   .h2-team .h2-team-line1{
     display:block;
-    font-size:clamp(28px, 5vw, 56px);
+    font-size:clamp(28px, 6vw, 64px);
     font-weight:800;
     letter-spacing:-0.015em;
     white-space:nowrap;
+    line-height:1;
   }
   .h2-team .h2-team-shine{
     display:inline-block;
-    margin-top:6px;
+    margin-top:0;
     font-family:'Playfair Display',serif;
     font-style:italic;
     font-weight:700;
-    font-size:clamp(40px, 7.5vw, 80px);
+    font-size:clamp(48px, 10vw, 108px);
     letter-spacing:0;
-    background:linear-gradient(
-      115deg,
-      #D4B66A 0%,
-      #D4B66A 38%,
-      #FFF1C5 48%,
-      #FFFFFF 50%,
-      #FFF1C5 52%,
-      #D4B66A 62%,
-      #D4B66A 100%
-    );
-    background-size:280% 100%;
-    background-position:-100% 0;
-    -webkit-background-clip:text;
-    background-clip:text;
-    -webkit-text-fill-color:transparent;
-    color:transparent;
-    animation:h2TeamShine 4s ease-in-out infinite;
-  }
-  @keyframes h2TeamShine{
-    0%   {background-position:-100% 0}
-    22%  {background-position:200% 0}
-    100% {background-position:200% 0}
+    color:var(--gold);
+    line-height:1.05;
   }
   @media(max-width:600px){
-    .h2-team .h2-team-line1{font-size:24px;letter-spacing:-0.012em}
-    .h2-team .h2-team-shine{font-size:36px}
+    .h2-team .h2-team-line1{font-size:26px;letter-spacing:-0.012em}
+    .h2-team .h2-team-shine{font-size:46px}
   }
 
   /* ===== TEAM ANIMATION (3 avatars online + breathing halo) ===== */
@@ -6809,7 +6790,7 @@
       </div>
     </div>
     <div style="text-align:center;margin-top:60px" class="reveal">
-      <a href="https://www.skool.com/genesys/about" target="_blank" rel="noopener" class="btn btn-gold">Commencer pour 49 $</a>
+      <a href="https://www.skool.com/genesys/about" target="_blank" rel="noopener" class="btn btn-gold">Rejoindre GENESYS</a>
       <p style="margin-top:24px;font-family:'Inter',sans-serif;font-size:11px;color:var(--text-faint);letter-spacing:0.22em;text-transform:uppercase">Sans engagement · résiliable en 1 clic</p>
     </div>
   </div>

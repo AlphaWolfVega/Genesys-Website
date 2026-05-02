@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Test Shimmer Photo Alpha</title>
+<title>Test Shimmer Photo Alpha — V2 (naturel)</title>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
   *{margin:0;padding:0;box-sizing:border-box}
@@ -53,7 +53,7 @@
     overflow:hidden;
     isolation:isolate;
     background:#0A1628;
-    border:1px solid rgba(212,182,106,0.25);
+    border:1px solid rgba(212,182,106,0.2);
     box-shadow:0 12px 30px rgba(0,0,0,0.4);
   }
   .photo-frame img{
@@ -63,224 +63,220 @@
   }
 
   /* ============================================
-     S1 — Sweep diagonal classique (4s)
-     Sweep 0-22%, repos 22-100%
+     N1 — Sweep doux long (8s) — opacity max 30%
+     Sweep 1.6s puis repos 6.4s
      ============================================ */
-  .photo-frame.s1::after{
+  .photo-frame.n1::after{
     content:"";position:absolute;inset:0;z-index:2;pointer-events:none;
     background:linear-gradient(
       115deg,
       transparent 35%,
-      rgba(255,255,255,0.55) 48%,
-      rgba(240,214,144,0.7) 50%,
-      rgba(255,255,255,0.55) 52%,
+      rgba(255,235,180,0.30) 49%,
+      rgba(240,214,144,0.32) 50%,
+      rgba(255,235,180,0.30) 51%,
       transparent 65%
     );
     background-size:280% 100%;
     background-position:-100% 0;
-    animation:s1Sweep 4s ease-in-out infinite;
+    animation:n1Sweep 8s ease-in-out infinite;
     mix-blend-mode:screen;
   }
-  @keyframes s1Sweep{
+  @keyframes n1Sweep{
     0%{background-position:-100% 0}
-    22%{background-position:200% 0}
+    20%{background-position:200% 0}
     100%{background-position:200% 0}
   }
 
   /* ============================================
-     S2 — Sweep doux long (4s) — mix-blend overlay, plus subtil
+     N2 — Glint éclair ultra-bref (6s) — flash 0.4s puis 5.6s repos
      ============================================ */
-  .photo-frame.s2::after{
-    content:"";position:absolute;inset:0;z-index:2;pointer-events:none;
-    background:linear-gradient(
-      115deg,
-      transparent 30%,
-      rgba(255,235,180,0.35) 47%,
-      rgba(255,215,128,0.5) 50%,
-      rgba(255,235,180,0.35) 53%,
-      transparent 70%
-    );
-    background-size:320% 100%;
-    background-position:-120% 0;
-    animation:s2Sweep 4s ease-out infinite;
-    mix-blend-mode:overlay;
-  }
-  @keyframes s2Sweep{
-    0%{background-position:-120% 0}
-    30%{background-position:220% 0}
-    100%{background-position:220% 0}
-  }
-
-  /* ============================================
-     S3 — Glint + flash (4s) — mini-flash blanc à mi-parcours
-     ============================================ */
-  .photo-frame.s3::after{
+  .photo-frame.n2::after{
     content:"";position:absolute;inset:0;z-index:2;pointer-events:none;
     background:linear-gradient(
       110deg,
-      transparent 38%,
-      rgba(255,255,255,0.7) 49%,
-      rgba(255,225,150,0.85) 50%,
-      rgba(255,255,255,0.7) 51%,
-      transparent 62%
+      transparent 42%,
+      rgba(255,235,180,0.45) 49%,
+      rgba(255,225,150,0.55) 50%,
+      rgba(255,235,180,0.45) 51%,
+      transparent 58%
     );
-    background-size:260% 100%;
+    background-size:240% 100%;
     background-position:-100% 0;
-    animation:s3Sweep 4s ease-in-out infinite;
+    animation:n2Glint 6s linear infinite;
     mix-blend-mode:screen;
   }
-  @keyframes s3Sweep{
+  @keyframes n2Glint{
     0%{background-position:-100% 0; opacity:0}
-    5%{opacity:1}
-    20%{background-position:200% 0; opacity:1}
-    25%{opacity:0}
+    2%{opacity:1}
+    8%{background-position:200% 0; opacity:1}
+    10%{opacity:0}
     100%{background-position:200% 0; opacity:0}
   }
 
   /* ============================================
-     S4 — Sweep lent or pur (5s, plus espacé) — pas de blanc, juste or
+     N3 — Halo périphérique (5s) — pas de sweep, juste un glow doré
+     qui apparaît sur le bord intérieur de la photo et s'estompe
      ============================================ */
-  .photo-frame.s4::after{
+  .photo-frame.n3::after{
+    content:"";position:absolute;inset:0;z-index:2;pointer-events:none;
+    background:radial-gradient(
+      ellipse 110% 100% at 50% 50%,
+      transparent 55%,
+      rgba(240,214,144,0.18) 75%,
+      rgba(240,214,144,0.30) 92%,
+      rgba(240,214,144,0.40) 100%
+    );
+    opacity:0;
+    animation:n3Halo 5s ease-in-out infinite;
+    mix-blend-mode:screen;
+  }
+  @keyframes n3Halo{
+    0%, 70%, 100%{opacity:0}
+    35%{opacity:1}
+  }
+
+  /* ============================================
+     N4 — Reflet ultra-lent (12s) — passe très lentement
+     opacity bas, cycle long
+     ============================================ */
+  .photo-frame.n4::after{
     content:"";position:absolute;inset:0;z-index:2;pointer-events:none;
     background:linear-gradient(
       115deg,
-      transparent 32%,
-      rgba(240,214,144,0.4) 46%,
-      rgba(255,225,150,0.6) 50%,
-      rgba(240,214,144,0.4) 54%,
-      transparent 68%
+      transparent 30%,
+      rgba(255,235,180,0.22) 47%,
+      rgba(240,214,144,0.28) 50%,
+      rgba(255,235,180,0.22) 53%,
+      transparent 70%
     );
     background-size:300% 100%;
     background-position:-110% 0;
-    animation:s4Sweep 5s ease-in-out infinite;
+    animation:n4Slow 12s ease-in-out infinite;
     mix-blend-mode:screen;
   }
-  @keyframes s4Sweep{
+  @keyframes n4Slow{
     0%{background-position:-110% 0}
-    20%{background-position:210% 0}
+    25%{background-position:210% 0}
     100%{background-position:210% 0}
   }
 
   /* ============================================
-     S5 — Double sweep (4s) — deux balayages rapprochés puis pause
+     N5 — Pulse couleur dorée diffus (10s) — la photo prend
+     une teinte dorée légère sur 0.8s puis revient au normal
      ============================================ */
-  .photo-frame.s5::after{
+  .photo-frame.n5::after{
     content:"";position:absolute;inset:0;z-index:2;pointer-events:none;
-    background:linear-gradient(
-      115deg,
-      transparent 35%,
-      rgba(255,255,255,0.45) 48%,
-      rgba(240,214,144,0.6) 50%,
-      rgba(255,255,255,0.45) 52%,
-      transparent 65%
+    background:radial-gradient(
+      ellipse 80% 70% at 50% 40%,
+      rgba(240,214,144,0.32) 0%,
+      rgba(240,214,144,0.16) 40%,
+      transparent 80%
     );
-    background-size:260% 100%;
-    background-position:-100% 0;
-    animation:s5Sweep 4s ease-in-out infinite;
-    mix-blend-mode:screen;
+    opacity:0;
+    animation:n5Warm 10s ease-in-out infinite;
+    mix-blend-mode:overlay;
   }
-  @keyframes s5Sweep{
-    0%{background-position:-100% 0}
-    18%{background-position:200% 0}
-    22%{background-position:-100% 0}
-    40%{background-position:200% 0}
-    100%{background-position:200% 0}
+  @keyframes n5Warm{
+    0%, 80%, 100%{opacity:0}
+    40%{opacity:1}
   }
 
   /* ============================================
-     S6 — Sweep + bordure dorée pulse (4s)
+     N6 — Vague organique (9s) — sweep avec opacité ondulée
+     non-linéaire, plus naturel qu'un balayage rigide
      ============================================ */
-  .photo-frame.s6{
-    box-shadow:0 12px 30px rgba(0,0,0,0.4), 0 0 0 1px rgba(212,182,106,0.25);
-    animation:s6Border 4s ease-in-out infinite;
-  }
-  .photo-frame.s6::after{
+  .photo-frame.n6::after{
     content:"";position:absolute;inset:0;z-index:2;pointer-events:none;
     background:linear-gradient(
-      115deg,
-      transparent 35%,
-      rgba(255,255,255,0.5) 48%,
-      rgba(240,214,144,0.65) 50%,
-      rgba(255,255,255,0.5) 52%,
-      transparent 65%
+      120deg,
+      transparent 32%,
+      rgba(255,240,200,0.20) 44%,
+      rgba(240,214,144,0.36) 50%,
+      rgba(255,240,200,0.20) 56%,
+      transparent 68%
     );
-    background-size:280% 100%;
+    background-size:300% 100%;
     background-position:-100% 0;
-    animation:s1Sweep 4s ease-in-out infinite;
+    opacity:0;
+    animation:n6Organic 9s cubic-bezier(0.45,0.05,0.55,0.95) infinite;
     mix-blend-mode:screen;
   }
-  @keyframes s6Border{
-    0%, 100%{box-shadow:0 12px 30px rgba(0,0,0,0.4), 0 0 0 1px rgba(212,182,106,0.25), 0 0 0 0 rgba(212,182,106,0.0)}
-    20%{box-shadow:0 12px 30px rgba(0,0,0,0.4), 0 0 0 1px rgba(212,182,106,0.6), 0 0 24px 4px rgba(212,182,106,0.35)}
+  @keyframes n6Organic{
+    0%   {background-position:-100% 0; opacity:0}
+    8%   {opacity:0.8}
+    14%  {opacity:1}
+    20%  {opacity:0.7}
+    25%  {background-position:210% 0; opacity:0}
+    100% {background-position:210% 0; opacity:0}
   }
 
 </style>
 </head>
 <body>
 
-<h1>Test shimmer photo Alpha — 6 variantes</h1>
-<p class="sub">Effet métallique doré qui passe sur la photo toutes les 4-5 secondes. Choisis la version qui rend le mieux. Tous les sweeps utilisent <code>mix-blend-mode</code> pour interagir avec la photo.</p>
+<h1>Test shimmer photo Alpha — V2 (naturel)</h1>
+<p class="sub">Effet métallique doré subtil, qui apparaît, disparaît, et revient quelques secondes plus tard. Cycles longs (5-12 s), opacité basse, ne doit pas perturber la lecture du visage.</p>
 
 <div class="grid">
 
   <div class="card">
-    <span class="num">S1</span>
-    <div class="photo-frame s1">
+    <span class="num">N1</span>
+    <div class="photo-frame n1">
       <img src="assets/alpha-wolf-vega.webp" alt="Alpha Wolf Vega">
     </div>
-    <div class="label">Classique</div>
-    <div class="desc">Sweep diagonal blanc + cœur or, sweep rapide puis 3,2 s de repos.</div>
-    <div class="timing">4 s · screen blend · ease-in-out</div>
+    <div class="label">Sweep doux long</div>
+    <div class="desc">Opacité 30 % max, sweep 1,6 s puis 6,4 s de repos. Très calme.</div>
+    <div class="timing">8 s · screen blend · ease-in-out</div>
   </div>
 
   <div class="card">
-    <span class="num">S2</span>
-    <div class="photo-frame s2">
+    <span class="num">N2</span>
+    <div class="photo-frame n2">
       <img src="assets/alpha-wolf-vega.webp" alt="Alpha Wolf Vega">
     </div>
-    <div class="label">Doux long</div>
-    <div class="desc">Plus subtil, mix-blend overlay, sweep de 1,2 s puis 2,8 s de repos.</div>
-    <div class="timing">4 s · overlay blend · ease-out</div>
+    <div class="label">Glint éclair</div>
+    <div class="desc">Mini-flash 0,4 s, fade in/out propres. Discret comme un reflet sur la peau.</div>
+    <div class="timing">6 s · linear · fade in/out</div>
   </div>
 
   <div class="card">
-    <span class="num">S3</span>
-    <div class="photo-frame s3">
+    <span class="num">N3</span>
+    <div class="photo-frame n3">
       <img src="assets/alpha-wolf-vega.webp" alt="Alpha Wolf Vega">
     </div>
-    <div class="label">Glint flash</div>
-    <div class="desc">Apparaît brièvement, mini-flash blanc + or à mi-parcours, disparaît net.</div>
-    <div class="timing">4 s · screen blend · fade in/out</div>
+    <div class="label">Halo périphérique</div>
+    <div class="desc">Pas de sweep. Juste un glow doré qui apparaît sur les bords et s'estompe. Photo intacte au centre.</div>
+    <div class="timing">5 s · screen blend · radial</div>
   </div>
 
   <div class="card">
-    <span class="num">S4</span>
-    <div class="photo-frame s4">
+    <span class="num">N4</span>
+    <div class="photo-frame n4">
       <img src="assets/alpha-wolf-vega.webp" alt="Alpha Wolf Vega">
     </div>
-    <div class="label">Or pur lent</div>
-    <div class="desc">Pas de blanc, juste un dégradé doré qui glisse. Plus chaleureux, moins flashy.</div>
-    <div class="timing">5 s · screen blend · ease-in-out</div>
+    <div class="label">Reflet ultra-lent</div>
+    <div class="desc">Cycle de 12 s, sweep très lent à opacité 28 %. Le viewer le voit à peine, mais ressent du mouvement.</div>
+    <div class="timing">12 s · screen blend · ease-in-out</div>
   </div>
 
   <div class="card">
-    <span class="num">S5</span>
-    <div class="photo-frame s5">
+    <span class="num">N5</span>
+    <div class="photo-frame n5">
       <img src="assets/alpha-wolf-vega.webp" alt="Alpha Wolf Vega">
     </div>
-    <div class="label">Double sweep</div>
-    <div class="desc">Deux balayages rapprochés (~0,7 s d'intervalle) puis pause longue. Effet « scintillement double ».</div>
-    <div class="timing">4 s · screen blend · ease-in-out</div>
+    <div class="label">Teinte dorée diffuse</div>
+    <div class="desc">Pas de sweep. La photo prend une légère teinte chaude pendant 1 s, puis revient au normal. Comme une lumière qui change.</div>
+    <div class="timing">10 s · overlay blend · radial</div>
   </div>
 
   <div class="card">
-    <span class="num">S6</span>
-    <div class="photo-frame s6">
+    <span class="num">N6</span>
+    <div class="photo-frame n6">
       <img src="assets/alpha-wolf-vega.webp" alt="Alpha Wolf Vega">
     </div>
-    <div class="label">Sweep + bordure pulse</div>
-    <div class="desc">Sweep classique + halo doré qui pulse autour de la photo en synchro.</div>
-    <div class="timing">4 s · screen blend · halo synchronisé</div>
+    <div class="label">Vague organique</div>
+    <div class="desc">Sweep avec opacité ondulée non-linéaire, mouvement irrégulier comme un vrai reflet de lumière qui passe.</div>
+    <div class="timing">9 s · cubic-bezier · screen blend</div>
   </div>
 
 </div>
