@@ -324,6 +324,79 @@
     line-height:1.55;max-width:520px;margin-left:auto;margin-right:auto;
   }
   .hero-price-warn strong{font-weight:700;font-style:normal;color:var(--gold)}
+
+  /* ===== Price rise — 49 $ → 79 $ animated arrow ===== */
+  .price-rise{
+    margin:18px auto 0;display:flex;align-items:center;justify-content:center;
+    gap:18px;max-width:540px;
+  }
+  .price-rise .pr-side{
+    display:flex;flex-direction:column;align-items:center;gap:4px;
+    flex-shrink:0;min-width:78px;
+  }
+  .price-rise .pr-amount{
+    font-family:'Playfair Display',serif;font-weight:700;
+    font-size:34px;line-height:1;letter-spacing:-0.01em;
+    color:var(--gold);
+    text-shadow:0 0 18px rgba(212,182,106,0.35);
+  }
+  .price-rise .pr-amount-soon{
+    color:#E07A6E;
+    text-shadow:0 0 14px rgba(224,122,110,0.30);
+    animation:prSoonPulse 4s ease-in-out infinite;
+  }
+  .price-rise .pr-label{
+    font-family:'Inter',sans-serif;font-size:10px;font-weight:700;
+    letter-spacing:0.18em;text-transform:uppercase;
+    color:rgba(212,182,106,0.75);
+  }
+  .price-rise .pr-label-soon{color:rgba(224,122,110,0.85)}
+  .price-rise .pr-arrow{
+    flex:1 1 auto;height:60px;position:relative;
+    min-width:120px;max-width:240px;
+  }
+  .price-rise .pr-arrow svg{
+    width:100%;height:100%;display:block;overflow:visible;
+  }
+  .price-rise .pr-path,
+  .price-rise .pr-head{
+    fill:none;
+    stroke:url(#prGradient);
+    stroke-width:2.2;
+    stroke-linecap:round;
+    stroke-linejoin:round;
+  }
+  .price-rise .pr-path{
+    stroke-dasharray:240;
+    stroke-dashoffset:240;
+    animation:prTrace 4s ease-in-out infinite;
+    filter:drop-shadow(0 0 6px rgba(212,182,106,0.45));
+  }
+  .price-rise .pr-head{
+    opacity:0;
+    animation:prHead 4s ease-in-out infinite;
+    filter:drop-shadow(0 0 8px rgba(224,122,110,0.55));
+  }
+  @keyframes prTrace{
+    0%{stroke-dashoffset:240;opacity:1}
+    55%{stroke-dashoffset:0;opacity:1}
+    80%{stroke-dashoffset:0;opacity:1}
+    95%{stroke-dashoffset:0;opacity:0}
+    100%{stroke-dashoffset:240;opacity:0}
+  }
+  @keyframes prHead{
+    0%,55%{opacity:0;transform:scale(0.7)}
+    62%{opacity:1;transform:scale(1.15)}
+    70%{opacity:1;transform:scale(1)}
+    85%{opacity:1;transform:scale(1)}
+    95%{opacity:0;transform:scale(1)}
+    100%{opacity:0;transform:scale(0.7)}
+  }
+  @keyframes prSoonPulse{
+    0%,60%,100%{transform:scale(1);text-shadow:0 0 14px rgba(224,122,110,0.30)}
+    66%{transform:scale(1.08);text-shadow:0 0 22px rgba(224,122,110,0.65)}
+    72%{transform:scale(1);text-shadow:0 0 16px rgba(224,122,110,0.40)}
+  }
   /* Pretitle "AVANT D'ALLER PLUS LOIN" + gold divider — used on desktop + mobile */
   .hl-pretitle{
     font-family:'Inter',sans-serif;
@@ -947,6 +1020,11 @@
     .hero-social .hs-divider{height:26px}
     .hero-social .hs-text{line-height:1.4}
     .hero-price-warn{font-size:11.5px;margin-top:12px;padding:0 14px}
+    .price-rise{gap:10px;margin-top:14px;padding:0 8px}
+    .price-rise .pr-side{min-width:60px;gap:3px}
+    .price-rise .pr-amount{font-size:26px}
+    .price-rise .pr-label{font-size:8.5px;letter-spacing:0.14em}
+    .price-rise .pr-arrow{height:46px;min-width:80px}
 
     /* Carousel container — full-viewport slides, snap-center, no peek */
     .hero-lead-carousel{
@@ -5439,7 +5517,29 @@
     <div class="hero-meta reveal">
       23 modules <span>·</span> 100 h+ de formations <span>·</span> 49 $/mois
     </div>
-    <div class="hero-price-warn reveal">Le tarif passe bientôt à <strong>79 $/mois</strong>. En rejoignant aujourd'hui, tu gardes 49 $ tant que tu es membre.</div>
+    <div class="price-rise reveal" aria-label="Le prix passe bientôt de 49 $ à 79 $ par mois">
+      <div class="pr-side pr-now">
+        <span class="pr-amount">49 $</span>
+        <span class="pr-label">Actuellement</span>
+      </div>
+      <div class="pr-arrow" aria-hidden="true">
+        <svg viewBox="0 0 200 60" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="prGradient" x1="0%" y1="100%" x2="100%" y2="0%">
+              <stop offset="0%" stop-color="#D4B66A"/>
+              <stop offset="55%" stop-color="#E0C57A"/>
+              <stop offset="100%" stop-color="#E07A6E"/>
+            </linearGradient>
+          </defs>
+          <path class="pr-path" d="M 4 50 C 60 50 100 18 192 10"/>
+          <path class="pr-head" d="M 180 4 L 196 10 L 180 16"/>
+        </svg>
+      </div>
+      <div class="pr-side pr-soon">
+        <span class="pr-amount pr-amount-soon">79 $</span>
+        <span class="pr-label pr-label-soon">Bientôt</span>
+      </div>
+    </div>
   </div>
 </header>
 
