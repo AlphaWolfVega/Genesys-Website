@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Test Shimmer Photo Alpha — V3 (12 effets)</title>
+<title>Test Shimmer Photo Alpha — V4 (catalogue complet)</title>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
   *{margin:0;padding:0;box-sizing:border-box}
@@ -13,13 +13,13 @@
     min-height:100vh;padding:60px 20px;
   }
   h1{font-size:28px;text-align:center;margin-bottom:8px;letter-spacing:-0.01em}
-  .sub{text-align:center;color:#9aa3b2;font-size:14px;margin-bottom:30px;max-width:740px;margin-left:auto;margin-right:auto;line-height:1.6}
+  .sub{text-align:center;color:#9aa3b2;font-size:14px;margin-bottom:20px;max-width:740px;margin-left:auto;margin-right:auto;line-height:1.6}
   h2.section{
     text-align:center;font-size:18px;color:#D4B66A;
-    margin:50px 0 30px;
+    margin:60px 0 30px;
     text-transform:uppercase;letter-spacing:0.18em;font-weight:700;
   }
-  h2.section span{display:block;font-size:11px;color:#6b7382;margin-top:6px;letter-spacing:0.14em;font-weight:500}
+  h2.section span{display:block;font-size:11px;color:#6b7382;margin-top:6px;letter-spacing:0.14em;font-weight:500;text-transform:none}
   .grid{
     max-width:1280px;margin:0 auto;
     display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));
@@ -37,384 +37,313 @@
     font-family:'JetBrains Mono','Menlo',monospace;
     font-size:11px;color:#D4B66A;font-weight:700;letter-spacing:0.1em;
   }
-  .card .label{
-    margin-top:18px;font-size:13px;color:#9aa3b2;
-    text-transform:uppercase;letter-spacing:0.1em;font-weight:600;
-  }
-  .card .desc{
-    margin-top:8px;font-size:12px;color:#6b7382;
-    line-height:1.55;max-width:260px;margin-left:auto;margin-right:auto;
-  }
-  .card .timing{
-    margin-top:8px;font-family:'JetBrains Mono','Menlo',monospace;
-    font-size:10.5px;color:#D4B66A;letter-spacing:0.04em;
-  }
+  .card .label{margin-top:18px;font-size:13px;color:#9aa3b2;text-transform:uppercase;letter-spacing:0.1em;font-weight:600}
+  .card .desc{margin-top:8px;font-size:12px;color:#6b7382;line-height:1.55;max-width:260px;margin-left:auto;margin-right:auto}
+  .card .timing{margin-top:8px;font-family:'JetBrains Mono','Menlo',monospace;font-size:10.5px;color:#D4B66A;letter-spacing:0.04em}
 
   .photo-frame{
-    position:relative;
-    width:240px;
-    aspect-ratio:1/1.18;
-    margin:0 auto;
-    border-radius:8px;
-    overflow:hidden;
-    isolation:isolate;
-    background:#0A1628;
-    border:1px solid rgba(212,182,106,0.2);
+    position:relative;width:240px;aspect-ratio:1/1.18;margin:0 auto;
+    border-radius:8px;overflow:hidden;isolation:isolate;
+    background:#0A1628;border:1px solid rgba(212,182,106,0.2);
     box-shadow:0 12px 30px rgba(0,0,0,0.4);
   }
-  .photo-frame img{
-    width:100%;height:100%;object-fit:cover;display:block;
+  .photo-frame img{width:100%;height:100%;object-fit:cover;display:block}
+
+  /* ============================================================
+     PARTIE 1 — BUTTON-CLONE PATTERN (3s, sweep + wait)
+     Pattern exact du bouton CTA : sweep 0-35%, wait 35-100%
+     ============================================================ */
+
+  /* B1 — Button-clone exact */
+  .photo-frame.b1::before{
+    content:"";position:absolute;inset:0;z-index:2;pointer-events:none;
+    background:linear-gradient(115deg,transparent 38%,rgba(255,255,255,0.6) 50%,transparent 62%);
+    background-size:50% 100%;background-repeat:no-repeat;background-position:-60% 0;
+    animation:bSweep 3s ease-in-out infinite;mix-blend-mode:screen;
+  }
+  /* B2 — Plus net (highlight blanc plus pur, plus étroit) */
+  .photo-frame.b2::before{
+    content:"";position:absolute;inset:0;z-index:2;pointer-events:none;
+    background:linear-gradient(115deg,transparent 42%,rgba(255,255,255,0.85) 50%,transparent 58%);
+    background-size:50% 100%;background-repeat:no-repeat;background-position:-60% 0;
+    animation:bSweep 3s ease-in-out infinite;mix-blend-mode:screen;
+  }
+  /* B3 — Plus or chaud (jaune/or au lieu du blanc) */
+  .photo-frame.b3::before{
+    content:"";position:absolute;inset:0;z-index:2;pointer-events:none;
+    background:linear-gradient(115deg,transparent 38%,rgba(255,225,140,0.65) 50%,transparent 62%);
+    background-size:50% 100%;background-repeat:no-repeat;background-position:-60% 0;
+    animation:bSweep 3s ease-in-out infinite;mix-blend-mode:screen;
+  }
+  /* B4 — Plus doux et plus large */
+  .photo-frame.b4::before{
+    content:"";position:absolute;inset:0;z-index:2;pointer-events:none;
+    background:linear-gradient(115deg,transparent 30%,rgba(255,240,200,0.45) 50%,transparent 70%);
+    background-size:55% 100%;background-repeat:no-repeat;background-position:-60% 0;
+    animation:bSweep 3.5s ease-in-out infinite;mix-blend-mode:screen;
+  }
+  /* B5 — Cycle plus long (5s, 4s wait) */
+  .photo-frame.b5::before{
+    content:"";position:absolute;inset:0;z-index:2;pointer-events:none;
+    background:linear-gradient(115deg,transparent 38%,rgba(255,255,255,0.6) 50%,transparent 62%);
+    background-size:50% 100%;background-repeat:no-repeat;background-position:-60% 0;
+    animation:bSweepLong 5s ease-in-out infinite;mix-blend-mode:screen;
+  }
+  /* B6 — Cycle très long (7s, 5.6s wait) — naturel premium */
+  .photo-frame.b6::before{
+    content:"";position:absolute;inset:0;z-index:2;pointer-events:none;
+    background:linear-gradient(115deg,transparent 38%,rgba(255,255,255,0.55) 50%,transparent 62%);
+    background-size:50% 100%;background-repeat:no-repeat;background-position:-60% 0;
+    animation:bSweepXLong 7s ease-in-out infinite;mix-blend-mode:screen;
+  }
+  @keyframes bSweep{0%{background-position:-60% 0}35%{background-position:160% 0}100%{background-position:160% 0}}
+  @keyframes bSweepLong{0%{background-position:-60% 0}25%{background-position:160% 0}100%{background-position:160% 0}}
+  @keyframes bSweepXLong{0%{background-position:-60% 0}20%{background-position:160% 0}100%{background-position:160% 0}}
+
+  /* ============================================================
+     PARTIE 2 — DIRECTIONS (angles différents)
+     ============================================================ */
+
+  /* D1 — Diagonal inverse 245° (de bas-droite vers haut-gauche) */
+  .photo-frame.d1::before{
+    content:"";position:absolute;inset:0;z-index:2;pointer-events:none;
+    background:linear-gradient(245deg,transparent 38%,rgba(255,255,255,0.6) 50%,transparent 62%);
+    background-size:50% 100%;background-repeat:no-repeat;background-position:160% 0;
+    animation:dRevSweep 3.5s ease-in-out infinite;mix-blend-mode:screen;
+  }
+  @keyframes dRevSweep{0%{background-position:160% 0}30%{background-position:-60% 0}100%{background-position:-60% 0}}
+
+  /* D2 — Vertical haut → bas */
+  .photo-frame.d2::before{
+    content:"";position:absolute;inset:0;z-index:2;pointer-events:none;
+    background:linear-gradient(180deg,transparent 38%,rgba(255,255,255,0.55) 50%,transparent 62%);
+    background-size:100% 50%;background-repeat:no-repeat;background-position:0 -60%;
+    animation:dVSweep 3.5s ease-in-out infinite;mix-blend-mode:screen;
+  }
+  @keyframes dVSweep{0%{background-position:0 -60%}30%{background-position:0 160%}100%{background-position:0 160%}}
+
+  /* D3 — Vertical bas → haut */
+  .photo-frame.d3::before{
+    content:"";position:absolute;inset:0;z-index:2;pointer-events:none;
+    background:linear-gradient(0deg,transparent 38%,rgba(255,225,140,0.55) 50%,transparent 62%);
+    background-size:100% 50%;background-repeat:no-repeat;background-position:0 160%;
+    animation:dVSweepUp 4s ease-in-out infinite;mix-blend-mode:screen;
+  }
+  @keyframes dVSweepUp{0%{background-position:0 160%}25%{background-position:0 -60%}100%{background-position:0 -60%}}
+
+  /* D4 — Horizontal pur (90°) */
+  .photo-frame.d4::before{
+    content:"";position:absolute;inset:0;z-index:2;pointer-events:none;
+    background:linear-gradient(90deg,transparent 38%,rgba(255,255,255,0.55) 50%,transparent 62%);
+    background-size:50% 100%;background-repeat:no-repeat;background-position:-60% 0;
+    animation:bSweep 3.5s ease-in-out infinite;mix-blend-mode:screen;
   }
 
   /* ============================================================
-     PARTIE A — Teinte dorée diffuse (4 déclinaisons)
+     PARTIE 3 — SPECIALS (effets uniques)
      ============================================================ */
 
-  /* T1 — Subtile (intensité basse, cycle 12s) */
-  .photo-frame.t1::after{
+  /* S1 — Mirror flash (éclat très bref et brillant) */
+  .photo-frame.s1::before{
     content:"";position:absolute;inset:0;z-index:2;pointer-events:none;
-    background:radial-gradient(
-      ellipse 80% 70% at 50% 40%,
-      rgba(240,214,144,0.20) 0%,
-      rgba(240,214,144,0.08) 40%,
-      transparent 80%
-    );
-    opacity:0;
-    animation:tWarm 12s ease-in-out infinite;
-    mix-blend-mode:overlay;
+    background:linear-gradient(110deg,transparent 44%,rgba(255,255,255,0.95) 50%,transparent 56%);
+    background-size:200% 100%;background-position:-100% 0;opacity:0;
+    animation:sFlash 4s linear infinite;mix-blend-mode:screen;
   }
-  /* T2 — Intense (intensité haute, cycle 8s) */
-  .photo-frame.t2::after{
-    content:"";position:absolute;inset:0;z-index:2;pointer-events:none;
-    background:radial-gradient(
-      ellipse 90% 80% at 50% 45%,
-      rgba(255,210,120,0.55) 0%,
-      rgba(240,180,100,0.25) 50%,
-      transparent 90%
-    );
-    opacity:0;
-    animation:tWarm 8s ease-in-out infinite;
-    mix-blend-mode:overlay;
-  }
-  /* T3 — Pleine couverture (gradient linéaire complet, 10s) */
-  .photo-frame.t3::after{
-    content:"";position:absolute;inset:0;z-index:2;pointer-events:none;
-    background:linear-gradient(
-      135deg,
-      rgba(255,225,150,0.30) 0%,
-      rgba(240,200,120,0.20) 50%,
-      rgba(255,225,150,0.30) 100%
-    );
-    opacity:0;
-    animation:tWarm 10s ease-in-out infinite;
-    mix-blend-mode:overlay;
-  }
-  /* T4 — Visage focus (radial sur le visage uniquement, 9s) */
-  .photo-frame.t4::after{
-    content:"";position:absolute;inset:0;z-index:2;pointer-events:none;
-    background:radial-gradient(
-      circle 38% at 50% 38%,
-      rgba(255,220,140,0.45) 0%,
-      rgba(255,200,120,0.18) 50%,
-      transparent 80%
-    );
-    opacity:0;
-    animation:tWarm 9s ease-in-out infinite;
-    mix-blend-mode:soft-light;
-  }
-  @keyframes tWarm{
-    0%, 80%, 100%{opacity:0}
-    40%{opacity:1}
-  }
+  @keyframes sFlash{0%{background-position:-100% 0;opacity:0}3%{opacity:1}10%{background-position:200% 0;opacity:1}13%{opacity:0}100%{background-position:200% 0;opacity:0}}
 
-  /* ============================================================
-     PARTIE B — 8 familles "carte métallique qu'on tourne"
-     ============================================================ */
-
-  /* M1 — Sweep diagonal classique (le simple) */
-  .photo-frame.m1::after{
+  /* S2 — Radial expand depuis centre (onde) */
+  .photo-frame.s2::before{
     content:"";position:absolute;inset:0;z-index:2;pointer-events:none;
-    background:linear-gradient(
-      115deg,
-      transparent 38%,
-      rgba(255,255,255,0.5) 49%,
-      rgba(255,225,150,0.7) 50%,
-      rgba(255,255,255,0.5) 51%,
-      transparent 62%
-    );
-    background-size:280% 100%;
-    background-position:-100% 0;
-    animation:m1Sweep 5s ease-in-out infinite;
-    mix-blend-mode:screen;
+    background:radial-gradient(circle at 50% 50%,rgba(255,225,140,0.5),rgba(255,225,140,0.2) 40%,transparent 70%);
+    transform:scale(0);opacity:0;
+    animation:sRadial 5s ease-out infinite;mix-blend-mode:screen;
   }
-  @keyframes m1Sweep{
-    0%{background-position:-100% 0}
-    20%{background-position:200% 0}
-    100%{background-position:200% 0}
-  }
+  @keyframes sRadial{0%{transform:scale(0);opacity:0}20%{transform:scale(1.5);opacity:1}40%{transform:scale(2.5);opacity:0}100%{transform:scale(2.5);opacity:0}}
 
-  /* M2 — Double sweep (2 reflets séquentiels) */
-  .photo-frame.m2::after{
-    content:"";position:absolute;inset:0;z-index:2;pointer-events:none;
-    background:linear-gradient(
-      115deg,
-      transparent 30%,
-      rgba(255,255,255,0.4) 41%,
-      rgba(255,225,150,0.55) 42%,
-      transparent 50%,
-      rgba(255,255,255,0.4) 58%,
-      rgba(255,225,150,0.55) 59%,
-      transparent 70%
-    );
-    background-size:300% 100%;
-    background-position:-100% 0;
-    animation:m1Sweep 6s ease-in-out infinite;
-    mix-blend-mode:screen;
-  }
-
-  /* M3 — Holographic spectrum (rainbow shift comme une carte holo) */
-  .photo-frame.m3::after{
-    content:"";position:absolute;inset:0;z-index:2;pointer-events:none;
-    background:linear-gradient(
-      115deg,
-      transparent 32%,
-      rgba(255,180,200,0.35) 44%,
-      rgba(255,225,140,0.50) 48%,
-      rgba(180,235,255,0.40) 52%,
-      rgba(220,200,255,0.35) 56%,
-      transparent 68%
-    );
-    background-size:300% 100%;
-    background-position:-100% 0;
-    animation:m1Sweep 6s ease-in-out infinite;
-    mix-blend-mode:screen;
-  }
-
-  /* M4 — Brushed metal (highlight horizontal large + texture verticale) */
-  .photo-frame.m4{
-    position:relative;
-  }
-  .photo-frame.m4::before{
-    content:"";position:absolute;inset:0;z-index:1;pointer-events:none;
-    background:repeating-linear-gradient(
-      90deg,
-      rgba(255,255,255,0) 0px,
-      rgba(255,255,255,0.025) 1px,
-      rgba(0,0,0,0.04) 2px,
-      rgba(255,255,255,0) 3px
-    );
-    mix-blend-mode:overlay;
-  }
-  .photo-frame.m4::after{
-    content:"";position:absolute;inset:0;z-index:2;pointer-events:none;
-    background:linear-gradient(
-      0deg,
-      transparent 20%,
-      rgba(255,225,150,0.25) 45%,
-      rgba(255,240,200,0.35) 50%,
-      rgba(255,225,150,0.25) 55%,
-      transparent 80%
-    );
-    background-size:100% 280%;
-    background-position:0 -100%;
-    animation:m4VerticalSweep 7s ease-in-out infinite;
-    mix-blend-mode:screen;
-  }
-  @keyframes m4VerticalSweep{
-    0%{background-position:0 -100%}
-    25%{background-position:0 200%}
-    100%{background-position:0 200%}
-  }
-
-  /* M5 — Mirror flash (un éclat unique très brillant et bref) */
-  .photo-frame.m5::after{
-    content:"";position:absolute;inset:0;z-index:2;pointer-events:none;
-    background:linear-gradient(
-      110deg,
-      transparent 44%,
-      rgba(255,255,255,0.85) 48%,
-      rgba(255,250,220,1) 50%,
-      rgba(255,255,255,0.85) 52%,
-      transparent 56%
-    );
-    background-size:200% 100%;
-    background-position:-100% 0;
-    opacity:0;
-    animation:m5Mirror 5s linear infinite;
-    mix-blend-mode:screen;
-  }
-  @keyframes m5Mirror{
-    0%{background-position:-100% 0; opacity:0}
-    3%{opacity:1}
-    9%{background-position:200% 0; opacity:1}
-    12%{opacity:0}
-    100%{background-position:200% 0; opacity:0}
-  }
-
-  /* M6 — Rotating beam (faisceau qui pivote autour d'un point) */
-  .photo-frame.m6::after{
+  /* S3 — Conic rotating beam */
+  .photo-frame.s3::before{
     content:"";position:absolute;inset:-50%;z-index:2;pointer-events:none;
-    background:conic-gradient(
-      from 0deg at 50% 50%,
-      transparent 0deg,
-      transparent 70deg,
-      rgba(255,225,150,0.35) 90deg,
-      rgba(255,250,220,0.55) 95deg,
-      rgba(255,225,150,0.35) 100deg,
-      transparent 120deg,
-      transparent 360deg
-    );
-    animation:m6Rotate 8s linear infinite;
-    mix-blend-mode:screen;
+    background:conic-gradient(from 0deg at 50% 50%,
+      transparent 0deg,transparent 75deg,
+      rgba(255,225,140,0.4) 88deg,rgba(255,250,220,0.6) 92deg,rgba(255,225,140,0.4) 96deg,
+      transparent 110deg,transparent 360deg);
+    animation:sRotate 8s linear infinite;mix-blend-mode:screen;
   }
-  @keyframes m6Rotate{
-    0%{transform:rotate(0deg)}
-    100%{transform:rotate(360deg)}
+  @keyframes sRotate{to{transform:rotate(360deg)}}
+
+  /* S4 — Double sweep enchaîné */
+  .photo-frame.s4::before{
+    content:"";position:absolute;inset:0;z-index:2;pointer-events:none;
+    background:linear-gradient(115deg,
+      transparent 28%,rgba(255,255,255,0.45) 39%,rgba(255,225,140,0.55) 41%,transparent 50%,
+      rgba(255,255,255,0.45) 59%,rgba(255,225,140,0.55) 61%,transparent 72%);
+    background-size:300% 100%;background-position:-100% 0;
+    animation:bSweep 4s ease-in-out infinite;mix-blend-mode:screen;
   }
 
-  /* M7 — Liquid foil (multi-gradient ondulé qui pulse) */
-  .photo-frame.m7::after{
+  /* S5 — Triple flash rapide */
+  .photo-frame.s5::before{
+    content:"";position:absolute;inset:0;z-index:2;pointer-events:none;
+    background:linear-gradient(115deg,transparent 42%,rgba(255,255,255,0.7) 50%,transparent 58%);
+    background-size:50% 100%;background-position:-60% 0;
+    animation:sTriple 4.5s linear infinite;mix-blend-mode:screen;
+  }
+  @keyframes sTriple{
+    0%{background-position:-60% 0}
+    8%{background-position:160% 0}
+    10%{background-position:-60% 0}
+    18%{background-position:160% 0}
+    20%{background-position:-60% 0}
+    28%{background-position:160% 0}
+    100%{background-position:160% 0}
+  }
+
+  /* S6 — Brushed metal (texture + sweep horizontal) */
+  .photo-frame.s6::before{
+    content:"";position:absolute;inset:0;z-index:1;pointer-events:none;
+    background:repeating-linear-gradient(90deg,
+      rgba(255,255,255,0) 0px,rgba(255,255,255,0.025) 1px,
+      rgba(0,0,0,0.04) 2px,rgba(255,255,255,0) 3px);
+    mix-blend-mode:overlay;
+  }
+  .photo-frame.s6::after{
+    content:"";position:absolute;inset:0;z-index:2;pointer-events:none;
+    background:linear-gradient(0deg,transparent 38%,rgba(255,225,140,0.5) 50%,transparent 62%);
+    background-size:100% 50%;background-repeat:no-repeat;background-position:0 160%;
+    animation:dVSweepUp 5s ease-in-out infinite;mix-blend-mode:screen;
+  }
+
+  /* S7 — Holographic spectrum (rose/or/bleu/violet) */
+  .photo-frame.s7::before{
+    content:"";position:absolute;inset:0;z-index:2;pointer-events:none;
+    background:linear-gradient(115deg,
+      transparent 32%,
+      rgba(255,180,200,0.40) 44%,
+      rgba(255,225,140,0.55) 48%,
+      rgba(180,235,255,0.45) 52%,
+      rgba(220,200,255,0.40) 56%,
+      transparent 68%);
+    background-size:300% 100%;background-position:-100% 0;
+    animation:bSweep 4s ease-in-out infinite;mix-blend-mode:screen;
+  }
+
+  /* S8 — 3D card flip + sweep */
+  .photo-frame.s8{perspective:600px;animation:sTilt 6s ease-in-out infinite}
+  .photo-frame.s8::before{
+    content:"";position:absolute;inset:0;z-index:2;pointer-events:none;
+    background:linear-gradient(115deg,transparent 38%,rgba(255,255,255,0.55) 50%,transparent 62%);
+    background-size:50% 100%;background-repeat:no-repeat;background-position:-60% 0;
+    animation:bSweepLong 6s ease-in-out infinite;mix-blend-mode:screen;
+  }
+  @keyframes sTilt{0%,100%{transform:rotateY(0deg)}50%{transform:rotateY(8deg)}}
+
+  /* S9 — Liquid foil (3 gradients superposés) */
+  .photo-frame.s9::before{
     content:"";position:absolute;inset:0;z-index:2;pointer-events:none;
     background:
-      linear-gradient(115deg, transparent 30%, rgba(255,225,150,0.45) 50%, transparent 70%),
-      linear-gradient(45deg, transparent 40%, rgba(180,235,255,0.30) 50%, transparent 60%),
-      linear-gradient(160deg, transparent 35%, rgba(255,200,220,0.25) 50%, transparent 65%);
-    background-size:250% 100%, 250% 100%, 250% 100%;
-    background-position:-100% 0, 100% 0, -50% 0;
-    animation:m7Foil 6s ease-in-out infinite;
-    mix-blend-mode:screen;
+      linear-gradient(115deg,transparent 30%,rgba(255,225,150,0.4) 50%,transparent 70%),
+      linear-gradient(45deg,transparent 40%,rgba(180,235,255,0.28) 50%,transparent 60%),
+      linear-gradient(160deg,transparent 35%,rgba(255,200,220,0.22) 50%,transparent 65%);
+    background-size:250% 100%,250% 100%,250% 100%;
+    background-position:-100% 0,200% 0,-50% 0;
+    animation:sFoil 6s ease-in-out infinite;mix-blend-mode:screen;
   }
-  @keyframes m7Foil{
-    0%{background-position:-100% 0, 200% 0, -50% 0}
-    50%{background-position:200% 0, -100% 0, 200% 0}
-    100%{background-position:-100% 0, 200% 0, -50% 0}
+  @keyframes sFoil{
+    0%{background-position:-100% 0,200% 0,-50% 0}
+    50%{background-position:200% 0,-100% 0,200% 0}
+    100%{background-position:-100% 0,200% 0,-50% 0}
   }
 
-  /* M8 — 3D card flip illusion (sweep + perspective tilt) */
-  .photo-frame.m8{
-    perspective:600px;
-    transform-style:preserve-3d;
-    animation:m8Tilt 6s ease-in-out infinite;
-  }
-  .photo-frame.m8::after{
+  /* S10 — Lens flare (streak + halo central) */
+  .photo-frame.s10::before{
     content:"";position:absolute;inset:0;z-index:2;pointer-events:none;
-    background:linear-gradient(
-      115deg,
-      transparent 35%,
-      rgba(255,255,255,0.45) 48%,
-      rgba(255,225,150,0.6) 50%,
-      rgba(255,255,255,0.45) 52%,
-      transparent 65%
-    );
-    background-size:280% 100%;
-    background-position:-100% 0;
-    animation:m1Sweep 6s ease-in-out infinite;
-    mix-blend-mode:screen;
+    background:
+      radial-gradient(circle 30% at 30% 35%,rgba(255,250,220,0.55),transparent 70%),
+      linear-gradient(115deg,transparent 38%,rgba(255,255,255,0.5) 50%,transparent 62%);
+    background-size:100% 100%,50% 100%;
+    background-position:0 0,-60% 0;
+    background-repeat:no-repeat;
+    opacity:0;
+    animation:sLensFlare 5s ease-in-out infinite;mix-blend-mode:screen;
   }
-  @keyframes m8Tilt{
-    0%, 100%{transform:rotateY(0deg)}
-    50%{transform:rotateY(8deg)}
+  @keyframes sLensFlare{
+    0%,90%,100%{opacity:0;background-position:0 0,-60% 0}
+    20%{opacity:1}
+    50%{opacity:1;background-position:0 0,160% 0}
+    70%{opacity:0;background-position:0 0,160% 0}
   }
+
+  /* ============================================================
+     PARTIE 4 — TEINTES DORÉES DIFFUSES (4 declinaisons)
+     ============================================================ */
+  .photo-frame.t1::before{
+    content:"";position:absolute;inset:0;z-index:2;pointer-events:none;
+    background:radial-gradient(ellipse 80% 70% at 50% 40%,rgba(240,214,144,0.20),rgba(240,214,144,0.08) 40%,transparent 80%);
+    opacity:0;animation:tWarm 12s ease-in-out infinite;mix-blend-mode:overlay;
+  }
+  .photo-frame.t2::before{
+    content:"";position:absolute;inset:0;z-index:2;pointer-events:none;
+    background:radial-gradient(ellipse 90% 80% at 50% 45%,rgba(255,210,120,0.55),rgba(240,180,100,0.25) 50%,transparent 90%);
+    opacity:0;animation:tWarm 8s ease-in-out infinite;mix-blend-mode:overlay;
+  }
+  .photo-frame.t3::before{
+    content:"";position:absolute;inset:0;z-index:2;pointer-events:none;
+    background:linear-gradient(135deg,rgba(255,225,150,0.30),rgba(240,200,120,0.20) 50%,rgba(255,225,150,0.30));
+    opacity:0;animation:tWarm 10s ease-in-out infinite;mix-blend-mode:overlay;
+  }
+  .photo-frame.t4::before{
+    content:"";position:absolute;inset:0;z-index:2;pointer-events:none;
+    background:radial-gradient(circle 38% at 50% 38%,rgba(255,220,140,0.45),rgba(255,200,120,0.18) 50%,transparent 80%);
+    opacity:0;animation:tWarm 9s ease-in-out infinite;mix-blend-mode:soft-light;
+  }
+  @keyframes tWarm{0%,80%,100%{opacity:0}40%{opacity:1}}
 
 </style>
 </head>
 <body>
 
-<h1>Test shimmer photo Alpha — V3</h1>
-<p class="sub">Toutes les variantes en 5-12 s loop. La partie A décline la teinte dorée diffuse (l'effet que tu as aimé). La partie B explore 8 familles différentes inspirées par "carte métallique qu'on fait tourner sous la lumière".</p>
+<h1>Test shimmer photo Alpha — V4 (catalogue)</h1>
+<p class="sub">24 effets organisés en 4 familles. La famille B (Button-clone) reproduit exactement le pattern du bouton CTA : sweep en 0,9 s puis 2,1 s d'attente. Les autres familles explorent directions, effets spéciaux et teintes.</p>
 
-<h2 class="section">Partie A — Teinte dorée diffuse <span>4 déclinaisons de la version qui te plaît</span></h2>
-
+<h2 class="section">Famille B — Button-clone <span>Pattern exact du bouton CTA : sweep + wait</span></h2>
 <div class="grid">
-  <div class="card">
-    <span class="num">T1</span>
-    <div class="photo-frame t1"><img src="assets/alpha-wolf-vega.webp" alt="Alpha"></div>
-    <div class="label">Subtile</div>
-    <div class="desc">Intensité basse, cycle 12 s. Très discret, presque imperceptible.</div>
-    <div class="timing">12 s · overlay · radial center</div>
-  </div>
-  <div class="card">
-    <span class="num">T2</span>
-    <div class="photo-frame t2"><img src="assets/alpha-wolf-vega.webp" alt="Alpha"></div>
-    <div class="label">Intense</div>
-    <div class="desc">Plus chaude et marquée, cycle 8 s. La photo s'illumine clairement par moments.</div>
-    <div class="timing">8 s · overlay · radial wide</div>
-  </div>
-  <div class="card">
-    <span class="num">T3</span>
-    <div class="photo-frame t3"><img src="assets/alpha-wolf-vega.webp" alt="Alpha"></div>
-    <div class="label">Pleine couverture</div>
-    <div class="desc">Gradient linéaire diagonal qui couvre toute la photo. Plus uniforme, moins centré.</div>
-    <div class="timing">10 s · overlay · linear 135°</div>
-  </div>
-  <div class="card">
-    <span class="num">T4</span>
-    <div class="photo-frame t4"><img src="assets/alpha-wolf-vega.webp" alt="Alpha"></div>
-    <div class="label">Visage focus</div>
-    <div class="desc">Radial étroit centré sur le visage uniquement. Le reste reste calme. Soft-light blend.</div>
-    <div class="timing">9 s · soft-light · circle face</div>
-  </div>
+  <div class="card"><span class="num">B1</span><div class="photo-frame b1"><img src="assets/alpha-wolf-vega.webp" alt="Alpha"></div><div class="label">Clone exact</div><div class="desc">Reproduction parfaite du bouton CTA : 3 s, sweep 1,05 s, wait 1,95 s.</div><div class="timing">3 s · 115° · screen</div></div>
+  <div class="card"><span class="num">B2</span><div class="photo-frame b2"><img src="assets/alpha-wolf-vega.webp" alt="Alpha"></div><div class="label">Plus net</div><div class="desc">Highlight blanc plus pur (0.85) et plus étroit. Plus marqué.</div><div class="timing">3 s · 115° · screen</div></div>
+  <div class="card"><span class="num">B3</span><div class="photo-frame b3"><img src="assets/alpha-wolf-vega.webp" alt="Alpha"></div><div class="label">Or chaud</div><div class="desc">Or pur au lieu de blanc, plus chaleureux et plus brand-aligned.</div><div class="timing">3 s · 115° · screen</div></div>
+  <div class="card"><span class="num">B4</span><div class="photo-frame b4"><img src="assets/alpha-wolf-vega.webp" alt="Alpha"></div><div class="label">Doux large</div><div class="desc">Highlight crème plus diffus, balayage plus large, plus subtil.</div><div class="timing">3,5 s · 115° · screen</div></div>
+  <div class="card"><span class="num">B5</span><div class="photo-frame b5"><img src="assets/alpha-wolf-vega.webp" alt="Alpha"></div><div class="label">Cycle 5 s</div><div class="desc">Même gradient B1 mais cycle plus long : sweep 1,25 s, wait 3,75 s.</div><div class="timing">5 s · 115° · screen</div></div>
+  <div class="card"><span class="num">B6</span><div class="photo-frame b6"><img src="assets/alpha-wolf-vega.webp" alt="Alpha"></div><div class="label">Cycle 7 s premium</div><div class="desc">Très espacé : sweep 1,4 s, wait 5,6 s. Naturel et discret.</div><div class="timing">7 s · 115° · screen</div></div>
 </div>
 
-<h2 class="section">Partie B — Carte métallique qu'on fait tourner <span>8 familles d'effets distincts</span></h2>
-
+<h2 class="section">Famille D — Directions <span>Mêmes patterns, angles différents</span></h2>
 <div class="grid">
-  <div class="card">
-    <span class="num">M1</span>
-    <div class="photo-frame m1"><img src="assets/alpha-wolf-vega.webp" alt="Alpha"></div>
-    <div class="label">Sweep classique</div>
-    <div class="desc">Un seul reflet diagonal qui passe et disparaît. Le plus simple.</div>
-    <div class="timing">5 s · linear 115° · screen</div>
-  </div>
-  <div class="card">
-    <span class="num">M2</span>
-    <div class="photo-frame m2"><img src="assets/alpha-wolf-vega.webp" alt="Alpha"></div>
-    <div class="label">Double sweep</div>
-    <div class="desc">Deux reflets enchaînés (bord avant + bord arrière de la carte qui passe).</div>
-    <div class="timing">6 s · linear 115° · screen</div>
-  </div>
-  <div class="card">
-    <span class="num">M3</span>
-    <div class="photo-frame m3"><img src="assets/alpha-wolf-vega.webp" alt="Alpha"></div>
-    <div class="label">Holographique</div>
-    <div class="desc">Sweep avec spectre rose-or-bleu-violet. Effet carte Pokémon holo / Apple foil.</div>
-    <div class="timing">6 s · linear · multi-color</div>
-  </div>
-  <div class="card">
-    <span class="num">M4</span>
-    <div class="photo-frame m4"><img src="assets/alpha-wolf-vega.webp" alt="Alpha"></div>
-    <div class="label">Brushed metal</div>
-    <div class="desc">Texture brushed verticale subtile + highlight horizontal qui balaye de bas en haut.</div>
-    <div class="timing">7 s · vertical sweep · screen</div>
-  </div>
-  <div class="card">
-    <span class="num">M5</span>
-    <div class="photo-frame m5"><img src="assets/alpha-wolf-vega.webp" alt="Alpha"></div>
-    <div class="label">Mirror flash</div>
-    <div class="desc">Un éclat très brillant et très bref (0.5 s), comme un miroir qui capte la lumière au bon angle.</div>
-    <div class="timing">5 s · sharp flash · screen</div>
-  </div>
-  <div class="card">
-    <span class="num">M6</span>
-    <div class="photo-frame m6"><img src="assets/alpha-wolf-vega.webp" alt="Alpha"></div>
-    <div class="label">Rotating beam</div>
-    <div class="desc">Un faisceau lumineux qui PIVOTE autour du centre de la photo (conic gradient). Très dynamique.</div>
-    <div class="timing">8 s · rotation 360° · conic</div>
-  </div>
-  <div class="card">
-    <span class="num">M7</span>
-    <div class="photo-frame m7"><img src="assets/alpha-wolf-vega.webp" alt="Alpha"></div>
-    <div class="label">Liquid foil</div>
-    <div class="desc">Trois gradients superposés (or, bleu, rose) qui se croisent et ondulent. Effet hologramme liquide.</div>
-    <div class="timing">6 s · multi-layer · screen</div>
-  </div>
-  <div class="card">
-    <span class="num">M8</span>
-    <div class="photo-frame m8"><img src="assets/alpha-wolf-vega.webp" alt="Alpha"></div>
-    <div class="label">3D card flip</div>
-    <div class="desc">La photo tilte légèrement en perspective (comme une carte qu'on incline) + sweep synchro.</div>
-    <div class="timing">6 s · perspective 600px · rotateY 8°</div>
-  </div>
+  <div class="card"><span class="num">D1</span><div class="photo-frame d1"><img src="assets/alpha-wolf-vega.webp" alt="Alpha"></div><div class="label">Diagonal inverse</div><div class="desc">Sweep de bas-droite vers haut-gauche (245°).</div><div class="timing">3,5 s · 245° · screen</div></div>
+  <div class="card"><span class="num">D2</span><div class="photo-frame d2"><img src="assets/alpha-wolf-vega.webp" alt="Alpha"></div><div class="label">Vertical ↓</div><div class="desc">Sweep horizontal qui descend du haut vers le bas.</div><div class="timing">3,5 s · 180° · screen</div></div>
+  <div class="card"><span class="num">D3</span><div class="photo-frame d3"><img src="assets/alpha-wolf-vega.webp" alt="Alpha"></div><div class="label">Vertical ↑ doré</div><div class="desc">Sweep doré qui remonte du bas vers le haut.</div><div class="timing">4 s · 0° · screen</div></div>
+  <div class="card"><span class="num">D4</span><div class="photo-frame d4"><img src="assets/alpha-wolf-vega.webp" alt="Alpha"></div><div class="label">Horizontal pur</div><div class="desc">Sweep parfaitement horizontal (90°), pas de diagonale.</div><div class="timing">3,5 s · 90° · screen</div></div>
+</div>
+
+<h2 class="section">Famille S — Effets spéciaux <span>10 mécaniques distinctes</span></h2>
+<div class="grid">
+  <div class="card"><span class="num">S1</span><div class="photo-frame s1"><img src="assets/alpha-wolf-vega.webp" alt="Alpha"></div><div class="label">Mirror flash</div><div class="desc">Éclat très brillant et très bref (0,4 s). Comme un miroir au bon angle.</div><div class="timing">4 s · sharp flash</div></div>
+  <div class="card"><span class="num">S2</span><div class="photo-frame s2"><img src="assets/alpha-wolf-vega.webp" alt="Alpha"></div><div class="label">Radial expand</div><div class="desc">Onde dorée qui se déploie depuis le centre vers les bords.</div><div class="timing">5 s · radial · ease-out</div></div>
+  <div class="card"><span class="num">S3</span><div class="photo-frame s3"><img src="assets/alpha-wolf-vega.webp" alt="Alpha"></div><div class="label">Conic beam</div><div class="desc">Faisceau lumineux qui pivote autour du centre (360°). Plus dynamique.</div><div class="timing">8 s · conic 360° · screen</div></div>
+  <div class="card"><span class="num">S4</span><div class="photo-frame s4"><img src="assets/alpha-wolf-vega.webp" alt="Alpha"></div><div class="label">Double sweep</div><div class="desc">Deux highlights enchaînés (bord avant + bord arrière de la carte).</div><div class="timing">4 s · 115° · screen</div></div>
+  <div class="card"><span class="num">S5</span><div class="photo-frame s5"><img src="assets/alpha-wolf-vega.webp" alt="Alpha"></div><div class="label">Triple flash</div><div class="desc">Trois sweeps rapides en rafale puis pause longue.</div><div class="timing">4,5 s · linear · screen</div></div>
+  <div class="card"><span class="num">S6</span><div class="photo-frame s6"><img src="assets/alpha-wolf-vega.webp" alt="Alpha"></div><div class="label">Brushed metal</div><div class="desc">Texture brushed verticale + highlight horizontal qui balaye de bas en haut.</div><div class="timing">5 s · vertical · multi-layer</div></div>
+  <div class="card"><span class="num">S7</span><div class="photo-frame s7"><img src="assets/alpha-wolf-vega.webp" alt="Alpha"></div><div class="label">Holographique</div><div class="desc">Spectre rose-or-bleu-violet. Effet carte Pokémon holo.</div><div class="timing">4 s · multi-color · screen</div></div>
+  <div class="card"><span class="num">S8</span><div class="photo-frame s8"><img src="assets/alpha-wolf-vega.webp" alt="Alpha"></div><div class="label">3D tilt + sweep</div><div class="desc">La photo s'incline (8°) en perspective + sweep synchro. Effet carte qu'on tourne.</div><div class="timing">6 s · perspective + sweep</div></div>
+  <div class="card"><span class="num">S9</span><div class="photo-frame s9"><img src="assets/alpha-wolf-vega.webp" alt="Alpha"></div><div class="label">Liquid foil</div><div class="desc">3 gradients (or, bleu, rose) qui se croisent et ondulent.</div><div class="timing">6 s · multi-layer · screen</div></div>
+  <div class="card"><span class="num">S10</span><div class="photo-frame s10"><img src="assets/alpha-wolf-vega.webp" alt="Alpha"></div><div class="label">Lens flare</div><div class="desc">Streak diagonal + halo lumineux dans un coin. Effet caméra haut de gamme.</div><div class="timing">5 s · multi-layer · screen</div></div>
+</div>
+
+<h2 class="section">Famille T — Teinte dorée diffuse <span>4 déclinaisons (pas de sweep, juste lumière chaude)</span></h2>
+<div class="grid">
+  <div class="card"><span class="num">T1</span><div class="photo-frame t1"><img src="assets/alpha-wolf-vega.webp" alt="Alpha"></div><div class="label">Subtile</div><div class="desc">Cycle 12 s, intensité basse. Très discret.</div><div class="timing">12 s · radial · overlay</div></div>
+  <div class="card"><span class="num">T2</span><div class="photo-frame t2"><img src="assets/alpha-wolf-vega.webp" alt="Alpha"></div><div class="label">Intense</div><div class="desc">Cycle 8 s, plus chaud et marqué.</div><div class="timing">8 s · radial · overlay</div></div>
+  <div class="card"><span class="num">T3</span><div class="photo-frame t3"><img src="assets/alpha-wolf-vega.webp" alt="Alpha"></div><div class="label">Pleine couverture</div><div class="desc">Gradient linéaire 135° couvrant toute la photo.</div><div class="timing">10 s · linear · overlay</div></div>
+  <div class="card"><span class="num">T4</span><div class="photo-frame t4"><img src="assets/alpha-wolf-vega.webp" alt="Alpha"></div><div class="label">Visage focus</div><div class="desc">Radial étroit centré sur le visage uniquement.</div><div class="timing">9 s · radial · soft-light</div></div>
 </div>
 
 </body>
