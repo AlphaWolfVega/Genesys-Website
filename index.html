@@ -1085,29 +1085,19 @@
     /* Texte metallique : gradient or → blanc → or qui traverse le texte (background-clip:text) */
     .hl-vraie-bridge-bot em{
       font-style:italic;font-weight:700;
-      background-image:linear-gradient(110deg,
-        #B8985A 0%,
-        #D4B66A 25%,
-        #F0D690 42%,
-        #FFFFFF 48%,
-        #FFFDF0 50%,
-        #FFFFFF 52%,
-        #F0D690 58%,
-        #D4B66A 75%,
-        #B8985A 100%);
-      background-size:300% 100%;
-      background-position:0% center;
-      background-repeat:no-repeat;
-      -webkit-background-clip:text;
-      background-clip:text;
-      -webkit-text-fill-color:transparent;
-      color:transparent;
-      animation:hlMetalText 3.2s ease-in-out infinite;
+      color:#D4B66A;
+      text-shadow:0 0 10px rgba(212,182,106,0.35);
+      animation:hlGoldGlowText 3.2s ease-in-out infinite;
     }
-    @keyframes hlMetalText{
-      0%{background-position:100% center}
-      55%{background-position:-50% center}
-      100%{background-position:-50% center}
+    @keyframes hlGoldGlowText{
+      0%, 100%{
+        color:#D4B66A;
+        text-shadow:0 0 8px rgba(212,182,106,0.3);
+      }
+      50%{
+        color:#FFFDF0;
+        text-shadow:0 0 18px rgba(212,182,106,0.7), 0 0 28px rgba(212,182,106,0.4);
+      }
     }
     /* Inspiration (0% → 50%) puis expiration (50% → 100%) — un cycle complet en 2s */
     @keyframes hlVerdictBreathe{
